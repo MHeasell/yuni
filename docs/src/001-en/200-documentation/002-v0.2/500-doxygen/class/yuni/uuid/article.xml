@@ -6,8 +6,28 @@
 
 
 
-<h2>Universally unique identifier ( UUID )<br /></h2>
-<div>Printing to cout a new UUID :<source type="cpp">  #include  &lt; yuni/yuni.h &gt;
+<h2>Universally unique identifier ( UUID )</h2>
+<h3>Public function</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructor</h4></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">UUID</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">UUID</a></span>(const UUID&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">UUID</a></span>(Flag flag)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">UUID</a></span>(const StringT&amp; string)</code></td></tr>
+<tr><td></td><td><br /><h4>UUID</h4></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">generate</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">clear</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">null</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">assign</a></span>(const StringT&amp; string)</code></td></tr>
+<tr><td></td><td><br /><h4>Operators</h4></td></tr>
+<tr><td class="doxygen_index"><code>UUID&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator=</a></span>(const UUID&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code>UUID&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator=</a></span>(const StringT&amp; string)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator!</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator==</a></span>(const UUID&amp; rhs) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator!=</a></span>(const UUID&amp; rhs) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator&lt;</a></span>(const UUID&amp; rhs) <span class="keyword">const</span></code></td></tr>
+</table></div>
+
+<h2>Detailed Description</h2><div>Printing to cout a new UUID :<source type="cpp">  #include  &lt; yuni/yuni.h &gt;
   #include  &lt; yuni/uuid/uuid.h &gt;
   #include  &lt;iostream&gt;
 
@@ -35,72 +55,80 @@
 </source>
 <br /></div>
 <table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 4)</i></code>
+</div></td></tr><tr id="FlagfNullfGenerate_62471319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('UUID_62481319583276')">+ UUID</a></span>:  ();
+<code> <span class="method"><a href="#">+ UUID</a></span>:  ();
 </code>
-</div></td></tr><tr id="UUID_62481319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="UUID_62481319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">The UUID will be set to null.<br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('UUID_62491319583276')">+ UUID</a></span>:  (const UUID&amp; rhs);
+<code> <span class="method"><a href="#">+ UUID</a></span>:  (const UUID&amp; rhs);
 </code>
-</div></td></tr><tr id="UUID_62491319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="UUID_62491319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor with flags.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('UUID_62501319583276')">+ UUID</a></span>:  (Flag flag);
+<code> <span class="method"><a href="#">+ UUID</a></span>:  (Flag flag);
 </code>
-</div></td></tr><tr id="UUID_62501319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="UUID_62501319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> flag</code> Flag to know how to initialize the UUID<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> flag</code> Flag to know how to initialize the UUID<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor from a string.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="UUID_62511319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('UUID_62511319583276')">+ UUID</a></span>:  (const StringT&amp; string);
+<code><div class="doxygen_tmpllist" id="UUID_62511319844517_tmpl"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a href="#">+ UUID</a></span>:  (const StringT&amp; string);
 </code>
-</div></td></tr><tr id="UUID_62511319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="UUID_62511319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">UUID <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Generate a new UUID .<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('generate_62521319583276')">+ generate</a></span>: void ();
+<code> <span class="method"><a href="#">+ generate</a></span>: void ();
 </code>
-</div></td></tr><tr id="generate_62521319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="generate_62521319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the UUID to null.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('clear_62531319583276')">+ clear</a></span>: void ();
+<code> <span class="method"><a href="#">+ clear</a></span>: void ();
 </code>
-</div></td></tr><tr id="clear_62531319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="clear_62531319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the UUID is null (e.g. 000000000-0000-0000-0000-0000000000000)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('null_62541319583276')">+ null</a></span>: bool () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ null</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="null_62541319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="null_62541319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assign from a string.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="assign_62551319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('assign_62551319583276')">+ assign</a></span>: bool (const StringT&amp; string);
+<code><div class="doxygen_tmpllist" id="assign_62551319844517_tmpl"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a href="#">+ assign</a></span>: bool (const StringT&amp; string);
 </code>
-</div></td></tr><tr id="assign_62551319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="assign_62551319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">Contrary to the operator =, the internal value will remain untouched if the conversion failed.<br />
 </div>
@@ -108,60 +136,52 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy operator.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator=_62571319583276')">+ operator=</a></span>: UUID&amp; (const UUID&amp; rhs);
+<code> <span class="method"><a href="#">+ operator=</a></span>: UUID&amp; (const UUID&amp; rhs);
 </code>
-</div></td></tr><tr id="operator=_62571319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator=_62561319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assignment from a string.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator=_62581319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('operator=_62581319583276')">+ operator=</a></span>: UUID&amp; (const StringT&amp; string);
+<code><div class="doxygen_tmpllist" id="operator=_62571319844517_tmpl"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a href="#">+ operator=</a></span>: UUID&amp; (const StringT&amp; string);
 </code>
-</div></td></tr><tr id="operator=_62581319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator=_62571319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">The UUID will be reset if the conversion failed.<br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Null.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator!_62601319583276')">+ operator!</a></span>: bool () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ operator!</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator!_62601319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator!_62581319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Comparison.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator==_62621319583276')">+ operator==</a></span>: bool (const UUID&amp; rhs) <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ operator==</a></span>: bool (const UUID&amp; rhs) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator==_62621319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator==_62591319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Comparison.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator!=_62631319583276')">+ operator!=</a></span>: bool (const UUID&amp; rhs) <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ operator!=</a></span>: bool (const UUID&amp; rhs) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator!=_62631319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator!=_62601319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Strict weak comparison.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator<_62641319583276')">+ operator&lt;</a></span>: bool (const UUID&amp; rhs) <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ operator&lt;</a></span>: bool (const UUID&amp; rhs) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator<_62641319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator<_62611319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
-</td></tr>
-<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 6)</i></code>
-</div></td></tr><tr id="FlagfNullfGenerate_62661319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 </table>

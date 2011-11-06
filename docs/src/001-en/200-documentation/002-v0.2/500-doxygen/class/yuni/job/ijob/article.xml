@@ -6,8 +6,47 @@
 
 
 
-<h2>Job Interface (time consuming operations)<br /></h2>
-<div>This class is designed to implement a single task executed by Job::QueueService .<br /> You can, for example, use this class to wrap a downloader, an image processing algorithm, a movie encoder, etc.<br /> Indeed, doing time-consuming operations like downloads and database transactions in the main thread can cause your user interface to seem as though it has stopped responding while they are running. To avoid this problem, you want to execute your long-running task in an asynchonous manner (a background task).<br /><source type="cpp">  class  MyJob  :  public  Job:: IJob
+<h2>Job Interface (time consuming operations)</h2>
+<h3>Public typedef</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">Ptr</a></span> : SmartPtr&lt;IJob&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">ThreadingPolicy</a></span> : Policy::ObjectLevelLockable&lt;IJob&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">List</a></span> : std::list&lt; Ptr&gt;</code></td></tr>
+</table></div>
+
+<h3>Public function</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Contructor &amp; Destructor</h4></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">IJob</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#"><b> ~ </b>IJob</a></span>()</code></td></tr>
+<tr><td></td><td><br /><h4>ID Card</h4></td></tr>
+<tr><td class="doxygen_index"><code>String </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">name</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">name</a></span>(const StringT&amp; s)</code></td></tr>
+<tr><td></td><td><br /><h4>Progression</h4></td></tr>
+<tr><td class="doxygen_index"><code>int </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">progression</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">finished</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td></td><td><br /><h4>States</h4></td></tr>
+<tr><td class="doxygen_index"><code>enum Job::State </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">state</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">idle</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">waiting</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">running</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">canceling</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td></td><td><br /><h4>Execution flow</h4></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">cancel</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">execute</a></span>(Thread::IThread* t)</code></td></tr>
+<tr><td></td><td><br /><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">fillInformation</a></span>(T&amp; info)</code></td></tr>
+</table></div>
+
+<h3>Protected function</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">onExecute</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">progression</a></span>(const int p)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">suspend</a></span>(unsigned int delay) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">shouldAbort</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">nameWL</a></span>(const StringT&amp; newName)</code></td></tr>
+</table></div>
+
+<h2>Detailed Description</h2><div>This class is designed to implement a single task executed by Job::QueueService .<br /> You can, for example, use this class to wrap a downloader, an image processing algorithm, a movie encoder, etc.<br /> Indeed, doing time-consuming operations like downloads and database transactions in the main thread can cause your user interface to seem as though it has stopped responding while they are running. To avoid this problem, you want to execute your long-running task in an asynchonous manner (a background task).<br /><source type="cpp">  class  MyJob  :  public  Job:: IJob
   {
   public :
     virtual  ~MyJob()  {  }
@@ -22,57 +61,90 @@
 </source>
 <br /><div><code>see</code> :  QueueService<br /></div><br /></div>
 <table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The most suitable smart pointer for the class.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;IJob&gt;;
+</code>
+</div></td></tr><tr id="Ptr_3151319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The threading policy.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ ThreadingPolicy</a></span>: <span class="keyword">typedef</span> Policy::ObjectLevelLockable&lt;IJob&gt;;
+</code>
+</div></td></tr><tr id="ThreadingPolicy_3161319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">List of jobs.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ List</a></span>: <span class="keyword">typedef</span> std::list&lt; Ptr&gt;;
+</code>
+</div></td></tr><tr id="List_3171319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief">Get if this policy is thread-safe.<br /><div class="doxygen_name_spacer"></div>
+<code><i>(unmanaged tag: 4)</i></code>
+</div></td></tr><tr id="@369_3181319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Contructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('IJob_3151319583276')">+ IJob</a></span>:  ();
+<code> <span class="method"><a href="#">+ IJob</a></span>:  ();
 </code>
-</div></td></tr><tr id="IJob_3151319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="IJob_3191319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('~IJob_3161319583276')">+ <b> ~ </b>IJob</a></span>:  ();
+<code> <span class="method"><a href="#">+ <b> ~ </b>IJob</a></span>:  ();
 </code>
-</div></td></tr><tr id="~IJob_3161319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="~IJob_3201319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">ID Card <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the full human-readable name of this job.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('name_3171319583276')">+ name</a></span>: String () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ name</a></span>: String () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="name_3171319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="name_3211319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the name of the job.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="name_3181319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('name_3181319583276')">+ name</a></span>: void (const StringT&amp; s);
+<code><div class="doxygen_tmpllist" id="name_3221319844517_tmpl"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a href="#">+ name</a></span>: void (const StringT&amp; s);
 </code>
-</div></td></tr><tr id="name_3181319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="name_3221319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Progression <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the progression in percent (value between 0 and 100)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('progression_3191319583276')">+ progression</a></span>: int () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ progression</a></span>: int () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="progression_3191319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="progression_3231319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the job is finished.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('finished_3201319583276')">+ finished</a></span>: bool () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ finished</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="finished_3201319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="finished_3241319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">This is a convenient (and faster) replacement for the following code :<source type="cpp">  ( state ()  ==  stateIdle  &amp;&amp;  progression ()  ==  100)
 </source>
@@ -82,142 +154,112 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">States <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the current state of the job.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('state_3211319583276')">+ state</a></span>: enum Job::State () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ state</a></span>: enum Job::State () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="state_3211319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="state_3251319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the job is idle.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('idle_3221319583276')">+ idle</a></span>: bool () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ idle</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="idle_3221319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="idle_3261319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the job is waiting for being executed.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('waiting_3231319583276')">+ waiting</a></span>: bool () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ waiting</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="waiting_3231319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="waiting_3271319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the job is running.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('running_3241319583276')">+ running</a></span>: bool () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ running</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="running_3241319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="running_3281319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the job is canceling its work (and it is currently running)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('canceling_3251319583276')">+ canceling</a></span>: bool () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ canceling</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="canceling_3251319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="canceling_3291319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Execution flow <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Ask to the job to cancel its work as soon as possible.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('cancel_3261319583276')">+ cancel</a></span>: void ();
+<code> <span class="method"><a href="#">+ cancel</a></span>: void ();
 </code>
-</div></td></tr><tr id="cancel_3261319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="cancel_3301319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">This method has no effect if the job is not currently running.<br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Execute the job.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('execute_3271319583276')">+ execute</a></span>: void (Thread::IThread* t);
+<code> <span class="method"><a href="#">+ execute</a></span>: void (Thread::IThread* t);
 </code>
-</div></td></tr><tr id="execute_3271319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="execute_3311319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">In standard uses, 't' must not be NULL.<br />Parameters :<ul><li><code> t</code> The thread which will execute this job (can be null)<br /></li></ul><br />
+<div class="doxygen_desc">In standard uses, 't' must not be NULL.<div class="doxygen_params">Parameters :</div><ul><li><code> t</code> The thread which will execute this job (can be null)<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The most suitable smart pointer for the class.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('Ptr_3281319583276')">+ Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;IJob&gt;;</code>
-</div></td></tr><tr id="Ptr_3281319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The threading policy.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('ThreadingPolicy_3291319583276')">+ ThreadingPolicy</a></span>: <span class="keyword">typedef</span> Policy::ObjectLevelLockable&lt;IJob&gt;;</code>
-</div></td></tr><tr id="ThreadingPolicy_3291319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">List of jobs.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('List_3301319583276')">+ List</a></span>: <span class="keyword">typedef</span> std::list&lt; Ptr&gt;;</code>
-</div></td></tr><tr id="List_3301319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief">Get if this policy is thread-safe.<br /><div class="doxygen_name_spacer"></div>
-<code><i>(unmanaged tag: 6)</i></code>
-</div></td></tr><tr id="@369_3311319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="fillInformation_3321319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class T &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('fillInformation_3321319583276')">+ fillInformation</a></span>: void (T&amp; info);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="fillInformation_3321319844517_tmpl"><span class="keyword">template</span>&lt;class T &gt;</div>
+ <span class="method"><a href="#">+ fillInformation</a></span>: void (T&amp; info);
 </code>
-</div></td></tr><tr id="fillInformation_3321319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="fillInformation_3321319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Protected <code class="doxygen_visibility">Protected</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Implement this method to define your own time-consuming task.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('onExecute_3331319583276')"># onExecute</a></span>: void ();
+<code> <span class="method"><a href="#"># onExecute</a></span>: void ();
 </code>
-</div></td></tr><tr id="onExecute_3331319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="onExecute_3331319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the progression in percent (0..100)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('progression_3341319583276')"># progression</a></span>: void (const int p);
+<code> <span class="method"><a href="#"># progression</a></span>: void (const int p);
 </code>
-</div></td></tr><tr id="progression_3341319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="progression_3341319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Suspend the execution of the job during X miliseconds.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('suspend_3351319583276')"># suspend</a></span>: bool (unsigned int delay) <span class="keyword">const</span>;
+<code> <span class="method"><a href="#"># suspend</a></span>: bool (unsigned int delay) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="suspend_3351319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="suspend_3351319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">This method is nearly identical to IThread::suspend() in its behavior. But this method should not have to be called in most of the jobs, except when polling events or equivalent. If you only want to know if the job should abort, prefer shouldAbort() instead.<br /><div><b>attention</b> :  This method must only be called inside the execution of the job<br /></div><br />Parameters :<ul><li><code> delay</code> The delay in miliseconds. 0 will only return if the thread should exit<br /></li></ul><div><code>return</code>  True indicates that the job should stop immediately<br /></div><div><code>see</code> :  IThread::suspend()<br /></div><br />
+<div class="doxygen_desc">This method is nearly identical to IThread::suspend() in its behavior. But this method should not have to be called in most of the jobs, except when polling events or equivalent. If you only want to know if the job should abort, prefer shouldAbort() instead.<br /><div><b>attention</b> :  This method must only be called inside the execution of the job<br /></div><div class="doxygen_params">Parameters :</div><ul><li><code> delay</code> The delay in miliseconds. 0 will only return if the thread should exit<br /></li></ul><div><code>return</code>  True indicates that the job should stop immediately<br /></div><div><code>see</code> :  IThread::suspend()<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the job should abort as soon as possible.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('shouldAbort_3361319583276')"># shouldAbort</a></span>: bool () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#"># shouldAbort</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="shouldAbort_3361319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="shouldAbort_3361319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">This is a convenient replacement of `suspend(0)`, and a bit faster.<br /><div><b>attention</b> :  This method must only be called inside the execution of the job<br /></div><div><code>return</code>  True indicates that the thread should stop immediately<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the name of the job without locking.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="nameWL_3371319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('nameWL_3371319583276')"># nameWL</a></span>: void (const StringT&amp; newName);
+<code><div class="doxygen_tmpllist" id="nameWL_3371319844517_tmpl"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a href="#"># nameWL</a></span>: void (const StringT&amp; newName);
 </code>
-</div></td></tr><tr id="nameWL_3371319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="nameWL_3371319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div><b>warning</b> :  This method should only be used from the constructor<br /></div><br />
 </div>
@@ -225,10 +267,10 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Protected <code class="doxygen_visibility">Protected</code></h3>
 </td></tr>
 <tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">Mutex.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('pMutex_3381319583276')"># pMutex</a></span>: Mutex;</code>
-</div></td></tr><tr id="pMutex_3381319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<code><span class="method"><a href="#"># pMutex</a></span>: Mutex;</code>
+</div></td></tr><tr id="pMutex_3381319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 </table>

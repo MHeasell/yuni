@@ -6,324 +6,592 @@
 
 
 
-<h2>A node for a markdown parse tree.<br /></h2>
-<table class="doxygen_table">
+<h2>A node for a markdown parse tree</h2>
+<h3>Public typedef</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Iterators</h4></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">iterator</a></span> : IIterator&lt;Private::Core::Tree::ChildIterator&lt; Node&gt;, false&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">const_iterator</a></span> : IIterator&lt;Private::Core::Tree::ChildIterator&lt; Node&gt;, true&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">depth_prefix_iterator</a></span> : IIterator&lt;Private::Core::Tree::DepthPrefixIterator&lt; Node&gt;, false&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">const_depth_prefix_iterator</a></span> : IIterator&lt;Private::Core::Tree::DepthPrefixIterator&lt; Node&gt;, true&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">depth_infix_iterator</a></span> : IIterator&lt;Private::Core::Tree::DepthInfixIterator&lt; Node&gt;, false&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">const_depth_infix_iterator</a></span> : IIterator&lt;Private::Core::Tree::DepthInfixIterator&lt; Node&gt;, true&gt;</code></td></tr>
+<tr><td></td><td><br /><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">AncestorType</a></span> : Core::TreeN&lt;Node, Policy::SingleThreaded&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">Ptr</a></span> : AncestorType::Ptr</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">Node</a></span> : Node</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">TreeNNode</a></span> : TreeN&lt; Node, Policy::SingleThreaded, Policy::Checking::None, Policy::Conversion::Allow&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">ThreadingPolicy</a></span> : Policy::SingleThreaded&lt;TreeNNode&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">PtrThreadSafe</a></span> : SmartPtr&lt;Node, Policy::Ownership::COMReferenceCounted, Policy::Checking::None, Policy::Conversion::Allow&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">PtrSingleThreaded</a></span> : SmartPtr&lt;Node, Policy::Ownership::COMReferenceCounted, Policy::Checking::None, Policy::Conversion::Allow&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">StoragePolicy</a></span> : Ptr::StoragePolicy</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">OwnershipPolicy</a></span> : Ptr::OwnershipPolicy</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">ConversionPolicy</a></span> : Ptr::ConversionPolicy</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">CheckingPolicy</a></span> : Ptr::CheckingPolicy</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">ConstnessPolicy</a></span> : Ptr::ConstnessPolicy</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">ConstPtr</a></span> : Ptr::ConstSmartPtrType</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">NonConstPtr</a></span> : Ptr::NonConstSmartPtrType</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">SizeType</a></span> : unsigned int</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">SignedSizeType</a></span> : int</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">Vector</a></span> : std::vector&lt; Ptr&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">List</a></span> : std::list&lt; Ptr&gt;</code></td></tr>
+</table></div>
+
+<h3>Public function</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Parent of the node</h4></td></tr>
+<tr><td class="doxygen_index"><code>Ptr </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">parent</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>Ptr </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">parent</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">parent</a></span>(Ptr newParent)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">detachFromParent</a></span>()</code></td></tr>
+<tr><td></td><td><br /><h4>Adding</h4></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">append</a></span>(Ptr&amp; node)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">append</a></span>(Node* node)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">push_back</a></span>(Ptr&amp; node)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">push_back</a></span>(Node* node)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">push_front</a></span>(Ptr&amp; node)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">push_front</a></span>(Node* node)</code></td></tr>
+<tr><td></td><td><br /><h4>Removing</h4></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">clear</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">remove</a></span>(Ptr&amp; node)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">remove</a></span>(const SizeType index)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">remove</a></span>(const SignedSizeType index)</code></td></tr>
+<tr><td></td><td><br /><h4>Searching</h4></td></tr>
+<tr><td class="doxygen_index"><code>iterator </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">begin</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>const iterator </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">begin</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>iterator </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">end</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>const iterator </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">end</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>Ptr </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">find</a></span>(const SizeType index)</code></td></tr>
+<tr><td class="doxygen_index"><code>Ptr </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">find</a></span>(const SignedSizeType index)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">empty</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>SizeType </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">count</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>SizeType </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>Ptr </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">firstChild</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>const Ptr </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">firstChild</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>Ptr </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">lastChild</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>const Ptr </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">lastChild</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>Ptr </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">previousSibling</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>const Ptr </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">previousSibling</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>Ptr </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">nextSibling</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>const Ptr </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">nextSibling</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td></td><td><br /><h4>Extra</h4></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">leaf</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>SizeType </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">depth</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>SizeType </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">treeHeight</a></span>()</code></td></tr>
+<tr><td></td><td><br /><h4>Comparisons</h4></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">equals</a></span>(const Ptr&amp; node) <span class="keyword">const</span></code></td></tr>
+<tr><td></td><td><br /><h4>Z-Order</h4></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">bringToFront</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">sendToBack</a></span>()</code></td></tr>
+<tr><td></td><td><br /><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">invalidate</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">isInvalidated</a></span>()</code></td></tr>
+<tr><td></td><td><br /><h4>Operators</h4></td></tr>
+<tr><td class="doxygen_index"><code>Node&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator+=</a></span>(Ptr&amp; node)</code></td></tr>
+<tr><td class="doxygen_index"><code>Node&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator+=</a></span>(Node* node)</code></td></tr>
+<tr><td class="doxygen_index"><code>Node&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator-=</a></span>(Ptr&amp; node)</code></td></tr>
+<tr><td class="doxygen_index"><code>Node&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator&lt;&lt;</a></span>(Ptr&amp; node)</code></td></tr>
+<tr><td class="doxygen_index"><code>Node&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator&lt;&lt;</a></span>(Node* node)</code></td></tr>
+<tr><td class="doxygen_index"><code>Node&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator==</a></span>(const Ptr&amp; node) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>Ptr </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator[]</a></span>(const SizeType index)</code></td></tr>
+<tr><td class="doxygen_index"><code>Ptr </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator[]</a></span>(const SignedSizeType index)</code></td></tr>
+<tr><td></td><td><br /><h4>Pointer management</h4></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">addRef</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">release</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td></td><td><br /><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">static</span> const char* </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">TypeToCString</a></span>(Type t)</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">static</span> bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">ShouldAppendAParagraphNode</a></span>(Type t)</code></td></tr>
+<tr><td></td><td><br /><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Node</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Node</a></span>(const Type t)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Node</a></span>(const Type t, const StringT&amp; text)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#"><b> ~ </b>Node</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">dump</a></span>(StreamT&amp; out, unsigned int level) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">flattenText</a></span>(String&amp; out) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>std::ostream&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">print</a></span>(std::ostream&amp; out, bool recursive, unsigned int level)</code></td></tr>
+</table></div>
+
+<h2>Detailed Description</h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Iterators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a href="javascript:toggleVisibility('iterator_45761319583276')">+ iterator</a></span>: <span class="keyword">typedef</span> IIterator&lt;Private::Core::Tree::ChildIterator&lt; Node&gt;, false&gt;;</code>
-</div></td></tr><tr id="iterator_45761319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a href="#">+ iterator</a></span>: <span class="keyword">typedef</span> IIterator&lt;Private::Core::Tree::ChildIterator&lt; Node&gt;, false&gt;;
+</code>
+</div></td></tr><tr id="iterator_45751319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a href="javascript:toggleVisibility('const_iterator_45771319583276')">+ const_iterator</a></span>: <span class="keyword">typedef</span> IIterator&lt;Private::Core::Tree::ChildIterator&lt; Node&gt;, true&gt;;</code>
-</div></td></tr><tr id="const_iterator_45771319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a href="#">+ const_iterator</a></span>: <span class="keyword">typedef</span> IIterator&lt;Private::Core::Tree::ChildIterator&lt; Node&gt;, true&gt;;
+</code>
+</div></td></tr><tr id="const_iterator_45761319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a href="javascript:toggleVisibility('depth_prefix_iterator_45781319583276')">+ depth_prefix_iterator</a></span>: <span class="keyword">typedef</span> IIterator&lt;Private::Core::Tree::DepthPrefixIterator&lt; Node&gt;, false&gt;;</code>
-</div></td></tr><tr id="depth_prefix_iterator_45781319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a href="#">+ depth_prefix_iterator</a></span>: <span class="keyword">typedef</span> IIterator&lt;Private::Core::Tree::DepthPrefixIterator&lt; Node&gt;, false&gt;;
+</code>
+</div></td></tr><tr id="depth_prefix_iterator_45771319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a href="javascript:toggleVisibility('const_depth_prefix_iterator_45791319583276')">+ const_depth_prefix_iterator</a></span>: <span class="keyword">typedef</span> IIterator&lt;Private::Core::Tree::DepthPrefixIterator&lt; Node&gt;, true&gt;;</code>
-</div></td></tr><tr id="const_depth_prefix_iterator_45791319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a href="#">+ const_depth_prefix_iterator</a></span>: <span class="keyword">typedef</span> IIterator&lt;Private::Core::Tree::DepthPrefixIterator&lt; Node&gt;, true&gt;;
+</code>
+</div></td></tr><tr id="const_depth_prefix_iterator_45781319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a href="javascript:toggleVisibility('depth_infix_iterator_45801319583276')">+ depth_infix_iterator</a></span>: <span class="keyword">typedef</span> IIterator&lt;Private::Core::Tree::DepthInfixIterator&lt; Node&gt;, false&gt;;</code>
-</div></td></tr><tr id="depth_infix_iterator_45801319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a href="#">+ depth_infix_iterator</a></span>: <span class="keyword">typedef</span> IIterator&lt;Private::Core::Tree::DepthInfixIterator&lt; Node&gt;, false&gt;;
+</code>
+</div></td></tr><tr id="depth_infix_iterator_45791319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a href="javascript:toggleVisibility('const_depth_infix_iterator_45811319583276')">+ const_depth_infix_iterator</a></span>: <span class="keyword">typedef</span> IIterator&lt;Private::Core::Tree::DepthInfixIterator&lt; Node&gt;, true&gt;;</code>
-</div></td></tr><tr id="const_depth_infix_iterator_45811319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a href="#">+ const_depth_infix_iterator</a></span>: <span class="keyword">typedef</span> IIterator&lt;Private::Core::Tree::DepthInfixIterator&lt; Node&gt;, true&gt;;
+</code>
+</div></td></tr><tr id="const_depth_infix_iterator_45801319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief">Type for a single node.<br /><div class="doxygen_name_spacer"></div>
+<code><i>(unmanaged tag: 4)</i></code>
+</div></td></tr><tr id="Typeunknowndocumentheadtocbodyheader1header2header3header4header5header6textparagraphquoteemphasisboldhzLineunorderedListorderedListlistItemlinebreakpragmamaxType_45811319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Our ancestor.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ AncestorType</a></span>: <span class="keyword">typedef</span> Core::TreeN&lt;Node, Policy::SingleThreaded&gt;;
+</code>
+</div></td></tr><tr id="AncestorType_45821319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Smart pointer.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ Ptr</a></span>: <span class="keyword">typedef</span> AncestorType::Ptr;
+</code>
+</div></td></tr><tr id="Ptr_45831319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Node.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ Node</a></span>: <span class="keyword">typedef</span> Node;
+</code>
+</div></td></tr><tr id="Node_45841319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The template class tree node.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ TreeNNode</a></span>: <span class="keyword">typedef</span> TreeN&lt; Node, Policy::SingleThreaded, Policy::Checking::None, Policy::Conversion::Allow&gt;;
+</code>
+</div></td></tr><tr id="TreeNNode_45851319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The threading policy.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ ThreadingPolicy</a></span>: <span class="keyword">typedef</span> Policy::SingleThreaded&lt;TreeNNode&gt;;
+</code>
+</div></td></tr><tr id="ThreadingPolicy_45861319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">A thread-safe node type.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ PtrThreadSafe</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;Node, Policy::Ownership::COMReferenceCounted, Policy::Checking::None, Policy::Conversion::Allow&gt;;
+</code>
+</div></td></tr><tr id="PtrThreadSafe_45871319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">A default node type.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ PtrSingleThreaded</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;Node, Policy::Ownership::COMReferenceCounted, Policy::Checking::None, Policy::Conversion::Allow&gt;;
+</code>
+</div></td></tr><tr id="PtrSingleThreaded_45881319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The Storage policy.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ StoragePolicy</a></span>: <span class="keyword">typedef</span> Ptr::StoragePolicy;
+</code>
+</div></td></tr><tr id="StoragePolicy_45891319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The Ownership policy.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ OwnershipPolicy</a></span>: <span class="keyword">typedef</span> Ptr::OwnershipPolicy;
+</code>
+</div></td></tr><tr id="OwnershipPolicy_45901319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The Conversion policy.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ ConversionPolicy</a></span>: <span class="keyword">typedef</span> Ptr::ConversionPolicy;
+</code>
+</div></td></tr><tr id="ConversionPolicy_45911319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The Checking policy.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ CheckingPolicy</a></span>: <span class="keyword">typedef</span> Ptr::CheckingPolicy;
+</code>
+</div></td></tr><tr id="CheckingPolicy_45921319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The Constness policy.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ ConstnessPolicy</a></span>: <span class="keyword">typedef</span> Ptr::ConstnessPolicy;
+</code>
+</div></td></tr><tr id="ConstnessPolicy_45931319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">A const pointer.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ ConstPtr</a></span>: <span class="keyword">typedef</span> Ptr::ConstSmartPtrType;
+</code>
+</div></td></tr><tr id="ConstPtr_45941319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">A non-const pointer.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ NonConstPtr</a></span>: <span class="keyword">typedef</span> Ptr::NonConstSmartPtrType;
+</code>
+</div></td></tr><tr id="NonConstPtr_45951319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Size.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ SizeType</a></span>: <span class="keyword">typedef</span> unsigned int;
+</code>
+</div></td></tr><tr id="SizeType_45961319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Size (signed)<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ SignedSizeType</a></span>: <span class="keyword">typedef</span> int;
+</code>
+</div></td></tr><tr id="SignedSizeType_45971319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">A vector of nodes (std::vector)<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ Vector</a></span>: <span class="keyword">typedef</span> std::vector&lt; Ptr&gt;;
+</code>
+</div></td></tr><tr id="Vector_45981319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">A list of nodes (std::list)<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ List</a></span>: <span class="keyword">typedef</span> std::list&lt; Ptr&gt;;
+</code>
+</div></td></tr><tr id="List_45991319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief">Get if this policy is thread-safe.<br /><div class="doxygen_name_spacer"></div>
+<code><i>(unmanaged tag: 4)</i></code>
+</div></td></tr><tr id="@368threadSafe_46001319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Parent of the node <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the parent of the node.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('parent_45821319583276')">+ parent</a></span>: Ptr ();
+<code> <span class="method"><a href="#">+ parent</a></span>: Ptr ();
 </code>
-</div></td></tr><tr id="parent_45821319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="parent_46011319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the parent of the node.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('parent_45831319583276')">+ parent</a></span>: Ptr () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ parent</a></span>: Ptr () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="parent_45831319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="parent_46021319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">ReAttach to another parent.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('parent_45841319583276')">+ parent</a></span>: void (Ptr newParent);
+<code> <span class="method"><a href="#">+ parent</a></span>: void (Ptr newParent);
 </code>
-</div></td></tr><tr id="parent_45841319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="parent_46031319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Detach the node from its parent.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('detachFromParent_45851319583276')">+ detachFromParent</a></span>: void ();
+<code> <span class="method"><a href="#">+ detachFromParent</a></span>: void ();
 </code>
-</div></td></tr><tr id="detachFromParent_45851319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="detachFromParent_46041319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Adding <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Append a child node to the end of the list.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('append_45861319583276')">+ append</a></span>: void (Ptr&amp; node);
+<code> <span class="method"><a href="#">+ append</a></span>: void (Ptr&amp; node);
 </code>
-</div></td></tr><tr id="append_45861319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="append_46051319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> node</code> The new child node<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> node</code> The new child node<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Append a child node to the end of the list.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('append_45871319583276')">+ append</a></span>: void (Node* node);
+<code> <span class="method"><a href="#">+ append</a></span>: void (Node* node);
 </code>
-</div></td></tr><tr id="append_45871319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="append_46061319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> node</code> The new child node<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> node</code> The new child node<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Append a child node at the end.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('push_back_45881319583276')">+ push_back</a></span>: void (Ptr&amp; node);
+<code> <span class="method"><a href="#">+ push_back</a></span>: void (Ptr&amp; node);
 </code>
-</div></td></tr><tr id="push_back_45881319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="push_back_46071319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> node</code> The new child node<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> node</code> The new child node<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Append a child node to the end of the list.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('push_back_45891319583276')">+ push_back</a></span>: void (Node* node);
+<code> <span class="method"><a href="#">+ push_back</a></span>: void (Node* node);
 </code>
-</div></td></tr><tr id="push_back_45891319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="push_back_46081319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> node</code> The new child node<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> node</code> The new child node<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Append a child node at the begining.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('push_front_45901319583276')">+ push_front</a></span>: void (Ptr&amp; node);
+<code> <span class="method"><a href="#">+ push_front</a></span>: void (Ptr&amp; node);
 </code>
-</div></td></tr><tr id="push_front_45901319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="push_front_46091319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> node</code> The new child node<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> node</code> The new child node<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Append a child node to the end of the list.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('push_front_45911319583276')">+ push_front</a></span>: void (Node* node);
+<code> <span class="method"><a href="#">+ push_front</a></span>: void (Node* node);
 </code>
-</div></td></tr><tr id="push_front_45911319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="push_front_46101319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> node</code> The new child node<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> node</code> The new child node<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Removing <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Remove all children.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('clear_45921319583276')">+ clear</a></span>: void ();
+<code> <span class="method"><a href="#">+ clear</a></span>: void ();
 </code>
-</div></td></tr><tr id="clear_45921319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="clear_46111319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Remove a child node.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('remove_45931319583276')">+ remove</a></span>: bool (Ptr&amp; node);
+<code> <span class="method"><a href="#">+ remove</a></span>: bool (Ptr&amp; node);
 </code>
-</div></td></tr><tr id="remove_45931319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="remove_46121319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div><code>return</code>  True if the node has been removed, False otherwise<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Remove the n-th child of the node.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('remove_45941319583276')">+ remove</a></span>: bool (const SizeType index);
+<code> <span class="method"><a href="#">+ remove</a></span>: bool (const SizeType index);
 </code>
-</div></td></tr><tr id="remove_45941319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="remove_46131319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">This method is only provided for convenience reasons. This method is slow and should be used with care.<br /><br />Parameters :<ul><li><code> index</code> Index of the child node to remove (zero-based) and this value can be out of bounds<br /></li></ul><div><code>return</code>  True if the node has been removed, False otherwise<br /></div><br />
+<div class="doxygen_desc">This method is only provided for convenience reasons. This method is slow and should be used with care.<br /><div class="doxygen_params">Parameters :</div><ul><li><code> index</code> Index of the child node to remove (zero-based) and this value can be out of bounds<br /></li></ul><div><code>return</code>  True if the node has been removed, False otherwise<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Remove all children.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('remove_45951319583276')">+ remove</a></span>: bool (const SignedSizeType index);
+<code> <span class="method"><a href="#">+ remove</a></span>: bool (const SignedSizeType index);
 </code>
-</div></td></tr><tr id="remove_45951319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="remove_46141319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Searching <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Return iterator to the first child of the node.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('begin_45961319583276')">+ begin</a></span>: iterator ();
+<code> <span class="method"><a href="#">+ begin</a></span>: iterator ();
 </code>
-</div></td></tr><tr id="begin_45961319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="begin_46151319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Return iterator to the first child of the node.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('begin_45971319583276')">+ begin</a></span>: const iterator () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ begin</a></span>: const iterator () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="begin_45971319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="begin_46161319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Return iterator to the last child of the node.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('end_45981319583276')">+ end</a></span>: iterator ();
+<code> <span class="method"><a href="#">+ end</a></span>: iterator ();
 </code>
-</div></td></tr><tr id="end_45981319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="end_46171319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Return iterator to the first child of the node.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('end_45991319583276')">+ end</a></span>: const iterator () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ end</a></span>: const iterator () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="end_45991319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="end_46181319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Find the n-th child of the node.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('find_46001319583276')">+ find</a></span>: Ptr (const SizeType index);
+<code> <span class="method"><a href="#">+ find</a></span>: Ptr (const SizeType index);
 </code>
-</div></td></tr><tr id="find_46001319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="find_46191319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">This method is only provided for convenience reasons. This method is slow and should be used with care.<br /><br />Parameters :<ul><li><code> index</code> Index of the child node to remove (zero-based) and this value can be out of bounds<br /></li></ul><div><code>return</code>  A pointer to a Ptr, NULL of not found<br /></div><br />
+<div class="doxygen_desc">This method is only provided for convenience reasons. This method is slow and should be used with care.<br /><div class="doxygen_params">Parameters :</div><ul><li><code> index</code> Index of the child node to remove (zero-based) and this value can be out of bounds<br /></li></ul><div><code>return</code>  A pointer to a Ptr, NULL of not found<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Return iterator to the first child of the node.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('find_46011319583276')">+ find</a></span>: Ptr (const SignedSizeType index);
+<code> <span class="method"><a href="#">+ find</a></span>: Ptr (const SignedSizeType index);
 </code>
-</div></td></tr><tr id="find_46011319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="find_46201319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the node has children.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('empty_46021319583276')">+ empty</a></span>: bool () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ empty</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="empty_46021319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="empty_46211319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Return iterator to the first child of the node.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('count_46031319583276')">+ count</a></span>: SizeType () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ count</a></span>: SizeType () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="count_46031319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="count_46221319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Alias for count()<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('size_46041319583276')">+ size</a></span>: SizeType () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ size</a></span>: SizeType () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="size_46041319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="size_46231319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the first child.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('firstChild_46051319583276')">+ firstChild</a></span>: Ptr ();
+<code> <span class="method"><a href="#">+ firstChild</a></span>: Ptr ();
 </code>
-</div></td></tr><tr id="firstChild_46051319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="firstChild_46241319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Return iterator to the first child of the node.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('firstChild_46061319583276')">+ firstChild</a></span>: const Ptr () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ firstChild</a></span>: const Ptr () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="firstChild_46061319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="firstChild_46251319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the last child.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('lastChild_46071319583276')">+ lastChild</a></span>: Ptr ();
+<code> <span class="method"><a href="#">+ lastChild</a></span>: Ptr ();
 </code>
-</div></td></tr><tr id="lastChild_46071319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="lastChild_46261319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Return iterator to the first child of the node.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('lastChild_46081319583276')">+ lastChild</a></span>: const Ptr () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ lastChild</a></span>: const Ptr () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="lastChild_46081319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="lastChild_46271319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the previous sibling.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('previousSibling_46091319583276')">+ previousSibling</a></span>: Ptr ();
+<code> <span class="method"><a href="#">+ previousSibling</a></span>: Ptr ();
 </code>
-</div></td></tr><tr id="previousSibling_46091319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="previousSibling_46281319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Return iterator to the first child of the node.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('previousSibling_46101319583276')">+ previousSibling</a></span>: const Ptr () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ previousSibling</a></span>: const Ptr () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="previousSibling_46101319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="previousSibling_46291319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the next sibling.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('nextSibling_46111319583276')">+ nextSibling</a></span>: Ptr ();
+<code> <span class="method"><a href="#">+ nextSibling</a></span>: Ptr ();
 </code>
-</div></td></tr><tr id="nextSibling_46111319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="nextSibling_46301319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Return iterator to the first child of the node.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('nextSibling_46121319583276')">+ nextSibling</a></span>: const Ptr () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ nextSibling</a></span>: const Ptr () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="nextSibling_46121319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="nextSibling_46311319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Extra <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the node is a leaf.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('leaf_46131319583276')">+ leaf</a></span>: bool () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ leaf</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="leaf_46131319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="leaf_46321319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">A leaf is merely a node without any children<div><code>return</code>  True if this node is a leaf, False otherwise<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Computes the depth of this node.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('depth_46141319583276')">+ depth</a></span>: SizeType () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ depth</a></span>: SizeType () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="depth_46141319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="depth_46331319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">The depth of a node n is the length of the path from the root to the node. The set of all nodes at a given depth is sometimes called a level of the tree. The root node is at depth zero.<br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Computes the height from this node.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('treeHeight_46151319583276')">+ treeHeight</a></span>: SizeType ();
+<code> <span class="method"><a href="#">+ treeHeight</a></span>: SizeType ();
 </code>
-</div></td></tr><tr id="treeHeight_46151319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="treeHeight_46341319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">The height of a tree is the length of the path from the root to the deepest node in the tree. A (rooted) tree with only a node (the root) has a height of zero.<br /><div><code>return</code>  The height of the tree<br /></div><br />
 </div>
@@ -331,9 +599,9 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Comparisons <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Test if the current node is equals to another one.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('equals_46161319583276')">+ equals</a></span>: bool (const Ptr&amp; node) <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ equals</a></span>: bool (const Ptr&amp; node) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="equals_46161319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="equals_46351319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div><code>return</code>  True if the two nodes are equal, false otherwise<br /></div><br />
 </div>
@@ -341,17 +609,17 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Z-Order <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Move the node to the end.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('bringToFront_46171319583276')">+ bringToFront</a></span>: void ();
+<code> <span class="method"><a href="#">+ bringToFront</a></span>: void ();
 </code>
-</div></td></tr><tr id="bringToFront_46171319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="bringToFront_46361319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">This method is especially useful when manipulating items on a layer. When iterating over all children, the last one can be considered as the last drawn thus the first visible item for the user.<br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Move the node to the begining.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('sendToBack_46181319583276')">+ sendToBack</a></span>: void ();
+<code> <span class="method"><a href="#">+ sendToBack</a></span>: void ();
 </code>
-</div></td></tr><tr id="sendToBack_46181319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="sendToBack_46371319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">This method is especially useful when manipulating items on a layer When iterating over all children, the first one can be considered as the first drawn thus the last visible item for the user.<br />
 </div>
@@ -359,83 +627,83 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Schedule an asynchronous update of the item (depending upon the implementation)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('invalidate_46191319583276')">+ invalidate</a></span>: void ();
+<code> <span class="method"><a href="#">+ invalidate</a></span>: void ();
 </code>
-</div></td></tr><tr id="invalidate_46191319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="invalidate_46381319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the item is invalidated (depending upon the implementation)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('isInvalidated_46201319583276')">+ isInvalidated</a></span>: bool ();
+<code> <span class="method"><a href="#">+ isInvalidated</a></span>: bool ();
 </code>
-</div></td></tr><tr id="isInvalidated_46201319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="isInvalidated_46391319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Append a child at the end.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator+=_46211319583276')">+ operator+=</a></span>: Node&amp; (Ptr&amp; node);
+<code> <span class="method"><a href="#">+ operator+=</a></span>: Node&amp; (Ptr&amp; node);
 </code>
-</div></td></tr><tr id="operator+=_46211319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator+=_46401319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Append a child at the end.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator+=_46221319583276')">+ operator+=</a></span>: Node&amp; (Node* node);
+<code> <span class="method"><a href="#">+ operator+=</a></span>: Node&amp; (Node* node);
 </code>
-</div></td></tr><tr id="operator+=_46221319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator+=_46411319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Remove a child node.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator_=_46231319583276')">+ operator-=</a></span>: Node&amp; (Ptr&amp; node);
+<code> <span class="method"><a href="#">+ operator-=</a></span>: Node&amp; (Ptr&amp; node);
 </code>
-</div></td></tr><tr id="operator_=_46231319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator_=_46441319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Append a child at the end.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator<<_46241319583276')">+ operator&lt;&lt;</a></span>: Node&amp; (Ptr&amp; node);
+<code> <span class="method"><a href="#">+ operator&lt;&lt;</a></span>: Node&amp; (Ptr&amp; node);
 </code>
-</div></td></tr><tr id="operator<<_46241319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator<<_46461319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Append a child at the end.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator<<_46251319583276')">+ operator&lt;&lt;</a></span>: Node&amp; (Node* node);
+<code> <span class="method"><a href="#">+ operator&lt;&lt;</a></span>: Node&amp; (Node* node);
 </code>
-</div></td></tr><tr id="operator<<_46251319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator<<_46471319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Comparison with another node.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator==_46261319583276')">+ operator==</a></span>: Node&amp; (const Ptr&amp; node) <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ operator==</a></span>: Node&amp; (const Ptr&amp; node) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator==_46261319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator==_46501319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the n-th child of the node.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator[]_46271319583276')">+ operator[]</a></span>: Ptr (const SizeType index);
+<code> <span class="method"><a href="#">+ operator[]</a></span>: Ptr (const SizeType index);
 </code>
-</div></td></tr><tr id="operator[]_46271319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator[]_46521319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div><code>see</code> :  find()<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the n-th child of the node.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator[]_46281319583276')">+ operator[]</a></span>: Ptr (const SignedSizeType index);
+<code> <span class="method"><a href="#">+ operator[]</a></span>: Ptr (const SignedSizeType index);
 </code>
-</div></td></tr><tr id="operator[]_46281319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator[]_46541319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div><code>see</code> :  find()<br /></div><br />
 </div>
@@ -443,255 +711,113 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Pointer management <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Increment the internal reference counter.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('addRef_46291319583276')">+ addRef</a></span>: void () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ addRef</a></span>: void () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="addRef_46291319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="addRef_46571319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Decrement the internal reference counter.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('release_46301319583276')">+ release</a></span>: void () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ release</a></span>: void () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="release_46301319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="release_46581319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
-</td></tr>
-<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief">Type for a single node.<br /><div class="doxygen_name_spacer"></div>
-<code><i>(unmanaged tag: 6)</i></code>
-</div></td></tr><tr id="Typeunknowndocumentheadtocbodyheader1header2header3header4header5header6textparagraphquoteemphasisboldhzLineunorderedListorderedListlistItemlinebreakpragmamaxType_46311319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Our ancestor.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('AncestorType_46321319583276')">+ AncestorType</a></span>: <span class="keyword">typedef</span> Core::TreeN&lt;Node, Policy::SingleThreaded&gt;;</code>
-</div></td></tr><tr id="AncestorType_46321319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Smart pointer.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('Ptr_46331319583276')">+ Ptr</a></span>: <span class="keyword">typedef</span> AncestorType::Ptr;</code>
-</div></td></tr><tr id="Ptr_46331319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Node.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('Node_46341319583276')">+ Node</a></span>: <span class="keyword">typedef</span> Node;</code>
-</div></td></tr><tr id="Node_46341319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The template class tree node.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('TreeNNode_46351319583276')">+ TreeNNode</a></span>: <span class="keyword">typedef</span> TreeN&lt; Node, Policy::SingleThreaded, Policy::Checking::None, Policy::Conversion::Allow&gt;;</code>
-</div></td></tr><tr id="TreeNNode_46351319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The threading policy.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('ThreadingPolicy_46361319583276')">+ ThreadingPolicy</a></span>: <span class="keyword">typedef</span> Policy::SingleThreaded&lt;TreeNNode&gt;;</code>
-</div></td></tr><tr id="ThreadingPolicy_46361319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">A thread-safe node type.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('PtrThreadSafe_46371319583276')">+ PtrThreadSafe</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;Node, Policy::Ownership::COMReferenceCounted, Policy::Checking::None, Policy::Conversion::Allow&gt;;</code>
-</div></td></tr><tr id="PtrThreadSafe_46371319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">A default node type.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('PtrSingleThreaded_46381319583276')">+ PtrSingleThreaded</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;Node, Policy::Ownership::COMReferenceCounted, Policy::Checking::None, Policy::Conversion::Allow&gt;;</code>
-</div></td></tr><tr id="PtrSingleThreaded_46381319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The Storage policy.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('StoragePolicy_46391319583276')">+ StoragePolicy</a></span>: <span class="keyword">typedef</span> Ptr::StoragePolicy;</code>
-</div></td></tr><tr id="StoragePolicy_46391319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The Ownership policy.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('OwnershipPolicy_46401319583276')">+ OwnershipPolicy</a></span>: <span class="keyword">typedef</span> Ptr::OwnershipPolicy;</code>
-</div></td></tr><tr id="OwnershipPolicy_46401319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The Conversion policy.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('ConversionPolicy_46411319583276')">+ ConversionPolicy</a></span>: <span class="keyword">typedef</span> Ptr::ConversionPolicy;</code>
-</div></td></tr><tr id="ConversionPolicy_46411319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The Checking policy.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('CheckingPolicy_46421319583276')">+ CheckingPolicy</a></span>: <span class="keyword">typedef</span> Ptr::CheckingPolicy;</code>
-</div></td></tr><tr id="CheckingPolicy_46421319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The Constness policy.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('ConstnessPolicy_46431319583276')">+ ConstnessPolicy</a></span>: <span class="keyword">typedef</span> Ptr::ConstnessPolicy;</code>
-</div></td></tr><tr id="ConstnessPolicy_46431319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">A const pointer.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('ConstPtr_46441319583276')">+ ConstPtr</a></span>: <span class="keyword">typedef</span> Ptr::ConstSmartPtrType;</code>
-</div></td></tr><tr id="ConstPtr_46441319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">A non-const pointer.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('NonConstPtr_46451319583276')">+ NonConstPtr</a></span>: <span class="keyword">typedef</span> Ptr::NonConstSmartPtrType;</code>
-</div></td></tr><tr id="NonConstPtr_46451319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Size.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('SizeType_46461319583276')">+ SizeType</a></span>: <span class="keyword">typedef</span> unsigned int;</code>
-</div></td></tr><tr id="SizeType_46461319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Size (signed)<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('SignedSizeType_46471319583276')">+ SignedSizeType</a></span>: <span class="keyword">typedef</span> int;</code>
-</div></td></tr><tr id="SignedSizeType_46471319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">A vector of nodes (std::vector)<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('Vector_46481319583276')">+ Vector</a></span>: <span class="keyword">typedef</span> std::vector&lt; Ptr&gt;;</code>
-</div></td></tr><tr id="Vector_46481319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">A list of nodes (std::list)<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('List_46491319583276')">+ List</a></span>: <span class="keyword">typedef</span> std::list&lt; Ptr&gt;;</code>
-</div></td></tr><tr id="List_46491319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief">Get if this policy is thread-safe.<br /><div class="doxygen_name_spacer"></div>
-<code><i>(unmanaged tag: 6)</i></code>
-</div></td></tr><tr id="@368threadSafe_46501319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
-</td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a href="javascript:toggleVisibility('type_46511319583276')">+ type</a></span>: Type;</code>
-</div></td></tr><tr id="type_46511319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">Text of the node.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('innerText_46521319583276')">+ innerText</a></span>: String;</code>
-</div></td></tr><tr id="innerText_46521319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">ID of the node.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('id_46531319583276')">+ id</a></span>: String;</code>
-</div></td></tr><tr id="id_46531319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Convert a node type into a mere c-string.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('TypeToCString_46541319583276')">+ TypeToCString</a></span>: <span class="keyword">static</span> const char* (Type t);
+<code> <span class="method"><a href="#">+ TypeToCString</a></span>: <span class="keyword">static</span> const char* (Type t);
 </code>
-</div></td></tr><tr id="TypeToCString_46541319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="TypeToCString_46601319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if a type is a block.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('ShouldAppendAParagraphNode_46551319583276')">+ ShouldAppendAParagraphNode</a></span>: <span class="keyword">static</span> bool (Type t);
+<code> <span class="method"><a href="#">+ ShouldAppendAParagraphNode</a></span>: <span class="keyword">static</span> bool (Type t);
 </code>
-</div></td></tr><tr id="ShouldAppendAParagraphNode_46551319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="ShouldAppendAParagraphNode_46621319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('Node_46561319583276')">+ Node</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ Node</a></span>:  ();
 </code>
-</div></td></tr><tr id="Node_46561319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Node_46641319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('Node_46571319583276')">+ Node</a></span>:  (const Type t);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ Node</a></span>:  (const Type t);
 </code>
-</div></td></tr><tr id="Node_46571319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Node_46651319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="Node_46581319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('Node_46581319583276')">+ Node</a></span>:  (const Type t, const StringT&amp; text);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="Node_46661319844517_tmpl"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a href="#">+ Node</a></span>:  (const Type t, const StringT&amp; text);
 </code>
-</div></td></tr><tr id="Node_46581319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Node_46661319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('~Node_46591319583276')">+ <b> ~ </b>Node</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ <b> ~ </b>Node</a></span>:  ();
 </code>
-</div></td></tr><tr id="~Node_46591319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="~Node_46671319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="dump_46601319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class StreamT &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('dump_46601319583276')">+ dump</a></span>: void (StreamT&amp; out, unsigned int level) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="dump_46681319844517_tmpl"><span class="keyword">template</span>&lt;class StreamT &gt;</div>
+ <span class="method"><a href="#">+ dump</a></span>: void (StreamT&amp; out, unsigned int level) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="dump_46601319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="dump_46681319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('flattenText_46611319583276')">+ flattenText</a></span>: void (String&amp; out) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ flattenText</a></span>: void (String&amp; out) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="flattenText_46611319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="flattenText_46691319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Print the entire tree to the output stream.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('print_46621319583276')">+ print</a></span>: std::ostream&amp; (std::ostream&amp; out, bool recursive, unsigned int level);
+<code> <span class="method"><a href="#">+ print</a></span>: std::ostream&amp; (std::ostream&amp; out, bool recursive, unsigned int level);
 </code>
-</div></td></tr><tr id="print_46621319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="print_46701319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">Should only be used for debugging purposes only<br />
+</div>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a href="#">+ type</a></span>: Type;</code>
+</div></td></tr><tr id="type_46711319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">Text of the node.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ innerText</a></span>: String;</code>
+</div></td></tr><tr id="innerText_46721319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">ID of the node.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ id</a></span>: String;</code>
+</div></td></tr><tr id="id_46731319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 </table>

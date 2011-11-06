@@ -6,242 +6,279 @@
 
 
 
-<h2>This is the the access to all the emitters for this queue service.<br /></h2>
-<div>All the emitters are managed here. It can be accessed through: queueService.emitter<br /></div>
+<h2>This is the the access to all the emitters for this queue service</h2>
+<h3>Public typedef</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">ThreadingPolicy</a></span> : Policy::ObjectLevelLockable&lt;Emitters&gt;</code></td></tr>
+</table></div>
+
+<h3>Public function</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code>Emitter::Ptr </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">get</a></span>(const StringT&amp; name)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">add</a></span>(const StringT&amp; name)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">attach</a></span>(const StringT&amp; name, const StringT2&amp; attachedBuffer)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">attach</a></span>(Emitter::Ptr name, const StringT&amp; attachedBuffer)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">modify</a></span>(const StringT&amp; name, bool loop)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">modify</a></span>(Emitter::Ptr name, bool loop)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">move</a></span>(const StringT&amp; name, const Point3D &lt;&gt;&amp; position)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">move</a></span>(Emitter::Ptr emitter, const Point3D &lt;&gt;&amp; position)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">move</a></span>(const StringT&amp; name, const Point3D &lt;&gt;&amp; position, const Vector3D &lt;&gt;&amp; velocity, const Vector3D &lt;&gt;&amp; direction)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">move</a></span>(Emitter::Ptr emitter, const Point3D &lt;&gt;&amp; position, const Vector3D &lt;&gt;&amp; velocity, const Vector3D &lt;&gt;&amp; direction)</code></td></tr>
+<tr><td class="doxygen_index"><code>sint64 </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">elapsedTime</a></span>(const StringT&amp; name)</code></td></tr>
+<tr><td class="doxygen_index"><code>sint64 </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">elapsedTime</a></span>(Emitter::Ptr emitter)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">play</a></span>(const StringT&amp; name)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">play</a></span>(Emitter::Ptr emitter)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">stop</a></span>(const StringT&amp; name)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">stop</a></span>(const Emitter::Ptr&amp; emitter)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">remove</a></span>(const StringT&amp; name)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">remove</a></span>(Emitter::Ptr name)</code></td></tr>
+<tr><td class="doxygen_index"><code>Emitter::Ptr </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">get</a></span>(const String&amp; name)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">add</a></span>(const String&amp; emitterName)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">attach</a></span>(const String&amp; emitterName, const String&amp; bufferName)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">attach</a></span>(Emitter::Ptr emitter, const String&amp; bufferName)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">move</a></span>(const String&amp; emitterName, const Point3D &lt;&gt;&amp; position)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">move</a></span>(const String&amp; emitterStr, const Point3D &lt;&gt;&amp; position, const Vector3D &lt;&gt;&amp; velocity, const Vector3D &lt;&gt;&amp; direction)</code></td></tr>
+<tr><td class="doxygen_index"><code>sint64 </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">elapsedTime</a></span>(const String&amp; name)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">play</a></span>(const String&amp; name)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">stop</a></span>(const String&amp; name)</code></td></tr>
+</table></div>
+
+<h2>Detailed Description</h2><div>All the emitters are managed here. It can be accessed through: queueService.emitter<br /></div>
 <table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a href="javascript:toggleVisibility('ThreadingPolicy_34281319583276')">+ ThreadingPolicy</a></span>: <span class="keyword">typedef</span> Policy::ObjectLevelLockable&lt;Emitters&gt;;</code>
-</div></td></tr><tr id="ThreadingPolicy_34281319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a href="#">+ ThreadingPolicy</a></span>: <span class="keyword">typedef</span> Policy::ObjectLevelLockable&lt;Emitters&gt;;
+</code>
+</div></td></tr><tr id="ThreadingPolicy_34121319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief">Get if this policy is thread-safe.<br /><div class="doxygen_name_spacer"></div>
-<code><i>(unmanaged tag: 6)</i></code>
-</div></td></tr><tr id="@369_34291319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<code><i>(unmanaged tag: 4)</i></code>
+</div></td></tr><tr id="@369_34141319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get an emitter.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="get_34301319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('get_34301319583276')">+ get</a></span>: Emitter::Ptr (const StringT&amp; name);
+<code><div class="doxygen_tmpllist" id="get_34151319844517_tmpl"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
+ <span class="method"><a href="#">+ get</a></span>: Emitter::Ptr (const StringT&amp; name);
 </code>
-</div></td></tr><tr id="get_34301319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="get_34151319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Add an emitter.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="add_34311319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('add_34311319583276')">+ add</a></span>: bool (const StringT&amp; name);
+<code><div class="doxygen_tmpllist" id="add_34171319844517_tmpl"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
+ <span class="method"><a href="#">+ add</a></span>: bool (const StringT&amp; name);
 </code>
-</div></td></tr><tr id="add_34311319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="add_34171319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Attach an emitter to a buffer.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="attach_34321319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename StringT , typename StringT2 &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('attach_34321319583276')">+ attach</a></span>: bool (const StringT&amp; name, const StringT2&amp; attachedBuffer);
+<code><div class="doxygen_tmpllist" id="attach_34181319844517_tmpl"><span class="keyword">template</span>&lt;typename StringT , typename StringT2 &gt;</div>
+ <span class="method"><a href="#">+ attach</a></span>: bool (const StringT&amp; name, const StringT2&amp; attachedBuffer);
 </code>
-</div></td></tr><tr id="attach_34321319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="attach_34181319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Attach an emitter to a buffer.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="attach_34331319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('attach_34331319583276')">+ attach</a></span>: bool (Emitter::Ptr name, const StringT&amp; attachedBuffer);
+<code><div class="doxygen_tmpllist" id="attach_34201319844517_tmpl"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
+ <span class="method"><a href="#">+ attach</a></span>: bool (Emitter::Ptr name, const StringT&amp; attachedBuffer);
 </code>
-</div></td></tr><tr id="attach_34331319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="attach_34201319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Modify an emitter's data.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="modify_34341319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('modify_34341319583276')">+ modify</a></span>: bool (const StringT&amp; name, bool loop);
+<code><div class="doxygen_tmpllist" id="modify_34231319844517_tmpl"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
+ <span class="method"><a href="#">+ modify</a></span>: bool (const StringT&amp; name, bool loop);
 </code>
-</div></td></tr><tr id="modify_34341319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="modify_34231319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Modify an emitter's data.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('modify_34351319583276')">+ modify</a></span>: bool (Emitter::Ptr name, bool loop);
+<code> <span class="method"><a href="#">+ modify</a></span>: bool (Emitter::Ptr name, bool loop);
 </code>
-</div></td></tr><tr id="modify_34351319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="modify_34251319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Move an emitter around.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="move_34361319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('move_34361319583276')">+ move</a></span>: bool (const StringT&amp; name, const Point3D &lt;&gt;&amp; position);
+<code><div class="doxygen_tmpllist" id="move_34271319844517_tmpl"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
+ <span class="method"><a href="#">+ move</a></span>: bool (const StringT&amp; name, const Point3D &lt;&gt;&amp; position);
 </code>
-</div></td></tr><tr id="move_34361319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="move_34271319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Move an emitter around.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('move_34371319583276')">+ move</a></span>: bool (Emitter::Ptr emitter, const Point3D &lt;&gt;&amp; position);
+<code> <span class="method"><a href="#">+ move</a></span>: bool (Emitter::Ptr emitter, const Point3D &lt;&gt;&amp; position);
 </code>
-</div></td></tr><tr id="move_34371319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="move_34301319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Move an emitter around.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="move_34381319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('move_34381319583276')">+ move</a></span>: bool (const StringT&amp; name, const Point3D &lt;&gt;&amp; position, const Vector3D &lt;&gt;&amp; velocity, const Vector3D &lt;&gt;&amp; direction);
+<code><div class="doxygen_tmpllist" id="move_34311319844517_tmpl"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
+ <span class="method"><a href="#">+ move</a></span>: bool (const StringT&amp; name, const Point3D &lt;&gt;&amp; position, const Vector3D &lt;&gt;&amp; velocity, const Vector3D &lt;&gt;&amp; direction);
 </code>
-</div></td></tr><tr id="move_34381319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="move_34311319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Move an emitter around.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('move_34391319583276')">+ move</a></span>: bool (Emitter::Ptr emitter, const Point3D &lt;&gt;&amp; position, const Vector3D &lt;&gt;&amp; velocity, const Vector3D &lt;&gt;&amp; direction);
+<code> <span class="method"><a href="#">+ move</a></span>: bool (Emitter::Ptr emitter, const Point3D &lt;&gt;&amp; position, const Vector3D &lt;&gt;&amp; velocity, const Vector3D &lt;&gt;&amp; direction);
 </code>
-</div></td></tr><tr id="move_34391319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="move_34331319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get elapsed playback time on an emitter.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="elapsedTime_34401319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('elapsedTime_34401319583276')">+ elapsedTime</a></span>: sint64 (const StringT&amp; name);
+<code><div class="doxygen_tmpllist" id="elapsedTime_34351319844517_tmpl"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
+ <span class="method"><a href="#">+ elapsedTime</a></span>: sint64 (const StringT&amp; name);
 </code>
-</div></td></tr><tr id="elapsedTime_34401319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="elapsedTime_34351319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get elapsed playback time on an emitter.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('elapsedTime_34411319583276')">+ elapsedTime</a></span>: sint64 (Emitter::Ptr emitter);
+<code> <span class="method"><a href="#">+ elapsedTime</a></span>: sint64 (Emitter::Ptr emitter);
 </code>
-</div></td></tr><tr id="elapsedTime_34411319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="elapsedTime_34361319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Start playback on an emitter.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="play_34421319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('play_34421319583276')">+ play</a></span>: bool (const StringT&amp; name);
+<code><div class="doxygen_tmpllist" id="play_34371319844517_tmpl"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
+ <span class="method"><a href="#">+ play</a></span>: bool (const StringT&amp; name);
 </code>
-</div></td></tr><tr id="play_34421319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="play_34371319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Start playback on an emitter.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('play_34431319583276')">+ play</a></span>: bool (Emitter::Ptr emitter);
+<code> <span class="method"><a href="#">+ play</a></span>: bool (Emitter::Ptr emitter);
 </code>
-</div></td></tr><tr id="play_34431319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="play_34391319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Stop playback on an emitter.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="stop_34441319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('stop_34441319583276')">+ stop</a></span>: bool (const StringT&amp; name);
+<code><div class="doxygen_tmpllist" id="stop_34401319844517_tmpl"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
+ <span class="method"><a href="#">+ stop</a></span>: bool (const StringT&amp; name);
 </code>
-</div></td></tr><tr id="stop_34441319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="stop_34401319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Stop playback on an emitter.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('stop_34451319583276')">+ stop</a></span>: bool (const Emitter::Ptr&amp; emitter);
+<code> <span class="method"><a href="#">+ stop</a></span>: bool (const Emitter::Ptr&amp; emitter);
 </code>
-</div></td></tr><tr id="stop_34451319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="stop_34411319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Remove an emitter.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="remove_34461319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('remove_34461319583276')">+ remove</a></span>: bool (const StringT&amp; name);
+<code><div class="doxygen_tmpllist" id="remove_34431319844517_tmpl"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
+ <span class="method"><a href="#">+ remove</a></span>: bool (const StringT&amp; name);
 </code>
-</div></td></tr><tr id="remove_34461319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="remove_34431319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Remove an emitter.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('remove_34471319583276')">+ remove</a></span>: bool (Emitter::Ptr name);
+<code> <span class="method"><a href="#">+ remove</a></span>: bool (Emitter::Ptr name);
 </code>
-</div></td></tr><tr id="remove_34471319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="remove_34441319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('get_34481319583276')">+ get</a></span>: Emitter::Ptr (const String&amp; name);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ get</a></span>: Emitter::Ptr (const String&amp; name);
 </code>
-</div></td></tr><tr id="get_34481319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="get_34451319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('add_34491319583276')">+ add</a></span>: bool (const String&amp; emitterName);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ add</a></span>: bool (const String&amp; emitterName);
 </code>
-</div></td></tr><tr id="add_34491319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="add_34471319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('attach_34501319583276')">+ attach</a></span>: bool (const String&amp; emitterName, const String&amp; bufferName);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ attach</a></span>: bool (const String&amp; emitterName, const String&amp; bufferName);
 </code>
-</div></td></tr><tr id="attach_34501319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="attach_34481319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('attach_34511319583276')">+ attach</a></span>: bool (Emitter::Ptr emitter, const String&amp; bufferName);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ attach</a></span>: bool (Emitter::Ptr emitter, const String&amp; bufferName);
 </code>
-</div></td></tr><tr id="attach_34511319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="attach_34491319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('move_34521319583276')">+ move</a></span>: bool (const String&amp; emitterName, const Point3D &lt;&gt;&amp; position);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ move</a></span>: bool (const String&amp; emitterName, const Point3D &lt;&gt;&amp; position);
 </code>
-</div></td></tr><tr id="move_34521319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="move_34511319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('move_34531319583276')">+ move</a></span>: bool (const String&amp; emitterStr, const Point3D &lt;&gt;&amp; position, const Vector3D &lt;&gt;&amp; velocity, const Vector3D &lt;&gt;&amp; direction);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ move</a></span>: bool (const String&amp; emitterStr, const Point3D &lt;&gt;&amp; position, const Vector3D &lt;&gt;&amp; velocity, const Vector3D &lt;&gt;&amp; direction);
 </code>
-</div></td></tr><tr id="move_34531319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="move_34521319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('elapsedTime_34541319583276')">+ elapsedTime</a></span>: sint64 (const String&amp; name);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ elapsedTime</a></span>: sint64 (const String&amp; name);
 </code>
-</div></td></tr><tr id="elapsedTime_34541319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="elapsedTime_34531319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('play_34551319583276')">+ play</a></span>: bool (const String&amp; name);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ play</a></span>: bool (const String&amp; name);
 </code>
-</div></td></tr><tr id="play_34551319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="play_34541319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('stop_34561319583276')">+ stop</a></span>: bool (const String&amp; name);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ stop</a></span>: bool (const String&amp; name);
 </code>
-</div></td></tr><tr id="stop_34561319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="stop_34551319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 </table>

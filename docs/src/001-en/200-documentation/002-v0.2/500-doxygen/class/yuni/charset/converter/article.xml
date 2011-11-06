@@ -6,28 +6,45 @@
 
 
 
-<h2>Charset conversion.<br /></h2>
-<div>This class provides a character set conversion system. You instanciate it by passing the FROM and TO charsets, and it can do stateful conversions. (ie, convert multiple buffers one after the other, while taking care of characters split between two buffers.<br /></div>
+<h2>Charset conversion</h2>
+<h3>Public function</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructors and destructors</h4></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Converter</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Converter</a></span>(Charset::Type fromCS, Charset::Type toCS, Charset::Unconvertable opts)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Converter</a></span>(const char* fromCS, const char* toCS)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#"><b> ~ </b>Converter</a></span>()</code></td></tr>
+<tr><td></td><td><br /><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code>int </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">lastError</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">valid</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">close</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">reset</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">convert</a></span>(SrcStringT&amp; source, DstStringT&amp; destination, bool isLastBuffer)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">convert</a></span>(SrcStringT&amp; source, DtsStringT&amp; destination, bool isLastBuffer)</code></td></tr>
+<tr><td></td><td><br /><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">static</span> const char* </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Name</a></span>(Charset::Type type)</code></td></tr>
+</table></div>
+
+<h2>Detailed Description</h2><div>This class provides a character set conversion system. You instanciate it by passing the FROM and TO charsets, and it can do stateful conversions. (ie, convert multiple buffers one after the other, while taking care of characters split between two buffers.<br /></div>
 <table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors and destructors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('Converter_15101319583276')">+ Converter</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ Converter</a></span>:  ();
 </code>
-</div></td></tr><tr id="Converter_15101319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Converter_15101319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">Constructs a converter, but do not set a charset.<br /> You must use open() before calling anything other than valid() .<div><code>see</code> :  open(), valid()<br /></div><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('Converter_15111319583276')">+ Converter</a></span>:  (Charset::Type fromCS, Charset::Type toCS, Charset::Unconvertable opts);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ Converter</a></span>:  (Charset::Type fromCS, Charset::Type toCS, Charset::Unconvertable opts);
 </code>
-</div></td></tr><tr id="Converter_15111319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Converter_15111319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">Constructs a converter, but do not set a charset.<br /> You must use open() before calling anything other than valid() .<div><code>see</code> :  open(), valid()<br /></div><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('Converter_15121319583276')">+ Converter</a></span>:  (const char* fromCS, const char* toCS);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ Converter</a></span>:  (const char* fromCS, const char* toCS);
 </code>
-</div></td></tr><tr id="Converter_15121319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Converter_15121319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">Constructs a converter using real charset names and flags.<br /> Using this method, you can open a converter the iconv_open(3) way:<source type="cpp">  Charset::Converter  converter( "UTF-8" ,  "ASCII" );
   Charset::Converter  converter( "UTF-8" ,  "ASCII//TRANSLIT" );
@@ -37,67 +54,67 @@
 <br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('~Converter_15131319583276')">+ <b> ~ </b>Converter</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ <b> ~ </b>Converter</a></span>:  ();
 </code>
-</div></td></tr><tr id="~Converter_15131319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="~Converter_15131319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">Destructor<br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('lastError_15141319583276')">+ lastError</a></span>: int () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ lastError</a></span>: int () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="lastError_15141319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="lastError_15141319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">Returns the last error encountered (errno-style)<br /><div><code>return</code>  the last error encountered by the object.<br /></div><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('valid_15151319583276')">+ valid</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ valid</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="valid_15151319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="valid_15151319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">Checks the validity of the conversion context<br /> All operations except checking the validity will fail on an invalid conversion context. This function may return false for a number of reasons:<ul><li> The conversion is not valid (invalid from/to charsets, conversion not implemented by the underlying iconv() functions...)<br /></li><li> The object was constructed using the default constructor and a conversion context was not open()ed.<br /></li></ul><br /><div><code>return</code>  true if the converter has been properly initialized.<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Closes the conversion context.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('close_15161319583276')">+ close</a></span>: void ();
+<code> <span class="method"><a href="#">+ close</a></span>: void ();
 </code>
-</div></td></tr><tr id="close_15161319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="close_15161319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">Closing and re-opening a conversion context is pratically equivalent to creating a new conversion object. We recommend creating a new object instead of closing and reopening one, to preserve the legibility of the code.<br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Resets the conversion context.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('reset_15171319583276')">+ reset</a></span>: void ();
+<code> <span class="method"><a href="#">+ reset</a></span>: void ();
 </code>
-</div></td></tr><tr id="reset_15171319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="reset_15171319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">You must reset the conversion context when you are reusing the same conversion object to perform operations on unrelated strings.<br /> This is because certain encodings are stateful (can shift state between 1-byte and 2-bytes characters for example).<br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Performs a conversion on memory buffers.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="convert_15181319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename SrcStringT , typename DstStringT &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('convert_15181319583276')">+ convert</a></span>: bool (SrcStringT&amp; source, DstStringT&amp; destination, bool isLastBuffer);
+<code><div class="doxygen_tmpllist" id="convert_15181319844517_tmpl"><span class="keyword">template</span>&lt;typename SrcStringT , typename DstStringT &gt;</div>
+ <span class="method"><a href="#">+ convert</a></span>: bool (SrcStringT&amp; source, DstStringT&amp; destination, bool isLastBuffer);
 </code>
-</div></td></tr><tr id="convert_15181319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="convert_15181319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">Performs a conversion, reading in the source encoding from the source buffer, and writing to the destination buffer. The destination buffer will be resized automatically if needed.<br /> Incomplete character sequences will be ignored temporarily if isLastBuffer is set to false. This behavior can be useful if you are reading a file block-by-block, and therefore only want to do this check on the last converted block.<br /> On completion:<ul><li> the source memory buffer will be depleted of the converted characters<br /></li><li> the destination buffer will be appended the converted characters<br /></li></ul><br /><div><code>return</code>  True if the conversion was successful, false otherwise.<br /></div><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="convert_15191319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename SrcStringT , typename DtsStringT &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('convert_15191319583276')">+ convert</a></span>: bool (SrcStringT&amp; source, DtsStringT&amp; destination, bool isLastBuffer);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="convert_15191319844517_tmpl"><span class="keyword">template</span>&lt;typename SrcStringT , typename DtsStringT &gt;</div>
+ <span class="method"><a href="#">+ convert</a></span>: bool (SrcStringT&amp; source, DtsStringT&amp; destination, bool isLastBuffer);
 </code>
-</div></td></tr><tr id="convert_15191319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="convert_15191319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('Name_15201319583276')">+ Name</a></span>: <span class="keyword">static</span> const char* (Charset::Type type);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ Name</a></span>: <span class="keyword">static</span> const char* (Charset::Type type);
 </code>
-</div></td></tr><tr id="Name_15201319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Name_15201319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">Returns the real name of the specified charset.<br /><div><code>return</code>  Returns a pointer on a static C string containing the name of the specified charset.<br /></div><br />
 </div>

@@ -6,108 +6,129 @@
 
 
 
-<h2>Transport layer for messages (abstract)<br /></h2>
-<div>A transport layer is not thread-safe.<br /></div>
+<h2>Transport layer for messages (abstract)</h2>
+<h3>Public typedef</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">Ptr</a></span> : SmartPtr&lt;TCP&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">Set</a></span> : std::set&lt; Ptr&gt;</code></td></tr>
+</table></div>
+
+<h3>Public function</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructor &amp; Destructor</h4></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">TCP</a></span>(Mode m)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#"><b> ~ </b>TCP</a></span>()</code></td></tr>
+<tr><td></td><td><br /><h4>Attached thread</h4></td></tr>
+<tr><td class="doxygen_index"><code>Thread::IThread* </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">attachedThread</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>const Thread::IThread* </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">attachedThread</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">attachedThread</a></span>(Thread::IThread* thread)</code></td></tr>
+<tr><td></td><td><br /><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code>Yuni::Net::Error </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">execute</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>Yuni::Net::Error </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator()</a></span>()</code></td></tr>
+</table></div>
+
+<h2>Detailed Description</h2><div>A transport layer is not thread-safe.<br /></div>
 <table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The most suitable smart pointer for the class.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;TCP&gt;;
+</code>
+</div></td></tr><tr id="Ptr_36061319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Set.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ Set</a></span>: <span class="keyword">typedef</span> std::set&lt; Ptr&gt;;
+</code>
+</div></td></tr><tr id="Set_36091319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('TCP_36531319583276')">+ TCP</a></span>:  (Mode m);
+<code> <span class="method"><a href="#">+ TCP</a></span>:  (Mode m);
 </code>
-</div></td></tr><tr id="TCP_36531319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="TCP_36111319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('~TCP_36551319583276')">+ <b> ~ </b>TCP</a></span>:  ();
+<code> <span class="method"><a href="#">+ <b> ~ </b>TCP</a></span>:  ();
 </code>
-</div></td></tr><tr id="~TCP_36551319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="~TCP_36131319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Attached thread <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the attached thread.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('attachedThread_36571319583276')">+ attachedThread</a></span>: Thread::IThread* ();
+<code> <span class="method"><a href="#">+ attachedThread</a></span>: Thread::IThread* ();
 </code>
-</div></td></tr><tr id="attachedThread_36571319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="attachedThread_36151319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the attached thread (const)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('attachedThread_36591319583276')">+ attachedThread</a></span>: const Thread::IThread* () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ attachedThread</a></span>: const Thread::IThread* () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="attachedThread_36591319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="attachedThread_36171319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the attached thread.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('attachedThread_36601319583276')">+ attachedThread</a></span>: void (Thread::IThread* thread);
+<code> <span class="method"><a href="#">+ attachedThread</a></span>: void (Thread::IThread* thread);
 </code>
-</div></td></tr><tr id="attachedThread_36601319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="attachedThread_36191319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Service.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('execute_36631319583276')">+ execute</a></span>: Yuni::Net::Error ();
+<code> <span class="method"><a href="#">+ execute</a></span>: Yuni::Net::Error ();
 </code>
-</div></td></tr><tr id="execute_36631319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="execute_36211319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">Execute the transport layer<br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Execute the transport layer.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator()_36651319583276')">+ operator()</a></span>: Yuni::Net::Error ();
+<code> <span class="method"><a href="#">+ operator()</a></span>: Yuni::Net::Error ();
 </code>
-</div></td></tr><tr id="operator()_36651319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator()_36231319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The most suitable smart pointer for the class.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('Ptr_36671319583276')">+ Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;TCP&gt;;</code>
-</div></td></tr><tr id="Ptr_36671319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Set.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('Set_36691319583276')">+ Set</a></span>: <span class="keyword">typedef</span> std::set&lt; Ptr&gt;;</code>
-</div></td></tr><tr id="Set_36691319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">Address to listen.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('address_36711319583276')">+ address</a></span>: HostAddress;</code>
-</div></td></tr><tr id="address_36711319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<code><span class="method"><a href="#">+ address</a></span>: HostAddress;</code>
+</div></td></tr><tr id="address_36251319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">Port .<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('port_36721319583276')">+ port</a></span>: Port;</code>
-</div></td></tr><tr id="port_36721319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<code><span class="method"><a href="#">+ port</a></span>: Port;</code>
+</div></td></tr><tr id="port_36271319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">Mode (server/client)<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('mode_36741319583276')">+ mode</a></span>: const Mode;</code>
-</div></td></tr><tr id="mode_36741319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<code><span class="method"><a href="#">+ mode</a></span>: const Mode;</code>
+</div></td></tr><tr id="mode_36281319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 </table>

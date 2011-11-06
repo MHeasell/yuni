@@ -6,316 +6,366 @@
 
 
 
-<h2>2D-Rectangle<br /></h2>
-<table class="doxygen_table">
+<h2>2D-Rectangle</h2>
+<h3>Public typedef</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">Type</a></span> : T</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">value_type</a></span> : T</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">Rect2DType</a></span> : Rect2D&lt;Type&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">PointType</a></span> : Point2D&lt;Type&gt;</code></td></tr>
+</table></div>
+
+<h3>Public function</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructors</h4></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Rect2D</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Rect2D</a></span>(const Point2D&lt;U&gt;&amp; a, const Point2D&lt;V&gt;&amp; b)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Rect2D</a></span>(const U ax1, const V ay1, const W ax2, const X ay2)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Rect2D</a></span>(const Rect2D&lt;U&gt;&amp; a, const Rect2D&lt;V&gt;&amp; b)</code></td></tr>
+<tr><td></td><td><br /><h4>Reset values</h4></td></tr>
+<tr><td class="doxygen_index"><code>Rect2D&lt;T&gt;&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">reset</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>Rect2D&lt;T&gt;&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">reset</a></span>(const Point2D&lt;U&gt;&amp; a, const Point2D&lt;V&gt;&amp; b)</code></td></tr>
+<tr><td class="doxygen_index"><code>Rect2D&lt;T&gt;&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">reset</a></span>(const U a, const V b, const W c, const X d)</code></td></tr>
+<tr><td class="doxygen_index"><code>Rect2D&lt;T&gt;&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">reset</a></span>(const Rect2D&lt;U&gt;&amp; a, const Rect2D&lt;V&gt;&amp; b)</code></td></tr>
+<tr><td></td><td><br /><h4>Measurement</h4></td></tr>
+<tr><td class="doxygen_index"><code>T </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>T </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">width</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>T </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">height</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td></td><td><br /><h4>Move the entire rect</h4></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">move</a></span>(const U ax1, const U ay1)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">move</a></span>(const Point2D&lt;U&gt;&amp; p)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator()</a></span>(const U&amp; ax1, const V&amp; ay1)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator()</a></span>(const Point2D&lt;U&gt;&amp; p)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator()</a></span>(const Point2D&lt;U&gt;&amp; a, const Point2D&lt;V&gt;&amp; b)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator()</a></span>(const Rect2D&lt;U&gt;&amp; a, const Rect2D&lt;V&gt;&amp; b)</code></td></tr>
+<tr><td></td><td><br /><h4>Geometrical localisation</h4></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">contains</a></span>(const Point2D&lt;U&gt;&amp; p) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">contains</a></span>(const U nx, const V ny) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">contains</a></span>(const Rect2D&lt;U&gt;&amp; r) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">collidedWith</a></span>(const Rect2D&lt;U&gt;&amp; r) <span class="keyword">const</span></code></td></tr>
+<tr><td></td><td><br /><h4>Assignment</h4></td></tr>
+<tr><td class="doxygen_index"><code>Rect2D&lt;T&gt;&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator=</a></span>(const Point2D&lt;U&gt;&amp; p)</code></td></tr>
+<tr><td class="doxygen_index"><code>Rect2D&lt;T&gt;&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator=</a></span>(const Rect2D&lt;U&gt;&amp; p)</code></td></tr>
+<tr><td></td><td><br /><h4>Stream printing</h4></td></tr>
+<tr><td class="doxygen_index"><code>std::ostream&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">print</a></span>(std::ostream&amp; out) <span class="keyword">const</span></code></td></tr>
+<tr><td></td><td><br /><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code>PointType </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">topLeft</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>PointType </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">bottomRight</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">normalize</a></span>()</code></td></tr>
+</table></div>
+
+<h2>Detailed Description</h2><table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The original type T.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ Type</a></span>: <span class="keyword">typedef</span> T;
+</code>
+</div></td></tr><tr id="Type_22591319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The original type T.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ value_type</a></span>: <span class="keyword">typedef</span> T;
+</code>
+</div></td></tr><tr id="value_type_22601319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Complete type for Rect2D .<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ Rect2DType</a></span>: <span class="keyword">typedef</span> Rect2D&lt;Type&gt;;
+</code>
+</div></td></tr><tr id="Rect2DType_22611319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Point2D .<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ PointType</a></span>: <span class="keyword">typedef</span> Point2D&lt;Type&gt;;
+</code>
+</div></td></tr><tr id="PointType_22621319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('Rect2D_22601319583276')">+ Rect2D</a></span>:  ();
+<code> <span class="method"><a href="#">+ Rect2D</a></span>:  ();
 </code>
-</div></td></tr><tr id="Rect2D_22601319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Rect2D_22631319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Construct the rectangle to cover two 2D-points.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="Rect2D_22611319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U , class V &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('Rect2D_22611319583276')">+ Rect2D</a></span>:  (const Point2D&lt;U&gt;&amp; a, const Point2D&lt;V&gt;&amp; b);
+<code><div class="doxygen_tmpllist" id="Rect2D_22641319844517_tmpl"><span class="keyword">template</span>&lt;class U , class V &gt;</div>
+ <span class="method"><a href="#">+ Rect2D</a></span>:  (const Point2D&lt;U&gt;&amp; a, const Point2D&lt;V&gt;&amp; b);
 </code>
-</div></td></tr><tr id="Rect2D_22611319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Rect2D_22641319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> a</code> The first point to cover<br /></li><li><code> b</code> The second point to cover<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> a</code> The first point to cover<br /></li><li><code> b</code> The second point to cover<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor with given coordinates.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="Rect2D_22621319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U , class V , class W , class X &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('Rect2D_22621319583276')">+ Rect2D</a></span>:  (const U ax1, const V ay1, const W ax2, const X ay2);
+<code><div class="doxygen_tmpllist" id="Rect2D_22651319844517_tmpl"><span class="keyword">template</span>&lt;class U , class V , class W , class X &gt;</div>
+ <span class="method"><a href="#">+ Rect2D</a></span>:  (const U ax1, const V ay1, const W ax2, const X ay2);
 </code>
-</div></td></tr><tr id="Rect2D_22621319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Rect2D_22651319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> ax1</code> The top-left X-coordinate<br /></li><li><code> ay1</code> The top-left Y-coordinate<br /></li><li><code> ax2</code> The bottom-right X-coordinate<br /></li><li><code> ay2</code> The bottom-right Y-coordinate<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> ax1</code> The top-left X-coordinate<br /></li><li><code> ay1</code> The top-left Y-coordinate<br /></li><li><code> ax2</code> The bottom-right X-coordinate<br /></li><li><code> ay2</code> The bottom-right Y-coordinate<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Construct the rectangle to cover two other rectangles.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="Rect2D_22631319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U , class V &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('Rect2D_22631319583276')">+ Rect2D</a></span>:  (const Rect2D&lt;U&gt;&amp; a, const Rect2D&lt;V&gt;&amp; b);
+<code><div class="doxygen_tmpllist" id="Rect2D_22661319844517_tmpl"><span class="keyword">template</span>&lt;class U , class V &gt;</div>
+ <span class="method"><a href="#">+ Rect2D</a></span>:  (const Rect2D&lt;U&gt;&amp; a, const Rect2D&lt;V&gt;&amp; b);
 </code>
-</div></td></tr><tr id="Rect2D_22631319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Rect2D_22661319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> a</code> The first rectangle to cover<br /></li><li><code> b</code> The second rectangle to cover<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> a</code> The first rectangle to cover<br /></li><li><code> b</code> The second rectangle to cover<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Reset values <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Reset all coordinates to zero.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('reset_22641319583276')">+ reset</a></span>: Rect2D&lt;T&gt;&amp; ();
+<code> <span class="method"><a href="#">+ reset</a></span>: Rect2D&lt;T&gt;&amp; ();
 </code>
-</div></td></tr><tr id="reset_22641319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="reset_22671319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div><code>return</code>  Always *this<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Reset the rectangle coordinates to cover two 2D-points.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="reset_22651319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U , class V &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('reset_22651319583276')">+ reset</a></span>: Rect2D&lt;T&gt;&amp; (const Point2D&lt;U&gt;&amp; a, const Point2D&lt;V&gt;&amp; b);
+<code><div class="doxygen_tmpllist" id="reset_22681319844517_tmpl"><span class="keyword">template</span>&lt;class U , class V &gt;</div>
+ <span class="method"><a href="#">+ reset</a></span>: Rect2D&lt;T&gt;&amp; (const Point2D&lt;U&gt;&amp; a, const Point2D&lt;V&gt;&amp; b);
 </code>
-</div></td></tr><tr id="reset_22651319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="reset_22681319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> a</code> The first point to cover<br /></li><li><code> b</code> The second point to cover<br /></li></ul><div><code>return</code>  Always *this<br /></div><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> a</code> The first point to cover<br /></li><li><code> b</code> The second point to cover<br /></li></ul><div><code>return</code>  Always *this<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Reset the rectangle coordinates to cover two 2D-points.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="reset_22661319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U , class V , class W , class X &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('reset_22661319583276')">+ reset</a></span>: Rect2D&lt;T&gt;&amp; (const U a, const V b, const W c, const X d);
+<code><div class="doxygen_tmpllist" id="reset_22691319844517_tmpl"><span class="keyword">template</span>&lt;class U , class V , class W , class X &gt;</div>
+ <span class="method"><a href="#">+ reset</a></span>: Rect2D&lt;T&gt;&amp; (const U a, const V b, const W c, const X d);
 </code>
-</div></td></tr><tr id="reset_22661319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="reset_22691319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> a</code> The first X-coordinate<br /></li><li><code> b</code> The first Y-coordinate<br /></li><li><code> c</code> The second X-coordinate<br /></li><li><code> d</code> The second Y-coordinate<br /></li></ul><div><code>return</code>  Always *this<br /></div><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> a</code> The first X-coordinate<br /></li><li><code> b</code> The first Y-coordinate<br /></li><li><code> c</code> The second X-coordinate<br /></li><li><code> d</code> The second Y-coordinate<br /></li></ul><div><code>return</code>  Always *this<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Reset the rectangle coordinates to cover two other rectangles.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="reset_22671319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U , class V &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('reset_22671319583276')">+ reset</a></span>: Rect2D&lt;T&gt;&amp; (const Rect2D&lt;U&gt;&amp; a, const Rect2D&lt;V&gt;&amp; b);
+<code><div class="doxygen_tmpllist" id="reset_22701319844517_tmpl"><span class="keyword">template</span>&lt;class U , class V &gt;</div>
+ <span class="method"><a href="#">+ reset</a></span>: Rect2D&lt;T&gt;&amp; (const Rect2D&lt;U&gt;&amp; a, const Rect2D&lt;V&gt;&amp; b);
 </code>
-</div></td></tr><tr id="reset_22671319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="reset_22701319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> a</code> The first rectangle to cover<br /></li><li><code> b</code> The second rectangle to cover<br /></li></ul><div><code>return</code>  Always *this<br /></div><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> a</code> The first rectangle to cover<br /></li><li><code> b</code> The second rectangle to cover<br /></li></ul><div><code>return</code>  Always *this<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Measurement <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the surface occupied by the rectangle.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('size_22681319583276')">+ size</a></span>: T () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ size</a></span>: T () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="size_22681319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="size_22711319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the width of the rectangle.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('width_22691319583276')">+ width</a></span>: T () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ width</a></span>: T () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="width_22691319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="width_22721319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the height of the rectangle.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('height_22701319583276')">+ height</a></span>: T () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ height</a></span>: T () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="height_22701319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="height_22731319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Move the entire rect <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Move the entire rect.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="move_22711319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('move_22711319583276')">+ move</a></span>: void (const U ax1, const U ay1);
+<code><div class="doxygen_tmpllist" id="move_22741319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">+ move</a></span>: void (const U ax1, const U ay1);
 </code>
-</div></td></tr><tr id="move_22711319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="move_22741319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> ax1</code> The new top left X-coordinate<br /></li><li><code> ay1</code> The new top left Y-coordinate<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> ax1</code> The new top left X-coordinate<br /></li><li><code> ay1</code> The new top left Y-coordinate<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Move the entire rect.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="move_22721319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('move_22721319583276')">+ move</a></span>: void (const Point2D&lt;U&gt;&amp; p);
+<code><div class="doxygen_tmpllist" id="move_22751319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">+ move</a></span>: void (const Point2D&lt;U&gt;&amp; p);
 </code>
-</div></td></tr><tr id="move_22721319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="move_22751319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> p</code> The new top left coordinates<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> p</code> The new top left coordinates<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Move the entire rect.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator()_22731319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U , class V &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('operator()_22731319583276')">+ operator()</a></span>: void (const U&amp; ax1, const V&amp; ay1);
+<code><div class="doxygen_tmpllist" id="operator()_22761319844517_tmpl"><span class="keyword">template</span>&lt;class U , class V &gt;</div>
+ <span class="method"><a href="#">+ operator()</a></span>: void (const U&amp; ax1, const V&amp; ay1);
 </code>
-</div></td></tr><tr id="operator()_22731319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator()_22761319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> ax1</code> The new top left X-coordinate<br /></li><li><code> ay1</code> The new top left Y-coordinate<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> ax1</code> The new top left X-coordinate<br /></li><li><code> ay1</code> The new top left Y-coordinate<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Move the entire rect.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator()_22741319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('operator()_22741319583276')">+ operator()</a></span>: void (const Point2D&lt;U&gt;&amp; p);
+<code><div class="doxygen_tmpllist" id="operator()_22771319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">+ operator()</a></span>: void (const Point2D&lt;U&gt;&amp; p);
 </code>
-</div></td></tr><tr id="operator()_22741319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator()_22771319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> p</code> The new top left coordinates<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> p</code> The new top left coordinates<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Reset the rectangle coordinates to cover two 2D-points.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator()_22751319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U , class V &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('operator()_22751319583276')">+ operator()</a></span>: void (const Point2D&lt;U&gt;&amp; a, const Point2D&lt;V&gt;&amp; b);
+<code><div class="doxygen_tmpllist" id="operator()_22781319844517_tmpl"><span class="keyword">template</span>&lt;class U , class V &gt;</div>
+ <span class="method"><a href="#">+ operator()</a></span>: void (const Point2D&lt;U&gt;&amp; a, const Point2D&lt;V&gt;&amp; b);
 </code>
-</div></td></tr><tr id="operator()_22751319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator()_22781319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> a</code> The first point to cover<br /></li><li><code> b</code> The second point to cover<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> a</code> The first point to cover<br /></li><li><code> b</code> The second point to cover<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Reset the rectangle coordinates to cover two other rectangles.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator()_22761319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U , class V &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('operator()_22761319583276')">+ operator()</a></span>: void (const Rect2D&lt;U&gt;&amp; a, const Rect2D&lt;V&gt;&amp; b);
+<code><div class="doxygen_tmpllist" id="operator()_22791319844517_tmpl"><span class="keyword">template</span>&lt;class U , class V &gt;</div>
+ <span class="method"><a href="#">+ operator()</a></span>: void (const Rect2D&lt;U&gt;&amp; a, const Rect2D&lt;V&gt;&amp; b);
 </code>
-</div></td></tr><tr id="operator()_22761319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator()_22791319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> a</code> The first rectangle to cover<br /></li><li><code> b</code> The second rectangle to cover<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> a</code> The first rectangle to cover<br /></li><li><code> b</code> The second rectangle to cover<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Geometrical localisation <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if a point is contained inside the rect.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="contains_22771319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('contains_22771319583276')">+ contains</a></span>: bool (const Point2D&lt;U&gt;&amp; p) <span class="keyword">const</span>;
+<code><div class="doxygen_tmpllist" id="contains_22801319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">+ contains</a></span>: bool (const Point2D&lt;U&gt;&amp; p) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="contains_22771319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="contains_22801319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> p</code> The point<br /></li></ul><div><code>return</code>  True if the point is contained inside the rect<br /></div><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> p</code> The point<br /></li></ul><div><code>return</code>  True if the point is contained inside the rect<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if a point is contained inside the rect.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="contains_22781319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U , class V &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('contains_22781319583276')">+ contains</a></span>: bool (const U nx, const V ny) <span class="keyword">const</span>;
+<code><div class="doxygen_tmpllist" id="contains_22811319844517_tmpl"><span class="keyword">template</span>&lt;class U , class V &gt;</div>
+ <span class="method"><a href="#">+ contains</a></span>: bool (const U nx, const V ny) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="contains_22781319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="contains_22811319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> nx</code> The X-coordinate of the point<br /></li><li><code> ny</code> The Y-coordinate of the point<br /></li></ul><div><code>return</code>  True if the point is contained inside the rect<br /></div><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> nx</code> The X-coordinate of the point<br /></li><li><code> ny</code> The Y-coordinate of the point<br /></li></ul><div><code>return</code>  True if the point is contained inside the rect<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if another rectangle is contained inside this rectangle.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="contains_22791319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('contains_22791319583276')">+ contains</a></span>: bool (const Rect2D&lt;U&gt;&amp; r) <span class="keyword">const</span>;
+<code><div class="doxygen_tmpllist" id="contains_22821319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">+ contains</a></span>: bool (const Rect2D&lt;U&gt;&amp; r) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="contains_22791319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="contains_22821319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> r</code> The rect to test if it is inside the rect<br /></li></ul><div><code>return</code>  True if the rect `r` is inside the rect `this`<br /></div><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> r</code> The rect to test if it is inside the rect<br /></li></ul><div><code>return</code>  True if the rect `r` is inside the rect `this`<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if another rectangle collides with this rectangle.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="collidedWith_22801319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('collidedWith_22801319583276')">+ collidedWith</a></span>: bool (const Rect2D&lt;U&gt;&amp; r) <span class="keyword">const</span>;
+<code><div class="doxygen_tmpllist" id="collidedWith_22831319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">+ collidedWith</a></span>: bool (const Rect2D&lt;U&gt;&amp; r) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="collidedWith_22801319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="collidedWith_22831319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Assignment <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Move the entire rect.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator=_22811319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('operator=_22811319583276')">+ operator=</a></span>: Rect2D&lt;T&gt;&amp; (const Point2D&lt;U&gt;&amp; p);
+<code><div class="doxygen_tmpllist" id="operator=_22841319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">+ operator=</a></span>: Rect2D&lt;T&gt;&amp; (const Point2D&lt;U&gt;&amp; p);
 </code>
-</div></td></tr><tr id="operator=_22811319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator=_22841319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> p</code> The new top left coordinates<br /></li></ul><div><code>return</code>  Always *this<br /></div><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> p</code> The new top left coordinates<br /></li></ul><div><code>return</code>  Always *this<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assign new values for all coordinates from another rect.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator=_22821319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('operator=_22821319583276')">+ operator=</a></span>: Rect2D&lt;T&gt;&amp; (const Rect2D&lt;U&gt;&amp; p);
+<code><div class="doxygen_tmpllist" id="operator=_22851319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">+ operator=</a></span>: Rect2D&lt;T&gt;&amp; (const Rect2D&lt;U&gt;&amp; p);
 </code>
-</div></td></tr><tr id="operator=_22821319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator=_22851319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> p</code> The new coordinates<br /></li></ul><div><code>return</code>  Always *this<br /></div><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> p</code> The new coordinates<br /></li></ul><div><code>return</code>  Always *this<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Stream printing <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Print the point.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('print_22831319583276')">+ print</a></span>: std::ostream&amp; (std::ostream&amp; out) <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ print</a></span>: std::ostream&amp; (std::ostream&amp; out) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="print_22831319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="print_22861319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The original type T.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('Type_22841319583276')">+ Type</a></span>: <span class="keyword">typedef</span> T;</code>
-</div></td></tr><tr id="Type_22841319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The original type T.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('value_type_22851319583276')">+ value_type</a></span>: <span class="keyword">typedef</span> T;</code>
-</div></td></tr><tr id="value_type_22851319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Complete type for Rect2D .<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('Rect2DType_22861319583276')">+ Rect2DType</a></span>: <span class="keyword">typedef</span> Rect2D&lt;Type&gt;;</code>
-</div></td></tr><tr id="Rect2DType_22861319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Point2D .<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('PointType_22871319583276')">+ PointType</a></span>: <span class="keyword">typedef</span> Point2D&lt;Type&gt;;</code>
-</div></td></tr><tr id="PointType_22871319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
-</td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">The top left X-coordinate.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('x1_22881319583276')">+ x1</a></span>: T;</code>
-</div></td></tr><tr id="x1_22881319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">The top left Y-coordinate.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('y1_22891319583276')">+ y1</a></span>: T;</code>
-</div></td></tr><tr id="y1_22891319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">The bottom right X-coordinate.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('x2_22901319583276')">+ x2</a></span>: T;</code>
-</div></td></tr><tr id="x2_22901319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">The bottom right Y-coordinate.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('y2_22911319583276')">+ y2</a></span>: T;</code>
-</div></td></tr><tr id="y2_22911319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the equivalent Point2D for the top left.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('topLeft_22921319583276')">+ topLeft</a></span>: PointType () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ topLeft</a></span>: PointType () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="topLeft_22921319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="topLeft_22871319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the equivalent Point2D for the bottom right.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('bottomRight_22931319583276')">+ bottomRight</a></span>: PointType () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ bottomRight</a></span>: PointType () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="bottomRight_22931319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="bottomRight_22881319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Swap coordinates if needed to have x1/y1 at the top-left and x2/y2 at the bottom-right.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('normalize_22941319583276')">+ normalize</a></span>: void ();
+<code> <span class="method"><a href="#">+ normalize</a></span>: void ();
 </code>
-</div></td></tr><tr id="normalize_22941319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="normalize_22891319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">The top left X-coordinate.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ x1</a></span>: T;</code>
+</div></td></tr><tr id="x1_22901319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">The top left Y-coordinate.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ y1</a></span>: T;</code>
+</div></td></tr><tr id="y1_22911319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">The bottom right X-coordinate.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ x2</a></span>: T;</code>
+</div></td></tr><tr id="x2_22921319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">The bottom right Y-coordinate.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ y2</a></span>: T;</code>
+</div></td></tr><tr id="y2_22931319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 </table>

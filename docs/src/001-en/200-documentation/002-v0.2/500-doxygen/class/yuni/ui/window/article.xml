@@ -6,181 +6,331 @@
 
 
 
-<h2>Abstraction of a window for graphic rendering.<br /></h2>
-<table class="doxygen_table">
+<h2>Abstraction of a window for graphic rendering</h2>
+<h3>Public typedef</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">Ptr</a></span> : IComponent::SmartPtrInfo&lt;Window&gt;::Type</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">Vector</a></span> : std::vector&lt; Ptr&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">Map</a></span> : std::map&lt; IComponent::ID, Ptr&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">ThreadingPolicy</a></span> : IComponent::ThreadingPolicy</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">DepthSortedMap</a></span> : std::map&lt; size_t, Map&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">EventObserverType</a></span> : IEventObserver&lt;IComponent, Policy::ObjectLevelLockable&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">ClassName</a></span> : CString&lt;64, false, false&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">ID</a></span> : Yuni::UI::ID::Type</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">IEventObserverType</a></span> : IEventObserver&lt;IComponent, Policy::ObjectLevelLockable&gt;</code></td></tr>
+</table></div>
+
+<h3>Public function</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Methods</h4></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">resize</a></span>(float width, float height)</code></td></tr>
+<tr><td></td><td><br /><h4>Accessors</h4></td></tr>
+<tr><td class="doxygen_index"><code>const ClassName&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">className</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">className</a></span>(ClassName&amp; )</code></td></tr>
+<tr><td class="doxygen_index"><code>ID </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">id</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>float </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">width</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>float </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">height</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>Point2D&lt;float&gt; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">position</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">size</a></span>(float&amp; width, float&amp; height) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>float </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">x</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>float </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">y</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td></td><td><br /><h4>Pointer management</h4></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">addRef</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">release</a></span>()</code></td></tr>
+<tr><td></td><td><br /><h4>Add / remove children</h4></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">add</a></span>(const IControl::Ptr&amp; child)</code></td></tr>
+<tr><td class="doxygen_index"><code>IControlContainer&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator+=</a></span>(const IControl::Ptr&amp; child)</code></td></tr>
+<tr><td class="doxygen_index"><code>IControlContainer&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator&lt;&lt;</a></span>(const IControl::Ptr&amp; child)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">remove</a></span>(IControl::ID child)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">remove</a></span>(const IControl::Ptr&amp; child)</code></td></tr>
+<tr><td class="doxygen_index"><code>IControlContainer&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator-=</a></span>(IComponent::ID id)</code></td></tr>
+<tr><td class="doxygen_index"><code>IControlContainer&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator-=</a></span>(const IControl::Ptr&amp; child)</code></td></tr>
+<tr><td></td><td><br /><h4>Methods</h4></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">addChildWL</a></span>(const IControl::Ptr&amp; child)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">removeChildWL</a></span>(IComponent::ID childID)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">removeChildWL</a></span>(const IControl::Ptr&amp; child)</code></td></tr>
+<tr><td></td><td><br /><h4>Constructor &amp; Destructor</h4></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Window</a></span>(const StringT&amp; title)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Window</a></span>(const StringT&amp; title, float width, float height)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Window</a></span>(const StringT&amp; title, float x, float y, float width, float height)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Window</a></span>(const StringT&amp; title, const Point2D&lt;T&gt;&amp; pos, float width, float height)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#"><b> ~ </b>Window</a></span>()</code></td></tr>
+<tr><td></td><td><br /><h4>Methods</h4></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">show</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">hide</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">close</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">closing</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td></td><td><br /><h4>Title of the Window</h4></td></tr>
+<tr><td class="doxygen_index"><code>String </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">title</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">title</a></span>(const StringT&amp; newTitle)</code></td></tr>
+<tr><td></td><td><br /><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">update</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>IControl::Ptr </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">parent</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">parent</a></span>(IControl::Ptr newParent)</code></td></tr>
+<tr><td class="doxygen_index"><code>IControl::Map </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">children</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">hasParent</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>unsigned int </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">depth</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">focus</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">enabled</a></span>(bool e)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">enabled</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">visible</a></span>(bool e)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">visible</a></span>() <span class="keyword">const</span></code></td></tr>
+</table></div>
+
+<h2>Detailed Description</h2><table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Smart pointer, inherited from the ancestor.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ Ptr</a></span>: <span class="keyword">typedef</span> IComponent::SmartPtrInfo&lt;Window&gt;::Type;
+</code>
+</div></td></tr><tr id="Ptr_48891319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Vector of controls.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ Vector</a></span>: <span class="keyword">typedef</span> std::vector&lt; Ptr&gt;;
+</code>
+</div></td></tr><tr id="Vector_48911319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Map of controls.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ Map</a></span>: <span class="keyword">typedef</span> std::map&lt; IComponent::ID, Ptr&gt;;
+</code>
+</div></td></tr><tr id="Map_48931319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Threading Policy .<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ ThreadingPolicy</a></span>: <span class="keyword">typedef</span> IComponent::ThreadingPolicy;
+</code>
+</div></td></tr><tr id="ThreadingPolicy_48941319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Sorted (by depth in UI tree) map of controls.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ DepthSortedMap</a></span>: <span class="keyword">typedef</span> std::map&lt; size_t, Map&gt;;
+</code>
+</div></td></tr><tr id="DepthSortedMap_48961319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Ancestor type.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ EventObserverType</a></span>: <span class="keyword">typedef</span> IEventObserver&lt;IComponent, Policy::ObjectLevelLockable&gt;;
+</code>
+</div></td></tr><tr id="EventObserverType_48981319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">A class name is a string tag representing a type of component.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ ClassName</a></span>: <span class="keyword">typedef</span> CString&lt;64, false, false&gt;;
+</code>
+</div></td></tr><tr id="ClassName_49011319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Unique local identifier.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ ID</a></span>: <span class="keyword">typedef</span> Yuni::UI::ID::Type;
+</code>
+</div></td></tr><tr id="ID_49021319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Type of the Event observer.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ IEventObserverType</a></span>: <span class="keyword">typedef</span> IEventObserver&lt;IComponent, Policy::ObjectLevelLockable&gt;;
+</code>
+</div></td></tr><tr id="IEventObserverType_49031319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief">Get if this policy is thread-safe.<br /><div class="doxygen_name_spacer"></div>
+<code><i>(unmanaged tag: 4)</i></code>
+</div></td></tr><tr id="@369threadSafe_49041319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Methods <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Resize the component.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('resize_48861319583276')">+ resize</a></span>: void (float width, float height);
+<code> <span class="method"><a href="#">+ resize</a></span>: void (float width, float height);
 </code>
-</div></td></tr><tr id="resize_48861319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="resize_49051319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Accessors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the class name (identifier for the type of component)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('className_48881319583276')">+ className</a></span>: const ClassName&amp; () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ className</a></span>: const ClassName&amp; () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="className_48881319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="className_49061319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the class name (identifier for the type of component)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('className_48901319583276')">+ className</a></span>: void (ClassName&amp; );
+<code> <span class="method"><a href="#">+ className</a></span>: void (ClassName&amp; );
 </code>
-</div></td></tr><tr id="className_48901319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="className_49071319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the unique Identifier for this component.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('id_48911319583276')">+ id</a></span>: ID ();
+<code> <span class="method"><a href="#">+ id</a></span>: ID ();
 </code>
-</div></td></tr><tr id="id_48911319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="id_49081319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the width of the component.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('width_48931319583276')">+ width</a></span>: float () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ width</a></span>: float () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="width_48931319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="width_49091319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the height of the component.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('height_48941319583276')">+ height</a></span>: float () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ height</a></span>: float () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="height_48941319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="height_49101319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the position of the component.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('position_48961319583276')">+ position</a></span>: Point2D&lt;float&gt; () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ position</a></span>: Point2D&lt;float&gt; () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="position_48961319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="position_49111319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the size of the component.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('size_48981319583276')">+ size</a></span>: void (float&amp; width, float&amp; height) <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ size</a></span>: void (float&amp; width, float&amp; height) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="size_48981319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="size_49121319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the X position of the component.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('x_49001319583276')">+ x</a></span>: float () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ x</a></span>: float () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="x_49001319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="x_49131319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the Y position of the component.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('y_49011319583276')">+ y</a></span>: float () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ y</a></span>: float () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="y_49011319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="y_49141319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Pointer management <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('addRef_49031319583276')">+ addRef</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ addRef</a></span>: void ();
 </code>
-</div></td></tr><tr id="addRef_49031319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="addRef_49151319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('release_49051319583276')">+ release</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ release</a></span>: void ();
 </code>
-</div></td></tr><tr id="release_49051319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="release_49161319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Add / remove children <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('add_49071319583276')">+ add</a></span>: void (const IControl::Ptr&amp; child);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ add</a></span>: void (const IControl::Ptr&amp; child);
 </code>
-</div></td></tr><tr id="add_49071319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="add_49171319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator+=_49091319583276')">+ operator+=</a></span>: IControlContainer&amp; (const IControl::Ptr&amp; child);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ operator+=</a></span>: IControlContainer&amp; (const IControl::Ptr&amp; child);
 </code>
-</div></td></tr><tr id="operator+=_49091319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator+=_49181319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator<<_49101319583276')">+ operator&lt;&lt;</a></span>: IControlContainer&amp; (const IControl::Ptr&amp; child);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ operator&lt;&lt;</a></span>: IControlContainer&amp; (const IControl::Ptr&amp; child);
 </code>
-</div></td></tr><tr id="operator<<_49101319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator<<_49191319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('remove_49111319583276')">+ remove</a></span>: bool (IControl::ID child);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ remove</a></span>: bool (IControl::ID child);
 </code>
-</div></td></tr><tr id="remove_49111319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="remove_49201319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('remove_49121319583276')">+ remove</a></span>: bool (const IControl::Ptr&amp; child);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ remove</a></span>: bool (const IControl::Ptr&amp; child);
 </code>
-</div></td></tr><tr id="remove_49121319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="remove_49211319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator_=_49131319583276')">+ operator-=</a></span>: IControlContainer&amp; (IComponent::ID id);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ operator-=</a></span>: IControlContainer&amp; (IComponent::ID id);
 </code>
-</div></td></tr><tr id="operator_=_49131319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator_=_49221319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator_=_49141319583276')">+ operator-=</a></span>: IControlContainer&amp; (const IControl::Ptr&amp; child);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ operator-=</a></span>: IControlContainer&amp; (const IControl::Ptr&amp; child);
 </code>
-</div></td></tr><tr id="operator_=_49141319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator_=_49231319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Methods <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Add a child.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('addChildWL_49151319583276')">+ addChildWL</a></span>: void (const IControl::Ptr&amp; child);
+<code> <span class="method"><a href="#">+ addChildWL</a></span>: void (const IControl::Ptr&amp; child);
 </code>
-</div></td></tr><tr id="addChildWL_49151319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="addChildWL_49241319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Remove a child.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('removeChildWL_49161319583276')">+ removeChildWL</a></span>: bool (IComponent::ID childID);
+<code> <span class="method"><a href="#">+ removeChildWL</a></span>: bool (IComponent::ID childID);
 </code>
-</div></td></tr><tr id="removeChildWL_49161319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="removeChildWL_49261319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Resize the window.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('removeChildWL_49171319583276')">+ removeChildWL</a></span>: bool (const IControl::Ptr&amp; child);
+<code> <span class="method"><a href="#">+ removeChildWL</a></span>: bool (const IControl::Ptr&amp; child);
 </code>
-</div></td></tr><tr id="removeChildWL_49171319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="removeChildWL_49281319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">This is implementation-dependent<br />
 </div>
@@ -188,180 +338,108 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Short constructor.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="Window_49181319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('Window_49181319583276')">+ Window</a></span>:  (const StringT&amp; title);
+<code><div class="doxygen_tmpllist" id="Window_49301319844517_tmpl"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a href="#">+ Window</a></span>:  (const StringT&amp; title);
 </code>
-</div></td></tr><tr id="Window_49181319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Window_49301319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor with dimensions.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="Window_49191319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('Window_49191319583276')">+ Window</a></span>:  (const StringT&amp; title, float width, float height);
+<code><div class="doxygen_tmpllist" id="Window_49311319844517_tmpl"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a href="#">+ Window</a></span>:  (const StringT&amp; title, float width, float height);
 </code>
-</div></td></tr><tr id="Window_49191319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Window_49311319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor with start position coordinates.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="Window_49201319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('Window_49201319583276')">+ Window</a></span>:  (const StringT&amp; title, float x, float y, float width, float height);
+<code><div class="doxygen_tmpllist" id="Window_49321319844517_tmpl"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a href="#">+ Window</a></span>:  (const StringT&amp; title, float x, float y, float width, float height);
 </code>
-</div></td></tr><tr id="Window_49201319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Window_49321319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor with start position as a point.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="Window_49211319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class StringT , class T &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('Window_49211319583276')">+ Window</a></span>:  (const StringT&amp; title, const Point2D&lt;T&gt;&amp; pos, float width, float height);
+<code><div class="doxygen_tmpllist" id="Window_49331319844517_tmpl"><span class="keyword">template</span>&lt;class StringT , class T &gt;</div>
+ <span class="method"><a href="#">+ Window</a></span>:  (const StringT&amp; title, const Point2D&lt;T&gt;&amp; pos, float width, float height);
 </code>
-</div></td></tr><tr id="Window_49211319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Window_49331319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Virtual destructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('~Window_49231319583276')">+ <b> ~ </b>Window</a></span>:  ();
+<code> <span class="method"><a href="#">+ <b> ~ </b>Window</a></span>:  ();
 </code>
-</div></td></tr><tr id="~Window_49231319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="~Window_49341319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Methods <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Show the window.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('show_49251319583276')">+ show</a></span>: void ();
+<code> <span class="method"><a href="#">+ show</a></span>: void ();
 </code>
-</div></td></tr><tr id="show_49251319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="show_49351319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Hide the window.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('hide_49261319583276')">+ hide</a></span>: void ();
+<code> <span class="method"><a href="#">+ hide</a></span>: void ();
 </code>
-</div></td></tr><tr id="hide_49261319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="hide_49361319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Close the window, release everything.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('close_49281319583276')">+ close</a></span>: void ();
+<code> <span class="method"><a href="#">+ close</a></span>: void ();
 </code>
-</div></td></tr><tr id="close_49281319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="close_49371319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get whether the window is in the process of closing.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('closing_49291319583276')">+ closing</a></span>: bool () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ closing</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="closing_49291319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="closing_49381319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Title of the Window <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the Title of the window.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('title_49301319583276')">+ title</a></span>: String () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ title</a></span>: String () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="title_49301319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="title_49391319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the title of the window.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="title_49311319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('title_49311319583276')">+ title</a></span>: void (const StringT&amp; newTitle);
+<code><div class="doxygen_tmpllist" id="title_49401319844517_tmpl"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a href="#">+ title</a></span>: void (const StringT&amp; newTitle);
 </code>
-</div></td></tr><tr id="title_49311319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="title_49401319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Smart pointer, inherited from the ancestor.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('Ptr_49321319583276')">+ Ptr</a></span>: <span class="keyword">typedef</span> IComponent::SmartPtrInfo&lt;Window&gt;::Type;</code>
-</div></td></tr><tr id="Ptr_49321319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Vector of controls.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('Vector_49331319583276')">+ Vector</a></span>: <span class="keyword">typedef</span> std::vector&lt; Ptr&gt;;</code>
-</div></td></tr><tr id="Vector_49331319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Map of controls.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('Map_49341319583276')">+ Map</a></span>: <span class="keyword">typedef</span> std::map&lt; IComponent::ID, Ptr&gt;;</code>
-</div></td></tr><tr id="Map_49341319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Threading Policy .<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('ThreadingPolicy_49351319583276')">+ ThreadingPolicy</a></span>: <span class="keyword">typedef</span> IComponent::ThreadingPolicy;</code>
-</div></td></tr><tr id="ThreadingPolicy_49351319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Sorted (by depth in UI tree) map of controls.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('DepthSortedMap_49361319583276')">+ DepthSortedMap</a></span>: <span class="keyword">typedef</span> std::map&lt; size_t, Map&gt;;</code>
-</div></td></tr><tr id="DepthSortedMap_49361319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Ancestor type.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('EventObserverType_49371319583276')">+ EventObserverType</a></span>: <span class="keyword">typedef</span> IEventObserver&lt;IComponent, Policy::ObjectLevelLockable&gt;;</code>
-</div></td></tr><tr id="EventObserverType_49371319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">A class name is a string tag representing a type of component.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('ClassName_49381319583276')">+ ClassName</a></span>: <span class="keyword">typedef</span> CString&lt;64, false, false&gt;;</code>
-</div></td></tr><tr id="ClassName_49381319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Unique local identifier.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('ID_49391319583276')">+ ID</a></span>: <span class="keyword">typedef</span> Yuni::UI::ID::Type;</code>
-</div></td></tr><tr id="ID_49391319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Type of the Event observer.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('IEventObserverType_49401319583276')">+ IEventObserverType</a></span>: <span class="keyword">typedef</span> IEventObserver&lt;IComponent, Policy::ObjectLevelLockable&gt;;</code>
-</div></td></tr><tr id="IEventObserverType_49401319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief">Get if this policy is thread-safe.<br /><div class="doxygen_name_spacer"></div>
-<code><i>(unmanaged tag: 6)</i></code>
-</div></td></tr><tr id="@369threadSafe_49411319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Ask the control to update its local representation.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('update_49421319583276')">+ update</a></span>: void () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ update</a></span>: void () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="update_49421319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="update_49411319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">A control will notify its representation to update itself using the latest modifications made to the control. This method should be used as follows :<source type="cpp">  void  modifyButton( Yuni::UI::Button::Ptr  btn,  const  Yuni::String &amp;  text,  bool  visible)
   {
@@ -374,82 +452,82 @@
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the parent.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('parent_49431319583276')">+ parent</a></span>: IControl::Ptr () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ parent</a></span>: IControl::Ptr () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="parent_49431319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="parent_49421319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the parent.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('parent_49441319583276')">+ parent</a></span>: void (IControl::Ptr newParent);
+<code> <span class="method"><a href="#">+ parent</a></span>: void (IControl::Ptr newParent);
 </code>
-</div></td></tr><tr id="parent_49441319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="parent_49431319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the children.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('children_49451319583276')">+ children</a></span>: IControl::Map () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ children</a></span>: IControl::Map () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="children_49451319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="children_49441319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Is there a parent ?<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('hasParent_49461319583276')">+ hasParent</a></span>: bool () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ hasParent</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="hasParent_49461319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="hasParent_49451319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Depth in the UI tree, 0 if root.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('depth_49471319583276')">+ depth</a></span>: unsigned int () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ depth</a></span>: unsigned int () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="depth_49471319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="depth_49461319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Catch the focus.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('focus_49481319583276')">+ focus</a></span>: void ();
+<code> <span class="method"><a href="#">+ focus</a></span>: void ();
 </code>
-</div></td></tr><tr id="focus_49481319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="focus_49471319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Enable / disable the control.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('enabled_49491319583276')">+ enabled</a></span>: void (bool e);
+<code> <span class="method"><a href="#">+ enabled</a></span>: void (bool e);
 </code>
-</div></td></tr><tr id="enabled_49491319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="enabled_49481319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the control is enabled.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('enabled_49501319583276')">+ enabled</a></span>: bool () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ enabled</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="enabled_49501319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="enabled_49491319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('visible_49511319583276')">+ visible</a></span>: void (bool e);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ visible</a></span>: void (bool e);
 </code>
-</div></td></tr><tr id="visible_49511319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="visible_49501319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the control is visible.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('visible_49521319583276')">+ visible</a></span>: bool () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ visible</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="visible_49521319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="visible_49511319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 </table>

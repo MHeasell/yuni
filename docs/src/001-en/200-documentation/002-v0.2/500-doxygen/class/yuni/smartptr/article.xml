@@ -6,8 +6,80 @@
 
 
 
-<h2>Smart Pointer.<br /></h2>
-<div>Smart pointers are abstract data type classes to simplify the memory management, especially in a multithreaded context. They simulate a pointer. They behave much like built-in C++ pointers except that they automatically delete the object pointed to at the appropriate time (automatic garbage collection), and can provide additional bounds checking.<br /> here is a simple example :<source type="cpp">  #include  &lt;iostream&gt;
+<h2>Smart Pointer</h2>
+<h3>Public typedef</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Type alias</h4></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">Type</a></span> : T</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">StoragePolicy</a></span> : StorP&lt; T&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">OwnershipPolicy</a></span> : OwspP&lt; typename StorP&lt; T&gt;:: PointerType&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">ConversionPolicy</a></span> : ConvP</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">CheckingPolicy</a></span> : ChckP&lt; typename StorP&lt; T&gt;:: StoredType&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">ConstnessPolicy</a></span> : ConsP&lt; T&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">PointerType</a></span> : StoragePolicy::PointerType</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">StoredType</a></span> : StoragePolicy::StoredType</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">ReferenceType</a></span> : StoragePolicy::ReferenceType</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">ConstPointerType</a></span> : ConstnessPolicy::Type*</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">ConstReferenceType</a></span> : ConstnessPolicy::Type&amp;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">SmartPtrType</a></span> : SmartPtr&lt;T, OwspP, ChckP, ConvP, StorP, ConsP&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">ConstSmartPtrType</a></span> : SmartPtr&lt;T, OwspP, ChckP, ConvP, StorP, Policy::Constness::PropagateConst&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">NonConstSmartPtrType</a></span> : SmartPtr&lt;T, OwspP, ChckP, ConvP, StorP, Policy::Constness::DontPropagateConst&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">CopyType</a></span> : Static::If&lt;OwnershipPolicy::destructiveCopy, SmartPtrType, const SmartPtrType&gt;::ResultType</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">Vector</a></span> : std::vector&lt; SmartPtrType&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">List</a></span> : std::list&lt; SmartPtrType&gt;</code></td></tr>
+</table></div>
+
+<h3>Public function</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructors &amp; Destructor</h4></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">SmartPtr</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">SmartPtr</a></span>(ExplicitStoredType ptr)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">SmartPtr</a></span>(ImplicitStoredType ptr)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">SmartPtr</a></span>(const NullPtr&amp; )</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">SmartPtr</a></span>(CopyType&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">SmartPtr</a></span>(const SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">SmartPtr</a></span>(SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">SmartPtr</a></span>(Static::MoveConstructor&lt;SmartPtrType&gt; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#"><b> ~ </b>SmartPtr</a></span>()</code></td></tr>
+<tr><td></td><td><br /><h4>Swap</h4></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">swap</a></span>(SmartPtr&amp; rhs)</code></td></tr>
+<tr><td></td><td><br /><h4>Operator * / -&gt;</h4></td></tr>
+<tr><td class="doxygen_index"><code>PointerType </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator-&gt;</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>ConstPointerType </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator-&gt;</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>ReferenceType </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator*</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>ConstReferenceType </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator*</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td></td><td><br /><h4>Operator =</h4></td></tr>
+<tr><td class="doxygen_index"><code>SmartPtr&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator=</a></span>(CopyType&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code>SmartPtr&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator=</a></span>(const NullPtr&amp; )</code></td></tr>
+<tr><td class="doxygen_index"><code>SmartPtr&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator=</a></span>(const SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code>SmartPtr&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator=</a></span>(SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs)</code></td></tr>
+<tr><td></td><td><br /><h4>Comparisons</h4></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator!</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator==</a></span>(const NullPtr&amp; ) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator!=</a></span>(const NullPtr&amp; ) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator==</a></span>(const SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator!=</a></span>(const SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator&lt;</a></span>(const SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator&gt;</a></span>(const SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator&lt;=</a></span>(const SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator&gt;=</a></span>(const SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs) <span class="keyword">const</span></code></td></tr>
+<tr><td></td><td><br /><h4>Cast-Operator</h4></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator Static::MoveConstructor&lt; SmartPtr &gt;</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator AutomaticConversion *</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td></td><td><br /><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">static</span> T* </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">WeakPointer</a></span>(const SmartPtr&amp; p)</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">static</span> S1 </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">DynamicCast</a></span>(SmartPtr p)</code></td></tr>
+<tr><td></td><td><br /><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code>PointerType </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">pointer</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>ConstPointerType </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">pointer</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">SmartPtr</a></span>(const SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs, const DynamicCastArg&amp; )</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">SmartPtr</a></span>(SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs, const DynamicCastArg&amp; )</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">SmartPtr</a></span>(typename SmartPtr&lt;T, OwspP, ChckP, ConvP, StorP, ConsP&gt;::ExplicitStoredType ptr)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">SmartPtr</a></span>(typename SmartPtr&lt;T, OwspP, ChckP, ConvP, StorP, ConsP&gt;:: CopyType&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">SmartPtr</a></span>(SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs, const typename SmartPtr&lt;T, OwspP, ChckP, ConvP, StorP, ConsP&gt;:: DynamicCastArg&amp; )</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">SmartPtr</a></span>(Static::MoveConstructor&lt;SmartPtr&lt;T, OwspP, ChckP, ConvP, StorP, ConsP&gt;&gt; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code>SmartPtr&lt;T, OwspP, ChckP, ConvP, StorP, ConsP&gt;&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator=</a></span>(typename SmartPtr&lt;T, OwspP, ChckP, ConvP, StorP, ConsP&gt;:: CopyType&amp; rhs)</code></td></tr>
+</table></div>
+
+<h2>Detailed Description</h2><div>Smart pointers are abstract data type classes to simplify the memory management, especially in a multithreaded context. They simulate a pointer. They behave much like built-in C++ pointers except that they automatically delete the object pointed to at the appropriate time (automatic garbage collection), and can provide additional bounds checking.<br /> here is a simple example :<source type="cpp">  #include  &lt;iostream&gt;
   #include  &lt; yuni/core/smartptr.h &gt;
 
   struct  Foo
@@ -113,394 +185,411 @@
          return  0;
   }
 </source>
-<br /></div><br />Parameters :<ul><li><code> T</code> The type<br /></li><li><code> OwspP</code> The ownership policy<br /></li><li><code> ChckP</code> The Checking policy<br /></li><li><code> ConvP</code> The Conversion policy<br /></li><li><code> StorP</code> The Storage policy<br /></li><li><code> ConsP</code> The Constness policy<br /></li></ul><br /></div>
+<br /></div><div class="doxygen_params">Parameters :</div><ul><li><code> T</code> The type<br /></li><li><code> OwspP</code> The ownership policy<br /></li><li><code> ChckP</code> The Checking policy<br /></li><li><code> ConvP</code> The Conversion policy<br /></li><li><code> StorP</code> The Storage policy<br /></li><li><code> ConsP</code> The Constness policy<br /></li></ul><br /></div>
 <table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Type alias <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Original type.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('Type_33551319583276')">+ Type</a></span>: <span class="keyword">typedef</span> T;</code>
-</div></td></tr><tr id="Type_33551319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<code><span class="method"><a href="#">+ Type</a></span>: <span class="keyword">typedef</span> T;
+</code>
+</div></td></tr><tr id="Type_33541319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The Storage policy.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('StoragePolicy_33561319583276')">+ StoragePolicy</a></span>: <span class="keyword">typedef</span> StorP&lt; T&gt;;</code>
-</div></td></tr><tr id="StoragePolicy_33561319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<code><span class="method"><a href="#">+ StoragePolicy</a></span>: <span class="keyword">typedef</span> StorP&lt; T&gt;;
+</code>
+</div></td></tr><tr id="StoragePolicy_33551319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The Ownership policy.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('OwnershipPolicy_33571319583276')">+ OwnershipPolicy</a></span>: <span class="keyword">typedef</span> OwspP&lt; typename StorP&lt; T&gt;:: PointerType&gt;;</code>
-</div></td></tr><tr id="OwnershipPolicy_33571319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<code><span class="method"><a href="#">+ OwnershipPolicy</a></span>: <span class="keyword">typedef</span> OwspP&lt; typename StorP&lt; T&gt;:: PointerType&gt;;
+</code>
+</div></td></tr><tr id="OwnershipPolicy_33561319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The conversion policy.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('ConversionPolicy_33581319583276')">+ ConversionPolicy</a></span>: <span class="keyword">typedef</span> ConvP;</code>
-</div></td></tr><tr id="ConversionPolicy_33581319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<code><span class="method"><a href="#">+ ConversionPolicy</a></span>: <span class="keyword">typedef</span> ConvP;
+</code>
+</div></td></tr><tr id="ConversionPolicy_33571319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The checking policy.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('CheckingPolicy_33591319583276')">+ CheckingPolicy</a></span>: <span class="keyword">typedef</span> ChckP&lt; typename StorP&lt; T&gt;:: StoredType&gt;;</code>
-</div></td></tr><tr id="CheckingPolicy_33591319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<code><span class="method"><a href="#">+ CheckingPolicy</a></span>: <span class="keyword">typedef</span> ChckP&lt; typename StorP&lt; T&gt;:: StoredType&gt;;
+</code>
+</div></td></tr><tr id="CheckingPolicy_33581319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The Constness policy.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('ConstnessPolicy_33601319583276')">+ ConstnessPolicy</a></span>: <span class="keyword">typedef</span> ConsP&lt; T&gt;;</code>
-</div></td></tr><tr id="ConstnessPolicy_33601319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<code><span class="method"><a href="#">+ ConstnessPolicy</a></span>: <span class="keyword">typedef</span> ConsP&lt; T&gt;;
+</code>
+</div></td></tr><tr id="ConstnessPolicy_33591319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">the Pointer type<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('PointerType_33611319583276')">+ PointerType</a></span>: <span class="keyword">typedef</span> StoragePolicy::PointerType;</code>
-</div></td></tr><tr id="PointerType_33611319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<code><span class="method"><a href="#">+ PointerType</a></span>: <span class="keyword">typedef</span> StoragePolicy::PointerType;
+</code>
+</div></td></tr><tr id="PointerType_33601319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The Stored type.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('StoredType_33621319583276')">+ StoredType</a></span>: <span class="keyword">typedef</span> StoragePolicy::StoredType;</code>
-</div></td></tr><tr id="StoredType_33621319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<code><span class="method"><a href="#">+ StoredType</a></span>: <span class="keyword">typedef</span> StoragePolicy::StoredType;
+</code>
+</div></td></tr><tr id="StoredType_33611319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The Reference type.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('ReferenceType_33631319583276')">+ ReferenceType</a></span>: <span class="keyword">typedef</span> StoragePolicy::ReferenceType;</code>
-</div></td></tr><tr id="ReferenceType_33631319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<code><span class="method"><a href="#">+ ReferenceType</a></span>: <span class="keyword">typedef</span> StoragePolicy::ReferenceType;
+</code>
+</div></td></tr><tr id="ReferenceType_33621319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The Pointer type (const)<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('ConstPointerType_33641319583276')">+ ConstPointerType</a></span>: <span class="keyword">typedef</span> ConstnessPolicy::Type*;</code>
-</div></td></tr><tr id="ConstPointerType_33641319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<code><span class="method"><a href="#">+ ConstPointerType</a></span>: <span class="keyword">typedef</span> ConstnessPolicy::Type*;
+</code>
+</div></td></tr><tr id="ConstPointerType_33631319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The Reference type (const)<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('ConstReferenceType_33651319583276')">+ ConstReferenceType</a></span>: <span class="keyword">typedef</span> ConstnessPolicy::Type&amp;;</code>
-</div></td></tr><tr id="ConstReferenceType_33651319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<code><span class="method"><a href="#">+ ConstReferenceType</a></span>: <span class="keyword">typedef</span> ConstnessPolicy::Type&amp;;
+</code>
+</div></td></tr><tr id="ConstReferenceType_33641319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Alias to itself.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('SmartPtrType_33661319583276')">+ SmartPtrType</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;T, OwspP, ChckP, ConvP, StorP, ConsP&gt;;</code>
-</div></td></tr><tr id="SmartPtrType_33661319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<code><span class="method"><a href="#">+ SmartPtrType</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;T, OwspP, ChckP, ConvP, StorP, ConsP&gt;;
+</code>
+</div></td></tr><tr id="SmartPtrType_33651319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">A smart pointer with a const pointer.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('ConstSmartPtrType_33671319583276')">+ ConstSmartPtrType</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;T, OwspP, ChckP, ConvP, StorP, Policy::Constness::PropagateConst&gt;;</code>
-</div></td></tr><tr id="ConstSmartPtrType_33671319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<code><span class="method"><a href="#">+ ConstSmartPtrType</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;T, OwspP, ChckP, ConvP, StorP, Policy::Constness::PropagateConst&gt;;
+</code>
+</div></td></tr><tr id="ConstSmartPtrType_33661319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">A smart pointer with a non-const pointer.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('NonConstSmartPtrType_33681319583276')">+ NonConstSmartPtrType</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;T, OwspP, ChckP, ConvP, StorP, Policy::Constness::DontPropagateConst&gt;;</code>
-</div></td></tr><tr id="NonConstSmartPtrType_33681319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<code><span class="method"><a href="#">+ NonConstSmartPtrType</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;T, OwspP, ChckP, ConvP, StorP, Policy::Constness::DontPropagateConst&gt;;
+</code>
+</div></td></tr><tr id="NonConstSmartPtrType_33671319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The Type to use for the copy constructor.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('CopyType_33691319583276')">+ CopyType</a></span>: <span class="keyword">typedef</span> Static::If&lt;OwnershipPolicy::destructiveCopy, SmartPtrType, const SmartPtrType&gt;::ResultType;</code>
-</div></td></tr><tr id="CopyType_33691319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<code><span class="method"><a href="#">+ CopyType</a></span>: <span class="keyword">typedef</span> Static::If&lt;OwnershipPolicy::destructiveCopy, SmartPtrType, const SmartPtrType&gt;::ResultType;
+</code>
+</div></td></tr><tr id="CopyType_33681319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Vector.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('Vector_33701319583276')">+ Vector</a></span>: <span class="keyword">typedef</span> std::vector&lt; SmartPtrType&gt;;</code>
-</div></td></tr><tr id="Vector_33701319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<code><span class="method"><a href="#">+ Vector</a></span>: <span class="keyword">typedef</span> std::vector&lt; SmartPtrType&gt;;
+</code>
+</div></td></tr><tr id="Vector_33691319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">List.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('List_33711319583276')">+ List</a></span>: <span class="keyword">typedef</span> std::list&lt; SmartPtrType&gt;;</code>
-</div></td></tr><tr id="List_33711319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<code><span class="method"><a href="#">+ List</a></span>: <span class="keyword">typedef</span> std::list&lt; SmartPtrType&gt;;
+</code>
+</div></td></tr><tr id="List_33701319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('SmartPtr_33721319583276')">+ SmartPtr</a></span>:  ();
+<code> <span class="method"><a href="#">+ SmartPtr</a></span>:  ();
 </code>
-</div></td></tr><tr id="SmartPtr_33721319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="SmartPtr_33711319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor with a given pointer, when implicit types are not allowed.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('SmartPtr_33731319583276')">+ SmartPtr</a></span>:  (ExplicitStoredType ptr);
+<code> <span class="method"><a href="#">+ SmartPtr</a></span>:  (ExplicitStoredType ptr);
 </code>
-</div></td></tr><tr id="SmartPtr_33731319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="SmartPtr_33721319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor with a given pointer, when implicit types are allowed.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('SmartPtr_33741319583276')">+ SmartPtr</a></span>:  (ImplicitStoredType ptr);
+<code> <span class="method"><a href="#">+ SmartPtr</a></span>:  (ImplicitStoredType ptr);
 </code>
-</div></td></tr><tr id="SmartPtr_33741319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="SmartPtr_33741319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor with a null pointer.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('SmartPtr_33751319583276')">+ SmartPtr</a></span>:  (const NullPtr&amp; );
+<code> <span class="method"><a href="#">+ SmartPtr</a></span>:  (const NullPtr&amp; );
 </code>
-</div></td></tr><tr id="SmartPtr_33751319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="SmartPtr_33761319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('SmartPtr_33761319583276')">+ SmartPtr</a></span>:  (CopyType&amp; rhs);
+<code> <span class="method"><a href="#">+ SmartPtr</a></span>:  (CopyType&amp; rhs);
 </code>
-</div></td></tr><tr id="SmartPtr_33761319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="SmartPtr_33781319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="SmartPtr_33771319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('SmartPtr_33771319583276')">+ SmartPtr</a></span>:  (const SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs);
+<code><div class="doxygen_tmpllist" id="SmartPtr_33801319844517_tmpl"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
+ <span class="method"><a href="#">+ SmartPtr</a></span>:  (const SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs);
 </code>
-</div></td></tr><tr id="SmartPtr_33771319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="SmartPtr_33801319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="SmartPtr_33781319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('SmartPtr_33781319583276')">+ SmartPtr</a></span>:  (SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs);
+<code><div class="doxygen_tmpllist" id="SmartPtr_33841319844517_tmpl"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
+ <span class="method"><a href="#">+ SmartPtr</a></span>:  (SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs);
 </code>
-</div></td></tr><tr id="SmartPtr_33781319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="SmartPtr_33841319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Move Constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('SmartPtr_33791319583276')">+ SmartPtr</a></span>:  (Static::MoveConstructor&lt;SmartPtrType&gt; rhs);
+<code> <span class="method"><a href="#">+ SmartPtr</a></span>:  (Static::MoveConstructor&lt;SmartPtrType&gt; rhs);
 </code>
-</div></td></tr><tr id="SmartPtr_33791319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="SmartPtr_33881319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('~SmartPtr_33801319583276')">+ <b> ~ </b>SmartPtr</a></span>:  ();
+<code> <span class="method"><a href="#">+ <b> ~ </b>SmartPtr</a></span>:  ();
 </code>
-</div></td></tr><tr id="~SmartPtr_33801319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="~SmartPtr_33891319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Swap <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Swap from another smartptr.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('swap_33811319583276')">+ swap</a></span>: void (SmartPtr&amp; rhs);
+<code> <span class="method"><a href="#">+ swap</a></span>: void (SmartPtr&amp; rhs);
 </code>
-</div></td></tr><tr id="swap_33811319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="swap_33911319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operator * / -&gt; <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator_>_33821319583276')">+ operator-&gt;</a></span>: PointerType ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ operator-&gt;</a></span>: PointerType ();
 </code>
-</div></td></tr><tr id="operator_>_33821319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator_>_33941319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator_>_33831319583276')">+ operator-&gt;</a></span>: ConstPointerType () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ operator-&gt;</a></span>: ConstPointerType () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator_>_33831319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator_>_33961319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator*_33841319583276')">+ operator*</a></span>: ReferenceType ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ operator*</a></span>: ReferenceType ();
 </code>
-</div></td></tr><tr id="operator*_33841319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator*_33971319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator*_33851319583276')">+ operator*</a></span>: ConstReferenceType () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ operator*</a></span>: ConstReferenceType () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator*_33851319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator*_33991319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operator = <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator=_33861319583276')">+ operator=</a></span>: SmartPtr&amp; (CopyType&amp; rhs);
+<code> <span class="method"><a href="#">+ operator=</a></span>: SmartPtr&amp; (CopyType&amp; rhs);
 </code>
-</div></td></tr><tr id="operator=_33861319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator=_34011319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Reset.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator=_33871319583276')">+ operator=</a></span>: SmartPtr&amp; (const NullPtr&amp; );
+<code> <span class="method"><a href="#">+ operator=</a></span>: SmartPtr&amp; (const NullPtr&amp; );
 </code>
-</div></td></tr><tr id="operator=_33871319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator=_34021319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy from another smartptr.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator=_33881319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('operator=_33881319583276')">+ operator=</a></span>: SmartPtr&amp; (const SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs);
+<code><div class="doxygen_tmpllist" id="operator=_34031319844517_tmpl"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
+ <span class="method"><a href="#">+ operator=</a></span>: SmartPtr&amp; (const SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs);
 </code>
-</div></td></tr><tr id="operator=_33881319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator=_34031319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy from another smartptr.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator=_33891319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('operator=_33891319583276')">+ operator=</a></span>: SmartPtr&amp; (SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs);
+<code><div class="doxygen_tmpllist" id="operator=_34041319844517_tmpl"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
+ <span class="method"><a href="#">+ operator=</a></span>: SmartPtr&amp; (SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs);
 </code>
-</div></td></tr><tr id="operator=_33891319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator=_34041319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Comparisons <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Operator `!` (to enable if (!mysmartptr) ...)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator!_33901319583276')">+ operator!</a></span>: bool () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ operator!</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator!_33901319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator!_34051319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">operator `==`<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator==_33911319583276')">+ operator==</a></span>: bool (const NullPtr&amp; ) <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ operator==</a></span>: bool (const NullPtr&amp; ) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator==_33911319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator==_34061319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">operator `!=`<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator!=_33921319583276')">+ operator!=</a></span>: bool (const NullPtr&amp; ) <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ operator!=</a></span>: bool (const NullPtr&amp; ) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator!=_33921319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator!=_34071319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">operator `==`<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator==_33931319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('operator==_33931319583276')">+ operator==</a></span>: bool (const SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs) <span class="keyword">const</span>;
+<code><div class="doxygen_tmpllist" id="operator==_34081319844517_tmpl"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
+ <span class="method"><a href="#">+ operator==</a></span>: bool (const SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator==_33931319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator==_34081319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Operator `!=`.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator!=_33941319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('operator!=_33941319583276')">+ operator!=</a></span>: bool (const SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs) <span class="keyword">const</span>;
+<code><div class="doxygen_tmpllist" id="operator!=_34091319844517_tmpl"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
+ <span class="method"><a href="#">+ operator!=</a></span>: bool (const SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator!=_33941319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator!=_34091319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Operator `&lt;`.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator<_33951319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('operator<_33951319583276')">+ operator&lt;</a></span>: bool (const SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs) <span class="keyword">const</span>;
+<code><div class="doxygen_tmpllist" id="operator<_34101319844517_tmpl"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
+ <span class="method"><a href="#">+ operator&lt;</a></span>: bool (const SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator<_33951319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator<_34101319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Operator `&gt;`.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator>_33961319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('operator>_33961319583276')">+ operator&gt;</a></span>: bool (const SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs) <span class="keyword">const</span>;
+<code><div class="doxygen_tmpllist" id="operator>_34111319844517_tmpl"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
+ <span class="method"><a href="#">+ operator&gt;</a></span>: bool (const SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator>_33961319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator>_34111319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Operator `&lt;=`.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator<=_33971319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('operator<=_33971319583276')">+ operator&lt;=</a></span>: bool (const SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs) <span class="keyword">const</span>;
+<code><div class="doxygen_tmpllist" id="operator<=_34131319844517_tmpl"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
+ <span class="method"><a href="#">+ operator&lt;=</a></span>: bool (const SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator<=_33971319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator<=_34131319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Operator `&gt;=`.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator>=_33981319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('operator>=_33981319583276')">+ operator&gt;=</a></span>: bool (const SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs) <span class="keyword">const</span>;
+<code><div class="doxygen_tmpllist" id="operator>=_34161319844517_tmpl"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
+ <span class="method"><a href="#">+ operator&gt;=</a></span>: bool (const SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator>=_33981319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator>=_34161319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Cast-Operator <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Cast-Operator.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator Static::MoveConstructor< SmartPtr >_33991319583276')">+ operator Static::MoveConstructor&lt; SmartPtr &gt;</a></span>:  ();
+<code> <span class="method"><a href="#">+ operator Static::MoveConstructor&lt; SmartPtr &gt;</a></span>:  ();
 </code>
-</div></td></tr><tr id="operator Static::MoveConstructor< SmartPtr >_33991319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator Static::MoveConstructor< SmartPtr >_34191319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Cast-Operator for `if (mySmartPtr) ...`.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator AutomaticConversion *_34001319583276')">+ operator AutomaticConversion *</a></span>:  () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ operator AutomaticConversion *</a></span>:  () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator AutomaticConversion *_34001319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator AutomaticConversion *_34211319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the internal stored pointer (weak pointer) by the smart pointer.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('WeakPointer_34011319583276')">+ WeakPointer</a></span>: <span class="keyword">static</span> T* (const SmartPtr&amp; p);
+<code> <span class="method"><a href="#">+ WeakPointer</a></span>: <span class="keyword">static</span> T* (const SmartPtr&amp; p);
 </code>
-</div></td></tr><tr id="WeakPointer_34011319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="WeakPointer_34221319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><div><b>note</b> :  This methode should be used with care, especially in a multithreaded world<br /></div><br />Parameters :<ul><li><code> p</code> The smart pointer<br /></li></ul><div><code>return</code>  The internal stored pointer (can be null)<br /></div><br />
+<div class="doxygen_desc"><div><b>note</b> :  This methode should be used with care, especially in a multithreaded world<br /></div><div class="doxygen_params">Parameters :</div><ul><li><code> p</code> The smart pointer<br /></li></ul><div><code>return</code>  The internal stored pointer (can be null)<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Perform a dynamic_cast on a smartptr.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="DynamicCast_34021319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class S1 &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('DynamicCast_34021319583276')">+ DynamicCast</a></span>: <span class="keyword">static</span> S1 (SmartPtr p);
+<code><div class="doxygen_tmpllist" id="DynamicCast_34241319844517_tmpl"><span class="keyword">template</span>&lt;class S1 &gt;</div>
+ <span class="method"><a href="#">+ DynamicCast</a></span>: <span class="keyword">static</span> S1 (SmartPtr p);
 </code>
-</div></td></tr><tr id="DynamicCast_34021319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="DynamicCast_34241319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">Assuming the class `B` is a descendant of the class `A`<source type="cpp">  A::Ptr  a  =  new  B();
 
@@ -512,77 +601,77 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get a pointer to the object, like operator -&gt; would do.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('pointer_34041319583276')">+ pointer</a></span>: PointerType ();
+<code> <span class="method"><a href="#">+ pointer</a></span>: PointerType ();
 </code>
-</div></td></tr><tr id="pointer_34041319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="pointer_34261319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get a pointer to the object, like operator -&gt; would do.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('pointer_34051319583276')">+ pointer</a></span>: ConstPointerType () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ pointer</a></span>: ConstPointerType () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="pointer_34051319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="pointer_34281319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor with Dynamic casting.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="SmartPtr_34071319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('SmartPtr_34071319583276')">+ SmartPtr</a></span>:  (const SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs, const DynamicCastArg&amp; );
+<code><div class="doxygen_tmpllist" id="SmartPtr_34291319844517_tmpl"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
+ <span class="method"><a href="#">+ SmartPtr</a></span>:  (const SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs, const DynamicCastArg&amp; );
 </code>
-</div></td></tr><tr id="SmartPtr_34071319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="SmartPtr_34291319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor with Dynamic casting.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="SmartPtr_34121319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('SmartPtr_34121319583276')">+ SmartPtr</a></span>:  (SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs, const DynamicCastArg&amp; );
+<code><div class="doxygen_tmpllist" id="SmartPtr_34321319844517_tmpl"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
+ <span class="method"><a href="#">+ SmartPtr</a></span>:  (SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs, const DynamicCastArg&amp; );
 </code>
-</div></td></tr><tr id="SmartPtr_34121319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="SmartPtr_34321319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="SmartPtr_34151319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename T , template&lt; class&gt;class OwspP, template&lt; class&gt;class ChckP, class ConvP , template&lt; class&gt;class StorP, template&lt; class&gt;class ConsP&gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('SmartPtr_34151319583276')">+ SmartPtr</a></span>:  (typename SmartPtr&lt;T, OwspP, ChckP, ConvP, StorP, ConsP&gt;::ExplicitStoredType ptr);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="SmartPtr_34341319844517_tmpl"><span class="keyword">template</span>&lt;typename T , template&lt; class&gt;class OwspP, template&lt; class&gt;class ChckP, class ConvP , template&lt; class&gt;class StorP, template&lt; class&gt;class ConsP&gt;</div>
+ <span class="method"><a href="#">+ SmartPtr</a></span>:  (typename SmartPtr&lt;T, OwspP, ChckP, ConvP, StorP, ConsP&gt;::ExplicitStoredType ptr);
 </code>
-</div></td></tr><tr id="SmartPtr_34151319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="SmartPtr_34341319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="SmartPtr_34191319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename T , template&lt; class&gt;class OwspP, template&lt; class&gt;class ChckP, class ConvP , template&lt; class&gt;class StorP, template&lt; class&gt;class ConsP&gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('SmartPtr_34191319583276')">+ SmartPtr</a></span>:  (typename SmartPtr&lt;T, OwspP, ChckP, ConvP, StorP, ConsP&gt;:: CopyType&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="SmartPtr_34381319844517_tmpl"><span class="keyword">template</span>&lt;typename T , template&lt; class&gt;class OwspP, template&lt; class&gt;class ChckP, class ConvP , template&lt; class&gt;class StorP, template&lt; class&gt;class ConsP&gt;</div>
+ <span class="method"><a href="#">+ SmartPtr</a></span>:  (typename SmartPtr&lt;T, OwspP, ChckP, ConvP, StorP, ConsP&gt;:: CopyType&amp; rhs);
 </code>
-</div></td></tr><tr id="SmartPtr_34191319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="SmartPtr_34381319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="SmartPtr_34231319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('SmartPtr_34231319583276')">+ SmartPtr</a></span>:  (SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs, const typename SmartPtr&lt;T, OwspP, ChckP, ConvP, StorP, ConsP&gt;:: DynamicCastArg&amp; );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="SmartPtr_34421319844517_tmpl"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>
+ <span class="method"><a href="#">+ SmartPtr</a></span>:  (SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs, const typename SmartPtr&lt;T, OwspP, ChckP, ConvP, StorP, ConsP&gt;:: DynamicCastArg&amp; );
 </code>
-</div></td></tr><tr id="SmartPtr_34231319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="SmartPtr_34421319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="SmartPtr_34261319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename T , template&lt; class&gt;class OwspP, template&lt; class&gt;class ChckP, class ConvP , template&lt; class&gt;class StorP, template&lt; class&gt;class ConsP&gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('SmartPtr_34261319583276')">+ SmartPtr</a></span>:  (Static::MoveConstructor&lt;SmartPtr&lt;T, OwspP, ChckP, ConvP, StorP, ConsP&gt;&gt; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="SmartPtr_34461319844517_tmpl"><span class="keyword">template</span>&lt;typename T , template&lt; class&gt;class OwspP, template&lt; class&gt;class ChckP, class ConvP , template&lt; class&gt;class StorP, template&lt; class&gt;class ConsP&gt;</div>
+ <span class="method"><a href="#">+ SmartPtr</a></span>:  (Static::MoveConstructor&lt;SmartPtr&lt;T, OwspP, ChckP, ConvP, StorP, ConsP&gt;&gt; rhs);
 </code>
-</div></td></tr><tr id="SmartPtr_34261319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="SmartPtr_34461319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="operator=_34271319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename T , template&lt; class&gt;class OwspP, template&lt; class&gt;class ChckP, class ConvP , template&lt; class&gt;class StorP, template&lt; class&gt;class ConsP&gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('operator=_34271319583276')">+ operator=</a></span>: SmartPtr&lt;T, OwspP, ChckP, ConvP, StorP, ConsP&gt;&amp; (typename SmartPtr&lt;T, OwspP, ChckP, ConvP, StorP, ConsP&gt;:: CopyType&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="operator=_34501319844517_tmpl"><span class="keyword">template</span>&lt;typename T , template&lt; class&gt;class OwspP, template&lt; class&gt;class ChckP, class ConvP , template&lt; class&gt;class StorP, template&lt; class&gt;class ConsP&gt;</div>
+ <span class="method"><a href="#">+ operator=</a></span>: SmartPtr&lt;T, OwspP, ChckP, ConvP, StorP, ConsP&gt;&amp; (typename SmartPtr&lt;T, OwspP, ChckP, ConvP, StorP, ConsP&gt;:: CopyType&amp; rhs);
 </code>
-</div></td></tr><tr id="operator=_34271319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator=_34501319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 </table>

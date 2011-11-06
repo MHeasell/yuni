@@ -6,85 +6,100 @@
 
 
 
-<h2>A vertex is a point in space which is the start of two edges of a triangle in a mesh.<br /></h2>
-<table class="doxygen_table">
+<h2>A vertex is a point in space which is the start of two edges of a triangle in a mesh</h2>
+<h3>Public function</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructors and destructors</h4></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Vertex</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Vertex</a></span>(const Point3D&lt;float&gt;&amp; position)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Vertex</a></span>(const U x, const V y, const W z)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#"><b> ~ </b>Vertex</a></span>()</code></td></tr>
+<tr><td></td><td><br /><h4>Operators</h4></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator==</a></span>(const Vertex&amp; other) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator!=</a></span>(const Vertex&amp; other) <span class="keyword">const</span></code></td></tr>
+<tr><td></td><td><br /><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code>const Point3D&lt;float&gt;&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">position</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>String </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">toString</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>std::ostream&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">glPrint</a></span>(std::ostream&amp; out) <span class="keyword">const</span></code></td></tr>
+</table></div>
+
+<h2>Detailed Description</h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors and destructors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('Vertex_48511319583276')">+ Vertex</a></span>:  ();
+<code> <span class="method"><a href="#">+ Vertex</a></span>:  ();
 </code>
-</div></td></tr><tr id="Vertex_48511319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Vertex_48501319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('Vertex_48521319583276')">+ Vertex</a></span>:  (const Point3D&lt;float&gt;&amp; position);
+<code> <span class="method"><a href="#">+ Vertex</a></span>:  (const Point3D&lt;float&gt;&amp; position);
 </code>
-</div></td></tr><tr id="Vertex_48521319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Vertex_48511319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="Vertex_48531319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename U , typename V , typename W &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('Vertex_48531319583276')">+ Vertex</a></span>:  (const U x, const V y, const W z);
+<code><div class="doxygen_tmpllist" id="Vertex_48521319844517_tmpl"><span class="keyword">template</span>&lt;typename U , typename V , typename W &gt;</div>
+ <span class="method"><a href="#">+ Vertex</a></span>:  (const U x, const V y, const W z);
 </code>
-</div></td></tr><tr id="Vertex_48531319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Vertex_48521319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('~Vertex_48541319583276')">+ <b> ~ </b>Vertex</a></span>:  ();
+<code> <span class="method"><a href="#">+ <b> ~ </b>Vertex</a></span>:  ();
 </code>
-</div></td></tr><tr id="~Vertex_48541319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="~Vertex_48531319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Comparison operator (equal with)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator==_48551319583276')">+ operator==</a></span>: bool (const Vertex&amp; other) <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ operator==</a></span>: bool (const Vertex&amp; other) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator==_48551319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator==_48541319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> other</code> The other vertex to compare with<br /></li></ul><div><code>return</code>  True if the two vertices are coincident<br /></div><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> other</code> The other vertex to compare with<br /></li></ul><div><code>return</code>  True if the two vertices are coincident<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Comparison operator (non equal with)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator!=_48561319583276')">+ operator!=</a></span>: bool (const Vertex&amp; other) <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ operator!=</a></span>: bool (const Vertex&amp; other) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator!=_48561319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator!=_48551319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> other</code> The other vertex to compare with<br /></li></ul><div><code>return</code>  True if the two vertices are distinct<br /></div><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> other</code> The other vertex to compare with<br /></li></ul><div><code>return</code>  True if the two vertices are distinct<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Position of the vertex in space.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('position_48571319583276')">+ position</a></span>: const Point3D&lt;float&gt;&amp; () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ position</a></span>: const Point3D&lt;float&gt;&amp; () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="position_48571319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="position_48561319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get a string representing the object to use as hash key.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('toString_48581319583276')">+ toString</a></span>: String () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ toString</a></span>: String () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="toString_48581319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="toString_48571319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Generate the OpenGL code for this vertex.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('glPrint_48591319583276')">+ glPrint</a></span>: std::ostream&amp; (std::ostream&amp; out) <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ glPrint</a></span>: std::ostream&amp; (std::ostream&amp; out) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="glPrint_48591319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="glPrint_48581319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> out</code> An output stream<br /></li></ul><div><code>return</code>  The output stream `out`<br /></div><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> out</code> An output stream<br /></li></ul><div><code>return</code>  The output stream `out`<br /></div><br />
 </div>
 </td></tr>
 </table>

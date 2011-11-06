@@ -6,88 +6,147 @@
 
 
 
-<h2>Base class interface for Threads (abstract)<br /></h2>
-<table class="doxygen_table">
+<h2>Base class interface for Threads (abstract)</h2>
+<h3>Public typedef</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">ThreadingPolicy</a></span> : Policy::ObjectLevelLockable&lt;IThread&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">Ptr</a></span> : SmartPtr&lt;IThread&gt;</code></td></tr>
+</table></div>
+
+<h3>Public function</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructor &amp; Destructor</h4></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">IThread</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#"><b> ~ </b>IThread</a></span>()</code></td></tr>
+<tr><td></td><td><br /><h4>Execution flow</h4></td></tr>
+<tr><td class="doxygen_index"><code>Error </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">start</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>Error </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">stop</a></span>(unsigned int timeout)</code></td></tr>
+<tr><td class="doxygen_index"><code>Error </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">wait</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>Error </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">wait</a></span>(unsigned int timeout)</code></td></tr>
+<tr><td class="doxygen_index"><code>Error </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">restart</a></span>(unsigned int timeout)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">gracefulStop</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">started</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">wakeUp</a></span>()</code></td></tr>
+<tr><td></td><td><br /><h4>Operators</h4></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator!</a></span>() <span class="keyword">const</span></code></td></tr>
+</table></div>
+
+<h3>Protected function</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">suspend</a></span>(const unsigned int delay)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">shouldAbort</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">onStarting</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">onExecute</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">onPause</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">onStop</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">onKill</a></span>()</code></td></tr>
+</table></div>
+
+<h2>Detailed Description</h2><table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The threading policy.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ ThreadingPolicy</a></span>: <span class="keyword">typedef</span> Policy::ObjectLevelLockable&lt;IThread&gt;;
+</code>
+</div></td></tr><tr id="ThreadingPolicy_68201319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The most suitable smart pointer for the class.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;IThread&gt;;
+</code>
+</div></td></tr><tr id="Ptr_68211319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief">Get if this policy is thread-safe.<br /><div class="doxygen_name_spacer"></div>
+<code><i>(unmanaged tag: 4)</i></code>
+</div></td></tr><tr id="@369_68231319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('IThread_68291319583276')">+ IThread</a></span>:  ();
+<code> <span class="method"><a href="#">+ IThread</a></span>:  ();
 </code>
-</div></td></tr><tr id="IThread_68291319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="IThread_68251319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('~IThread_68311319583276')">+ <b> ~ </b>IThread</a></span>:  ();
+<code> <span class="method"><a href="#">+ <b> ~ </b>IThread</a></span>:  ();
 </code>
-</div></td></tr><tr id="~IThread_68311319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="~IThread_68271319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Execution flow <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Start the execution of the thread, if not already started.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('start_68341319583276')">+ start</a></span>: Error ();
+<code> <span class="method"><a href="#">+ start</a></span>: Error ();
 </code>
-</div></td></tr><tr id="start_68341319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="start_68291319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">If already started, the thread will be woke up<div><code>return</code>  True if the thread has been started<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Stop the execution of the thread and wait for it, if not already stopped.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('stop_68351319583276')">+ stop</a></span>: Error (unsigned int timeout);
+<code> <span class="method"><a href="#">+ stop</a></span>: Error (unsigned int timeout);
 </code>
-</div></td></tr><tr id="stop_68351319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="stop_68311319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> timeout</code> The timeout in milliseconds before killing the thread (default: 5000ms)<br /></li></ul><div><code>return</code>  An error status (`errNone` if succeeded)<br /></div><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> timeout</code> The timeout in milliseconds before killing the thread (default: 5000ms)<br /></li></ul><div><code>return</code>  An error status (`errNone` if succeeded)<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Wait for an infinite amount of time for the end of the thread.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('wait_68371319583276')">+ wait</a></span>: Error ();
+<code> <span class="method"><a href="#">+ wait</a></span>: Error ();
 </code>
-</div></td></tr><tr id="wait_68371319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="wait_68331319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">The thread is not stopped during the process.<div><code>return</code>  An error status (`errNone` if succeeded)<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Wait for the end of the thread.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('wait_68391319583276')">+ wait</a></span>: Error (unsigned int timeout);
+<code> <span class="method"><a href="#">+ wait</a></span>: Error (unsigned int timeout);
 </code>
-</div></td></tr><tr id="wait_68391319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="wait_68351319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">The thread is not stopped during the process.<br />Parameters :<ul><li><code> timeout</code> The timeout in milliseconds<br /></li></ul><div><code>return</code>  An error status (`errNone` if succeeded)<br /></div><br />
+<div class="doxygen_desc">The thread is not stopped during the process.<div class="doxygen_params">Parameters :</div><ul><li><code> timeout</code> The timeout in milliseconds<br /></li></ul><div><code>return</code>  An error status (`errNone` if succeeded)<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Restart the thread.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('restart_68411319583276')">+ restart</a></span>: Error (unsigned int timeout);
+<code> <span class="method"><a href="#">+ restart</a></span>: Error (unsigned int timeout);
 </code>
-</div></td></tr><tr id="restart_68411319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="restart_68371319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> timeout</code> The timeout in milliseconds before killing the thread (default: 5000ms)<br /></li></ul><div><code>return</code>  True if the thread has been stopped then started<br /></div><div><code>see</code> :  stop()<br /> start()<br /></div><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> timeout</code> The timeout in milliseconds before killing the thread (default: 5000ms)<br /></li></ul><div><code>return</code>  True if the thread has been stopped then started<br /></div><div><code>see</code> :  stop()<br /> start()<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Ask to Stop the execution of the thread as soon as possible.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('gracefulStop_68431319583276')">+ gracefulStop</a></span>: void ();
+<code> <span class="method"><a href="#">+ gracefulStop</a></span>: void ();
 </code>
-</div></td></tr><tr id="gracefulStop_68431319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="gracefulStop_68391319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">After a call to this method, the method suspend() will return true, which indicates that the thread should stop.<div><code>see</code> :  suspend()<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the thread is currently running.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('started_68441319583276')">+ started</a></span>: bool () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ started</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="started_68441319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="started_68411319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div><code>return</code>  True if the thread is running<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Interrupt the thread if suspended.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('wakeUp_68461319583276')">+ wakeUp</a></span>: void ();
+<code> <span class="method"><a href="#">+ wakeUp</a></span>: void ();
 </code>
-</div></td></tr><tr id="wakeUp_68461319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="wakeUp_68431319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">A call to this methid will interrupt a suspended state. This method has no effect if the thread is not started.<br />
 </div>
@@ -95,66 +154,43 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the thread is currently stopped.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator!_68471319583276')">+ operator!</a></span>: bool () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ operator!</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator!_68471319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator!_68451319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The threading policy.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('ThreadingPolicy_68481319583276')">+ ThreadingPolicy</a></span>: <span class="keyword">typedef</span> Policy::ObjectLevelLockable&lt;IThread&gt;;</code>
-</div></td></tr><tr id="ThreadingPolicy_68481319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The most suitable smart pointer for the class.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('Ptr_68491319583276')">+ Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;IThread&gt;;</code>
-</div></td></tr><tr id="Ptr_68491319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief">Get if this policy is thread-safe.<br /><div class="doxygen_name_spacer"></div>
-<code><i>(unmanaged tag: 6)</i></code>
-</div></td></tr><tr id="@369_68501319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Protected <code class="doxygen_visibility">Protected</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Suspend the execution of the thread of X miliseconds.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('suspend_68511319583276')"># suspend</a></span>: bool (const unsigned int delay);
+<code> <span class="method"><a href="#"># suspend</a></span>: bool (const unsigned int delay);
 </code>
-</div></td></tr><tr id="suspend_68511319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="suspend_68471319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">This is a convenient method to know if the thread should stop as soon as possible. If you do not want to suspend the execution of thread, you should use the method `shouldAbort()` instead.<br /><div><b>attention</b> :  This method must only be called inside the execution of the thread<br /></div><br />Parameters :<ul><li><code> delay</code> The delay in miliseconds. O will only return if the thread should exit<br /></li></ul><div><code>return</code>  True indicates that the thread should stop immediately<br /></div><br />
+<div class="doxygen_desc">This is a convenient method to know if the thread should stop as soon as possible. If you do not want to suspend the execution of thread, you should use the method `shouldAbort()` instead.<br /><div><b>attention</b> :  This method must only be called inside the execution of the thread<br /></div><div class="doxygen_params">Parameters :</div><ul><li><code> delay</code> The delay in miliseconds. O will only return if the thread should exit<br /></li></ul><div><code>return</code>  True indicates that the thread should stop immediately<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the thread should abort as soon as possible.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('shouldAbort_68521319583276')"># shouldAbort</a></span>: bool ();
+<code> <span class="method"><a href="#"># shouldAbort</a></span>: bool ();
 </code>
-</div></td></tr><tr id="shouldAbort_68521319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="shouldAbort_68481319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">This is a convenient routine instead of `suspend(0)`, but a bit faster.<div><b>attention</b> :  This method must only be called inside the execution of the thread<br /></div><div><code>return</code>  True indicates that the thread should stop immediately<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Event : The thread has just been started.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('onStarting_68531319583276')"># onStarting</a></span>: bool ();
+<code> <span class="method"><a href="#"># onStarting</a></span>: bool ();
 </code>
-</div></td></tr><tr id="onStarting_68531319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="onStarting_68491319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">This event is executed in the thread which has just been created.<br /> It can be directly stopped if returning false. However the `onStopped` event will not be called.<br /><div><code>return</code>  True to continue the execution of the thread, false to abort the execution right now<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Event : The thread is running.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('onExecute_68541319583276')"># onExecute</a></span>: bool ();
+<code> <span class="method"><a href="#"># onExecute</a></span>: bool ();
 </code>
-</div></td></tr><tr id="onExecute_68541319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="onExecute_68501319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">The thread has been successfully started (and `onStarting()` returned true).<br /> If this method returns false, the thread will be stopped (and the thread context will be destroyed). The method `onStopped` will be called. Otherwise, the thread will be paused for an infinite amount of time and the method onPause() will be called. In this case it will be possible to re-run it in calling wakeUp() or start() .<br /><div><b>attention</b> :  This method should check from time to time if the thread has to stop. For that, a call to `suspend(0)` is recommended.<source type="cpp">     if  ( suspend ())
         return ;
@@ -163,25 +199,25 @@
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Event : The thread has finished its job and is waiting for being re-executed.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('onPause_68551319583276')"># onPause</a></span>: void ();
+<code> <span class="method"><a href="#"># onPause</a></span>: void ();
 </code>
-</div></td></tr><tr id="onPause_68551319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="onPause_68511319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">This event will be fired if the method onExecute returns false.<br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Event : The thread has been gracefully stopped.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('onStop_68561319583276')"># onStop</a></span>: void ();
+<code> <span class="method"><a href="#"># onStop</a></span>: void ();
 </code>
-</div></td></tr><tr id="onStop_68561319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="onStop_68531319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">This event is executed in the thread.<br /><div><b>attention</b> :  You should not rely on this event to release your resources. There is no guaranty that this method will be called, especially if the thread has been killed because it did not stop before the timeout was reached.<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Event : The thread has been killed.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('onKill_68571319583276')"># onKill</a></span>: void ();
+<code> <span class="method"><a href="#"># onKill</a></span>: void ();
 </code>
-</div></td></tr><tr id="onKill_68571319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="onKill_68551319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">This method may be called from any thread<br />
 </div>
@@ -189,10 +225,10 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Protected <code class="doxygen_visibility">Protected</code></h3>
 </td></tr>
 <tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">Mutex.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('pMutex_68581319583276')"># pMutex</a></span>: Mutex;</code>
-</div></td></tr><tr id="pMutex_68581319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<code><span class="method"><a href="#"># pMutex</a></span>: Mutex;</code>
+</div></td></tr><tr id="pMutex_68571319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 </table>

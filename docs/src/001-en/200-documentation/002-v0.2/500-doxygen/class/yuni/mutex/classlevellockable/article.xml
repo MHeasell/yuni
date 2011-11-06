@@ -6,14 +6,14 @@
 
 
 
-<h2>A class-level locking mechanism.<br /></h2>
+<h2>A class-level locking mechanism</h2>
 <div>A class-level locking operation locks all objects in a given class during that operation<br /></div>
 <table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">A dedicated mutex for the class T.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('mutex_4891319583276')">+ mutex</a></span>: Mutex;</code>
-</div></td></tr><tr id="mutex_4891319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<code><span class="method"><a href="#">+ mutex</a></span>: Mutex;</code>
+</div></td></tr><tr id="mutex_4891319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">All mutexes for each class.<br />
 </div>

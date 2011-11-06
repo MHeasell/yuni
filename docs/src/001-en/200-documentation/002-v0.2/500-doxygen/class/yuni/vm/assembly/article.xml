@@ -6,151 +6,177 @@
 
 
 
-<h2>Assembly</h2><table class="doxygen_table">
+<h2>Assembly</h2>
+<h3>Public function</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructor &amp; Destructor</h4></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Assembly</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#"><b> ~ </b>Assembly</a></span>()</code></td></tr>
+<tr><td></td><td><br /><h4>Execution flow</h4></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">validate</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>int </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">execute</a></span>()</code></td></tr>
+<tr><td></td><td><br /><h4>Intrinsic functions</h4></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">intrinsic</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">intrinsic</a></span>(uint8 r1)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">intrinsic</a></span>(uint8 r1, uint8 r2)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">intrinsic</a></span>(uint8 r1, uint8 r2, uint8 r3)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">intrinsic</a></span>(uint8 r1, uint8 r2, uint8 r3, uint8 r4)</code></td></tr>
+<tr><td></td><td><br /><h4>Add</h4></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">add</a></span>(uint8 ret, uint8 r1, uint8 r2)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">addu</a></span>(uint8 ret, uint8 r1, uint8 r2)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">addi</a></span>(uint8 ret, uint8 r1, sint64 i)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">addui</a></span>(uint8 ret, uint8 r1, uint64 i)</code></td></tr>
+<tr><td></td><td><br /><h4>Misc. functions</h4></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">nop</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">exit</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">exitCode</a></span>(uint8 r1)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">exitCodei</a></span>(sint8 i)</code></td></tr>
+</table></div>
+
+<h2>Detailed Description</h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('Assembly_48791319583276')">+ Assembly</a></span>:  ();
+<code> <span class="method"><a href="#">+ Assembly</a></span>:  ();
 </code>
-</div></td></tr><tr id="Assembly_48791319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Assembly_48781319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('~Assembly_48801319583276')">+ <b> ~ </b>Assembly</a></span>:  ();
+<code> <span class="method"><a href="#">+ <b> ~ </b>Assembly</a></span>:  ();
 </code>
-</div></td></tr><tr id="~Assembly_48801319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="~Assembly_48791319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Execution flow <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Check the validity of the assembly code.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('validate_48811319583276')">+ validate</a></span>: bool () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ validate</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="validate_48811319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="validate_48801319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Execute the program.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('execute_48821319583276')">+ execute</a></span>: int ();
+<code> <span class="method"><a href="#">+ execute</a></span>: int ();
 </code>
-</div></td></tr><tr id="execute_48821319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="execute_48811319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Intrinsic functions <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">intrinsic function<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('intrinsic_48831319583276')">+ intrinsic</a></span>: void ();
+<code> <span class="method"><a href="#">+ intrinsic</a></span>: void ();
 </code>
-</div></td></tr><tr id="intrinsic_48831319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="intrinsic_48821319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">intrinsic function, with 1 parameter<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('intrinsic_48841319583276')">+ intrinsic</a></span>: void (uint8 r1);
+<code> <span class="method"><a href="#">+ intrinsic</a></span>: void (uint8 r1);
 </code>
-</div></td></tr><tr id="intrinsic_48841319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="intrinsic_48831319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">intrinsic function, with 2 parameters<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('intrinsic_48851319583276')">+ intrinsic</a></span>: void (uint8 r1, uint8 r2);
+<code> <span class="method"><a href="#">+ intrinsic</a></span>: void (uint8 r1, uint8 r2);
 </code>
-</div></td></tr><tr id="intrinsic_48851319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="intrinsic_48841319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">intrinsic function, with 3 parameters<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('intrinsic_48871319583276')">+ intrinsic</a></span>: void (uint8 r1, uint8 r2, uint8 r3);
+<code> <span class="method"><a href="#">+ intrinsic</a></span>: void (uint8 r1, uint8 r2, uint8 r3);
 </code>
-</div></td></tr><tr id="intrinsic_48871319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="intrinsic_48851319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">intrinsic function, with 4 parameters<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('intrinsic_48891319583276')">+ intrinsic</a></span>: void (uint8 r1, uint8 r2, uint8 r3, uint8 r4);
+<code> <span class="method"><a href="#">+ intrinsic</a></span>: void (uint8 r1, uint8 r2, uint8 r3, uint8 r4);
 </code>
-</div></td></tr><tr id="intrinsic_48891319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="intrinsic_48861319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Add <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">add ret, R1, R2: ret = R1 + R2<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('add_48921319583276')">+ add</a></span>: void (uint8 ret, uint8 r1, uint8 r2);
+<code> <span class="method"><a href="#">+ add</a></span>: void (uint8 ret, uint8 r1, uint8 r2);
 </code>
-</div></td></tr><tr id="add_48921319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="add_48871319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">addu ret, R1, R2: ret = R1 + R2 (unsigned)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('addu_48951319583276')">+ addu</a></span>: void (uint8 ret, uint8 r1, uint8 r2);
+<code> <span class="method"><a href="#">+ addu</a></span>: void (uint8 ret, uint8 r1, uint8 r2);
 </code>
-</div></td></tr><tr id="addu_48951319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="addu_48881319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">addi ret, R1, I: ret = R1 + I<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('addi_48971319583276')">+ addi</a></span>: void (uint8 ret, uint8 r1, sint64 i);
+<code> <span class="method"><a href="#">+ addi</a></span>: void (uint8 ret, uint8 r1, sint64 i);
 </code>
-</div></td></tr><tr id="addi_48971319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="addi_48901319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">addui ret, R1, I: ret = R1 + I (unsigned)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('addui_48991319583276')">+ addui</a></span>: void (uint8 ret, uint8 r1, uint64 i);
+<code> <span class="method"><a href="#">+ addui</a></span>: void (uint8 ret, uint8 r1, uint64 i);
 </code>
-</div></td></tr><tr id="addui_48991319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="addui_48921319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Misc. functions <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">nop<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('nop_49021319583276')">+ nop</a></span>: void ();
+<code> <span class="method"><a href="#">+ nop</a></span>: void ();
 </code>
-</div></td></tr><tr id="nop_49021319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="nop_48951319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Abort the execution of the program.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('exit_49041319583276')">+ exit</a></span>: void ();
+<code> <span class="method"><a href="#">+ exit</a></span>: void ();
 </code>
-</div></td></tr><tr id="exit_49041319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="exit_48971319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the value of the exit code from the value of a register.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('exitCode_49061319583276')">+ exitCode</a></span>: void (uint8 r1);
+<code> <span class="method"><a href="#">+ exitCode</a></span>: void (uint8 r1);
 </code>
-</div></td></tr><tr id="exitCode_49061319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="exitCode_48991319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the value of the exit code from an immediate value.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('exitCodei_49081319583276')">+ exitCodei</a></span>: void (sint8 i);
+<code> <span class="method"><a href="#">+ exitCodei</a></span>: void (sint8 i);
 </code>
-</div></td></tr><tr id="exitCodei_49081319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="exitCodei_49001319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 </table>
