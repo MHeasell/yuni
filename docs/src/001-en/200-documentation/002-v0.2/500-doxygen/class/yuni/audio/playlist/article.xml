@@ -6,106 +6,129 @@
 
 
 
-<h2>A play list contains an ordered list of sounds to be played.<br /></h2>
-<table class="doxygen_table">
+<h2>A play list contains an ordered list of sounds to be played</h2>
+<h3>Public typedef</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Typedefs</h4></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">Ptr</a></span> : SmartPtr&lt;PlayList&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">Size</a></span> : unsigned int</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">ThreadingPolicy</a></span> : Policy::ObjectLevelLockable&lt;ISound&gt;</code></td></tr>
+</table></div>
+
+<h3>Public function</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">PlayList</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>Size </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">append</a></span>(SmartPtr&lt;ISound&gt;&amp; sound)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">remove</a></span>(const StringT&amp; soundID)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">play</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">pause</a></span>(bool paused)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">previous</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">next</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">shuffle</a></span>()</code></td></tr>
+</table></div>
+
+<h2>Detailed Description</h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Typedefs <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The most suitable smart pointer for the class.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('Ptr_33221319583276')">+ Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;PlayList&gt;;</code>
-</div></td></tr><tr id="Ptr_33221319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<code><span class="method"><a href="#">+ Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;PlayList&gt;;
+</code>
+</div></td></tr><tr id="Ptr_33211319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Size type.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('Size_33231319583276')">+ Size</a></span>: <span class="keyword">typedef</span> unsigned int;</code>
-</div></td></tr><tr id="Size_33231319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<code><span class="method"><a href="#">+ Size</a></span>: <span class="keyword">typedef</span> unsigned int;
+</code>
+</div></td></tr><tr id="Size_33221319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The Threading Policy .<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('ThreadingPolicy_33241319583276')">+ ThreadingPolicy</a></span>: <span class="keyword">typedef</span> Policy::ObjectLevelLockable&lt;ISound&gt;;</code>
-</div></td></tr><tr id="ThreadingPolicy_33241319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<code><span class="method"><a href="#">+ ThreadingPolicy</a></span>: <span class="keyword">typedef</span> Policy::ObjectLevelLockable&lt;ISound&gt;;
+</code>
+</div></td></tr><tr id="ThreadingPolicy_33231319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief">Get if this policy is thread-safe.<br /><div class="doxygen_name_spacer"></div>
-<code><i>(unmanaged tag: 6)</i></code>
-</div></td></tr><tr id="@369_33251319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<code><i>(unmanaged tag: 4)</i></code>
+</div></td></tr><tr id="@369_33241319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Empty constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('PlayList_33261319583276')">+ PlayList</a></span>:  ();
+<code> <span class="method"><a href="#">+ PlayList</a></span>:  ();
 </code>
-</div></td></tr><tr id="PlayList_33261319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="PlayList_33251319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('size_33271319583276')">+ size</a></span>: Size () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ size</a></span>: Size () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="size_33271319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="size_33261319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Add a sound at the end of the playlist.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('append_33281319583276')">+ append</a></span>: void (SmartPtr&lt;ISound&gt;&amp; sound);
+<code> <span class="method"><a href="#">+ append</a></span>: void (SmartPtr&lt;ISound&gt;&amp; sound);
 </code>
-</div></td></tr><tr id="append_33281319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="append_33271319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="remove_33291319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('remove_33291319583276')">+ remove</a></span>: void (const StringT&amp; soundID);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="remove_33281319844517_tmpl"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
+ <span class="method"><a href="#">+ remove</a></span>: void (const StringT&amp; soundID);
 </code>
-</div></td></tr><tr id="remove_33291319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="remove_33281319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('play_33301319583276')">+ play</a></span>: void () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ play</a></span>: void () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="play_33301319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="play_33291319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('pause_33311319583276')">+ pause</a></span>: void (bool paused);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ pause</a></span>: void (bool paused);
 </code>
-</div></td></tr><tr id="pause_33311319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="pause_33301319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('previous_33321319583276')">+ previous</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ previous</a></span>: void ();
 </code>
-</div></td></tr><tr id="previous_33321319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="previous_33311319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('next_33331319583276')">+ next</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ next</a></span>: void ();
 </code>
-</div></td></tr><tr id="next_33331319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="next_33321319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('shuffle_33341319583276')">+ shuffle</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ shuffle</a></span>: void ();
 </code>
-</div></td></tr><tr id="shuffle_33341319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="shuffle_33331319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 </table>

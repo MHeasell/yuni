@@ -6,219 +6,246 @@
 
 
 
-<h2>Represents a 2D-point.<br /></h2>
-<table class="doxygen_table">
+<h2>Represents a 2D-point</h2>
+<h3>Public function</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructors &amp; Destructor</h4></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Point2D</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Point2D</a></span>(const U x1, const V y1)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Point2D</a></span>(const Point2D&lt;U&gt;&amp; p)</code></td></tr>
+<tr><td class="doxygen_index"><code>Point2D&lt;T&gt;&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">reset</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">move</a></span>(const U x1, const V y1)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">move</a></span>(const Point2D&lt;U&gt;&amp; p)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">translate</a></span>(const U k)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">translate</a></span>(const U x1, const V y1)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">translate</a></span>(const Point2D&lt;U&gt;&amp; p)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">mean</a></span>(const Point2D&lt;U&gt;&amp; p)</code></td></tr>
+<tr><td class="doxygen_index"><code>Point2D&lt;T&gt;&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">mean</a></span>(const Point2D&lt;U&gt;&amp; p1, const Point2D&lt;V&gt;&amp; p2)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">closeTo</a></span>(const Point2D&lt;U&gt;&amp; rhs, const V delta) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">closeTo</a></span>(const U x1, const U y1, const V delta) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">static</span> Point2D&lt;T&gt;&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Mean</a></span>(const Point2D&lt;T&gt;&amp; p1, const Point2D&lt;T&gt;&amp; p2)</code></td></tr>
+<tr><td></td><td><br /><h4>Operators</h4></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator()</a></span>(const U x1, const U y1)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator()</a></span>(const Point2D&lt;U&gt;&amp; p)</code></td></tr>
+<tr><td class="doxygen_index"><code>Point2D&lt;T&gt;&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator+=</a></span>(const U k)</code></td></tr>
+<tr><td class="doxygen_index"><code>Point2D&lt;T&gt;&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator+=</a></span>(const Point2D&lt;U&gt;&amp; p)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator==</a></span>(const Point2D&lt;U&gt;&amp; rhs) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator!=</a></span>(const Point2D&lt;U&gt;&amp; rhs) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>Point2D&lt;T&gt;&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator=</a></span>(const Point2D&lt;U&gt;&amp; p)</code></td></tr>
+<tr><td class="doxygen_index"><code>StreamT&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">print</a></span>(StreamT&amp; out) <span class="keyword">const</span></code></td></tr>
+</table></div>
+
+<h2>Detailed Description</h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('Point2D_15321319583276')">+ Point2D</a></span>:  ();
+<code> <span class="method"><a href="#">+ Point2D</a></span>:  ();
 </code>
-</div></td></tr><tr id="Point2D_15321319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Point2D_15321319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="Point2D_15331319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename U , typename V &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('Point2D_15331319583276')">+ Point2D</a></span>:  (const U x1, const V y1);
+<code><div class="doxygen_tmpllist" id="Point2D_15331319844517_tmpl"><span class="keyword">template</span>&lt;typename U , typename V &gt;</div>
+ <span class="method"><a href="#">+ Point2D</a></span>:  (const U x1, const V y1);
 </code>
-</div></td></tr><tr id="Point2D_15331319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Point2D_15331319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> x1</code> The default x coordinate<br /></li><li><code> y1</code> The default y coordinate<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> x1</code> The default x coordinate<br /></li><li><code> y1</code> The default y coordinate<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor by copy.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="Point2D_15341319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('Point2D_15341319583276')">+ Point2D</a></span>:  (const Point2D&lt;U&gt;&amp; p);
+<code><div class="doxygen_tmpllist" id="Point2D_15341319844517_tmpl"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">+ Point2D</a></span>:  (const Point2D&lt;U&gt;&amp; p);
 </code>
-</div></td></tr><tr id="Point2D_15341319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Point2D_15341319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Reset the point to origin.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('reset_15351319583276')">+ reset</a></span>: Point2D&lt;T&gt;&amp; ();
+<code> <span class="method"><a href="#">+ reset</a></span>: Point2D&lt;T&gt;&amp; ();
 </code>
-</div></td></tr><tr id="reset_15351319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="reset_15351319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Move the point to new coordinates.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="move_15361319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename U , typename V &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('move_15361319583276')">+ move</a></span>: void (const U x1, const V y1);
+<code><div class="doxygen_tmpllist" id="move_15361319844517_tmpl"><span class="keyword">template</span>&lt;typename U , typename V &gt;</div>
+ <span class="method"><a href="#">+ move</a></span>: void (const U x1, const V y1);
 </code>
-</div></td></tr><tr id="move_15361319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="move_15361319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> x1</code> The new X coordinate<br /></li><li><code> y1</code> The new Y coordinate<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> x1</code> The new X coordinate<br /></li><li><code> y1</code> The new Y coordinate<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Move the point to new coordinates.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="move_15371319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('move_15371319583276')">+ move</a></span>: void (const Point2D&lt;U&gt;&amp; p);
+<code><div class="doxygen_tmpllist" id="move_15371319844517_tmpl"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">+ move</a></span>: void (const Point2D&lt;U&gt;&amp; p);
 </code>
-</div></td></tr><tr id="move_15371319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="move_15371319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> p</code> The new coordinates<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> p</code> The new coordinates<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Translate the point with the same value for all coordinates.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="translate_15381319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('translate_15381319583276')">+ translate</a></span>: void (const U k);
+<code><div class="doxygen_tmpllist" id="translate_15381319844517_tmpl"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">+ translate</a></span>: void (const U k);
 </code>
-</div></td></tr><tr id="translate_15381319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="translate_15381319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> k</code> The value to add to all coordinates<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> k</code> The value to add to all coordinates<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Translate the point with relative coordinates.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="translate_15391319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename U , typename V &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('translate_15391319583276')">+ translate</a></span>: void (const U x1, const V y1);
+<code><div class="doxygen_tmpllist" id="translate_15391319844517_tmpl"><span class="keyword">template</span>&lt;typename U , typename V &gt;</div>
+ <span class="method"><a href="#">+ translate</a></span>: void (const U x1, const V y1);
 </code>
-</div></td></tr><tr id="translate_15391319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="translate_15391319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> x1</code> The value to add to the x coordinate<br /></li><li><code> y1</code> The value to add to the y coordinate<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> x1</code> The value to add to the x coordinate<br /></li><li><code> y1</code> The value to add to the y coordinate<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Translate the point with relative coordinates from another Point.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="translate_15401319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('translate_15401319583276')">+ translate</a></span>: void (const Point2D&lt;U&gt;&amp; p);
+<code><div class="doxygen_tmpllist" id="translate_15401319844517_tmpl"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">+ translate</a></span>: void (const Point2D&lt;U&gt;&amp; p);
 </code>
-</div></td></tr><tr id="translate_15401319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="translate_15401319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> p</code> The values to add to the coordinates<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> p</code> The values to add to the coordinates<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Calculate the mean between two points.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="mean_15411319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('mean_15411319583276')">+ mean</a></span>: void (const Point2D&lt;U&gt;&amp; p);
+<code><div class="doxygen_tmpllist" id="mean_15411319844517_tmpl"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">+ mean</a></span>: void (const Point2D&lt;U&gt;&amp; p);
 </code>
-</div></td></tr><tr id="mean_15411319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="mean_15411319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">The calling object is modified to store the value<br /><br />Parameters :<ul><li><code> p</code> Point to compute the mean with<br /></li></ul><br />
+<div class="doxygen_desc">The calling object is modified to store the value<br /><div class="doxygen_params">Parameters :</div><ul><li><code> p</code> Point to compute the mean with<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Calculate the mean between two points.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="mean_15421319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename U , typename V &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('mean_15421319583276')">+ mean</a></span>: Point2D&lt;T&gt;&amp; (const Point2D&lt;U&gt;&amp; p1, const Point2D&lt;V&gt;&amp; p2);
+<code><div class="doxygen_tmpllist" id="mean_15421319844517_tmpl"><span class="keyword">template</span>&lt;typename U , typename V &gt;</div>
+ <span class="method"><a href="#">+ mean</a></span>: Point2D&lt;T&gt;&amp; (const Point2D&lt;U&gt;&amp; p1, const Point2D&lt;V&gt;&amp; p2);
 </code>
-</div></td></tr><tr id="mean_15421319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="mean_15421319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">The calling object is modified to store the value<br /><br />Parameters :<ul><li><code> p1</code> Point to compute the mean with<br /></li><li><code> p2</code> Second point to compute the mean with<br /></li></ul><div><code>return</code>  Always *this<br /></div><br />
+<div class="doxygen_desc">The calling object is modified to store the value<br /><div class="doxygen_params">Parameters :</div><ul><li><code> p1</code> Point to compute the mean with<br /></li><li><code> p2</code> Second point to compute the mean with<br /></li></ul><div><code>return</code>  Always *this<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the point is close to another point.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="closeTo_15431319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename U , typename V &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('closeTo_15431319583276')">+ closeTo</a></span>: bool (const Point2D&lt;U&gt;&amp; rhs, const V delta) <span class="keyword">const</span>;
+<code><div class="doxygen_tmpllist" id="closeTo_15431319844517_tmpl"><span class="keyword">template</span>&lt;typename U , typename V &gt;</div>
+ <span class="method"><a href="#">+ closeTo</a></span>: bool (const Point2D&lt;U&gt;&amp; rhs, const V delta) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="closeTo_15431319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="closeTo_15431319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> rhs</code> The other point<br /></li><li><code> delta</code> Delta value<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> rhs</code> The other point<br /></li><li><code> delta</code> Delta value<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the point is close to another point.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="closeTo_15441319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename U , typename V &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('closeTo_15441319583276')">+ closeTo</a></span>: bool (const U x1, const U y1, const V delta) <span class="keyword">const</span>;
+<code><div class="doxygen_tmpllist" id="closeTo_15441319844517_tmpl"><span class="keyword">template</span>&lt;typename U , typename V &gt;</div>
+ <span class="method"><a href="#">+ closeTo</a></span>: bool (const U x1, const U y1, const V delta) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="closeTo_15441319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="closeTo_15441319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> x1</code> The X coordinate of the other point<br /></li><li><code> y1</code> The Y coordinate of the other point<br /></li><li><code> delta</code> Delta value<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> x1</code> The X coordinate of the other point<br /></li><li><code> y1</code> The Y coordinate of the other point<br /></li><li><code> delta</code> Delta value<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Calculate the mean between two points.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('Mean_15451319583276')">+ Mean</a></span>: <span class="keyword">static</span> Point2D&lt;T&gt;&amp; (const Point2D&lt;T&gt;&amp; p1, const Point2D&lt;T&gt;&amp; p2);
+<code> <span class="method"><a href="#">+ Mean</a></span>: <span class="keyword">static</span> Point2D&lt;T&gt;&amp; (const Point2D&lt;T&gt;&amp; p1, const Point2D&lt;T&gt;&amp; p2);
 </code>
-</div></td></tr><tr id="Mean_15451319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Mean_15451319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> p1</code> First point<br /></li><li><code> p2</code> Second point<br /></li></ul><div><code>return</code>  A new instance of Point3D<br /></div><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> p1</code> First point<br /></li><li><code> p2</code> Second point<br /></li></ul><div><code>return</code>  A new instance of Point3D<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">X coordinate.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('x_15461319583276')">+ x</a></span>: T;</code>
-</div></td></tr><tr id="x_15461319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<code><span class="method"><a href="#">+ x</a></span>: T;</code>
+</div></td></tr><tr id="x_15461319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">Y coordinate.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('y_15471319583276')">+ y</a></span>: T;</code>
-</div></td></tr><tr id="y_15471319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<code><span class="method"><a href="#">+ y</a></span>: T;</code>
+</div></td></tr><tr id="y_15471319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Reset all coordinates.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator()_15481319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('operator()_15481319583276')">+ operator()</a></span>: void (const U x1, const U y1);
+<code><div class="doxygen_tmpllist" id="operator()_15481319844517_tmpl"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">+ operator()</a></span>: void (const U x1, const U y1);
 </code>
-</div></td></tr><tr id="operator()_15481319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator()_15481319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> x1</code> The new value for the x coordinate<br /></li><li><code> y1</code> The new value for the y coordinate<br /></li></ul><div><code>see</code> :  move()<br /></div><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> x1</code> The new value for the x coordinate<br /></li><li><code> y1</code> The new value for the y coordinate<br /></li></ul><div><code>see</code> :  move()<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy all coordinates from another point.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator()_15491319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('operator()_15491319583276')">+ operator()</a></span>: void (const Point2D&lt;U&gt;&amp; p);
+<code><div class="doxygen_tmpllist" id="operator()_15491319844517_tmpl"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">+ operator()</a></span>: void (const Point2D&lt;U&gt;&amp; p);
 </code>
-</div></td></tr><tr id="operator()_15491319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator()_15491319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> p</code> The coordinates to copy<br /></li></ul><div><code>see</code> :  move()<br /></div><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> p</code> The coordinates to copy<br /></li></ul><div><code>see</code> :  move()<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Translate the point with the same value for all coordinates.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator+=_15501319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('operator+=_15501319583276')">+ operator+=</a></span>: Point2D&lt;T&gt;&amp; (const U k);
+<code><div class="doxygen_tmpllist" id="operator+=_15501319844517_tmpl"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">+ operator+=</a></span>: Point2D&lt;T&gt;&amp; (const U k);
 </code>
-</div></td></tr><tr id="operator+=_15501319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator+=_15501319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> k</code> The value to add to all coordinates<br /></li></ul><div><code>return</code>  Always *this<br /></div><div><code>see</code> :  translate()<br /></div><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> k</code> The value to add to all coordinates<br /></li></ul><div><code>return</code>  Always *this<br /></div><div><code>see</code> :  translate()<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Translate the point with relative coordinates.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator+=_15511319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('operator+=_15511319583276')">+ operator+=</a></span>: Point2D&lt;T&gt;&amp; (const Point2D&lt;U&gt;&amp; p);
+<code><div class="doxygen_tmpllist" id="operator+=_15511319844517_tmpl"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">+ operator+=</a></span>: Point2D&lt;T&gt;&amp; (const Point2D&lt;U&gt;&amp; p);
 </code>
-</div></td></tr><tr id="operator+=_15511319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator+=_15511319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> p</code> Point to use as reference x and y for the translation<br /></li></ul><div><code>return</code>  Always *this<br /></div><div><code>see</code> :  translate()<br /></div><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> p</code> Point to use as reference x and y for the translation<br /></li></ul><div><code>return</code>  Always *this<br /></div><div><code>see</code> :  translate()<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Comparison operator (equal with)<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator==_15521319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('operator==_15521319583276')">+ operator==</a></span>: bool (const Point2D&lt;U&gt;&amp; rhs) <span class="keyword">const</span>;
+<code><div class="doxygen_tmpllist" id="operator==_15521319844517_tmpl"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">+ operator==</a></span>: bool (const Point2D&lt;U&gt;&amp; rhs) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator==_15521319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator==_15521319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> rhs</code> The other point to compare with<br /></li></ul><div><code>return</code>  True if the two points are equal<br /></div><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> rhs</code> The other point to compare with<br /></li></ul><div><code>return</code>  True if the two points are equal<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Comparison operator (non equal with)<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator!=_15531319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('operator!=_15531319583276')">+ operator!=</a></span>: bool (const Point2D&lt;U&gt;&amp; rhs) <span class="keyword">const</span>;
+<code><div class="doxygen_tmpllist" id="operator!=_15531319844517_tmpl"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">+ operator!=</a></span>: bool (const Point2D&lt;U&gt;&amp; rhs) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator!=_15531319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator!=_15531319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> rhs</code> The other point to compare with<br /></li></ul><div><code>return</code>  True if the two points are not equal<br /></div><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> rhs</code> The other point to compare with<br /></li></ul><div><code>return</code>  True if the two points are not equal<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assign new values for all coordinates from another point.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator=_15541319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('operator=_15541319583276')">+ operator=</a></span>: Point2D&lt;T&gt;&amp; (const Point2D&lt;U&gt;&amp; p);
+<code><div class="doxygen_tmpllist" id="operator=_15541319844517_tmpl"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">+ operator=</a></span>: Point2D&lt;T&gt;&amp; (const Point2D&lt;U&gt;&amp; p);
 </code>
-</div></td></tr><tr id="operator=_15541319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator=_15541319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> p</code> The new coordinates<br /></li></ul><div><code>return</code>  Always *this<br /></div><div><code>see</code> :  move()<br /></div><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> p</code> The new coordinates<br /></li></ul><div><code>return</code>  Always *this<br /></div><div><code>see</code> :  move()<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Print the point.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="print_15551319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class StreamT &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('print_15551319583276')">+ print</a></span>: StreamT&amp; (StreamT&amp; out) <span class="keyword">const</span>;
+<code><div class="doxygen_tmpllist" id="print_15551319844517_tmpl"><span class="keyword">template</span>&lt;class StreamT &gt;</div>
+ <span class="method"><a href="#">+ print</a></span>: StreamT&amp; (StreamT&amp; out) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="print_15551319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="print_15551319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> out</code> An output stream<br /></li></ul><div><code>return</code>  The output stream `out`<br /></div><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> out</code> An output stream<br /></li></ul><div><code>return</code>  The output stream `out`<br /></div><br />
 </div>
 </td></tr>
 </table>

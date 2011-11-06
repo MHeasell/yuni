@@ -6,8 +6,33 @@
 
 
 
-<h2>Wrapper for any random number generator to generate any numbers within a desired range.<br /></h2>
-<div><source type="cpp">  #include  &lt;iostream&gt;
+<h2>Wrapper for any random number generator to generate any numbers within a desired range</h2>
+<h3>Public typedef</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">Value</a></span> : T</code></td></tr>
+</table></div>
+
+<h3>Public function</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Informations about the random number generator</h4></td></tr>
+<tr><td class="doxygen_index"><code>const char* </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">name</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>const Value </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">min</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>const Value </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">max</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td></td><td><br /><h4>Operators</h4></td></tr>
+<tr><td class="doxygen_index"><code>const Value </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator()</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>Range&lt;D, LoValue, HiValue, T&gt;&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator&gt;&gt;</a></span>(U&amp; u)</code></td></tr>
+<tr><td></td><td><br /><h4>Constructor &amp; Destructor</h4></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Range</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#"><b> ~ </b>Range</a></span>()</code></td></tr>
+<tr><td></td><td><br /><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">static</span> const char* </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Name</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">static</span> const T </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">min</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">static</span> const T </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">max</a></span>()</code></td></tr>
+<tr><td></td><td><br /><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">reset</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>const Value </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">next</a></span>()</code></td></tr>
+</table></div>
+
+<h2>Detailed Description</h2><div><source type="cpp">  #include  &lt;iostream&gt;
   #include  &lt; yuni/core/math/random/default.h &gt;
   #include  &lt; yuni/core/math/random/range.h &gt;
 
@@ -25,46 +50,56 @@
          return  0;
   }
 </source>
-<br /><br />Parameters :<ul><li><code> D</code> The distribution<br /></li><li><code> LoValue</code> The lower bound of the range, including itself<br /></li><li><code> HiValue</code> The upper bound of the range, but not including itself<br /></li><li><code> T</code> The type of random numbers<br /></li></ul><br /></div>
+<br /><div class="doxygen_params">Parameters :</div><ul><li><code> D</code> The distribution<br /></li><li><code> LoValue</code> The lower bound of the range, including itself<br /></li><li><code> HiValue</code> The upper bound of the range, but not including itself<br /></li><li><code> T</code> The type of random numbers<br /></li></ul><br /></div>
 <table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Type for a single random number.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ Value</a></span>: <span class="keyword">typedef</span> T;
+</code>
+</div></td></tr><tr id="Value_34741319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Informations about the random number generator <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the name of the distribution.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('name_34751319583276')">+ name</a></span>: const char* () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ name</a></span>: const char* () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="name_34751319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="name_34751319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">The lower bound (including itself)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('min_34761319583276')">+ min</a></span>: const Value () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ min</a></span>: const Value () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="min_34761319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="min_34761319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">The Upper bound (but not including itself)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('max_34771319583276')">+ max</a></span>: const Value () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ max</a></span>: const Value () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="max_34771319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="max_34771319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator()_34781319583276')">+ operator()</a></span>: const Value ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ operator()</a></span>: const Value ();
 </code>
-</div></td></tr><tr id="operator()_34781319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator()_34781319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div><code>see</code> :  next()<br /></div><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator>>_34791319583276')">+ operator&gt;&gt;</a></span>: Range&lt;D, LoValue, HiValue, T&gt;&amp; (U&amp; u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ operator&gt;&gt;</a></span>: Range&lt;D, LoValue, HiValue, T&gt;&amp; (U&amp; u);
 </code>
-</div></td></tr><tr id="operator>>_34791319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator>>_34791319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div><code>see</code> :  next()<br /></div><br />
 </div>
@@ -72,70 +107,61 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('Range_34801319583276')">+ Range</a></span>:  ();
+<code> <span class="method"><a href="#">+ Range</a></span>:  ();
 </code>
-</div></td></tr><tr id="Range_34801319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Range_34801319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('~Range_34811319583276')">+ <b> ~ </b>Range</a></span>:  ();
+<code> <span class="method"><a href="#">+ <b> ~ </b>Range</a></span>:  ();
 </code>
-</div></td></tr><tr id="~Range_34811319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="~Range_34811319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Type for a single random number.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('Value_34821319583276')">+ Value</a></span>: <span class="keyword">typedef</span> T;</code>
-</div></td></tr><tr id="Value_34821319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the name of the distribution.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('Name_34831319583276')">+ Name</a></span>: <span class="keyword">static</span> const char* ();
+<code> <span class="method"><a href="#">+ Name</a></span>: <span class="keyword">static</span> const char* ();
 </code>
-</div></td></tr><tr id="Name_34831319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Name_34821319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('min_34841319583276')">+ min</a></span>: <span class="keyword">static</span> const T ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ min</a></span>: <span class="keyword">static</span> const T ();
 </code>
-</div></td></tr><tr id="min_34841319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="min_34831319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('max_34851319583276')">+ max</a></span>: <span class="keyword">static</span> const T ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ max</a></span>: <span class="keyword">static</span> const T ();
 </code>
-</div></td></tr><tr id="max_34851319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="max_34841319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Reset the random number generator.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('reset_34861319583276')">+ reset</a></span>: void ();
+<code> <span class="method"><a href="#">+ reset</a></span>: void ();
 </code>
-</div></td></tr><tr id="reset_34861319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="reset_34851319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the next random number.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('next_34871319583276')">+ next</a></span>: const Value ();
+<code> <span class="method"><a href="#">+ next</a></span>: const Value ();
 </code>
-</div></td></tr><tr id="next_34871319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="next_34861319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 </table>

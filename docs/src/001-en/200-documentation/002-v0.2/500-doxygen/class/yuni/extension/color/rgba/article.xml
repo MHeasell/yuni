@@ -6,43 +6,59 @@
 
 
 
-<h2>RGBA</h2><table class="doxygen_table">
+<h2>RGBA</h2>
+<h3>Public typedef</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">Type</a></span> : RGBType::Type</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">CalculationType</a></span> : RGBType::template Calculation&lt; T&gt;:: Type</code></td></tr>
+</table></div>
+
+<h3>Public function</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">static</span> void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Assign</a></span>(RGBType&amp; color, const T&amp; value)</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">static</span> bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">IsEqual</a></span>(RGBType&amp; color, const T&amp; value)</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">static</span> void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Increase</a></span>(RGBType&amp; color, const T&amp; value)</code></td></tr>
+</table></div>
+
+<h2>Detailed Description</h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a href="javascript:toggleVisibility('Type_15031319583276')">+ Type</a></span>: <span class="keyword">typedef</span> RGBType::Type;</code>
-</div></td></tr><tr id="Type_15031319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a href="#">+ Type</a></span>: <span class="keyword">typedef</span> RGBType::Type;
+</code>
+</div></td></tr><tr id="Type_15031319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a href="javascript:toggleVisibility('CalculationType_15041319583276')">+ CalculationType</a></span>: <span class="keyword">typedef</span> RGBType::template Calculation&lt; T&gt;:: Type;</code>
-</div></td></tr><tr id="CalculationType_15041319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a href="#">+ CalculationType</a></span>: <span class="keyword">typedef</span> RGBType::template Calculation&lt; T&gt;:: Type;
+</code>
+</div></td></tr><tr id="CalculationType_15041319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('Assign_15051319583276')">+ Assign</a></span>: <span class="keyword">static</span> void (RGBType&amp; color, const T&amp; value);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ Assign</a></span>: <span class="keyword">static</span> void (RGBType&amp; color, const T&amp; value);
 </code>
-</div></td></tr><tr id="Assign_15051319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Assign_15051319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('IsEqual_15061319583276')">+ IsEqual</a></span>: <span class="keyword">static</span> bool (RGBType&amp; color, const T&amp; value);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ IsEqual</a></span>: <span class="keyword">static</span> bool (RGBType&amp; color, const T&amp; value);
 </code>
-</div></td></tr><tr id="IsEqual_15061319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="IsEqual_15061319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="Increase_15071319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;bool PlusT&gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('Increase_15071319583276')">+ Increase</a></span>: <span class="keyword">static</span> void (RGBType&amp; color, const T&amp; value);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="Increase_15071319844517_tmpl"><span class="keyword">template</span>&lt;bool PlusT&gt;</div>
+ <span class="method"><a href="#">+ Increase</a></span>: <span class="keyword">static</span> void (RGBType&amp; color, const T&amp; value);
 </code>
-</div></td></tr><tr id="Increase_15071319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Increase_15071319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 </table>

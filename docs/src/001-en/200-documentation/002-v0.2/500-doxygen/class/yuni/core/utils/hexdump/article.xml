@@ -6,8 +6,20 @@
 
 
 
-<h2>A simple hexadecimal buffer dumper.<br /></h2>
-<div>This dumper can dump any buffer (with start address and length), or any class having a data() and size() member function. (for example, String). The output looks like the following:<br /> Sample usage:<source type="cpp">  //  Either  call  it  with  a  memory  buffer
+<h2>A simple hexadecimal buffer dumper</h2>
+<h3>Public function</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructor &amp; Destructor</h4></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Hexdump</a></span>(const char* buffer, unsigned int size)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Hexdump</a></span>(const Hexdump&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Hexdump</a></span>(const U&amp; buffer)</code></td></tr>
+<tr><td></td><td><br /><h4>Dump functions</h4></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">dump</a></span>(U&amp; outStream) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>String </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">dump</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td></td><td><br /><h4>Operators</h4></td></tr>
+<tr><td class="doxygen_index"><code>Hexdump&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator=</a></span>(const Hexdump&amp; rhs)</code></td></tr>
+</table></div>
+
+<h2>Detailed Description</h2><div>This dumper can dump any buffer (with start address and length), or any class having a data() and size() member function. (for example, String). The output looks like the following:<br /> Sample usage:<source type="cpp">  //  Either  call  it  with  a  memory  buffer
   std::cout  &lt;&lt;  Core::Utils::Hexdump (myBuffer);
 
   //  Or  with  a  plain  old  char  buffer.
@@ -25,45 +37,45 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Construct from a simple buffer.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('Hexdump_49531319583276')">+ Hexdump</a></span>:  (const char* buffer, unsigned int size);
+<code> <span class="method"><a href="#">+ Hexdump</a></span>:  (const char* buffer, unsigned int size);
 </code>
-</div></td></tr><tr id="Hexdump_49531319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Hexdump_49521319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> buffer</code> A pointer to a raw buffer.<br /></li><li><code> size</code> The size to dump.<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> buffer</code> A pointer to a raw buffer.<br /></li><li><code> size</code> The size to dump.<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy ctor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('Hexdump_49541319583276')">+ Hexdump</a></span>:  (const Hexdump&amp; rhs);
+<code> <span class="method"><a href="#">+ Hexdump</a></span>:  (const Hexdump&amp; rhs);
 </code>
-</div></td></tr><tr id="Hexdump_49541319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Hexdump_49531319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> rhs</code> The original Hexdump instance<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> rhs</code> The original Hexdump instance<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Construct from a string (or like) object.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="Hexdump_49551319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('Hexdump_49551319583276')">+ Hexdump</a></span>:  (const U&amp; buffer);
+<code><div class="doxygen_tmpllist" id="Hexdump_49541319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">+ Hexdump</a></span>:  (const U&amp; buffer);
 </code>
-</div></td></tr><tr id="Hexdump_49551319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Hexdump_49541319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> buffer</code> The stream to output the hexdump on.<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> buffer</code> The stream to output the hexdump on.<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Dump functions <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Dumps the current buffer to a stream.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="dump_49561319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('dump_49561319583276')">+ dump</a></span>: void (U&amp; outStream) <span class="keyword">const</span>;
+<code><div class="doxygen_tmpllist" id="dump_49551319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">+ dump</a></span>: void (U&amp; outStream) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="dump_49561319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="dump_49551319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> outStream</code> The buffer will dumped to this stream.<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> outStream</code> The buffer will dumped to this stream.<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Dumps the current buffer to a string.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('dump_49571319583276')">+ dump</a></span>: String () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ dump</a></span>: String () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="dump_49571319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="dump_49561319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div><code>return</code>  The dump contents.<br /></div><br />
 </div>
@@ -71,11 +83,11 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Operator =.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator=_49581319583276')">+ operator=</a></span>: Hexdump&amp; (const Hexdump&amp; rhs);
+<code> <span class="method"><a href="#">+ operator=</a></span>: Hexdump&amp; (const Hexdump&amp; rhs);
 </code>
-</div></td></tr><tr id="operator=_49581319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator=_49571319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> rhs</code> The source Hexdump instance<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> rhs</code> The source Hexdump instance<br /></li></ul><br />
 </div>
 </td></tr>
 </table>

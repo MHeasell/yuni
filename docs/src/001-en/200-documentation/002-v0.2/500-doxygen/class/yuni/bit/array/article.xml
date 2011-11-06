@@ -6,8 +6,58 @@
 
 
 
-<h2>Array of bits.<br /></h2>
-<div>This class provides routines for handling an array of bits and is especially efficient for a medium or large amount of bits.<br /> Performance Tip: For small arrays of bits (for example &lt; 50), a typical char[] may be faster, but it will use more memory.<br /><source type="cpp">  Bit::Array  bits(50);
+<h2>Array of bits</h2>
+<h3>Public typedef</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">Size</a></span> : unsigned int</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">BufferType</a></span> : CString&lt;20, true, false&gt;</code></td></tr>
+</table></div>
+
+<h3>Public function</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructors &amp; Destructor</h4></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Array</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Array</a></span>(unsigned int n)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Array</a></span>(unsigned int n, bool value)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Array</a></span>(const Array&amp; copy)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#"><b> ~ </b>Array</a></span>()</code></td></tr>
+<tr><td></td><td><br /><h4>Bit manipulation</h4></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">reset</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">reset</a></span>(bool value)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">set</a></span>(unsigned int i)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">set</a></span>(unsigned int i, bool value)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">unset</a></span>(unsigned int i)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">unset</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">get</a></span>(unsigned int i) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">test</a></span>(unsigned int i) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">any</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">none</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">all</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td></td><td><br /><h4>Import/Export</h4></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">loadFromBuffer</a></span>(const StringT&amp; buffer)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">loadFromBuffer</a></span>(const StringT&amp; buffer, unsigned int size)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">saveToBuffer</a></span>(AnyBufferT&amp; u)</code></td></tr>
+<tr><td></td><td><br /><h4>Lookup</h4></td></tr>
+<tr><td class="doxygen_index"><code>unsigned int </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">find</a></span>(unsigned int offset) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>unsigned int </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">findN</a></span>(unsigned int count, unsigned int offset) <span class="keyword">const</span></code></td></tr>
+<tr><td></td><td><br /><h4>Memory management</h4></td></tr>
+<tr><td class="doxygen_index"><code>unsigned int </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>unsigned int </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">count</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>unsigned int </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">sizeInBytes</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">reserve</a></span>(unsigned int n)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">truncate</a></span>(unsigned int n)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">resize</a></span>(unsigned int n)</code></td></tr>
+<tr><td></td><td><br /><h4>Stream</h4></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">print</a></span>(U&amp; out) <span class="keyword">const</span></code></td></tr>
+<tr><td></td><td><br /><h4>Operators</h4></td></tr>
+<tr><td class="doxygen_index"><code>Array&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator=</a></span>(const Array&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code>Array&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator=</a></span>(const StringT&amp; rhs)</code></td></tr>
+<tr><td></td><td><br /><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code>const char* </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">c_str</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>const char* </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">data</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>char* </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">data</a></span>()</code></td></tr>
+</table></div>
+
+<h2>Detailed Description</h2><div>This class provides routines for handling an array of bits and is especially efficient for a medium or large amount of bits.<br /> Performance Tip: For small arrays of bits (for example &lt; 50), a typical char[] may be faster, but it will use more memory.<br /><source type="cpp">  Bit::Array  bits(50);
   std::cout  &lt;&lt;  bits  &lt;&lt;  "\n" ;
 
   bits.set(12);
@@ -23,309 +73,311 @@
 </source>
 <br /></div>
 <table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 4)</i></code>
+</div></td></tr><tr id="@162npos_49951319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Size.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ Size</a></span>: <span class="keyword">typedef</span> unsigned int;
+</code>
+</div></td></tr><tr id="Size_49961319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Buffer Type.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ BufferType</a></span>: <span class="keyword">typedef</span> CString&lt;20, true, false&gt;;
+</code>
+</div></td></tr><tr id="BufferType_49971319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('Array_49961319583276')">+ Array</a></span>:  ();
+<code> <span class="method"><a href="#">+ Array</a></span>:  ();
 </code>
-</div></td></tr><tr id="Array_49961319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Array_49981319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor, with an initial number of bits.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('Array_49971319583276')">+ Array</a></span>:  (unsigned int n);
+<code> <span class="method"><a href="#">+ Array</a></span>:  (unsigned int n);
 </code>
-</div></td></tr><tr id="Array_49971319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Array_49991319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor, with an initial number of bits and a value for each of them.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('Array_49981319583276')">+ Array</a></span>:  (unsigned int n, bool value);
+<code> <span class="method"><a href="#">+ Array</a></span>:  (unsigned int n, bool value);
 </code>
-</div></td></tr><tr id="Array_49981319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Array_50001319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('Array_49991319583276')">+ Array</a></span>:  (const Array&amp; copy);
+<code> <span class="method"><a href="#">+ Array</a></span>:  (const Array&amp; copy);
 </code>
-</div></td></tr><tr id="Array_49991319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Array_50011319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('~Array_50001319583276')">+ <b> ~ </b>Array</a></span>:  ();
+<code> <span class="method"><a href="#">+ <b> ~ </b>Array</a></span>:  ();
 </code>
-</div></td></tr><tr id="~Array_50001319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="~Array_50021319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Bit manipulation <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Unset all bits at once.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('reset_50011319583276')">+ reset</a></span>: void ();
+<code> <span class="method"><a href="#">+ reset</a></span>: void ();
 </code>
-</div></td></tr><tr id="reset_50011319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="reset_50031319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set/Unset all bits at once.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('reset_50021319583276')">+ reset</a></span>: void (bool value);
+<code> <span class="method"><a href="#">+ reset</a></span>: void (bool value);
 </code>
-</div></td></tr><tr id="reset_50021319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="reset_50041319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the Ith bit.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('set_50031319583276')">+ set</a></span>: void (unsigned int i);
+<code> <span class="method"><a href="#">+ set</a></span>: void (unsigned int i);
 </code>
-</div></td></tr><tr id="set_50031319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="set_50051319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set/Unset the Ith bit.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('set_50041319583276')">+ set</a></span>: void (unsigned int i, bool value);
+<code> <span class="method"><a href="#">+ set</a></span>: void (unsigned int i, bool value);
 </code>
-</div></td></tr><tr id="set_50041319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="set_50061319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Unset the Ith bit.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('unset_50051319583276')">+ unset</a></span>: void (unsigned int i);
+<code> <span class="method"><a href="#">+ unset</a></span>: void (unsigned int i);
 </code>
-</div></td></tr><tr id="unset_50051319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="unset_50071319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Unset all bits at once.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('unset_50061319583276')">+ unset</a></span>: void ();
+<code> <span class="method"><a href="#">+ unset</a></span>: void ();
 </code>
-</div></td></tr><tr id="unset_50061319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="unset_50081319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">Equivalent to reset() .<br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the Ith bit is set.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('get_50071319583276')">+ get</a></span>: bool (unsigned int i) <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ get</a></span>: bool (unsigned int i) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="get_50071319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="get_50091319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the Ith bit is set.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('test_50081319583276')">+ test</a></span>: bool (unsigned int i) <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ test</a></span>: bool (unsigned int i) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="test_50081319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="test_50101319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">This routine is provided for STL compatibility.<br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Test if any bit is set.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('any_50091319583276')">+ any</a></span>: bool () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ any</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="any_50091319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="any_50111319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Test if no bit is set.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('none_50101319583276')">+ none</a></span>: bool () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ none</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="none_50101319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="none_50121319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Test if all bit are set.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('all_50111319583276')">+ all</a></span>: bool () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ all</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="all_50111319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="all_50131319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Import/Export <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Load an array of bit from a buffer.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="loadFromBuffer_50121319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('loadFromBuffer_50121319583276')">+ loadFromBuffer</a></span>: void (const StringT&amp; buffer);
+<code><div class="doxygen_tmpllist" id="loadFromBuffer_50141319844517_tmpl"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a href="#">+ loadFromBuffer</a></span>: void (const StringT&amp; buffer);
 </code>
-</div></td></tr><tr id="loadFromBuffer_50121319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="loadFromBuffer_50141319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> buffer</code> Any buffer<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> buffer</code> Any buffer<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Load an array of bit from a buffer.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="loadFromBuffer_50131319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('loadFromBuffer_50131319583276')">+ loadFromBuffer</a></span>: void (const StringT&amp; buffer, unsigned int size);
+<code><div class="doxygen_tmpllist" id="loadFromBuffer_50171319844517_tmpl"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a href="#">+ loadFromBuffer</a></span>: void (const StringT&amp; buffer, unsigned int size);
 </code>
-</div></td></tr><tr id="loadFromBuffer_50131319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="loadFromBuffer_50171319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> buffer</code> A raw buffer<br /></li><li><code> size</code> Size ofthe buffer<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> buffer</code> A raw buffer<br /></li><li><code> size</code> Size ofthe buffer<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Save the array of bits into another buffer (which may use any type)<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="saveToBuffer_50161319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class AnyBufferT &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('saveToBuffer_50161319583276')">+ saveToBuffer</a></span>: void (AnyBufferT&amp; u);
+<code><div class="doxygen_tmpllist" id="saveToBuffer_50191319844517_tmpl"><span class="keyword">template</span>&lt;class AnyBufferT &gt;</div>
+ <span class="method"><a href="#">+ saveToBuffer</a></span>: void (AnyBufferT&amp; u);
 </code>
-</div></td></tr><tr id="saveToBuffer_50161319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="saveToBuffer_50191319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> u</code> A buffer<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> u</code> A buffer<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Lookup <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Find the first bit set or unset from a given offset.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="find_50191319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;bool ValueT&gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('find_50191319583276')">+ find</a></span>: unsigned int (unsigned int offset) <span class="keyword">const</span>;
+<code><div class="doxygen_tmpllist" id="find_50211319844517_tmpl"><span class="keyword">template</span>&lt;bool ValueT&gt;</div>
+ <span class="method"><a href="#">+ find</a></span>: unsigned int (unsigned int offset) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="find_50191319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="find_50211319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> offset</code> The offset where to start from<br /></li></ul><div><code>return</code>  The bit index. npos if not found<br /></div><br />Parameters :<ul><li><code> ValueT</code> True to find the first bit set, false for the first unset<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> offset</code> The offset where to start from<br /></li></ul><div><code>return</code>  The bit index. npos if not found<br /></div><div class="doxygen_params">Parameters :</div><ul><li><code> ValueT</code> True to find the first bit set, false for the first unset<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Find the first N bit set or unset from a given offset.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="findN_50201319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;bool ValueT&gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('findN_50201319583276')">+ findN</a></span>: unsigned int (unsigned int count, unsigned int offset) <span class="keyword">const</span>;
+<code><div class="doxygen_tmpllist" id="findN_50221319844517_tmpl"><span class="keyword">template</span>&lt;bool ValueT&gt;</div>
+ <span class="method"><a href="#">+ findN</a></span>: unsigned int (unsigned int count, unsigned int offset) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="findN_50201319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="findN_50221319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> count</code> The number of consecutive bits<br /></li><li><code> offset</code> The offset where to start from<br /></li></ul><div><code>return</code>  The bit index. npos if not found<br /></div><br />Parameters :<ul><li><code> ValueT</code> True to find the first bit set, false for the first unset<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> count</code> The number of consecutive bits<br /></li><li><code> offset</code> The offset where to start from<br /></li></ul><div><code>return</code>  The bit index. npos if not found<br /></div><div class="doxygen_params">Parameters :</div><ul><li><code> ValueT</code> True to find the first bit set, false for the first unset<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Memory management <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">The number of bits within the buffer.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('size_50211319583276')">+ size</a></span>: unsigned int () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ size</a></span>: unsigned int () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="size_50211319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="size_50231319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">The number of bits within the buffer.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('count_50221319583276')">+ count</a></span>: unsigned int () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ count</a></span>: unsigned int () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="count_50221319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="count_50241319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">The size in bytes needed to store all bits within the buffer.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('sizeInBytes_50231319583276')">+ sizeInBytes</a></span>: unsigned int () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ sizeInBytes</a></span>: unsigned int () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="sizeInBytes_50231319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="sizeInBytes_50251319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">This value greater of equal to the value returned by size() .<br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Reserve an amount of bits.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('reserve_50241319583276')">+ reserve</a></span>: void (unsigned int n);
+<code> <span class="method"><a href="#">+ reserve</a></span>: void (unsigned int n);
 </code>
-</div></td></tr><tr id="reserve_50241319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="reserve_50261319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Truncate to an amount of bits.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('truncate_50251319583276')">+ truncate</a></span>: void (unsigned int n);
+<code> <span class="method"><a href="#">+ truncate</a></span>: void (unsigned int n);
 </code>
-</div></td></tr><tr id="truncate_50251319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="truncate_50271319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Resize the internal buffer to a given amount of bit.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('resize_50261319583276')">+ resize</a></span>: void (unsigned int n);
+<code> <span class="method"><a href="#">+ resize</a></span>: void (unsigned int n);
 </code>
-</div></td></tr><tr id="resize_50261319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="resize_50281319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Stream <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="print_50271319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('print_50271319583276')">+ print</a></span>: void (U&amp; out) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="print_50291319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">+ print</a></span>: void (U&amp; out) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="print_50271319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="print_50291319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">The operator `=`.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator=_50281319583276')">+ operator=</a></span>: Array&amp; (const Array&amp; rhs);
+<code> <span class="method"><a href="#">+ operator=</a></span>: Array&amp; (const Array&amp; rhs);
 </code>
-</div></td></tr><tr id="operator=_50281319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator=_50301319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">The operator `=`.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator=_50291319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('operator=_50291319583276')">+ operator=</a></span>: Array&amp; (const StringT&amp; rhs);
+<code><div class="doxygen_tmpllist" id="operator=_50311319844517_tmpl"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a href="#">+ operator=</a></span>: Array&amp; (const StringT&amp; rhs);
 </code>
-</div></td></tr><tr id="operator=_50291319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator=_50311319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 6)</i></code>
-</div></td></tr><tr id="@162npos_50301319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Size.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('Size_50311319583276')">+ Size</a></span>: <span class="keyword">typedef</span> unsigned int;</code>
-</div></td></tr><tr id="Size_50311319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Buffer Type.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('BufferType_50321319583276')">+ BufferType</a></span>: <span class="keyword">typedef</span> CString&lt;20, true, false&gt;;</code>
-</div></td></tr><tr id="BufferType_50321319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('c_str_50341319583276')">+ c_str</a></span>: const char* () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ c_str</a></span>: const char* () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="c_str_50341319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="c_str_50321319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('data_50361319583276')">+ data</a></span>: const char* () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ data</a></span>: const char* () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="data_50361319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="data_50331319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('data_50381319583276')">+ data</a></span>: char* ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ data</a></span>: char* ();
 </code>
-</div></td></tr><tr id="data_50381319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="data_50341319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 </table>

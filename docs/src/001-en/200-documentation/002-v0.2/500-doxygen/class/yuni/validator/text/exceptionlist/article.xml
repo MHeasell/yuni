@@ -6,8 +6,36 @@
 
 
 
-<h2>Allow/Deny all strings/char by default, with a list of exceptions.<br /></h2>
-<div><source type="cpp">  Validator::Text::ExceptionList&lt;Validator::allowByDefault&gt;  validator;
+<h2>Allow/Deny all strings/char by default, with a list of exceptions</h2>
+<h3>Public function</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructors</h4></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">ExceptionList</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">ExceptionList</a></span>(const ExceptionList&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">ExceptionList</a></span>(const ExceptionList&lt;OtherDefaultPolicy&gt;&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">ExceptionList</a></span>(const String::Vector&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">ExceptionList</a></span>(const String::List&amp; rhs)</code></td></tr>
+<tr><td></td><td><br /><h4>String validation</h4></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">validate</a></span>(const U&amp; s) <span class="keyword">const</span></code></td></tr>
+<tr><td></td><td><br /><h4>Add an exception in the list</h4></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">exception</a></span>(const U&amp; e)</code></td></tr>
+<tr><td class="doxygen_index"><code>ExceptionList&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator+=</a></span>(const U&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code>ExceptionList&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator+=</a></span>(const ExceptionList&lt;OtherDefaultPolicy&gt;&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code>ExceptionList&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator+=</a></span>(const String::Vector&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code>ExceptionList&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator+=</a></span>(const String::List&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code>ExceptionList&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator&lt;&lt;</a></span>(const U&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code>ExceptionList&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator&lt;&lt;</a></span>(const ExceptionList&lt;OtherDefaultPolicy&gt;&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code>ExceptionList&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator&lt;&lt;</a></span>(const String::Vector&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code>ExceptionList&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator&lt;&lt;</a></span>(const String::List&amp; rhs)</code></td></tr>
+<tr><td></td><td><br /><h4>Reset the exception list</h4></td></tr>
+<tr><td class="doxygen_index"><code>ExceptionList&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator=</a></span>(const ExceptionList&lt;OtherDefaultPolicy&gt;&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code>ExceptionList&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator=</a></span>(const String::Vector&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code>ExceptionList&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator=</a></span>(const String::List&amp; rhs)</code></td></tr>
+<tr><td></td><td><br /><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">ExceptionList</a></span>(const ExceptionList&lt;DefaultPolicy&gt;&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator()</a></span>(const U&amp; u) <span class="keyword">const</span></code></td></tr>
+</table></div>
+
+<h2>Detailed Description</h2><div><source type="cpp">  Validator::Text::ExceptionList&lt;Validator::allowByDefault&gt;  validator;
   validator.exception( "january" );
   validator.exception( "december" );
 
@@ -19,176 +47,176 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default Constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('ExceptionList_27971319583276')">+ ExceptionList</a></span>:  ();
+<code> <span class="method"><a href="#">+ ExceptionList</a></span>:  ();
 </code>
-</div></td></tr><tr id="ExceptionList_27971319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="ExceptionList_27961319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('ExceptionList_27981319583276')">+ ExceptionList</a></span>:  (const ExceptionList&amp; rhs);
+<code> <span class="method"><a href="#">+ ExceptionList</a></span>:  (const ExceptionList&amp; rhs);
 </code>
-</div></td></tr><tr id="ExceptionList_27981319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="ExceptionList_27971319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="ExceptionList_27991319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;Yuni::Validator::DefaultPolicy OtherDefaultPolicy&gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('ExceptionList_27991319583276')">+ ExceptionList</a></span>:  (const ExceptionList&lt;OtherDefaultPolicy&gt;&amp; rhs);
+<code><div class="doxygen_tmpllist" id="ExceptionList_27981319844517_tmpl"><span class="keyword">template</span>&lt;Yuni::Validator::DefaultPolicy OtherDefaultPolicy&gt;</div>
+ <span class="method"><a href="#">+ ExceptionList</a></span>:  (const ExceptionList&lt;OtherDefaultPolicy&gt;&amp; rhs);
 </code>
-</div></td></tr><tr id="ExceptionList_27991319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="ExceptionList_27981319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor with a default exception list.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('ExceptionList_28001319583276')">+ ExceptionList</a></span>:  (const String::Vector&amp; rhs);
+<code> <span class="method"><a href="#">+ ExceptionList</a></span>:  (const String::Vector&amp; rhs);
 </code>
-</div></td></tr><tr id="ExceptionList_28001319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="ExceptionList_27991319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor with a default exception list.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('ExceptionList_28011319583276')">+ ExceptionList</a></span>:  (const String::List&amp; rhs);
+<code> <span class="method"><a href="#">+ ExceptionList</a></span>:  (const String::List&amp; rhs);
 </code>
-</div></td></tr><tr id="ExceptionList_28011319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="ExceptionList_28001319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">String validation <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Validate (or not) a string.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="validate_28021319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('validate_28021319583276')">+ validate</a></span>: bool (const U&amp; s) <span class="keyword">const</span>;
+<code><div class="doxygen_tmpllist" id="validate_28011319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">+ validate</a></span>: bool (const U&amp; s) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="validate_28021319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="validate_28011319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Add an exception in the list <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Add an exception.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="exception_28031319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('exception_28031319583276')">+ exception</a></span>: void (const U&amp; e);
+<code><div class="doxygen_tmpllist" id="exception_28021319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">+ exception</a></span>: void (const U&amp; e);
 </code>
-</div></td></tr><tr id="exception_28031319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="exception_28021319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> e</code> The exception (arbitrary string)<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> e</code> The exception (arbitrary string)<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Operator += on an arbitrary string.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator+=_28041319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('operator+=_28041319583276')">+ operator+=</a></span>: ExceptionList&amp; (const U&amp; rhs);
+<code><div class="doxygen_tmpllist" id="operator+=_28031319844517_tmpl"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">+ operator+=</a></span>: ExceptionList&amp; (const U&amp; rhs);
 </code>
-</div></td></tr><tr id="operator+=_28041319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator+=_28031319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Add an exception.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator+=_28051319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;Yuni::Validator::DefaultPolicy OtherDefaultPolicy&gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('operator+=_28051319583276')">+ operator+=</a></span>: ExceptionList&amp; (const ExceptionList&lt;OtherDefaultPolicy&gt;&amp; rhs);
+<code><div class="doxygen_tmpllist" id="operator+=_28041319844517_tmpl"><span class="keyword">template</span>&lt;Yuni::Validator::DefaultPolicy OtherDefaultPolicy&gt;</div>
+ <span class="method"><a href="#">+ operator+=</a></span>: ExceptionList&amp; (const ExceptionList&lt;OtherDefaultPolicy&gt;&amp; rhs);
 </code>
-</div></td></tr><tr id="operator+=_28051319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator+=_28041319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> e</code> The exception (arbitrary string)<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> e</code> The exception (arbitrary string)<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Operator += on a std::vector.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator+=_28061319583276')">+ operator+=</a></span>: ExceptionList&amp; (const String::Vector&amp; rhs);
+<code> <span class="method"><a href="#">+ operator+=</a></span>: ExceptionList&amp; (const String::Vector&amp; rhs);
 </code>
-</div></td></tr><tr id="operator+=_28061319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator+=_28051319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Operator += on a std::list.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator+=_28071319583276')">+ operator+=</a></span>: ExceptionList&amp; (const String::List&amp; rhs);
+<code> <span class="method"><a href="#">+ operator+=</a></span>: ExceptionList&amp; (const String::List&amp; rhs);
 </code>
-</div></td></tr><tr id="operator+=_28071319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator+=_28071319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Operator &lt;&lt; on an arbitrary string.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator<<_28081319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;typename U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('operator<<_28081319583276')">+ operator&lt;&lt;</a></span>: ExceptionList&amp; (const U&amp; rhs);
+<code><div class="doxygen_tmpllist" id="operator<<_28091319844517_tmpl"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a href="#">+ operator&lt;&lt;</a></span>: ExceptionList&amp; (const U&amp; rhs);
 </code>
-</div></td></tr><tr id="operator<<_28081319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator<<_28091319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Operator &lt;&lt; on another exception list.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator<<_28091319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;Yuni::Validator::DefaultPolicy OtherDefaultPolicy&gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('operator<<_28091319583276')">+ operator&lt;&lt;</a></span>: ExceptionList&amp; (const ExceptionList&lt;OtherDefaultPolicy&gt;&amp; rhs);
+<code><div class="doxygen_tmpllist" id="operator<<_28121319844517_tmpl"><span class="keyword">template</span>&lt;Yuni::Validator::DefaultPolicy OtherDefaultPolicy&gt;</div>
+ <span class="method"><a href="#">+ operator&lt;&lt;</a></span>: ExceptionList&amp; (const ExceptionList&lt;OtherDefaultPolicy&gt;&amp; rhs);
 </code>
-</div></td></tr><tr id="operator<<_28091319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator<<_28121319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Operator &lt;&lt; on a std::vector.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator<<_28101319583276')">+ operator&lt;&lt;</a></span>: ExceptionList&amp; (const String::Vector&amp; rhs);
+<code> <span class="method"><a href="#">+ operator&lt;&lt;</a></span>: ExceptionList&amp; (const String::Vector&amp; rhs);
 </code>
-</div></td></tr><tr id="operator<<_28101319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator<<_28141319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Operator &lt;&lt; on a std::list.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator<<_28111319583276')">+ operator&lt;&lt;</a></span>: ExceptionList&amp; (const String::List&amp; rhs);
+<code> <span class="method"><a href="#">+ operator&lt;&lt;</a></span>: ExceptionList&amp; (const String::List&amp; rhs);
 </code>
-</div></td></tr><tr id="operator<<_28111319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator<<_28171319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Reset the exception list <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Operator =.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator=_28121319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;Yuni::Validator::DefaultPolicy OtherDefaultPolicy&gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('operator=_28121319583276')">+ operator=</a></span>: ExceptionList&amp; (const ExceptionList&lt;OtherDefaultPolicy&gt;&amp; rhs);
+<code><div class="doxygen_tmpllist" id="operator=_28201319844517_tmpl"><span class="keyword">template</span>&lt;Yuni::Validator::DefaultPolicy OtherDefaultPolicy&gt;</div>
+ <span class="method"><a href="#">+ operator=</a></span>: ExceptionList&amp; (const ExceptionList&lt;OtherDefaultPolicy&gt;&amp; rhs);
 </code>
-</div></td></tr><tr id="operator=_28121319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator=_28201319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Operator =.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator=_28131319583276')">+ operator=</a></span>: ExceptionList&amp; (const String::Vector&amp; rhs);
+<code> <span class="method"><a href="#">+ operator=</a></span>: ExceptionList&amp; (const String::Vector&amp; rhs);
 </code>
-</div></td></tr><tr id="operator=_28131319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator=_28231319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Operator =.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator=_28141319583276')">+ operator=</a></span>: ExceptionList&amp; (const String::List&amp; rhs);
+<code> <span class="method"><a href="#">+ operator=</a></span>: ExceptionList&amp; (const String::List&amp; rhs);
 </code>
-</div></td></tr><tr id="operator=_28141319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator=_28251319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="ExceptionList_28151319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;Yuni::Validator::DefaultPolicy DefaultPolicy&gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('ExceptionList_28151319583276')">+ ExceptionList</a></span>:  (const ExceptionList&lt;DefaultPolicy&gt;&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="ExceptionList_28271319844517_tmpl"><span class="keyword">template</span>&lt;Yuni::Validator::DefaultPolicy DefaultPolicy&gt;</div>
+ <span class="method"><a href="#">+ ExceptionList</a></span>:  (const ExceptionList&lt;DefaultPolicy&gt;&amp; rhs);
 </code>
-</div></td></tr><tr id="ExceptionList_28151319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="ExceptionList_28271319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('operator()_28161319583276')">+ operator()</a></span>: bool (const U&amp; u) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ operator()</a></span>: bool (const U&amp; u) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator()_28161319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator()_28301319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div><code>see</code> :  validate()<br /></div><br />
 </div>

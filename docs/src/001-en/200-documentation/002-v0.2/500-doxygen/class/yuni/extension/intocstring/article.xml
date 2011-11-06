@@ -6,24 +6,29 @@
 
 
 
-<h2>Extension : Convert any type into a mere C-String.<br /></h2>
-<table class="doxygen_table">
+<h2>Extension : Convert any type into a mere C-String</h2>
+<h3>Public function</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">static</span> const char* </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Perform</a></span>(const U&amp; )</code></td></tr>
+</table></div>
+
+<h2>Detailed Description</h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 6)</i></code>
-</div></td></tr><tr id="@319validconvertedzeroTerminated_20301319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 4)</i></code>
+</div></td></tr><tr id="@319validconvertedzeroTerminated_20291319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="Perform_20311319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('Perform_20311319583276')">+ Perform</a></span>: <span class="keyword">static</span> const char* (const U&amp; );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="Perform_20301319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">+ Perform</a></span>: <span class="keyword">static</span> const char* (const U&amp; );
 </code>
-</div></td></tr><tr id="Perform_20311319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Perform_20301319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 </table>

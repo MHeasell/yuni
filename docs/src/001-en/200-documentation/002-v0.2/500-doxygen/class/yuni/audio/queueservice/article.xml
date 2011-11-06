@@ -6,93 +6,111 @@
 
 
 
-<h2>The audio queue service is the service that manages everything sound-related.<br /></h2>
-<div>It takes care of ffmpeg / openal inits. It uses an event loop to solve MT problems.<br /></div>
+<h2>The audio queue service is the service that manages everything sound-related</h2>
+<h3>Public typedef</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">ThreadingPolicy</a></span> : Policy::ObjectLevelLockable&lt;QueueService&gt;</code></td></tr>
+</table></div>
+
+<h3>Public function</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructor and destructor</h4></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">QueueService</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#"><b> ~ </b>QueueService</a></span>()</code></td></tr>
+<tr><td></td><td><br /><h4>Private operations</h4></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">QueueService</a></span>(const QueueService&amp; )</code></td></tr>
+<tr><td class="doxygen_index"><code>QueueService&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator=</a></span>(const QueueService&amp; )</code></td></tr>
+<tr><td></td><td><br /><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">start</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">stop</a></span>()</code></td></tr>
+</table></div>
+
+<h2>Detailed Description</h2><div>It takes care of ffmpeg / openal inits. It uses an event loop to solve MT problems.<br /></div>
 <table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The threading policy.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ ThreadingPolicy</a></span>: <span class="keyword">typedef</span> Policy::ObjectLevelLockable&lt;QueueService&gt;;
+</code>
+</div></td></tr><tr id="ThreadingPolicy_67891319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief">Get if this policy is thread-safe.<br /><div class="doxygen_name_spacer"></div>
+<code><i>(unmanaged tag: 4)</i></code>
+</div></td></tr><tr id="@369_67901319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor and destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('QueueService_67901319583276')">+ QueueService</a></span>:  ();
+<code> <span class="method"><a href="#">+ QueueService</a></span>:  ();
 </code>
-</div></td></tr><tr id="QueueService_67901319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="QueueService_67911319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('~QueueService_67911319583276')">+ <b> ~ </b>QueueService</a></span>:  ();
+<code> <span class="method"><a href="#">+ <b> ~ </b>QueueService</a></span>:  ();
 </code>
-</div></td></tr><tr id="~QueueService_67911319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="~QueueService_67921319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Private operations <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('QueueService_67921319583276')">+ QueueService</a></span>:  (const QueueService&amp; );
+<code> <span class="method"><a href="#">+ QueueService</a></span>:  (const QueueService&amp; );
 </code>
-</div></td></tr><tr id="QueueService_67921319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="QueueService_67931319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assignment.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator=_67931319583276')">+ operator=</a></span>: QueueService&amp; (const QueueService&amp; );
+<code> <span class="method"><a href="#">+ operator=</a></span>: QueueService&amp; (const QueueService&amp; );
 </code>
-</div></td></tr><tr id="operator=_67931319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator=_67941319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The threading policy.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('ThreadingPolicy_67941319583276')">+ ThreadingPolicy</a></span>: <span class="keyword">typedef</span> Policy::ObjectLevelLockable&lt;QueueService&gt;;</code>
-</div></td></tr><tr id="ThreadingPolicy_67941319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief">Get if this policy is thread-safe.<br /><div class="doxygen_name_spacer"></div>
-<code><i>(unmanaged tag: 6)</i></code>
-</div></td></tr><tr id="@369_67951319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
-</td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">Control block for emitters.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('emitter_67961319583276')">+ emitter</a></span>: Emitters;</code>
-</div></td></tr><tr id="emitter_67961319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">Control block for audio buffers.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('bank_67971319583276')">+ bank</a></span>: Bank;</code>
-</div></td></tr><tr id="bank_67971319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Start the audio service.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('start_67981319583276')">+ start</a></span>: bool ();
+<code> <span class="method"><a href="#">+ start</a></span>: bool ();
 </code>
-</div></td></tr><tr id="start_67981319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="start_67951319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Stop the audio service.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('stop_67991319583276')">+ stop</a></span>: void ();
+<code> <span class="method"><a href="#">+ stop</a></span>: void ();
 </code>
-</div></td></tr><tr id="stop_67991319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="stop_67961319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">Control block for emitters.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ emitter</a></span>: Emitters;</code>
+</div></td></tr><tr id="emitter_67971319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">Control block for audio buffers.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ bank</a></span>: Bank;</code>
+</div></td></tr><tr id="bank_67981319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 </table>

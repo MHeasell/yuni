@@ -6,150 +6,180 @@
 
 
 
-<h2>Screen/Monitor resolution.<br /></h2>
-<table class="doxygen_table">
+<h2>Screen/Monitor resolution</h2>
+<h3>Public typedef</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">Ptr</a></span> : SmartPtr&lt;Resolution&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">Vector</a></span> : std::vector&lt; Ptr&gt;</code></td></tr>
+</table></div>
+
+<h3>Public function</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructors</h4></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Resolution</a></span>(const uint32 w, const uint32 h, const uint8 b)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Resolution</a></span>(const Resolution&amp; c)</code></td></tr>
+<tr><td></td><td><br /><h4>Information about the current mode</h4></td></tr>
+<tr><td class="doxygen_index"><code>uint32 </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">width</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>uint32 </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">height</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>uint8 </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">bitPerPixel</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td></td><td><br /><h4>Operators</h4></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator==</a></span>(const Resolution&amp; rhs) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator!=</a></span>(const Resolution&amp; rhs) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator&lt;</a></span>(const Resolution&amp; rhs) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator&lt;=</a></span>(const Resolution&amp; rhs) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator&gt;</a></span>(const Resolution&amp; rhs) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator&gt;=</a></span>(const Resolution&amp; rhs) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>Resolution&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator=</a></span>(const Resolution&amp; p)</code></td></tr>
+<tr><td></td><td><br /><h4>Stream printing</h4></td></tr>
+<tr><td class="doxygen_index"><code>std::ostream&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">print</a></span>(std::ostream&amp; out) <span class="keyword">const</span></code></td></tr>
+<tr><td></td><td><br /><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code>String </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">toString</a></span>() <span class="keyword">const</span></code></td></tr>
+</table></div>
+
+<h2>Detailed Description</h2><table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 4)</i></code>
+</div></td></tr><tr id="@348minimumWidthminimumHeightmaximumWidthmaximumHeight_37971319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The most suitable smart pointer to use with the class `Resolution`.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;Resolution&gt;;
+</code>
+</div></td></tr><tr id="Ptr_37981319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Vector of resolutions.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ Vector</a></span>: <span class="keyword">typedef</span> std::vector&lt; Ptr&gt;;
+</code>
+</div></td></tr><tr id="Vector_37991319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('Resolution_37981319583276')">+ Resolution</a></span>:  (const uint32 w, const uint32 h, const uint8 b);
+<code> <span class="method"><a href="#">+ Resolution</a></span>:  (const uint32 w, const uint32 h, const uint8 b);
 </code>
-</div></td></tr><tr id="Resolution_37981319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Resolution_38001319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> w</code> Width of the monitor/screen<br /></li><li><code> h</code> Height of the monitor/screen<br /></li><li><code> b</code> Bit per Pixel<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> w</code> Width of the monitor/screen<br /></li><li><code> h</code> Height of the monitor/screen<br /></li><li><code> b</code> Bit per Pixel<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor by copy.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('Resolution_37991319583276')">+ Resolution</a></span>:  (const Resolution&amp; c);
+<code> <span class="method"><a href="#">+ Resolution</a></span>:  (const Resolution&amp; c);
 </code>
-</div></td></tr><tr id="Resolution_37991319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Resolution_38011319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> c</code> The instance to copy<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> c</code> The instance to copy<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Information about the current mode <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">The width of the monitor/screen.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('width_38001319583276')">+ width</a></span>: uint32 () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ width</a></span>: uint32 () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="width_38001319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="width_38021319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">The height of the monitor/screen.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('height_38011319583276')">+ height</a></span>: uint32 () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ height</a></span>: uint32 () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="height_38011319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="height_38031319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Bit per pixel.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('bitPerPixel_38021319583276')">+ bitPerPixel</a></span>: uint8 () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ bitPerPixel</a></span>: uint8 () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="bitPerPixel_38021319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="bitPerPixel_38041319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Comparison operator (equal with)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator==_38031319583276')">+ operator==</a></span>: bool (const Resolution&amp; rhs) <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ operator==</a></span>: bool (const Resolution&amp; rhs) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator==_38031319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator==_38051319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> rhs</code> The other resolution to compare with<br /></li></ul><div><code>return</code>  True if the two resolution are equal<br /></div><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> rhs</code> The other resolution to compare with<br /></li></ul><div><code>return</code>  True if the two resolution are equal<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Comparison operator (non equal with)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator!=_38041319583276')">+ operator!=</a></span>: bool (const Resolution&amp; rhs) <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ operator!=</a></span>: bool (const Resolution&amp; rhs) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator!=_38041319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator!=_38061319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> rhs</code> The other resolution to compare with<br /></li></ul><div><code>return</code>  True if the two resolution are not equal<br /></div><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> rhs</code> The other resolution to compare with<br /></li></ul><div><code>return</code>  True if the two resolution are not equal<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Comparison operator (less than)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator<_38051319583276')">+ operator&lt;</a></span>: bool (const Resolution&amp; rhs) <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ operator&lt;</a></span>: bool (const Resolution&amp; rhs) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator<_38051319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator<_38071319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> rhs</code> The other resolution to compare with<br /></li></ul><div><code>return</code>  True if *this &lt; rhs<br /></div><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> rhs</code> The other resolution to compare with<br /></li></ul><div><code>return</code>  True if *this &lt; rhs<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Comparison operator (less than or equal)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator<=_38061319583276')">+ operator&lt;=</a></span>: bool (const Resolution&amp; rhs) <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ operator&lt;=</a></span>: bool (const Resolution&amp; rhs) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator<=_38061319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator<=_38081319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> rhs</code> The other resolution to compare with<br /></li></ul><div><code>return</code>  True if *this &lt;= rhs<br /></div><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> rhs</code> The other resolution to compare with<br /></li></ul><div><code>return</code>  True if *this &lt;= rhs<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Comparison operator (greater than)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator>_38071319583276')">+ operator&gt;</a></span>: bool (const Resolution&amp; rhs) <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ operator&gt;</a></span>: bool (const Resolution&amp; rhs) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator>_38071319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator>_38091319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> rhs</code> The other resolution to compare with<br /></li></ul><div><code>return</code>  True if *this &gt; rhs<br /></div><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> rhs</code> The other resolution to compare with<br /></li></ul><div><code>return</code>  True if *this &gt; rhs<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Comparison operator (greater than or equal)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator>=_38081319583276')">+ operator&gt;=</a></span>: bool (const Resolution&amp; rhs) <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ operator&gt;=</a></span>: bool (const Resolution&amp; rhs) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator>=_38081319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator>=_38101319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> rhs</code> The other resolution to compare with<br /></li></ul><div><code>return</code>  True if *this &gt;= rhs<br /></div><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> rhs</code> The other resolution to compare with<br /></li></ul><div><code>return</code>  True if *this &gt;= rhs<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assign new values from another resolution.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator=_38091319583276')">+ operator=</a></span>: Resolution&amp; (const Resolution&amp; p);
+<code> <span class="method"><a href="#">+ operator=</a></span>: Resolution&amp; (const Resolution&amp; p);
 </code>
-</div></td></tr><tr id="operator=_38091319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator=_38111319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> p</code> The new values<br /></li></ul><div><code>return</code>  Always *this<br /></div><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> p</code> The new values<br /></li></ul><div><code>return</code>  Always *this<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Stream printing <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Print the resolution.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('print_38101319583276')">+ print</a></span>: std::ostream&amp; (std::ostream&amp; out) <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ print</a></span>: std::ostream&amp; (std::ostream&amp; out) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="print_38101319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="print_38121319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> out</code> An output stream<br /></li></ul><div><code>return</code>  The output stream `out`<br /></div><br />
-</div>
-</td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
-</td></tr>
-<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 6)</i></code>
-</div></td></tr><tr id="@348minimumWidthminimumHeightmaximumWidthmaximumHeight_38111319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The most suitable smart pointer to use with the class `Resolution`.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('Ptr_38121319583276')">+ Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;Resolution&gt;;</code>
-</div></td></tr><tr id="Ptr_38121319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Vector of resolutions.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('Vector_38131319583276')">+ Vector</a></span>: <span class="keyword">typedef</span> std::vector&lt; Ptr&gt;;</code>
-</div></td></tr><tr id="Vector_38131319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> out</code> An output stream<br /></li></ul><div><code>return</code>  The output stream `out`<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Convert these informations into an human readable string.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('toString_38141319583276')">+ toString</a></span>: String () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ toString</a></span>: String () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="toString_38141319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="toString_38131319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 </table>

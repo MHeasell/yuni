@@ -6,67 +6,79 @@
 
 
 
-<h2>Implementation of the no-copy ownership policy.<br /></h2>
-<table class="doxygen_table">
+<h2>Implementation of the no-copy ownership policy</h2>
+<h3>Public function</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructors</h4></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">NoCopy</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">NoCopy</a></span>(const NoCopy&lt;U&gt;&amp; )</code></td></tr>
+<tr><td></td><td><br /><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">initFromRawPointer</a></span>(const T&amp; )</code></td></tr>
+<tr><td></td><td><br /><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">static</span> T </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">clone</a></span>(const T&amp; )</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">static</span> bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">release</a></span>(const T&amp; )</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">static</span> void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">swapPointer</a></span>(NoCopy&amp; )</code></td></tr>
+</table></div>
+
+<h2>Detailed Description</h2><table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 4)</i></code>
+</div></td></tr><tr id="@228destructiveCopy_57271319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('NoCopy_57281319583276')">+ NoCopy</a></span>:  ();
+<code> <span class="method"><a href="#">+ NoCopy</a></span>:  ();
 </code>
-</div></td></tr><tr id="NoCopy_57281319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="NoCopy_57281319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="NoCopy_57291319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('NoCopy_57291319583276')">+ NoCopy</a></span>:  (const NoCopy&lt;U&gt;&amp; );
+<code><div class="doxygen_tmpllist" id="NoCopy_57291319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">+ NoCopy</a></span>:  (const NoCopy&lt;U&gt;&amp; );
 </code>
-</div></td></tr><tr id="NoCopy_57291319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="NoCopy_57291319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
-</td></tr>
-<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 6)</i></code>
-</div></td></tr><tr id="@228destructiveCopy_57301319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Initialization from a raw pointer.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('initFromRawPointer_57311319583276')">+ initFromRawPointer</a></span>: void (const T&amp; );
+<code> <span class="method"><a href="#">+ initFromRawPointer</a></span>: void (const T&amp; );
 </code>
-</div></td></tr><tr id="initFromRawPointer_57311319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="initFromRawPointer_57301319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Clone this object.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('clone_57321319583276')">+ clone</a></span>: <span class="keyword">static</span> T (const T&amp; );
+<code> <span class="method"><a href="#">+ clone</a></span>: <span class="keyword">static</span> T (const T&amp; );
 </code>
-</div></td></tr><tr id="clone_57321319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="clone_57311319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">This method can not be called at compile time<br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('release_57331319583276')">+ release</a></span>: <span class="keyword">static</span> bool (const T&amp; );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ release</a></span>: <span class="keyword">static</span> bool (const T&amp; );
 </code>
-</div></td></tr><tr id="release_57331319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="release_57321319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('swapPointer_57341319583276')">+ swapPointer</a></span>: <span class="keyword">static</span> void (NoCopy&amp; );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ swapPointer</a></span>: <span class="keyword">static</span> void (NoCopy&amp; );
 </code>
-</div></td></tr><tr id="swapPointer_57341319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="swapPointer_57331319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 </table>

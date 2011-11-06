@@ -6,58 +6,75 @@
 
 
 
-<h2>Sum</h2><table class="doxygen_table">
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors <code class="doxygen_visibility">Public</code></h3>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default Constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('Sum_38411319583276')">+ Sum</a></span>:  ();
-</code>
-</div></td></tr><tr id="Sum_38411319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('Sum_38421319583276')">+ Sum</a></span>:  (const Sum&amp; rhs);
-</code>
-</div></td></tr><tr id="Sum_38421319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
+<h2>Sum</h2>
+<h3>Public typedef</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">ResultType</a></span> : T</code></td></tr>
+</table></div>
+
+<h3>Public function</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructors</h4></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Sum</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Sum</a></span>(const Sum&amp; rhs)</code></td></tr>
+<tr><td></td><td><br /><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator()</a></span>(const T&amp; v)</code></td></tr>
+<tr><td class="doxygen_index"><code>ResultType </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">result</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">reset</a></span>()</code></td></tr>
+</table></div>
+
+<h2>Detailed Description</h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Type of the result.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('ResultType_38431319583276')">+ ResultType</a></span>: <span class="keyword">typedef</span> T;</code>
-</div></td></tr><tr id="ResultType_38431319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<code><span class="method"><a href="#">+ ResultType</a></span>: <span class="keyword">typedef</span> T;
+</code>
+</div></td></tr><tr id="ResultType_38401319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default Constructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">+ Sum</a></span>:  ();
+</code>
+</div></td></tr><tr id="Sum_38411319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor.<br /><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a href="#">+ Sum</a></span>:  (const Sum&amp; rhs);
+</code>
+</div></td></tr><tr id="Sum_38421319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Take into account a new value.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator()_38441319583276')">+ operator()</a></span>: void (const T&amp; v);
+<code> <span class="method"><a href="#">+ operator()</a></span>: void (const T&amp; v);
 </code>
-</div></td></tr><tr id="operator()_38441319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator()_38441319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">The Final result.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('result_38451319583276')">+ result</a></span>: ResultType () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ result</a></span>: ResultType () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="result_38451319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="result_38461319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Reset the internal counter.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('reset_38461319583276')">+ reset</a></span>: void ();
+<code> <span class="method"><a href="#">+ reset</a></span>: void ();
 </code>
-</div></td></tr><tr id="reset_38461319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="reset_38471319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 </table>

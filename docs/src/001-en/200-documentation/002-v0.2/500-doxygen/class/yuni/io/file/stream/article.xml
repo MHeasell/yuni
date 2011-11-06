@@ -6,8 +6,58 @@
 
 
 
-<h2>A low-level implementation for reading and writing files.<br /></h2>
-<div>The file will be automatically closed (if not already done) at the destruction of the object.<br /> Here is a simple example for reading a file, line by line :<source type="cpp">  IO::File::Stream  file ;
+<h2>A low-level implementation for reading and writing files</h2>
+<h3>Public typedef</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">HandleType</a></span> : FILE*</code></td></tr>
+</table></div>
+
+<h3>Public function</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructor &amp; Destructor</h4></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Stream</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Stream</a></span>(const Stream&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Stream</a></span>(const U&amp; filename, const int mode)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#"><b> ~ </b>Stream</a></span>()</code></td></tr>
+<tr><td></td><td><br /><h4>Open / Close a file</h4></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">open</a></span>(const U&amp; filename, const int mode)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">openRW</a></span>(const U&amp; filename)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">close</a></span>()</code></td></tr>
+<tr><td></td><td><br /><h4>Stream</h4></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">opened</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">eof</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>ssize_t </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">tell</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">seek</a></span>(ssize_t offset, SeekOrigin origin)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">seekFromBeginning</a></span>(ssize_t offset)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">seekFromEndOfFile</a></span>(ssize_t offset)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">seekMove</a></span>(ssize_t offset)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">flush</a></span>()</code></td></tr>
+<tr><td></td><td><br /><h4>Read</h4></td></tr>
+<tr><td class="doxygen_index"><code>char </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">get</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">readline</a></span>(char* buffer, size_t maxSize)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">readline</a></span>(CString&lt;ChunkSizeT, ExpandableT, ZeroTerminatedT&gt;&amp; buffer)</code></td></tr>
+<tr><td class="doxygen_index"><code>size_t </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">read</a></span>(char* buffer, const size_t size)</code></td></tr>
+<tr><td class="doxygen_index"><code>size_t </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">read</a></span>(CString&lt;CSizeT, ExpT, ZeroT&gt;&amp; buffer)</code></td></tr>
+<tr><td></td><td><br /><h4>Write</h4></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">put</a></span>(const char c)</code></td></tr>
+<tr><td class="doxygen_index"><code>size_t </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">write</a></span>(const char* buffer, const size_t size)</code></td></tr>
+<tr><td class="doxygen_index"><code>size_t </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">write</a></span>(const U&amp; buffer)</code></td></tr>
+<tr><td class="doxygen_index"><code>size_t </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">write</a></span>(const U&amp; buffer, const size_t size)</code></td></tr>
+<tr><td></td><td><br /><h4>Locking</h4></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">lockShared</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">lockExclusive</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">unlock</a></span>()</code></td></tr>
+<tr><td></td><td><br /><h4>Native</h4></td></tr>
+<tr><td class="doxygen_index"><code>HandleType </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">nativeHandle</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td></td><td><br /><h4>Operators</h4></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator!</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>Stream&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator+=</a></span>(const U&amp; u)</code></td></tr>
+<tr><td class="doxygen_index"><code>Stream&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator+=</a></span>(const char c)</code></td></tr>
+<tr><td class="doxygen_index"><code>Stream&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator&lt;&lt;</a></span>(const U&amp; u)</code></td></tr>
+<tr><td class="doxygen_index"><code>Stream&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator&lt;&lt;</a></span>(const char c)</code></td></tr>
+<tr><td class="doxygen_index"><code>Stream&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator&gt;&gt;</a></span>(U&amp; rhs)</code></td></tr>
+</table></div>
+
+<h2>Detailed Description</h2><div>The file will be automatically closed (if not already done) at the destruction of the object.<br /> Here is a simple example for reading a file, line by line :<source type="cpp">  IO::File::Stream  file ;
   //  opening  out  file
   if  (file.open( "myfile.txt" ))
   {
@@ -31,37 +81,47 @@
 </source>
 <br /></div>
 <table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The native handle type.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ HandleType</a></span>: <span class="keyword">typedef</span> FILE*;
+</code>
+</div></td></tr><tr id="HandleType_8301319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default Constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('Stream_8301319583276')">+ Stream</a></span>:  ();
+<code> <span class="method"><a href="#">+ Stream</a></span>:  ();
 </code>
-</div></td></tr><tr id="Stream_8301319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Stream_8311319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor (not allowed, it will fail at compile time)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('Stream_8311319583276')">+ Stream</a></span>:  (const Stream&amp; rhs);
+<code> <span class="method"><a href="#">+ Stream</a></span>:  (const Stream&amp; rhs);
 </code>
-</div></td></tr><tr id="Stream_8311319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Stream_8321319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Open a file.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="Stream_8321319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('Stream_8321319583276')">+ Stream</a></span>:  (const U&amp; filename, const int mode);
+<code><div class="doxygen_tmpllist" id="Stream_8331319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">+ Stream</a></span>:  (const U&amp; filename, const int mode);
 </code>
-</div></td></tr><tr id="Stream_8321319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Stream_8331319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('~Stream_8331319583276')">+ <b> ~ </b>Stream</a></span>:  ();
+<code> <span class="method"><a href="#">+ <b> ~ </b>Stream</a></span>:  ();
 </code>
-</div></td></tr><tr id="~Stream_8331319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="~Stream_8341319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">The file will be closed if necessary<br />
 </div>
@@ -69,95 +129,95 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Open / Close a file <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Open a file.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="open_8341319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('open_8341319583276')">+ open</a></span>: bool (const U&amp; filename, const int mode);
+<code><div class="doxygen_tmpllist" id="open_8351319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">+ open</a></span>: bool (const U&amp; filename, const int mode);
 </code>
-</div></td></tr><tr id="open_8341319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="open_8351319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">The file will be previously closed if necessary.<br /><br />Parameters :<ul><li><code> filename</code> Any string reprensenting an UTF8 relative or absolute filename<br /></li><li><code> mode</code> The open mode to use<br /></li></ul><div><code>return</code>  True if the operation succeeded, false otherwise<br /></div><br />
+<div class="doxygen_desc">The file will be previously closed if necessary.<br /><div class="doxygen_params">Parameters :</div><ul><li><code> filename</code> Any string reprensenting an UTF8 relative or absolute filename<br /></li><li><code> mode</code> The open mode to use<br /></li></ul><div><code>return</code>  True if the operation succeeded, false otherwise<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Open a file for writing.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="openRW_8351319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('openRW_8351319583276')">+ openRW</a></span>: bool (const U&amp; filename);
+<code><div class="doxygen_tmpllist" id="openRW_8361319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">+ openRW</a></span>: bool (const U&amp; filename);
 </code>
-</div></td></tr><tr id="openRW_8351319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="openRW_8361319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">This method is strictly equivalent to :<source type="cpp">  open (filename,  IO::OpenMode::write  |  IO::OpenMode::truncate );
 </source>
- The file will be previously closed if necessary.<br /><br />Parameters :<ul><li><code> filename</code> Any string reprensenting an UTF8 relative or absolute filename<br /></li></ul><div><code>return</code>  True if the operation succeeded, false otherwise<br /></div><br />
+ The file will be previously closed if necessary.<br /><div class="doxygen_params">Parameters :</div><ul><li><code> filename</code> Any string reprensenting an UTF8 relative or absolute filename<br /></li></ul><div><code>return</code>  True if the operation succeeded, false otherwise<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Close the file if opened.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('close_8361319583276')">+ close</a></span>: bool ();
+<code> <span class="method"><a href="#">+ close</a></span>: bool ();
 </code>
-</div></td></tr><tr id="close_8361319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="close_8371319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Stream <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if a file is currently opened.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('opened_8371319583276')">+ opened</a></span>: bool () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ opened</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="opened_8371319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="opened_8381319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the end-of-file has been reached.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('eof_8381319583276')">+ eof</a></span>: bool () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ eof</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="eof_8381319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="eof_8391319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the current value of the file position indicator.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('tell_8391319583276')">+ tell</a></span>: ssize_t () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ tell</a></span>: ssize_t () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="tell_8391319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="tell_8401319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the position in the stream.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('seek_8401319583276')">+ seek</a></span>: bool (ssize_t offset, SeekOrigin origin);
+<code> <span class="method"><a href="#">+ seek</a></span>: bool (ssize_t offset, SeekOrigin origin);
 </code>
-</div></td></tr><tr id="seek_8401319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="seek_8411319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> offset</code> A relative offset<br /></li><li><code> origin</code> Origin of the offset<br /></li></ul><div><code>return</code>  True if the operation succeeded, false otherwise<br /></div><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> offset</code> A relative offset<br /></li><li><code> origin</code> Origin of the offset<br /></li></ul><div><code>return</code>  True if the operation succeeded, false otherwise<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the position indicator associated with the currently opened file from the beginning of the file.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('seekFromBeginning_8411319583276')">+ seekFromBeginning</a></span>: bool (ssize_t offset);
+<code> <span class="method"><a href="#">+ seekFromBeginning</a></span>: bool (ssize_t offset);
 </code>
-</div></td></tr><tr id="seekFromBeginning_8411319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="seekFromBeginning_8421319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> offset</code> A relative offset<br /></li></ul><div><code>return</code>  True if the operation succeeded, False otherwise<br /></div><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> offset</code> A relative offset<br /></li></ul><div><code>return</code>  True if the operation succeeded, False otherwise<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the position indicator associated with the currently opened file from the end of the file.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('seekFromEndOfFile_8421319583276')">+ seekFromEndOfFile</a></span>: bool (ssize_t offset);
+<code> <span class="method"><a href="#">+ seekFromEndOfFile</a></span>: bool (ssize_t offset);
 </code>
-</div></td></tr><tr id="seekFromEndOfFile_8421319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="seekFromEndOfFile_8431319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> offset</code> A relative offset<br /></li></ul><div><code>return</code>  True if the operation succeeded, False otherwise<br /></div><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> offset</code> A relative offset<br /></li></ul><div><code>return</code>  True if the operation succeeded, False otherwise<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Move the position indicator from the current position in the stream.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('seekMove_8431319583276')">+ seekMove</a></span>: bool (ssize_t offset);
+<code> <span class="method"><a href="#">+ seekMove</a></span>: bool (ssize_t offset);
 </code>
-</div></td></tr><tr id="seekMove_8431319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="seekMove_8441319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> offset</code> A relative offset<br /></li></ul><div><code>return</code>  True if the operation succeeded, False otherwise<br /></div><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> offset</code> A relative offset<br /></li></ul><div><code>return</code>  True if the operation succeeded, False otherwise<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Flush the last I/O operations.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('flush_8441319583276')">+ flush</a></span>: bool ();
+<code> <span class="method"><a href="#">+ flush</a></span>: bool ();
 </code>
-</div></td></tr><tr id="flush_8441319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="flush_8451319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div><code>return</code>  True if the operation succeeded, False otherwise<br /></div><br />
 </div>
@@ -165,105 +225,105 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Read <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Read a single char.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('get_8451319583276')">+ get</a></span>: char ();
+<code> <span class="method"><a href="#">+ get</a></span>: char ();
 </code>
-</div></td></tr><tr id="get_8451319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="get_8461319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Read a line from the file.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('readline_8461319583276')">+ readline</a></span>: bool (char* buffer, size_t maxSize);
+<code> <span class="method"><a href="#">+ readline</a></span>: bool (char* buffer, size_t maxSize);
 </code>
-</div></td></tr><tr id="readline_8461319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="readline_8471319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">It reads a line into the buffer pointed to by buffer until either a terminating newline or EOF, which it replaces with ’\0’.<br /><br />Parameters :<ul><li><code> buffer</code> The buffer where to write the line<br /></li><li><code> maxSize</code> The maximum allowed size for the buffer<br /></li></ul><br />
+<div class="doxygen_desc">It reads a line into the buffer pointed to by<code> buffer</code> until either a terminating newline or EOF, which it replaces with ’\0’.<br /><div class="doxygen_params">Parameters :</div><ul><li><code> buffer</code> The buffer where to write the line<br /></li><li><code> maxSize</code> The maximum allowed size for the buffer<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Read a line from the file.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="readline_8471319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT&gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('readline_8471319583276')">+ readline</a></span>: bool (CString&lt;ChunkSizeT, ExpandableT, ZeroTerminatedT&gt;&amp; buffer);
+<code><div class="doxygen_tmpllist" id="readline_8481319844517_tmpl"><span class="keyword">template</span>&lt;unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT&gt;</div>
+ <span class="method"><a href="#">+ readline</a></span>: bool (CString&lt;ChunkSizeT, ExpandableT, ZeroTerminatedT&gt;&amp; buffer);
 </code>
-</div></td></tr><tr id="readline_8471319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="readline_8481319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">It reads a line into the buffer pointed to by #s until either a terminating newline or EOF, which it replaces with ’\0’. The maximum number of char read is `buffer.chunkSize`. For code robutness (to prevent against misuses) this routine will reserve space according to the chunk size.<br /> The newline, if any, is retained.<br /><br />Parameters :<ul><li><code> buffer</code> The buffer where to write the line<br /></li></ul><br />
+<div class="doxygen_desc">It reads a line into the buffer pointed to by #s until either a terminating newline or EOF, which it replaces with ’\0’. The maximum number of char read is `buffer.chunkSize`. For code robutness (to prevent against misuses) this routine will reserve space according to the chunk size.<br /> The newline, if any, is retained.<br /><div class="doxygen_params">Parameters :</div><ul><li><code> buffer</code> The buffer where to write the line<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Read a buffer.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('read_8481319583276')">+ read</a></span>: size_t (char* buffer, const size_t size);
+<code> <span class="method"><a href="#">+ read</a></span>: size_t (char* buffer, const size_t size);
 </code>
-</div></td></tr><tr id="read_8481319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="read_8491319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> buffer</code> A raw buffer where to store the data which will be read from the file<br /></li><li><code> size</code> Size (in bytes) of the data to read (and size of the buffer)<br /></li></ul><div><code>return</code>  The number of bytes that have been read<br /></div><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> buffer</code> A raw buffer where to store the data which will be read from the file<br /></li><li><code> size</code> Size (in bytes) of the data to read (and size of the buffer)<br /></li></ul><div><code>return</code>  The number of bytes that have been read<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Read data into a string buffer.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="read_8491319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;unsigned int CSizeT, bool ExpT, bool ZeroT&gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('read_8491319583276')">+ read</a></span>: size_t (CString&lt;CSizeT, ExpT, ZeroT&gt;&amp; buffer);
+<code><div class="doxygen_tmpllist" id="read_8501319844517_tmpl"><span class="keyword">template</span>&lt;unsigned int CSizeT, bool ExpT, bool ZeroT&gt;</div>
+ <span class="method"><a href="#">+ read</a></span>: size_t (CString&lt;CSizeT, ExpT, ZeroT&gt;&amp; buffer);
 </code>
-</div></td></tr><tr id="read_8491319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="read_8501319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">'buffer.size() * sizeof(C)' bytes will be read from the stream and store into the given buffer. Use the method 'buffer.resize()' to change the buffer size before calling this method.<br /><br />Parameters :<ul><li><code> buffer</code> An arbitrary buffer<br /></li></ul><div><code>return</code>  The number of bytes that have been read<br /></div><br />
+<div class="doxygen_desc">'buffer.size() * sizeof(C)' bytes will be read from the stream and store into the given buffer. Use the method 'buffer.resize()' to change the buffer size before calling this method.<br /><div class="doxygen_params">Parameters :</div><ul><li><code> buffer</code> An arbitrary buffer<br /></li></ul><div><code>return</code>  The number of bytes that have been read<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Write <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Write a chr to the stream.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('put_8501319583276')">+ put</a></span>: bool (const char c);
+<code> <span class="method"><a href="#">+ put</a></span>: bool (const char c);
 </code>
-</div></td></tr><tr id="put_8501319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="put_8511319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Write a raw buffer.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('write_8511319583276')">+ write</a></span>: size_t (const char* buffer, const size_t size);
+<code> <span class="method"><a href="#">+ write</a></span>: size_t (const char* buffer, const size_t size);
 </code>
-</div></td></tr><tr id="write_8511319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="write_8521319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> buffer</code> An arbitrary buffer<br /></li><li><code> size</code> Size of the buffer to write<br /></li></ul><div><code>return</code>  The number of bytes that have been written<br /></div><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> buffer</code> An arbitrary buffer<br /></li><li><code> size</code> Size of the buffer to write<br /></li></ul><div><code>return</code>  The number of bytes that have been written<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Write any arbitrary buffer.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="write_8521319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('write_8521319583276')">+ write</a></span>: size_t (const U&amp; buffer);
+<code><div class="doxygen_tmpllist" id="write_8531319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">+ write</a></span>: size_t (const U&amp; buffer);
 </code>
-</div></td></tr><tr id="write_8521319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="write_8531319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> buffer</code> An arbitrary buffer (const char*, String, CString )<br /></li></ul><div><code>return</code>  The number of bytes that have been written<br /></div><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> buffer</code> An arbitrary buffer (const char*, String, CString )<br /></li></ul><div><code>return</code>  The number of bytes that have been written<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Write any arbitrary buffer.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="write_8531319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('write_8531319583276')">+ write</a></span>: size_t (const U&amp; buffer, const size_t size);
+<code><div class="doxygen_tmpllist" id="write_8541319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">+ write</a></span>: size_t (const U&amp; buffer, const size_t size);
 </code>
-</div></td></tr><tr id="write_8531319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="write_8541319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">Parameters :<ul><li><code> buffer</code> An arbitrary buffer (const char*, String, CString )<br /></li><li><code> size</code> Size of the buffer to write<br /></li></ul><div><code>return</code>  The number of bytes that have been written<br /></div><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> buffer</code> An arbitrary buffer (const char*, String, CString )<br /></li><li><code> size</code> Size of the buffer to write<br /></li></ul><div><code>return</code>  The number of bytes that have been written<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Locking <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Lock the file for a shared access.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('lockShared_8541319583276')">+ lockShared</a></span>: bool ();
+<code> <span class="method"><a href="#">+ lockShared</a></span>: bool ();
 </code>
-</div></td></tr><tr id="lockShared_8541319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="lockShared_8551319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div><b>warning</b> :  The implementation is missing on Windows (#346)<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Lock the file for an exclusive access.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('lockExclusive_8551319583276')">+ lockExclusive</a></span>: bool ();
+<code> <span class="method"><a href="#">+ lockExclusive</a></span>: bool ();
 </code>
-</div></td></tr><tr id="lockExclusive_8551319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="lockExclusive_8561319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div><b>warning</b> :  The implementation is missing on Windows (#346)<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Unlock the file.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('unlock_8561319583276')">+ unlock</a></span>: void ();
+<code> <span class="method"><a href="#">+ unlock</a></span>: void ();
 </code>
-</div></td></tr><tr id="unlock_8561319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="unlock_8571319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div><b>warning</b> :  The implementation is missing on Windows (#346)<br /></div><br />
 </div>
@@ -271,73 +331,64 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Native <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the OS Dependant handle.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('nativeHandle_8571319583276')">+ nativeHandle</a></span>: HandleType () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ nativeHandle</a></span>: HandleType () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="nativeHandle_8571319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="nativeHandle_8581319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">True if the stream if not opened.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator!_8581319583276')">+ operator!</a></span>: bool () <span class="keyword">const</span>;
+<code> <span class="method"><a href="#">+ operator!</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator!_8581319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator!_8591319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">operator += (write)<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator+=_8591319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('operator+=_8591319583276')">+ operator+=</a></span>: Stream&amp; (const U&amp; u);
+<code><div class="doxygen_tmpllist" id="operator+=_8601319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">+ operator+=</a></span>: Stream&amp; (const U&amp; u);
 </code>
-</div></td></tr><tr id="operator+=_8591319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator+=_8601319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">operator += (write)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator+=_8601319583276')">+ operator+=</a></span>: Stream&amp; (const char c);
+<code> <span class="method"><a href="#">+ operator+=</a></span>: Stream&amp; (const char c);
 </code>
-</div></td></tr><tr id="operator+=_8601319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator+=_8611319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">operator &lt;&lt; (write)<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator<<_8611319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('operator<<_8611319583276')">+ operator&lt;&lt;</a></span>: Stream&amp; (const U&amp; u);
+<code><div class="doxygen_tmpllist" id="operator<<_8621319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">+ operator&lt;&lt;</a></span>: Stream&amp; (const U&amp; u);
 </code>
-</div></td></tr><tr id="operator<<_8611319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator<<_8621319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">operator &lt;&lt; (write)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('operator<<_8621319583276')">+ operator&lt;&lt;</a></span>: Stream&amp; (const char c);
+<code> <span class="method"><a href="#">+ operator&lt;&lt;</a></span>: Stream&amp; (const char c);
 </code>
-</div></td></tr><tr id="operator<<_8621319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator<<_8631319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Operator &gt;&gt; (read)<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator>>_8631319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('operator>>_8631319583276')">+ operator&gt;&gt;</a></span>: Stream&amp; (U&amp; rhs);
+<code><div class="doxygen_tmpllist" id="operator>>_8641319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">+ operator&gt;&gt;</a></span>: Stream&amp; (U&amp; rhs);
 </code>
-</div></td></tr><tr id="operator>>_8631319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="operator>>_8641319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
-</td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The native handle type.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('HandleType_8641319583276')">+ HandleType</a></span>: <span class="keyword">typedef</span> FILE*;</code>
-</div></td></tr><tr id="HandleType_8641319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 </table>

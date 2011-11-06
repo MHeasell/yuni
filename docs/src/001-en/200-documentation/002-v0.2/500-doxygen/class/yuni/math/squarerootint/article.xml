@@ -6,7 +6,7 @@
 
 
 
-<h2>The Square root function for integer values.<br /></h2>
+<h2>The Square root function for integer values</h2>
 <div>$value = \sqrt{N}$<br /><source type="cpp">     std::cout  &lt;&lt;  SquareRoot&lt;16&gt;::value  &lt;&lt;  std::endl;  //  4
 </source>
 <br /></div>
@@ -14,10 +14,10 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief">The formula for the squere root function.<br /><div class="doxygen_name_spacer"></div>
-<code><i>(unmanaged tag: 6)</i></code>
-</div></td></tr><tr id="@210valueI_28521319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+<code><i>(unmanaged tag: 4)</i></code>
+</div></td></tr><tr id="@210valueI_28511319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 </table>

@@ -6,23 +6,29 @@
 
 
 
-<h2>Locks a mutex in the constructor and unlocks it in the destructor.<br /></h2>
-<table class="doxygen_table">
+<h2>Locks a mutex in the constructor and unlocks it in the destructor</h2>
+<h3>Public function</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">MutexLocker</a></span>(const C&amp; h)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#"><b> ~ </b>MutexLocker</a></span>()</code></td></tr>
+</table></div>
+
+<h2>Detailed Description</h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="MutexLocker_22581319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class C &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('MutexLocker_22581319583276')">+ MutexLocker</a></span>:  (const C&amp; h);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="MutexLocker_22571319844517_tmpl"><span class="keyword">template</span>&lt;class C &gt;</div>
+ <span class="method"><a href="#">+ MutexLocker</a></span>:  (const C&amp; h);
 </code>
-</div></td></tr><tr id="MutexLocker_22581319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="MutexLocker_22571319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="javascript:toggleVisibility('~MutexLocker_22591319583276')">+ <b> ~ </b>MutexLocker</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ <b> ~ </b>MutexLocker</a></span>:  ();
 </code>
-</div></td></tr><tr id="~MutexLocker_22591319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="~MutexLocker_22581319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 </table>

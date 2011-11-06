@@ -6,69 +6,89 @@
 
 
 
-<h2>Timer</h2><table class="doxygen_table">
+<h2>Timer</h2>
+<h3>Public typedef</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">EventLoopType</a></span> : EventLoopT</code></td></tr>
+</table></div>
+
+<h3>Public function</h3>
+<div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructor</h4></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Timer</a></span>()</code></td></tr>
+<tr><td></td><td><br /><h4>Events triggered by the public interface of the event loop (from any thread)</h4></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">static</span> bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">onStart</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">static</span> bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">onStop</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">static</span> bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">onRequestPosted</a></span>(const U&amp; request)</code></td></tr>
+<tr><td></td><td><br /><h4>Events triggered from the main thread of the event loop</h4></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">onNewCycle</a></span>()</code></td></tr>
+<tr><td></td><td><br /><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">timeout</a></span>(unsigned int t)</code></td></tr>
+</table></div>
+
+<h2>Detailed Description</h2><table class="doxygen_table">
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Type of the event loop.<br /><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a href="#">+ EventLoopType</a></span>: <span class="keyword">typedef</span> EventLoopT;
+</code>
+</div></td></tr><tr id="EventLoopType_63831319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('Timer_63871319583276')">+ Timer</a></span>:  ();
+<code> <span class="method"><a href="#">+ Timer</a></span>:  ();
 </code>
-</div></td></tr><tr id="Timer_63871319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="Timer_63851319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Events triggered by the public interface of the event loop (from any thread) <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">The event loop has just started.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('onStart_63901319583276')">+ onStart</a></span>: <span class="keyword">static</span> bool ();
+<code> <span class="method"><a href="#">+ onStart</a></span>: <span class="keyword">static</span> bool ();
 </code>
-</div></td></tr><tr id="onStart_63901319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="onStart_63871319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">The event loop is locked when this method is called<br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">The event loop has just stopped.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('onStop_63921319583276')">+ onStop</a></span>: <span class="keyword">static</span> bool ();
+<code> <span class="method"><a href="#">+ onStop</a></span>: <span class="keyword">static</span> bool ();
 </code>
-</div></td></tr><tr id="onStop_63921319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="onStop_63891319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">The event loop is locked when this method is called<br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">A new request has just been added into the queue.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="onRequestPosted_63941319583276_tmpl" style="display:none"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="javascript:toggleVisibility('onRequestPosted_63941319583276')">+ onRequestPosted</a></span>: <span class="keyword">static</span> bool (const U&amp; request);
+<code><div class="doxygen_tmpllist" id="onRequestPosted_63901319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a href="#">+ onRequestPosted</a></span>: <span class="keyword">static</span> bool (const U&amp; request);
 </code>
-</div></td></tr><tr id="onRequestPosted_63941319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="onRequestPosted_63901319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">The event loop is locked when this method is called<br />Parameters :<ul><li><code> request</code> The request (bind, see EventLoopType::RequestType)<br /></li></ul><div><code>return</code>  True to allow the request to be posted<br /></div><br />
+<div class="doxygen_desc">The event loop is locked when this method is called<div class="doxygen_params">Parameters :</div><ul><li><code> request</code> The request (bind, see EventLoopType::RequestType)<br /></li></ul><div><code>return</code>  True to allow the request to be posted<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Events triggered from the main thread of the event loop <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">The event loop has started a new cycle.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('onNewCycle_63971319583276')">+ onNewCycle</a></span>: bool ();
+<code> <span class="method"><a href="#">+ onNewCycle</a></span>: bool ();
 </code>
-</div></td></tr><tr id="onNewCycle_63971319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="onNewCycle_63931319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">This method is called from the main thread of the event loop. No lock is provided.<br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Type of the event loop.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="javascript:toggleVisibility('EventLoopType_63981319583276')">+ EventLoopType</a></span>: <span class="keyword">typedef</span> EventLoopT;</code>
-</div></td></tr><tr id="EventLoopType_63981319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><i>no description</i>
-</div>
-</td></tr>
-<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
-</td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the timeout to wait between each cycle.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="javascript:toggleVisibility('timeout_64001319583276')">+ timeout</a></span>: void (unsigned int t);
+<code> <span class="method"><a href="#">+ timeout</a></span>: void (unsigned int t);
 </code>
-</div></td></tr><tr id="timeout_64001319583276_desc" style="display:none"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr id="timeout_63951319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div><b>note</b> :  Due to implementation limitations, the timeout is limited to 10s when the loop is not in detached mode. There is no restriction in detached mode (which is the default).<br /></div><br />
 </div>
