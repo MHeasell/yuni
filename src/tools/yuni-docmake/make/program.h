@@ -17,11 +17,15 @@ namespace DocMake
 	class Program
 	{
 	public:
+		//! \name Constructor & Destructor
+		//@{
 		/*!
 		** \brief Default constructor
 		*/
 		Program();
+		//! Destructor
 		~Program();
+		//@}
 
 		bool parseCommandLine(int argc, char** argv);
 
