@@ -87,32 +87,31 @@ namespace Tree
 	template<class NodeT>
 	void DepthPrefixIterator<NodeT>::forward()
 	{
-		// This is depth-first prefix traversal, so do the children first
+		// Return the left-most child when possible
 		if (!pNode->empty())
 		{
-			pNode = (*pNode)[0];
+			pNode = pNode->firstChild();
 			return;
 		}
 		// If we reached a leaf, do the siblings
 		NodePtr next = pNode->nextSibling();
 		if (next)
-			pNode = next;
-		// If there are no siblings
-		else
 		{
-			// Climb back the parents until we find siblings
-			while (pNode->parent() && !pNode->parent()->nextSibling())
-				pNode = pNode->parent();
-			// If there is still no sibling, it means we reached
-			// the right-most sibling of the root, which means we have finished.
-			if (!pNode->nextSibling())
-			{
-				pNode = nullptr;
-				return;
-			}
-			// Otherwise, the next sibling we found is the next node to traverse
-			pNode = pNode->parent()->nextSibling();
+			pNode = next;
+			return;
 		}
+		// Climb back the parents until we find siblings
+		while (pNode->parent() && !pNode->parent()->nextSibling())
+			pNode = pNode->parent();
+		// If there is still no sibling, it means we reached
+		// the right-most sibling of the root, which means we have finished.
+		if (!pNode->nextSibling())
+		{
+			pNode = nullptr;
+			return;
+		}
+		// Otherwise, the next sibling we found is the next node to traverse
+		pNode = pNode->parent()->nextSibling();
 	}
 
 
@@ -145,10 +144,9 @@ namespace Tree
 		// Go to the previous sibling
 		pNode = pNode->previousSibling();
 		// If the sibling has no child, return it
-		if (pNode->empty())
-			return;
-		// Otherwise, go to its right-most child
-		pNode = pNode->lastChild();
+		while (!pNode->empty())
+			pNode = pNode->lastChild();
+		// Once we reached a leaf, stop
 	}
 
 

@@ -87,7 +87,24 @@ namespace Tree
 	template<class NodeT>
 	void DepthSuffixIterator<NodeT>::forward()
 	{
-		// TODO
+		// If we are on the root, stop
+		if (!pNode->parent())
+		{
+			pNode = nullptr;
+			return;
+		}
+		// If this is the right-most child, go to the parent
+		if (!pNode->nextSibling())
+		{
+			pNode = pNode->parent();
+			return;
+		}
+		// Go to the next sibling
+		pNode = pNode->nextSibling();
+		// While we can walk down the tree, do it
+		while (!pNode->empty())
+			pNode = pNode->firstChild();
+		// Once we reached a leaf, stop
 	}
 
 
@@ -105,7 +122,31 @@ namespace Tree
 	template<class NodeT>
 	void DepthSuffixIterator<NodeT>::backward()
 	{
-		// TODO
+		// Return the right-most child when possible
+		if (!pNode->empty())
+		{
+			pNode = pNode->lastChild();
+			return;
+		}
+		// If we reached a leaf, do the siblings
+		NodePtr previous = pNode->previousSibling();
+		if (previous)
+		{
+			pNode = previous;
+			return;
+		}
+		// Climb back the parents until we find siblings
+		while (pNode->parent() && !pNode->parent()->previousSibling())
+			pNode = pNode->parent();
+		// If there is still no sibling, it means we reached
+		// the left-most sibling of the root, which means we have finished.
+		if (!pNode->previousSibling())
+		{
+			pNode = nullptr;
+			return;
+		}
+		// Otherwise, the previous sibling we found is the next node to traverse
+		pNode = pNode->parent()->previousSibling();
 	}
 
 
