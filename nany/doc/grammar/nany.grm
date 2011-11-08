@@ -28,7 +28,8 @@ HexLiteral     = '0'[xX]{Hex Digit}+ ( [UuLl] | [Uu][Ll] | [Ll][Uu] )?
 RealLiteral    = {Digit}*'.'{Digit}+ ( [FfDd] )?
 CharLiteral    = '' ( {Char Chars} | '\'{Printable} )''
 TimeLiteral    = ( {Digit}+ | {Digit}*'.'{Digit}+ ) ( 'ms' | 's' | 'm' | 'h' )
-TypeQualifier  = 'const' | 'ref' | 'volatile'
+ConstQualifier = 'const'
+TypeQualifier  = ConstQualifier | 'ref' | 'volatile'
 VisibilityQualifier = 'public' | 'protected' | 'private' | 'published'
 OptimQualifier = 'immutable' | 'stable' | 'threadunsafe'
 BuiltInType    = 'any' | 'int' | 'unsigned int' | 'int8' | 'uint8' | 'int16' | 'uint16' | 'int32' | 'uint32' | 'int64' | 'uint64' | 'char' | 'float' | 'double' | 'bool'
@@ -94,19 +95,24 @@ Comment End = '*#' | '*/'
                | <Class Declaration> <Class Content> ! Nested class
                | ! Empty
 
-<Property Declaration> ::= 'property' <Attribute Declaration> <Property Callbacks>
+<Property Declaration> ::= 'property' Identifier <Optional Typing> <Optional Assignment> <Property Callbacks>
 
-<Property Callbacks> ::= 'read' <Expression> <Property Callbacks>
-               | 'write' <Expression> <Property Callbacks>
+<Property Callbacks> ::= 'read' <SingleThread Exp> <Property Callbacks>
+               | 'write' <SingleThread Exp> <Property Callbacks>
                | ! Empty
 
-<Attribute Declaration> ::= Identifier ':' <Type Qualifiers> <Expression> <Optional Assignment>
-               | Identifier ':=' <Expression>
-
-<Optional Typing> ::= ':' <Type Qualifiers> <Expression>
-               | ! Empty
+! Strict version, works fine and is clean but not powerful enough
+!<Attribute Declaration> ::= Identifier ':' <Type Qualifiers> Identifier <Optional Assignment>
+!               | ConstQualifier Identifier ':=' <Expression>
+!               | Identifier ':=' <Expression>
+! Loose version, very powerful but requires a keyword and a lot of work in the type-checking
+<Attribute Declaration> ::= 'attribute' Identifier <Optional Typing> <Optional Assignment>
+               | ConstQualifier 'attribute' Identifier <Optional Typing> <Optional Assignment>
 
 <Optional Assignment> ::= ':=' <Expression>
+               | ! Empty
+
+<Optional Typing> ::= ':' <Type Qualifiers> <SingleThread Exp>
                | ! Empty
 
 ! -------------------------------------------------
@@ -156,9 +162,9 @@ Comment End = '*#' | '*/'
 ! Functions and methods
 ! -------------------------------------------------
 
-<Function Declaration> ::= <Optional Optim Qualifier> 'function' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> '{' <Statements> '}'
+<Function Declaration> ::= <Optional Optim Qualifier> 'function' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> '{' <Expression> '}'
 
-<Method Declaration> ::= <Optional Optim Qualifier> 'method' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> '{' <Statements> '}'
+<Method Declaration> ::= <Optional Optim Qualifier> 'method' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> '{' <Expression> '}'
 
 <Return Type Declaration> ::= ':' <Expression>
                | ! Empty
@@ -166,8 +172,7 @@ Comment End = '*#' | '*/'
 <Optional Parameters> ::= '(' <Parameter List> ')'
                | ! Empty
 
-<Parameter List> ::= <Attribute Declaration> <Parameter List Continued>
-               | Identifier <Parameter List Continued>
+<Parameter List> ::= Identifier <Optional Typing> <Optional Assignment> <Parameter List Continued>
                | ! Empty
 
 <Parameter List Continued> ::= ',' <Parameter List>
@@ -226,35 +231,38 @@ Comment End = '*#' | '*/'
 ! Expressions
 ! -------------------------------------------------
 
-<Statements> ::= <Statement> <Statements Continued>
+<Expression>   ::= <Possibly Parallel Exp> <Expression List>
+
+<Expression List> ::= ';' <Expression>
                | ! Empty
 
-<Statements Continued> ::= <Statement> <Statements Continued>
+<Possibly Parallel Exp> ::= <SingleThread Exp>
+               | '&' <SingleThread Exp>
+
+<SingleThread Exp> ::= <Assignment Exp>
+
+<Assignment Exp> ::= <Simple Exp> <Optional Typing> <Optional Assignment>
+
+<Simple Exp> ::= <Binary Exp>
+               | 'return' <SingleThread Exp>
+               | 'typeof' <SingleThread Exp>
+               | 'break'
+               | 'continue'
+               | <Attribute Declaration>
+               | 'if' <Expression> 'then' <Expression> <Else Expression>
+               | 'while' <Expression> 'do' <Expression>
+               | 'for' Identifier ':=' <Expression> 'until' <Expression> 'do' <Expression>
+               | 'for' Identifier ':=' <Expression> 'until' <Expression> 'step' <Expression> 'do' <Expression>
+               | 'foreach' Identifier 'in' <Expression> 'do' <Expression>
+               | 'foreach' Identifier 'in' <Expression> 'order' 'do' <Expression>
+               | 'timeout' <Expression> 'do' <Expression>
+               | 'timeout' <Expression> 'do' <Expression> 'else' <Expression>
+               | '{' <Expression> '}'
+
+<Else Expression> ::= 'else' <Expression>
                | ! Empty
 
-<Statement>   ::= <Statement Expression> ';'
-               | '&' <Statement Expression> ';'
-               | 'return' <Expression> ';'
-               | 'break' ';'
-               | 'continue' ';'
-               | <Attribute Declaration> ';'
-               | 'if' <Expression> 'then' <Statement>
-               | 'if' <Expression> 'then' <Statement> 'else' <Statement>
-               | 'while' <Expression> 'do' <Statement>
-               | 'for' Identifier ':=' <Expression> 'until' <Expression> 'do' <Statement>
-               | 'for' Identifier ':=' <Expression> 'until' <Expression> 'step' <Expression> 'do' <Statement>
-               | 'foreach' Identifier 'in' <Expression> 'do' <Statement>
-               | 'foreach' Identifier 'in' <Expression> 'order' 'do' <Statement>
-               | 'timeout' <Expression> 'do' <Statement>
-               | 'timeout' <Expression> 'do' <Statement> 'else' <Statement>
-               | '{' <Statements> '}'
-
-<Assignment Exp> ::= <Expression> ':=' <Expression>
-
-<Expression>  ::= 'if' <Expression> 'then' <Expression> 'else' <Expression>
-               | <Statement Expression>
-
-<Statement Expression> ::= <Expression> '|' <Xor Exp> ! Constraint
+<Binary Exp> ::= <SingleThread Exp> '|' <Xor Exp> ! Constraint
                |  <Xor Exp>
 
 <Xor Exp>      ::= <Xor Exp> 'xor' <Or Exp> ! Boolean XOR
@@ -307,14 +315,11 @@ Comment End = '*#' | '*/'
 
 ! For use in arithmetic, requires parentheses around expressions to have proper priorities
 ! e.g. : weight := - (car.weight + passengers.weight)
-<Value>  ::= <Simple Value>
-               | <Simple Value> '.' <Subscript>
+<Value>  ::= <Literal> <Subscript>
+               | '(' <SingleThread Exp> ')' <Subscript>
+               | Identifier <Subscript>
 
-<Simple Value> ::= <Literal>
-               | '(' <Expression> ')'
-               | Identifier
-
-<Subscript> ::= Identifier
-               | Identifier '.' <Subscript> ! Property or attribute or function call with no argument
-               | Identifier '(' <Argument List> ')' ! Function / Method call with arguments
+<Subscript> ::= ! Empty
+               | '.' <Value> ! Property or attribute or function call with no argument
+               | '(' <Argument List> ')' ! Function / Method call with arguments
 
