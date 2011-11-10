@@ -251,10 +251,9 @@ Comment End = '*#' | '*/'
                | <Attribute Declaration>
                | 'if' <Expression> 'then' <Expression> <Else Expression>
                | 'while' <Expression> 'do' <Expression>
-               | 'for' Identifier ':=' <Expression> 'until' <Expression> 'do' <Expression>
-               | 'for' Identifier ':=' <Expression> 'until' <Expression> 'step' <Expression> 'do' <Expression>
-               | 'foreach' Identifier 'in' <Expression> 'do' <Expression>
-               | 'foreach' Identifier 'in' <Expression> 'order' 'do' <Expression>
+               | 'for' Identifier 'in' <Expression> 'do' <Expression>
+               | 'for' Identifier 'in' <Expression> 'order' ':' <Expression> 'packedby' ':' <Expression> 'do' <Expression>
+               | 'for' Identifier 'in' <Expression> 'order' 'do' <Expression>
                | 'timeout' <Expression> 'do' <Expression>
                | 'timeout' <Expression> 'do' <Expression> 'else' <Expression>
                | '{' <Expression> '}'
