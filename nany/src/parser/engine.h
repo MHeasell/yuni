@@ -115,7 +115,6 @@ int Parse(
   wchar_t *InputBuf,                  /* Pointer to the input data. */
   long InputSize,                     /* Number of characters in the input. */
   int TrimReductions,                 /* 0 = don't trim, 1 = trim reductions. */
-  int Debug,                          /* 0 = no debug, 1 = print debug info. */
   struct TokenStruct **Token);        /* Output, the first Token. */
 void DeleteTokens(struct TokenStruct *Token);
 wchar_t *RetrieveToken(

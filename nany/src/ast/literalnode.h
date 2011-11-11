@@ -19,11 +19,16 @@ namespace Ast
 		typedef DataT DataType;
 
 	public:
-		LiteralNode(DataT& data): pData(data)
+		LiteralNode(DataT other): data(other)
 		{}
 
-	protected:
-		DataT pData;
+		virtual void accept(Visitor* visitor)
+		{
+			visitor->visit(this);
+		}
+
+	public:
+		DataT data;
 	};
 
 
