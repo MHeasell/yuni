@@ -240,8 +240,7 @@ int ParseToken(
     int *LalrState,
     struct TokenStackStruct **TokenStack,
     struct TokenStackStruct *InputToken,
-    int TrimReductions,
-    int Debug) {
+    int TrimReductions) {
   struct TokenStackStruct *PopToken;
   struct TokenStackStruct *Reduction;
   int Action;
@@ -260,19 +259,11 @@ int ParseToken(
   /* If not found then exit with SYNTAXERROR. The Token is not allowed in this
      context. */
   if (Action >= Grammar.LalrArray[*LalrState].ActionCount) {
-    if (Debug > 0) {
-      fprintf(stdout,"LALR Syntax error: symbol %d not found in LALR table %d.\n",
-        InputToken->Token->Symbol,*LalrState);
-      }
     return(LALRSYNTAXERROR);
     }
 
   /* ACTIONACCEPT: exit. We're finished parsing the input. */
   if (Grammar.LalrArray[*LalrState].Actions[Action].Action == ACTIONACCEPT) {
-    if (Debug > 0) {
-      fprintf(stdout,"LALR Accept: Target=%d\n",
-        Grammar.LalrArray[*LalrState].Actions[Action].Target);
-      }
     return(LALRACCEPT);
     }
 
@@ -280,9 +271,6 @@ int ParseToken(
      the next token. */
   if (Grammar.LalrArray[*LalrState].Actions[Action].Action == ACTIONSHIFT) {
     *LalrState = Grammar.LalrArray[*LalrState].Actions[Action].Target;
-    if (Debug > 0) {
-      fprintf(stdout,"LALR Shift: Lalr=%d\n",*LalrState);
-      }
     return(LALRSHIFT);
     }
 
@@ -294,9 +282,6 @@ int ParseToken(
      implementation does not need. */
   if (Grammar.LalrArray[*LalrState].Actions[Action].Action == ACTIONGOTO) {
     *LalrState = Grammar.LalrArray[*LalrState].Actions[Action].Target;
-    if (Debug > 0) {
-      fprintf(stdout,"LALR Goto: Lalr=%d\n",*LalrState);
-      }
     return(LALRGOTO);
     }
 
@@ -308,11 +293,6 @@ int ParseToken(
      - Iterate.
      */
   Rule = Grammar.LalrArray[*LalrState].Actions[Action].Target;
-  if (Debug > 0) {
-    fprintf(stdout,"LALR Reduce: Lalr=%d TargetRule=%S[%d] ==> %S\n",
-      *LalrState,Grammar.SymbolArray[Grammar.RuleArray[Rule].Head].Name,
-      Grammar.RuleArray[Rule].Head,Grammar.RuleArray[Rule].Description);
-    }
 
   /* If TrimReductions is active, and the Rule contains a single non-terminal,
      then eleminate the unneeded reduction by modifying the Rule on the stack
@@ -321,9 +301,6 @@ int ParseToken(
   if ((TrimReductions != 0) &&
       (Grammar.RuleArray[Rule].SymbolsCount == 1) &&
       (Grammar.SymbolArray[Grammar.RuleArray[Rule].Symbols[0]].Kind == SYMBOLNONTERMINAL)) {
-    if (Debug > 0) {
-      fprintf(stdout,"LALR TrimReduction.\n");
-      }
 
     /* Pop the Rule from the TokenStack. */
     PopToken = *TokenStack;
@@ -336,7 +313,7 @@ int ParseToken(
     PopToken->Token->Symbol = Grammar.RuleArray[Rule].Head;
 
     /* Feed the Token to the LALR state machine. */
-    ParseToken(LalrState,TokenStack,PopToken,TrimReductions,Debug);
+    ParseToken(LalrState,TokenStack,PopToken,TrimReductions);
 
     /* Push the modified Token back onto the TokenStack. */
     PopToken->NextToken = *TokenStack;
@@ -346,7 +323,7 @@ int ParseToken(
     InputToken->LalrState = *LalrState;
 
     /* Feed the input Token to the LALR state machine and exit. */
-    return(ParseToken(LalrState,TokenStack,InputToken,TrimReductions,Debug));
+    return(ParseToken(LalrState,TokenStack,InputToken,TrimReductions));
     }
 
   /* Allocate and initialize memory for the Reduction. */
@@ -379,23 +356,6 @@ int ParseToken(
     PopToken = *TokenStack;
     *TokenStack = PopToken->NextToken;
     PopToken->NextToken = NULL;
-    if (Debug > 0) {
-      if (PopToken->Token->Data != NULL) {
-          fprintf(stdout,"  + Symbol=%S[%d] RuleSymbol=%S[%d] Value='%S' Lalr=%d\n",
-            Grammar.SymbolArray[PopToken->Token->Symbol].Name,
-            PopToken->Token->Symbol,
-            Grammar.SymbolArray[Grammar.RuleArray[Rule].Symbols[i-1]].Name,
-            Grammar.RuleArray[Rule].Symbols[i-1],
-            PopToken->Token->Data,PopToken->LalrState);
-        } else {
-          fprintf(stdout,"  + Symbol=%S[%d] RuleSymbol=%S[%d] Lalr=%d\n",
-            Grammar.SymbolArray[PopToken->Token->Symbol].Name,
-            PopToken->Token->Symbol,
-            Grammar.SymbolArray[Grammar.RuleArray[Rule].Symbols[i-1]].Name,
-            Grammar.RuleArray[Rule].Symbols[i-1],
-            PopToken->LalrState);
-          }
-      }
     Reduction->Token->Tokens[i - 1] = PopToken->Token;
     *LalrState = PopToken->LalrState;
     Reduction->LalrState = PopToken->LalrState;
@@ -405,13 +365,7 @@ int ParseToken(
     }
 
   /* Call the LALR state machine with the Symbol of the Rule. */
-  if (Debug > 0) {
-    fprintf(stdout,"Calling Lalr 1: Lalr=%d Symbol=%S[%d]\n",
-      *LalrState,
-      Grammar.SymbolArray[Grammar.RuleArray[Rule].Head].Name,
-      Grammar.RuleArray[Rule].Head);
-    }
-  ParseToken(LalrState,TokenStack,Reduction,TrimReductions,Debug);
+  ParseToken(LalrState,TokenStack,Reduction,TrimReductions);
 
   /* Push new Token on the TokenStack for the Reduction. */
   Reduction->NextToken = *TokenStack;
@@ -424,13 +378,7 @@ int ParseToken(
   /* Call the LALR state machine with the InputToken. The state has
      changed because of the reduction, so we must accept the token
      again. */
-  if (Debug > 0) {
-    fprintf(stdout,"Calling Lalr 2: Lalr=%d Symbol=%S[%d]\n",
-      *LalrState,
-      Grammar.SymbolArray[InputToken->Token->Symbol].Name,
-      InputToken->Token->Symbol);
-    }
-  return(ParseToken(LalrState,TokenStack,InputToken,TrimReductions,Debug));
+  return(ParseToken(LalrState,TokenStack,InputToken,TrimReductions));
   }
 
 
@@ -501,7 +449,6 @@ int Parse(
     wchar_t *InputBuf,                   /* Pointer to the input data. */
     long InputSize,                      /* Number of characters in the input. */
     int TrimReductions,                  /* 0 = don't trim, 1 = trim reductions. */
-    int Debug,                           /* 0 = no debug, 1 = print debug info. */
     struct TokenStruct **FirstToken) {   /* Output token. */
   int LalrState;                         /* Index into Grammar.LalrArray[]. */
   struct TokenStackStruct *TokenStack;   /* Stack of Tokens. */
@@ -609,7 +556,6 @@ int Parse(
        CommentLevel and loop. The routine will keep reading tokens
        until the end of the comment. */
     if (Grammar.SymbolArray[Work->Token->Symbol].Kind == SYMBOLCOMMENTSTART) {
-      if (Debug > 0) fprintf(stdout,"Parse: skipping comment.\n");
 
       /* Push the Token on the TokenStack to keep track of line+column. */
       Work->NextToken = TokenStack;
@@ -659,25 +605,13 @@ int Parse(
 
     /* The tokenizer should never return a non-terminal symbol. */
     if (Grammar.SymbolArray[Work->Token->Symbol].Kind == SYMBOLNONTERMINAL) {
-      if (Debug > 0) {
-        fprintf(stdout,"Error: tokenizer returned SYMBOLNONTERMINAL '%S'.\n",
-          Work->Token->Data);
-        }
       ParseCleanup(TokenStack,Work,FirstToken);
       return(PARSETOKENERROR);
       }
 
-    if (Debug > 0) {
-      fprintf(stdout,"Token Read: Lalr=%d Symbol=%S[%d] Value='%S'\n",
-        LalrState,
-        Grammar.SymbolArray[Work->Token->Symbol].Name,
-        Work->Token->Symbol,
-        Work->Token->Data);
-      }
-
     /* Feed the Symbol to the LALR state machine. It can do several
        things, such as wind back and iteratively call itself. */
-    Result = ParseToken(&LalrState,&TokenStack,Work,TrimReductions,Debug);
+    Result = ParseToken(&LalrState,&TokenStack,Work,TrimReductions);
 
     /* If out of memory then exit. */
     if (Result == LALRMEMORYERROR) {

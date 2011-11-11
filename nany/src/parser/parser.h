@@ -2,8 +2,9 @@
 #ifndef __PARSER_H__
 # define __PARSER_H__
 
+# include "../ast/node.h"
 
-int parseFile(int argc, char *argv[]);
+Nany::Ast::Node* parseFile(const char* filePath);
 
 
 #endif /* __PARSER_H__ */

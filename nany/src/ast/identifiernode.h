@@ -16,11 +16,17 @@ namespace Ast
 	class IdentifierNode: public Node
 	{
 	public:
-		IdentifierNode(const char* data): pData(data)
+		template<class StringT>
+		IdentifierNode(const StringT& other): data(other)
 		{}
 
+		virtual void accept(Visitor* visitor)
+		{
+			visitor->visit(this);
+		}
+
 	public:
-		const Yuni::String pData;
+		const Yuni::String data;
 	};
 
 
