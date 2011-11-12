@@ -1120,7 +1120,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToFunction(R (*pointer)()) const
 		{
-			return (pPointer == pointer);
+			return ((void*)pPointer == (void*)pointer);
 		}
 
 		virtual bool compareWithPointerToObject(const void*) const
@@ -1179,7 +1179,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToFunction(R (*pointer)(A0)) const
 		{
-			return (pPointer == pointer);
+			return ((void*)pPointer == (void*)pointer);
 		}
 
 		virtual bool compareWithPointerToObject(const void*) const
@@ -1238,7 +1238,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1)) const
 		{
-			return (pPointer == pointer);
+			return ((void*)pPointer == (void*)pointer);
 		}
 
 		virtual bool compareWithPointerToObject(const void*) const
@@ -1297,7 +1297,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2)) const
 		{
-			return (pPointer == pointer);
+			return ((void*)pPointer == (void*)pointer);
 		}
 
 		virtual bool compareWithPointerToObject(const void*) const
@@ -1356,7 +1356,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3)) const
 		{
-			return (pPointer == pointer);
+			return ((void*)pPointer == (void*)pointer);
 		}
 
 		virtual bool compareWithPointerToObject(const void*) const
@@ -1415,7 +1415,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4)) const
 		{
-			return (pPointer == pointer);
+			return ((void*)pPointer == (void*)pointer);
 		}
 
 		virtual bool compareWithPointerToObject(const void*) const
@@ -1474,7 +1474,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5)) const
 		{
-			return (pPointer == pointer);
+			return ((void*)pPointer == (void*)pointer);
 		}
 
 		virtual bool compareWithPointerToObject(const void*) const
@@ -1533,7 +1533,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6)) const
 		{
-			return (pPointer == pointer);
+			return ((void*)pPointer == (void*)pointer);
 		}
 
 		virtual bool compareWithPointerToObject(const void*) const
@@ -1592,7 +1592,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7)) const
 		{
-			return (pPointer == pointer);
+			return ((void*)pPointer == (void*)pointer);
 		}
 
 		virtual bool compareWithPointerToObject(const void*) const
@@ -1651,7 +1651,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8)) const
 		{
-			return (pPointer == pointer);
+			return ((void*)pPointer == (void*)pointer);
 		}
 
 		virtual bool compareWithPointerToObject(const void*) const
@@ -1710,7 +1710,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)) const
 		{
-			return (pPointer == pointer);
+			return ((void*)pPointer == (void*)pointer);
 		}
 
 		virtual bool compareWithPointerToObject(const void*) const
@@ -1769,7 +1769,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)) const
 		{
-			return (pPointer == pointer);
+			return ((void*)pPointer == (void*)pointer);
 		}
 
 		virtual bool compareWithPointerToObject(const void*) const
@@ -1828,7 +1828,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)) const
 		{
-			return (pPointer == pointer);
+			return ((void*)pPointer == (void*)pointer);
 		}
 
 		virtual bool compareWithPointerToObject(const void*) const
@@ -1887,7 +1887,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)) const
 		{
-			return (pPointer == pointer);
+			return ((void*)pPointer == (void*)pointer);
 		}
 
 		virtual bool compareWithPointerToObject(const void*) const
@@ -1946,7 +1946,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)) const
 		{
-			return (pPointer == pointer);
+			return ((void*)pPointer == (void*)pointer);
 		}
 
 		virtual bool compareWithPointerToObject(const void*) const
@@ -2005,7 +2005,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)) const
 		{
-			return (pPointer == pointer);
+			return ((void*)pPointer == (void*)pointer);
 		}
 
 		virtual bool compareWithPointerToObject(const void*) const
@@ -2066,7 +2066,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToFunction(R (*pointer)()) const
 		{
-			return (pPointer == pointer);
+			return ((void*)pPointer == (void*)pointer);
 		}
 
 		virtual bool compareWithPointerToObject(const void*) const
@@ -2123,7 +2123,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToFunction(R (*pointer)(A0)) const
 		{
-			return (pPointer == pointer);
+			return ((void*)pPointer == (void*)pointer);
 		}
 
 		virtual bool compareWithPointerToObject(const void*) const
@@ -2180,7 +2180,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1)) const
 		{
-			return (pPointer == pointer);
+			return ((void*)pPointer == (void*)pointer);
 		}
 
 		virtual bool compareWithPointerToObject(const void*) const
@@ -2237,7 +2237,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2)) const
 		{
-			return (pPointer == pointer);
+			return ((void*)pPointer == (void*)pointer);
 		}
 
 		virtual bool compareWithPointerToObject(const void*) const
@@ -2294,7 +2294,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3)) const
 		{
-			return (pPointer == pointer);
+			return ((void*)pPointer == (void*)pointer);
 		}
 
 		virtual bool compareWithPointerToObject(const void*) const
@@ -2351,7 +2351,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4)) const
 		{
-			return (pPointer == pointer);
+			return ((void*)pPointer == (void*)pointer);
 		}
 
 		virtual bool compareWithPointerToObject(const void*) const
@@ -2408,7 +2408,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5)) const
 		{
-			return (pPointer == pointer);
+			return ((void*)pPointer == (void*)pointer);
 		}
 
 		virtual bool compareWithPointerToObject(const void*) const
@@ -2465,7 +2465,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6)) const
 		{
-			return (pPointer == pointer);
+			return ((void*)pPointer == (void*)pointer);
 		}
 
 		virtual bool compareWithPointerToObject(const void*) const
@@ -2522,7 +2522,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7)) const
 		{
-			return (pPointer == pointer);
+			return ((void*)pPointer == (void*)pointer);
 		}
 
 		virtual bool compareWithPointerToObject(const void*) const
@@ -2579,7 +2579,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8)) const
 		{
-			return (pPointer == pointer);
+			return ((void*)pPointer == (void*)pointer);
 		}
 
 		virtual bool compareWithPointerToObject(const void*) const
@@ -2636,7 +2636,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)) const
 		{
-			return (pPointer == pointer);
+			return ((void*)pPointer == (void*)pointer);
 		}
 
 		virtual bool compareWithPointerToObject(const void*) const
@@ -2693,7 +2693,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)) const
 		{
-			return (pPointer == pointer);
+			return ((void*)pPointer == (void*)pointer);
 		}
 
 		virtual bool compareWithPointerToObject(const void*) const
@@ -2750,7 +2750,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)) const
 		{
-			return (pPointer == pointer);
+			return ((void*)pPointer == (void*)pointer);
 		}
 
 		virtual bool compareWithPointerToObject(const void*) const
@@ -2807,7 +2807,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)) const
 		{
-			return (pPointer == pointer);
+			return ((void*)pPointer == (void*)pointer);
 		}
 
 		virtual bool compareWithPointerToObject(const void*) const
@@ -2864,7 +2864,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)) const
 		{
-			return (pPointer == pointer);
+			return ((void*)pPointer == (void*)pointer);
 		}
 
 		virtual bool compareWithPointerToObject(const void*) const
@@ -2921,7 +2921,7 @@ namespace BindImpl
 
 		virtual bool compareWithPointerToFunction(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)) const
 		{
-			return (pPointer == pointer);
+			return ((void*)pPointer == (void*)pointer);
 		}
 
 		virtual bool compareWithPointerToObject(const void*) const
