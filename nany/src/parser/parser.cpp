@@ -266,7 +266,12 @@ Nany::Ast::Node* Rule_Literal_HexLiteral(struct TokenStruct *Token, struct Conte
 /* <Literal> ::= RealLiteral */
 Nany::Ast::Node* Rule_Literal_RealLiteral(struct TokenStruct *Token, struct ContextStruct *Context)
 {
-	return RuleTemplate(Token,Context);
+	Nany::Ast::Node* child0 = ParseChild(Token, Context, 0);
+	assert(nullptr == child0 && "Child must be a symbol !");
+	assert(Context->ReturnValue && "Symbol must not be empty !");
+
+	Yuni::String data(Context->ReturnValue);
+	return new Nany::Ast::LiteralNode<int>(data.to<float>());
 };
 
 
@@ -284,7 +289,11 @@ Nany::Ast::Node* Rule_Literal_TimeLiteral(struct TokenStruct *Token, struct Cont
 /* <Literal> ::= CharLiteral */
 Nany::Ast::Node* Rule_Literal_CharLiteral(struct TokenStruct *Token, struct ContextStruct *Context)
 {
-	return RuleTemplate(Token,Context);
+	Nany::Ast::Node* child0 = ParseChild(Token, Context, 0);
+	assert(nullptr == child0 && "Child must be a symbol !");
+	assert(Context->ReturnValue && "Symbol must not be empty !");
+
+	return new Nany::Ast::LiteralNode<char>(Context->ReturnValue[0]);
 };
 
 
@@ -293,7 +302,12 @@ Nany::Ast::Node* Rule_Literal_CharLiteral(struct TokenStruct *Token, struct Cont
 /* <Literal> ::= StringLiteral */
 Nany::Ast::Node* Rule_Literal_StringLiteral(struct TokenStruct *Token, struct ContextStruct *Context)
 {
-	return RuleTemplate(Token,Context);
+	Nany::Ast::Node* child0 = ParseChild(Token, Context, 0);
+	assert(nullptr == child0 && "Child must be a symbol !");
+	assert(Context->ReturnValue && "Symbol must not be empty !");
+
+	Yuni::String data(Context->ReturnValue);
+	return new Nany::Ast::LiteralNode<const char*>(data.to<const char*>());
 };
 
 
@@ -2255,14 +2269,14 @@ static wchar_t *LoadInputFile(const char *FileName)
 	Fin = fopen(FileName,"rb");
 	if (Fin == NULL)
 	{
-		fprintf(stderr,"Could not open input file: %s\n",FileName);
+		std::cerr << "Could not open input file: " << FileName << std::endl;
 		return NULL;
 	}
 
 	/* Get the size of the file. */
 	if (fstat(fileno(Fin),&statbuf) != 0)
 	{
-		fprintf(stderr,"Could not stat() the input file: %s\n",FileName);
+		std::cerr << "Could not stat() the input file: " << FileName << std::endl;
 		fclose(Fin);
 		return NULL;
 	}
@@ -2272,7 +2286,7 @@ static wchar_t *LoadInputFile(const char *FileName)
 	Buf2 = (wchar_t *)malloc(sizeof(wchar_t) * (statbuf.st_size + 1));
 	if ((Buf1 == NULL) || (Buf2 == NULL))
 	{
-		fprintf(stderr,"Not enough memory to load the file: %s\n",FileName);
+		std::cerr << "Not enough memory to load the file: " << FileName << std::endl;
 		fclose(Fin);
 		if (Buf1 != NULL) free(Buf1);
 		if (Buf2 != NULL) free(Buf2);
@@ -2289,7 +2303,7 @@ static wchar_t *LoadInputFile(const char *FileName)
 	/* Exit if there was an error while reading the file. */
 	if (BytesRead != (size_t)statbuf.st_size)
 	{
-		fprintf(stdout,"Error while reading input file: %s\n",FileName);
+		std::cerr << "Error while reading input file: " << FileName << std::endl;
 		free(Buf1);
 		free(Buf2);
 		return NULL;
@@ -2315,55 +2329,55 @@ static void ShowErrorMessage(struct TokenStruct *Token, int Result)
 	switch(Result)
 	{
 		case PARSELEXICALERROR:
-			fprintf(stderr,"Lexical error");
+			std::cerr << "Lexical error";
 			break;
 		case PARSECOMMENTERROR:
-			fprintf(stderr,"Comment error");
+			std::cerr << "Comment error";
 			break;
 		case PARSETOKENERROR:
-			fprintf(stderr,"Tokenizer error");
+			std::cerr << "Tokenizer error";
 			break;
 		case PARSESYNTAXERROR:
-			fprintf(stderr,"Syntax error");
+			std::cerr << "Syntax error";
 			break;
 		case PARSEMEMORYERROR:
-			fprintf(stderr,"Out of memory");
+			std::cerr << "Out of memory";
 			break;
 	}
 	if (Token != NULL)
-		fprintf(stderr," at line %ld column %ld",Token->Line,Token->Column);
-	fprintf(stderr,".\n");
+		std::cerr << " at line " << Token->Line << " column " << Token->Column;
+	std::cerr << "." << std::endl;
 
 	if (Result == PARSELEXICALERROR)
 	{
 		if (Token->Data != NULL)
 		{
 			ReadableString(Token->Data,s1,BUFSIZ);
-			fprintf(stderr,"The grammar does not specify what to do with '%S'.\n",s1);
+			std::cerr << "The grammar does not specify what to do with '" << s1 << "'." << std::endl;
 		}
 		else
 		{
-			fprintf(stderr,"The grammar does not specify what to do.\n");
+			std::cerr << "The grammar does not specify what to do." << std::endl;
 		}
 	}
 	if (Result == PARSETOKENERROR)
 	{
-		fprintf(stderr,"The tokenizer returned a non-terminal.\n");
+		std::cerr << "The tokenizer returned a non-terminal." << std::endl;
 	}
 	if (Result == PARSECOMMENTERROR)
 	{
-		fprintf(stderr,"The comment has no end, it was started but not finished.\n");
+		std::cerr << "The comment has no end, it was started but not finished." << std::endl;
 	}
 	if (Result == PARSESYNTAXERROR)
 	{
 		if (Token->Data != NULL)
 		{
 			ReadableString(Token->Data,s1,BUFSIZ);
-			fprintf(stderr,"Encountered '%S', but expected ",s1);
+			std::cerr << "Encountered '" << s1 << "', but expected ";
 		}
 		else
 		{
-			fprintf(stderr,"Expected ");
+			std::cerr << "Expected ";
 		}
 		for (i = 0; i < Grammar.LalrArray[Token->Symbol].ActionCount; i++)
 		{
@@ -2372,14 +2386,14 @@ static void ShowErrorMessage(struct TokenStruct *Token, int Result)
 			{
 				if (i > 0)
 				{
-					fprintf(stderr,", ");
+					std::cerr << ", ";
 					if (i >= Grammar.LalrArray[Token->Symbol].ActionCount - 2)
-						fprintf(stderr,"or ");
+						std::cerr << "or ";
 				}
-				fprintf(stderr,"'%S'",Grammar.SymbolArray[Symbol].Name);
+				std::cerr << '\'' << Grammar.SymbolArray[Symbol].Name << '\'';
 			}
 		}
-		fprintf(stderr,".\n");
+		std::cerr << "." << std::endl;
 	}
 }
 
