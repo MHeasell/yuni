@@ -26,6 +26,16 @@ namespace Ast
 
 		virtual void visit(LiteralNode<unsigned int>*)
 		{}
+
+		virtual void visit(LiteralNode<float>*)
+		{}
+
+		virtual void visit(LiteralNode<char>*)
+		{}
+
+		virtual void visit(LiteralNode<const char*>*)
+		{}
+
 	};
 
 

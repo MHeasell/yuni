@@ -20,24 +20,39 @@ namespace Ast
 		CppWriterVisitor(std::ofstream& stream): pOut(stream)
 		{}
 
-		void visit(IdentifierNode* node)
+		virtual void visit(IdentifierNode* node)
 		{
 			pOut << node->data;
 		}
 
-		void visit(LiteralNode<bool>* node)
+		virtual void visit(LiteralNode<bool>* node)
 		{
 			pOut << node->data;
 		}
 
-		void visit(LiteralNode<int>* node)
+		virtual void visit(LiteralNode<int>* node)
 		{
 			pOut << node->data;
 		}
 
-		void visit(LiteralNode<unsigned int>* node)
+		virtual void visit(LiteralNode<unsigned int>* node)
 		{
-			pOut << node->data;
+			pOut << node->data << 'u';
+		}
+
+		virtual void visit(LiteralNode<float>* node)
+		{
+			pOut << node->data << 'f';
+		}
+
+		virtual void visit(LiteralNode<char>* node)
+		{
+			pOut << '\'' << node->data << '\'';
+		}
+
+		virtual void visit(LiteralNode<const char*>* node)
+		{
+			pOut << '\"' << node->data << '\"';
 		}
 
 
