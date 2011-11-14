@@ -1,8 +1,7 @@
 #ifndef __NANY_AST_NODE_H__
 # define __NANY_AST_NODE_H__
 
-# include "yuni/yuni.h"
-# include "yuni/core/tree/treeN.h"
+# include "type.h"
 # include "visitor.h"
 
 namespace Nany
@@ -10,17 +9,19 @@ namespace Nany
 namespace Ast
 {
 
-	// Forward declaration
-	class Visitor;
-
 
 	/*!
-	** \brief Abstract syntax tree. Base class for all types of nodes.
+	** \brief Abstract syntax tree. Base class for all types of node.
 	*/
-	class Node: public Yuni::Core::TreeN<Node, Yuni::Policy::SingleThreaded>
+	class Node
 	{
 	public:
+		//! All nodes must implement visitor acceptance
 		virtual void accept(Visitor*) = 0;
+
+	protected:
+		//! Types are flyweight patterns, stored as a static map in Nany::Ast::Type.
+		Type* pType;
 	};
 
 

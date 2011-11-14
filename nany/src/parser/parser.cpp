@@ -97,11 +97,16 @@ static Nany::Ast::Node* ParseChild(struct TokenStruct* token, struct ContextStru
 
 
 
-/* <Program> ::= <Unit Declaration> <Dependencies> <Implementation Block> */
+/* <Program> ::= <Unit Declaration> <Dependencies> <Declaration List> */
 Nany::Ast::Node* Rule_Program(struct TokenStruct *Token, struct ContextStruct *Context)
 {
-	return RuleTemplate(Token,Context);
-};
+	Nany::Ast::UnitDeclarationNode* unitDecl = dynamic_cast<Nany::Ast::UnitDeclarationNode*>(ParseChild(Token, Context, 0));
+	assert(nullptr != unitDecl && "Invalid dynamic cast !");
+	Nany::Ast::DeclarationListNode* declarations = dynamic_cast<Nany::Ast::DeclarationListNode*>(ParseChild(Token, Context, 2));
+	assert(nullptr != declarations && "Invalid dynamic cast !");
+
+	return new Nany::Ast::ProgramNode(unitDecl, declarations);
+}
 
 
 
@@ -109,8 +114,13 @@ Nany::Ast::Node* Rule_Program(struct TokenStruct *Token, struct ContextStruct *C
 /* <Unit Declaration> ::= <Optional Visibility Qualifier> unit Identifier ';' */
 Nany::Ast::Node* Rule_UnitDeclaration_unit_Identifier_Semi(struct TokenStruct *Token, struct ContextStruct *Context)
 {
-	return RuleTemplate(Token,Context);
-};
+	// TODO : handle visibility qualifiers
+
+	assert(nullptr == ParseChild(Token, Context, 2) && "Child must be a symbol !");
+	Nany::Ast::Node* node = new Nany::Ast::UnitDeclarationNode(false, Context->ReturnValue);
+	free(Context->ReturnValue);
+	return node;
+}
 
 
 
@@ -118,8 +128,11 @@ Nany::Ast::Node* Rule_UnitDeclaration_unit_Identifier_Semi(struct TokenStruct *T
 /* <Unit Declaration> ::= program Identifier ';' */
 Nany::Ast::Node* Rule_UnitDeclaration_program_Identifier_Semi(struct TokenStruct *Token, struct ContextStruct *Context)
 {
-	return RuleTemplate(Token,Context);
-};
+	assert(nullptr == ParseChild(Token, Context, 1) && "Child must be a symbol !");
+	Nany::Ast::Node* node = new Nany::Ast::UnitDeclarationNode(true, Context->ReturnValue);
+	free(Context->ReturnValue);
+	return node;
+}
 
 
 
@@ -134,10 +147,10 @@ Nany::Ast::Node* Rule_Dependencies(struct TokenStruct *Token, struct ContextStru
 
 
 /* <Dependencies> ::=  */
-Nany::Ast::Node* Rule_Dependencies2(struct TokenStruct *Token, struct ContextStruct *Context)
+Nany::Ast::Node* Rule_Dependencies2(struct TokenStruct*, struct ContextStruct*)
 {
-	return RuleTemplate(Token,Context);
-};
+	return nullptr;
+}
 
 
 
@@ -161,7 +174,33 @@ Nany::Ast::Node* Rule_DependencyContinued_Dot_Identifier(struct TokenStruct *Tok
 
 
 /* <Dependency Continued> ::=  */
-Nany::Ast::Node* Rule_DependencyContinued(struct TokenStruct *Token, struct ContextStruct *Context)
+Nany::Ast::Node* Rule_DependencyContinued(struct TokenStruct*, struct ContextStruct*)
+{
+	return nullptr;
+}
+
+
+
+
+/* <Declaration List> ::= <Function Declaration> <Declaration List> */
+Nany::Ast::Node* Rule_DeclarationList(struct TokenStruct *Token, struct ContextStruct *Context)
+{
+	Nany::Ast::FunctionDeclarationNode* funcDecl = dynamic_cast<Nany::Ast::FunctionDeclarationNode*>(ParseChild(Token, Context, 0));
+	assert(nullptr != funcDecl && "Invalid dynamic cast !");
+
+	Nany::Ast::DeclarationListNode* declList = dynamic_cast<Nany::Ast::DeclarationListNode*>(ParseChild(Token, Context, 1));
+	if (!declList)
+		declList = new Nany::Ast::DeclarationListNode();
+	declList->prepend(funcDecl);
+
+	return declList;
+};
+
+
+
+
+/* <Declaration List> ::= <Optional Visibility Qualifier> <Class Declaration> <Declaration List> */
+Nany::Ast::Node* Rule_DeclarationList2(struct TokenStruct *Token, struct ContextStruct *Context)
 {
 	return RuleTemplate(Token,Context);
 };
@@ -169,44 +208,28 @@ Nany::Ast::Node* Rule_DependencyContinued(struct TokenStruct *Token, struct Cont
 
 
 
-/* <Implementation Block> ::= <Function Declaration> <Implementation Block> */
-Nany::Ast::Node* Rule_ImplementationBlock(struct TokenStruct *Token, struct ContextStruct *Context)
+/* <Declaration List> ::= <Optional Visibility Qualifier> <Workflow Declaration> <Declaration List> */
+Nany::Ast::Node* Rule_DeclarationList3(struct TokenStruct *Token, struct ContextStruct *Context)
 {
-	return RuleTemplate(Token,Context);
+	// TODO : Handle workflows
+	return nullptr;
 };
 
 
 
 
-/* <Implementation Block> ::= <Optional Visibility Qualifier> <Class Declaration> <Implementation Block> */
-Nany::Ast::Node* Rule_ImplementationBlock2(struct TokenStruct *Token, struct ContextStruct *Context)
+/* <Declaration List> ::= <Optional Visibility Qualifier> <Enum Declaration> <Declaration List> */
+Nany::Ast::Node* Rule_DeclarationList4(struct TokenStruct *Token, struct ContextStruct *Context)
 {
-	return RuleTemplate(Token,Context);
+	// TODO : Handle enums
+	return nullptr;
 };
 
 
 
 
-/* <Implementation Block> ::= <Optional Visibility Qualifier> <Workflow Declaration> <Implementation Block> */
-Nany::Ast::Node* Rule_ImplementationBlock3(struct TokenStruct *Token, struct ContextStruct *Context)
-{
-	return RuleTemplate(Token,Context);
-};
-
-
-
-
-/* <Implementation Block> ::= <Optional Visibility Qualifier> <Enum Declaration> <Implementation Block> */
-Nany::Ast::Node* Rule_ImplementationBlock4(struct TokenStruct *Token, struct ContextStruct *Context)
-{
-	return RuleTemplate(Token,Context);
-};
-
-
-
-
-/* <Implementation Block> ::=  */
-Nany::Ast::Node* Rule_ImplementationBlock5(struct TokenStruct*, struct ContextStruct*)
+/* <Declaration List> ::=  */
+Nany::Ast::Node* Rule_DeclarationList5(struct TokenStruct*, struct ContextStruct*)
 {
 	return nullptr;
 };
@@ -712,8 +735,18 @@ Nany::Ast::Node* Rule_EnumContent(struct TokenStruct *Token, struct ContextStruc
 /* <Function Declaration> ::= <Optional Optim Qualifier> function Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> '{' <Expression> '}' */
 Nany::Ast::Node* Rule_FunctionDeclaration_function_Identifier_LBrace_RBrace(struct TokenStruct *Token, struct ContextStruct *Context)
 {
-	return RuleTemplate(Token,Context);
-};
+	Nany::Ast::Node* body = ParseChild(Token, Context, 10);
+
+	// TODO : Almost everything... optims, parameters, in and out blocks
+
+	// Read the name of the function
+	assert(nullptr == ParseChild(Token, Context, 2) && "Child must be a symbol !");
+	assert(Context->ReturnValue && "Symbol must not be empty !");
+
+	Nany::Ast::Node* result = new Nany::Ast::FunctionDeclarationNode(Context->ReturnValue, body);
+	free(Context->ReturnValue);
+	return result;
+}
 
 
 
@@ -1241,9 +1274,9 @@ Nany::Ast::Node* Rule_ElseExpression_else(struct TokenStruct *Token, struct Cont
 
 
 /* <Else Expression> ::=  */
-Nany::Ast::Node* Rule_ElseExpression(struct TokenStruct *Token, struct ContextStruct *Context)
+Nany::Ast::Node* Rule_ElseExpression(struct TokenStruct*, struct ContextStruct*)
 {
-	return RuleTemplate(Token,Context);
+	return nullptr;
 };
 
 
@@ -1594,19 +1627,25 @@ Nany::Ast::Node* Rule_Value_LParan_RParan(struct TokenStruct *Token, struct Cont
 /* <Value> ::= Identifier <Subscript> */
 Nany::Ast::Node* Rule_Value_Identifier(struct TokenStruct *Token, struct ContextStruct *Context)
 {
-	RuleTemplate(Token,Context);
+	assert(nullptr == ParseChild(Token, Context, 0) && "Symbol parsing must return null");
 	assert(Context->ReturnValue && "Identifier node must have a value !");
-	Yuni::String data(Context->ReturnValue);
-	return new Nany::Ast::IdentifierNode(data);
+	Yuni::String identifier(Context->ReturnValue);
+	free(Context->ReturnValue);
+
+	Nany::Ast::Node* child1 = ParseChild(Token, Context, 1);
+	if (nullptr != child1)
+		return child1; // TODO
+
+	return new Nany::Ast::IdentifierNode(identifier);
 };
 
 
 
 
 /* <Subscript> ::=  */
-Nany::Ast::Node* Rule_Subscript(struct TokenStruct *Token, struct ContextStruct *Context)
+Nany::Ast::Node* Rule_Subscript(struct TokenStruct*, struct ContextStruct*)
 {
-	return RuleTemplate(Token,Context);
+	return nullptr;
 };
 
 
@@ -1638,7 +1677,7 @@ Nany::Ast::Node* Rule_Subscript_LParan_RParan(struct TokenStruct *Token, struct 
 Nany::Ast::Node* (*RuleJumpTable[])(struct TokenStruct *Token, struct ContextStruct *Context) =
 {
 
-	/* 0. <Program> ::= <Unit Declaration> <Dependencies> <Implementation Block> */
+	/* 0. <Program> ::= <Unit Declaration> <Dependencies> <Declaration List> */
 	Rule_Program,
 
 	/* 1. <Unit Declaration> ::= <Optional Visibility Qualifier> unit Identifier ';' */
@@ -1662,20 +1701,20 @@ Nany::Ast::Node* (*RuleJumpTable[])(struct TokenStruct *Token, struct ContextStr
 	/* 7. <Dependency Continued> ::=  */
 	Rule_DependencyContinued,
 
-	/* 8. <Implementation Block> ::= <Function Declaration> <Implementation Block> */
-	Rule_ImplementationBlock,
+	/* 8. <Declaration List> ::= <Function Declaration> <Declaration List> */
+	Rule_DeclarationList,
 
-	/* 9. <Implementation Block> ::= <Optional Visibility Qualifier> <Class Declaration> <Implementation Block> */
-	Rule_ImplementationBlock2,
+	/* 9. <Declaration List> ::= <Optional Visibility Qualifier> <Class Declaration> <Declaration List> */
+	Rule_DeclarationList2,
 
-	/* 10. <Implementation Block> ::= <Optional Visibility Qualifier> <Workflow Declaration> <Implementation Block> */
-	Rule_ImplementationBlock3,
+	/* 10. <Declaration List> ::= <Optional Visibility Qualifier> <Workflow Declaration> <Declaration List> */
+	Rule_DeclarationList3,
 
-	/* 11. <Implementation Block> ::= <Optional Visibility Qualifier> <Enum Declaration> <Implementation Block> */
-	Rule_ImplementationBlock4,
+	/* 11. <Declaration List> ::= <Optional Visibility Qualifier> <Enum Declaration> <Declaration List> */
+	Rule_DeclarationList4,
 
-	/* 12. <Implementation Block> ::=  */
-	Rule_ImplementationBlock5,
+	/* 12. <Declaration List> ::=  */
+	Rule_DeclarationList5,
 
 	/* 13. <Literal> ::= BooleanLiteral */
 	Rule_Literal_BooleanLiteral,
@@ -2282,14 +2321,14 @@ static wchar_t *LoadInputFile(const char *FileName)
 	}
 
 	/* Allocate memory for the input. */
-	Buf1 = (char *)malloc(statbuf.st_size + 1);
-	Buf2 = (wchar_t *)malloc(sizeof(wchar_t) * (statbuf.st_size + 1));
+	Buf1 = new char[statbuf.st_size + 1];//(char *)malloc(statbuf.st_size + 1);
+	Buf2 = new wchar_t[sizeof(wchar_t) * (statbuf.st_size + 1)]; //(wchar_t *)malloc(sizeof(wchar_t) * (statbuf.st_size + 1));
 	if ((Buf1 == NULL) || (Buf2 == NULL))
 	{
 		std::cerr << "Not enough memory to load the file: " << FileName << std::endl;
 		fclose(Fin);
-		if (Buf1 != NULL) free(Buf1);
-		if (Buf2 != NULL) free(Buf2);
+		if (Buf1 != NULL) delete Buf1;
+		if (Buf2 != NULL) delete Buf2;
 		return NULL;
 	}
 
@@ -2304,17 +2343,17 @@ static wchar_t *LoadInputFile(const char *FileName)
 	if (BytesRead != (size_t)statbuf.st_size)
 	{
 		std::cerr << "Error while reading input file: " << FileName << std::endl;
-		free(Buf1);
-		free(Buf2);
+		delete Buf1;
+		delete Buf2;
 		return NULL;
 	}
 
 	/* Convert from ASCII to Unicode. */
 	for (i = 0; i <= BytesRead; i++)
 		Buf2[i] = Buf1[i];
-	free(Buf1);
+	delete Buf1;
 
-	return(Buf2);
+	return Buf2;
 }
 
 
@@ -2437,6 +2476,6 @@ Nany::Ast::Node* parseFile(const char* filePath)
 
 	// Cleanup.
 	DeleteTokens(token);
-	free(inputBuf);
+	delete inputBuf;
 	return tree;
 }
