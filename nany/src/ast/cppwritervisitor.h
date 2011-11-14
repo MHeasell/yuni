@@ -17,8 +17,36 @@ namespace Ast
 	class CppWriterVisitor: public Visitor
 	{
 	public:
-		CppWriterVisitor(std::ofstream& stream): pOut(stream)
+		CppWriterVisitor(std::ofstream& stream):
+			pOut(stream),
+			pFunctionScope(false)
 		{}
+
+
+		virtual void visit(ProgramNode* node)
+		{
+			node->unitDeclaration()->accept(this);
+			node->declarations()->accept(this);
+		}
+
+		virtual void visit(DeclarationListNode* node)
+		{
+			const DeclarationListNode::Vector& declList = node->declarations();
+			DeclarationListNode::Vector::iterator end = declList.end();
+			for (DeclarationListNode::Vector::iterator it = declList.begin(); it != end; ++it)
+				it->accept(this);
+		}
+
+		virtual void visit(FunctionDeclarationNode* node)
+		{
+			// TODO : handle parameters
+			pOut << node->returnType()->name() << " " << node->name() << '(' << ')' << std::endl
+				 << '{' << std::endl;
+			pFunctionScope = true;
+			node->body()->accept(this);
+			pFunctionScope = false;
+			pOut << '}' << std::endl;
+		}
 
 		virtual void visit(IdentifierNode* node)
 		{
@@ -59,6 +87,13 @@ namespace Ast
 	private:
 		//! Stream to the destination C++ file
 		std::ofstream& pOut;
+
+		/*!
+		** \brief Are we at the lowest scope inside a function ?
+		**
+		** This is useful to know when we might need to add a return keyword.
+		*/
+		bool pFunctionScope;
 	};
 
 

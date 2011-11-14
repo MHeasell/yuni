@@ -15,6 +15,19 @@ namespace Ast
 	class Visitor
 	{
 	public:
+
+		virtual void visit(ProgramNode*)
+		{}
+
+		virtual void visit(UnitDeclarationNode*)
+		{}
+
+		virtual void visit(DeclarationListNode* node)
+		{}
+
+		virtual void visit(FunctionDeclarationNode*)
+		{}
+
 		virtual void visit(IdentifierNode*)
 		{}
 

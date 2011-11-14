@@ -22,6 +22,9 @@ namespace Ast
 		LiteralNode(DataT other): data(other)
 		{}
 
+		virtual ~LiteralNode()
+		{}
+
 		virtual void accept(Visitor* visitor)
 		{
 			visitor->visit(this);

@@ -20,6 +20,9 @@ namespace Ast
 		IdentifierNode(const StringT& other): data(other)
 		{}
 
+		virtual ~IdentifierNode()
+		{}
+
 		virtual void accept(Visitor* visitor)
 		{
 			visitor->visit(this);

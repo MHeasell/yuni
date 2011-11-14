@@ -1,0 +1,28 @@
+
+CC = gcc
+
+CXX = g++
+
+CFLAGS = -Wall -W -ansi -ggdb  -I../../src/
+
+CXXFLAGS = -Wall -W -ggdb  -I../../src/
+
+SRC = main.cpp parser/parser.cpp
+
+OBJ = $(SRC:.cpp=.o)
+
+NAME = nanyc
+
+
+all: $(NAME) $(CPPWRITER)
+
+$(NAME): $(OBJ) parser/engine.o
+	$(CXX) $(CXXFLAGS) $(OBJ) parser/engine.o -o $(NAME)
+
+clean:
+	rm -f *~ \#*
+	rm -f *.o
+	rm -f parser/*.o
+
+distclean: clean
+	rm -f $(DEBUGPARSER) $(CPPWRITER)
