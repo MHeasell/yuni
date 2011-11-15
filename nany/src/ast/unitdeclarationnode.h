@@ -20,7 +20,9 @@ namespace Ast
 	{
 	public:
 		template<class StringT>
-		UnitDeclarationNode(bool isProgram, const StringT& name): pUnitName(name)
+		UnitDeclarationNode(bool isProgram, const StringT& name):
+			pIsProgram(isProgram),
+			pUnitName(name)
 		{}
 
 		virtual ~UnitDeclarationNode()

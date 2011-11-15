@@ -5,9 +5,11 @@ CXX = g++
 
 CFLAGS = -Wall -W -ansi -ggdb -I../../src/
 
-CXXFLAGS = -Wall -W -ggdb -I../../src/
+CXXFLAGS = -Wall -W -std=gnu++0x -ggdb -I../../src/
 
-SRC = main.cpp parser/parser.cpp
+LDFLAGS = -L../../src/build/debug/lib -l"yuni-static-core"
+
+SRC = main.cpp parser/parser.cpp ast/type.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
@@ -17,7 +19,7 @@ NAME = nanyc.exe
 all: $(NAME)
 
 $(NAME): $(OBJ) parser/engine.o
-	$(CXX) $(CXXFLAGS) $(OBJ) parser/engine.o -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJ) parser/engine.o $(LDFLAGS) -o $(NAME)
 
 clean:
 	del /Q *~

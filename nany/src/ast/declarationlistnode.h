@@ -18,14 +18,18 @@ namespace Ast
 	class DeclarationListNode: public Node
 	{
 	public:
-		typedef std::list<Node*>  Vector;
+		typedef std::list<Node*>  List;
 
 	public:
-		DeclarationListNode(): pDeclarations()
+		DeclarationListNode()
 		{}
 
 		virtual ~DeclarationListNode()
-		{}
+		{
+			List::iterator end = pDeclarations.end();
+			for (List::iterator it = pDeclarations.begin(); it != end; ++it)
+				delete *it;
+		}
 
 		virtual void accept(Visitor* visitor)
 		{
@@ -37,10 +41,10 @@ namespace Ast
 			pDeclarations.push_front(child);
 		}
 
-		const Vector& declarations() { return pDeclarations; }
+		List& declarations() { return pDeclarations; }
 
 	private:
-		Vector pDeclarations;
+		List pDeclarations;
 	};
 
 

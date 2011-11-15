@@ -16,8 +16,23 @@ namespace Ast
 	class Node
 	{
 	public:
+		Node(): pType(nullptr)
+		{}
+
+		virtual ~Node() {}
+
 		//! All nodes must implement visitor acceptance
 		virtual void accept(Visitor*) = 0;
+
+		void type(Type* newType)
+		{
+			pType = newType;
+		}
+
+		Type* type() const
+		{
+			return pType;
+		}
 
 	protected:
 		//! Types are flyweight patterns, stored as a static map in Nany::Ast::Type.

@@ -2,6 +2,7 @@
 # define __NANY_AST_VISITOR_H__
 
 # include "fwd.h"
+# include "type.h"
 
 namespace Nany
 {
@@ -22,10 +23,19 @@ namespace Ast
 		virtual void visit(UnitDeclarationNode*)
 		{}
 
-		virtual void visit(DeclarationListNode* node)
+		virtual void visit(DeclarationListNode*)
 		{}
 
 		virtual void visit(FunctionDeclarationNode*)
+		{}
+
+		virtual void visit(ExpressionListNode*)
+		{}
+
+		virtual void visit(ParallelExpressionNode*)
+		{}
+
+		virtual void visit(TypeExpressionNode*)
 		{}
 
 		virtual void visit(IdentifierNode*)
@@ -47,6 +57,12 @@ namespace Ast
 		{}
 
 		virtual void visit(LiteralNode<const char*>*)
+		{}
+
+		virtual void visit(LiteralNode<void*>*)
+		{}
+
+		virtual void visit(LiteralNode<Type*>*)
 		{}
 
 	};

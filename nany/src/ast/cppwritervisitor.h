@@ -31,21 +31,51 @@ namespace Ast
 
 		virtual void visit(DeclarationListNode* node)
 		{
-			const DeclarationListNode::Vector& declList = node->declarations();
-			DeclarationListNode::Vector::iterator end = declList.end();
-			for (DeclarationListNode::Vector::iterator it = declList.begin(); it != end; ++it)
-				it->accept(this);
+			DeclarationListNode::List& declList = node->declarations();
+			DeclarationListNode::List::iterator end = declList.end();
+			for (DeclarationListNode::List::iterator it = declList.begin(); it != end; ++it)
+				(*it)->accept(this);
 		}
 
 		virtual void visit(FunctionDeclarationNode* node)
 		{
-			// TODO : handle parameters
-			pOut << node->returnType()->name() << " " << node->name() << '(' << ')' << std::endl
+			if (node->returnType())
+			{
+				node->returnType()->accept(this);
+				pOut << " ";
+			}
+			else
+				pOut << "void ";
+			// TODO : handle parameter list
+			pOut << node->name() << '(' << ')' << std::endl
 				 << '{' << std::endl;
 			pFunctionScope = true;
-			node->body()->accept(this);
+			if (node->body())
+				node->body()->accept(this);
 			pFunctionScope = false;
 			pOut << '}' << std::endl;
+		}
+
+		virtual void visit(ExpressionListNode* node)
+		{
+			ExpressionListNode::List& exprList = node->expressions();
+			ExpressionListNode::List::iterator end = exprList.end();
+			for (ExpressionListNode::List::iterator it = exprList.begin(); it != end; ++it)
+			{
+				(*it)->accept(this);
+				pOut << ';' << std::endl;
+			}
+		}
+
+		virtual void visit(ParallelExpressionNode* node)
+		{
+			// TODO : parallelize the expression
+			node->expression()->accept(this);
+		}
+
+		virtual void visit(TypeExpressionNode* node)
+		{
+			node->expression()->accept(this);
 		}
 
 		virtual void visit(IdentifierNode* node)
@@ -81,6 +111,16 @@ namespace Ast
 		virtual void visit(LiteralNode<const char*>* node)
 		{
 			pOut << '\"' << node->data << '\"';
+		}
+
+		virtual void visit(LiteralNode<void*>* node)
+		{
+			pOut << "(void*)" << node->data;
+		}
+
+		virtual void visit(LiteralNode<Type*>* node)
+		{
+			pOut << node->data->name();
 		}
 
 
