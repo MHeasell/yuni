@@ -216,14 +216,14 @@ namespace Extension
 	// nulptr
 
 	template<class SizeT>
-	class Length<NullPtr, SizeT>
+	class Length<YuniNullPtr, SizeT>
 	{
 	public:
 		typedef SizeT SizeType;
 		enum { valid = 1, isFixed = 1, fixedLength = 1, };
 
 	public:
-		static SizeT Value(const Yuni::NullPtr&)
+		static SizeT Value(const YuniNullPtr&)
 		{
 			return 0;
 		}

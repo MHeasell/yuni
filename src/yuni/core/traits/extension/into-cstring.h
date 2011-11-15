@@ -138,13 +138,13 @@ namespace Extension
 
 
 	template<>
-	class IntoCString<NullPtr>
+	class IntoCString<YuniNullPtr>
 	{
 	public:
 		enum { valid = 1, converted = 0, zeroTerminated = 1, };
 
 	public:
-		static const char* Perform(const Yuni::NullPtr&)
+		static const char* Perform(const YuniNullPtr&)
 		{
 			return NULL;
 		}

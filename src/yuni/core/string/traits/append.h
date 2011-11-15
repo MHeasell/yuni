@@ -99,10 +99,10 @@ namespace CString
 
 	// nullptr
 	template<class CStringT>
-	class Append<CStringT, Yuni::NullPtr>
+	class Append<CStringT, YuniNullPtr>
 	{
 	public:
-		static void Perform(CStringT&, const Yuni::NullPtr&)
+		static void Perform(CStringT&, const YuniNullPtr&)
 		{ /* Do nothing */ }
 	};
 
