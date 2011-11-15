@@ -138,10 +138,10 @@ namespace CString
 
 	// nullptr
 	template<class CStringT>
-	class Assign<CStringT, Yuni::NullPtr>
+	class Assign<CStringT, YuniNullPtr>
 	{
 	public:
-		static void Perform(CStringT& s, const Yuni::NullPtr&)
+		static void Perform(CStringT& s, const YuniNullPtr&)
 		{
 			s.clear();
 		}

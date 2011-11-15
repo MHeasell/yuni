@@ -93,7 +93,7 @@
 /* Have int128_t, from stdint.h */
 #cmakedefine YUNI_HAS_INT128_T
 
-/* C++0x support: nullptr */
+/* C++0x support: nullptr (GCC: only >= 4.6 with -std=gnu++0x, VS: only >= 10) */
 #cmakedefine YUNI_HAS_NULLPTR
 
 /* gcc __sync_add_and_fetch */

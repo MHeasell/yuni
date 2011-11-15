@@ -3,6 +3,11 @@
 
 # ifdef __cplusplus /* Only with a C++ Compiler */
 
+/* nullptr_t does not exist in GCC 4.5 */
+# if YUNI_OS_GCC_VERSION >= 40000 && YUNI_OS_GCC_VERSION < 40600
+#	undef YUNI_HAS_NULLPTR
+# endif
+
 # ifdef YUNI_HAS_NULLPTR
 #	include <cstddef>
 # endif
@@ -39,7 +44,7 @@ public:
 		return 0;
 	}
 
-# if YUNI_OS_GCC_VERSION >= 40400
+	# if YUNI_OS_GCC_VERSION >= 40400
 	template<class T> bool operator == (const T* rhs) const
 	{
 		return !rhs;
@@ -49,7 +54,7 @@ public:
 	{
 		return (NULL != rhs);
 	}
-# endif
+	# endif
 
 private:
 	void operator&() const;  /* Can't take address of nullptr */
@@ -57,7 +62,7 @@ private:
 } nullptr = {};
 
 
-# endif // nullptr support
+# endif /* nullptr support */
 
 
 namespace Yuni
