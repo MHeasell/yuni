@@ -2,5 +2,5 @@ program ifMissingExpression;
 
 function main
 {
-	if true then  else 0;
+	if true then  else 0
 }
