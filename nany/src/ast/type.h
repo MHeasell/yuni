@@ -51,17 +51,18 @@ namespace Ast
 	private:
 		static void RegisterBuiltinTypes()
 		{
-			sTypeMap["void"] = new Type("void");
-			sTypeMap["int"] = new Type("int");
-			sTypeMap["uint"] = new Type("unsigned int");
-			sTypeMap["int64"] = new Type("long long");
-			sTypeMap["uint64"] = new Type("unsigned long long");
-			sTypeMap["int32"] = new Type("long");
-			sTypeMap["uint32"] = new Type("unsigned long");
-			sTypeMap["int16"] = new Type("short");
-			sTypeMap["uint16"] = new Type("unsigned short");
-			sTypeMap["char"] = new Type("char");
-			sTypeMap["string"] = new Type("char*");
+			Yuni::String s;
+			sTypeMap[(s = "void")] = new Type("void");
+			sTypeMap[(s = "int")] = new Type("int");
+			sTypeMap[(s = "uint")] = new Type("unsigned int");
+			sTypeMap[(s = "int64")] = new Type("long long");
+			sTypeMap[(s = "uint64")] = new Type("unsigned long long");
+			sTypeMap[(s = "int32")] = new Type("long");
+			sTypeMap[(s = "uint32")] = new Type("unsigned long");
+			sTypeMap[(s = "int16")] = new Type("short");
+			sTypeMap[(s = "uint16")] = new Type("unsigned short");
+			sTypeMap[(s = "char")] = new Type("char");
+			sTypeMap[(s = "string")] = new Type("char*");
 		}
 
 
