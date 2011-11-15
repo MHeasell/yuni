@@ -27,6 +27,13 @@ namespace Ast
 			pReturnType(nullptr)
 		{}
 
+		template<class StringT>
+		FunctionDeclarationNode(const StringT& name, Node* body, TypeExpressionNode* returnType):
+			pFunctionName(name),
+			pBody(body),
+			pReturnType(returnType)
+		{}
+
 		virtual void accept(Visitor* visitor)
 		{
 			visitor->visit(this);
@@ -36,7 +43,7 @@ namespace Ast
 
 		Nany::Ast::Node* body() const { return pBody; }
 
-		const Type* returnType() const { return pReturnType; }
+		TypeExpressionNode* returnType() const { return pReturnType; }
 
 	private:
 		//! Identifier representing the name of the unit or program
@@ -46,7 +53,7 @@ namespace Ast
 		Node* pBody;
 
 		//! Return type of the function
-		Type* pReturnType;
+		TypeExpressionNode* pReturnType;
 	};
 
 

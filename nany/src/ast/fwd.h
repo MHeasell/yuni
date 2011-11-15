@@ -21,6 +21,15 @@ namespace Ast
 	//! Function declaration
 	class FunctionDeclarationNode;
 
+	//! List of expressions separated by semi-commas
+	class ExpressionListNode;
+
+	//! Expression that parallelizes the execution of a contained expression
+	class ParallelExpressionNode;
+
+	//! Expression representing a type
+	class TypeExpressionNode;
+
 	//! A type or variable identifier
 	class IdentifierNode;
 

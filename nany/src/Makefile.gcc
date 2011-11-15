@@ -3,21 +3,23 @@ CC = gcc
 
 CXX = g++
 
-CFLAGS = -Wall -W -ansi -ggdb  -I../../src/
+CFLAGS = -Wall -W -ansi -ggdb -I../../src/
 
-CXXFLAGS = -Wall -W -ggdb  -I../../src/
+CXXFLAGS = -Wall -W -std=gnu++0x -ggdb -I../../src/
 
-SRC = main.cpp parser/parser.cpp
+LDFLAGS = -L../../src/build/debug/lib -l"yuni-static-core"
+
+SRC = main.cpp parser/parser.cpp ast/type.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
 NAME = nanyc
 
 
-all: $(NAME) $(CPPWRITER)
+all: $(NAME)
 
 $(NAME): $(OBJ) parser/engine.o
-	$(CXX) $(CXXFLAGS) $(OBJ) parser/engine.o -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJ) parser/engine.o $(LDFLAGS) -o $(NAME)
 
 clean:
 	rm -f *~ \#*
@@ -25,4 +27,4 @@ clean:
 	rm -f parser/*.o
 
 distclean: clean
-	rm -f $(DEBUGPARSER) $(CPPWRITER)
+	rm -f $(NAME)
