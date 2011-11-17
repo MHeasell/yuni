@@ -47,7 +47,7 @@ Comment End = '*#' | '*/'
 ! -------------------------------------------------
 
 ! The grammar starts below
-<Program> ::= <Unit Declaration> <Dependencies> <Implementation Block>
+<Program> ::= <Unit Declaration> <Dependencies> <Declaration List>
 
 <Unit Declaration> ::= <Optional Visibility Qualifier> 'unit' Identifier ';'
                | 'program' Identifier ';'
@@ -60,10 +60,10 @@ Comment End = '*#' | '*/'
 <Dependency Continued> ::= '.' Identifier <Dependency Continued>
                | ! Empty
 
-<Implementation Block> ::= <Function Declaration> <Implementation Block>
-               | <Optional Visibility Qualifier> <Class Declaration> <Implementation Block>
-               | <Optional Visibility Qualifier> <Workflow Declaration> <Implementation Block>
-               | <Optional Visibility Qualifier> <Enum Declaration> <Implementation Block>
+<Declaration List> ::= <Function Declaration> <Declaration List>
+               | <Optional Visibility Qualifier> <Class Declaration> <Declaration List>
+               | <Optional Visibility Qualifier> <Workflow Declaration> <Declaration List>
+               | <Optional Visibility Qualifier> <Enum Declaration> <Declaration List>
                | ! Empty
 
 ! -------------------------------------------------
