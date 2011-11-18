@@ -21,14 +21,14 @@ namespace Ast
 	{
 	public:
 		template<class StringT>
-		FunctionDeclarationNode(const StringT& name, Node* body):
+		FunctionDeclarationNode(const StringT& name, ScopeNode* body):
 			pFunctionName(name),
 			pBody(body),
 			pReturnType(nullptr)
 		{}
 
 		template<class StringT>
-		FunctionDeclarationNode(const StringT& name, Node* body, TypeExpressionNode* returnType):
+		FunctionDeclarationNode(const StringT& name, ScopeNode* body, TypeExpressionNode* returnType):
 			pFunctionName(name),
 			pBody(body),
 			pReturnType(returnType)
@@ -41,7 +41,7 @@ namespace Ast
 
 		const Yuni::String& name() const { return pFunctionName; }
 
-		Nany::Ast::Node* body() const { return pBody; }
+		ScopeNode* body() const { return pBody; }
 
 		TypeExpressionNode* returnType() const { return pReturnType; }
 
@@ -50,7 +50,7 @@ namespace Ast
 		Yuni::String pFunctionName;
 
 		//! The body of the function is an expression
-		Node* pBody;
+		ScopeNode* pBody;
 
 		//! Return type of the function
 		TypeExpressionNode* pReturnType;

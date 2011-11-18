@@ -29,6 +29,9 @@ namespace Ast
 		virtual void visit(FunctionDeclarationNode*)
 		{}
 
+		virtual void visit(ScopeNode*)
+		{}
+
 		virtual void visit(ExpressionListNode*)
 		{}
 

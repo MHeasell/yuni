@@ -21,6 +21,9 @@ namespace Ast
 	//! Function declaration
 	class FunctionDeclarationNode;
 
+	//! Scope
+	class ScopeNode;
+
 	//! List of expressions separated by semi-commas
 	class ExpressionListNode;
 
