@@ -766,7 +766,8 @@ Nany::Ast::Node* Rule_EnumContent(struct TokenStruct* token)
 Nany::Ast::Node* Rule_FunctionDeclaration_function_Identifier_LBrace_RBrace(struct TokenStruct* token)
 {
 	// Read the body of the function
-	Nany::Ast::Node* body = ParseChild<Nany::Ast::Node>(token, 9);
+	Nany::Ast::Node* bodyExpr = ParseChild<Nany::Ast::Node>(token, 9);
+	Nany::Ast::ScopeNode* body = new Nany::Ast::ScopeNode(bodyExpr);
 
 	// TODO : Almost everything... optims, parameters, in and out blocks
 
@@ -1139,8 +1140,17 @@ Nany::Ast::Node* Rule_TypeArgumentsContinued(struct TokenStruct* token)
 Nany::Ast::Node* Rule_Expression(struct TokenStruct* token)
 {
 	Nany::Ast::Node* expr = ParseChild<>(token, 0);
-	Nany::Ast::ExpressionListNode* list = ParseChild<Nany::Ast::ExpressionListNode>(token, 1);
-	list->prepend(expr);
+	Nany::Ast::Node* recursive = ParseChild<Nany::Ast::Node>(token, 1);
+
+	if (!recursive)
+		return expr;
+
+	Nany::Ast::ExpressionListNode* list = dynamic_cast<Nany::Ast::ExpressionListNode*>(recursive);
+	if (!list)
+	{
+		list = new Nany::Ast::ExpressionListNode();
+		list->prepend(expr);
+	}
 	return list;
 }
 
@@ -1159,7 +1169,7 @@ Nany::Ast::Node* Rule_ExpressionList_Semi(struct TokenStruct* token)
 // <Expression List> ::= 
 Nany::Ast::Node* Rule_ExpressionList(struct TokenStruct* token)
 {
-	return new Nany::Ast::ExpressionListNode();
+	return nullptr;
 }
 
 

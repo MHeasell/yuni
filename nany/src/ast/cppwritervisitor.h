@@ -47,12 +47,18 @@ namespace Ast
 			else
 				pOut << "void ";
 			// TODO : handle parameter list
-			pOut << node->name() << '(' << ')' << std::endl
-				 << '{' << std::endl;
+			pOut << node->name() << '(' << ')' << std::endl;
 			pFunctionScope = true;
-			if (node->body())
-				node->body()->accept(this);
+			node->body()->accept(this);
 			pFunctionScope = false;
+		}
+
+		virtual void visit(ScopeNode* node)
+		{
+			pOut << '{' << std::endl;
+			if (node->expression())
+				node->expression()->accept(this);
+			pOut << ';' << std::endl;
 			pOut << '}' << std::endl;
 		}
 
