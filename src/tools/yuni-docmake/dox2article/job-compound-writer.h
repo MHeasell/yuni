@@ -55,7 +55,7 @@ namespace Job
 		void appendClassSection(const Section& section, bool isAbstract);
 		void prepareClassSubtitle(const Section& section);
 		void appendClassFunction(const Member& member, bool isPublic);
-		void appendClassTypedef(bool isPublic);
+		void appendClassTypedef(const Member& member, bool isPublic);
 		void appendClassVariable();
 
 	private:

@@ -54,6 +54,7 @@ namespace Dox2Article
 	public:
 		CompoundType  kind;
 		String id;
+		String htmlID;
 		String name;
 		String brief;
 		String detailedDescription;

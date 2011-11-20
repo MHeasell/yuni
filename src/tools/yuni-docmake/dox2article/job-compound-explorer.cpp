@@ -145,6 +145,7 @@ namespace Job
 				Section::Ptr section = pSections.front();
 				Member* member = new Member();
 				member->id = element.Attribute("id");
+				IO::ExtractFileName(member->htmlID, member->id);
 				member->kind = Compound::StringToKind(StringAdapter(element.Attribute("kind")));
 				if (member->kind == kdUnknown)
 					logs.warning() << "unknown type: " << StringAdapter(element.Attribute("kind"));
