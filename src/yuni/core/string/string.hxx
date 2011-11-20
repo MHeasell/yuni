@@ -1904,7 +1904,7 @@ namespace Yuni
 			{
 				// Actually we have to erase a part of the cstr
 				(void)::memmove(AncestorType::data + sizeof(Char) * (offset),
-					AncestorType::data + sizeof(Char) * (offset + len), sizeof(Char) * (AncestorType::size - offset));
+					AncestorType::data + sizeof(Char) * (offset + len), sizeof(Char) * (AncestorType::size - offset - len));
 				// Reducing the cstr's size
 				AncestorType::size -= len;
 			}
