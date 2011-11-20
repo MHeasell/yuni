@@ -186,7 +186,10 @@ namespace Job
 			if (fileOut.notEmpty())
 				fileOut << "<h2>Detailed Description</h2>";
 			if (pCompound->description.notEmpty())
-				fileOut << "<div>" << pCompound->description << "</div>\n";
+			{
+				fileOut << "<div>" << pCompound->description
+					<< "</div><div style=\"margin-top:3em;border:1px solid #aaa;border-bottom-style:none;border-left-style:none;border-right-style:none\"></div>\n";
+			}
 
 			// Writing indexes
 			file << fileOut;
@@ -396,7 +399,7 @@ namespace Job
 			out << "</td><td class=\"doxnone\"><div class=\"doxygen_brief\">";
 
 			if (member.brief.notEmpty())
-				out << member.brief << "<div class=\"doxygen_name_spacer\"></div>\n";
+				out << "<b>" << member.brief << "</b><div class=\"doxygen_name_spacer\"></div>\n";
 			out << "<code>";
 
 			switch (member.kind)
