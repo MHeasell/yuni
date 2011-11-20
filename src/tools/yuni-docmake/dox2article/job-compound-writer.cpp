@@ -408,7 +408,7 @@ namespace Job
 					appendClassFunction(member, isPublic);
 					break;
 				case kdTypedef:
-					appendClassTypedef(isPublic);
+					appendClassTypedef(member, isPublic);
 					break;
 				case kdVariable:
 					appendClassVariable();
@@ -423,7 +423,7 @@ namespace Job
 			out << "</div></td>";
 
 			out << "</tr>";
-			out << "<tr id=\"" << id << "_desc\"><td class=\"doxnone doxreturn\"></td><td class=\"doxnone\">\n";
+			out << "<tr><td class=\"doxnone doxreturn\"></td><td class=\"doxnone\">\n";
 			out << "<div class=\"doxygen_name_spacer\"></div>\n<div class=\"doxygen_desc\">";
 
 			if (member.detailedDescription.notEmpty())
@@ -451,7 +451,7 @@ namespace Job
 
 		if (!member.templates.empty())
 		{
-			out << "<div class=\"doxygen_tmpllist\" id=\"" << id << "_tmpl\">";
+			out << "<div class=\"doxygen_tmpllist\">";
 			out << "<span class=\"keyword\">template</span>&lt;";
 			for (unsigned int p = 0; p != member.templates.size(); ++p)
 			{
@@ -471,13 +471,13 @@ namespace Job
 		{
 			String t = name;
 			t.replace("~", "<b> ~ </b>");
-			out << " <span class=\"method\"><a href=\"#\">" << umlSymbol << ' ' << t << "</a></span>";
-			outIx << " <span class=\"method\"><a href=\"#\">" << t << "</a></span>";
+			out << " <span class=\"method\"><a name=\"" << member.htmlID << "\" href=\"#\">" << umlSymbol << ' ' << t << "</a></span>";
+			outIx << " <span class=\"method\"><a href=\"#" << member.htmlID << "\">" << t << "</a></span>";
 		}
 		else
 		{
-			out << " <span class=\"method\"><a href=\"#\">" << umlSymbol << ' ' << name << "</a></span>";
-			outIx << " <span class=\"method\"><a href=\"#\">" << name << "</a></span>";
+			out << " <span class=\"method\"><a name=\"" << member.htmlID << "\" href=\"#\">" << umlSymbol << ' ' << name << "</a></span>";
+			outIx << " <span class=\"method\"><a href=\"#" << member.htmlID << "\">" << name << "</a></span>";
 		}
 
 		out << ": ";
@@ -516,21 +516,21 @@ namespace Job
 
 
 
-	void CompoundWriter::appendClassTypedef(bool isPublic)
+	void CompoundWriter::appendClassTypedef(const Member& member, bool isPublic)
 	{
 		Clob& outIx = outC[isPublic][kdTypedef];
 		if (outIx.empty())
 			outIx << "<table class=\"nostyle\">";
-		outIx
-			<< "<tr><td class=\"doxygen_index\"><code><span class=\"keyword\">typedef</span></code></td>"
-			<< "<td class=\"doxygen_index_def\"><code><span class=\"method\"><a href=\"#\">" << name << "</a></span> : "
-			<< type
-			<< "</code></td></tr>\n";
 		out
-			<< "<span class=\"method\"><a href=\"#\">" << umlSymbol << ' ' << name << "</a></span>"
+			<< "<span class=\"method\"><a name=\"" << member.htmlID << "\" href=\"#\">" << umlSymbol << ' ' << name << "</a></span>"
 			<< ": <span class=\"keyword\">typedef</span> "
 			<< type
 			<< ";\n";
+		outIx
+			<< "<tr><td class=\"doxygen_index\"><code><span class=\"keyword\">typedef</span></code></td>"
+			<< "<td class=\"doxygen_index_def\"><code><span class=\"method\"><a name=\"#" << member.htmlID << "\" href=\"#\">" << name << "</a></span> : "
+			<< type
+			<< "</code></td></tr>\n";
 	}
 
 
