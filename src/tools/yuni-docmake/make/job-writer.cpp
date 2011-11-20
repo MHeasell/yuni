@@ -694,12 +694,14 @@ void JobWriter::prepareVariables(const String& filenameInHtdocs)
 		pVars["TAGS_BEGIN"] = "<!--";
 		pVars["TAGS_END"]   = "-->";
 		pVars["TAGS_LIST"]  = nullptr;
+		pVars["KEYWORDS"]   = nullptr;
 	}
 	else
 	{
 		pVars["TAGS_BEGIN"] = nullptr;
 		pVars["TAGS_END"]   = nullptr;
 		String& list = pVars["TAGS_LIST"];
+		String& keywords = pVars["KEYWORDS"];
 		list << "\n\n\n\n\t<div class=\"tagindex\">\n";
 		switch (pArticle.tags.size())
 		{
@@ -713,10 +715,14 @@ void JobWriter::prepareVariables(const String& filenameInHtdocs)
 		for (Dictionary::TagSet::const_iterator i = pArticle.tags.begin(); i != end; ++i)
 		{
 			if (!first)
+			{
 				list += "\t\t, ";
+				keywords += ", ";
+			}
 			else
 				list += "\t\t";
 			list << "<a href=\"#\">" << *i << "</a>\n";
+			keywords += *i;
 			first = false;
 		}
 		list << "\t</div>\n\n";
@@ -773,6 +779,8 @@ void JobWriter::prepareVariables(const String& filenameInHtdocs)
 		tmp << "</ol>\n";
 		pVars["TOC_CONTENT"] = tmp;
 	}
+	else
+		pVars["TOC_CONTENT"].clear();
 
 
 	// Quick links
@@ -837,25 +845,28 @@ void JobWriter::onExecute()
 	if (!articleIDIndatabase())
 		return;
 
+	// temporary string
+	String key;
+
 	// Looking for the target filename
 	String filenameInHtdocs;
 	{
-		String s = pHtdocs;
+		key = pHtdocs;
 		if (pArticle.htdocsFilename != "/")
 		{
-			s << SEP << pArticle.htdocsFilename;
+			key << SEP << pArticle.htdocsFilename;
 			# ifdef YUNI_OS_WINDOWS
-			s.replace('/', '\\');
+			key.replace('/', '\\');
 			# endif
-			if (!IO::Directory::Create(s))
+			if (!IO::Directory::Create(key))
 			{
-				logs.error() << "impossible to create the directory " << s;
+				logs.error() << "impossible to create the directory " << key;
 				return;
 			}
 		}
 
-		s << SEP << Program::indexFilename;
-		IO::Normalize(filenameInHtdocs, s);
+		key << SEP << Program::indexFilename;
+		IO::Normalize(filenameInHtdocs, key);
 	}
 
 	// Console verbose / debug
@@ -872,54 +883,53 @@ void JobWriter::onExecute()
 	// Prepare all variables
 	prepareVariables(filenameInHtdocs);
 
-	String content = gTemplateContent;
-	const String& root = pVars["ROOT"];
+	CString<8192> content = gTemplateContent;
 
-	// @{TITLE}
-	content.replace("@{TITLE}", pVars["TITLE"]);
-	// @{DESCRIPTION}
-	content.replace("@{DESCRIPTION}", pVars["DESCRIPTION"]);
-
-	String tmp;
-
-	// @{URL}
-	content.replace("@{URL}", pVars["URL"]);
-
-	// @{URL_PARTS}
-	content.replace("@{URL_PARTS}",  pVars["URL_PARTS"]);
-
-	// TOC
-	content.replace("@{TOC_BEGIN}", pVars["TOC_BEGIN"]);
-	content.replace("@{TOC_END}", pVars["TOC_END"]);
-	content.replace("@{TOC_CONTENT}", pVars["TOC_CONTENT"]);
-
-	// Quick links
-	content.replace("@{QUICKLINKS_BEGIN}", pVars["QUICKLINKS_BEGIN"]);
-	content.replace("@{QUICKLINKS_END}", pVars["QUICKLINKS_END"]);
-
-	// Tags
-	content.replace("@{TAGS_BEGIN}", pVars["TAGS_BEGIN"]);
-	content.replace("@{TAGS_LIST}", pVars["TAGS_LIST"]);
-	content.replace("@{TAGS_END}", pVars["TAGS_END"]);
-
-	// @{CONTENT}
-	content.replace("@{CONTENT}", pVars["CONTENT"]);
-
-	// @{LANG}
-	content.replace("@{LANG}", pVars["LANG"]);
-
-	// @{MODIFIED}
-	content.replace("@{MODIFIED}", pVars["MODIFIED"]);
-	content.replace("@{MODIFIED_TIMESTAMP}", pVars["MODIFIED_TIMESTAMP"]);
-	content.replace("@{MODIFIED_ISO8601}", pVars["MODIFIED_ISO8601"]);
-
-	// Directory Index
-	content.replace("@{DIRECTORY_INDEX}",  pVars["DIRECTORY_INDEX"]);
-
-	// The replacement of the variable "root" must be done after all replacement
-	content.replace("@{ROOT}",  root);
-	// The index filename
-	content.replace("@{INDEX}", pVars["INDEX"]);
+	String::Size offset = 0;
+	do
+	{
+		offset = content.find("@{", offset);
+		if (offset < content.size())
+		{
+			String::Size end = content.find('}', offset + 2);
+			if (end < content.size())
+			{
+				if (end - offset < 64)
+				{
+					unsigned int length = end - offset + 1;
+					if (length < 4)
+					{
+						offset += 2;
+						logs.warning() << pArticle.relativeFilename << ": empty variable name";
+						continue;
+					}
+					key.assign(content.c_str() + offset + 2, length - 3);
+					Variables::const_iterator i = pVars.find(key);
+					if (i != pVars.end())
+					{
+						content.erase(offset, length);
+						content.insert(offset, i->second);
+					}
+					else
+					{
+						offset += 2;
+						logs.warning() << pArticle.relativeFilename << ": unknown variable '" << key << "'";
+					}
+					continue;
+				}
+				else
+				{
+					logs.warning() << pArticle.relativeFilename << ": variable name too long";
+					offset += 2;
+					continue;
+				}
+			}
+			else
+				logs.warning() << pArticle.relativeFilename << ": invalid variable definition";
+		}
+		break;
+	}
+	while (true);
 
 	// Replace all pseudo linefeed
 	content.replace("&#x0A;", "\n");
