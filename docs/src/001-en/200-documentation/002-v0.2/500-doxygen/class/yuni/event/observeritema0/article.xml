@@ -9,56 +9,56 @@
 <h2>ObserverItemA0</h2>
 <h3>Public function</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructor &amp; Destructor</h4></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">ObserverItemA0</a></span>(C* o, R(C::*)() method)</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#"><b> ~ </b>ObserverItemA0</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Event_1_1ObserverItemA0_1aaae9fb6f5171df5c383301f863bff8b6">ObserverItemA0</a></span>(C* o, R(C::*)() method)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Event_1_1ObserverItemA0_1a64c90b2369db8c3bffbd3414f2f2ae11"><b> ~ </b>ObserverItemA0</a></span>()</code></td></tr>
 <tr><td></td><td><br /><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code>R </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">fireEvent</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>IObserver* </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">observer</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">equalsTo</a></span>(const IObserver* o) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>R </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Event_1_1ObserverItemA0_1af0756e632f07417d74b533f56a4e0190">fireEvent</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>IObserver* </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Event_1_1ObserverItemA0_1ab41c7ba0c014e05e10ca67b49dfce348">observer</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Event_1_1ObserverItemA0_1a9010103102931e5b3aa9b1dfca8d3bca">equalsTo</a></span>(const IObserver* o) <span class="keyword">const</span></code></td></tr>
 </table></div>
 
-<h2>Detailed Description</h2><div><div class="doxygen_params">Parameters :</div><ul><li><code> C</code> The real type of the observer<br /></li><li><code> Mode</code> The mode when firing the event<br /></li><li><code> R</code> The type of the returned value<br /></li></ul><br /></div>
+<h2>Detailed Description</h2><div><div class="doxygen_params">Parameters :</div><ul><li><code> C</code> The real type of the observer<br /></li><li><code> Mode</code> The mode when firing the event<br /></li><li><code> R</code> The type of the returned value<br /></li></ul><br /></div><div style="margin-top:3em;border:1px solid #aaa;border-bottom-style:none;border-left-style:none;border-right-style:none"></div>
 <table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default Constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ ObserverItemA0</a></span>:  (C* o, R(C::*)() method);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Default Constructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Event_1_1ObserverItemA0_1aaae9fb6f5171df5c383301f863bff8b6" href="#">+ ObserverItemA0</a></span>:  (C* o, R(C::*)() method);
 </code>
-</div></td></tr><tr id="ObserverItemA0_39091319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> o</code> Pointer to the object<br /></li><li><code> method</code> Pointer to member<br /></li></ul><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ <b> ~ </b>ObserverItemA0</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Destructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Event_1_1ObserverItemA0_1a64c90b2369db8c3bffbd3414f2f2ae11" href="#">+ <b> ~ </b>ObserverItemA0</a></span>:  ();
 </code>
-</div></td></tr><tr id="~ObserverItemA0_39121319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Fire the event.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ fireEvent</a></span>: R () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Fire the event.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Event_1_1ObserverItemA0_1af0756e632f07417d74b533f56a4e0190" href="#">+ fireEvent</a></span>: R () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="fireEvent_39141319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get a pointer to the observer object.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ observer</a></span>: IObserver* () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get a pointer to the observer object.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Event_1_1ObserverItemA0_1ab41c7ba0c014e05e10ca67b49dfce348" href="#">+ observer</a></span>: IObserver* () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="observer_39151319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Test if the class contains a given observer.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ equalsTo</a></span>: bool (const IObserver* o) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Test if the class contains a given observer.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Event_1_1ObserverItemA0_1a9010103102931e5b3aa9b1dfca8d3bca" href="#">+ equalsTo</a></span>: bool (const IObserver* o) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="equalsTo_39171319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>

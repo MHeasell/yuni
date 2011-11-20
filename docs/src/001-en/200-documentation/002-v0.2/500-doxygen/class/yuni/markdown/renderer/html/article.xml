@@ -9,105 +9,105 @@
 <h2>Html</h2>
 <h3>Public function</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructor &amp; Destructor</h4></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Html</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#"><b> ~ </b>Html</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Markdown_1_1Renderer_1_1Html_1aeb411b10109833b99be4782e767a6f27">Html</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Markdown_1_1Renderer_1_1Html_1ad5eb860b2af3ad7999f26b436c3b6bab"><b> ~ </b>Html</a></span>()</code></td></tr>
 <tr><td></td><td><br /><h4>Enable / Disable nodes</h4></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">discard</a></span>(Node::Type ndtype)</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">enableAllNodes</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Markdown_1_1Renderer_1_1Html_1ad4b65c2016051cc4dfd4e249a767fe49">discard</a></span>(Node::Type ndtype)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Markdown_1_1Renderer_1_1Html_1ae590f27fc440db202541f6adfa96b9ce">enableAllNodes</a></span>()</code></td></tr>
 <tr><td></td><td><br /><h4>Rendering</h4></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">render</a></span>(const Reader&amp; reader)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Markdown_1_1Renderer_1_1Html_1a88ebda2c3dfca736562ae8a82db82041">render</a></span>(const Reader&amp; reader)</code></td></tr>
 <tr><td></td><td><br /><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">resetDefaultValues</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Markdown_1_1Renderer_1_1Html_1aa49756f8a2020eef1d97fa8e3bf3832e">resetDefaultValues</a></span>()</code></td></tr>
 </table></div>
 
 <h2>Detailed Description</h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 4)</i></code>
-</div></td></tr><tr id="@352partBeginpartEndpartNewLinepartCount_35041319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 4)</i></code>
-</div></td></tr><tr id="@353nodeCount_35051319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ Html</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Default constructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Markdown_1_1Renderer_1_1Html_1aeb411b10109833b99be4782e767a6f27" href="#">+ Html</a></span>:  ();
 </code>
-</div></td></tr><tr id="Html_35061319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ <b> ~ </b>Html</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Destructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Markdown_1_1Renderer_1_1Html_1ad5eb860b2af3ad7999f26b436c3b6bab" href="#">+ <b> ~ </b>Html</a></span>:  ();
 </code>
-</div></td></tr><tr id="~Html_35071319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Enable / Disable nodes <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Ignore a type of node.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ discard</a></span>: void (Node::Type ndtype);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Ignore a type of node.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Markdown_1_1Renderer_1_1Html_1ad4b65c2016051cc4dfd4e249a767fe49" href="#">+ discard</a></span>: void (Node::Type ndtype);
 </code>
-</div></td></tr><tr id="discard_35081319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Consider all types of node.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ enableAllNodes</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Consider all types of node.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Markdown_1_1Renderer_1_1Html_1ae590f27fc440db202541f6adfa96b9ce" href="#">+ enableAllNodes</a></span>: void ();
 </code>
-</div></td></tr><tr id="enableAllNodes_35101319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Rendering <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ render</a></span>: bool (const Reader&amp; reader);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1Markdown_1_1Renderer_1_1Html_1a88ebda2c3dfca736562ae8a82db82041" href="#">+ render</a></span>: bool (const Reader&amp; reader);
 </code>
-</div></td></tr><tr id="render_35121319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Reset all default values.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ resetDefaultValues</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Reset all default values.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Markdown_1_1Renderer_1_1Html_1aa49756f8a2020eef1d97fa8e3bf3832e" href="#">+ resetDefaultValues</a></span>: void ();
 </code>
-</div></td></tr><tr id="resetDefaultValues_35141319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">Tags composition.<br /><div class="doxygen_name_spacer"></div>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief"><b>Tags composition.<br /></b><div class="doxygen_name_spacer"></div>
 <code><span class="method"><a href="#">+ composition</a></span>: String;</code>
-</div></td></tr><tr id="composition_35161319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">Flag to enable/disable each type of node.<br /><div class="doxygen_name_spacer"></div>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief"><b>Flag to enable/disable each type of node.<br /></b><div class="doxygen_name_spacer"></div>
 <code><span class="method"><a href="#">+ enable</a></span>: bool;</code>
-</div></td></tr><tr id="enable_35171319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a href="#">+ paragraphSkipIfAlone</a></span>: bool;</code>
-</div></td></tr><tr id="paragraphSkipIfAlone_35181319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>

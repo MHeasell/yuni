@@ -9,43 +9,43 @@
 <h2>Implementation of the Threading Model policy in a multi-threaded environnement (one mutex per class)</h2>
 <h3>Public function</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructor &amp; Destructor</h4></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">ClassLevelLockable</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">ClassLevelLockable</a></span>(const ClassLevelLockable&amp; )</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#"><b> ~ </b>ClassLevelLockable</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1ClassLevelLockable_1a1420a5644493072c7e14e6b332af7e6a">ClassLevelLockable</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1ClassLevelLockable_1a5d332630a1d280913bcc4ebdf5f75064">ClassLevelLockable</a></span>(const ClassLevelLockable&amp; )</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1ClassLevelLockable_1a4c64f3318d90361e255b05987a4a13f3"><b> ~ </b>ClassLevelLockable</a></span>()</code></td></tr>
 </table></div>
 
 <h2>Detailed Description</h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief">Get if this policy is thread-safe.<br /><div class="doxygen_name_spacer"></div>
+<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><b>Get if this policy is thread-safe.<br /></b><div class="doxygen_name_spacer"></div>
 <code><i>(unmanaged tag: 4)</i></code>
-</div></td></tr><tr id="@371threadSafe_28441319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ ClassLevelLockable</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Default constructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Policy_1_1ClassLevelLockable_1a1420a5644493072c7e14e6b332af7e6a" href="#">+ ClassLevelLockable</a></span>:  ();
 </code>
-</div></td></tr><tr id="ClassLevelLockable_28451319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ ClassLevelLockable</a></span>:  (const ClassLevelLockable&amp; );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Copy constructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Policy_1_1ClassLevelLockable_1a5d332630a1d280913bcc4ebdf5f75064" href="#">+ ClassLevelLockable</a></span>:  (const ClassLevelLockable&amp; );
 </code>
-</div></td></tr><tr id="ClassLevelLockable_28461319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ <b> ~ </b>ClassLevelLockable</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Destructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Policy_1_1ClassLevelLockable_1a4c64f3318d90361e255b05987a4a13f3" href="#">+ <b> ~ </b>ClassLevelLockable</a></span>:  ();
 </code>
-</div></td></tr><tr id="~ClassLevelLockable_28471319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>

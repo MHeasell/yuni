@@ -9,87 +9,87 @@
 <h2>And</h2>
 <h3>Public typedef</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">ResultType</a></span> : bool</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#structYuni_1_1Result_1_1And_1a9b638bee2291807febcf5fa238e0f35a" href="#">ResultType</a></span> : bool</code></td></tr>
 </table></div>
 
 <h3>Public function</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructors</h4></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">And</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">And</a></span>(bool defaultValue)</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">And</a></span>(const And&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#structYuni_1_1Result_1_1And_1aedeef11fbf1cea2347101afd379a99c7">And</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#structYuni_1_1Result_1_1And_1a642ece3012fbb073479fa2acf622e605">And</a></span>(bool defaultValue)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#structYuni_1_1Result_1_1And_1ae749e4772ca61263d0d03b755bcbcc25">And</a></span>(const And&amp; rhs)</code></td></tr>
 <tr><td></td><td><br /><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator()</a></span>(const T&amp; v)</code></td></tr>
-<tr><td class="doxygen_index"><code>ResultType </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">result</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">reset</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">reset</a></span>(bool v)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#structYuni_1_1Result_1_1And_1aaf5eaa7b3aa83edc5958cbcd5111c74b">operator()</a></span>(const T&amp; v)</code></td></tr>
+<tr><td class="doxygen_index"><code>ResultType </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#structYuni_1_1Result_1_1And_1a975d9d0ac9831e2da103853d50c00e5e">result</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#structYuni_1_1Result_1_1And_1aecbfcc7aa8ad295b96f7e10645eb3f7c">reset</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#structYuni_1_1Result_1_1And_1abddc8390367f395bb63ed171f1a94c04">reset</a></span>(bool v)</code></td></tr>
 </table></div>
 
 <h2>Detailed Description</h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Type of the result.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ ResultType</a></span>: <span class="keyword">typedef</span> bool;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>Type of the result.<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="structYuni_1_1Result_1_1And_1a9b638bee2291807febcf5fa238e0f35a" href="#">+ ResultType</a></span>: <span class="keyword">typedef</span> bool;
 </code>
-</div></td></tr><tr id="ResultType_4901319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default Constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ And</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Default Constructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="structYuni_1_1Result_1_1And_1aedeef11fbf1cea2347101afd379a99c7" href="#">+ And</a></span>:  ();
 </code>
-</div></td></tr><tr id="And_4911319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default Constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ And</a></span>:  (bool defaultValue);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Default Constructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="structYuni_1_1Result_1_1And_1a642ece3012fbb073479fa2acf622e605" href="#">+ And</a></span>:  (bool defaultValue);
 </code>
-</div></td></tr><tr id="And_4921319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ And</a></span>:  (const And&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Copy constructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="structYuni_1_1Result_1_1And_1ae749e4772ca61263d0d03b755bcbcc25" href="#">+ And</a></span>:  (const And&amp; rhs);
 </code>
-</div></td></tr><tr id="And_4931319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Take into account a new value.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator()</a></span>: void (const T&amp; v);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Take into account a new value.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="structYuni_1_1Result_1_1And_1aaf5eaa7b3aa83edc5958cbcd5111c74b" href="#">+ operator()</a></span>: void (const T&amp; v);
 </code>
-</div></td></tr><tr id="operator()_4941319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">The Final result.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ result</a></span>: ResultType () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>The Final result.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="structYuni_1_1Result_1_1And_1a975d9d0ac9831e2da103853d50c00e5e" href="#">+ result</a></span>: ResultType () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="result_4951319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Reset the internal counter.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ reset</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Reset the internal counter.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="structYuni_1_1Result_1_1And_1aecbfcc7aa8ad295b96f7e10645eb3f7c" href="#">+ reset</a></span>: void ();
 </code>
-</div></td></tr><tr id="reset_4961319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ reset</a></span>: void (bool v);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="structYuni_1_1Result_1_1And_1abddc8390367f395bb63ed171f1a94c04" href="#">+ reset</a></span>: void (bool v);
 </code>
-</div></td></tr><tr id="reset_4971319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>

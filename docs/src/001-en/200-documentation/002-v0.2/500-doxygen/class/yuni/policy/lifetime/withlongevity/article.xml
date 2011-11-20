@@ -9,26 +9,26 @@
 <h2>Singletons with longevity are destroyed in increasing value of their longevity</h2>
 <h3>Public function</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">static</span> void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">ScheduleDestruction</a></span>(DestructionFunction callback)</code></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">static</span> void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">OnDeadReference</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">static</span> void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Lifetime_1_1WithLongevity_1a8e54f36c7f1cb43a8f3e956468f0022f">ScheduleDestruction</a></span>(DestructionFunction callback)</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">static</span> void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Lifetime_1_1WithLongevity_1aa51eabf399bfc46fe53ca3ce59dc61cc">OnDeadReference</a></span>()</code></td></tr>
 </table></div>
 
-<h2>Detailed Description</h2><div>Among singletons with the same longevity, last in first out order is ensured<br /></div>
+<h2>Detailed Description</h2><div>Among singletons with the same longevity, last in first out order is ensured<br /></div><div style="margin-top:3em;border:1px solid #aaa;border-bottom-style:none;border-left-style:none;border-right-style:none"></div>
 <table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Track various longevities in a priority list.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ ScheduleDestruction</a></span>: <span class="keyword">static</span> void (DestructionFunction callback);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Track various longevities in a priority list.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Policy_1_1Lifetime_1_1WithLongevity_1a8e54f36c7f1cb43a8f3e956468f0022f" href="#">+ ScheduleDestruction</a></span>: <span class="keyword">static</span> void (DestructionFunction callback);
 </code>
-</div></td></tr><tr id="ScheduleDestruction_9931319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Throw if longevities were not given properly.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ OnDeadReference</a></span>: <span class="keyword">static</span> void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Throw if longevities were not given properly.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Policy_1_1Lifetime_1_1WithLongevity_1aa51eabf399bfc46fe53ca3ce59dc61cc" href="#">+ OnDeadReference</a></span>: <span class="keyword">static</span> void ();
 </code>
-</div></td></tr><tr id="OnDeadReference_9941319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>

@@ -9,210 +9,210 @@
 <h2>An atomic scalar type</h2>
 <h3>Public typedef</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">ThreadingPolicy</a></span> : Private::AtomicImpl::ThreadingPolicy&lt; threadSafe, Int&lt; Size, TP&gt;&gt;:: Type</code></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">Type</a></span> : Private::AtomicImpl::TypeFromSize&lt; Size&gt;:: Type</code></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">ScalarType</a></span> : Type</code></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">InnerType</a></span> : Private::AtomicImpl::Volatile&lt; threadSafe, Type&gt;:: Type</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1a9e6741e0c061a70e10c58241b29025b5" href="#">ThreadingPolicy</a></span> : Private::AtomicImpl::ThreadingPolicy&lt; threadSafe, Int&lt; Size, TP&gt;&gt;:: Type</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1a73857733ca54180fc36cb3f8b29fc7ae" href="#">Type</a></span> : Private::AtomicImpl::TypeFromSize&lt; Size&gt;:: Type</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1ace81fbb4b2c328259692415754ef0275" href="#">ScalarType</a></span> : Type</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1a84f87acea41cc6ec60ff3b9bbb685303" href="#">InnerType</a></span> : Private::AtomicImpl::Volatile&lt; threadSafe, Type&gt;:: Type</code></td></tr>
 </table></div>
 
 <h3>Public function</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructors</h4></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Int</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Int</a></span>(const sint16 v)</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Int</a></span>(const sint32 v)</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Int</a></span>(const sint64 v)</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Int</a></span>(const Int&amp; v)</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Int</a></span>(const Int&lt; Size2, TP2&gt;&amp; v)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1a1ed74cbc7ba7321165b8e7e1557bb49e">Int</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1a0cec18ec773fefee82eb434dc26ce02d">Int</a></span>(const sint16 v)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1adb14b756f338be22a9a6275c2b95c861">Int</a></span>(const sint32 v)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1aa602a7ecee17c7a38e30671d2975c632">Int</a></span>(const sint64 v)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1af7de5ea836ea4f35be27aee4d554f7c8">Int</a></span>(const Int&amp; v)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1a906678000697446b3e88c9bf5035a9a9">Int</a></span>(const Int&lt; Size2, TP2&gt;&amp; v)</code></td></tr>
 <tr><td></td><td><br /><h4>Operators</h4></td></tr>
-<tr><td class="doxygen_index"><code>ScalarType </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator++</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code>ScalarType </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator--</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code>ScalarType </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator++</a></span>(int )</code></td></tr>
-<tr><td class="doxygen_index"><code>ScalarType </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator--</a></span>(int )</code></td></tr>
-<tr><td class="doxygen_index"><code>Int&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator=</a></span>(const ScalarType v)</code></td></tr>
-<tr><td class="doxygen_index"><code>Int&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator+=</a></span>(const ScalarType v)</code></td></tr>
-<tr><td class="doxygen_index"><code>Int&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator-=</a></span>(const ScalarType v)</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator ScalarType</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator!</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>ScalarType </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1ac0fe8bfac8bb9844d578e5a55a47c01b">operator++</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>ScalarType </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1ac1dcbdb8fc480149fc27102c580e1e8d">operator--</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>ScalarType </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1aa5c77b53a620a3cb77b9938868e3b55b">operator++</a></span>(int )</code></td></tr>
+<tr><td class="doxygen_index"><code>ScalarType </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1ac25d573f9ad96c096b11026a602a33bc">operator--</a></span>(int )</code></td></tr>
+<tr><td class="doxygen_index"><code>Int&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1a67a1c9835a370f20176d04aa0f79e136">operator=</a></span>(const ScalarType v)</code></td></tr>
+<tr><td class="doxygen_index"><code>Int&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1abfe473f8e8771c2171f8c0eba29a9a19">operator+=</a></span>(const ScalarType v)</code></td></tr>
+<tr><td class="doxygen_index"><code>Int&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1af3329e18b13fee3fa16ed430d3a40811">operator-=</a></span>(const ScalarType v)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1abcf48b069b024f243f84b46dcd615aa9">operator ScalarType</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1a6093ca4793c469449aa5084e398e2de1">operator!</a></span>() <span class="keyword">const</span></code></td></tr>
 </table></div>
 
 <h2>Detailed Description</h2><div>An atomic scalar value is a value that may be updated atomically (means without the use of a mutex).<br /><source type="cpp">  Atomic::Int&lt;32&gt;  i;
   ++i;
 </source>
-<br /><div class="doxygen_params">Parameters :</div><ul><li><code> Size</code> Size (in bits) of the scalar type (16 or 32 or 64)<br /></li><li><code> TP</code> A threading policy to guarantee thread-safety or not<br /></li></ul><br /></div>
+<br /><div class="doxygen_params">Parameters :</div><ul><li><code> Size</code> Size (in bits) of the scalar type (16 or 32 or 64)<br /></li><li><code> TP</code> A threading policy to guarantee thread-safety or not<br /></li></ul><br /></div><div style="margin-top:3em;border:1px solid #aaa;border-bottom-style:none;border-left-style:none;border-right-style:none"></div>
 <table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 4)</i></code>
-</div></td></tr><tr id="@2threadSafethreadSafe_67421319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 4)</i></code>
-</div></td></tr><tr id="@3mustUseMutex_67431319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 4)</i></code>
-</div></td></tr><tr id="@4size_67441319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The Threading Policy .<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ ThreadingPolicy</a></span>: <span class="keyword">typedef</span> Private::AtomicImpl::ThreadingPolicy&lt; threadSafe, Int&lt; Size, TP&gt;&gt;:: Type;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>The Threading Policy .<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1a9e6741e0c061a70e10c58241b29025b5" href="#">+ ThreadingPolicy</a></span>: <span class="keyword">typedef</span> Private::AtomicImpl::ThreadingPolicy&lt; threadSafe, Int&lt; Size, TP&gt;&gt;:: Type;
 </code>
-</div></td></tr><tr id="ThreadingPolicy_67451319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">The threading policy will be Policy::SingleThreaded in all cases, except when the compiler or the operating system can not provide methods on atomic scalar types. It is the case when the version of gcc is &lt; 4.1 for example.<br />
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The scalar type.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ Type</a></span>: <span class="keyword">typedef</span> Private::AtomicImpl::TypeFromSize&lt; Size&gt;:: Type;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>The scalar type.<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1a73857733ca54180fc36cb3f8b29fc7ae" href="#">+ Type</a></span>: <span class="keyword">typedef</span> Private::AtomicImpl::TypeFromSize&lt; Size&gt;:: Type;
 </code>
-</div></td></tr><tr id="Type_67461319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The scalar type.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ ScalarType</a></span>: <span class="keyword">typedef</span> Type;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>The scalar type.<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1ace81fbb4b2c328259692415754ef0275" href="#">+ ScalarType</a></span>: <span class="keyword">typedef</span> Type;
 </code>
-</div></td></tr><tr id="ScalarType_67471319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Type of the inner variable.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ InnerType</a></span>: <span class="keyword">typedef</span> Private::AtomicImpl::Volatile&lt; threadSafe, Type&gt;:: Type;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>Type of the inner variable.<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1a84f87acea41cc6ec60ff3b9bbb685303" href="#">+ InnerType</a></span>: <span class="keyword">typedef</span> Private::AtomicImpl::Volatile&lt; threadSafe, Type&gt;:: Type;
 </code>
-</div></td></tr><tr id="InnerType_67481319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">Most of the time the keyword `volatile` is required (to avoid dangerous optimizations by the compiler), except when there is no need for thread-safety or when a mutex is used.<br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default Constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ Int</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Default Constructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1a1ed74cbc7ba7321165b8e7e1557bb49e" href="#">+ Int</a></span>:  ();
 </code>
-</div></td></tr><tr id="Int_67491319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor with an initial value (int16)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ Int</a></span>:  (const sint16 v);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Constructor with an initial value (int16)<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1a0cec18ec773fefee82eb434dc26ce02d" href="#">+ Int</a></span>:  (const sint16 v);
 </code>
-</div></td></tr><tr id="Int_67501319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor with an initial value (int32)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ Int</a></span>:  (const sint32 v);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Constructor with an initial value (int32)<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1adb14b756f338be22a9a6275c2b95c861" href="#">+ Int</a></span>:  (const sint32 v);
 </code>
-</div></td></tr><tr id="Int_67511319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor with an initial value (int64)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ Int</a></span>:  (const sint64 v);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Constructor with an initial value (int64)<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1aa602a7ecee17c7a38e30671d2975c632" href="#">+ Int</a></span>:  (const sint64 v);
 </code>
-</div></td></tr><tr id="Int_67521319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ Int</a></span>:  (const Int&amp; v);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Copy constructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1af7de5ea836ea4f35be27aee4d554f7c8" href="#">+ Int</a></span>:  (const Int&amp; v);
 </code>
-</div></td></tr><tr id="Int_67531319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor from another type and another threading policy.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="Int_67541319844517_tmpl"><span class="keyword">template</span>&lt;int Size2, template&lt; class&gt;class TP2&gt;</div>
- <span class="method"><a href="#">+ Int</a></span>:  (const Int&lt; Size2, TP2&gt;&amp; v);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Copy constructor from another type and another threading policy.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;int Size2, template&lt; class&gt;class TP2&gt;</div>
+ <span class="method"><a name="classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1a906678000697446b3e88c9bf5035a9a9" href="#">+ Int</a></span>:  (const Int&lt; Size2, TP2&gt;&amp; v);
 </code>
-</div></td></tr><tr id="Int_67541319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Pre increment operator.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator++</a></span>: ScalarType ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Pre increment operator.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1ac0fe8bfac8bb9844d578e5a55a47c01b" href="#">+ operator++</a></span>: ScalarType ();
 </code>
-</div></td></tr><tr id="operator++_67551319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Pre decrement operator.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator--</a></span>: ScalarType ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Pre decrement operator.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1ac1dcbdb8fc480149fc27102c580e1e8d" href="#">+ operator--</a></span>: ScalarType ();
 </code>
-</div></td></tr><tr id="operator___67561319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Post increment operator.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator++</a></span>: ScalarType (int );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Post increment operator.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1aa5c77b53a620a3cb77b9938868e3b55b" href="#">+ operator++</a></span>: ScalarType (int );
 </code>
-</div></td></tr><tr id="operator++_67571319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Post decrement operator.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator--</a></span>: ScalarType (int );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Post decrement operator.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1ac25d573f9ad96c096b11026a602a33bc" href="#">+ operator--</a></span>: ScalarType (int );
 </code>
-</div></td></tr><tr id="operator___67581319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Pre increment operator.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator=</a></span>: Int&amp; (const ScalarType v);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Pre increment operator.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1a67a1c9835a370f20176d04aa0f79e136" href="#">+ operator=</a></span>: Int&amp; (const ScalarType v);
 </code>
-</div></td></tr><tr id="operator=_67591319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Increment.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator+=</a></span>: Int&amp; (const ScalarType v);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Increment.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1abfe473f8e8771c2171f8c0eba29a9a19" href="#">+ operator+=</a></span>: Int&amp; (const ScalarType v);
 </code>
-</div></td></tr><tr id="operator+=_67601319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Decrement.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator-=</a></span>: Int&amp; (const ScalarType v);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Decrement.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1af3329e18b13fee3fa16ed430d3a40811" href="#">+ operator-=</a></span>: Int&amp; (const ScalarType v);
 </code>
-</div></td></tr><tr id="operator_=_67611319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Cast operator.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator ScalarType</a></span>:  () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Cast operator.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1abcf48b069b024f243f84b46dcd615aa9" href="#">+ operator ScalarType</a></span>:  () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator ScalarType_67621319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">not<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator!</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>not<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Atomic_1_1YUNI__ATOMIC__INHERITS_1a6093ca4793c469449aa5084e398e2de1" href="#">+ operator!</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator!_67631319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>

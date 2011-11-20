@@ -9,172 +9,172 @@
 <h2>Assembly</h2>
 <h3>Public function</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructor &amp; Destructor</h4></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Assembly</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#"><b> ~ </b>Assembly</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1VM_1_1Assembly_1a4f4777a1611d88ad9993f0988f394809">Assembly</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1VM_1_1Assembly_1ac18e241f864d7a4a7c45dd203e52ebf9"><b> ~ </b>Assembly</a></span>()</code></td></tr>
 <tr><td></td><td><br /><h4>Execution flow</h4></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">validate</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>int </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">execute</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1VM_1_1Assembly_1a98c76d45a0649a1efc32cc867d4887a7">validate</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>int </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1VM_1_1Assembly_1a83e0d45dcf0e371a0ec55bc76bdb79a0">execute</a></span>()</code></td></tr>
 <tr><td></td><td><br /><h4>Intrinsic functions</h4></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">intrinsic</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">intrinsic</a></span>(uint8 r1)</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">intrinsic</a></span>(uint8 r1, uint8 r2)</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">intrinsic</a></span>(uint8 r1, uint8 r2, uint8 r3)</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">intrinsic</a></span>(uint8 r1, uint8 r2, uint8 r3, uint8 r4)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1VM_1_1Assembly_1a97accb993d1b7bb2b329ab80981a33c4">intrinsic</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1VM_1_1Assembly_1ae4587a797fb973a82c88cba3152daac4">intrinsic</a></span>(uint8 r1)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1VM_1_1Assembly_1acd9991b8a3d53289081ab2e1fa7502b5">intrinsic</a></span>(uint8 r1, uint8 r2)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1VM_1_1Assembly_1ac4ba3da9a46607f57409d6063073610e">intrinsic</a></span>(uint8 r1, uint8 r2, uint8 r3)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1VM_1_1Assembly_1a6a00f50d97277abf51389a93c2e1da56">intrinsic</a></span>(uint8 r1, uint8 r2, uint8 r3, uint8 r4)</code></td></tr>
 <tr><td></td><td><br /><h4>Add</h4></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">add</a></span>(uint8 ret, uint8 r1, uint8 r2)</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">addu</a></span>(uint8 ret, uint8 r1, uint8 r2)</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">addi</a></span>(uint8 ret, uint8 r1, sint64 i)</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">addui</a></span>(uint8 ret, uint8 r1, uint64 i)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1VM_1_1Assembly_1a9c6413df2fad07db5fdd4c999bee7d49">add</a></span>(uint8 ret, uint8 r1, uint8 r2)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1VM_1_1Assembly_1a7b041c060fdb135e6bfb4e92cd593846">addu</a></span>(uint8 ret, uint8 r1, uint8 r2)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1VM_1_1Assembly_1a830e2941ff28b9bd0fbc90613d17261a">addi</a></span>(uint8 ret, uint8 r1, sint64 i)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1VM_1_1Assembly_1a55859e1cdd7245d691a7c13d1deb4b73">addui</a></span>(uint8 ret, uint8 r1, uint64 i)</code></td></tr>
 <tr><td></td><td><br /><h4>Misc. functions</h4></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">nop</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">exit</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">exitCode</a></span>(uint8 r1)</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">exitCodei</a></span>(sint8 i)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1VM_1_1Assembly_1a8b58fdc24698e7ad60e1c0f1865ef7eb">nop</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1VM_1_1Assembly_1a59c3a8674cbaa1fe51754ab8b599d43f">exit</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1VM_1_1Assembly_1a041acd178343dd639c67205f694dd358">exitCode</a></span>(uint8 r1)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1VM_1_1Assembly_1a727843f632ae14d9d01a9ea1e8395822">exitCodei</a></span>(sint8 i)</code></td></tr>
 </table></div>
 
 <h2>Detailed Description</h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ Assembly</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Default constructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1VM_1_1Assembly_1a4f4777a1611d88ad9993f0988f394809" href="#">+ Assembly</a></span>:  ();
 </code>
-</div></td></tr><tr id="Assembly_48781319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ <b> ~ </b>Assembly</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Destructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1VM_1_1Assembly_1ac18e241f864d7a4a7c45dd203e52ebf9" href="#">+ <b> ~ </b>Assembly</a></span>:  ();
 </code>
-</div></td></tr><tr id="~Assembly_48791319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Execution flow <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Check the validity of the assembly code.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ validate</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Check the validity of the assembly code.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1VM_1_1Assembly_1a98c76d45a0649a1efc32cc867d4887a7" href="#">+ validate</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="validate_48801319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Execute the program.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ execute</a></span>: int ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Execute the program.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1VM_1_1Assembly_1a83e0d45dcf0e371a0ec55bc76bdb79a0" href="#">+ execute</a></span>: int ();
 </code>
-</div></td></tr><tr id="execute_48811319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Intrinsic functions <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">intrinsic function<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ intrinsic</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>intrinsic function<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1VM_1_1Assembly_1a97accb993d1b7bb2b329ab80981a33c4" href="#">+ intrinsic</a></span>: void ();
 </code>
-</div></td></tr><tr id="intrinsic_48821319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">intrinsic function, with 1 parameter<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ intrinsic</a></span>: void (uint8 r1);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>intrinsic function, with 1 parameter<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1VM_1_1Assembly_1ae4587a797fb973a82c88cba3152daac4" href="#">+ intrinsic</a></span>: void (uint8 r1);
 </code>
-</div></td></tr><tr id="intrinsic_48831319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">intrinsic function, with 2 parameters<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ intrinsic</a></span>: void (uint8 r1, uint8 r2);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>intrinsic function, with 2 parameters<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1VM_1_1Assembly_1acd9991b8a3d53289081ab2e1fa7502b5" href="#">+ intrinsic</a></span>: void (uint8 r1, uint8 r2);
 </code>
-</div></td></tr><tr id="intrinsic_48841319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">intrinsic function, with 3 parameters<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ intrinsic</a></span>: void (uint8 r1, uint8 r2, uint8 r3);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>intrinsic function, with 3 parameters<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1VM_1_1Assembly_1ac4ba3da9a46607f57409d6063073610e" href="#">+ intrinsic</a></span>: void (uint8 r1, uint8 r2, uint8 r3);
 </code>
-</div></td></tr><tr id="intrinsic_48851319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">intrinsic function, with 4 parameters<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ intrinsic</a></span>: void (uint8 r1, uint8 r2, uint8 r3, uint8 r4);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>intrinsic function, with 4 parameters<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1VM_1_1Assembly_1a6a00f50d97277abf51389a93c2e1da56" href="#">+ intrinsic</a></span>: void (uint8 r1, uint8 r2, uint8 r3, uint8 r4);
 </code>
-</div></td></tr><tr id="intrinsic_48861319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Add <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">add ret, R1, R2: ret = R1 + R2<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ add</a></span>: void (uint8 ret, uint8 r1, uint8 r2);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>add ret, R1, R2: ret = R1 + R2<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1VM_1_1Assembly_1a9c6413df2fad07db5fdd4c999bee7d49" href="#">+ add</a></span>: void (uint8 ret, uint8 r1, uint8 r2);
 </code>
-</div></td></tr><tr id="add_48871319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">addu ret, R1, R2: ret = R1 + R2 (unsigned)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ addu</a></span>: void (uint8 ret, uint8 r1, uint8 r2);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>addu ret, R1, R2: ret = R1 + R2 (unsigned)<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1VM_1_1Assembly_1a7b041c060fdb135e6bfb4e92cd593846" href="#">+ addu</a></span>: void (uint8 ret, uint8 r1, uint8 r2);
 </code>
-</div></td></tr><tr id="addu_48881319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">addi ret, R1, I: ret = R1 + I<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ addi</a></span>: void (uint8 ret, uint8 r1, sint64 i);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>addi ret, R1, I: ret = R1 + I<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1VM_1_1Assembly_1a830e2941ff28b9bd0fbc90613d17261a" href="#">+ addi</a></span>: void (uint8 ret, uint8 r1, sint64 i);
 </code>
-</div></td></tr><tr id="addi_48901319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">addui ret, R1, I: ret = R1 + I (unsigned)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ addui</a></span>: void (uint8 ret, uint8 r1, uint64 i);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>addui ret, R1, I: ret = R1 + I (unsigned)<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1VM_1_1Assembly_1a55859e1cdd7245d691a7c13d1deb4b73" href="#">+ addui</a></span>: void (uint8 ret, uint8 r1, uint64 i);
 </code>
-</div></td></tr><tr id="addui_48921319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Misc. functions <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">nop<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ nop</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>nop<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1VM_1_1Assembly_1a8b58fdc24698e7ad60e1c0f1865ef7eb" href="#">+ nop</a></span>: void ();
 </code>
-</div></td></tr><tr id="nop_48951319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Abort the execution of the program.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ exit</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Abort the execution of the program.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1VM_1_1Assembly_1a59c3a8674cbaa1fe51754ab8b599d43f" href="#">+ exit</a></span>: void ();
 </code>
-</div></td></tr><tr id="exit_48971319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the value of the exit code from the value of a register.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ exitCode</a></span>: void (uint8 r1);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Set the value of the exit code from the value of a register.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1VM_1_1Assembly_1a041acd178343dd639c67205f694dd358" href="#">+ exitCode</a></span>: void (uint8 r1);
 </code>
-</div></td></tr><tr id="exitCode_48991319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the value of the exit code from an immediate value.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ exitCodei</a></span>: void (sint8 i);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Set the value of the exit code from an immediate value.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1VM_1_1Assembly_1a727843f632ae14d9d01a9ea1e8395822" href="#">+ exitCodei</a></span>: void (sint8 i);
 </code>
-</div></td></tr><tr id="exitCodei_49001319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>

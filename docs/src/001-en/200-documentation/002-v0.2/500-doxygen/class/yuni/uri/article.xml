@@ -9,46 +9,46 @@
 <h2>Uniform resource Identifier</h2>
 <h3>Public function</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructors</h4></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Uri</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Uri</a></span>(const StringT&amp; s)</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Uri</a></span>(const Uri&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Uri_1ac0f2fcba11822f23ddbfb3e8729a2075">Uri</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Uri_1ab4d788342721f51c7c9693be3658f28e">Uri</a></span>(const StringT&amp; s)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Uri_1ab6f1be097f64cb13f635d1ce995ba3e9">Uri</a></span>(const Uri&amp; rhs)</code></td></tr>
 <tr><td></td><td><br /><h4>Informations about the URI structure</h4></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">clear</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code>const String&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">scheme</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">scheme</a></span>(const StringT&amp; s)</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">scheme</a></span>(const Net::Protocol::Type&amp; type)</code></td></tr>
-<tr><td class="doxygen_index"><code>const String&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">server</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">server</a></span>(const StringT&amp; s)</code></td></tr>
-<tr><td class="doxygen_index"><code>int </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">port</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">port</a></span>(int p)</code></td></tr>
-<tr><td class="doxygen_index"><code>const String&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">user</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">user</a></span>(const StringT&amp; s)</code></td></tr>
-<tr><td class="doxygen_index"><code>const String&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">password</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">password</a></span>(const StringT&amp; s)</code></td></tr>
-<tr><td class="doxygen_index"><code>const String&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">path</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">path</a></span>(const StringT&amp; s)</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">defaultPathIfEmpty</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code>const String&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">query</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">query</a></span>(const StringT&amp; s)</code></td></tr>
-<tr><td class="doxygen_index"><code>const String&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">fragment</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">fragment</a></span>(const StringT&amp; s)</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">isValid</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Uri_1afb3da6c8f0e8f418a5ca16515d2ea613">clear</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>const String&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Uri_1a74fdf06641e510ff8d6fdd49d65776fe">scheme</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Uri_1a7a32b482901bf17ea582a3f4ae9a67b5">scheme</a></span>(const StringT&amp; s)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Uri_1aa2b75fda579aefa9448b4d64890ebb53">scheme</a></span>(const Net::Protocol::Type&amp; type)</code></td></tr>
+<tr><td class="doxygen_index"><code>const String&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Uri_1aaeb29636272a970a9c20376c42335fb0">server</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Uri_1aa90585980bcacab21262ebf82321282d">server</a></span>(const StringT&amp; s)</code></td></tr>
+<tr><td class="doxygen_index"><code>int </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Uri_1a8017f15b32581a82f30d7713faf80559">port</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Uri_1a16613590ba224dc23033eea8bd599673">port</a></span>(int p)</code></td></tr>
+<tr><td class="doxygen_index"><code>const String&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Uri_1a0487d16cfbec4c4ca7e0d8e2d70ff711">user</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Uri_1ad057934a97aba51655e3b3994d221f5c">user</a></span>(const StringT&amp; s)</code></td></tr>
+<tr><td class="doxygen_index"><code>const String&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Uri_1a1eb14510b3d2952b88be78f33f9b9576">password</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Uri_1a81b4181189ba6b68b2bbb1080fd98e05">password</a></span>(const StringT&amp; s)</code></td></tr>
+<tr><td class="doxygen_index"><code>const String&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Uri_1af43c238e8bab548e90c1c7c6aa171639">path</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Uri_1a32c619a590d56d768318478b0665e3f7">path</a></span>(const StringT&amp; s)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Uri_1aeb610f7cf600cd33f621c716d99f16c6">defaultPathIfEmpty</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>const String&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Uri_1a1b401f8a3d4c3f8f721b4f56cb28382b">query</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Uri_1a6fabdfe024391425f8e45e9a06f35562">query</a></span>(const StringT&amp; s)</code></td></tr>
+<tr><td class="doxygen_index"><code>const String&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Uri_1a532083430d1eba2d9e5e6de276ffa671">fragment</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Uri_1a1311404dfcf4fb914f3d069377803cd7">fragment</a></span>(const StringT&amp; s)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Uri_1a583e127cdfdba6a644c89fc53f297b00">isValid</a></span>() <span class="keyword">const</span></code></td></tr>
 <tr><td></td><td><br /><h4>Scheme</h4></td></tr>
-<tr><td class="doxygen_index"><code>Net::Protocol::Type </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">protocol</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">schemeIsFile</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">schemeIsHTTP</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">schemeIsFTP</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">schemeIsSSH</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">schemeIsLDAP</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>Net::Protocol::Type </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Uri_1aed4c75dc25419b6571d4fc56d7fbf0d4">protocol</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Uri_1af1884331863f2c5f0d0e437cbca3a0a1">schemeIsFile</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Uri_1a76c198aabf30a1eccb1ec0220bf4ec5e">schemeIsHTTP</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Uri_1a14053b23b690cc321e32ab61e5f95c98">schemeIsFTP</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Uri_1a14906dd927ad029a3d46a9bb8f3e09c0">schemeIsSSH</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Uri_1a7c3b926d8efeff1ff6f7e974c1aeb400">schemeIsLDAP</a></span>() <span class="keyword">const</span></code></td></tr>
 <tr><td></td><td><br /><h4>Conversion</h4></td></tr>
-<tr><td class="doxygen_index"><code>String </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">toString</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>std::ostream&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">print</a></span>(std::ostream&amp; out) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>String </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Uri_1adc84a61bcdd73c0430514845faf217f7">toString</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>std::ostream&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Uri_1a4da758a3a40c1477ba1d91c5344ea494">print</a></span>(std::ostream&amp; out) <span class="keyword">const</span></code></td></tr>
 <tr><td></td><td><br /><h4>Operators</h4></td></tr>
-<tr><td class="doxygen_index"><code>Uri&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator=</a></span>(const Uri&amp; rhs)</code></td></tr>
-<tr><td class="doxygen_index"><code>Uri&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator=</a></span>(const StringT&amp; rhs)</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator==</a></span>(const Uri&amp; rhs) <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator!=</a></span>(const Uri&amp; rhs) <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>String </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator()</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>Uri&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Uri_1abde97061f25d7f052fb18c38f587d52b">operator=</a></span>(const Uri&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code>Uri&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Uri_1a0716f0602d4ea5bc3182f1a47864617d">operator=</a></span>(const StringT&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Uri_1ac59f66a0488605d2c5c2e2f662e6d243">operator==</a></span>(const Uri&amp; rhs) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Uri_1a7944852e696529fd0954d08f4c5320d0">operator!=</a></span>(const Uri&amp; rhs) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>String </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Uri_1a39e0e581859f0b401a022dc5b5b8269f">operator()</a></span>() <span class="keyword">const</span></code></td></tr>
 </table></div>
 
 <h2>Detailed Description</h2><div>This implementation of URIs follows the RFC 3986<div><code>see</code> :  http://www.ietf.org/rfc/rfc3986.txt<br /></div> Here are some examples of URIs (extracted from the RFC itself)<source type="cpp">  file: ///etc/hosts
@@ -97,311 +97,311 @@
   //  Server:  `www.libyuni.org`,  path:  `/downloads`
   std::cout  &lt;&lt;  "Server:  `"  &lt;&lt;  uri3.server()  &lt;&lt;  "`,  path:  `"  &lt;&lt;  uri3.path()  &lt;&lt;  "`"  &lt;&lt;  std::endl;
 </source>
-<br /> IPv6 addresses : According to the RFC, IPv6 addresses must be enclosed in brackets (ex: `http://[2001:db8::7]`)<br /> Dot segments Removal : In the most cases, the special segments `.` and `..` will be removed (`file:///path/./to/../somewhere` will give `file:///path/somewhere`). However it can not be done for the begining of relative paths (`file://../../relative/./path` will give `file://../../relative/path`). Consequently a path that starts with a dot is a relative path.<br /></div> Bug This implementation does not handle at all escaped caracters<br /></div>
+<br /> IPv6 addresses : According to the RFC, IPv6 addresses must be enclosed in brackets (ex: `http://[2001:db8::7]`)<br /> Dot segments Removal : In the most cases, the special segments `.` and `..` will be removed (`file:///path/./to/../somewhere` will give `file:///path/somewhere`). However it can not be done for the begining of relative paths (`file://../../relative/./path` will give `file://../../relative/path`). Consequently a path that starts with a dot is a relative path.<br /></div> Bug This implementation does not handle at all escaped caracters<br /></div><div style="margin-top:3em;border:1px solid #aaa;border-bottom-style:none;border-left-style:none;border-right-style:none"></div>
 <table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ Uri</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Default constructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Uri_1ac0f2fcba11822f23ddbfb3e8729a2075" href="#">+ Uri</a></span>:  ();
 </code>
-</div></td></tr><tr id="Uri_52931319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor with a string, to directly construct the URI.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="Uri_52951319844517_tmpl"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="#">+ Uri</a></span>:  (const StringT&amp; s);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Constructor with a string, to directly construct the URI.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a name="classYuni_1_1Uri_1ab4d788342721f51c7c9693be3658f28e" href="#">+ Uri</a></span>:  (const StringT&amp; s);
 </code>
-</div></td></tr><tr id="Uri_52951319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ Uri</a></span>:  (const Uri&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Copy constructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Uri_1ab6f1be097f64cb13f635d1ce995ba3e9" href="#">+ Uri</a></span>:  (const Uri&amp; rhs);
 </code>
-</div></td></tr><tr id="Uri_52971319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Informations about the URI structure <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Clear all informations about the URI structure.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ clear</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Clear all informations about the URI structure.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Uri_1afb3da6c8f0e8f418a5ca16515d2ea613" href="#">+ clear</a></span>: void ();
 </code>
-</div></td></tr><tr id="clear_53001319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Scheme (lowercase)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ scheme</a></span>: const String&amp; () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Scheme (lowercase)<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Uri_1a74fdf06641e510ff8d6fdd49d65776fe" href="#">+ scheme</a></span>: const String&amp; () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="scheme_53021319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the scheme.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="scheme_53041319844517_tmpl"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="#">+ scheme</a></span>: void (const StringT&amp; s);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Set the scheme.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a name="classYuni_1_1Uri_1a7a32b482901bf17ea582a3f4ae9a67b5" href="#">+ scheme</a></span>: void (const StringT&amp; s);
 </code>
-</div></td></tr><tr id="scheme_53041319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Clear all informations about the URI structure.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ scheme</a></span>: void (const Net::Protocol::Type&amp; type);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Clear all informations about the URI structure.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Uri_1aa2b75fda579aefa9448b4d64890ebb53" href="#">+ scheme</a></span>: void (const Net::Protocol::Type&amp; type);
 </code>
-</div></td></tr><tr id="scheme_53061319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Server.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ server</a></span>: const String&amp; () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Server.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Uri_1aaeb29636272a970a9c20376c42335fb0" href="#">+ server</a></span>: const String&amp; () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="server_53081319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the server.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="server_53101319844517_tmpl"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="#">+ server</a></span>: void (const StringT&amp; s);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Set the server.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a name="classYuni_1_1Uri_1aa90585980bcacab21262ebf82321282d" href="#">+ server</a></span>: void (const StringT&amp; s);
 </code>
-</div></td></tr><tr id="server_53101319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Port (equals to `INT_MIN` if none)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ port</a></span>: int () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Port (equals to `INT_MIN` if none)<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Uri_1a8017f15b32581a82f30d7713faf80559" href="#">+ port</a></span>: int () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="port_53121319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the port value (only if strictly positive, or equals to INT_MIN do disable it)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ port</a></span>: void (int p);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Set the port value (only if strictly positive, or equals to INT_MIN do disable it)<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Uri_1a16613590ba224dc23033eea8bd599673" href="#">+ port</a></span>: void (int p);
 </code>
-</div></td></tr><tr id="port_53141319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">User.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ user</a></span>: const String&amp; () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>User.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Uri_1a0487d16cfbec4c4ca7e0d8e2d70ff711" href="#">+ user</a></span>: const String&amp; () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="user_53161319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the user.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="user_53181319844517_tmpl"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="#">+ user</a></span>: void (const StringT&amp; s);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Set the user.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a name="classYuni_1_1Uri_1ad057934a97aba51655e3b3994d221f5c" href="#">+ user</a></span>: void (const StringT&amp; s);
 </code>
-</div></td></tr><tr id="user_53181319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Password.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ password</a></span>: const String&amp; () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Password.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Uri_1a1eb14510b3d2952b88be78f33f9b9576" href="#">+ password</a></span>: const String&amp; () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="password_53201319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the password.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="password_53221319844517_tmpl"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="#">+ password</a></span>: void (const StringT&amp; s);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Set the password.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a name="classYuni_1_1Uri_1a81b4181189ba6b68b2bbb1080fd98e05" href="#">+ password</a></span>: void (const StringT&amp; s);
 </code>
-</div></td></tr><tr id="password_53221319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Path.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ path</a></span>: const String&amp; () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Path.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Uri_1af43c238e8bab548e90c1c7c6aa171639" href="#">+ path</a></span>: const String&amp; () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="path_53241319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the path.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="path_53251319844517_tmpl"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="#">+ path</a></span>: void (const StringT&amp; s);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Set the path.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a name="classYuni_1_1Uri_1a32c619a590d56d768318478b0665e3f7" href="#">+ path</a></span>: void (const StringT&amp; s);
 </code>
-</div></td></tr><tr id="path_53251319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set a default path (`/`) if there is no path.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ defaultPathIfEmpty</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Set a default path (`/`) if there is no path.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Uri_1aeb610f7cf600cd33f621c716d99f16c6" href="#">+ defaultPathIfEmpty</a></span>: void ();
 </code>
-</div></td></tr><tr id="defaultPathIfEmpty_53271319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Query.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ query</a></span>: const String&amp; () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Query.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Uri_1a1b401f8a3d4c3f8f721b4f56cb28382b" href="#">+ query</a></span>: const String&amp; () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="query_53291319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the query.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="query_53311319844517_tmpl"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="#">+ query</a></span>: void (const StringT&amp; s);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Set the query.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a name="classYuni_1_1Uri_1a6fabdfe024391425f8e45e9a06f35562" href="#">+ query</a></span>: void (const StringT&amp; s);
 </code>
-</div></td></tr><tr id="query_53311319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Fragment.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ fragment</a></span>: const String&amp; () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Fragment.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Uri_1a532083430d1eba2d9e5e6de276ffa671" href="#">+ fragment</a></span>: const String&amp; () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="fragment_53331319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the fragment.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="fragment_53351319844517_tmpl"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="#">+ fragment</a></span>: void (const StringT&amp; s);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Set the fragment.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a name="classYuni_1_1Uri_1a1311404dfcf4fb914f3d069377803cd7" href="#">+ fragment</a></span>: void (const StringT&amp; s);
 </code>
-</div></td></tr><tr id="fragment_53351319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the URI was valid during the last extract.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ isValid</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get if the URI was valid during the last extract.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Uri_1a583e127cdfdba6a644c89fc53f297b00" href="#">+ isValid</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="isValid_53381319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div><b>note</b> :  If any modification is brought to any part of the URI, the returned value of this method should no longer be used, because this variable is set when the URI is built from a simple string.<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Scheme <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Try to find out the network protocol from the scheme.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ protocol</a></span>: Net::Protocol::Type () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Try to find out the network protocol from the scheme.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Uri_1aed4c75dc25419b6571d4fc56d7fbf0d4" href="#">+ protocol</a></span>: Net::Protocol::Type () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="protocol_53401319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Convenient method to know if the URI is merely a file.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ schemeIsFile</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Convenient method to know if the URI is merely a file.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Uri_1af1884331863f2c5f0d0e437cbca3a0a1" href="#">+ schemeIsFile</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="schemeIsFile_53421319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the scheme is `HTTP` or `HTTPS`.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ schemeIsHTTP</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get if the scheme is `HTTP` or `HTTPS`.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Uri_1a76c198aabf30a1eccb1ec0220bf4ec5e" href="#">+ schemeIsHTTP</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="schemeIsHTTP_53441319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the scheme is `FTP`.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ schemeIsFTP</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get if the scheme is `FTP`.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Uri_1a14053b23b690cc321e32ab61e5f95c98" href="#">+ schemeIsFTP</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="schemeIsFTP_53451319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the scheme is `SSH`.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ schemeIsSSH</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get if the scheme is `SSH`.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Uri_1a14906dd927ad029a3d46a9bb8f3e09c0" href="#">+ schemeIsSSH</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="schemeIsSSH_53471319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the scheme is `LDAP`.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ schemeIsLDAP</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get if the scheme is `LDAP`.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Uri_1a7c3b926d8efeff1ff6f7e974c1aeb400" href="#">+ schemeIsLDAP</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="schemeIsLDAP_53481319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Conversion <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Reconstruct the URI to a string.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ toString</a></span>: String () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Reconstruct the URI to a string.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Uri_1adc84a61bcdd73c0430514845faf217f7" href="#">+ toString</a></span>: String () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="toString_53501319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Print this URI to a stream output.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ print</a></span>: std::ostream&amp; (std::ostream&amp; out) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Print this URI to a stream output.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Uri_1a4da758a3a40c1477ba1d91c5344ea494" href="#">+ print</a></span>: std::ostream&amp; (std::ostream&amp; out) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="print_53521319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> out</code> The stream output<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">The operator =.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator=</a></span>: Uri&amp; (const Uri&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>The operator =.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Uri_1abde97061f25d7f052fb18c38f587d52b" href="#">+ operator=</a></span>: Uri&amp; (const Uri&amp; rhs);
 </code>
-</div></td></tr><tr id="operator=_53541319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">The operator =.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator=_53561319844517_tmpl"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="#">+ operator=</a></span>: Uri&amp; (const StringT&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>The operator =.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a name="classYuni_1_1Uri_1a0716f0602d4ea5bc3182f1a47864617d" href="#">+ operator=</a></span>: Uri&amp; (const StringT&amp; rhs);
 </code>
-</div></td></tr><tr id="operator=_53561319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">The operator ==.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator==</a></span>: bool (const Uri&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>The operator ==.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Uri_1ac59f66a0488605d2c5c2e2f662e6d243" href="#">+ operator==</a></span>: bool (const Uri&amp; rhs) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator==_53591319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">The operator !=.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator!=</a></span>: bool (const Uri&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>The operator !=.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Uri_1a7944852e696529fd0954d08f4c5320d0" href="#">+ operator!=</a></span>: bool (const Uri&amp; rhs) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator!=_53611319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">The operator ()<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator()</a></span>: String () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>The operator ()<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Uri_1a39e0e581859f0b401a022dc5b5b8269f" href="#">+ operator()</a></span>: String () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator()_53631319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>

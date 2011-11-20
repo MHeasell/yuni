@@ -9,23 +9,23 @@
 <h2>Pre-Cached table of random numbers</h2>
 <h3>Public typedef</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">Value</a></span> : D::Value</code></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">ThreadingPolicy</a></span> : TP&lt; Table&lt;D, TableSize, Cyclic, TP&gt;&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1Math_1_1Random_1_1Table_1a897a1c848b68098b137509522a2ad2c0" href="#">Value</a></span> : D::Value</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1Math_1_1Random_1_1Table_1a5b2104e9097debbbb89dd407d2f72dee" href="#">ThreadingPolicy</a></span> : TP&lt; Table&lt;D, TableSize, Cyclic, TP&gt;&gt;</code></td></tr>
 </table></div>
 
 <h3>Public function</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructor &amp; Destructor</h4></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Table</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#"><b> ~ </b>Table</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Math_1_1Random_1_1Table_1ad745b6644bd5d1ff14f579aafec9a7ae">Table</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Math_1_1Random_1_1Table_1a81f4b49a396d38dcf5bf4c086e5e9967"><b> ~ </b>Table</a></span>()</code></td></tr>
 <tr><td></td><td><br /><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">reset</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code>const Value </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">next</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">fill</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code>Table&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator&gt;&gt;</a></span>(U&amp; u)</code></td></tr>
-<tr><td class="doxygen_index"><code>const Value </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator()</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Math_1_1Random_1_1Table_1a3e986d31c31f56aad1662d8e6a297d53">reset</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>const Value </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Math_1_1Random_1_1Table_1a2126b5f646e27c6765083f597f927878">next</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Math_1_1Random_1_1Table_1ab6618b065992305c835221232c009054">fill</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>Table&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Math_1_1Random_1_1Table_1ab93593963b1cdd789a79d4d0eb71f651">operator&gt;&gt;</a></span>(U&amp; u)</code></td></tr>
+<tr><td class="doxygen_index"><code>const Value </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Math_1_1Random_1_1Table_1ae7ea165c1f429791e0299b6e3d4f3c1b">operator()</a></span>()</code></td></tr>
 <tr><td></td><td><br /><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">static</span> const char* </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Name</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">static</span> int </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">size</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">static</span> const char* </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Math_1_1Random_1_1Table_1afc376fc17af7d118980ce4c58a042aa4">Name</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">static</span> int </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Math_1_1Random_1_1Table_1a67926f3352d03c03a4cb7de6532f6444">size</a></span>()</code></td></tr>
 </table></div>
 
 <h2>Detailed Description</h2><div>This class behaves like any other random number generator except random numbers come from a prefetch cache.<br /><source type="cpp">  #include  &lt;iostream&gt;
@@ -47,107 +47,107 @@
          return  0;
   }
 </source>
-<br /> Do not forget that you have to reset the random number generator yourself, As this operation may be costly, You may want to control it. The other reason is that some specific parameters may be required<br /> Even if it is possible to make this class thread-safe (using the godd threading policy, it is no really advised. The real purpose of this class is to avoid the high cost of a Random number generation (in a real-time game for example) and additional locks might be costly as well. In most cases you would prefer a `table` per thread.<br /><div class="doxygen_params">Parameters :</div><ul><li><code> D</code> Any random number generator<br /></li><li><code> TableSize</code> The count of random numbers to cache<br /></li><li><code> Cyclic</code> True to Cycle through the list or False to regenerate a new set when all pre-cached random numbers are exhausted<br /></li><li><code> TP</code> The Threading Policy<br /></li></ul><br /></div>
+<br /> Do not forget that you have to reset the random number generator yourself, As this operation may be costly, You may want to control it. The other reason is that some specific parameters may be required<br /> Even if it is possible to make this class thread-safe (using the godd threading policy, it is no really advised. The real purpose of this class is to avoid the high cost of a Random number generation (in a real-time game for example) and additional locks might be costly as well. In most cases you would prefer a `table` per thread.<br /><div class="doxygen_params">Parameters :</div><ul><li><code> D</code> Any random number generator<br /></li><li><code> TableSize</code> The count of random numbers to cache<br /></li><li><code> Cyclic</code> True to Cycle through the list or False to regenerate a new set when all pre-cached random numbers are exhausted<br /></li><li><code> TP</code> The Threading Policy<br /></li></ul><br /></div><div style="margin-top:3em;border:1px solid #aaa;border-bottom-style:none;border-left-style:none;border-right-style:none"></div>
 <table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 4)</i></code>
-</div></td></tr><tr id="@214tableSize_46421319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Type for a single random number.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ Value</a></span>: <span class="keyword">typedef</span> D::Value;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>Type for a single random number.<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="classYuni_1_1Math_1_1Random_1_1Table_1a897a1c848b68098b137509522a2ad2c0" href="#">+ Value</a></span>: <span class="keyword">typedef</span> D::Value;
 </code>
-</div></td></tr><tr id="Value_46431319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The threading policy.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ ThreadingPolicy</a></span>: <span class="keyword">typedef</span> TP&lt; Table&lt;D, TableSize, Cyclic, TP&gt;&gt;;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>The threading policy.<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="classYuni_1_1Math_1_1Random_1_1Table_1a5b2104e9097debbbb89dd407d2f72dee" href="#">+ ThreadingPolicy</a></span>: <span class="keyword">typedef</span> TP&lt; Table&lt;D, TableSize, Cyclic, TP&gt;&gt;;
 </code>
-</div></td></tr><tr id="ThreadingPolicy_46451319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ Table</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Default constructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Math_1_1Random_1_1Table_1ad745b6644bd5d1ff14f579aafec9a7ae" href="#">+ Table</a></span>:  ();
 </code>
-</div></td></tr><tr id="Table_46481319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">The table will be filled with random numbers provided by the given distribution.<br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ <b> ~ </b>Table</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Destructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Math_1_1Random_1_1Table_1a81f4b49a396d38dcf5bf4c086e5e9967" href="#">+ <b> ~ </b>Table</a></span>:  ();
 </code>
-</div></td></tr><tr id="~Table_46491319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Reset the random number generator.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ reset</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Reset the random number generator.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Math_1_1Random_1_1Table_1a3e986d31c31f56aad1662d8e6a297d53" href="#">+ reset</a></span>: void ();
 </code>
-</div></td></tr><tr id="reset_46511319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">The method `fill()` will be implicity called to generate a new set of random numbers.<br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the next random number.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ next</a></span>: const Value ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get the next random number.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Math_1_1Random_1_1Table_1a2126b5f646e27c6765083f597f927878" href="#">+ next</a></span>: const Value ();
 </code>
-</div></td></tr><tr id="next_46531319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Fill the table with a new set of random numbers.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ fill</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Fill the table with a new set of random numbers.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Math_1_1Random_1_1Table_1ab6618b065992305c835221232c009054" href="#">+ fill</a></span>: void ();
 </code>
-</div></td></tr><tr id="fill_46551319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">The operator `&gt;&gt;`.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator>>_46561319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">+ operator&gt;&gt;</a></span>: Table&amp; (U&amp; u);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>The operator `&gt;&gt;`.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a name="classYuni_1_1Math_1_1Random_1_1Table_1ab93593963b1cdd789a79d4d0eb71f651" href="#">+ operator&gt;&gt;</a></span>: Table&amp; (U&amp; u);
 </code>
-</div></td></tr><tr id="operator>>_46561319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">The operator `()`.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator()</a></span>: const Value ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>The operator `()`.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Math_1_1Random_1_1Table_1ae7ea165c1f429791e0299b6e3d4f3c1b" href="#">+ operator()</a></span>: const Value ();
 </code>
-</div></td></tr><tr id="operator()_46591319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Name of the distribution.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ Name</a></span>: <span class="keyword">static</span> const char* ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Name of the distribution.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Math_1_1Random_1_1Table_1afc376fc17af7d118980ce4c58a042aa4" href="#">+ Name</a></span>: <span class="keyword">static</span> const char* ();
 </code>
-</div></td></tr><tr id="Name_46611319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">This name is given by the template parameter D.<br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the number of random number in the table.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ size</a></span>: <span class="keyword">static</span> int ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get the number of random number in the table.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Math_1_1Random_1_1Table_1a67926f3352d03c03a4cb7de6532f6444" href="#">+ size</a></span>: <span class="keyword">static</span> int ();
 </code>
-</div></td></tr><tr id="size_46631319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>

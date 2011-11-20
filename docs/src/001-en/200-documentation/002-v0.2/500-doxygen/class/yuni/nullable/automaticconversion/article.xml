@@ -9,16 +9,16 @@
 <h2>Empty class to allow `if (mySmartPtr) ...`</h2>
 <h3>Public function</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator delete</a></span>(void* )</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#structYuni_1_1Nullable_1_1AutomaticConversion_1ac5287cbf99b1529c983025ae4007b335">operator delete</a></span>(void* )</code></td></tr>
 </table></div>
 
 <h2>Detailed Description</h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Disabling the delete operator.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator delete</a></span>: void (void* );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Disabling the delete operator.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="structYuni_1_1Nullable_1_1AutomaticConversion_1ac5287cbf99b1529c983025ae4007b335" href="#">+ operator delete</a></span>: void (void* );
 </code>
-</div></td></tr><tr id="operator delete_34871319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>

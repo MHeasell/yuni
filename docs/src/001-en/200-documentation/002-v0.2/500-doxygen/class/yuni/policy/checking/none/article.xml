@@ -9,59 +9,59 @@
 <h2>Do not make any check</h2>
 <h3>Public function</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">None</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">None</a></span>(const None&lt;U&gt;&amp; )</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Checking_1_1None_1ad44650a0b67d8c5a3ea4b81b81ac6719">None</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Checking_1_1None_1a65163e28128739df0b9cb3445cc3f568">None</a></span>(const None&lt;U&gt;&amp; )</code></td></tr>
 <tr><td></td><td><br /><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">static</span> void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">onDefault</a></span>(const T&amp; )</code></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">static</span> void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">onInit</a></span>(const T&amp; )</code></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">static</span> void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">onDereference</a></span>(const T&amp; )</code></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">static</span> void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">swapPointer</a></span>(None&amp; )</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">static</span> void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Checking_1_1None_1a05a70492b7e0911f56e1623e83cdb4e4">onDefault</a></span>(const T&amp; )</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">static</span> void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Checking_1_1None_1a5a01686bf8f06a83a8b4495d7312d936">onInit</a></span>(const T&amp; )</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">static</span> void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Checking_1_1None_1aea1e61dc33ae7a3c3d3a0f375821dddb">onDereference</a></span>(const T&amp; )</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">static</span> void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Checking_1_1None_1ad4c0b58172712558a71bec111c4d55a5">swapPointer</a></span>(None&amp; )</code></td></tr>
 </table></div>
 
 <h2>Detailed Description</h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ None</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1Policy_1_1Checking_1_1None_1ad44650a0b67d8c5a3ea4b81b81ac6719" href="#">+ None</a></span>:  ();
 </code>
-</div></td></tr><tr id="None_30081319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="None_30091319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">+ None</a></span>:  (const None&lt;U&gt;&amp; );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a name="classYuni_1_1Policy_1_1Checking_1_1None_1a65163e28128739df0b9cb3445cc3f568" href="#">+ None</a></span>:  (const None&lt;U&gt;&amp; );
 </code>
-</div></td></tr><tr id="None_30091319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ onDefault</a></span>: <span class="keyword">static</span> void (const T&amp; );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1Policy_1_1Checking_1_1None_1a05a70492b7e0911f56e1623e83cdb4e4" href="#">+ onDefault</a></span>: <span class="keyword">static</span> void (const T&amp; );
 </code>
-</div></td></tr><tr id="onDefault_30101319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ onInit</a></span>: <span class="keyword">static</span> void (const T&amp; );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1Policy_1_1Checking_1_1None_1a5a01686bf8f06a83a8b4495d7312d936" href="#">+ onInit</a></span>: <span class="keyword">static</span> void (const T&amp; );
 </code>
-</div></td></tr><tr id="onInit_30111319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ onDereference</a></span>: <span class="keyword">static</span> void (const T&amp; );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1Policy_1_1Checking_1_1None_1aea1e61dc33ae7a3c3d3a0f375821dddb" href="#">+ onDereference</a></span>: <span class="keyword">static</span> void (const T&amp; );
 </code>
-</div></td></tr><tr id="onDereference_30121319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ swapPointer</a></span>: <span class="keyword">static</span> void (None&amp; );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1Policy_1_1Checking_1_1None_1ad4c0b58172712558a71bec111c4d55a5" href="#">+ swapPointer</a></span>: <span class="keyword">static</span> void (None&amp; );
 </code>
-</div></td></tr><tr id="swapPointer_30131319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>

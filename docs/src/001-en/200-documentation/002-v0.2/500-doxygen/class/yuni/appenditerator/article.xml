@@ -9,34 +9,34 @@
 <h2>AppendIterator</h2>
 <h3>Public function</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">static</span> void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Perform</a></span>(StringT&amp; s, const IteratorT&amp; begin, const IteratorT2&amp; end)</code></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">static</span> void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Perform</a></span>(StringT&amp; s, const IteratorT&amp; begin, const IteratorT2&amp; end, const SeparatorT&amp; separator)</code></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">static</span> void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Perform</a></span>(StringT&amp; s, const IteratorT&amp; begin, const IteratorT2&amp; end, const SeparatorT&amp; separator, const EnclosureT&amp; enclosure)</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">static</span> void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#structYuni_1_1AppendIterator_1ae5639e69c1f66d68a4147e26c1af3e6c">Perform</a></span>(StringT&amp; s, const IteratorT&amp; begin, const IteratorT2&amp; end)</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">static</span> void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#structYuni_1_1AppendIterator_1af190cd49074f436afe12f0d49927b3a4">Perform</a></span>(StringT&amp; s, const IteratorT&amp; begin, const IteratorT2&amp; end, const SeparatorT&amp; separator)</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">static</span> void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#structYuni_1_1AppendIterator_1a215462364788eb80372044ff982a101c">Perform</a></span>(StringT&amp; s, const IteratorT&amp; begin, const IteratorT2&amp; end, const SeparatorT&amp; separator, const EnclosureT&amp; enclosure)</code></td></tr>
 </table></div>
 
 <h2>Detailed Description</h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="Perform_4381319844517_tmpl"><span class="keyword">template</span>&lt;class StringT , class IteratorT , class IteratorT2 &gt;</div>
- <span class="method"><a href="#">+ Perform</a></span>: <span class="keyword">static</span> void (StringT&amp; s, const IteratorT&amp; begin, const IteratorT2&amp; end);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class StringT , class IteratorT , class IteratorT2 &gt;</div>
+ <span class="method"><a name="structYuni_1_1AppendIterator_1ae5639e69c1f66d68a4147e26c1af3e6c" href="#">+ Perform</a></span>: <span class="keyword">static</span> void (StringT&amp; s, const IteratorT&amp; begin, const IteratorT2&amp; end);
 </code>
-</div></td></tr><tr id="Perform_4381319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="Perform_4391319844517_tmpl"><span class="keyword">template</span>&lt;class StringT , class IteratorT , class IteratorT2 , class SeparatorT &gt;</div>
- <span class="method"><a href="#">+ Perform</a></span>: <span class="keyword">static</span> void (StringT&amp; s, const IteratorT&amp; begin, const IteratorT2&amp; end, const SeparatorT&amp; separator);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class StringT , class IteratorT , class IteratorT2 , class SeparatorT &gt;</div>
+ <span class="method"><a name="structYuni_1_1AppendIterator_1af190cd49074f436afe12f0d49927b3a4" href="#">+ Perform</a></span>: <span class="keyword">static</span> void (StringT&amp; s, const IteratorT&amp; begin, const IteratorT2&amp; end, const SeparatorT&amp; separator);
 </code>
-</div></td></tr><tr id="Perform_4391319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="Perform_4401319844517_tmpl"><span class="keyword">template</span>&lt;class StringT , class IteratorT , class IteratorT2 , class SeparatorT , class EnclosureT &gt;</div>
- <span class="method"><a href="#">+ Perform</a></span>: <span class="keyword">static</span> void (StringT&amp; s, const IteratorT&amp; begin, const IteratorT2&amp; end, const SeparatorT&amp; separator, const EnclosureT&amp; enclosure);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class StringT , class IteratorT , class IteratorT2 , class SeparatorT , class EnclosureT &gt;</div>
+ <span class="method"><a name="structYuni_1_1AppendIterator_1a215462364788eb80372044ff982a101c" href="#">+ Perform</a></span>: <span class="keyword">static</span> void (StringT&amp; s, const IteratorT&amp; begin, const IteratorT2&amp; end, const SeparatorT&amp; separator, const EnclosureT&amp; enclosure);
 </code>
-</div></td></tr><tr id="Perform_4401319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>

@@ -9,175 +9,175 @@
 <h2>Screen/Monitor resolution</h2>
 <h3>Public typedef</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">Ptr</a></span> : SmartPtr&lt;Resolution&gt;</code></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">Vector</a></span> : std::vector&lt; Ptr&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1Device_1_1Display_1_1Resolution_1aaacb8ac1c509704ddb08f74e112f3c2e" href="#">Ptr</a></span> : SmartPtr&lt;Resolution&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1Device_1_1Display_1_1Resolution_1a42e9b3cf2f181ffa46e712ea4a3e2bc0" href="#">Vector</a></span> : std::vector&lt; Ptr&gt;</code></td></tr>
 </table></div>
 
 <h3>Public function</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructors</h4></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Resolution</a></span>(const uint32 w, const uint32 h, const uint8 b)</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Resolution</a></span>(const Resolution&amp; c)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Resolution_1aec197c8a7e77e3a0ad0890fc6928263e">Resolution</a></span>(const uint32 w, const uint32 h, const uint8 b)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Resolution_1a326834f9146c735356b3a0a9ebdc7c30">Resolution</a></span>(const Resolution&amp; c)</code></td></tr>
 <tr><td></td><td><br /><h4>Information about the current mode</h4></td></tr>
-<tr><td class="doxygen_index"><code>uint32 </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">width</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>uint32 </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">height</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>uint8 </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">bitPerPixel</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>uint32 </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Resolution_1a104dd6fe7dc6e2b70c273358d355fa87">width</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>uint32 </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Resolution_1a04864a9f391faac3d36b1f9ab60f80d4">height</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>uint8 </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Resolution_1ae0be8ae84ebdddae67496e96f28f7bfe">bitPerPixel</a></span>() <span class="keyword">const</span></code></td></tr>
 <tr><td></td><td><br /><h4>Operators</h4></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator==</a></span>(const Resolution&amp; rhs) <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator!=</a></span>(const Resolution&amp; rhs) <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator&lt;</a></span>(const Resolution&amp; rhs) <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator&lt;=</a></span>(const Resolution&amp; rhs) <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator&gt;</a></span>(const Resolution&amp; rhs) <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator&gt;=</a></span>(const Resolution&amp; rhs) <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>Resolution&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator=</a></span>(const Resolution&amp; p)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Resolution_1a7d6cf54dee03f70eb1a446670774dea5">operator==</a></span>(const Resolution&amp; rhs) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Resolution_1ad2a993b8792e3b7e4b3bbc8355e7fbc2">operator!=</a></span>(const Resolution&amp; rhs) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Resolution_1a7babd03bff760f899d07723dd2304ee8">operator&lt;</a></span>(const Resolution&amp; rhs) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Resolution_1a59eb90bcf976b651b784174fd1c0ca58">operator&lt;=</a></span>(const Resolution&amp; rhs) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Resolution_1a94695938b0350d65f29106fe4c492b5f">operator&gt;</a></span>(const Resolution&amp; rhs) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Resolution_1aa3c3299e828b67707490ec48641b798a">operator&gt;=</a></span>(const Resolution&amp; rhs) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>Resolution&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Resolution_1a306e03552776529e68ba9dcb3de82fcf">operator=</a></span>(const Resolution&amp; p)</code></td></tr>
 <tr><td></td><td><br /><h4>Stream printing</h4></td></tr>
-<tr><td class="doxygen_index"><code>std::ostream&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">print</a></span>(std::ostream&amp; out) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>std::ostream&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Resolution_1abfc80d81646f927bca7f81b3ce00f4e9">print</a></span>(std::ostream&amp; out) <span class="keyword">const</span></code></td></tr>
 <tr><td></td><td><br /><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code>String </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">toString</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>String </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Resolution_1a842e1c5df97c08999e3c0845ed5f23c0">toString</a></span>() <span class="keyword">const</span></code></td></tr>
 </table></div>
 
 <h2>Detailed Description</h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 4)</i></code>
-</div></td></tr><tr id="@348minimumWidthminimumHeightmaximumWidthmaximumHeight_37971319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The most suitable smart pointer to use with the class `Resolution`.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;Resolution&gt;;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>The most suitable smart pointer to use with the class `Resolution`.<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Resolution_1aaacb8ac1c509704ddb08f74e112f3c2e" href="#">+ Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;Resolution&gt;;
 </code>
-</div></td></tr><tr id="Ptr_37981319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Vector of resolutions.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ Vector</a></span>: <span class="keyword">typedef</span> std::vector&lt; Ptr&gt;;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>Vector of resolutions.<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Resolution_1a42e9b3cf2f181ffa46e712ea4a3e2bc0" href="#">+ Vector</a></span>: <span class="keyword">typedef</span> std::vector&lt; Ptr&gt;;
 </code>
-</div></td></tr><tr id="Vector_37991319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ Resolution</a></span>:  (const uint32 w, const uint32 h, const uint8 b);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Constructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Resolution_1aec197c8a7e77e3a0ad0890fc6928263e" href="#">+ Resolution</a></span>:  (const uint32 w, const uint32 h, const uint8 b);
 </code>
-</div></td></tr><tr id="Resolution_38001319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> w</code> Width of the monitor/screen<br /></li><li><code> h</code> Height of the monitor/screen<br /></li><li><code> b</code> Bit per Pixel<br /></li></ul><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor by copy.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ Resolution</a></span>:  (const Resolution&amp; c);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Constructor by copy.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Resolution_1a326834f9146c735356b3a0a9ebdc7c30" href="#">+ Resolution</a></span>:  (const Resolution&amp; c);
 </code>
-</div></td></tr><tr id="Resolution_38011319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> c</code> The instance to copy<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Information about the current mode <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">The width of the monitor/screen.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ width</a></span>: uint32 () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>The width of the monitor/screen.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Resolution_1a104dd6fe7dc6e2b70c273358d355fa87" href="#">+ width</a></span>: uint32 () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="width_38021319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">The height of the monitor/screen.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ height</a></span>: uint32 () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>The height of the monitor/screen.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Resolution_1a04864a9f391faac3d36b1f9ab60f80d4" href="#">+ height</a></span>: uint32 () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="height_38031319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Bit per pixel.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ bitPerPixel</a></span>: uint8 () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Bit per pixel.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Resolution_1ae0be8ae84ebdddae67496e96f28f7bfe" href="#">+ bitPerPixel</a></span>: uint8 () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="bitPerPixel_38041319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Comparison operator (equal with)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator==</a></span>: bool (const Resolution&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Comparison operator (equal with)<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Resolution_1a7d6cf54dee03f70eb1a446670774dea5" href="#">+ operator==</a></span>: bool (const Resolution&amp; rhs) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator==_38051319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> rhs</code> The other resolution to compare with<br /></li></ul><div><code>return</code>  True if the two resolution are equal<br /></div><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Comparison operator (non equal with)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator!=</a></span>: bool (const Resolution&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Comparison operator (non equal with)<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Resolution_1ad2a993b8792e3b7e4b3bbc8355e7fbc2" href="#">+ operator!=</a></span>: bool (const Resolution&amp; rhs) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator!=_38061319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> rhs</code> The other resolution to compare with<br /></li></ul><div><code>return</code>  True if the two resolution are not equal<br /></div><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Comparison operator (less than)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator&lt;</a></span>: bool (const Resolution&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Comparison operator (less than)<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Resolution_1a7babd03bff760f899d07723dd2304ee8" href="#">+ operator&lt;</a></span>: bool (const Resolution&amp; rhs) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator<_38071319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> rhs</code> The other resolution to compare with<br /></li></ul><div><code>return</code>  True if *this &lt; rhs<br /></div><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Comparison operator (less than or equal)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator&lt;=</a></span>: bool (const Resolution&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Comparison operator (less than or equal)<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Resolution_1a59eb90bcf976b651b784174fd1c0ca58" href="#">+ operator&lt;=</a></span>: bool (const Resolution&amp; rhs) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator<=_38081319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> rhs</code> The other resolution to compare with<br /></li></ul><div><code>return</code>  True if *this &lt;= rhs<br /></div><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Comparison operator (greater than)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator&gt;</a></span>: bool (const Resolution&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Comparison operator (greater than)<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Resolution_1a94695938b0350d65f29106fe4c492b5f" href="#">+ operator&gt;</a></span>: bool (const Resolution&amp; rhs) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator>_38091319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> rhs</code> The other resolution to compare with<br /></li></ul><div><code>return</code>  True if *this &gt; rhs<br /></div><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Comparison operator (greater than or equal)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator&gt;=</a></span>: bool (const Resolution&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Comparison operator (greater than or equal)<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Resolution_1aa3c3299e828b67707490ec48641b798a" href="#">+ operator&gt;=</a></span>: bool (const Resolution&amp; rhs) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator>=_38101319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> rhs</code> The other resolution to compare with<br /></li></ul><div><code>return</code>  True if *this &gt;= rhs<br /></div><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assign new values from another resolution.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator=</a></span>: Resolution&amp; (const Resolution&amp; p);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Assign new values from another resolution.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Resolution_1a306e03552776529e68ba9dcb3de82fcf" href="#">+ operator=</a></span>: Resolution&amp; (const Resolution&amp; p);
 </code>
-</div></td></tr><tr id="operator=_38111319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> p</code> The new values<br /></li></ul><div><code>return</code>  Always *this<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Stream printing <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Print the resolution.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ print</a></span>: std::ostream&amp; (std::ostream&amp; out) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Print the resolution.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Resolution_1abfc80d81646f927bca7f81b3ce00f4e9" href="#">+ print</a></span>: std::ostream&amp; (std::ostream&amp; out) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="print_38121319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> out</code> An output stream<br /></li></ul><div><code>return</code>  The output stream `out`<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Convert these informations into an human readable string.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ toString</a></span>: String () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Convert these informations into an human readable string.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Resolution_1a842e1c5df97c08999e3c0845ed5f23c0" href="#">+ toString</a></span>: String () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="toString_38131319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>

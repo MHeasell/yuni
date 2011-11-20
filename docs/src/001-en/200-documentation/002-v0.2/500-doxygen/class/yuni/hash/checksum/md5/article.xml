@@ -9,19 +9,19 @@
 <h2>MD5 Checksum</h2>
 <h3>Public function</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructor &amp; Destructor</h4></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">MD5</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#"><b> ~ </b>MD5</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Hash_1_1Checksum_1_1MD5_1a1c6b111dd795c2c9140ee957bf4f007c">MD5</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Hash_1_1Checksum_1_1MD5_1aee246d86a045d044451faa9a5a025cf3"><b> ~ </b>MD5</a></span>()</code></td></tr>
 <tr><td></td><td><br /><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">static</span> String </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">FromString</a></span>(const String&amp; s)</code></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">static</span> String </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">FromRawData</a></span>(const void* rawdata, uint64 size)</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">static</span> String </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Hash_1_1Checksum_1_1MD5_1a183a8476b671fb0696b63756608e0814">FromString</a></span>(const String&amp; s)</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">static</span> String </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Hash_1_1Checksum_1_1MD5_1ae25fad0e9ae4895291a53d6a34113d80">FromRawData</a></span>(const void* rawdata, uint64 size)</code></td></tr>
 <tr><td></td><td><br /><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code>const String&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">fromRawData</a></span>(const void* rawdata, uint64 size)</code></td></tr>
-<tr><td class="doxygen_index"><code>const String&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">fromFile</a></span>(const String&amp; filename)</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">reset</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code>const String&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">fromString</a></span>(const String&amp; s)</code></td></tr>
-<tr><td class="doxygen_index"><code>const String&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">value</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>const String&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator()</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>const String&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator[]</a></span>(const String&amp; s)</code></td></tr>
+<tr><td class="doxygen_index"><code>const String&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Hash_1_1Checksum_1_1MD5_1aa88ee2d8ab395241b0b75f40d1e9f9d2">fromRawData</a></span>(const void* rawdata, uint64 size)</code></td></tr>
+<tr><td class="doxygen_index"><code>const String&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Hash_1_1Checksum_1_1MD5_1aaf698d0bb49f72bccf5df34fc992032d">fromFile</a></span>(const String&amp; filename)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Hash_1_1Checksum_1_1IChecksum_1a96f1f9c57fc389e88f9f0f431b55f24f">reset</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>const String&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Hash_1_1Checksum_1_1IChecksum_1ad85c7ffcb189ef632962f48bdd9a0d24">fromString</a></span>(const String&amp; s)</code></td></tr>
+<tr><td class="doxygen_index"><code>const String&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Hash_1_1Checksum_1_1IChecksum_1a77a7291326e69c4f27d6351771f456fb">value</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>const String&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Hash_1_1Checksum_1_1IChecksum_1ab48d78eb802d6bac5a6c98eb6cca9963">operator()</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>const String&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Hash_1_1Checksum_1_1IChecksum_1ae5747eacf74def324090857546737cfd">operator[]</a></span>(const String&amp; s)</code></td></tr>
 </table></div>
 
 <h2>Detailed Description</h2><div>Compute the MD5 from a string :<source type="cpp">  Yuni::Hash::Checksum::MD5  md5;
@@ -39,98 +39,98 @@
   std::cout  &lt;&lt;  md5[ "World" ]  &lt;&lt;  std::endl;
   std::cout  &lt;&lt;  md5[ "Hello  world" ]  &lt;&lt;  std::endl;
 </source>
-<br /></div>
+<br /></div><div style="margin-top:3em;border:1px solid #aaa;border-bottom-style:none;border-left-style:none;border-right-style:none"></div>
 <table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ MD5</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Default constructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Hash_1_1Checksum_1_1MD5_1a1c6b111dd795c2c9140ee957bf4f007c" href="#">+ MD5</a></span>:  ();
 </code>
-</div></td></tr><tr id="MD5_34901319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ <b> ~ </b>MD5</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Destructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Hash_1_1Checksum_1_1MD5_1aee246d86a045d044451faa9a5a025cf3" href="#">+ <b> ~ </b>MD5</a></span>:  ();
 </code>
-</div></td></tr><tr id="~MD5_34911319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Compute the hash from a string.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ FromString</a></span>: <span class="keyword">static</span> String (const String&amp; s);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Compute the hash from a string.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Hash_1_1Checksum_1_1MD5_1a183a8476b671fb0696b63756608e0814" href="#">+ FromString</a></span>: <span class="keyword">static</span> String (const String&amp; s);
 </code>
-</div></td></tr><tr id="FromString_34921319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> s</code> The string<br /></li></ul><div><code>return</code>  The hash value<br /></div><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Compute the hash from raw data.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ FromRawData</a></span>: <span class="keyword">static</span> String (const void* rawdata, uint64 size);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Compute the hash from raw data.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Hash_1_1Checksum_1_1MD5_1ae25fad0e9ae4895291a53d6a34113d80" href="#">+ FromRawData</a></span>: <span class="keyword">static</span> String (const void* rawdata, uint64 size);
 </code>
-</div></td></tr><tr id="FromRawData_34931319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> rawdata</code> The original buffer<br /></li><li><code> size</code> Size of the given buffer.<br /></li></ul><div><code>return</code>  The hash value<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Compute the hash from raw data.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ fromRawData</a></span>: const String&amp; (const void* rawdata, uint64 size);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Compute the hash from raw data.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Hash_1_1Checksum_1_1MD5_1aa88ee2d8ab395241b0b75f40d1e9f9d2" href="#">+ fromRawData</a></span>: const String&amp; (const void* rawdata, uint64 size);
 </code>
-</div></td></tr><tr id="fromRawData_34941319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> rawdata</code> The buffer<br /></li><li><code> size</code> The size of the buffer. AutoDetectNullChar will make an autodetection of the length<br /></li></ul><div><code>return</code>  The hash value<br /></div><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Compute the hash of a given file.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ fromFile</a></span>: const String&amp; (const String&amp; filename);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Compute the hash of a given file.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Hash_1_1Checksum_1_1MD5_1aaf698d0bb49f72bccf5df34fc992032d" href="#">+ fromFile</a></span>: const String&amp; (const String&amp; filename);
 </code>
-</div></td></tr><tr id="fromFile_34951319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> filename</code> The filename to analyze<br /></li></ul><div><code>return</code>  The hash value<br /></div><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Reset the hash value.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ reset</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Reset the hash value.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Hash_1_1Checksum_1_1IChecksum_1a96f1f9c57fc389e88f9f0f431b55f24f" href="#">+ reset</a></span>: void ();
 </code>
-</div></td></tr><tr id="reset_34961319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Compute the hash from a string.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ fromString</a></span>: const String&amp; (const String&amp; s);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Compute the hash from a string.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Hash_1_1Checksum_1_1IChecksum_1ad85c7ffcb189ef632962f48bdd9a0d24" href="#">+ fromString</a></span>: const String&amp; (const String&amp; s);
 </code>
-</div></td></tr><tr id="fromString_34971319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> s</code> The string<br /></li></ul><div><code>return</code>  The hash value<br /></div><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the last hash value.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ value</a></span>: const String&amp; () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get the last hash value.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Hash_1_1Checksum_1_1IChecksum_1a77a7291326e69c4f27d6351771f456fb" href="#">+ value</a></span>: const String&amp; () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="value_34981319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the hash value.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator()</a></span>: const String&amp; () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get the hash value.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Hash_1_1Checksum_1_1IChecksum_1ab48d78eb802d6bac5a6c98eb6cca9963" href="#">+ operator()</a></span>: const String&amp; () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator()_34991319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Compute the hash value from a string and returns it.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator[]</a></span>: const String&amp; (const String&amp; s);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Compute the hash value from a string and returns it.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Hash_1_1Checksum_1_1IChecksum_1ae5747eacf74def324090857546737cfd" href="#">+ operator[]</a></span>: const String&amp; (const String&amp; s);
 </code>
-</div></td></tr><tr id="operator[]_35001319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> s</code> The string to compute<br /></li></ul><div><code>return</code>  The hash value<br /></div><br />
 </div>

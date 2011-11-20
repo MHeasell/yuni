@@ -9,68 +9,68 @@
 <h2>Allocator</h2>
 <h3>Public function</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructor &amp; Destructor</h4></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Allocator</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#"><b> ~ </b>Allocator</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1STM_1_1Allocator_1a7a3e42bdfc28742b0e338bf2861fa6f6">Allocator</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1STM_1_1Allocator_1a765210250c6ba6273bebaf19bd7f12e4"><b> ~ </b>Allocator</a></span>()</code></td></tr>
 <tr><td></td><td><br /><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code>Pointer </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">allocate</a></span>(uint64 size)</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">release</a></span>(Pointer ptr)</code></td></tr>
-<tr><td class="doxygen_index"><code>Transaction::Handle </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">begin</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">commit</a></span>(Transaction::Handle handle)</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">rollback</a></span>(Transaction::Handle handle)</code></td></tr>
+<tr><td class="doxygen_index"><code>Pointer </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1STM_1_1Allocator_1a32d0a7b51bcb68e27e20de92b92fe0e5">allocate</a></span>(uint64 size)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1STM_1_1Allocator_1a03d49e941efe61d37cf2c8883d59f78e">release</a></span>(Pointer ptr)</code></td></tr>
+<tr><td class="doxygen_index"><code>Transaction::Handle </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1STM_1_1Allocator_1ae1408a0acf636a9ec5aa402074a63f8c">begin</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1STM_1_1Allocator_1a570406caea535ef18332c3be3357ef49">commit</a></span>(Transaction::Handle handle)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1STM_1_1Allocator_1a05d3d5ef3b2867d0fbf6cb89be5d9550">rollback</a></span>(Transaction::Handle handle)</code></td></tr>
 </table></div>
 
 <h2>Detailed Description</h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ Allocator</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Default constructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1STM_1_1Allocator_1a7a3e42bdfc28742b0e338bf2861fa6f6" href="#">+ Allocator</a></span>:  ();
 </code>
-</div></td></tr><tr id="Allocator_33141319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ <b> ~ </b>Allocator</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Destructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1STM_1_1Allocator_1a765210250c6ba6273bebaf19bd7f12e4" href="#">+ <b> ~ </b>Allocator</a></span>:  ();
 </code>
-</div></td></tr><tr id="~Allocator_33151319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ allocate</a></span>: Pointer (uint64 size);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1STM_1_1Allocator_1a32d0a7b51bcb68e27e20de92b92fe0e5" href="#">+ allocate</a></span>: Pointer (uint64 size);
 </code>
-</div></td></tr><tr id="allocate_33161319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ release</a></span>: void (Pointer ptr);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1STM_1_1Allocator_1a03d49e941efe61d37cf2c8883d59f78e" href="#">+ release</a></span>: void (Pointer ptr);
 </code>
-</div></td></tr><tr id="release_33171319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ begin</a></span>: Transaction::Handle ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1STM_1_1Allocator_1ae1408a0acf636a9ec5aa402074a63f8c" href="#">+ begin</a></span>: Transaction::Handle ();
 </code>
-</div></td></tr><tr id="begin_33181319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ commit</a></span>: bool (Transaction::Handle handle);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1STM_1_1Allocator_1a570406caea535ef18332c3be3357ef49" href="#">+ commit</a></span>: bool (Transaction::Handle handle);
 </code>
-</div></td></tr><tr id="commit_33191319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ rollback</a></span>: void (Transaction::Handle handle);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1STM_1_1Allocator_1a05d3d5ef3b2867d0fbf6cb89be5d9550" href="#">+ rollback</a></span>: void (Transaction::Handle handle);
 </code>
-</div></td></tr><tr id="rollback_33201319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>

@@ -9,274 +9,274 @@
 <h2>This is the the access to all the emitters for this queue service</h2>
 <h3>Public typedef</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">ThreadingPolicy</a></span> : Policy::ObjectLevelLockable&lt;Emitters&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1Audio_1_1QueueService_1_1Emitters_1a4baaf5f5165a966bf1575fe81ed4a9d3" href="#">ThreadingPolicy</a></span> : Policy::ObjectLevelLockable&lt;Emitters&gt;</code></td></tr>
 </table></div>
 
 <h3>Public function</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code>Emitter::Ptr </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">get</a></span>(const StringT&amp; name)</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">add</a></span>(const StringT&amp; name)</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">attach</a></span>(const StringT&amp; name, const StringT2&amp; attachedBuffer)</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">attach</a></span>(Emitter::Ptr name, const StringT&amp; attachedBuffer)</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">modify</a></span>(const StringT&amp; name, bool loop)</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">modify</a></span>(Emitter::Ptr name, bool loop)</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">move</a></span>(const StringT&amp; name, const Point3D &lt;&gt;&amp; position)</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">move</a></span>(Emitter::Ptr emitter, const Point3D &lt;&gt;&amp; position)</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">move</a></span>(const StringT&amp; name, const Point3D &lt;&gt;&amp; position, const Vector3D &lt;&gt;&amp; velocity, const Vector3D &lt;&gt;&amp; direction)</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">move</a></span>(Emitter::Ptr emitter, const Point3D &lt;&gt;&amp; position, const Vector3D &lt;&gt;&amp; velocity, const Vector3D &lt;&gt;&amp; direction)</code></td></tr>
-<tr><td class="doxygen_index"><code>sint64 </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">elapsedTime</a></span>(const StringT&amp; name)</code></td></tr>
-<tr><td class="doxygen_index"><code>sint64 </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">elapsedTime</a></span>(Emitter::Ptr emitter)</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">play</a></span>(const StringT&amp; name)</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">play</a></span>(Emitter::Ptr emitter)</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">stop</a></span>(const StringT&amp; name)</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">stop</a></span>(const Emitter::Ptr&amp; emitter)</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">remove</a></span>(const StringT&amp; name)</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">remove</a></span>(Emitter::Ptr name)</code></td></tr>
-<tr><td class="doxygen_index"><code>Emitter::Ptr </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">get</a></span>(const String&amp; name)</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">add</a></span>(const String&amp; emitterName)</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">attach</a></span>(const String&amp; emitterName, const String&amp; bufferName)</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">attach</a></span>(Emitter::Ptr emitter, const String&amp; bufferName)</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">move</a></span>(const String&amp; emitterName, const Point3D &lt;&gt;&amp; position)</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">move</a></span>(const String&amp; emitterStr, const Point3D &lt;&gt;&amp; position, const Vector3D &lt;&gt;&amp; velocity, const Vector3D &lt;&gt;&amp; direction)</code></td></tr>
-<tr><td class="doxygen_index"><code>sint64 </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">elapsedTime</a></span>(const String&amp; name)</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">play</a></span>(const String&amp; name)</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">stop</a></span>(const String&amp; name)</code></td></tr>
+<tr><td class="doxygen_index"><code>Emitter::Ptr </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1QueueService_1_1Emitters_1a703243fedd80ff71ffc971ddb50bc416">get</a></span>(const StringT&amp; name)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1QueueService_1_1Emitters_1a6446cdd06b16c010e84b55ef7b8d39f5">add</a></span>(const StringT&amp; name)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1QueueService_1_1Emitters_1ab4e10c424942cbb18b16b4f9d8c45544">attach</a></span>(const StringT&amp; name, const StringT2&amp; attachedBuffer)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1QueueService_1_1Emitters_1a9436d368bb1703e5cf423acd133d2c8e">attach</a></span>(Emitter::Ptr name, const StringT&amp; attachedBuffer)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1QueueService_1_1Emitters_1ad14c467c3d374aaf8c3cc41f3f52a274">modify</a></span>(const StringT&amp; name, bool loop)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1QueueService_1_1Emitters_1a7e0877195bea644af87199ed6ea9fd0c">modify</a></span>(Emitter::Ptr name, bool loop)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1QueueService_1_1Emitters_1a5b3dc46ee64dffce1a27e971ee70b7fd">move</a></span>(const StringT&amp; name, const Point3D &lt;&gt;&amp; position)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1QueueService_1_1Emitters_1a382895aaa52f275ee961e9aee217a117">move</a></span>(Emitter::Ptr emitter, const Point3D &lt;&gt;&amp; position)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1QueueService_1_1Emitters_1a169fa2e1a59f9968948b445a4ec85d16">move</a></span>(const StringT&amp; name, const Point3D &lt;&gt;&amp; position, const Vector3D &lt;&gt;&amp; velocity, const Vector3D &lt;&gt;&amp; direction)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1QueueService_1_1Emitters_1abe68419d7f07e1b74af5317d2f405073">move</a></span>(Emitter::Ptr emitter, const Point3D &lt;&gt;&amp; position, const Vector3D &lt;&gt;&amp; velocity, const Vector3D &lt;&gt;&amp; direction)</code></td></tr>
+<tr><td class="doxygen_index"><code>sint64 </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1QueueService_1_1Emitters_1a3897056108912f10e6a4f394bb848e96">elapsedTime</a></span>(const StringT&amp; name)</code></td></tr>
+<tr><td class="doxygen_index"><code>sint64 </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1QueueService_1_1Emitters_1a1880c54608195ca35fc0dc9764db087b">elapsedTime</a></span>(Emitter::Ptr emitter)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1QueueService_1_1Emitters_1aa7d6efc1f74bcf014c39323d1b11b0f5">play</a></span>(const StringT&amp; name)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1QueueService_1_1Emitters_1aab8ab5e6b06bf3aadd10547e5e7dc283">play</a></span>(Emitter::Ptr emitter)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1QueueService_1_1Emitters_1a72de38459d50eca4c0c28b629c94d381">stop</a></span>(const StringT&amp; name)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1QueueService_1_1Emitters_1aa635ae964ffe4548c3f265f49b1a3427">stop</a></span>(const Emitter::Ptr&amp; emitter)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1QueueService_1_1Emitters_1ab6017e2798f3654caf83817b4cdd7341">remove</a></span>(const StringT&amp; name)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1QueueService_1_1Emitters_1aca4dd6e4adcc00eece003ed213ddc173">remove</a></span>(Emitter::Ptr name)</code></td></tr>
+<tr><td class="doxygen_index"><code>Emitter::Ptr </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1QueueService_1_1Emitters_1a63797e1bd0364126a3afd183fc7b6508">get</a></span>(const String&amp; name)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1QueueService_1_1Emitters_1ab13a5b8c41b5985ecdc311ff7eb44e34">add</a></span>(const String&amp; emitterName)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1QueueService_1_1Emitters_1a987f5f13b48645b54aa2f9413d18c3c1">attach</a></span>(const String&amp; emitterName, const String&amp; bufferName)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1QueueService_1_1Emitters_1ad7f4c7256288353eb3022e088e0f59a5">attach</a></span>(Emitter::Ptr emitter, const String&amp; bufferName)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1QueueService_1_1Emitters_1a348f8f1261a70146248bd6f15b02ce6f">move</a></span>(const String&amp; emitterName, const Point3D &lt;&gt;&amp; position)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1QueueService_1_1Emitters_1a2852e95f28eb27eb137cbdc0435fddcc">move</a></span>(const String&amp; emitterStr, const Point3D &lt;&gt;&amp; position, const Vector3D &lt;&gt;&amp; velocity, const Vector3D &lt;&gt;&amp; direction)</code></td></tr>
+<tr><td class="doxygen_index"><code>sint64 </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1QueueService_1_1Emitters_1a438558dd01a292ffa5a1db0cb3436e74">elapsedTime</a></span>(const String&amp; name)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1QueueService_1_1Emitters_1a050b67685350ca422af0dc900d8978d6">play</a></span>(const String&amp; name)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1QueueService_1_1Emitters_1a44eb563fb793041fad8d13efb5f14f7e">stop</a></span>(const String&amp; name)</code></td></tr>
 </table></div>
 
-<h2>Detailed Description</h2><div>All the emitters are managed here. It can be accessed through: queueService.emitter<br /></div>
+<h2>Detailed Description</h2><div>All the emitters are managed here. It can be accessed through: queueService.emitter<br /></div><div style="margin-top:3em;border:1px solid #aaa;border-bottom-style:none;border-left-style:none;border-right-style:none"></div>
 <table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a href="#">+ ThreadingPolicy</a></span>: <span class="keyword">typedef</span> Policy::ObjectLevelLockable&lt;Emitters&gt;;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a name="classYuni_1_1Audio_1_1QueueService_1_1Emitters_1a4baaf5f5165a966bf1575fe81ed4a9d3" href="#">+ ThreadingPolicy</a></span>: <span class="keyword">typedef</span> Policy::ObjectLevelLockable&lt;Emitters&gt;;
 </code>
-</div></td></tr><tr id="ThreadingPolicy_34121319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief">Get if this policy is thread-safe.<br /><div class="doxygen_name_spacer"></div>
+<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><b>Get if this policy is thread-safe.<br /></b><div class="doxygen_name_spacer"></div>
 <code><i>(unmanaged tag: 4)</i></code>
-</div></td></tr><tr id="@369_34141319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get an emitter.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="get_34151319844517_tmpl"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
- <span class="method"><a href="#">+ get</a></span>: Emitter::Ptr (const StringT&amp; name);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get an emitter.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
+ <span class="method"><a name="classYuni_1_1Audio_1_1QueueService_1_1Emitters_1a703243fedd80ff71ffc971ddb50bc416" href="#">+ get</a></span>: Emitter::Ptr (const StringT&amp; name);
 </code>
-</div></td></tr><tr id="get_34151319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Add an emitter.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="add_34171319844517_tmpl"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
- <span class="method"><a href="#">+ add</a></span>: bool (const StringT&amp; name);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Add an emitter.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
+ <span class="method"><a name="classYuni_1_1Audio_1_1QueueService_1_1Emitters_1a6446cdd06b16c010e84b55ef7b8d39f5" href="#">+ add</a></span>: bool (const StringT&amp; name);
 </code>
-</div></td></tr><tr id="add_34171319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Attach an emitter to a buffer.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="attach_34181319844517_tmpl"><span class="keyword">template</span>&lt;typename StringT , typename StringT2 &gt;</div>
- <span class="method"><a href="#">+ attach</a></span>: bool (const StringT&amp; name, const StringT2&amp; attachedBuffer);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Attach an emitter to a buffer.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;typename StringT , typename StringT2 &gt;</div>
+ <span class="method"><a name="classYuni_1_1Audio_1_1QueueService_1_1Emitters_1ab4e10c424942cbb18b16b4f9d8c45544" href="#">+ attach</a></span>: bool (const StringT&amp; name, const StringT2&amp; attachedBuffer);
 </code>
-</div></td></tr><tr id="attach_34181319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Attach an emitter to a buffer.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="attach_34201319844517_tmpl"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
- <span class="method"><a href="#">+ attach</a></span>: bool (Emitter::Ptr name, const StringT&amp; attachedBuffer);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Attach an emitter to a buffer.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
+ <span class="method"><a name="classYuni_1_1Audio_1_1QueueService_1_1Emitters_1a9436d368bb1703e5cf423acd133d2c8e" href="#">+ attach</a></span>: bool (Emitter::Ptr name, const StringT&amp; attachedBuffer);
 </code>
-</div></td></tr><tr id="attach_34201319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Modify an emitter's data.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="modify_34231319844517_tmpl"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
- <span class="method"><a href="#">+ modify</a></span>: bool (const StringT&amp; name, bool loop);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Modify an emitter's data.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
+ <span class="method"><a name="classYuni_1_1Audio_1_1QueueService_1_1Emitters_1ad14c467c3d374aaf8c3cc41f3f52a274" href="#">+ modify</a></span>: bool (const StringT&amp; name, bool loop);
 </code>
-</div></td></tr><tr id="modify_34231319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Modify an emitter's data.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ modify</a></span>: bool (Emitter::Ptr name, bool loop);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Modify an emitter's data.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Audio_1_1QueueService_1_1Emitters_1a7e0877195bea644af87199ed6ea9fd0c" href="#">+ modify</a></span>: bool (Emitter::Ptr name, bool loop);
 </code>
-</div></td></tr><tr id="modify_34251319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Move an emitter around.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="move_34271319844517_tmpl"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
- <span class="method"><a href="#">+ move</a></span>: bool (const StringT&amp; name, const Point3D &lt;&gt;&amp; position);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Move an emitter around.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
+ <span class="method"><a name="classYuni_1_1Audio_1_1QueueService_1_1Emitters_1a5b3dc46ee64dffce1a27e971ee70b7fd" href="#">+ move</a></span>: bool (const StringT&amp; name, const Point3D &lt;&gt;&amp; position);
 </code>
-</div></td></tr><tr id="move_34271319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Move an emitter around.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ move</a></span>: bool (Emitter::Ptr emitter, const Point3D &lt;&gt;&amp; position);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Move an emitter around.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Audio_1_1QueueService_1_1Emitters_1a382895aaa52f275ee961e9aee217a117" href="#">+ move</a></span>: bool (Emitter::Ptr emitter, const Point3D &lt;&gt;&amp; position);
 </code>
-</div></td></tr><tr id="move_34301319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Move an emitter around.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="move_34311319844517_tmpl"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
- <span class="method"><a href="#">+ move</a></span>: bool (const StringT&amp; name, const Point3D &lt;&gt;&amp; position, const Vector3D &lt;&gt;&amp; velocity, const Vector3D &lt;&gt;&amp; direction);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Move an emitter around.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
+ <span class="method"><a name="classYuni_1_1Audio_1_1QueueService_1_1Emitters_1a169fa2e1a59f9968948b445a4ec85d16" href="#">+ move</a></span>: bool (const StringT&amp; name, const Point3D &lt;&gt;&amp; position, const Vector3D &lt;&gt;&amp; velocity, const Vector3D &lt;&gt;&amp; direction);
 </code>
-</div></td></tr><tr id="move_34311319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Move an emitter around.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ move</a></span>: bool (Emitter::Ptr emitter, const Point3D &lt;&gt;&amp; position, const Vector3D &lt;&gt;&amp; velocity, const Vector3D &lt;&gt;&amp; direction);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Move an emitter around.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Audio_1_1QueueService_1_1Emitters_1abe68419d7f07e1b74af5317d2f405073" href="#">+ move</a></span>: bool (Emitter::Ptr emitter, const Point3D &lt;&gt;&amp; position, const Vector3D &lt;&gt;&amp; velocity, const Vector3D &lt;&gt;&amp; direction);
 </code>
-</div></td></tr><tr id="move_34331319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get elapsed playback time on an emitter.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="elapsedTime_34351319844517_tmpl"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
- <span class="method"><a href="#">+ elapsedTime</a></span>: sint64 (const StringT&amp; name);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get elapsed playback time on an emitter.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
+ <span class="method"><a name="classYuni_1_1Audio_1_1QueueService_1_1Emitters_1a3897056108912f10e6a4f394bb848e96" href="#">+ elapsedTime</a></span>: sint64 (const StringT&amp; name);
 </code>
-</div></td></tr><tr id="elapsedTime_34351319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get elapsed playback time on an emitter.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ elapsedTime</a></span>: sint64 (Emitter::Ptr emitter);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get elapsed playback time on an emitter.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Audio_1_1QueueService_1_1Emitters_1a1880c54608195ca35fc0dc9764db087b" href="#">+ elapsedTime</a></span>: sint64 (Emitter::Ptr emitter);
 </code>
-</div></td></tr><tr id="elapsedTime_34361319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Start playback on an emitter.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="play_34371319844517_tmpl"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
- <span class="method"><a href="#">+ play</a></span>: bool (const StringT&amp; name);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Start playback on an emitter.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
+ <span class="method"><a name="classYuni_1_1Audio_1_1QueueService_1_1Emitters_1aa7d6efc1f74bcf014c39323d1b11b0f5" href="#">+ play</a></span>: bool (const StringT&amp; name);
 </code>
-</div></td></tr><tr id="play_34371319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Start playback on an emitter.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ play</a></span>: bool (Emitter::Ptr emitter);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Start playback on an emitter.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Audio_1_1QueueService_1_1Emitters_1aab8ab5e6b06bf3aadd10547e5e7dc283" href="#">+ play</a></span>: bool (Emitter::Ptr emitter);
 </code>
-</div></td></tr><tr id="play_34391319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Stop playback on an emitter.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="stop_34401319844517_tmpl"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
- <span class="method"><a href="#">+ stop</a></span>: bool (const StringT&amp; name);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Stop playback on an emitter.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
+ <span class="method"><a name="classYuni_1_1Audio_1_1QueueService_1_1Emitters_1a72de38459d50eca4c0c28b629c94d381" href="#">+ stop</a></span>: bool (const StringT&amp; name);
 </code>
-</div></td></tr><tr id="stop_34401319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Stop playback on an emitter.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ stop</a></span>: bool (const Emitter::Ptr&amp; emitter);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Stop playback on an emitter.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Audio_1_1QueueService_1_1Emitters_1aa635ae964ffe4548c3f265f49b1a3427" href="#">+ stop</a></span>: bool (const Emitter::Ptr&amp; emitter);
 </code>
-</div></td></tr><tr id="stop_34411319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Remove an emitter.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="remove_34431319844517_tmpl"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
- <span class="method"><a href="#">+ remove</a></span>: bool (const StringT&amp; name);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Remove an emitter.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;typename StringT &gt;</div>
+ <span class="method"><a name="classYuni_1_1Audio_1_1QueueService_1_1Emitters_1ab6017e2798f3654caf83817b4cdd7341" href="#">+ remove</a></span>: bool (const StringT&amp; name);
 </code>
-</div></td></tr><tr id="remove_34431319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Remove an emitter.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ remove</a></span>: bool (Emitter::Ptr name);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Remove an emitter.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Audio_1_1QueueService_1_1Emitters_1aca4dd6e4adcc00eece003ed213ddc173" href="#">+ remove</a></span>: bool (Emitter::Ptr name);
 </code>
-</div></td></tr><tr id="remove_34441319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ get</a></span>: Emitter::Ptr (const String&amp; name);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1Audio_1_1QueueService_1_1Emitters_1a63797e1bd0364126a3afd183fc7b6508" href="#">+ get</a></span>: Emitter::Ptr (const String&amp; name);
 </code>
-</div></td></tr><tr id="get_34451319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ add</a></span>: bool (const String&amp; emitterName);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1Audio_1_1QueueService_1_1Emitters_1ab13a5b8c41b5985ecdc311ff7eb44e34" href="#">+ add</a></span>: bool (const String&amp; emitterName);
 </code>
-</div></td></tr><tr id="add_34471319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ attach</a></span>: bool (const String&amp; emitterName, const String&amp; bufferName);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1Audio_1_1QueueService_1_1Emitters_1a987f5f13b48645b54aa2f9413d18c3c1" href="#">+ attach</a></span>: bool (const String&amp; emitterName, const String&amp; bufferName);
 </code>
-</div></td></tr><tr id="attach_34481319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ attach</a></span>: bool (Emitter::Ptr emitter, const String&amp; bufferName);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1Audio_1_1QueueService_1_1Emitters_1ad7f4c7256288353eb3022e088e0f59a5" href="#">+ attach</a></span>: bool (Emitter::Ptr emitter, const String&amp; bufferName);
 </code>
-</div></td></tr><tr id="attach_34491319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ move</a></span>: bool (const String&amp; emitterName, const Point3D &lt;&gt;&amp; position);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1Audio_1_1QueueService_1_1Emitters_1a348f8f1261a70146248bd6f15b02ce6f" href="#">+ move</a></span>: bool (const String&amp; emitterName, const Point3D &lt;&gt;&amp; position);
 </code>
-</div></td></tr><tr id="move_34511319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ move</a></span>: bool (const String&amp; emitterStr, const Point3D &lt;&gt;&amp; position, const Vector3D &lt;&gt;&amp; velocity, const Vector3D &lt;&gt;&amp; direction);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1Audio_1_1QueueService_1_1Emitters_1a2852e95f28eb27eb137cbdc0435fddcc" href="#">+ move</a></span>: bool (const String&amp; emitterStr, const Point3D &lt;&gt;&amp; position, const Vector3D &lt;&gt;&amp; velocity, const Vector3D &lt;&gt;&amp; direction);
 </code>
-</div></td></tr><tr id="move_34521319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ elapsedTime</a></span>: sint64 (const String&amp; name);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1Audio_1_1QueueService_1_1Emitters_1a438558dd01a292ffa5a1db0cb3436e74" href="#">+ elapsedTime</a></span>: sint64 (const String&amp; name);
 </code>
-</div></td></tr><tr id="elapsedTime_34531319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ play</a></span>: bool (const String&amp; name);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1Audio_1_1QueueService_1_1Emitters_1a050b67685350ca422af0dc900d8978d6" href="#">+ play</a></span>: bool (const String&amp; name);
 </code>
-</div></td></tr><tr id="play_34541319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ stop</a></span>: bool (const String&amp; name);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1Audio_1_1QueueService_1_1Emitters_1a44eb563fb793041fad8d13efb5f14f7e" href="#">+ stop</a></span>: bool (const String&amp; name);
 </code>
-</div></td></tr><tr id="stop_34551319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>

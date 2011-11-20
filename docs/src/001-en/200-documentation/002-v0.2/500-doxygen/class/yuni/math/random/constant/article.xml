@@ -9,51 +9,51 @@
 <h2>Constant random number generator</h2>
 <h3>Public function</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">static</span> const char* </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Name</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">static</span> const char* </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Math_1_1Random_1_1Constant_1a305c745c808439207d1832638ddbcff5">Name</a></span>()</code></td></tr>
 <tr><td></td><td><br /><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Constant</a></span>(const T v)</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#"><b> ~ </b>Constant</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">reset</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code>const Value </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">next</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Math_1_1Random_1_1Constant_1abd7c29c8b19b1c8922eb309e980afeb8">Constant</a></span>(const T v)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Math_1_1Random_1_1Constant_1a5a666b0a6c079d685445d70dd5fa16a0"><b> ~ </b>Constant</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Math_1_1Random_1_1Constant_1a2c4309072b0c76c443f9f2f7d8b91fb5">reset</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>const Value </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Math_1_1Random_1_1Constant_1aace4f17b4ab829a339ecf139509fc5fa">next</a></span>() <span class="keyword">const</span></code></td></tr>
 </table></div>
 
-<h2>Detailed Description</h2><div>Provides always the same value, given through the constructor<br /></div>
+<h2>Detailed Description</h2><div>Provides always the same value, given through the constructor<br /></div><div style="margin-top:3em;border:1px solid #aaa;border-bottom-style:none;border-left-style:none;border-right-style:none"></div>
 <table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ Name</a></span>: <span class="keyword">static</span> const char* ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1Math_1_1Random_1_1Constant_1a305c745c808439207d1832638ddbcff5" href="#">+ Name</a></span>: <span class="keyword">static</span> const char* ();
 </code>
-</div></td></tr><tr id="Name_38341319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ Constant</a></span>:  (const T v);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1Math_1_1Random_1_1Constant_1abd7c29c8b19b1c8922eb309e980afeb8" href="#">+ Constant</a></span>:  (const T v);
 </code>
-</div></td></tr><tr id="Constant_38361319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ <b> ~ </b>Constant</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1Math_1_1Random_1_1Constant_1a5a666b0a6c079d685445d70dd5fa16a0" href="#">+ <b> ~ </b>Constant</a></span>:  ();
 </code>
-</div></td></tr><tr id="~Constant_38371319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ reset</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1Math_1_1Random_1_1Constant_1a2c4309072b0c76c443f9f2f7d8b91fb5" href="#">+ reset</a></span>: void ();
 </code>
-</div></td></tr><tr id="reset_38381319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ next</a></span>: const Value () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1Math_1_1Random_1_1Constant_1aace4f17b4ab829a339ecf139509fc5fa" href="#">+ next</a></span>: const Value () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="next_38391319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>

@@ -9,277 +9,277 @@
 <h2>Event</h2>
 <h3>Public typedef</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">EventType</a></span> : Event&lt;P&gt;</code></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">BindType</a></span> : Bind&lt;P&gt;</code></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">AncestorType</a></span> : Private::EventImpl::template WithNArguments&lt;BindType::argumentCount, BindType&gt;</code></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">ThreadingPolicy</a></span> : AncestorType::ThreadingPolicy</code></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">Ptr</a></span> : SmartPtr&lt;Event&gt;</code></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">FunctionType</a></span> : BindType::FunctionType</code></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">ReturnType</a></span> : BindType::ReturnType</code></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">Map</a></span> : std::map&lt; IEvent*, unsigned int&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1Event_1a4504b077977ee162eb02c10eb1d731ab" href="#">EventType</a></span> : Event&lt;P&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1Event_1a11f4b3a5540ba2bfa47de0c0a2acd866" href="#">BindType</a></span> : Bind&lt;P&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1Event_1a07c4de07cb000cd81a01b491c6c38c33" href="#">AncestorType</a></span> : Private::EventImpl::template WithNArguments&lt;BindType::argumentCount, BindType&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1Event_1a1c046d411e26d6b9328048dda22b759a" href="#">ThreadingPolicy</a></span> : AncestorType::ThreadingPolicy</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1Event_1a4cf13340e3472c2406cd5ea1e753b7ac" href="#">Ptr</a></span> : SmartPtr&lt;Event&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1Event_1a187d5aa12e0ba51c60e7ed4e2cd33fd0" href="#">FunctionType</a></span> : BindType::FunctionType</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1Event_1a956aa699ff1b1c262eeb586af5073068" href="#">ReturnType</a></span> : BindType::ReturnType</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1IEvent_1a48379a1ae29641a64e1021a51d20b6cd" href="#">Map</a></span> : std::map&lt; IEvent*, unsigned int&gt;</code></td></tr>
 </table></div>
 
 <h3>Public function</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Event</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Event</a></span>(const Event&amp; rhs)</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#"><b> ~ </b>Event</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Event_1af4afa85379f1a14ce4d4c31a3adb4ee2">Event</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Event_1a94625a6c24b02af554b1e0cadbfd6c22">Event</a></span>(const Event&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Event_1a917935e865468f1b1fa83f51d8f3dd99"><b> ~ </b>Event</a></span>()</code></td></tr>
 <tr><td></td><td><br /><h4>Connection</h4></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">connect</a></span>(typename BindType::FunctionType pointer)</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">connect</a></span>(typename BindType::template WithUserData&lt; U&gt;:: FunctionType pointer, typename BindType::template WithUserData&lt; U&gt;::ParameterType userdata)</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">connect</a></span>(C* o, typename PointerToMember&lt;C&gt;::Type method)</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">connect</a></span>(const C* o, typename PointerToMember&lt;C&gt;::ConstType method)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Event_1a3db35fcf747b8170680b7d7884f53cdd">connect</a></span>(typename BindType::FunctionType pointer)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Event_1a73bd5f660958f281f24616fa7ca1eca6">connect</a></span>(typename BindType::template WithUserData&lt; U&gt;:: FunctionType pointer, typename BindType::template WithUserData&lt; U&gt;::ParameterType userdata)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Event_1afb880a13b9291094531a6b7e295b4983">connect</a></span>(C* o, typename PointerToMember&lt;C&gt;::Type method)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Event_1acfe3deadd7ddfc92602a390001685628">connect</a></span>(const C* o, typename PointerToMember&lt;C&gt;::ConstType method)</code></td></tr>
 <tr><td></td><td><br /><h4>Disconnection</h4></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">remove</a></span>(const U* object)</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">clear</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Event_1adae29929d22e27e8aa649add4db70f1d">remove</a></span>(const U* object)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Event_1a5c2a57ee64da858b78920b5f78492f77">clear</a></span>()</code></td></tr>
 <tr><td></td><td><br /><h4>Misc</h4></td></tr>
-<tr><td class="doxygen_index"><code>unsigned int </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">size</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>unsigned int </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">count</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">empty</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">notEmpty</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>unsigned int </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Event_1a41f088d526b15ada8736a108037a23de">size</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>unsigned int </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Event_1aade6560f7cfb7dac9f94b32b81443a2e">count</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Event_1ac426a56e576338cd240da80d55da0313">empty</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Event_1a7961b9aa55602ed006de6901eaa7655b">notEmpty</a></span>() <span class="keyword">const</span></code></td></tr>
 <tr><td></td><td><br /><h4>Operators</h4></td></tr>
-<tr><td class="doxygen_index"><code>Event&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator=</a></span>(const NullPtr&amp; )</code></td></tr>
-<tr><td class="doxygen_index"><code>Event&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator=</a></span>(const Event&amp; rhs)</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator!</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>Event&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Event_1af35faea74ac26e10632e3f652e3865a5">operator=</a></span>(const NullPtr&amp; )</code></td></tr>
+<tr><td class="doxygen_index"><code>Event&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Event_1ab0f4c99831e350733178dd2419355466">operator=</a></span>(const Event&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Event_1a27a36f83bf6158970062b76e425f7198">operator!</a></span>() <span class="keyword">const</span></code></td></tr>
 <tr><td></td><td><br /><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">connect</a></span>(C* o, typename Event&lt;P&gt;::template PointerToMember&lt;C&gt;::Type method)</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">connect</a></span>(const C* o, typename Event&lt;P&gt;::template PointerToMember&lt;C&gt;::ConstType method)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Event_1a56f02a4e0debd7b7c9871c62954bbe6d">connect</a></span>(C* o, typename Event&lt;P&gt;::template PointerToMember&lt;C&gt;::Type method)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Event_1a46762418b8a982ea5a16fdea1b676921">connect</a></span>(const C* o, typename Event&lt;P&gt;::template PointerToMember&lt;C&gt;::ConstType method)</code></td></tr>
 </table></div>
 
 <h2>Detailed Description</h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 4)</i></code>
-</div></td></tr><tr id="@170argumentCount_22291319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 4)</i></code>
-</div></td></tr><tr id="@171hasReturnValue_22301319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Event .<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ EventType</a></span>: <span class="keyword">typedef</span> Event&lt;P&gt;;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>Event .<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="classYuni_1_1Event_1a4504b077977ee162eb02c10eb1d731ab" href="#">+ EventType</a></span>: <span class="keyword">typedef</span> Event&lt;P&gt;;
 </code>
-</div></td></tr><tr id="EventType_22311319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The Bind Type.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ BindType</a></span>: <span class="keyword">typedef</span> Bind&lt;P&gt;;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>The Bind Type.<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="classYuni_1_1Event_1a11f4b3a5540ba2bfa47de0c0a2acd866" href="#">+ BindType</a></span>: <span class="keyword">typedef</span> Bind&lt;P&gt;;
 </code>
-</div></td></tr><tr id="BindType_22321319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Type of the Ancestor.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ AncestorType</a></span>: <span class="keyword">typedef</span> Private::EventImpl::template WithNArguments&lt;BindType::argumentCount, BindType&gt;;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>Type of the Ancestor.<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="classYuni_1_1Event_1a07c4de07cb000cd81a01b491c6c38c33" href="#">+ AncestorType</a></span>: <span class="keyword">typedef</span> Private::EventImpl::template WithNArguments&lt;BindType::argumentCount, BindType&gt;;
 </code>
-</div></td></tr><tr id="AncestorType_22331319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The Threading Policy .<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ ThreadingPolicy</a></span>: <span class="keyword">typedef</span> AncestorType::ThreadingPolicy;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>The Threading Policy .<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="classYuni_1_1Event_1a1c046d411e26d6b9328048dda22b759a" href="#">+ ThreadingPolicy</a></span>: <span class="keyword">typedef</span> AncestorType::ThreadingPolicy;
 </code>
-</div></td></tr><tr id="ThreadingPolicy_22341319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The most suitable smartptr for the class.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;Event&gt;;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>The most suitable smartptr for the class.<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="classYuni_1_1Event_1a4cf13340e3472c2406cd5ea1e753b7ac" href="#">+ Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;Event&gt;;
 </code>
-</div></td></tr><tr id="Ptr_22351319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Pointer-to-function.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ FunctionType</a></span>: <span class="keyword">typedef</span> BindType::FunctionType;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>Pointer-to-function.<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="classYuni_1_1Event_1a187d5aa12e0ba51c60e7ed4e2cd33fd0" href="#">+ FunctionType</a></span>: <span class="keyword">typedef</span> BindType::FunctionType;
 </code>
-</div></td></tr><tr id="FunctionType_22361319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The type of the return value.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ ReturnType</a></span>: <span class="keyword">typedef</span> BindType::ReturnType;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>The type of the return value.<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="classYuni_1_1Event_1a956aa699ff1b1c262eeb586af5073068" href="#">+ ReturnType</a></span>: <span class="keyword">typedef</span> BindType::ReturnType;
 </code>
-</div></td></tr><tr id="ReturnType_22371319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">IEvent list.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ Map</a></span>: <span class="keyword">typedef</span> std::map&lt; IEvent*, unsigned int&gt;;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>IEvent list.<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="classYuni_1_1IEvent_1a48379a1ae29641a64e1021a51d20b6cd" href="#">+ Map</a></span>: <span class="keyword">typedef</span> std::map&lt; IEvent*, unsigned int&gt;;
 </code>
-</div></td></tr><tr id="Map_22381319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">name Constructor &amp; Destructor<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ Event</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>name Constructor &amp; Destructor<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Event_1af4afa85379f1a14ce4d4c31a3adb4ee2" href="#">+ Event</a></span>:  ();
 </code>
-</div></td></tr><tr id="Event_22391319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">Default Constructor<br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ Event</a></span>:  (const Event&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Copy constructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Event_1a94625a6c24b02af554b1e0cadbfd6c22" href="#">+ Event</a></span>:  (const Event&amp; rhs);
 </code>
-</div></td></tr><tr id="Event_22401319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ <b> ~ </b>Event</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Destructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Event_1a917935e865468f1b1fa83f51d8f3dd99" href="#">+ <b> ~ </b>Event</a></span>:  ();
 </code>
-</div></td></tr><tr id="~Event_22411319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Connection <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Connect to a function.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ connect</a></span>: void (typename BindType::FunctionType pointer);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Connect to a function.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Event_1a3db35fcf747b8170680b7d7884f53cdd" href="#">+ connect</a></span>: void (typename BindType::FunctionType pointer);
 </code>
-</div></td></tr><tr id="connect_22421319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> pointer</code> Pointer-to-function<br /></li></ul><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Connect to a function with a custom user data.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="connect_22431319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">+ connect</a></span>: void (typename BindType::template WithUserData&lt; U&gt;:: FunctionType pointer, typename BindType::template WithUserData&lt; U&gt;::ParameterType userdata);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Connect to a function with a custom user data.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a name="classYuni_1_1Event_1a73bd5f660958f281f24616fa7ca1eca6" href="#">+ connect</a></span>: void (typename BindType::template WithUserData&lt; U&gt;:: FunctionType pointer, typename BindType::template WithUserData&lt; U&gt;::ParameterType userdata);
 </code>
-</div></td></tr><tr id="connect_22431319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> pointer</code> Pointer-to-function<br /></li><li><code> userdata</code> The userdata to copy and store<br /></li></ul><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Connect to a object member.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="connect_22441319844517_tmpl"><span class="keyword">template</span>&lt;class C &gt;</div>
- <span class="method"><a href="#">+ connect</a></span>: void (C* o, typename PointerToMember&lt;C&gt;::Type method);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Connect to a object member.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class C &gt;</div>
+ <span class="method"><a name="classYuni_1_1Event_1afb880a13b9291094531a6b7e295b4983" href="#">+ connect</a></span>: void (C* o, typename PointerToMember&lt;C&gt;::Type method);
 </code>
-</div></td></tr><tr id="connect_22441319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> o</code> An object, with the class IEventObserver as ancestor (can be null)<br /></li><li><code> method</code> Pointer-to-member<br /></li></ul><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Connect to a const object member.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="connect_22451319844517_tmpl"><span class="keyword">template</span>&lt;class C &gt;</div>
- <span class="method"><a href="#">+ connect</a></span>: void (const C* o, typename PointerToMember&lt;C&gt;::ConstType method);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Connect to a const object member.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class C &gt;</div>
+ <span class="method"><a name="classYuni_1_1Event_1acfe3deadd7ddfc92602a390001685628" href="#">+ connect</a></span>: void (const C* o, typename PointerToMember&lt;C&gt;::ConstType method);
 </code>
-</div></td></tr><tr id="connect_22451319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> o</code> An object, with the class IEventObserver as ancestor (can be null)<br /></li><li><code> method</code> const Pointer-to-member<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Disconnection <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Disconnect all methods of an arbitrary object connected to the event.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="remove_22461319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">+ remove</a></span>: void (const U* object);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Disconnect all methods of an arbitrary object connected to the event.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a name="classYuni_1_1Event_1adae29929d22e27e8aa649add4db70f1d" href="#">+ remove</a></span>: void (const U* object);
 </code>
-</div></td></tr><tr id="remove_22461319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> object</code> The object to find and to disconnect<br /></li></ul><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Disconnect all.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ clear</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Disconnect all.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Event_1a5c2a57ee64da858b78920b5f78492f77" href="#">+ clear</a></span>: void ();
 </code>
-</div></td></tr><tr id="clear_22471319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Misc <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the number of current connections.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ size</a></span>: unsigned int () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get the number of current connections.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Event_1a41f088d526b15ada8736a108037a23de" href="#">+ size</a></span>: unsigned int () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="size_22481319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ count</a></span>: unsigned int () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1Event_1aade6560f7cfb7dac9f94b32b81443a2e" href="#">+ count</a></span>: unsigned int () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="count_22491319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div><code>see</code> :  size()<br /></div><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the event does not have any single callback.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ empty</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get if the event does not have any single callback.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Event_1ac426a56e576338cd240da80d55da0313" href="#">+ empty</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="empty_22501319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the event has at least one callback.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ notEmpty</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get if the event has at least one callback.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Event_1a7961b9aa55602ed006de6901eaa7655b" href="#">+ notEmpty</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="notEmpty_22511319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assignment with a nullptr (equivalent to clear() )<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator=</a></span>: Event&amp; (const NullPtr&amp; );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Assignment with a nullptr (equivalent to clear() )<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Event_1af35faea74ac26e10632e3f652e3865a5" href="#">+ operator=</a></span>: Event&amp; (const NullPtr&amp; );
 </code>
-</div></td></tr><tr id="operator=_22521319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy operator.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator=</a></span>: Event&amp; (const Event&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Copy operator.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Event_1ab0f4c99831e350733178dd2419355466" href="#">+ operator=</a></span>: Event&amp; (const Event&amp; rhs);
 </code>
-</div></td></tr><tr id="operator=_22531319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the event is empty.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator!</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get if the event is empty.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Event_1a27a36f83bf6158970062b76e425f7198" href="#">+ operator!</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator!_22541319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="connect_22551319844517_tmpl"><span class="keyword">template</span>&lt;class C &gt;</div>
- <span class="method"><a href="#">+ connect</a></span>: void (C* o, typename Event&lt;P&gt;::template PointerToMember&lt;C&gt;::Type method);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class C &gt;</div>
+ <span class="method"><a name="classYuni_1_1Event_1a56f02a4e0debd7b7c9871c62954bbe6d" href="#">+ connect</a></span>: void (C* o, typename Event&lt;P&gt;::template PointerToMember&lt;C&gt;::Type method);
 </code>
-</div></td></tr><tr id="connect_22551319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="connect_22561319844517_tmpl"><span class="keyword">template</span>&lt;class C &gt;</div>
- <span class="method"><a href="#">+ connect</a></span>: void (const C* o, typename Event&lt;P&gt;::template PointerToMember&lt;C&gt;::ConstType method);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class C &gt;</div>
+ <span class="method"><a name="classYuni_1_1Event_1a46762418b8a982ea5a16fdea1b676921" href="#">+ connect</a></span>: void (const C* o, typename Event&lt;P&gt;::template PointerToMember&lt;C&gt;::ConstType method);
 </code>
-</div></td></tr><tr id="connect_22561319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>

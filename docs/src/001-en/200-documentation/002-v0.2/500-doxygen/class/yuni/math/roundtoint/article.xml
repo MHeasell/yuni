@@ -9,37 +9,37 @@
 <h2>RoundToInt</h2>
 <h3>Public typedef</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">Type</a></span> : T</code></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">ResultType</a></span> : R</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#structYuni_1_1Math_1_1RoundToInt_1ace302fa8fc0b87764fdf7ddcdab29445" href="#">Type</a></span> : T</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#structYuni_1_1Math_1_1RoundToInt_1a4b7110d104cf9433de82124242954093" href="#">ResultType</a></span> : R</code></td></tr>
 </table></div>
 
 <h3>Public function</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">static</span> ResultType </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Value</a></span>(Type x)</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">static</span> ResultType </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#structYuni_1_1Math_1_1RoundToInt_1a1303b95ea82f2cdafb0ed28b111883e1">Value</a></span>(Type x)</code></td></tr>
 </table></div>
 
 <h2>Detailed Description</h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a href="#">+ Type</a></span>: <span class="keyword">typedef</span> T;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a name="structYuni_1_1Math_1_1RoundToInt_1ace302fa8fc0b87764fdf7ddcdab29445" href="#">+ Type</a></span>: <span class="keyword">typedef</span> T;
 </code>
-</div></td></tr><tr id="Type_35741319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a href="#">+ ResultType</a></span>: <span class="keyword">typedef</span> R;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><code><span class="method"><a name="structYuni_1_1Math_1_1RoundToInt_1a4b7110d104cf9433de82124242954093" href="#">+ ResultType</a></span>: <span class="keyword">typedef</span> R;
 </code>
-</div></td></tr><tr id="ResultType_35751319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ Value</a></span>: <span class="keyword">static</span> ResultType (Type x);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="structYuni_1_1Math_1_1RoundToInt_1a1303b95ea82f2cdafb0ed28b111883e1" href="#">+ Value</a></span>: <span class="keyword">static</span> ResultType (Type x);
 </code>
-</div></td></tr><tr id="Value_35761319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>

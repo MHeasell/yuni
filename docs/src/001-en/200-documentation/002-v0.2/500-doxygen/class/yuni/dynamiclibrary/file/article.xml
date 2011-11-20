@@ -9,28 +9,28 @@
 <h2>An Executable Object file</h2>
 <h3>Public typedef</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">Handle</a></span> : void*</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1DynamicLibrary_1_1File_1aa745782b48760f9e26c6038ae0a425be" href="#">Handle</a></span> : void*</code></td></tr>
 </table></div>
 
 <h3>Public function</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructor &amp; DEstructor</h4></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">File</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">File</a></span>(const String&amp; filename, const Relocation r, const Visibility v)</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#"><b> ~ </b>File</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1DynamicLibrary_1_1File_1a478a99938b4f702d4419d7b9852c64de">File</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1DynamicLibrary_1_1File_1a88d11f076401863fa8bdc5810c5e6115">File</a></span>(const String&amp; filename, const Relocation r, const Visibility v)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1DynamicLibrary_1_1File_1a0d6f478b7e65de75db560c206971a872"><b> ~ </b>File</a></span>()</code></td></tr>
 <tr><td></td><td><br /><h4>Loading / Unloading</h4></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">loadFromFile</a></span>(const String&amp; filename, const Relocation r, const Visibility v)</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">loadFromRawFilename</a></span>(const char* filename, const Relocation r, const Visibility v)</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">loadFromRawFilename</a></span>(const String&amp; filename, const Relocation r, const Visibility v)</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">unload</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">loaded</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>const String&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">filename</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1DynamicLibrary_1_1File_1a5e5149b93db75346dda191c2a710cedf">loadFromFile</a></span>(const String&amp; filename, const Relocation r, const Visibility v)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1DynamicLibrary_1_1File_1adcccd6875499a85d3dbded283e571e8b">loadFromRawFilename</a></span>(const char* filename, const Relocation r, const Visibility v)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1DynamicLibrary_1_1File_1a8cafe34c225ea627642e2d67575bf861">loadFromRawFilename</a></span>(const String&amp; filename, const Relocation r, const Visibility v)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1DynamicLibrary_1_1File_1a0ec329ddefdd2163ff6458ab39f27f96">unload</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1DynamicLibrary_1_1File_1a7a5b6454103a9544a8a4f8dc0cd6b48c">loaded</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>const String&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1DynamicLibrary_1_1File_1a7e39d6edacb8bea0aaf5c4b4c7746419">filename</a></span>() <span class="keyword">const</span></code></td></tr>
 <tr><td></td><td><br /><h4>Symbols</h4></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">hasSymbol</a></span>(const String&amp; name) <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>Symbol </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">resolve</a></span>(const String&amp; name) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1DynamicLibrary_1_1File_1abea1617c08ca55c83941e38a692b967a">hasSymbol</a></span>(const String&amp; name) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>Symbol </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1DynamicLibrary_1_1File_1a73d79c0137a2b6750c6d2bc88d0a5d1a">resolve</a></span>(const String&amp; name) <span class="keyword">const</span></code></td></tr>
 <tr><td></td><td><br /><h4>Handle</h4></td></tr>
-<tr><td class="doxygen_index"><code>Handle </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">handle</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>Handle </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1DynamicLibrary_1_1File_1a7f46004b77b4b4b5e7f70fd4134b7ed9">handle</a></span>() <span class="keyword">const</span></code></td></tr>
 <tr><td></td><td><br /><h4>Operators</h4></td></tr>
-<tr><td class="doxygen_index"><code>Symbol </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator[]</a></span>(const String&amp; name) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>Symbol </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1DynamicLibrary_1_1File_1a4c5cf1fce036034e56aa66ecdc88d1f3">operator[]</a></span>(const String&amp; name) <span class="keyword">const</span></code></td></tr>
 </table></div>
 
 <h2>Detailed Description</h2><div>Here is an example of a typical use of a dynamic library. Assuming we have the following shared library :<source type="cpp">  #include  &lt; yuni/yuni.h &gt;  //  For  `YUNI_LIB_EXPORT`,  which  is  OS  Dependant
@@ -83,122 +83,122 @@
          std::cout  &lt;&lt;  "Library  name:  "  &lt;&lt;  (s  ?  s  :  "(null)" )  &lt;&lt;  std::endl;
   }
 </source>
-<br /></div>
+<br /></div><div style="margin-top:3em;border:1px solid #aaa;border-bottom-style:none;border-left-style:none;border-right-style:none"></div>
 <table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief">Relocation options.<br /><div class="doxygen_name_spacer"></div>
+<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><b>Relocation options.<br /></b><div class="doxygen_name_spacer"></div>
 <code><i>(unmanaged tag: 4)</i></code>
-</div></td></tr><tr id="RelocationrelocationLazyrelocationNow_12591319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">When an object is brought into the address space of a process, it may contain references to symbols whose addresses are not known until the object is loaded. These references shall be relocated before the symbols can be accessed (man dlopen).<br /> These options are actually ignored on Windows.<br />
 </div>
 </td></tr>
-<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief">Scope of visibility options.<br /><div class="doxygen_name_spacer"></div>
+<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><b>Scope of visibility options.<br /></b><div class="doxygen_name_spacer"></div>
 <code><i>(unmanaged tag: 4)</i></code>
-</div></td></tr><tr id="VisibilityvisibilityDefaultvisibilityGlobalvisibilityLocal_12601319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">OS Dependant Handle of a shared library.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ Handle</a></span>: <span class="keyword">typedef</span> void*;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>OS Dependant Handle of a shared library.<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="classYuni_1_1DynamicLibrary_1_1File_1aa745782b48760f9e26c6038ae0a425be" href="#">+ Handle</a></span>: <span class="keyword">typedef</span> void*;
 </code>
-</div></td></tr><tr id="Handle_12611319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; DEstructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ File</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Default constructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1DynamicLibrary_1_1File_1a478a99938b4f702d4419d7b9852c64de" href="#">+ File</a></span>:  ();
 </code>
-</div></td></tr><tr id="File_12621319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor - Load an dynamic library.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ File</a></span>:  (const String&amp; filename, const Relocation r, const Visibility v);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Constructor - Load an dynamic library.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1DynamicLibrary_1_1File_1a88d11f076401863fa8bdc5810c5e6115" href="#">+ File</a></span>:  (const String&amp; filename, const Relocation r, const Visibility v);
 </code>
-</div></td></tr><tr id="File_12631319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> filename</code> Filename of the library to load<br /></li><li><code> r</code> The relocation mode (no effect on Windows)<br /></li><li><code> v</code> The visibility mode (no effect on Windows)<br /></li></ul><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ <b> ~ </b>File</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Destructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1DynamicLibrary_1_1File_1a0d6f478b7e65de75db560c206971a872" href="#">+ <b> ~ </b>File</a></span>:  ();
 </code>
-</div></td></tr><tr id="~File_12641319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">The library will be automatically unloaded if needed.<br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Loading / Unloading <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Load a dynamic library from its filename.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ loadFromFile</a></span>: bool (const String&amp; filename, const Relocation r, const Visibility v);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Load a dynamic library from its filename.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1DynamicLibrary_1_1File_1a5e5149b93db75346dda191c2a710cedf" href="#">+ loadFromFile</a></span>: bool (const String&amp; filename, const Relocation r, const Visibility v);
 </code>
-</div></td></tr><tr id="loadFromFile_12651319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">The filename may be modified, according the current operating system. A prefix and/or a suffix may be added to suit to the OS.<br /> The prefix : `lib` may be added as prefix on Unix platforms The suffixes :<ul><li> Mac OS : .dylib, .bundle, .so<br /></li><li> Unix/Linux : .so<br /></li><li> AIX : .a<br /></li><li> HP-UX : .sl, .so<br /></li><li> Windows : .dll<br /></li></ul><br /> The library will be searched in all system-specific library locations (e.g. LD_LIBRARY_PATH on Unix), then in all given search paths, unless the file name has an absolute path.<br /> If a library is already loaded, it will be unloaded first.<br /><div class="doxygen_params">Parameters :</div><ul><li><code> filename</code> The absolute or relative filename to the library<br /></li><li><code> r</code> The relocation mode (no effect on Windows)<br /></li><li><code> v</code> The visibility mode (no effect on Windows)<br /></li></ul><div><code>return</code>  True if the library has been loaded<br /></div><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Load a dynamic library from its filename.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ loadFromRawFilename</a></span>: bool (const char* filename, const Relocation r, const Visibility v);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Load a dynamic library from its filename.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1DynamicLibrary_1_1File_1adcccd6875499a85d3dbded283e571e8b" href="#">+ loadFromRawFilename</a></span>: bool (const char* filename, const Relocation r, const Visibility v);
 </code>
-</div></td></tr><tr id="loadFromRawFilename_12661319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">No operation will be made on the filename, contrary to load() where a suffic and/or a prefix might be added.<br /> If a library is already loaded, it will be unloaded first.<br /><div class="doxygen_params">Parameters :</div><ul><li><code> filename</code> The absolute or relative filename to the library<br /></li><li><code> r</code> The relocation mode (no effect on Windows)<br /></li><li><code> v</code> The visibility mode (no effect on Windows)<br /></li></ul><div><code>return</code>  True if the library has been loaded<br /></div><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Load a dynamic library from its filename.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ loadFromRawFilename</a></span>: bool (const String&amp; filename, const Relocation r, const Visibility v);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Load a dynamic library from its filename.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1DynamicLibrary_1_1File_1a8cafe34c225ea627642e2d67575bf861" href="#">+ loadFromRawFilename</a></span>: bool (const String&amp; filename, const Relocation r, const Visibility v);
 </code>
-</div></td></tr><tr id="loadFromRawFilename_12671319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">The filename may be modified, according the current operating system. A prefix and/or a suffix may be added to suit to the OS.<br /> The prefix : `lib` may be added as prefix on Unix platforms The suffixes :<ul><li> Mac OS : .dylib, .bundle, .so<br /></li><li> Unix/Linux : .so<br /></li><li> AIX : .a<br /></li><li> HP-UX : .sl, .so<br /></li><li> Windows : .dll<br /></li></ul><br /> The library will be searched in all system-specific library locations (e.g. LD_LIBRARY_PATH on Unix), then in all given search paths, unless the file name has an absolute path.<br /> If a library is already loaded, it will be unloaded first.<br /><div class="doxygen_params">Parameters :</div><ul><li><code> filename</code> The absolute or relative filename to the library<br /></li><li><code> r</code> The relocation mode (no effect on Windows)<br /></li><li><code> v</code> The visibility mode (no effect on Windows)<br /></li></ul><div><code>return</code>  True if the library has been loaded<br /></div><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Unload the dynamic library.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ unload</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Unload the dynamic library.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1DynamicLibrary_1_1File_1a0ec329ddefdd2163ff6458ab39f27f96" href="#">+ unload</a></span>: void ();
 </code>
-</div></td></tr><tr id="unload_12681319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">Nothing will be done if the library is not already loaded<br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the dynamic library is loaded.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ loaded</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get if the dynamic library is loaded.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1DynamicLibrary_1_1File_1a7a5b6454103a9544a8a4f8dc0cd6b48c" href="#">+ loaded</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="loaded_12691319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the filename of the loaded library.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ filename</a></span>: const String&amp; () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get the filename of the loaded library.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1DynamicLibrary_1_1File_1a7e39d6edacb8bea0aaf5c4b4c7746419" href="#">+ filename</a></span>: const String&amp; () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="filename_12701319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div><code>return</code>  The full filename of the library, or empty if not loaded<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Symbols <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if a symbol exists in the library.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ hasSymbol</a></span>: bool (const String&amp; name) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get if a symbol exists in the library.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1DynamicLibrary_1_1File_1abea1617c08ca55c83941e38a692b967a" href="#">+ hasSymbol</a></span>: bool (const String&amp; name) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="hasSymbol_12711319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> name</code> Name of the exported symbol<br /></li></ul><div><code>return</code>  True if the library is loaded and the symbol exists, False otherwise<br /></div><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Try to resolve the address of an exported symbol by the library.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ resolve</a></span>: Symbol (const String&amp; name) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Try to resolve the address of an exported symbol by the library.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1DynamicLibrary_1_1File_1a73d79c0137a2b6750c6d2bc88d0a5d1a" href="#">+ resolve</a></span>: Symbol (const String&amp; name) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="resolve_12721319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><source type="cpp">  Yuni::DynamicLibrary::File  lib;
   if  (lib.load( "my" ))
@@ -222,29 +222,29 @@
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Handle <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the OS Dependant handle of the dynamic library.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ handle</a></span>: Handle () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get the OS Dependant handle of the dynamic library.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1DynamicLibrary_1_1File_1a7f46004b77b4b4b5e7f70fd4134b7ed9" href="#">+ handle</a></span>: Handle () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="handle_12731319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">The operator [].<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator[]</a></span>: Symbol (const String&amp; name) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>The operator [].<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1DynamicLibrary_1_1File_1a4c5cf1fce036034e56aa66ecdc88d1f3" href="#">+ operator[]</a></span>: Symbol (const String&amp; name) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator[]_12741319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div><code>see</code> :  resolve()<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">An invalid handle.<br /><div class="doxygen_name_spacer"></div>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief"><b>An invalid handle.<br /></b><div class="doxygen_name_spacer"></div>
 <code><span class="method"><a href="#">+ NullHandle</a></span>: const Handle;</code>
-</div></td></tr><tr id="NullHandle_12751319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>

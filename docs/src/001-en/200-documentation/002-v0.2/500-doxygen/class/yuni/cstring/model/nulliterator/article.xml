@@ -9,82 +9,82 @@
 <h2>NullIterator</h2>
 <h3>Public typedef</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">StringType</a></span> : CStringType</code></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">value_type</a></span> : UTF8::Char</code></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">size_type</a></span> : CStringType::size_type</code></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">difference_type</a></span> : CStringType::difference_type</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1CString_1_1Model_1_1NullIterator_1aa158ed09db31a7b43c44b3b121999ddf" href="#">StringType</a></span> : CStringType</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1CString_1_1Model_1_1NullIterator_1a955b3a62722c2dc57f774d687639a559" href="#">value_type</a></span> : UTF8::Char</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1CString_1_1Model_1_1NullIterator_1affc368db69eba86084ae7d66dcf8622f" href="#">size_type</a></span> : CStringType::size_type</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1CString_1_1Model_1_1NullIterator_1ad1758d5eddb084b10b3dec2de51a24fa" href="#">difference_type</a></span> : CStringType::difference_type</code></td></tr>
 </table></div>
 
 <h3>Public function</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code>Size </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">offset</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>const StringType&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">string</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>Size </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">rawOffset</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>Size </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1CString_1_1Model_1_1NullIterator_1a68f7c54cc02b09aef423e99215f2b30d">offset</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>const StringType&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1CString_1_1Model_1_1NullIterator_1a65971b680c5c532e48cd22745eb7a85e">string</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>Size </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1CString_1_1Model_1_1NullIterator_1a079b80fea0291c39764a4090f7836e64">rawOffset</a></span>() <span class="keyword">const</span></code></td></tr>
 </table></div>
 
 <h2>Detailed Description</h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 4)</i></code>
-</div></td></tr><tr id="@279iteratorModelForCStringcanGoForwardcanGoBackward_33341319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Type of the original string.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ StringType</a></span>: <span class="keyword">typedef</span> CStringType;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>Type of the original string.<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="classYuni_1_1CString_1_1Model_1_1NullIterator_1aa158ed09db31a7b43c44b3b121999ddf" href="#">+ StringType</a></span>: <span class="keyword">typedef</span> CStringType;
 </code>
-</div></td></tr><tr id="StringType_33351319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The type of the orignal object.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ value_type</a></span>: <span class="keyword">typedef</span> UTF8::Char;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>The type of the orignal object.<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="classYuni_1_1CString_1_1Model_1_1NullIterator_1a955b3a62722c2dc57f774d687639a559" href="#">+ value_type</a></span>: <span class="keyword">typedef</span> UTF8::Char;
 </code>
-</div></td></tr><tr id="value_type_33361319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">An unsigned integral type.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ size_type</a></span>: <span class="keyword">typedef</span> CStringType::size_type;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>An unsigned integral type.<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="classYuni_1_1CString_1_1Model_1_1NullIterator_1affc368db69eba86084ae7d66dcf8622f" href="#">+ size_type</a></span>: <span class="keyword">typedef</span> CStringType::size_type;
 </code>
-</div></td></tr><tr id="size_type_33371319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">A signed integral type.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ difference_type</a></span>: <span class="keyword">typedef</span> CStringType::difference_type;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>A signed integral type.<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="classYuni_1_1CString_1_1Model_1_1NullIterator_1ad1758d5eddb084b10b3dec2de51a24fa" href="#">+ difference_type</a></span>: <span class="keyword">typedef</span> CStringType::difference_type;
 </code>
-</div></td></tr><tr id="difference_type_33381319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the current offset in the string.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ offset</a></span>: Size () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get the current offset in the string.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1CString_1_1Model_1_1NullIterator_1a68f7c54cc02b09aef423e99215f2b30d" href="#">+ offset</a></span>: Size () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="offset_33391319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get a reference to the original string.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ string</a></span>: const StringType&amp; () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get a reference to the original string.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1CString_1_1Model_1_1NullIterator_1a65971b680c5c532e48cd22745eb7a85e" href="#">+ string</a></span>: const StringType&amp; () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="string_33401319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the current offset in the string.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ rawOffset</a></span>: Size () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get the current offset in the string.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1CString_1_1Model_1_1NullIterator_1a079b80fea0291c39764a4090f7836e64" href="#">+ rawOffset</a></span>: Size () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="rawOffset_33411319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">This method should not be directly used and is only useful for other external iterators<br />
 </div>
