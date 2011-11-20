@@ -9,22 +9,22 @@
 <h2>Variant type implementation</h2>
 <h3>Public function</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructors</h4></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Variant</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Variant</a></span>(const Variant&amp; rhs)</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Variant</a></span>(const T&amp; rhs)</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#"><b> ~ </b>Variant</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Variant_1aaacbfa4fac143c515f2668566191a793">Variant</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Variant_1a729e25a50fffa933ae26e858c243aa31">Variant</a></span>(const Variant&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Variant_1a15bf52e77bbd724755bc4f8c7df92c14">Variant</a></span>(const T&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Variant_1afd022ec6c3d159e816d42e1c18ffae47"><b> ~ </b>Variant</a></span>()</code></td></tr>
 <tr><td></td><td><br /><h4>Alteration methods</h4></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">assign</a></span>(const Variant&amp; rhs)</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">assign</a></span>(const T&amp; rhs)</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">assign</a></span>(const char* rhs)</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">clear</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Variant_1a67c84fd40bb2af9753f2b48b984ed806">assign</a></span>(const Variant&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Variant_1a5f854a3f40891139712ce091ce2de64c">assign</a></span>(const T&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Variant_1abbe6a0b4b26de5c6938135b03bbc8ac3">assign</a></span>(const char* rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Variant_1a0f8ed14c5313d6a926b447146b75c23d">clear</a></span>()</code></td></tr>
 <tr><td></td><td><br /><h4>Information methods</h4></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">empty</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Variant_1a6369358741c3f81ce7278bda6ee77281">empty</a></span>() <span class="keyword">const</span></code></td></tr>
 <tr><td></td><td><br /><h4>Operator overloads</h4></td></tr>
-<tr><td class="doxygen_index"><code>Variant&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator=</a></span>(const Variant&amp; rhs)</code></td></tr>
-<tr><td class="doxygen_index"><code>Variant&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator=</a></span>(const T&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code>Variant&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Variant_1ab9268f322ca792e3f5f863e2a882c469">operator=</a></span>(const Variant&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code>Variant&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Variant_1a1e04e8d1fdee8407dfcada49921b35b6">operator=</a></span>(const T&amp; rhs)</code></td></tr>
 <tr><td></td><td><br /><h4>Retrieval methods</h4></td></tr>
-<tr><td class="doxygen_index"><code>T </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">to</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>T </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Variant_1a95b9ad1dd7d0cfa2adca1f1f8a1eb04d">to</a></span>() <span class="keyword">const</span></code></td></tr>
 </table></div>
 
 <h2>Detailed Description</h2><div>This is an implementation of Variants that handles a limited range of types (classical ones), but that can make automagic conversions between them, if such a conversion is possible.<br /> It differs from Any , which can handle almost any type (with the notable exception of arrays), but cannot automatically convert from a type to another.<br /> How to use:<source type="cpp">  Variant  v( int (12));
@@ -32,111 +32,111 @@
   std::cout  &lt;&lt;  v.to&lt; float &gt;()  &lt;&lt;  std::endl;
   std::cout  &lt;&lt;  v.to&lt; String &gt;()  &lt;&lt;  std::endl;
 </source>
-<br /></div>
+<br /></div><div style="margin-top:3em;border:1px solid #aaa;border-bottom-style:none;border-left-style:none;border-right-style:none"></div>
 <table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructs an empty Variant .<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ Variant</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Constructs an empty Variant .<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Variant_1aaacbfa4fac143c515f2668566191a793" href="#">+ Variant</a></span>:  ();
 </code>
-</div></td></tr><tr id="Variant_19411319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructs a copy of an existing Variant .<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ Variant</a></span>:  (const Variant&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Constructs a copy of an existing Variant .<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Variant_1a729e25a50fffa933ae26e858c243aa31" href="#">+ Variant</a></span>:  (const Variant&amp; rhs);
 </code>
-</div></td></tr><tr id="Variant_19421319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructs a Variant based on an existing variable of simple type.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="Variant_19431319844517_tmpl"><span class="keyword">template</span>&lt;typename T &gt;</div>
- <span class="method"><a href="#">+ Variant</a></span>:  (const T&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Constructs a Variant based on an existing variable of simple type.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;typename T &gt;</div>
+ <span class="method"><a name="classYuni_1_1Variant_1a15bf52e77bbd724755bc4f8c7df92c14" href="#">+ Variant</a></span>:  (const T&amp; rhs);
 </code>
-</div></td></tr><tr id="Variant_19431319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ <b> ~ </b>Variant</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Destructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Variant_1afd022ec6c3d159e816d42e1c18ffae47" href="#">+ <b> ~ </b>Variant</a></span>:  ();
 </code>
-</div></td></tr><tr id="~Variant_19441319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Alteration methods <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assignment from an existing Variant .<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ assign</a></span>: void (const Variant&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Assignment from an existing Variant .<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Variant_1a67c84fd40bb2af9753f2b48b984ed806" href="#">+ assign</a></span>: void (const Variant&amp; rhs);
 </code>
-</div></td></tr><tr id="assign_19451319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assignment from a simple type.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="assign_19461319844517_tmpl"><span class="keyword">template</span>&lt;typename T &gt;</div>
- <span class="method"><a href="#">+ assign</a></span>: void (const T&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Assignment from a simple type.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;typename T &gt;</div>
+ <span class="method"><a name="classYuni_1_1Variant_1a5f854a3f40891139712ce091ce2de64c" href="#">+ assign</a></span>: void (const T&amp; rhs);
 </code>
-</div></td></tr><tr id="assign_19461319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Specific assignment from C strings.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ assign</a></span>: void (const char* rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Specific assignment from C strings.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Variant_1abbe6a0b4b26de5c6938135b03bbc8ac3" href="#">+ assign</a></span>: void (const char* rhs);
 </code>
-</div></td></tr><tr id="assign_19471319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Resets the Variant to an empty one.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ clear</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Resets the Variant to an empty one.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Variant_1a0f8ed14c5313d6a926b447146b75c23d" href="#">+ clear</a></span>: void ();
 </code>
-</div></td></tr><tr id="clear_19481319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Information methods <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Returns true if the Variant is empty.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ empty</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Returns true if the Variant is empty.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Variant_1a6369358741c3f81ce7278bda6ee77281" href="#">+ empty</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="empty_19491319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operator overloads <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ operator=</a></span>: Variant&amp; (const Variant&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1Variant_1ab9268f322ca792e3f5f863e2a882c469" href="#">+ operator=</a></span>: Variant&amp; (const Variant&amp; rhs);
 </code>
-</div></td></tr><tr id="operator=_19501319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="operator=_19511319844517_tmpl"><span class="keyword">template</span>&lt;typename T &gt;</div>
- <span class="method"><a href="#">+ operator=</a></span>: Variant&amp; (const T&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;typename T &gt;</div>
+ <span class="method"><a name="classYuni_1_1Variant_1a1e04e8d1fdee8407dfcada49921b35b6" href="#">+ operator=</a></span>: Variant&amp; (const T&amp; rhs);
 </code>
-</div></td></tr><tr id="operator=_19511319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Retrieval methods <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist" id="to_19521319844517_tmpl"><span class="keyword">template</span>&lt;typename T &gt;</div>
- <span class="method"><a href="#">+ to</a></span>: T () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;typename T &gt;</div>
+ <span class="method"><a name="classYuni_1_1Variant_1a95b9ad1dd7d0cfa2adca1f1f8a1eb04d" href="#">+ to</a></span>: T () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="to_19521319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>

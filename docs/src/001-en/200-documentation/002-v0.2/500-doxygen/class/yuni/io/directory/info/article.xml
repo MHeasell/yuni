@@ -9,51 +9,51 @@
 <h2>Tool for creating, moving, and enumerating through directories and subdirectories</h2>
 <h3>Public typedef</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Iterators</h4></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">iterator</a></span> : Yuni::IIterator&lt;Model::Iterator&lt;itFile|itFolder&gt;, true&gt;</code></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">file_iterator</a></span> : Yuni::IIterator&lt;Model::Iterator&lt;itFile&gt;, true&gt;</code></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">folder_iterator</a></span> : Yuni::IIterator&lt;Model::Iterator&lt;itFolder&gt;, true&gt;</code></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">recursive_iterator</a></span> : Yuni::IIterator&lt;Model::Iterator&lt;itAll&gt;, true&gt;</code></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">recursive_file_iterator</a></span> : Yuni::IIterator&lt;Model::Iterator&lt;itFile|itRecursive&gt;, true&gt;</code></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">recursive_folder_iterator</a></span> : Yuni::IIterator&lt;Model::Iterator&lt;itFolder|itRecursive&gt;, true&gt;</code></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">null_iterator</a></span> : Yuni::IIterator&lt;Model::NullIterator, true&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1IO_1_1Directory_1_1Info_1a106c93682cd03a9c4f13d2dc6b834f18" href="#">iterator</a></span> : Yuni::IIterator&lt;Model::Iterator&lt;itFile|itFolder&gt;, true&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1IO_1_1Directory_1_1Info_1a677c4f87051ed9e3b12678141cd37b58" href="#">file_iterator</a></span> : Yuni::IIterator&lt;Model::Iterator&lt;itFile&gt;, true&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1IO_1_1Directory_1_1Info_1a80bc1dccb6a2fc9f22511fc3b03b3f23" href="#">folder_iterator</a></span> : Yuni::IIterator&lt;Model::Iterator&lt;itFolder&gt;, true&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1IO_1_1Directory_1_1Info_1a045abccb4911a88ea88e9a0cbf001267" href="#">recursive_iterator</a></span> : Yuni::IIterator&lt;Model::Iterator&lt;itAll&gt;, true&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1IO_1_1Directory_1_1Info_1aebb4ce9d5b01e7333d757f7f12355741" href="#">recursive_file_iterator</a></span> : Yuni::IIterator&lt;Model::Iterator&lt;itFile|itRecursive&gt;, true&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1IO_1_1Directory_1_1Info_1acc12467e2220a091c0b39d1737dfc427" href="#">recursive_folder_iterator</a></span> : Yuni::IIterator&lt;Model::Iterator&lt;itFolder|itRecursive&gt;, true&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1IO_1_1Directory_1_1Info_1aa63e3a0d6b8d3476f7687f072af1d590" href="#">null_iterator</a></span> : Yuni::IIterator&lt;Model::NullIterator, true&gt;</code></td></tr>
 </table></div>
 
 <h3>Public function</h3>
-<div class="doxygen_brief"><table class="nostyle"><tr><td class="doxygen_index"><code>iterator </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">begin</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>null_iterator </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">end</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>file_iterator </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">file_begin</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>null_iterator </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">file_end</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>folder_iterator </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">folder_begin</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>null_iterator </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">folder_end</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>recursive_iterator </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">recursive_begin</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>null_iterator </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">recursive_end</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>recursive_file_iterator </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">recursive_file_begin</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>null_iterator </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">recursive_file_end</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>recursive_folder_iterator </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">recursive_folder_begin</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>null_iterator </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">recursive_folder_end</a></span>() <span class="keyword">const</span></code></td></tr>
+<div class="doxygen_brief"><table class="nostyle"><tr><td class="doxygen_index"><code>iterator </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1Directory_1_1Info_1a49cb93a140d46c93d1ca7bf492b7fbe7">begin</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>null_iterator </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1Directory_1_1Info_1ac75b6e624ebcfc684c650f1aad49179e">end</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>file_iterator </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1Directory_1_1Info_1ad405820acaeae567a6cce59da5a3c66c">file_begin</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>null_iterator </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1Directory_1_1Info_1af69016fd0bd23a3433471b9953529749">file_end</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>folder_iterator </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1Directory_1_1Info_1a74ddefe75f037329e1047cd348da4eee">folder_begin</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>null_iterator </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1Directory_1_1Info_1aa489c0747211eb7127237e4bf6a82388">folder_end</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>recursive_iterator </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1Directory_1_1Info_1a1465b41a3011ef1bf6335901f271d41a">recursive_begin</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>null_iterator </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1Directory_1_1Info_1a0155e48b02ade66af76e8fc223d10275">recursive_end</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>recursive_file_iterator </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1Directory_1_1Info_1aef7af80ce2709af9b5b13bac0b6b57fe">recursive_file_begin</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>null_iterator </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1Directory_1_1Info_1aeadd89fc12b15238b8cd5fabe3539c51">recursive_file_end</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>recursive_folder_iterator </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1Directory_1_1Info_1afa798b75f86a21c12ba6640c6a7cd36b">recursive_folder_begin</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>null_iterator </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1Directory_1_1Info_1acf901735588bccd5ca5f65a9b3b776a0">recursive_folder_end</a></span>() <span class="keyword">const</span></code></td></tr>
 <tr><td></td><td><br /><h4>Constructors &amp; Destructor</h4></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Info</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Info</a></span>(const StringT&amp; directory)</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Info</a></span>(const Info&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1Directory_1_1Info_1adc59b6d62333dd04d9826751dd73dff0">Info</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1Directory_1_1Info_1a8138f10a6c675686d4b11ddb6b82a78f">Info</a></span>(const StringT&amp; directory)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1Directory_1_1Info_1a55fd51e333ca59df7637730968272174">Info</a></span>(const Info&amp; rhs)</code></td></tr>
 <tr><td></td><td><br /><h4>Common operations</h4></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">create</a></span>(unsigned int mode) <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">remove</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">clean</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">copy</a></span>(const StringT&amp; destination) <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">setAsCurrentDirectory</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1Directory_1_1Info_1ab76bbfecc9793a4ec11d951f362811e4">create</a></span>(unsigned int mode) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1Directory_1_1Info_1a94fd6b3edaeb3e9457cae258acf98b85">remove</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1Directory_1_1Info_1a696cad9eacc2ca6c427f923a4f0c51eb">clean</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1Directory_1_1Info_1a98871bb757104b95549bb9c68a55134f">copy</a></span>(const StringT&amp; destination) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1Directory_1_1Info_1a8353b10cccd4b9ca8e9341a63d2f5d3a">setAsCurrentDirectory</a></span>() <span class="keyword">const</span></code></td></tr>
 <tr><td></td><td><br /><h4>Operators</h4></td></tr>
-<tr><td class="doxygen_index"><code>Info&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator=</a></span>(const Info&amp; rhs)</code></td></tr>
-<tr><td class="doxygen_index"><code>Info&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator=</a></span>(const U&amp; rhs)</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator==</a></span>(const Info&amp; rhs) <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator==</a></span>(const U&amp; rhs) <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>Info&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator+=</a></span>(const U&amp; rhs)</code></td></tr>
-<tr><td class="doxygen_index"><code>Info&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator&lt;&lt;</a></span>(const U&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code>Info&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1Directory_1_1Info_1a55ecec0f71dc3aec64059fa1fdcd99dd">operator=</a></span>(const Info&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code>Info&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1Directory_1_1Info_1a54b4529feca88df923155c4fb535d339">operator=</a></span>(const U&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1Directory_1_1Info_1a7b8857f2d3f70a22f1f0f0dbb72c9195">operator==</a></span>(const Info&amp; rhs) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1Directory_1_1Info_1ac16006e92f2316f0027e048c9ca25b53">operator==</a></span>(const U&amp; rhs) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>Info&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1Directory_1_1Info_1a45fdb98015b752d5d823c6d56aa102a4">operator+=</a></span>(const U&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code>Info&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1Directory_1_1Info_1a42677a09bb15d5266406efa525ebe156">operator&lt;&lt;</a></span>(const U&amp; rhs)</code></td></tr>
 <tr><td></td><td><br /><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">exists</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">normalize</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">normalize</a></span>(StringT&amp; tmp)</code></td></tr>
-<tr><td class="doxygen_index"><code>const String&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">directory</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>String&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">directory</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1Directory_1_1Info_1a7179e954f082d701cadd85a7b09c9593">exists</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1Directory_1_1Info_1acec4e6a28a0776ad0a32c5066f293bb5">normalize</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1Directory_1_1Info_1a895637861ef27acbbc7ed055cfd5a84c">normalize</a></span>(StringT&amp; tmp)</code></td></tr>
+<tr><td class="doxygen_index"><code>const String&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1Directory_1_1Info_1a6c0151a987f735dbf79140fe53991522">directory</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>String&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1Directory_1_1Info_1a9202036c29fec2d043be7e5cc00fc383">directory</a></span>()</code></td></tr>
 </table></div>
 
 <h2>Detailed Description</h2><div>Example for iterating through a directory :<source type="cpp">  #include  &lt; yuni/yuni.h &gt;
@@ -72,332 +72,332 @@
      return  0;
   }
 </source>
-<br /></div>
+<br /></div><div style="margin-top:3em;border:1px solid #aaa;border-bottom-style:none;border-left-style:none;border-right-style:none"></div>
 <table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Iterators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief">Options for performing an iteration.<br /><div class="doxygen_name_spacer"></div>
+<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><b>Options for performing an iteration.<br /></b><div class="doxygen_name_spacer"></div>
 <code><i>(unmanaged tag: 4)</i></code>
-</div></td></tr><tr id="OptionIteratoritNoneitFileitFolderitRecursiveitAll_54121319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The default iterator, for iterating through all files and folders within a directory.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ iterator</a></span>: <span class="keyword">typedef</span> Yuni::IIterator&lt;Model::Iterator&lt;itFile|itFolder&gt;, true&gt;;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>The default iterator, for iterating through all files and folders within a directory.<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1a106c93682cd03a9c4f13d2dc6b834f18" href="#">+ iterator</a></span>: <span class="keyword">typedef</span> Yuni::IIterator&lt;Model::Iterator&lt;itFile|itFolder&gt;, true&gt;;
 </code>
-</div></td></tr><tr id="iterator_54141319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The default iterator, for iterating through all files within a directory.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ file_iterator</a></span>: <span class="keyword">typedef</span> Yuni::IIterator&lt;Model::Iterator&lt;itFile&gt;, true&gt;;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>The default iterator, for iterating through all files within a directory.<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1a677c4f87051ed9e3b12678141cd37b58" href="#">+ file_iterator</a></span>: <span class="keyword">typedef</span> Yuni::IIterator&lt;Model::Iterator&lt;itFile&gt;, true&gt;;
 </code>
-</div></td></tr><tr id="file_iterator_54161319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The default iterator, for iterating through all folders within a directory.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ folder_iterator</a></span>: <span class="keyword">typedef</span> Yuni::IIterator&lt;Model::Iterator&lt;itFolder&gt;, true&gt;;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>The default iterator, for iterating through all folders within a directory.<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1a80bc1dccb6a2fc9f22511fc3b03b3f23" href="#">+ folder_iterator</a></span>: <span class="keyword">typedef</span> Yuni::IIterator&lt;Model::Iterator&lt;itFolder&gt;, true&gt;;
 </code>
-</div></td></tr><tr id="folder_iterator_54181319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The default iterator, for recursively iterating through all files and folders within a directory.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ recursive_iterator</a></span>: <span class="keyword">typedef</span> Yuni::IIterator&lt;Model::Iterator&lt;itAll&gt;, true&gt;;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>The default iterator, for recursively iterating through all files and folders within a directory.<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1a045abccb4911a88ea88e9a0cbf001267" href="#">+ recursive_iterator</a></span>: <span class="keyword">typedef</span> Yuni::IIterator&lt;Model::Iterator&lt;itAll&gt;, true&gt;;
 </code>
-</div></td></tr><tr id="recursive_iterator_54201319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The default iterator, for iterating through all files within a directory.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ recursive_file_iterator</a></span>: <span class="keyword">typedef</span> Yuni::IIterator&lt;Model::Iterator&lt;itFile|itRecursive&gt;, true&gt;;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>The default iterator, for iterating through all files within a directory.<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1aebb4ce9d5b01e7333d757f7f12355741" href="#">+ recursive_file_iterator</a></span>: <span class="keyword">typedef</span> Yuni::IIterator&lt;Model::Iterator&lt;itFile|itRecursive&gt;, true&gt;;
 </code>
-</div></td></tr><tr id="recursive_file_iterator_54221319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The default iterator, for iterating through all folders within a directory.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ recursive_folder_iterator</a></span>: <span class="keyword">typedef</span> Yuni::IIterator&lt;Model::Iterator&lt;itFolder|itRecursive&gt;, true&gt;;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>The default iterator, for iterating through all folders within a directory.<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1acc12467e2220a091c0b39d1737dfc427" href="#">+ recursive_folder_iterator</a></span>: <span class="keyword">typedef</span> Yuni::IIterator&lt;Model::Iterator&lt;itFolder|itRecursive&gt;, true&gt;;
 </code>
-</div></td></tr><tr id="recursive_folder_iterator_54251319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">A generic null iterator.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ null_iterator</a></span>: <span class="keyword">typedef</span> Yuni::IIterator&lt;Model::NullIterator, true&gt;;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>A generic null iterator.<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1aa63e3a0d6b8d3476f7687f072af1d590" href="#">+ null_iterator</a></span>: <span class="keyword">typedef</span> Yuni::IIterator&lt;Model::NullIterator, true&gt;;
 </code>
-</div></td></tr><tr id="null_iterator_54271319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Options for performing an iteration.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ begin</a></span>: iterator () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Options for performing an iteration.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1a49cb93a140d46c93d1ca7bf492b7fbe7" href="#">+ begin</a></span>: iterator () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="begin_54291319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Options for performing an iteration.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ end</a></span>: null_iterator () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Options for performing an iteration.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1ac75b6e624ebcfc684c650f1aad49179e" href="#">+ end</a></span>: null_iterator () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="end_54321319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Options for performing an iteration.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ file_begin</a></span>: file_iterator () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Options for performing an iteration.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1ad405820acaeae567a6cce59da5a3c66c" href="#">+ file_begin</a></span>: file_iterator () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="file_begin_54331319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Options for performing an iteration.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ file_end</a></span>: null_iterator () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Options for performing an iteration.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1af69016fd0bd23a3433471b9953529749" href="#">+ file_end</a></span>: null_iterator () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="file_end_54361319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Options for performing an iteration.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ folder_begin</a></span>: folder_iterator () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Options for performing an iteration.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1a74ddefe75f037329e1047cd348da4eee" href="#">+ folder_begin</a></span>: folder_iterator () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="folder_begin_54381319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Options for performing an iteration.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ folder_end</a></span>: null_iterator () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Options for performing an iteration.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1aa489c0747211eb7127237e4bf6a82388" href="#">+ folder_end</a></span>: null_iterator () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="folder_end_54401319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Options for performing an iteration.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ recursive_begin</a></span>: recursive_iterator () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Options for performing an iteration.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1a1465b41a3011ef1bf6335901f271d41a" href="#">+ recursive_begin</a></span>: recursive_iterator () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="recursive_begin_54411319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Options for performing an iteration.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ recursive_end</a></span>: null_iterator () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Options for performing an iteration.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1a0155e48b02ade66af76e8fc223d10275" href="#">+ recursive_end</a></span>: null_iterator () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="recursive_end_54431319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Options for performing an iteration.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ recursive_file_begin</a></span>: recursive_file_iterator () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Options for performing an iteration.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1aef7af80ce2709af9b5b13bac0b6b57fe" href="#">+ recursive_file_begin</a></span>: recursive_file_iterator () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="recursive_file_begin_54451319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Options for performing an iteration.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ recursive_file_end</a></span>: null_iterator () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Options for performing an iteration.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1aeadd89fc12b15238b8cd5fabe3539c51" href="#">+ recursive_file_end</a></span>: null_iterator () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="recursive_file_end_54481319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Options for performing an iteration.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ recursive_folder_begin</a></span>: recursive_folder_iterator () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Options for performing an iteration.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1afa798b75f86a21c12ba6640c6a7cd36b" href="#">+ recursive_folder_begin</a></span>: recursive_folder_iterator () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="recursive_folder_begin_54491319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Options for performing an iteration.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ recursive_folder_end</a></span>: null_iterator () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Options for performing an iteration.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1acf901735588bccd5ca5f65a9b3b776a0" href="#">+ recursive_folder_end</a></span>: null_iterator () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="recursive_folder_end_54521319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ Info</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Default constructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1adc59b6d62333dd04d9826751dd73dff0" href="#">+ Info</a></span>:  ();
 </code>
-</div></td></tr><tr id="Info_54531319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="Info_54541319844517_tmpl"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="#">+ Info</a></span>:  (const StringT&amp; directory);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Constructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1a8138f10a6c675686d4b11ddb6b82a78f" href="#">+ Info</a></span>:  (const StringT&amp; directory);
 </code>
-</div></td></tr><tr id="Info_54541319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> directory</code> A directory<br /></li></ul><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ Info</a></span>:  (const Info&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Copy constructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1a55fd51e333ca59df7637730968272174" href="#">+ Info</a></span>:  (const Info&amp; rhs);
 </code>
-</div></td></tr><tr id="Info_54551319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Common operations <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Create the directory recursively.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ create</a></span>: bool (unsigned int mode) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Create the directory recursively.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1ab76bbfecc9793a4ec11d951f362811e4" href="#">+ create</a></span>: bool (unsigned int mode) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="create_54561319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> mode</code> Access permissions (ignored on the MS Windows platforms)<br /></li></ul><div><code>return</code>  True if the operation succeeded, false otherwise<br /></div><div><code>see</code> :  Yuni::IO::Directory::Create()<br /></div><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Remove the directory and all its content.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ remove</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Remove the directory and all its content.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1a94fd6b3edaeb3e9457cae258acf98b85" href="#">+ remove</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="remove_54571319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div><code>return</code>  True if the operation succeeded False otherwise<br /></div><div><code>see</code> :  Yuni::IO::Directory::Remove()<br /></div><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Clean the directory (remove all its content)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ clean</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Clean the directory (remove all its content)<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1a696cad9eacc2ca6c427f923a4f0c51eb" href="#">+ clean</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="clean_54581319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy the directory and its content into another location.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="copy_54591319844517_tmpl"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="#">+ copy</a></span>: bool (const StringT&amp; destination) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Copy the directory and its content into another location.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1a98871bb757104b95549bb9c68a55134f" href="#">+ copy</a></span>: bool (const StringT&amp; destination) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="copy_54591319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> destination</code> The destination folder<br /></li></ul><div><code>return</code>  True if the operation succeeded False otherwise<br /></div><div><code>see</code> :  Yuni::IO::Directory::Copy()<br /></div><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set as the current directory.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ setAsCurrentDirectory</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Set as the current directory.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1a8353b10cccd4b9ca8e9341a63d2f5d3a" href="#">+ setAsCurrentDirectory</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="setAsCurrentDirectory_54601319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div><code>return</code>  True if the operation succeeded False otherwise<br /></div><div><code>see</code> :  Yuni::IO::Directory::Current::Set()<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assignement.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator=</a></span>: Info&amp; (const Info&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Assignement.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1a55ecec0f71dc3aec64059fa1fdcd99dd" href="#">+ operator=</a></span>: Info&amp; (const Info&amp; rhs);
 </code>
-</div></td></tr><tr id="operator=_54611319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assignment, for any types convertible into a string.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator=_54621319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">+ operator=</a></span>: Info&amp; (const U&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Assignment, for any types convertible into a string.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1a54b4529feca88df923155c4fb535d339" href="#">+ operator=</a></span>: Info&amp; (const U&amp; rhs);
 </code>
-</div></td></tr><tr id="operator=_54621319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Comparison.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator==</a></span>: bool (const Info&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Comparison.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1a7b8857f2d3f70a22f1f0f0dbb72c9195" href="#">+ operator==</a></span>: bool (const Info&amp; rhs) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator==_54631319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Comparison.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator==_54641319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">+ operator==</a></span>: bool (const U&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Comparison.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1ac16006e92f2316f0027e048c9ca25b53" href="#">+ operator==</a></span>: bool (const U&amp; rhs) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator==_54641319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assignement.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator+=_54651319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">+ operator+=</a></span>: Info&amp; (const U&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Assignement.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1a45fdb98015b752d5d823c6d56aa102a4" href="#">+ operator+=</a></span>: Info&amp; (const U&amp; rhs);
 </code>
-</div></td></tr><tr id="operator+=_54651319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assignement.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator<<_54661319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">+ operator&lt;&lt;</a></span>: Info&amp; (const U&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Assignement.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1a42677a09bb15d5266406efa525ebe156" href="#">+ operator&lt;&lt;</a></span>: Info&amp; (const U&amp; rhs);
 </code>
-</div></td></tr><tr id="operator<<_54661319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the directory exists.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ exists</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get if the directory exists.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1a7179e954f082d701cadd85a7b09c9593" href="#">+ exists</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="exists_54671319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Normalize the directory path.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ normalize</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Normalize the directory path.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1acec4e6a28a0776ad0a32c5066f293bb5" href="#">+ normalize</a></span>: void ();
 </code>
-</div></td></tr><tr id="normalize_54681319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div><code>see</code> :  Yuni::IO::Normalize()<br /></div><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Normalize the directory path.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="normalize_54691319844517_tmpl"><span class="keyword">template</span>&lt;class StringT &gt;</div>
- <span class="method"><a href="#">+ normalize</a></span>: void (StringT&amp; tmp);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Normalize the directory path.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1a895637861ef27acbbc7ed055cfd5a84c" href="#">+ normalize</a></span>: void (StringT&amp; tmp);
 </code>
-</div></td></tr><tr id="normalize_54691319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">A temporary string is required to normalize the path. This additional parameter allows the user to provide its own temporary buffer to be reused when performing the operation. This should reduce the overhead due to useless memory allocation.<br /><div class="doxygen_params">Parameters :</div><ul><li><code> StringT</code> Any container of type string (String, std::string...)<br /></li></ul><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get a reference to the directory string itself (const)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ directory</a></span>: const String&amp; () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get a reference to the directory string itself (const)<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1a6c0151a987f735dbf79140fe53991522" href="#">+ directory</a></span>: const String&amp; () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="directory_54701319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get a reference to the directory string itself.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ directory</a></span>: String&amp; ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get a reference to the directory string itself.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1IO_1_1Directory_1_1Info_1a9202036c29fec2d043be7e5cc00fc383" href="#">+ directory</a></span>: String&amp; ();
 </code>
-</div></td></tr><tr id="directory_54711319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">The directory can directly be modified by the user without any restriction. This can be useful to reduce memory allocations.<br />
 </div>

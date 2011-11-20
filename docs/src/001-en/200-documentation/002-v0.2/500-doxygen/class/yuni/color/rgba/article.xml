@@ -9,263 +9,263 @@
 <h2>32Bits RGB Color Model (additive color model + transparency)</h2>
 <h3>Public typedef</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">Type</a></span> : T</code></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">PrintType</a></span> : Yuni::Private::Color::Print&lt; T&gt;:: Type</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1Color_1_1RGBA_1a4a3f4b3626d76dcdbbbb00198b9fc2f6" href="#">Type</a></span> : T</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1Color_1_1RGBA_1af27f2ca90454d53dbc6b180132e4f60d" href="#">PrintType</a></span> : Yuni::Private::Color::Print&lt; T&gt;:: Type</code></td></tr>
 </table></div>
 
 <h3>Public function</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructors</h4></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">RGBA</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">RGBA</a></span>(const RGBA&amp; rhs)</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">RGBA</a></span>(R r, G g, B b, A a)</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">RGBA</a></span>(R r, G g, B b)</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">RGBA</a></span>(const U&amp; value)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Color_1_1RGBA_1a4dbbe1dd4f326e14da463006181f4d90">RGBA</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Color_1_1RGBA_1a8f29966bba3f281c3ec2b851f9f8e9ed">RGBA</a></span>(const RGBA&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Color_1_1RGBA_1a0ee6ca56e7630cf426abbf6ec2213484">RGBA</a></span>(R r, G g, B b, A a)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Color_1_1RGBA_1a0bcd36ca6319e384dd080789eb51e70c">RGBA</a></span>(R r, G g, B b)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Color_1_1RGBA_1a21db3f88a5312c3b1a2cc6089803ad8b">RGBA</a></span>(const U&amp; value)</code></td></tr>
 <tr><td></td><td><br /><h4>Assign</h4></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">assign</a></span>(R r, G g, B b, A a)</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">assign</a></span>(R r, G g, B b)</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">assign</a></span>(const U&amp; value)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Color_1_1RGBA_1ac9e1fb51d7e2fcdf232ebd682da09f95">assign</a></span>(R r, G g, B b, A a)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Color_1_1RGBA_1a9843dcd8d35dcd6973936eba42322704">assign</a></span>(R r, G g, B b)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Color_1_1RGBA_1a349f8945f44d07f62c93015e19cc1598">assign</a></span>(const U&amp; value)</code></td></tr>
 <tr><td></td><td><br /><h4>Misc</h4></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">visible</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">valid</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Color_1_1RGBA_1a1de904695842144c2a04f3d44d26cca8">visible</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Color_1_1RGBA_1aa1f01ec4b45dbafd2dbb3631970d8b92">valid</a></span>() <span class="keyword">const</span></code></td></tr>
 <tr><td></td><td><br /><h4>Stream printing</h4></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">print</a></span>(CString&lt;ChunkSizeT, ExpandableT, ZeroT&gt;&amp; string) <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">print</a></span>(StreamT&amp; out) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Color_1_1RGBA_1ae61ceabdf90cfafa648d8493a44d1f58">print</a></span>(CString&lt;ChunkSizeT, ExpandableT, ZeroT&gt;&amp; string) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Color_1_1RGBA_1a6641efe21248927973b1800c477b7089">print</a></span>(StreamT&amp; out) <span class="keyword">const</span></code></td></tr>
 <tr><td></td><td><br /><h4>Operators</h4></td></tr>
-<tr><td class="doxygen_index"><code>RGBA&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator+=</a></span>(const U&amp; value)</code></td></tr>
-<tr><td class="doxygen_index"><code>RGBA&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator-=</a></span>(const U&amp; value)</code></td></tr>
-<tr><td class="doxygen_index"><code>RGBA&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator=</a></span>(const RGBA&amp; rhs)</code></td></tr>
-<tr><td class="doxygen_index"><code>RGBA&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator=</a></span>(const Yuni::NullPtr&amp; )</code></td></tr>
-<tr><td class="doxygen_index"><code>RGBA&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator=</a></span>(const U&amp; rhs)</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator==</a></span>(const U&amp; rhs) <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator!=</a></span>(const U&amp; rhs) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>RGBA&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Color_1_1RGBA_1af3d258a0dc5f9629174748fc2b10b4d5">operator+=</a></span>(const U&amp; value)</code></td></tr>
+<tr><td class="doxygen_index"><code>RGBA&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Color_1_1RGBA_1a9b3068ec0a487a4837b108ad85eb23cf">operator-=</a></span>(const U&amp; value)</code></td></tr>
+<tr><td class="doxygen_index"><code>RGBA&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Color_1_1RGBA_1a016962b5e518c941aa98c66e6a17781c">operator=</a></span>(const RGBA&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code>RGBA&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Color_1_1RGBA_1aa74d61d3c4bb369eb3f9e3ef2d610543">operator=</a></span>(const Yuni::NullPtr&amp; )</code></td></tr>
+<tr><td class="doxygen_index"><code>RGBA&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Color_1_1RGBA_1a2fe9c932eab84c84e38fd42e8bf55d21">operator=</a></span>(const U&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Color_1_1RGBA_1a8777ed790e7fbd56b0f3c2f458bd1e25">operator==</a></span>(const U&amp; rhs) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Color_1_1RGBA_1ac9d05e103bd463ac3bae5e90441d36ef">operator!=</a></span>(const U&amp; rhs) <span class="keyword">const</span></code></td></tr>
 </table></div>
 
 <h2>Detailed Description</h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 4)</i></code>
-</div></td></tr><tr id="@168hasTransparencyupperBoundlowerBound_8741319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Type used for channels.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ Type</a></span>: <span class="keyword">typedef</span> T;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>Type used for channels.<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="classYuni_1_1Color_1_1RGBA_1a4a3f4b3626d76dcdbbbb00198b9fc2f6" href="#">+ Type</a></span>: <span class="keyword">typedef</span> T;
 </code>
-</div></td></tr><tr id="Type_8751319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The most appropriate type for printing.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ PrintType</a></span>: <span class="keyword">typedef</span> Yuni::Private::Color::Print&lt; T&gt;:: Type;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>The most appropriate type for printing.<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="classYuni_1_1Color_1_1RGBA_1af27f2ca90454d53dbc6b180132e4f60d" href="#">+ PrintType</a></span>: <span class="keyword">typedef</span> Yuni::Private::Color::Print&lt; T&gt;:: Type;
 </code>
-</div></td></tr><tr id="PrintType_8761319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ RGBA</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Default constructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Color_1_1RGBA_1a4dbbe1dd4f326e14da463006181f4d90" href="#">+ RGBA</a></span>:  ();
 </code>
-</div></td></tr><tr id="RGBA_8771319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ RGBA</a></span>:  (const RGBA&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Copy constructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Color_1_1RGBA_1a8f29966bba3f281c3ec2b851f9f8e9ed" href="#">+ RGBA</a></span>:  (const RGBA&amp; rhs);
 </code>
-</div></td></tr><tr id="RGBA_8781319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor with default values.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="RGBA_8791319844517_tmpl"><span class="keyword">template</span>&lt;class R , class G , class B , class A &gt;</div>
- <span class="method"><a href="#">+ RGBA</a></span>:  (R r, G g, B b, A a);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Constructor with default values.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class R , class G , class B , class A &gt;</div>
+ <span class="method"><a name="classYuni_1_1Color_1_1RGBA_1a0ee6ca56e7630cf426abbf6ec2213484" href="#">+ RGBA</a></span>:  (R r, G g, B b, A a);
 </code>
-</div></td></tr><tr id="RGBA_8791319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor with default values.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="RGBA_8801319844517_tmpl"><span class="keyword">template</span>&lt;class R , class G , class B &gt;</div>
- <span class="method"><a href="#">+ RGBA</a></span>:  (R r, G g, B b);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Constructor with default values.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class R , class G , class B &gt;</div>
+ <span class="method"><a name="classYuni_1_1Color_1_1RGBA_1a0bcd36ca6319e384dd080789eb51e70c" href="#">+ RGBA</a></span>:  (R r, G g, B b);
 </code>
-</div></td></tr><tr id="RGBA_8801319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor with default values.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="RGBA_8811319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">+ RGBA</a></span>:  (const U&amp; value);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Constructor with default values.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a name="classYuni_1_1Color_1_1RGBA_1a21db3f88a5312c3b1a2cc6089803ad8b" href="#">+ RGBA</a></span>:  (const U&amp; value);
 </code>
-</div></td></tr><tr id="RGBA_8811319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Assign <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assign all channels at once.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="assign_8821319844517_tmpl"><span class="keyword">template</span>&lt;class R , class G , class B , class A &gt;</div>
- <span class="method"><a href="#">+ assign</a></span>: void (R r, G g, B b, A a);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Assign all channels at once.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class R , class G , class B , class A &gt;</div>
+ <span class="method"><a name="classYuni_1_1Color_1_1RGBA_1ac9e1fb51d7e2fcdf232ebd682da09f95" href="#">+ assign</a></span>: void (R r, G g, B b, A a);
 </code>
-</div></td></tr><tr id="assign_8821319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Reset all channels at once.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="assign_8831319844517_tmpl"><span class="keyword">template</span>&lt;class R , class G , class B &gt;</div>
- <span class="method"><a href="#">+ assign</a></span>: void (R r, G g, B b);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Reset all channels at once.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class R , class G , class B &gt;</div>
+ <span class="method"><a name="classYuni_1_1Color_1_1RGBA_1a9843dcd8d35dcd6973936eba42322704" href="#">+ assign</a></span>: void (R r, G g, B b);
 </code>
-</div></td></tr><tr id="assign_8831319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">The alpha channel will have a default value (opaque)<br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Reset all channels at once from a single value.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="assign_8841319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">+ assign</a></span>: void (const U&amp; value);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Reset all channels at once from a single value.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a name="classYuni_1_1Color_1_1RGBA_1a349f8945f44d07f62c93015e19cc1598" href="#">+ assign</a></span>: void (const U&amp; value);
 </code>
-</div></td></tr><tr id="assign_8841319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Misc <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the color will be visible.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ visible</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get if the color will be visible.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Color_1_1RGBA_1a1de904695842144c2a04f3d44d26cca8" href="#">+ visible</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="visible_8851319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">This method is equivalent to manually check the alpha channel with the lower bound<br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Check if all channels are valid.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ valid</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Check if all channels are valid.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Color_1_1RGBA_1aa1f01ec4b45dbafd2dbb3631970d8b92" href="#">+ valid</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="valid_8861319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">This method is only useful when the channels are modified manually.<br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Stream printing <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Print the color value.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="print_8871319844517_tmpl"><span class="keyword">template</span>&lt;unsigned int ChunkSizeT, bool ExpandableT, bool ZeroT&gt;</div>
- <span class="method"><a href="#">+ print</a></span>: void (CString&lt;ChunkSizeT, ExpandableT, ZeroT&gt;&amp; string) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Print the color value.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;unsigned int ChunkSizeT, bool ExpandableT, bool ZeroT&gt;</div>
+ <span class="method"><a name="classYuni_1_1Color_1_1RGBA_1ae61ceabdf90cfafa648d8493a44d1f58" href="#">+ print</a></span>: void (CString&lt;ChunkSizeT, ExpandableT, ZeroT&gt;&amp; string) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="print_8871319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Print the color value.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="print_8881319844517_tmpl"><span class="keyword">template</span>&lt;class StreamT &gt;</div>
- <span class="method"><a href="#">+ print</a></span>: void (StreamT&amp; out) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Print the color value.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class StreamT &gt;</div>
+ <span class="method"><a name="classYuni_1_1Color_1_1RGBA_1a6641efe21248927973b1800c477b7089" href="#">+ print</a></span>: void (StreamT&amp; out) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="print_8881319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Increase or decrease all channels.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator+=_8891319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">+ operator+=</a></span>: RGBA&amp; (const U&amp; value);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Increase or decrease all channels.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a name="classYuni_1_1Color_1_1RGBA_1af3d258a0dc5f9629174748fc2b10b4d5" href="#">+ operator+=</a></span>: RGBA&amp; (const U&amp; value);
 </code>
-</div></td></tr><tr id="operator+=_8891319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Increase or decrease all channels.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator_=_8901319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">+ operator-=</a></span>: RGBA&amp; (const U&amp; value);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Increase or decrease all channels.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a name="classYuni_1_1Color_1_1RGBA_1a9b3068ec0a487a4837b108ad85eb23cf" href="#">+ operator-=</a></span>: RGBA&amp; (const U&amp; value);
 </code>
-</div></td></tr><tr id="operator_=_8901319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assignment.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator=</a></span>: RGBA&amp; (const RGBA&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Assignment.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Color_1_1RGBA_1a016962b5e518c941aa98c66e6a17781c" href="#">+ operator=</a></span>: RGBA&amp; (const RGBA&amp; rhs);
 </code>
-</div></td></tr><tr id="operator=_8911319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assignment.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator=</a></span>: RGBA&amp; (const Yuni::NullPtr&amp; );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Assignment.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Color_1_1RGBA_1aa74d61d3c4bb369eb3f9e3ef2d610543" href="#">+ operator=</a></span>: RGBA&amp; (const Yuni::NullPtr&amp; );
 </code>
-</div></td></tr><tr id="operator=_8921319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Assignment.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator=_8931319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">+ operator=</a></span>: RGBA&amp; (const U&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Assignment.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a name="classYuni_1_1Color_1_1RGBA_1a2fe9c932eab84c84e38fd42e8bf55d21" href="#">+ operator=</a></span>: RGBA&amp; (const U&amp; rhs);
 </code>
-</div></td></tr><tr id="operator=_8931319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Comparison.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator==_8941319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">+ operator==</a></span>: bool (const U&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Comparison.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a name="classYuni_1_1Color_1_1RGBA_1a8777ed790e7fbd56b0f3c2f458bd1e25" href="#">+ operator==</a></span>: bool (const U&amp; rhs) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator==_8941319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Comparison.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="operator!=_8951319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">+ operator!=</a></span>: bool (const U&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Comparison.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a name="classYuni_1_1Color_1_1RGBA_1ac9d05e103bd463ac3bae5e90441d36ef" href="#">+ operator!=</a></span>: bool (const U&amp; rhs) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator!=_8951319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">The red channel.<br /><div class="doxygen_name_spacer"></div>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief"><b>The red channel.<br /></b><div class="doxygen_name_spacer"></div>
 <code><span class="method"><a href="#">+ red</a></span>: Type;</code>
-</div></td></tr><tr id="red_8961319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">The green channel.<br /><div class="doxygen_name_spacer"></div>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief"><b>The green channel.<br /></b><div class="doxygen_name_spacer"></div>
 <code><span class="method"><a href="#">+ green</a></span>: Type;</code>
-</div></td></tr><tr id="green_8971319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">The blue channel.<br /><div class="doxygen_name_spacer"></div>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief"><b>The blue channel.<br /></b><div class="doxygen_name_spacer"></div>
 <code><span class="method"><a href="#">+ blue</a></span>: Type;</code>
-</div></td></tr><tr id="blue_8981319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">The alpha channel (transparency)<br /><div class="doxygen_name_spacer"></div>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief"><b>The alpha channel (transparency)<br /></b><div class="doxygen_name_spacer"></div>
 <code><span class="method"><a href="#">+ alpha</a></span>: Type;</code>
-</div></td></tr><tr id="alpha_8991319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>

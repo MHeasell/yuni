@@ -9,81 +9,81 @@
 <h2>Implementation of the reference counting ownership policy</h2>
 <h3>Public function</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructors</h4></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">ReferenceCounted</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">ReferenceCounted</a></span>(const ReferenceCounted&amp; c)</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">ReferenceCounted</a></span>(const ReferenceCounted&lt;U&gt;&amp; c)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Ownership_1_1ReferenceCounted_1acb609f261ed2ba7dfa5f3660a1716025">ReferenceCounted</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Ownership_1_1ReferenceCounted_1aee6187dbab972dce43c6cbb801e4cd9c">ReferenceCounted</a></span>(const ReferenceCounted&amp; c)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Ownership_1_1ReferenceCounted_1a858b6eef9c63515f611b2c165095c2aa">ReferenceCounted</a></span>(const ReferenceCounted&lt;U&gt;&amp; c)</code></td></tr>
 <tr><td></td><td><br /><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">initFromRawPointer</a></span>(const T&amp; )</code></td></tr>
-<tr><td class="doxygen_index"><code>T </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">clone</a></span>(const T&amp; rhs)</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">release</a></span>(const T&amp; )</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">swapPointer</a></span>(ReferenceCounted&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Ownership_1_1ReferenceCounted_1a755753c7b398e6c51da0523b17680693">initFromRawPointer</a></span>(const T&amp; )</code></td></tr>
+<tr><td class="doxygen_index"><code>T </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Ownership_1_1ReferenceCounted_1a0edbaa421b4fe05c40d5cef30bc30a0b">clone</a></span>(const T&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Ownership_1_1ReferenceCounted_1a0ece65580eea126e1b2276a5041662b1">release</a></span>(const T&amp; )</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Ownership_1_1ReferenceCounted_1aa7661fb73896300cbf722cc5c9f39dc4">swapPointer</a></span>(ReferenceCounted&amp; rhs)</code></td></tr>
 </table></div>
 
 <h2>Detailed Description</h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 4)</i></code>
-</div></td></tr><tr id="@224destructiveCopy_64191319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ ReferenceCounted</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Default constructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Policy_1_1Ownership_1_1ReferenceCounted_1acb609f261ed2ba7dfa5f3660a1716025" href="#">+ ReferenceCounted</a></span>:  ();
 </code>
-</div></td></tr><tr id="ReferenceCounted_64211319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ ReferenceCounted</a></span>:  (const ReferenceCounted&amp; c);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Copy constructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Policy_1_1Ownership_1_1ReferenceCounted_1aee6187dbab972dce43c6cbb801e4cd9c" href="#">+ ReferenceCounted</a></span>:  (const ReferenceCounted&amp; c);
 </code>
-</div></td></tr><tr id="ReferenceCounted_64231319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor for any king of template parameter.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="ReferenceCounted_64251319844517_tmpl"><span class="keyword">template</span>&lt;typename U &gt;</div>
- <span class="method"><a href="#">+ ReferenceCounted</a></span>:  (const ReferenceCounted&lt;U&gt;&amp; c);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Copy constructor for any king of template parameter.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a name="classYuni_1_1Policy_1_1Ownership_1_1ReferenceCounted_1a858b6eef9c63515f611b2c165095c2aa" href="#">+ ReferenceCounted</a></span>:  (const ReferenceCounted&lt;U&gt;&amp; c);
 </code>
-</div></td></tr><tr id="ReferenceCounted_64251319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Initialization from a raw pointer.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ initFromRawPointer</a></span>: void (const T&amp; );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Initialization from a raw pointer.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Policy_1_1Ownership_1_1ReferenceCounted_1a755753c7b398e6c51da0523b17680693" href="#">+ initFromRawPointer</a></span>: void (const T&amp; );
 </code>
-</div></td></tr><tr id="initFromRawPointer_64281319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Clone this object.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ clone</a></span>: T (const T&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Clone this object.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Policy_1_1Ownership_1_1ReferenceCounted_1a0edbaa421b4fe05c40d5cef30bc30a0b" href="#">+ clone</a></span>: T (const T&amp; rhs);
 </code>
-</div></td></tr><tr id="clone_64301319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> rhs</code> The original object<br /></li></ul><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Release the reference.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ release</a></span>: bool (const T&amp; );
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Release the reference.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Policy_1_1Ownership_1_1ReferenceCounted_1a0ece65580eea126e1b2276a5041662b1" href="#">+ release</a></span>: bool (const T&amp; );
 </code>
-</div></td></tr><tr id="release_64321319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ swapPointer</a></span>: void (ReferenceCounted&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1Policy_1_1Ownership_1_1ReferenceCounted_1aa7661fb73896300cbf722cc5c9f39dc4" href="#">+ swapPointer</a></span>: void (ReferenceCounted&amp; rhs);
 </code>
-</div></td></tr><tr id="swapPointer_64331319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>

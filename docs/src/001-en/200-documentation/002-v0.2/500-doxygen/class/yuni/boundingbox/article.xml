@@ -9,92 +9,92 @@
 <h2>A bounding box in 3D that grows with what is added inside</h2>
 <h3>Public function</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructors and destructor</h4></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">BoundingBox</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">BoundingBox</a></span>(const Point3D&lt;T&gt;&amp; min, const Point3D&lt;T&gt;&amp; max)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1BoundingBox_1a35ee4d6c54f2a2c46e9d5c59c65988a9">BoundingBox</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1BoundingBox_1a68fd04e9048c3304fa5e1a08666b11cf">BoundingBox</a></span>(const Point3D&lt;T&gt;&amp; min, const Point3D&lt;T&gt;&amp; max)</code></td></tr>
 <tr><td></td><td><br /><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code>const Point3D&lt;T&gt;&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">min</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>const Point3D&lt;T&gt;&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">max</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>const Point3D&lt;T&gt;&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">center</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">addPoint</a></span>(const Point3D&lt;T&gt;&amp; point)</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">addTriangle</a></span>(const Triangle&amp; tri)</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">contains</a></span>(const Point3D&lt;T&gt;&amp; point) <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">reset</a></span>(Point3D&lt;U&gt; newCenter)</code></td></tr>
+<tr><td class="doxygen_index"><code>const Point3D&lt;T&gt;&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1BoundingBox_1af2aa23a3a276b21e96cc05c7181b50d3">min</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>const Point3D&lt;T&gt;&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1BoundingBox_1ad59f9bb0e3cb8cb03fac6043da524f8b">max</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>const Point3D&lt;T&gt;&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1BoundingBox_1a7a6cd60eddb257b57714661ff5ef3398">center</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1BoundingBox_1ae66237bae81b4f59d5976ba080c4bf88">addPoint</a></span>(const Point3D&lt;T&gt;&amp; point)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1BoundingBox_1a092fcbc9f0f9eee7957d87f03c5b838c">addTriangle</a></span>(const Triangle&amp; tri)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1BoundingBox_1aed773c596fde5eebf849f68fc662c497">contains</a></span>(const Point3D&lt;T&gt;&amp; point) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1BoundingBox_1a84d3eb0890090e4f0d1bfa4f9da99f34">reset</a></span>(Point3D&lt;U&gt; newCenter)</code></td></tr>
 </table></div>
 
 <h2>Detailed Description</h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors and destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ BoundingBox</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Default constructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1BoundingBox_1a35ee4d6c54f2a2c46e9d5c59c65988a9" href="#">+ BoundingBox</a></span>:  ();
 </code>
-</div></td></tr><tr id="BoundingBox_49761319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ BoundingBox</a></span>:  (const Point3D&lt;T&gt;&amp; min, const Point3D&lt;T&gt;&amp; max);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Constructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1BoundingBox_1a68fd04e9048c3304fa5e1a08666b11cf" href="#">+ BoundingBox</a></span>:  (const Point3D&lt;T&gt;&amp; min, const Point3D&lt;T&gt;&amp; max);
 </code>
-</div></td></tr><tr id="BoundingBox_49771319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the minimum coordinates of the box.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ min</a></span>: const Point3D&lt;T&gt;&amp; () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get the minimum coordinates of the box.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1BoundingBox_1af2aa23a3a276b21e96cc05c7181b50d3" href="#">+ min</a></span>: const Point3D&lt;T&gt;&amp; () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="min_49781319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the maximum coordinates of the box.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ max</a></span>: const Point3D&lt;T&gt;&amp; () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get the maximum coordinates of the box.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1BoundingBox_1ad59f9bb0e3cb8cb03fac6043da524f8b" href="#">+ max</a></span>: const Point3D&lt;T&gt;&amp; () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="max_49791319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the center of the box.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ center</a></span>: const Point3D&lt;T&gt;&amp; () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get the center of the box.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1BoundingBox_1a7a6cd60eddb257b57714661ff5ef3398" href="#">+ center</a></span>: const Point3D&lt;T&gt;&amp; () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="center_49801319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Add a point that can possibly grow the bounding box.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ addPoint</a></span>: void (const Point3D&lt;T&gt;&amp; point);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Add a point that can possibly grow the bounding box.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1BoundingBox_1ae66237bae81b4f59d5976ba080c4bf88" href="#">+ addPoint</a></span>: void (const Point3D&lt;T&gt;&amp; point);
 </code>
-</div></td></tr><tr id="addPoint_49811319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Add a triangle that can possibly grow the bounding box.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ addTriangle</a></span>: void (const Triangle&amp; tri);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Add a triangle that can possibly grow the bounding box.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1BoundingBox_1a092fcbc9f0f9eee7957d87f03c5b838c" href="#">+ addTriangle</a></span>: void (const Triangle&amp; tri);
 </code>
-</div></td></tr><tr id="addTriangle_49821319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Is the point inside the bounding box?<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ contains</a></span>: bool (const Point3D&lt;T&gt;&amp; point) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Is the point inside the bounding box?<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1BoundingBox_1aed773c596fde5eebf849f68fc662c497" href="#">+ contains</a></span>: bool (const Point3D&lt;T&gt;&amp; point) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="contains_49831319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Reset the bounding box to 0 size.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="reset_49841319844517_tmpl"><span class="keyword">template</span>&lt;typename U &gt;</div>
- <span class="method"><a href="#">+ reset</a></span>: void (Point3D&lt;U&gt; newCenter);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Reset the bounding box to 0 size.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;typename U &gt;</div>
+ <span class="method"><a name="classYuni_1_1BoundingBox_1a84d3eb0890090e4f0d1bfa4f9da99f34" href="#">+ reset</a></span>: void (Point3D&lt;U&gt; newCenter);
 </code>
-</div></td></tr><tr id="reset_49841319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> newCenter</code> Reset the bounding box to a given position<br /></li></ul><br />
 </div>

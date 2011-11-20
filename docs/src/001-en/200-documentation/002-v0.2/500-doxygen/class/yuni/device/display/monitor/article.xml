@@ -9,245 +9,245 @@
 <h2>Information about a single Frame Buffer Device</h2>
 <h3>Public typedef</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">Ptr</a></span> : SmartPtr&lt;Monitor&gt;</code></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">Handle</a></span> : int</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1Device_1_1Display_1_1Monitor_1a6fe735bcfdd66385ed34f16563acb5ff" href="#">Ptr</a></span> : SmartPtr&lt;Monitor&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1Device_1_1Display_1_1Monitor_1a2ded9e22cdae4b0c348cd52bf0e91f70" href="#">Handle</a></span> : int</code></td></tr>
 </table></div>
 
 <h3>Public function</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructors and Destructor</h4></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Monitor</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Monitor</a></span>(const String&amp; nm, const Monitor::Handle hwn, const bool p, const bool a, const bool b)</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Monitor</a></span>(const Monitor&amp; c)</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#"><b> ~ </b>Monitor</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Monitor_1a5712884d4b9cf0c52fb12687bce18ad2">Monitor</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Monitor_1afc9991a8bd2e66dfa70913bf24853bb2">Monitor</a></span>(const String&amp; nm, const Monitor::Handle hwn, const bool p, const bool a, const bool b)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Monitor_1ad564ead8cc1b9d4cfb24e550e37c59c2">Monitor</a></span>(const Monitor&amp; c)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Monitor_1a6ead22e37276a3be62ba293cc422994c"><b> ~ </b>Monitor</a></span>()</code></td></tr>
 <tr><td></td><td><br /><h4>Handle</h4></td></tr>
-<tr><td class="doxygen_index"><code>Monitor::Handle </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">handle</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">valid</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>Monitor::Handle </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Monitor_1a3ef99ec8ef0412f2e54ed7d26487612c">handle</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Monitor_1a0f3cf7736433583968b9a38b77cb92c6">valid</a></span>() <span class="keyword">const</span></code></td></tr>
 <tr><td></td><td><br /><h4>Identifiers</h4></td></tr>
-<tr><td class="doxygen_index"><code>const String&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">productName</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>const String&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">guid</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>const String&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Monitor_1a383208facb4a355a506108e509df8ddc">productName</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>const String&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Monitor_1ab7e588dc7001539dbd9c722ab01dd79e">guid</a></span>()</code></td></tr>
 <tr><td></td><td><br /><h4>Informations about the monitor</h4></td></tr>
-<tr><td class="doxygen_index"><code>const Resolution::Vector&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">resolutions</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>Resolution::Ptr </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">recommendedResolution</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">clear</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">resolutionIsValid</a></span>(const Resolution::Ptr&amp; rhs) <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">primary</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">hardwareAcceleration</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">builtin</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>const Resolution::Vector&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Monitor_1a10a5288ca97a8472457823e6195e9c25">resolutions</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>Resolution::Ptr </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Monitor_1ab577ae0e6b28d65cd0ec823cdd6bbe66">recommendedResolution</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Monitor_1a28e5846ae8f8a842ccff147ddf233535">clear</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Monitor_1aa5ec3dabcd912aba58a3a6abca04078d">resolutionIsValid</a></span>(const Resolution::Ptr&amp; rhs) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Monitor_1ab6cbd3695bedd4263e71dd477a0168f1">primary</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Monitor_1a3594f54c80051f685417d8d157101254">hardwareAcceleration</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Monitor_1a722659cfecffbd00ad635b359e76a697">builtin</a></span>() <span class="keyword">const</span></code></td></tr>
 <tr><td></td><td><br /><h4>Operators</h4></td></tr>
-<tr><td class="doxygen_index"><code>Monitor&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator+=</a></span>(Resolution* rhs)</code></td></tr>
-<tr><td class="doxygen_index"><code>Monitor&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator+=</a></span>(const Resolution::Ptr&amp; rhs)</code></td></tr>
-<tr><td class="doxygen_index"><code>Monitor&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator&lt;&lt;</a></span>(Resolution* rhs)</code></td></tr>
-<tr><td class="doxygen_index"><code>Monitor&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator&lt;&lt;</a></span>(const Resolution::Ptr&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code>Monitor&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Monitor_1a019248fd7fd2ed76ec1e135c3574d134">operator+=</a></span>(Resolution* rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code>Monitor&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Monitor_1a019152b228f00635f88aea7eb9419d29">operator+=</a></span>(const Resolution::Ptr&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code>Monitor&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Monitor_1a7263c5810c512a2a9f9a6c9f3a8170cb">operator&lt;&lt;</a></span>(Resolution* rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code>Monitor&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Monitor_1a0d6a8d7a36f90756d56116e8ad67fcaf">operator&lt;&lt;</a></span>(const Resolution::Ptr&amp; rhs)</code></td></tr>
 <tr><td></td><td><br /><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">add</a></span>(const Resolution::Ptr&amp; r)</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">addSafeResolutions</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Monitor_1a38a18d598be5987829c3384651770b0e">add</a></span>(const Resolution::Ptr&amp; r)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Monitor_1aaba24ae9412bbb18db8f8b1b86caa40b">addSafeResolutions</a></span>()</code></td></tr>
 </table></div>
 
-<h2>Detailed Description</h2><div>This class is not thread-safe<br /></div>
+<h2>Detailed Description</h2><div>This class is not thread-safe<br /></div><div style="margin-top:3em;border:1px solid #aaa;border-bottom-style:none;border-left-style:none;border-right-style:none"></div>
 <table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The most suitable smart pointer to use with the class `Monitor`.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;Monitor&gt;;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>The most suitable smart pointer to use with the class `Monitor`.<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Monitor_1a6fe735bcfdd66385ed34f16563acb5ff" href="#">+ Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;Monitor&gt;;
 </code>
-</div></td></tr><tr id="Ptr_68121319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Handle for a single monitor.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ Handle</a></span>: <span class="keyword">typedef</span> int;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>Handle for a single monitor.<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Monitor_1a2ded9e22cdae4b0c348cd52bf0e91f70" href="#">+ Handle</a></span>: <span class="keyword">typedef</span> int;
 </code>
-</div></td></tr><tr id="Handle_68131319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">This handle is system-dependant<ul><li> Mac OS : The equivalent is `CGDirectDisplayID`<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors and Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ Monitor</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Default constructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Monitor_1a5712884d4b9cf0c52fb12687bce18ad2" href="#">+ Monitor</a></span>:  ();
 </code>
-</div></td></tr><tr id="Monitor_68141319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">By default, some safe (assumed) resolutions will be available<br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor with values.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ Monitor</a></span>:  (const String&amp; nm, const Monitor::Handle hwn, const bool p, const bool a, const bool b);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Constructor with values.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Monitor_1afc9991a8bd2e66dfa70913bf24853bb2" href="#">+ Monitor</a></span>:  (const String&amp; nm, const Monitor::Handle hwn, const bool p, const bool a, const bool b);
 </code>
-</div></td></tr><tr id="Monitor_68151319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">By default, some safe (assumed) resolutions will be available<br /><div class="doxygen_params">Parameters :</div><ul><li><code> nm</code> Name of the monitor<br /></li><li><code> hwn</code> Handle of the monitor<br /></li><li><code> p</code> Is the primary display<br /></li><li><code> a</code> Is hardware-accelerated<br /></li><li><code> b</code> Is a builtin device<br /></li></ul><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor by copy.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ Monitor</a></span>:  (const Monitor&amp; c);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Constructor by copy.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Monitor_1ad564ead8cc1b9d4cfb24e550e37c59c2" href="#">+ Monitor</a></span>:  (const Monitor&amp; c);
 </code>
-</div></td></tr><tr id="Monitor_68161319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ <b> ~ </b>Monitor</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Destructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Monitor_1a6ead22e37276a3be62ba293cc422994c" href="#">+ <b> ~ </b>Monitor</a></span>:  ();
 </code>
-</div></td></tr><tr id="~Monitor_68171319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Handle <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the index of the current selected monitor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ handle</a></span>: Monitor::Handle () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get the index of the current selected monitor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Monitor_1a3ef99ec8ef0412f2e54ed7d26487612c" href="#">+ handle</a></span>: Monitor::Handle () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="handle_68181319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the handle of this monitor is valid.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ valid</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get if the handle of this monitor is valid.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Monitor_1a0f3cf7736433583968b9a38b77cb92c6" href="#">+ valid</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="valid_68191319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Identifiers <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the human readable name of the monitor, if any.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ productName</a></span>: const String&amp; () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get the human readable name of the monitor, if any.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Monitor_1a383208facb4a355a506108e509df8ddc" href="#">+ productName</a></span>: const String&amp; () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="productName_68221319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div><code>return</code>  The name of the monitor (product), or an empty value if not available<br /></div><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get an unique id for this screen.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ guid</a></span>: const String&amp; ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get an unique id for this screen.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Monitor_1ab7e588dc7001539dbd9c722ab01dd79e" href="#">+ guid</a></span>: const String&amp; ();
 </code>
-</div></td></tr><tr id="guid_68241319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">This ID should be considered as unique only on the local computer. This guid may be useful to load/save settings according the current monitor<br /><div><code>return</code>  A md5 string<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Informations about the monitor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get all available resolutions for this screen.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ resolutions</a></span>: const Resolution::Vector&amp; () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get all available resolutions for this screen.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Monitor_1a10a5288ca97a8472457823e6195e9c25" href="#">+ resolutions</a></span>: const Resolution::Vector&amp; () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="resolutions_68261319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">The returned value is guaranteed to not be empty and to be a sorted descendant list.<br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the recommended resolution for this device.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ recommendedResolution</a></span>: Resolution::Ptr () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get the recommended resolution for this device.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Monitor_1ab577ae0e6b28d65cd0ec823cdd6bbe66" href="#">+ recommendedResolution</a></span>: Resolution::Ptr () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="recommendedResolution_68281319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">It is merely the highest available resolution<div><code>return</code>  A valid and not null resolution<br /></div><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Remove all resolutions.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ clear</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Remove all resolutions.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Monitor_1a28e5846ae8f8a842ccff147ddf233535" href="#">+ clear</a></span>: void ();
 </code>
-</div></td></tr><tr id="clear_68301319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if a resolution is valid for this monitor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ resolutionIsValid</a></span>: bool (const Resolution::Ptr&amp; rhs) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get if a resolution is valid for this monitor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Monitor_1aa5ec3dabcd912aba58a3a6abca04078d" href="#">+ resolutionIsValid</a></span>: bool (const Resolution::Ptr&amp; rhs) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="resolutionIsValid_68321319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> rhs</code> The resolution to check<br /></li></ul><div><code>return</code>  True if the resolution is valid, merely if this resolution is in the list<br /></div><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if this monitor is the primary display.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ primary</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get if this monitor is the primary display.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Monitor_1ab6cbd3695bedd4263e71dd477a0168f1" href="#">+ primary</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="primary_68341319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the device is hardware accelerated.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ hardwareAcceleration</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get if the device is hardware accelerated.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Monitor_1a3594f54c80051f685417d8d157101254" href="#">+ hardwareAcceleration</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="hardwareAcceleration_68361319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the monitor is a builtin device.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ builtin</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get if the monitor is a builtin device.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Monitor_1a722659cfecffbd00ad635b359e76a697" href="#">+ builtin</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="builtin_68381319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div><b>note</b> :  Only available on Mac OS X v10.2 or later<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Append a resolution.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator+=</a></span>: Monitor&amp; (Resolution* rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Append a resolution.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Monitor_1a019248fd7fd2ed76ec1e135c3574d134" href="#">+ operator+=</a></span>: Monitor&amp; (Resolution* rhs);
 </code>
-</div></td></tr><tr id="operator+=_68401319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Append a resolution.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator+=</a></span>: Monitor&amp; (const Resolution::Ptr&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Append a resolution.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Monitor_1a019152b228f00635f88aea7eb9419d29" href="#">+ operator+=</a></span>: Monitor&amp; (const Resolution::Ptr&amp; rhs);
 </code>
-</div></td></tr><tr id="operator+=_68421319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Append a resolution.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator&lt;&lt;</a></span>: Monitor&amp; (Resolution* rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Append a resolution.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Monitor_1a7263c5810c512a2a9f9a6c9f3a8170cb" href="#">+ operator&lt;&lt;</a></span>: Monitor&amp; (Resolution* rhs);
 </code>
-</div></td></tr><tr id="operator<<_68441319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Append a resolution.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator&lt;&lt;</a></span>: Monitor&amp; (const Resolution::Ptr&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Append a resolution.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Monitor_1a0d6a8d7a36f90756d56116e8ad67fcaf" href="#">+ operator&lt;&lt;</a></span>: Monitor&amp; (const Resolution::Ptr&amp; rhs);
 </code>
-</div></td></tr><tr id="operator<<_68461319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Add a new resolution in the list.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ add</a></span>: void (const Resolution::Ptr&amp; r);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Add a new resolution in the list.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Monitor_1a38a18d598be5987829c3384651770b0e" href="#">+ add</a></span>: void (const Resolution::Ptr&amp; r);
 </code>
-</div></td></tr><tr id="add_68521319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> r</code> The resolution to add<br /></li></ul><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Add some safe resolutions.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ addSafeResolutions</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Add some safe resolutions.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Monitor_1aaba24ae9412bbb18db8f8b1b86caa40b" href="#">+ addSafeResolutions</a></span>: void ();
 </code>
-</div></td></tr><tr id="addSafeResolutions_68541319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">Value for an invalid handle.<br /><div class="doxygen_name_spacer"></div>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief"><b>Value for an invalid handle.<br /></b><div class="doxygen_name_spacer"></div>
 <code><span class="method"><a href="#">+ InvalidHandle</a></span>: const Handle;</code>
-</div></td></tr><tr id="InvalidHandle_68561319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>

@@ -9,14 +9,14 @@
 <h2>A simple hexadecimal buffer dumper</h2>
 <h3>Public function</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructor &amp; Destructor</h4></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Hexdump</a></span>(const char* buffer, unsigned int size)</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Hexdump</a></span>(const Hexdump&amp; rhs)</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Hexdump</a></span>(const U&amp; buffer)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Core_1_1Utils_1_1Hexdump_1a57fb7f4e38701f4ffd67cb53ff9fdf50">Hexdump</a></span>(const char* buffer, unsigned int size)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Core_1_1Utils_1_1Hexdump_1a6881a636d00ddc7dfe62f7375d06ffa9">Hexdump</a></span>(const Hexdump&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Core_1_1Utils_1_1Hexdump_1aff0f851bf81ca6e5391835be6a0a88fe">Hexdump</a></span>(const U&amp; buffer)</code></td></tr>
 <tr><td></td><td><br /><h4>Dump functions</h4></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">dump</a></span>(U&amp; outStream) <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>String </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">dump</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Core_1_1Utils_1_1Hexdump_1a4e8dd1e61c44985c0bffcd84da05fd9a">dump</a></span>(U&amp; outStream) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>String </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Core_1_1Utils_1_1Hexdump_1abaec4bc218bf54f9b78d1613cfb3812f">dump</a></span>() <span class="keyword">const</span></code></td></tr>
 <tr><td></td><td><br /><h4>Operators</h4></td></tr>
-<tr><td class="doxygen_index"><code>Hexdump&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator=</a></span>(const Hexdump&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code>Hexdump&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Core_1_1Utils_1_1Hexdump_1a62774a52c5a1c7ca4c0a6d5f02ff4776">operator=</a></span>(const Hexdump&amp; rhs)</code></td></tr>
 </table></div>
 
 <h2>Detailed Description</h2><div>This dumper can dump any buffer (with start address and length), or any class having a data() and size() member function. (for example, String). The output looks like the following:<br /> Sample usage:<source type="cpp">  //  Either  call  it  with  a  memory  buffer
@@ -32,60 +32,60 @@
   0x00604040:  3031  3233  3435  3637  3839  3a3b  3c3d  3e3f  |0123456789:;&lt;=&gt;?|
   0x00604050:  4041  4243  4445  4647  4849  4a4b  4c4d  4e4f  |@ABCDEFGHIJKLMNO|
 </source>
-<br /></div>
+<br /></div><div style="margin-top:3em;border:1px solid #aaa;border-bottom-style:none;border-left-style:none;border-right-style:none"></div>
 <table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Construct from a simple buffer.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ Hexdump</a></span>:  (const char* buffer, unsigned int size);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Construct from a simple buffer.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Core_1_1Utils_1_1Hexdump_1a57fb7f4e38701f4ffd67cb53ff9fdf50" href="#">+ Hexdump</a></span>:  (const char* buffer, unsigned int size);
 </code>
-</div></td></tr><tr id="Hexdump_49521319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> buffer</code> A pointer to a raw buffer.<br /></li><li><code> size</code> The size to dump.<br /></li></ul><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy ctor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ Hexdump</a></span>:  (const Hexdump&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Copy ctor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Core_1_1Utils_1_1Hexdump_1a6881a636d00ddc7dfe62f7375d06ffa9" href="#">+ Hexdump</a></span>:  (const Hexdump&amp; rhs);
 </code>
-</div></td></tr><tr id="Hexdump_49531319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> rhs</code> The original Hexdump instance<br /></li></ul><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Construct from a string (or like) object.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="Hexdump_49541319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">+ Hexdump</a></span>:  (const U&amp; buffer);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Construct from a string (or like) object.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a name="classYuni_1_1Core_1_1Utils_1_1Hexdump_1aff0f851bf81ca6e5391835be6a0a88fe" href="#">+ Hexdump</a></span>:  (const U&amp; buffer);
 </code>
-</div></td></tr><tr id="Hexdump_49541319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> buffer</code> The stream to output the hexdump on.<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Dump functions <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Dumps the current buffer to a stream.<br /><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist" id="dump_49551319844517_tmpl"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a href="#">+ dump</a></span>: void (U&amp; outStream) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Dumps the current buffer to a stream.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class U &gt;</div>
+ <span class="method"><a name="classYuni_1_1Core_1_1Utils_1_1Hexdump_1a4e8dd1e61c44985c0bffcd84da05fd9a" href="#">+ dump</a></span>: void (U&amp; outStream) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="dump_49551319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> outStream</code> The buffer will dumped to this stream.<br /></li></ul><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Dumps the current buffer to a string.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ dump</a></span>: String () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Dumps the current buffer to a string.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Core_1_1Utils_1_1Hexdump_1abaec4bc218bf54f9b78d1613cfb3812f" href="#">+ dump</a></span>: String () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="dump_49561319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div><code>return</code>  The dump contents.<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Operator =.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator=</a></span>: Hexdump&amp; (const Hexdump&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Operator =.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Core_1_1Utils_1_1Hexdump_1a62774a52c5a1c7ca4c0a6d5f02ff4776" href="#">+ operator=</a></span>: Hexdump&amp; (const Hexdump&amp; rhs);
 </code>
-</div></td></tr><tr id="operator=_49571319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> rhs</code> The source Hexdump instance<br /></li></ul><br />
 </div>

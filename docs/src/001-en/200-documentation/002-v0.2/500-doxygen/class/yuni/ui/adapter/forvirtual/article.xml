@@ -9,55 +9,55 @@
 <h2>Interface for adapters on the virtual UI side</h2>
 <h3>Public function</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">ForVirtual</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">ForVirtual</a></span>(Private::UI::Local::Adapter::ForRepresentation* forRepresentation)</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#"><b> ~ </b>ForVirtual</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">sendShowWindow</a></span>(const Yuni::UI::GUID&amp; applicationID, IComponent::ID id) <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">sendHideWindow</a></span>(const Yuni::UI::GUID&amp; applicationID, IComponent::ID id) <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">sendCloseWindow</a></span>(const Yuni::UI::GUID&amp; applicationID, IComponent::ID id) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1UI_1_1Adapter_1_1ForVirtual_1aaf843329d5e324f644bf978cd21d3a0d">ForVirtual</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1UI_1_1Adapter_1_1ForVirtual_1a71821ff8e9ca92e9100df64aabded789">ForVirtual</a></span>(Private::UI::Local::Adapter::ForRepresentation* forRepresentation)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1UI_1_1Adapter_1_1ForVirtual_1a9fcdd452f2ecb08c4e22418b31c6000d"><b> ~ </b>ForVirtual</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1UI_1_1Adapter_1_1ForVirtual_1a9d6e0448e89e0f83140bbd6fa7b475ff">sendShowWindow</a></span>(const Yuni::UI::GUID&amp; applicationID, IComponent::ID id) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1UI_1_1Adapter_1_1ForVirtual_1a3736abe3f6b9af7d7e33ca990f68c0e1">sendHideWindow</a></span>(const Yuni::UI::GUID&amp; applicationID, IComponent::ID id) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1UI_1_1Adapter_1_1ForVirtual_1a1b217608245d46ddcb6f14d497db9c86">sendCloseWindow</a></span>(const Yuni::UI::GUID&amp; applicationID, IComponent::ID id) <span class="keyword">const</span></code></td></tr>
 </table></div>
 
 <h2>Detailed Description</h2><table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ ForVirtual</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1UI_1_1Adapter_1_1ForVirtual_1aaf843329d5e324f644bf978cd21d3a0d" href="#">+ ForVirtual</a></span>:  ();
 </code>
-</div></td></tr><tr id="ForVirtual_3661319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ ForVirtual</a></span>:  (Private::UI::Local::Adapter::ForRepresentation* forRepresentation);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1UI_1_1Adapter_1_1ForVirtual_1a71821ff8e9ca92e9100df64aabded789" href="#">+ ForVirtual</a></span>:  (Private::UI::Local::Adapter::ForRepresentation* forRepresentation);
 </code>
-</div></td></tr><tr id="ForVirtual_3671319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ <b> ~ </b>ForVirtual</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1UI_1_1Adapter_1_1ForVirtual_1a9fcdd452f2ecb08c4e22418b31c6000d" href="#">+ <b> ~ </b>ForVirtual</a></span>:  ();
 </code>
-</div></td></tr><tr id="~ForVirtual_3681319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ sendShowWindow</a></span>: void (const Yuni::UI::GUID&amp; applicationID, IComponent::ID id) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1UI_1_1Adapter_1_1ForVirtual_1a9d6e0448e89e0f83140bbd6fa7b475ff" href="#">+ sendShowWindow</a></span>: void (const Yuni::UI::GUID&amp; applicationID, IComponent::ID id) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="sendShowWindow_3691319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ sendHideWindow</a></span>: void (const Yuni::UI::GUID&amp; applicationID, IComponent::ID id) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1UI_1_1Adapter_1_1ForVirtual_1a3736abe3f6b9af7d7e33ca990f68c0e1" href="#">+ sendHideWindow</a></span>: void (const Yuni::UI::GUID&amp; applicationID, IComponent::ID id) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="sendHideWindow_3701319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a href="#">+ sendCloseWindow</a></span>: void (const Yuni::UI::GUID&amp; applicationID, IComponent::ID id) <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1UI_1_1Adapter_1_1ForVirtual_1a1b217608245d46ddcb6f14d497db9c86" href="#">+ sendCloseWindow</a></span>: void (const Yuni::UI::GUID&amp; applicationID, IComponent::ID id) <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="sendCloseWindow_3711319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>

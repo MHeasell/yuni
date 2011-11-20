@@ -9,38 +9,38 @@
 <h2>A thread that executes a method every X milliseconds</h2>
 <h3>Public typedef</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">ThreadingPolicy</a></span> : IThread::ThreadingPolicy</code></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">Ptr</a></span> : SmartPtr&lt;IThread&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1Thread_1_1Timer_1af2992e864853d7cad9759bdc840344bc" href="#">ThreadingPolicy</a></span> : IThread::ThreadingPolicy</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1Thread_1_1IThread_1a66b01c52f9b8f8c9129ca5cde1ee3d04" href="#">Ptr</a></span> : SmartPtr&lt;IThread&gt;</code></td></tr>
 </table></div>
 
 <h3>Public function</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Execution flow</h4></td></tr>
-<tr><td class="doxygen_index"><code>Error </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">start</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code>Error </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">stop</a></span>(unsigned int timeout)</code></td></tr>
-<tr><td class="doxygen_index"><code>Error </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">wait</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code>Error </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">wait</a></span>(unsigned int timeout)</code></td></tr>
-<tr><td class="doxygen_index"><code>Error </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">restart</a></span>(unsigned int timeout)</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">gracefulStop</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">started</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">wakeUp</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>Error </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Thread_1_1IThread_1a1df5ec27846ac58cdf9ac6313105caf8">start</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>Error </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Thread_1_1IThread_1afffb44d4983cebc25736ba48a280cf95">stop</a></span>(unsigned int timeout)</code></td></tr>
+<tr><td class="doxygen_index"><code>Error </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Thread_1_1IThread_1a282203a441c6ddfeceeb73e983e4271b">wait</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>Error </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Thread_1_1IThread_1ab2960ea2030367220303b493e5fdfc87">wait</a></span>(unsigned int timeout)</code></td></tr>
+<tr><td class="doxygen_index"><code>Error </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Thread_1_1IThread_1a222767cf3201500510c3f7475c15711b">restart</a></span>(unsigned int timeout)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Thread_1_1IThread_1ac96653c72d924d1822a148f09c255a72">gracefulStop</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Thread_1_1IThread_1a6f6419557628fd56c546b2bc93d4cd3f">started</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Thread_1_1IThread_1a7850dbae6ad979fa88a5e8ac60d3a670">wakeUp</a></span>()</code></td></tr>
 <tr><td></td><td><br /><h4>Operators</h4></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator!</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Thread_1_1IThread_1a5d149fcf4a9b3458bee90c1221245278">operator!</a></span>() <span class="keyword">const</span></code></td></tr>
 <tr><td></td><td><br /><h4>Constructor &amp; Destructor</h4></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Timer</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Timer</a></span>(const unsigned int interval)</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Timer</a></span>(const unsigned int interval, const unsigned int cycles)</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Timer</a></span>(const Timer&amp; rhs)</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#"><b> ~ </b>Timer</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Thread_1_1Timer_1a8b30a907501ee862a892f695bfcf44f1">Timer</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Thread_1_1Timer_1a3c72332c175f53262d546d3e1d01d11b">Timer</a></span>(const unsigned int interval)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Thread_1_1Timer_1abfbd6c86ac6e024b92b8ad2d62f72364">Timer</a></span>(const unsigned int interval, const unsigned int cycles)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Thread_1_1Timer_1ade075db526506606517c75af0c385ed3">Timer</a></span>(const Timer&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Thread_1_1Timer_1a40fd6947aa089c0bc20e83cca30a1da3"><b> ~ </b>Timer</a></span>()</code></td></tr>
 <tr><td></td><td><br /><h4>Settings (Time interval &amp; Cycles)</h4></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">reload</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">reload</a></span>(unsigned int interval)</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">reload</a></span>(unsigned int interval, unsigned int cycles)</code></td></tr>
-<tr><td class="doxygen_index"><code>unsigned int </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">interval</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">interval</a></span>(const unsigned int t)</code></td></tr>
-<tr><td class="doxygen_index"><code>unsigned int </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">cycleCount</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">cycleCount</a></span>(const unsigned int n)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Thread_1_1Timer_1a85e0504e182176651fba68fc4074c377">reload</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Thread_1_1Timer_1a441512f567d8308bb12cba49baeadaf1">reload</a></span>(unsigned int interval)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Thread_1_1Timer_1a24419fd8549c21893ebac7b6fb950dbe">reload</a></span>(unsigned int interval, unsigned int cycles)</code></td></tr>
+<tr><td class="doxygen_index"><code>unsigned int </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Thread_1_1Timer_1ac976a2c544aa1375798c01ba77819708">interval</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Thread_1_1Timer_1a2b50541c91bf7faa498e99ef505866cc">interval</a></span>(const unsigned int t)</code></td></tr>
+<tr><td class="doxygen_index"><code>unsigned int </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Thread_1_1Timer_1aaa89c6154d2486fa78d83cfa6a8f9225">cycleCount</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Thread_1_1Timer_1a61971f664df8a95128f466a82b877b09">cycleCount</a></span>(const unsigned int n)</code></td></tr>
 <tr><td></td><td><br /><h4>Operators</h4></td></tr>
-<tr><td class="doxygen_index"><code>Timer&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">operator=</a></span>(const Timer&amp; rhs)</code></td></tr>
+<tr><td class="doxygen_index"><code>Timer&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Thread_1_1Timer_1aaed7bd554bad75aaf39fc010216d625f">operator=</a></span>(const Timer&amp; rhs)</code></td></tr>
 </table></div>
 
 <h2>Detailed Description</h2><div><source type="cpp">  using  namespace  Yuni;
@@ -75,171 +75,171 @@
       return  0;
   }
 </source>
-<br /></div>
+<br /></div><div style="margin-top:3em;border:1px solid #aaa;border-bottom-style:none;border-left-style:none;border-right-style:none"></div>
 <table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 4)</i></code>
-</div></td></tr><tr id="@372infinitedefaultInterval_9431319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The Threading policy.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ ThreadingPolicy</a></span>: <span class="keyword">typedef</span> IThread::ThreadingPolicy;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>The Threading policy.<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="classYuni_1_1Thread_1_1Timer_1af2992e864853d7cad9759bdc840344bc" href="#">+ ThreadingPolicy</a></span>: <span class="keyword">typedef</span> IThread::ThreadingPolicy;
 </code>
-</div></td></tr><tr id="ThreadingPolicy_9441319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The most suitable smart pointer for the class.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;IThread&gt;;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>The most suitable smart pointer for the class.<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="classYuni_1_1Thread_1_1IThread_1a66b01c52f9b8f8c9129ca5cde1ee3d04" href="#">+ Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;IThread&gt;;
 </code>
-</div></td></tr><tr id="Ptr_9451319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief">Get if this policy is thread-safe.<br /><div class="doxygen_name_spacer"></div>
+<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><b>Get if this policy is thread-safe.<br /></b><div class="doxygen_name_spacer"></div>
 <code><i>(unmanaged tag: 4)</i></code>
-</div></td></tr><tr id="@369_9461319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Execution flow <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Start the execution of the thread, if not already started.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ start</a></span>: Error ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Start the execution of the thread, if not already started.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Thread_1_1IThread_1a1df5ec27846ac58cdf9ac6313105caf8" href="#">+ start</a></span>: Error ();
 </code>
-</div></td></tr><tr id="start_9471319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">If already started, the thread will be woke up<div><code>return</code>  True if the thread has been started<br /></div><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Stop the execution of the thread and wait for it, if not already stopped.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ stop</a></span>: Error (unsigned int timeout);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Stop the execution of the thread and wait for it, if not already stopped.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Thread_1_1IThread_1afffb44d4983cebc25736ba48a280cf95" href="#">+ stop</a></span>: Error (unsigned int timeout);
 </code>
-</div></td></tr><tr id="stop_9481319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> timeout</code> The timeout in milliseconds before killing the thread (default: 5000ms)<br /></li></ul><div><code>return</code>  An error status (`errNone` if succeeded)<br /></div><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Wait for an infinite amount of time for the end of the thread.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ wait</a></span>: Error ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Wait for an infinite amount of time for the end of the thread.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Thread_1_1IThread_1a282203a441c6ddfeceeb73e983e4271b" href="#">+ wait</a></span>: Error ();
 </code>
-</div></td></tr><tr id="wait_9491319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">The thread is not stopped during the process.<div><code>return</code>  An error status (`errNone` if succeeded)<br /></div><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Wait for the end of the thread.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ wait</a></span>: Error (unsigned int timeout);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Wait for the end of the thread.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Thread_1_1IThread_1ab2960ea2030367220303b493e5fdfc87" href="#">+ wait</a></span>: Error (unsigned int timeout);
 </code>
-</div></td></tr><tr id="wait_9501319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">The thread is not stopped during the process.<div class="doxygen_params">Parameters :</div><ul><li><code> timeout</code> The timeout in milliseconds<br /></li></ul><div><code>return</code>  An error status (`errNone` if succeeded)<br /></div><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Restart the thread.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ restart</a></span>: Error (unsigned int timeout);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Restart the thread.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Thread_1_1IThread_1a222767cf3201500510c3f7475c15711b" href="#">+ restart</a></span>: Error (unsigned int timeout);
 </code>
-</div></td></tr><tr id="restart_9511319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> timeout</code> The timeout in milliseconds before killing the thread (default: 5000ms)<br /></li></ul><div><code>return</code>  True if the thread has been stopped then started<br /></div><div><code>see</code> :  stop()<br /> start()<br /></div><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Ask to Stop the execution of the thread as soon as possible.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ gracefulStop</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Ask to Stop the execution of the thread as soon as possible.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Thread_1_1IThread_1ac96653c72d924d1822a148f09c255a72" href="#">+ gracefulStop</a></span>: void ();
 </code>
-</div></td></tr><tr id="gracefulStop_9521319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">After a call to this method, the method suspend() will return true, which indicates that the thread should stop.<div><code>see</code> :  suspend()<br /></div><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the thread is currently running.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ started</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get if the thread is currently running.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Thread_1_1IThread_1a6f6419557628fd56c546b2bc93d4cd3f" href="#">+ started</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="started_9531319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div><code>return</code>  True if the thread is running<br /></div><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Interrupt the thread if suspended.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ wakeUp</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Interrupt the thread if suspended.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Thread_1_1IThread_1a7850dbae6ad979fa88a5e8ac60d3a670" href="#">+ wakeUp</a></span>: void ();
 </code>
-</div></td></tr><tr id="wakeUp_9541319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">A call to this methid will interrupt a suspended state. This method has no effect if the thread is not started.<br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get if the thread is currently stopped.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator!</a></span>: bool () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get if the thread is currently stopped.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Thread_1_1IThread_1a5d149fcf4a9b3458bee90c1221245278" href="#">+ operator!</a></span>: bool () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="operator!_9551319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructor &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Default constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ Timer</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Default constructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Thread_1_1Timer_1a8b30a907501ee862a892f695bfcf44f1" href="#">+ Timer</a></span>:  ();
 </code>
-</div></td></tr><tr id="Timer_9561319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">By default, the constant `defaultInterval` will be used for the time interval with an infinite number of cycles.<br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor with a time interval.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ Timer</a></span>:  (const unsigned int interval);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Constructor with a time interval.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Thread_1_1Timer_1a3c72332c175f53262d546d3e1d01d11b" href="#">+ Timer</a></span>:  (const unsigned int interval);
 </code>
-</div></td></tr><tr id="Timer_9571319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">An infinite number of cycles will be used by default.<br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor with a time interval + cycle count.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ Timer</a></span>:  (const unsigned int interval, const unsigned int cycles);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Constructor with a time interval + cycle count.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Thread_1_1Timer_1abfbd6c86ac6e024b92b8ad2d62f72364" href="#">+ Timer</a></span>:  (const unsigned int interval, const unsigned int cycles);
 </code>
-</div></td></tr><tr id="Timer_9581319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> interval</code> The new time interval (in milliseconds)<br /></li><li><code> cycles</code> The number of cycles [0 .. n[<br /></li></ul><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Copy constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ Timer</a></span>:  (const Timer&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Copy constructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Thread_1_1Timer_1ade075db526506606517c75af0c385ed3" href="#">+ Timer</a></span>:  (const Timer&amp; rhs);
 </code>
-</div></td></tr><tr id="Timer_9591319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">The given timer will be locked to copy its settings.<br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ <b> ~ </b>Timer</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Destructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Thread_1_1Timer_1a40fd6947aa089c0bc20e83cca30a1da3" href="#">+ <b> ~ </b>Timer</a></span>:  ();
 </code>
-</div></td></tr><tr id="~Timer_9601319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Settings (Time interval &amp; Cycles) <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Reload the settings.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ reload</a></span>: void ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Reload the settings.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Thread_1_1Timer_1a85e0504e182176651fba68fc4074c377" href="#">+ reload</a></span>: void ();
 </code>
-</div></td></tr><tr id="reload_9611319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">The timer will reload its settings (time interval and number of cycles) if it is already started. It has not effect otherwise. Prefer to use this method instead of restarting the timer.<br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Modify then Reload the settings.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ reload</a></span>: void (unsigned int interval);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Modify then Reload the settings.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Thread_1_1Timer_1a441512f567d8308bb12cba49baeadaf1" href="#">+ reload</a></span>: void (unsigned int interval);
 </code>
-</div></td></tr><tr id="reload_9621319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">Modify the settings (time interval only) with a single lock and ask to reload them if the timer is started. This method is a convenient and faster replacement for the following code: (assuming we want one second for the time interval)<source type="cpp">  timer.interval(1000);  //  1  second
   timer.reload();
@@ -247,10 +247,10 @@
 <br /><div class="doxygen_params">Parameters :</div><ul><li><code> interval</code> The new time interval (in milliseconds)<br /></li></ul><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Modify then Reload the settings.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ reload</a></span>: void (unsigned int interval, unsigned int cycles);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Modify then Reload the settings.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Thread_1_1Timer_1a24419fd8549c21893ebac7b6fb950dbe" href="#">+ reload</a></span>: void (unsigned int interval, unsigned int cycles);
 </code>
-</div></td></tr><tr id="reload_9631319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">Modify the settings (time interval and number of cycles) with a single lock and ask to reload them if the timer is started. This method is a convenient and faster replacement for the following code: (assuming we want one second for the time interval and three cycles)<source type="cpp">  timer.interval(1000);  //  1  second
   timer.cycleCount(3);
@@ -259,44 +259,44 @@
 <br /><div class="doxygen_params">Parameters :</div><ul><li><code> interval</code> The new time interval (in milliseconds)<br /></li><li><code> cycles</code> The number of cycles [0 .. n[<br /></li></ul><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the time interval (in milliseconds)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ interval</a></span>: unsigned int () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get the time interval (in milliseconds)<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Thread_1_1Timer_1ac976a2c544aa1375798c01ba77819708" href="#">+ interval</a></span>: unsigned int () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="interval_9641319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the time interval (in `ms`)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ interval</a></span>: void (const unsigned int t);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Set the time interval (in `ms`)<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Thread_1_1Timer_1a2b50541c91bf7faa498e99ef505866cc" href="#">+ interval</a></span>: void (const unsigned int t);
 </code>
-</div></td></tr><tr id="interval_9651319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">Use `reload()` to apply the changes if the timer is already started.<div class="doxygen_params">Parameters :</div><ul><li><code> t</code> The new time interval (in milliseconds)<br /></li></ul><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the number of cycle to run.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ cycleCount</a></span>: unsigned int () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get the number of cycle to run.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Thread_1_1Timer_1aaa89c6154d2486fa78d83cfa6a8f9225" href="#">+ cycleCount</a></span>: unsigned int () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="cycleCount_9661319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div><code>see</code> :  Timer::infinite<br /></div><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the number of cycle to run.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ cycleCount</a></span>: void (const unsigned int n);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Set the number of cycle to run.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Thread_1_1Timer_1a61971f664df8a95128f466a82b877b09" href="#">+ cycleCount</a></span>: void (const unsigned int n);
 </code>
-</div></td></tr><tr id="cycleCount_9671319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">Use `reload()` to apply the changes if the timer is already started.<div class="doxygen_params">Parameters :</div><ul><li><code> n</code> The number of cycles [0 .. n[<br /></li></ul><div><code>see</code> :  Timer::infinite<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operators <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">The assignment operator (=)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ operator=</a></span>: Timer&amp; (const Timer&amp; rhs);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>The assignment operator (=)<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Thread_1_1Timer_1aaed7bd554bad75aaf39fc010216d625f" href="#">+ operator=</a></span>: Timer&amp; (const Timer&amp; rhs);
 </code>
-</div></td></tr><tr id="operator=_9681319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">Both the given timer and this object will be locked to copy the settings. Use `reload()` to apply the changes if the timer is already started.<br />
 </div>

@@ -9,247 +9,247 @@
 <h2>An audio emitter is an object from which the sound is played</h2>
 <h3>Public typedef</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">Ptr</a></span> : SmartPtr&lt;Emitter&gt;</code></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">ThreadingPolicy</a></span> : Policy::ObjectLevelLockable&lt;Emitter&gt;</code></td></tr>
-<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a href="#">Map</a></span> : std::map&lt; String, Ptr&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1Audio_1_1Emitter_1a76c5f889acdc7f481b3943dc49be8914" href="#">Ptr</a></span> : SmartPtr&lt;Emitter&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1Audio_1_1Emitter_1ad07e3048ef8b85fc9a34a41e47cef5e2" href="#">ThreadingPolicy</a></span> : Policy::ObjectLevelLockable&lt;Emitter&gt;</code></td></tr>
+<tr><td class="doxygen_index"><code><span class="keyword">typedef</span></code></td><td class="doxygen_index_def"><code><span class="method"><a name="#classYuni_1_1Audio_1_1Emitter_1a36710e2076b1f6d4fb1688b1934071e6" href="#">Map</a></span> : std::map&lt; String, Ptr&gt;</code></td></tr>
 </table></div>
 
 <h3>Public function</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructors &amp; Destructor</h4></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Emitter</a></span>(bool loop)</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Emitter</a></span>(const Point3D &lt;&gt;&amp; position, bool loop)</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">Emitter</a></span>(const Point3D &lt;&gt;&amp; position, const Vector3D &lt;&gt;&amp; velocity, const Vector3D &lt;&gt;&amp; direction, bool loop)</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#"><b> ~ </b>Emitter</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1Emitter_1a67ee85bbad7de5d029d2b9ce01b0627a">Emitter</a></span>(bool loop)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1Emitter_1a9be54a299f7783a61bf3270c76c2c814">Emitter</a></span>(const Point3D &lt;&gt;&amp; position, bool loop)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1Emitter_1a80f18c99d99749ed732cc463ab9a595e">Emitter</a></span>(const Point3D &lt;&gt;&amp; position, const Vector3D &lt;&gt;&amp; velocity, const Vector3D &lt;&gt;&amp; direction, bool loop)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1Emitter_1a6c841d0371a71d63f7fa9ae13e8f1a55"><b> ~ </b>Emitter</a></span>()</code></td></tr>
 <tr><td></td><td><br /><h4>Methods</h4></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">attachBufferDispatched</a></span>(Sound::Ptr&amp; buffer)</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">prepareDispatched</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">playSoundDispatched</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">playSoundDispatched</a></span>(Sound::Ptr&amp; buffer)</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">updateDispatched</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1Emitter_1a7661e91bffad646ee5442fdfcb3fce3b">attachBufferDispatched</a></span>(Sound::Ptr&amp; buffer)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1Emitter_1a904bc159d35b69d0669c575786e470b1">prepareDispatched</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1Emitter_1aae371afc5f9121176fcacc3cfcfeccc2">playSoundDispatched</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1Emitter_1a480b12df9acc926a85f5f8788680866f">playSoundDispatched</a></span>(Sound::Ptr&amp; buffer)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1Emitter_1a20b5a2e9348740ebd8f8131b6051aff5">updateDispatched</a></span>()</code></td></tr>
 <tr><td></td><td><br /><h4>Accessors</h4></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">position</a></span>(const Point3D &lt;&gt;&amp; position)</code></td></tr>
-<tr><td class="doxygen_index"><code>Point3D </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">position</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">velocity</a></span>(const Vector3D &lt;&gt;&amp; position)</code></td></tr>
-<tr><td class="doxygen_index"><code>Vector3D </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">velocity</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">direction</a></span>(const Vector3D &lt;&gt;&amp; position)</code></td></tr>
-<tr><td class="doxygen_index"><code>Vector3D </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">direction</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">gain</a></span>(float newGain)</code></td></tr>
-<tr><td class="doxygen_index"><code>float </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">gain</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>sint64 </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">elapsedTime</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>unsigned int </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#">id</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1Emitter_1a5ada5bf9c7a99ead2e361c77f3e88592">position</a></span>(const Point3D &lt;&gt;&amp; position)</code></td></tr>
+<tr><td class="doxygen_index"><code>Point3D </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1Emitter_1ad76ec66aaab865b12a80094aea546597">position</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1Emitter_1ae4eb189df7dbd3a24ea671af4e7b61e9">velocity</a></span>(const Vector3D &lt;&gt;&amp; position)</code></td></tr>
+<tr><td class="doxygen_index"><code>Vector3D </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1Emitter_1a238c7ea9d2ade9445990bc4a80110c8e">velocity</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1Emitter_1a6128c88d4fe1ebdcdf4963bb49dcbea7">direction</a></span>(const Vector3D &lt;&gt;&amp; position)</code></td></tr>
+<tr><td class="doxygen_index"><code>Vector3D </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1Emitter_1a6cee81c75f460fbcff2541dc6969a747">direction</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1Emitter_1aa4609412d89c8f07e5fe3659fb5ffb32">gain</a></span>(float newGain)</code></td></tr>
+<tr><td class="doxygen_index"><code>float </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1Emitter_1a8d556044c28c50cbe57e23a7c92d6201">gain</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>sint64 </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1Emitter_1ae009b1efb229a538193c6bbadf2d61a4">elapsedTime</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>unsigned int </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1Emitter_1adaacba04d27d7d53118b7b9241d92963">id</a></span>() <span class="keyword">const</span></code></td></tr>
 </table></div>
 
-<h2>Detailed Description</h2><div>Audio emitters can be placed in space, and be moved around.<br /></div>
+<h2>Detailed Description</h2><div>Audio emitters can be placed in space, and be moved around.<br /></div><div style="margin-top:3em;border:1px solid #aaa;border-bottom-style:none;border-left-style:none;border-right-style:none"></div>
 <table class="doxygen_table">
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><code><i>(unmanaged tag: 4)</i></code>
-</div></td></tr><tr id="@0DefaultAttenuationDefaultLooping_35471319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">The most suitable smart pointer for the class.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;Emitter&gt;;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>The most suitable smart pointer for the class.<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="classYuni_1_1Audio_1_1Emitter_1a76c5f889acdc7f481b3943dc49be8914" href="#">+ Ptr</a></span>: <span class="keyword">typedef</span> SmartPtr&lt;Emitter&gt;;
 </code>
-</div></td></tr><tr id="Ptr_35481319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Threading Policy .<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ ThreadingPolicy</a></span>: <span class="keyword">typedef</span> Policy::ObjectLevelLockable&lt;Emitter&gt;;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>Threading Policy .<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="classYuni_1_1Audio_1_1Emitter_1ad07e3048ef8b85fc9a34a41e47cef5e2" href="#">+ ThreadingPolicy</a></span>: <span class="keyword">typedef</span> Policy::ObjectLevelLockable&lt;Emitter&gt;;
 </code>
-</div></td></tr><tr id="ThreadingPolicy_35491319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief">Map.<br /><div class="doxygen_name_spacer"></div>
-<code><span class="method"><a href="#">+ Map</a></span>: <span class="keyword">typedef</span> std::map&lt; String, Ptr&gt;;
+<tr><td class="doxygen_typedef"></td><td class="doxnone"><div class="doxygen_brief"><b>Map.<br /></b><div class="doxygen_name_spacer"></div>
+<code><span class="method"><a name="classYuni_1_1Audio_1_1Emitter_1a36710e2076b1f6d4fb1688b1934071e6" href="#">+ Map</a></span>: <span class="keyword">typedef</span> std::map&lt; String, Ptr&gt;;
 </code>
-</div></td></tr><tr id="Map_35501319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief">Get if this policy is thread-safe.<br /><div class="doxygen_name_spacer"></div>
+<tr><td class="doxygen_enum"></td><td class="doxnone"><div class="doxygen_brief"><b>Get if this policy is thread-safe.<br /></b><div class="doxygen_name_spacer"></div>
 <code><i>(unmanaged tag: 4)</i></code>
-</div></td></tr><tr id="@369_35511319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors &amp; Destructor <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Shortest constructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ Emitter</a></span>:  (bool loop);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Shortest constructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Audio_1_1Emitter_1a67ee85bbad7de5d029d2b9ce01b0627a" href="#">+ Emitter</a></span>:  (bool loop);
 </code>
-</div></td></tr><tr id="Emitter_35521319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">Position, speed and direction default to (0,0,0)<br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor with 3D position.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ Emitter</a></span>:  (const Point3D &lt;&gt;&amp; position, bool loop);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Constructor with 3D position.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Audio_1_1Emitter_1a9be54a299f7783a61bf3270c76c2c814" href="#">+ Emitter</a></span>:  (const Point3D &lt;&gt;&amp; position, bool loop);
 </code>
-</div></td></tr><tr id="Emitter_35531319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">Speed and velocity default to (0,0,0)<br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Constructor with position, velocity and direction.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ Emitter</a></span>:  (const Point3D &lt;&gt;&amp; position, const Vector3D &lt;&gt;&amp; velocity, const Vector3D &lt;&gt;&amp; direction, bool loop);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Constructor with position, velocity and direction.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Audio_1_1Emitter_1a80f18c99d99749ed732cc463ab9a595e" href="#">+ Emitter</a></span>:  (const Point3D &lt;&gt;&amp; position, const Vector3D &lt;&gt;&amp; velocity, const Vector3D &lt;&gt;&amp; direction, bool loop);
 </code>
-</div></td></tr><tr id="Emitter_35541319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Destructor.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ <b> ~ </b>Emitter</a></span>:  ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Destructor.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Audio_1_1Emitter_1a6c841d0371a71d63f7fa9ae13e8f1a55" href="#">+ <b> ~ </b>Emitter</a></span>:  ();
 </code>
-</div></td></tr><tr id="~Emitter_35551319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Methods <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Attach a buffer to the emitter.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ attachBufferDispatched</a></span>: bool (Sound::Ptr&amp; buffer);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Attach a buffer to the emitter.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Audio_1_1Emitter_1a7661e91bffad646ee5442fdfcb3fce3b" href="#">+ attachBufferDispatched</a></span>: bool (Sound::Ptr&amp; buffer);
 </code>
-</div></td></tr><tr id="attachBufferDispatched_35561319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Prepare the emitter for playing.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ prepareDispatched</a></span>: bool ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Prepare the emitter for playing.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Audio_1_1Emitter_1a904bc159d35b69d0669c575786e470b1" href="#">+ prepareDispatched</a></span>: bool ();
 </code>
-</div></td></tr><tr id="prepareDispatched_35571319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Play the sound.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ playSoundDispatched</a></span>: bool ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Play the sound.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Audio_1_1Emitter_1aae371afc5f9121176fcacc3cfcfeccc2" href="#">+ playSoundDispatched</a></span>: bool ();
 </code>
-</div></td></tr><tr id="playSoundDispatched_35581319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Play the sound.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ playSoundDispatched</a></span>: bool (Sound::Ptr&amp; buffer);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Play the sound.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Audio_1_1Emitter_1a480b12df9acc926a85f5f8788680866f" href="#">+ playSoundDispatched</a></span>: bool (Sound::Ptr&amp; buffer);
 </code>
-</div></td></tr><tr id="playSoundDispatched_35591319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Update buffers if necessary.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ updateDispatched</a></span>: bool ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Update buffers if necessary.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Audio_1_1Emitter_1a20b5a2e9348740ebd8f8131b6051aff5" href="#">+ updateDispatched</a></span>: bool ();
 </code>
-</div></td></tr><tr id="updateDispatched_35601319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Accessors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the 3D position of the emitter.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ position</a></span>: void (const Point3D &lt;&gt;&amp; position);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Set the 3D position of the emitter.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Audio_1_1Emitter_1a5ada5bf9c7a99ead2e361c77f3e88592" href="#">+ position</a></span>: void (const Point3D &lt;&gt;&amp; position);
 </code>
-</div></td></tr><tr id="position_35611319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the 3D position of the emitter.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ position</a></span>: Point3D () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get the 3D position of the emitter.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Audio_1_1Emitter_1ad76ec66aaab865b12a80094aea546597" href="#">+ position</a></span>: Point3D () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="position_35621319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the velocity of the emitter.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ velocity</a></span>: void (const Vector3D &lt;&gt;&amp; position);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Set the velocity of the emitter.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Audio_1_1Emitter_1ae4eb189df7dbd3a24ea671af4e7b61e9" href="#">+ velocity</a></span>: void (const Vector3D &lt;&gt;&amp; position);
 </code>
-</div></td></tr><tr id="velocity_35631319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the velocity of the emitter.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ velocity</a></span>: Vector3D () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get the velocity of the emitter.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Audio_1_1Emitter_1a238c7ea9d2ade9445990bc4a80110c8e" href="#">+ velocity</a></span>: Vector3D () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="velocity_35641319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the direction of the emitter.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ direction</a></span>: void (const Vector3D &lt;&gt;&amp; position);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Set the direction of the emitter.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Audio_1_1Emitter_1a6128c88d4fe1ebdcdf4963bb49dcbea7" href="#">+ direction</a></span>: void (const Vector3D &lt;&gt;&amp; position);
 </code>
-</div></td></tr><tr id="direction_35651319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the direction of the emitter.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ direction</a></span>: Vector3D () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get the direction of the emitter.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Audio_1_1Emitter_1a6cee81c75f460fbcff2541dc6969a747" href="#">+ direction</a></span>: Vector3D () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="direction_35661319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Set the volume modifier on the emitter.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ gain</a></span>: void (float newGain);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Set the volume modifier on the emitter.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Audio_1_1Emitter_1aa4609412d89c8f07e5fe3659fb5ffb32" href="#">+ gain</a></span>: void (float newGain);
 </code>
-</div></td></tr><tr id="gain_35671319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> newGain</code> 0.0f for no sound, 1.0f to keep sound as is, &gt; 1.0f to amplify sound Set the volume modifier<br /></li></ul><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the current volume modifier.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ gain</a></span>: float () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get the current volume modifier.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Audio_1_1Emitter_1a8d556044c28c50cbe57e23a7c92d6201" href="#">+ gain</a></span>: float () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="gain_35681319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the elapsed playback time (in seconds)<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ elapsedTime</a></span>: sint64 () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get the elapsed playback time (in seconds)<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Audio_1_1Emitter_1ae009b1efb229a538193c6bbadf2d61a4" href="#">+ elapsedTime</a></span>: sint64 () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="elapsedTime_35691319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div><code>return</code>  Time elapsed since the emitter started playback. 0 if not playing.<br /></div><br />
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief">Get the identifier for the emitter.<br /><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a href="#">+ id</a></span>: unsigned int () <span class="keyword">const</span>;
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get the identifier for the emitter.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Audio_1_1Emitter_1adaacba04d27d7d53118b7b9241d92963" href="#">+ id</a></span>: unsigned int () <span class="keyword">const</span>;
 </code>
-</div></td></tr><tr id="id_35701319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">Default value for pitch (1.0)<br /><div class="doxygen_name_spacer"></div>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief"><b>Default value for pitch (1.0)<br /></b><div class="doxygen_name_spacer"></div>
 <code><span class="method"><a href="#">+ DefaultPitch</a></span>: const float;</code>
-</div></td></tr><tr id="DefaultPitch_35711319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief">Default value for gain (1.0)<br /><div class="doxygen_name_spacer"></div>
+<tr><td class="doxygen_var"></td><td class="doxnone"><div class="doxygen_brief"><b>Default value for gain (1.0)<br /></b><div class="doxygen_name_spacer"></div>
 <code><span class="method"><a href="#">+ DefaultGain</a></span>: const float;</code>
-</div></td></tr><tr id="DefaultGain_35721319844517_desc"><td class="doxnone doxreturn"></td><td class="doxnone">
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">
 </div>
