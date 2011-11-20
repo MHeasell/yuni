@@ -334,7 +334,7 @@ if(MODULES)
 			set(YUNI_MODULE_DOCUMENTATION true)
 		endif()
 		# -docs
-		if("${it}" STREQUAL "-doc" OR "${it}" STREQUAL "docs")
+		if("${it}" STREQUAL "-doc" OR "${it}" STREQUAL "-docs")
 			set(KeywordIsKnown true)
 			set(YUNI_MODULE_DOCUMENTATION false)
 		endif()
