@@ -10,6 +10,8 @@
 # include "expressionlistnode.h"
 # include "parallelexpressionnode.h"
 # include "typeexpressionnode.h"
+# include "assignmentexpressionnode.h"
+# include "returnexpressionnode.h"
 # include "identifiernode.h"
 # include "literalnode.h"
 

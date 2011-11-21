@@ -33,6 +33,12 @@ namespace Ast
 	//! Expression representing a type
 	class TypeExpressionNode;
 
+	//! Assignment or variable declaration
+	class AssignmentExpressionNode;
+
+	//! Expression following a `return` keyword
+	class ReturnExpressionNode;
+
 	//! A type or variable identifier
 	class IdentifierNode;
 

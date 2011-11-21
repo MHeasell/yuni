@@ -2,6 +2,7 @@
 # define __NANY_AST_CPPWRITERVISITOR_H__
 
 # include <fstream>
+# include "yuni/yuni.h"
 # include "all.h"
 # include "visitor.h"
 
@@ -19,7 +20,8 @@ namespace Ast
 	public:
 		CppWriterVisitor(std::ofstream& stream):
 			pOut(stream),
-			pFunctionScope(false)
+			pFunctionScope(false),
+			pIndent()
 		{}
 
 
@@ -48,6 +50,7 @@ namespace Ast
 				pOut << "void ";
 			// TODO : handle parameter list
 			pOut << node->name() << '(' << ')' << std::endl;
+
 			pFunctionScope = true;
 			node->body()->accept(this);
 			pFunctionScope = false;
@@ -55,11 +58,19 @@ namespace Ast
 
 		virtual void visit(ScopeNode* node)
 		{
-			pOut << '{' << std::endl;
+			pOut << pIndent << '{' << std::endl;
+			indent();
 			if (node->expression())
+			{
+				// On single expressions, write the indent
+				// On expression lists, leave this work to the visit(expressionlistnode)
+				if (nullptr == dynamic_cast<ExpressionListNode*>(node->expression()))
+					pOut << pIndent;
 				node->expression()->accept(this);
+			}
 			pOut << ';' << std::endl;
-			pOut << '}' << std::endl;
+			unindent();
+			pOut << pIndent << '}' << std::endl;
 		}
 
 		virtual void visit(ExpressionListNode* node)
@@ -68,6 +79,7 @@ namespace Ast
 			ExpressionListNode::List::iterator end = exprList.end();
 			for (ExpressionListNode::List::iterator it = exprList.begin(); it != end; ++it)
 			{
+				pOut << pIndent;
 				(*it)->accept(this);
 				pOut << ';' << std::endl;
 			}
@@ -81,6 +93,21 @@ namespace Ast
 
 		virtual void visit(TypeExpressionNode* node)
 		{
+			node->expression()->accept(this);
+		}
+
+		virtual void visit(AssignmentExpressionNode* node)
+		{
+			node->left()->accept(this);
+			if (node->type())
+				node->type()->accept(this);
+			if (node->right())
+				node->right()->accept(this);
+		}
+
+		virtual void visit(ReturnExpressionNode* node)
+		{
+			pOut << pIndent << "return ";
 			node->expression()->accept(this);
 		}
 
@@ -131,6 +158,18 @@ namespace Ast
 
 
 	private:
+		void indent()
+		{
+			pIndent << '\t';
+		}
+
+		void unindent()
+		{
+			pIndent.removeLast();
+		}
+
+
+	private:
 		//! Stream to the destination C++ file
 		std::ofstream& pOut;
 
@@ -140,6 +179,9 @@ namespace Ast
 		** This is useful to know when we might need to add a return keyword.
 		*/
 		bool pFunctionScope;
+
+		//! Current indent
+		Yuni::String pIndent;
 	};
 
 
