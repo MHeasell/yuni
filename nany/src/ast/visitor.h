@@ -41,6 +41,12 @@ namespace Ast
 		virtual void visit(TypeExpressionNode*)
 		{}
 
+		virtual void visit(AssignmentExpressionNode*)
+		{}
+
+		virtual void visit(ReturnExpressionNode*)
+		{}
+
 		virtual void visit(IdentifierNode*)
 		{}
 

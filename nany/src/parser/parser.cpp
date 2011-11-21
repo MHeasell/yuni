@@ -238,7 +238,11 @@ Nany::Ast::Node* Rule_Literal_BooleanLiteral(struct TokenStruct* token)
 // <Literal> ::= DecLiteral
 Nany::Ast::Node* Rule_Literal_DecLiteral(struct TokenStruct* token)
 {
-	Yuni::String data(GetChildSymbol(token, 0));
+	const wchar_t* symbol = GetChildSymbol(token, 0);
+	size_t len = wcslen(symbol);
+	char* buffer = new char[len];
+	wcstombs(buffer, symbol, len);
+	Yuni::String data(buffer);
 	bool isUnsigned = data[data.size() - 1] == 'u' || (data.size() > 1 && data[data.size() - 2] == 'u')
 		|| data[data.size() - 1] == 'U' || (data.size() > 1 && data[data.size() - 2] == 'U');
 	if (isUnsigned)
@@ -272,8 +276,12 @@ Nany::Ast::Node* Rule_Literal_HexLiteral(struct TokenStruct* token)
 // <Literal> ::= RealLiteral
 Nany::Ast::Node* Rule_Literal_RealLiteral(struct TokenStruct* token)
 {
-	Yuni::String data(GetChildSymbol(token, 0));
-	return new Nany::Ast::LiteralNode<int>(data.to<float>());
+	const wchar_t* symbol = GetChildSymbol(token, 0);
+	size_t len = wcslen(symbol);
+	char* buffer = new char[len];
+	wcstombs(buffer, symbol, len);
+	Yuni::String data(buffer);
+	return new Nany::Ast::LiteralNode<float>(data.to<float>());
 }
 
 
@@ -487,8 +495,7 @@ Nany::Ast::Node* Rule_AttributeDeclaration_ConstQualifier_attribute_Identifier(s
 // <Optional Assignment> ::= ':=' <Expression>
 Nany::Ast::Node* Rule_OptionalAssignment_ColonEq(struct TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Not yet implemented !");
+	return ParseChild<>(token, 2);
 }
 
 
@@ -506,8 +513,9 @@ Nany::Ast::Node* Rule_OptionalAssignment(struct TokenStruct* token)
 // <Optional Typing> ::= ':' <Type Qualifiers> <SingleThread Exp>
 Nany::Ast::Node* Rule_OptionalTyping_Colon(struct TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Not yet implemented !");
+	// TODO : handle type qualifiers
+
+	return new Nany::Ast::TypeExpressionNode(ParseChild<>(token, 2));
 }
 
 
@@ -769,7 +777,7 @@ Nany::Ast::Node* Rule_FunctionDeclaration_function_Identifier_LBrace_RBrace(stru
 	Nany::Ast::Node* bodyExpr = ParseChild<Nany::Ast::Node>(token, 9);
 	Nany::Ast::ScopeNode* body = new Nany::Ast::ScopeNode(bodyExpr);
 
-	// TODO : Almost everything... optims, parameters, in and out blocks
+	// TODO : Almost everything... optims, parameters, type parameters, in and out blocks
 
 	Nany::Ast::TypeExpressionNode* returnType = ParseChild<Nany::Ast::TypeExpressionNode>(token, 5);
 
@@ -1206,9 +1214,14 @@ Nany::Ast::Node* Rule_SingleThreadExp(struct TokenStruct* token)
 // <Assignment Exp> ::= <Simple Exp> <Optional Typing> <Optional Assignment>
 Nany::Ast::Node* Rule_AssignmentExp(struct TokenStruct* token)
 {
-	// TODO : assignment
+	Nany::Ast::Node* left = ParseChild<>(token, 0);
+	Nany::Ast::TypeExpressionNode* type = ParseChild<Nany::Ast::TypeExpressionNode>(token, 1);
+	Nany::Ast::Node* right = ParseChild<>(token, 2);
 
-	return ParseChild<>(token, 0);
+	if (!type || !right)
+		return left;
+
+	return new Nany::Ast::AssignmentExpressionNode(left, type, right);
 }
 
 
@@ -1226,8 +1239,7 @@ Nany::Ast::Node* Rule_SimpleExp(struct TokenStruct* token)
 // <Simple Exp> ::= return <SingleThread Exp>
 Nany::Ast::Node* Rule_SimpleExp_return(struct TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Not yet implemented !");
+	return new Nany::Ast::ReturnExpressionNode(ParseChild<>(token, 1));
 }
 
 
