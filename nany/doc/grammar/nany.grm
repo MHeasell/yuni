@@ -247,9 +247,11 @@ Comment End = '*#' | '*/'
 
 <SingleThread Exp> ::= <Assignment Exp>
 
-<Assignment Exp> ::= <Simple Exp> <Typing> <Assignment>
-               | <Simple Exp> <Assignment>
-               | <Simple Exp> <Typing>
+<Assignment Exp> ::= <Assignment Exp> ':=' <Simple Exp>
+               | <Local Declaration Exp>
+
+<Local Declaration Exp> ::= <Value> <Typing>
+               | <Simple Exp>
 
 <Simple Exp> ::= <Binary Exp>
                | 'return' <SingleThread Exp>
@@ -269,7 +271,7 @@ Comment End = '*#' | '*/'
 <Else Expression> ::= 'else' <Expression>
                | ! Empty
 
-<Binary Exp> ::= <SingleThread Exp> '|' <Xor Exp> ! Constraint
+<Binary Exp> ::= <Binary Exp> '|' <Xor Exp> ! Constraint
                |  <Xor Exp>
 
 <Xor Exp>      ::= <Xor Exp> 'xor' <Or Exp> ! Boolean XOR

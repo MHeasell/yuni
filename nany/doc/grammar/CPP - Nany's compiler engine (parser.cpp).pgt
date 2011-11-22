@@ -266,7 +266,7 @@ static void ShowErrorMessage(struct TokenStruct* token, int result)
 		{
 			wchar_t s1[BUFSIZ];
 			ReadableString(token->Data, s1, BUFSIZ);
-			std::cerr << "The grammar does not specify what to do with '" << s1 << "'." << std::endl;
+			std::wcerr << L"The grammar does not specify what to do with '" << s1 << L"'." << std::endl;
 		}
 		else
 		{
@@ -287,7 +287,7 @@ static void ShowErrorMessage(struct TokenStruct* token, int result)
 		{
 			wchar_t s1[BUFSIZ];
 			ReadableString(token->Data, s1, BUFSIZ);
-			std::cerr << "Encountered '" << s1 << "', but expected ";
+			std::wcerr << L"Encountered '" << s1 << L"', but expected ";
 		}
 		else
 		{
@@ -304,7 +304,7 @@ static void ShowErrorMessage(struct TokenStruct* token, int result)
 					if (i >= Grammar.LalrArray[token->Symbol].ActionCount - 2)
 						std::cerr << "or ";
 				}
-				std::cerr << '\'' << Grammar.SymbolArray[symbol].Name << '\'';
+				std::wcerr << L'\'' << Grammar.SymbolArray[symbol].Name << L'\'';
 			}
 		}
 		std::cerr << "." << std::endl;
