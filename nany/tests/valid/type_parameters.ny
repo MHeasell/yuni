@@ -7,8 +7,8 @@ public
     # Constructor with item value
     method create(value) { item := value; }
 
-    next: ListItem<T> := nil;
-    item: T;
+    attribute next: ListItem<T> := nil;
+    attribute item: T;
 }
 
 class List<T>
