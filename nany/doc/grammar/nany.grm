@@ -95,7 +95,9 @@ Comment End = '*#' | '*/'
                | <Class Declaration> <Class Content> ! Nested class
                | ! Empty
 
-<Property Declaration> ::= 'property' Identifier <Optional Typing> <Optional Assignment> <Property Callbacks>
+<Property Declaration> ::= 'property' Identifier <Typing> <Assignment> <Property Callbacks>
+               | 'property' Identifier <Assignment> <Property Callbacks>
+               | 'property' Identifier <Typing> <Property Callbacks>
 
 <Property Callbacks> ::= 'read' <SingleThread Exp> <Property Callbacks>
                | 'write' <SingleThread Exp> <Property Callbacks>
@@ -106,14 +108,16 @@ Comment End = '*#' | '*/'
 !               | ConstQualifier Identifier ':=' <Expression>
 !               | Identifier ':=' <Expression>
 ! Loose version, very powerful but requires a keyword and a lot of work in the type-checking
-<Attribute Declaration> ::= 'attribute' Identifier <Optional Typing> <Optional Assignment>
-               | ConstQualifier 'attribute' Identifier <Optional Typing> <Optional Assignment>
+<Attribute Declaration> ::= 'attribute' Identifier <Typing> <Assignment>
+               | 'attribute' Identifier <Assignment>
+               | 'attribute' Identifier <Typing>
+               | ConstQualifier 'attribute' Identifier <Typing> <Assignment>
+               | ConstQualifier 'attribute' Identifier <Assignment>
+               | ConstQualifier 'attribute' Identifier <Typing>
 
-<Optional Assignment> ::= ':=' <Expression>
-               | ! Empty
+<Assignment> ::= ':=' <Expression>
 
-<Optional Typing> ::= ':' <Type Qualifiers> <SingleThread Exp>
-               | ! Empty
+<Typing> ::= ':' <Type Qualifiers> <Simple Exp>
 
 ! -------------------------------------------------
 ! Workflows
@@ -172,7 +176,9 @@ Comment End = '*#' | '*/'
 <Optional Parameters> ::= '(' <Parameter List> ')'
                | ! Empty
 
-<Parameter List> ::= Identifier <Optional Typing> <Optional Assignment> <Parameter List Continued>
+<Parameter List> ::= Identifier <Typing> <Assignment> <Parameter List Continued>
+               | Identifier <Assignment> <Parameter List Continued>
+               | Identifier <Typing> <Parameter List Continued>
                | ! Empty
 
 <Parameter List Continued> ::= ',' <Parameter List>
@@ -241,7 +247,9 @@ Comment End = '*#' | '*/'
 
 <SingleThread Exp> ::= <Assignment Exp>
 
-<Assignment Exp> ::= <Simple Exp> <Optional Typing> <Optional Assignment>
+<Assignment Exp> ::= <Simple Exp> <Typing> <Assignment>
+               | <Simple Exp> <Assignment>
+               | <Simple Exp> <Typing>
 
 <Simple Exp> ::= <Binary Exp>
                | 'return' <SingleThread Exp>

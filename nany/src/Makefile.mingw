@@ -15,16 +15,26 @@ OBJ = $(SRC:.cpp=.o)
 
 NAME = nanyc.exe
 
+FIX_PARSER = tools/fix_parser.exe
 
-all: $(NAME)
+
+all: $(NAME) $(FIX_PARSER)
 
 $(NAME): $(OBJ) parser/engine.o
 	$(CXX) $(CXXFLAGS) $(OBJ) parser/engine.o $(LDFLAGS) -o $(NAME)
 
+$(FIX_PARSER): tools/fix_parser.cpp
+	$(CXX) $(CXXFLAGS) tools/fix_parser.cpp $(LDFLAGS) -o $(FIX_PARSER)
+
 clean:
 	del /Q *~
 	del /Q *.o
+	del /Q ast\*~
+	del /Q ast\*.o
+	del /Q parser\*~
 	del /Q parser\*.o
+	del /Q tools\*~
 
 distclean: clean
 	del /Q $(NAME)
+	del /Q $(FIX_PARSER)
