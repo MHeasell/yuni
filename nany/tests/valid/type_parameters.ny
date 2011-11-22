@@ -52,7 +52,7 @@ private
 # Test function type parameters
 function printList<ListType>(list: ListType)
 {
-    foreach item in list do
+    for item in list do
         println("\t" << item)
 }
 
