@@ -35,6 +35,8 @@ static void mergeFile(const Yuni::String& oldContents, std::ifstream& newFile, s
 	{
 		merged << line << std::endl;
 		bool isRule = identifyRulePrototype(s = line, ruleName);
+		// Add the parenthese to make sure no rule with a longer name contains this one
+		ruleName << '(';
 		unsigned int index = oldContents.find(ruleName);
 
 		// If we found a rule and it already existed in the old file
