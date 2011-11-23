@@ -4200,73 +4200,6 @@ wchar_t GrammarCharset119[61+1] =
 	104,
 	106,
 	107,
-	108,
-	109,
-	110,
-	111,
-	112,
-	113,
-	114,
-	116,
-	117,
-	118,
-	119,
-	120,
-	121,
-	122,
-	0
-};
-#define GrammarCharset120CharCount 62
-wchar_t GrammarCharset120[62+1] =
-{
-	48,
-	49,
-	50,
-	51,
-	52,
-	53,
-	54,
-	55,
-	56,
-	57,
-	65,
-	66,
-	67,
-	68,
-	69,
-	70,
-	71,
-	72,
-	73,
-	74,
-	75,
-	76,
-	77,
-	78,
-	79,
-	80,
-	81,
-	82,
-	83,
-	84,
-	85,
-	86,
-	87,
-	88,
-	89,
-	90,
-	95,
-	97,
-	98,
-	99,
-	100,
-	101,
-	102,
-	104,
-	105,
-	106,
-	107,
-	108,
 	109,
 	110,
 	111,
@@ -4283,14 +4216,8 @@ wchar_t GrammarCharset120[62+1] =
 	122,
 	0
 };
-#define GrammarCharset121CharCount 1
-wchar_t GrammarCharset121[1+1] =
-{
-	32,
-	0
-};
-#define GrammarCharset122CharCount 60
-wchar_t GrammarCharset122[60+1] =
+#define GrammarCharset120CharCount 60
+wchar_t GrammarCharset120[60+1] =
 {
 	48,
 	49,
@@ -4411,9 +4338,9 @@ struct DfaEdgeStruct GrammarDfaEdgeArray0[48+1] =
 	{251, GrammarCharset42CharCount, GrammarCharset42},
 	{263, GrammarCharset43CharCount, GrammarCharset43},
 	{300, GrammarCharset44CharCount, GrammarCharset44},
-	{327, GrammarCharset45CharCount, GrammarCharset45},
-	{335, GrammarCharset46CharCount, GrammarCharset46},
-	{351, GrammarCharset47CharCount, GrammarCharset47},
+	{317, GrammarCharset45CharCount, GrammarCharset45},
+	{327, GrammarCharset46CharCount, GrammarCharset46},
+	{343, GrammarCharset47CharCount, GrammarCharset47},
 	{-1, 0, NULL}
 };
 struct DfaEdgeStruct GrammarDfaEdgeArray1[1+1] =
@@ -6125,7 +6052,7 @@ struct DfaEdgeStruct GrammarDfaEdgeArray300[4+1] =
 	{23, GrammarCharset118CharCount, GrammarCharset118},
 	{301, GrammarCharset36CharCount, GrammarCharset36},
 	{311, GrammarCharset38CharCount, GrammarCharset38},
-	{324, GrammarCharset42CharCount, GrammarCharset42},
+	{314, GrammarCharset42CharCount, GrammarCharset42},
 	{-1, 0, NULL}
 };
 struct DfaEdgeStruct GrammarDfaEdgeArray301[2+1] =
@@ -6187,11 +6114,10 @@ struct DfaEdgeStruct GrammarDfaEdgeArray310[1+1] =
 	{23, GrammarCharset51CharCount, GrammarCharset51},
 	{-1, 0, NULL}
 };
-struct DfaEdgeStruct GrammarDfaEdgeArray311[3+1] =
+struct DfaEdgeStruct GrammarDfaEdgeArray311[2+1] =
 {
-	{23, GrammarCharset119CharCount, GrammarCharset119},
+	{23, GrammarCharset71CharCount, GrammarCharset71},
 	{312, GrammarCharset36CharCount, GrammarCharset36},
-	{314, GrammarCharset42CharCount, GrammarCharset42},
 	{-1, 0, NULL}
 };
 struct DfaEdgeStruct GrammarDfaEdgeArray312[2+1] =
@@ -6207,69 +6133,73 @@ struct DfaEdgeStruct GrammarDfaEdgeArray313[1+1] =
 };
 struct DfaEdgeStruct GrammarDfaEdgeArray314[2+1] =
 {
-	{23, GrammarCharset71CharCount, GrammarCharset71},
-	{315, GrammarCharset36CharCount, GrammarCharset36},
+	{23, GrammarCharset73CharCount, GrammarCharset73},
+	{315, GrammarCharset34CharCount, GrammarCharset34},
 	{-1, 0, NULL}
 };
 struct DfaEdgeStruct GrammarDfaEdgeArray315[2+1] =
 {
-	{23, GrammarCharset120CharCount, GrammarCharset120},
-	{316, GrammarCharset109CharCount, GrammarCharset109},
+	{23, GrammarCharset63CharCount, GrammarCharset63},
+	{316, GrammarCharset42CharCount, GrammarCharset42},
 	{-1, 0, NULL}
 };
-struct DfaEdgeStruct GrammarDfaEdgeArray316[2+1] =
+struct DfaEdgeStruct GrammarDfaEdgeArray316[1+1] =
 {
-	{23, GrammarCharset62CharCount, GrammarCharset62},
-	{317, GrammarCharset38CharCount, GrammarCharset38},
+	{23, GrammarCharset51CharCount, GrammarCharset51},
 	{-1, 0, NULL}
 };
 struct DfaEdgeStruct GrammarDfaEdgeArray317[2+1] =
 {
-	{23, GrammarCharset73CharCount, GrammarCharset73},
-	{318, GrammarCharset34CharCount, GrammarCharset34},
+	{23, GrammarCharset61CharCount, GrammarCharset61},
+	{318, GrammarCharset39CharCount, GrammarCharset39},
 	{-1, 0, NULL}
 };
-struct DfaEdgeStruct GrammarDfaEdgeArray318[2+1] =
+struct DfaEdgeStruct GrammarDfaEdgeArray318[3+1] =
 {
-	{23, GrammarCharset89CharCount, GrammarCharset89},
-	{319, GrammarCharset33CharCount, GrammarCharset33},
+	{23, GrammarCharset119CharCount, GrammarCharset119},
+	{319, GrammarCharset36CharCount, GrammarCharset36},
+	{321, GrammarCharset70CharCount, GrammarCharset70},
 	{-1, 0, NULL}
 };
 struct DfaEdgeStruct GrammarDfaEdgeArray319[2+1] =
 {
-	{320, GrammarCharset121CharCount, GrammarCharset121},
-	{23, GrammarCharset51CharCount, GrammarCharset51},
+	{23, GrammarCharset89CharCount, GrammarCharset89},
+	{320, GrammarCharset33CharCount, GrammarCharset33},
 	{-1, 0, NULL}
 };
 struct DfaEdgeStruct GrammarDfaEdgeArray320[1+1] =
 {
-	{321, GrammarCharset36CharCount, GrammarCharset36},
+	{23, GrammarCharset51CharCount, GrammarCharset51},
 	{-1, 0, NULL}
 };
-struct DfaEdgeStruct GrammarDfaEdgeArray321[1+1] =
+struct DfaEdgeStruct GrammarDfaEdgeArray321[2+1] =
 {
-	{322, GrammarCharset38CharCount, GrammarCharset38},
+	{23, GrammarCharset68CharCount, GrammarCharset68},
+	{322, GrammarCharset30CharCount, GrammarCharset30},
 	{-1, 0, NULL}
 };
-struct DfaEdgeStruct GrammarDfaEdgeArray322[1+1] =
+struct DfaEdgeStruct GrammarDfaEdgeArray322[2+1] =
 {
+	{23, GrammarCharset64CharCount, GrammarCharset64},
 	{323, GrammarCharset43CharCount, GrammarCharset43},
 	{-1, 0, NULL}
 };
-struct DfaEdgeStruct GrammarDfaEdgeArray323[0+1] =
+struct DfaEdgeStruct GrammarDfaEdgeArray323[2+1] =
 {
+	{23, GrammarCharset71CharCount, GrammarCharset71},
+	{324, GrammarCharset36CharCount, GrammarCharset36},
 	{-1, 0, NULL}
 };
 struct DfaEdgeStruct GrammarDfaEdgeArray324[2+1] =
 {
-	{23, GrammarCharset73CharCount, GrammarCharset73},
-	{325, GrammarCharset34CharCount, GrammarCharset34},
+	{23, GrammarCharset69CharCount, GrammarCharset69},
+	{325, GrammarCharset70CharCount, GrammarCharset70},
 	{-1, 0, NULL}
 };
 struct DfaEdgeStruct GrammarDfaEdgeArray325[2+1] =
 {
-	{23, GrammarCharset63CharCount, GrammarCharset63},
-	{326, GrammarCharset42CharCount, GrammarCharset42},
+	{23, GrammarCharset73CharCount, GrammarCharset73},
+	{326, GrammarCharset34CharCount, GrammarCharset34},
 	{-1, 0, NULL}
 };
 struct DfaEdgeStruct GrammarDfaEdgeArray326[1+1] =
@@ -6277,161 +6207,114 @@ struct DfaEdgeStruct GrammarDfaEdgeArray326[1+1] =
 	{23, GrammarCharset51CharCount, GrammarCharset51},
 	{-1, 0, NULL}
 };
-struct DfaEdgeStruct GrammarDfaEdgeArray327[2+1] =
+struct DfaEdgeStruct GrammarDfaEdgeArray327[4+1] =
 {
-	{23, GrammarCharset61CharCount, GrammarCharset61},
-	{328, GrammarCharset39CharCount, GrammarCharset39},
+	{23, GrammarCharset120CharCount, GrammarCharset120},
+	{328, GrammarCharset56CharCount, GrammarCharset56},
+	{332, GrammarCharset39CharCount, GrammarCharset39},
+	{339, GrammarCharset41CharCount, GrammarCharset41},
 	{-1, 0, NULL}
 };
 struct DfaEdgeStruct GrammarDfaEdgeArray328[2+1] =
 {
-	{23, GrammarCharset69CharCount, GrammarCharset69},
-	{329, GrammarCharset70CharCount, GrammarCharset70},
+	{23, GrammarCharset71CharCount, GrammarCharset71},
+	{329, GrammarCharset36CharCount, GrammarCharset36},
 	{-1, 0, NULL}
 };
 struct DfaEdgeStruct GrammarDfaEdgeArray329[2+1] =
 {
-	{23, GrammarCharset68CharCount, GrammarCharset68},
-	{330, GrammarCharset30CharCount, GrammarCharset30},
+	{23, GrammarCharset69CharCount, GrammarCharset69},
+	{330, GrammarCharset70CharCount, GrammarCharset70},
 	{-1, 0, NULL}
 };
 struct DfaEdgeStruct GrammarDfaEdgeArray330[2+1] =
 {
-	{23, GrammarCharset64CharCount, GrammarCharset64},
-	{331, GrammarCharset43CharCount, GrammarCharset43},
+	{23, GrammarCharset73CharCount, GrammarCharset73},
+	{331, GrammarCharset34CharCount, GrammarCharset34},
 	{-1, 0, NULL}
 };
-struct DfaEdgeStruct GrammarDfaEdgeArray331[2+1] =
+struct DfaEdgeStruct GrammarDfaEdgeArray331[1+1] =
 {
-	{23, GrammarCharset71CharCount, GrammarCharset71},
-	{332, GrammarCharset36CharCount, GrammarCharset36},
+	{23, GrammarCharset51CharCount, GrammarCharset51},
 	{-1, 0, NULL}
 };
 struct DfaEdgeStruct GrammarDfaEdgeArray332[2+1] =
 {
-	{23, GrammarCharset69CharCount, GrammarCharset69},
-	{333, GrammarCharset70CharCount, GrammarCharset70},
+	{23, GrammarCharset74CharCount, GrammarCharset74},
+	{333, GrammarCharset41CharCount, GrammarCharset41},
 	{-1, 0, NULL}
 };
 struct DfaEdgeStruct GrammarDfaEdgeArray333[2+1] =
 {
-	{23, GrammarCharset73CharCount, GrammarCharset73},
-	{334, GrammarCharset34CharCount, GrammarCharset34},
+	{23, GrammarCharset81CharCount, GrammarCharset81},
+	{334, GrammarCharset82CharCount, GrammarCharset82},
 	{-1, 0, NULL}
 };
-struct DfaEdgeStruct GrammarDfaEdgeArray334[1+1] =
+struct DfaEdgeStruct GrammarDfaEdgeArray334[2+1] =
 {
-	{23, GrammarCharset51CharCount, GrammarCharset51},
+	{23, GrammarCharset72CharCount, GrammarCharset72},
+	{335, GrammarCharset35CharCount, GrammarCharset35},
 	{-1, 0, NULL}
 };
-struct DfaEdgeStruct GrammarDfaEdgeArray335[4+1] =
+struct DfaEdgeStruct GrammarDfaEdgeArray335[2+1] =
 {
-	{23, GrammarCharset122CharCount, GrammarCharset122},
-	{336, GrammarCharset56CharCount, GrammarCharset56},
-	{340, GrammarCharset39CharCount, GrammarCharset39},
-	{347, GrammarCharset41CharCount, GrammarCharset41},
+	{23, GrammarCharset69CharCount, GrammarCharset69},
+	{336, GrammarCharset70CharCount, GrammarCharset70},
 	{-1, 0, NULL}
 };
 struct DfaEdgeStruct GrammarDfaEdgeArray336[2+1] =
 {
-	{23, GrammarCharset71CharCount, GrammarCharset71},
-	{337, GrammarCharset36CharCount, GrammarCharset36},
+	{23, GrammarCharset61CharCount, GrammarCharset61},
+	{337, GrammarCharset39CharCount, GrammarCharset39},
 	{-1, 0, NULL}
 };
 struct DfaEdgeStruct GrammarDfaEdgeArray337[2+1] =
 {
-	{23, GrammarCharset69CharCount, GrammarCharset69},
-	{338, GrammarCharset70CharCount, GrammarCharset70},
+	{23, GrammarCharset76CharCount, GrammarCharset76},
+	{338, GrammarCharset46CharCount, GrammarCharset46},
 	{-1, 0, NULL}
 };
-struct DfaEdgeStruct GrammarDfaEdgeArray338[2+1] =
-{
-	{23, GrammarCharset73CharCount, GrammarCharset73},
-	{339, GrammarCharset34CharCount, GrammarCharset34},
-	{-1, 0, NULL}
-};
-struct DfaEdgeStruct GrammarDfaEdgeArray339[1+1] =
+struct DfaEdgeStruct GrammarDfaEdgeArray338[1+1] =
 {
 	{23, GrammarCharset51CharCount, GrammarCharset51},
+	{-1, 0, NULL}
+};
+struct DfaEdgeStruct GrammarDfaEdgeArray339[2+1] =
+{
+	{23, GrammarCharset71CharCount, GrammarCharset71},
+	{340, GrammarCharset36CharCount, GrammarCharset36},
 	{-1, 0, NULL}
 };
 struct DfaEdgeStruct GrammarDfaEdgeArray340[2+1] =
 {
-	{23, GrammarCharset74CharCount, GrammarCharset74},
-	{341, GrammarCharset41CharCount, GrammarCharset41},
+	{23, GrammarCharset64CharCount, GrammarCharset64},
+	{341, GrammarCharset43CharCount, GrammarCharset43},
 	{-1, 0, NULL}
 };
 struct DfaEdgeStruct GrammarDfaEdgeArray341[2+1] =
 {
-	{23, GrammarCharset81CharCount, GrammarCharset81},
-	{342, GrammarCharset82CharCount, GrammarCharset82},
+	{23, GrammarCharset73CharCount, GrammarCharset73},
+	{342, GrammarCharset34CharCount, GrammarCharset34},
 	{-1, 0, NULL}
 };
-struct DfaEdgeStruct GrammarDfaEdgeArray342[2+1] =
+struct DfaEdgeStruct GrammarDfaEdgeArray342[1+1] =
 {
-	{23, GrammarCharset72CharCount, GrammarCharset72},
-	{343, GrammarCharset35CharCount, GrammarCharset35},
+	{23, GrammarCharset51CharCount, GrammarCharset51},
 	{-1, 0, NULL}
 };
 struct DfaEdgeStruct GrammarDfaEdgeArray343[2+1] =
 {
-	{23, GrammarCharset69CharCount, GrammarCharset69},
-	{344, GrammarCharset70CharCount, GrammarCharset70},
+	{23, GrammarCharset61CharCount, GrammarCharset61},
+	{344, GrammarCharset39CharCount, GrammarCharset39},
 	{-1, 0, NULL}
 };
 struct DfaEdgeStruct GrammarDfaEdgeArray344[2+1] =
 {
-	{23, GrammarCharset61CharCount, GrammarCharset61},
-	{345, GrammarCharset39CharCount, GrammarCharset39},
-	{-1, 0, NULL}
-};
-struct DfaEdgeStruct GrammarDfaEdgeArray345[2+1] =
-{
-	{23, GrammarCharset76CharCount, GrammarCharset76},
-	{346, GrammarCharset46CharCount, GrammarCharset46},
-	{-1, 0, NULL}
-};
-struct DfaEdgeStruct GrammarDfaEdgeArray346[1+1] =
-{
-	{23, GrammarCharset51CharCount, GrammarCharset51},
-	{-1, 0, NULL}
-};
-struct DfaEdgeStruct GrammarDfaEdgeArray347[2+1] =
-{
-	{23, GrammarCharset71CharCount, GrammarCharset71},
-	{348, GrammarCharset36CharCount, GrammarCharset36},
-	{-1, 0, NULL}
-};
-struct DfaEdgeStruct GrammarDfaEdgeArray348[2+1] =
-{
-	{23, GrammarCharset64CharCount, GrammarCharset64},
-	{349, GrammarCharset43CharCount, GrammarCharset43},
-	{-1, 0, NULL}
-};
-struct DfaEdgeStruct GrammarDfaEdgeArray349[2+1] =
-{
-	{23, GrammarCharset73CharCount, GrammarCharset73},
-	{350, GrammarCharset34CharCount, GrammarCharset34},
-	{-1, 0, NULL}
-};
-struct DfaEdgeStruct GrammarDfaEdgeArray350[1+1] =
-{
-	{23, GrammarCharset51CharCount, GrammarCharset51},
-	{-1, 0, NULL}
-};
-struct DfaEdgeStruct GrammarDfaEdgeArray351[2+1] =
-{
-	{23, GrammarCharset61CharCount, GrammarCharset61},
-	{352, GrammarCharset39CharCount, GrammarCharset39},
-	{-1, 0, NULL}
-};
-struct DfaEdgeStruct GrammarDfaEdgeArray352[2+1] =
-{
 	{23, GrammarCharset74CharCount, GrammarCharset74},
-	{353, GrammarCharset41CharCount, GrammarCharset41},
+	{345, GrammarCharset41CharCount, GrammarCharset41},
 	{-1, 0, NULL}
 };
-struct DfaEdgeStruct GrammarDfaEdgeArray353[1+1] =
+struct DfaEdgeStruct GrammarDfaEdgeArray345[1+1] =
 {
 	{23, GrammarCharset51CharCount, GrammarCharset51},
 	{-1, 0, NULL}
@@ -14240,7 +14123,7 @@ struct DfaStateStruct
   struct DfaEdgeStruct *Edges;
 };
 */
-struct DfaStateStruct GrammarDfaStateArray[354+1] =
+struct DfaStateStruct GrammarDfaStateArray[346+1] =
 {
 	/* 0 */    {-1, 48, GrammarDfaEdgeArray0},
 	/* 1 */    {2, 1, GrammarDfaEdgeArray1},
@@ -14545,7 +14428,7 @@ struct DfaStateStruct GrammarDfaStateArray[354+1] =
 	/* 300 */    {56, 4, GrammarDfaEdgeArray300},
 	/* 301 */    {56, 2, GrammarDfaEdgeArray301},
 	/* 302 */    {56, 2, GrammarDfaEdgeArray302},
-	/* 303 */    {56, 5, GrammarDfaEdgeArray303},
+	/* 303 */    {42, 5, GrammarDfaEdgeArray303},
 	/* 304 */    {56, 2, GrammarDfaEdgeArray304},
 	/* 305 */    {42, 1, GrammarDfaEdgeArray305},
 	/* 306 */    {56, 2, GrammarDfaEdgeArray306},
@@ -14553,49 +14436,41 @@ struct DfaStateStruct GrammarDfaStateArray[354+1] =
 	/* 308 */    {56, 2, GrammarDfaEdgeArray308},
 	/* 309 */    {42, 1, GrammarDfaEdgeArray309},
 	/* 310 */    {42, 1, GrammarDfaEdgeArray310},
-	/* 311 */    {56, 3, GrammarDfaEdgeArray311},
+	/* 311 */    {56, 2, GrammarDfaEdgeArray311},
 	/* 312 */    {56, 2, GrammarDfaEdgeArray312},
 	/* 313 */    {82, 1, GrammarDfaEdgeArray313},
 	/* 314 */    {56, 2, GrammarDfaEdgeArray314},
 	/* 315 */    {56, 2, GrammarDfaEdgeArray315},
-	/* 316 */    {56, 2, GrammarDfaEdgeArray316},
+	/* 316 */    {83, 1, GrammarDfaEdgeArray316},
 	/* 317 */    {56, 2, GrammarDfaEdgeArray317},
-	/* 318 */    {56, 2, GrammarDfaEdgeArray318},
+	/* 318 */    {56, 3, GrammarDfaEdgeArray318},
 	/* 319 */    {56, 2, GrammarDfaEdgeArray319},
-	/* 320 */    {-1, 1, GrammarDfaEdgeArray320},
-	/* 321 */    {-1, 1, GrammarDfaEdgeArray321},
-	/* 322 */    {-1, 1, GrammarDfaEdgeArray322},
-	/* 323 */    {42, 0, GrammarDfaEdgeArray323},
+	/* 320 */    {42, 1, GrammarDfaEdgeArray320},
+	/* 321 */    {56, 2, GrammarDfaEdgeArray321},
+	/* 322 */    {56, 2, GrammarDfaEdgeArray322},
+	/* 323 */    {56, 2, GrammarDfaEdgeArray323},
 	/* 324 */    {56, 2, GrammarDfaEdgeArray324},
 	/* 325 */    {56, 2, GrammarDfaEdgeArray325},
-	/* 326 */    {83, 1, GrammarDfaEdgeArray326},
-	/* 327 */    {56, 2, GrammarDfaEdgeArray327},
+	/* 326 */    {81, 1, GrammarDfaEdgeArray326},
+	/* 327 */    {56, 4, GrammarDfaEdgeArray327},
 	/* 328 */    {56, 2, GrammarDfaEdgeArray328},
 	/* 329 */    {56, 2, GrammarDfaEdgeArray329},
 	/* 330 */    {56, 2, GrammarDfaEdgeArray330},
-	/* 331 */    {56, 2, GrammarDfaEdgeArray331},
+	/* 331 */    {85, 1, GrammarDfaEdgeArray331},
 	/* 332 */    {56, 2, GrammarDfaEdgeArray332},
 	/* 333 */    {56, 2, GrammarDfaEdgeArray333},
-	/* 334 */    {81, 1, GrammarDfaEdgeArray334},
-	/* 335 */    {56, 4, GrammarDfaEdgeArray335},
+	/* 334 */    {56, 2, GrammarDfaEdgeArray334},
+	/* 335 */    {56, 2, GrammarDfaEdgeArray335},
 	/* 336 */    {56, 2, GrammarDfaEdgeArray336},
 	/* 337 */    {56, 2, GrammarDfaEdgeArray337},
-	/* 338 */    {56, 2, GrammarDfaEdgeArray338},
-	/* 339 */    {85, 1, GrammarDfaEdgeArray339},
+	/* 338 */    {86, 1, GrammarDfaEdgeArray338},
+	/* 339 */    {56, 2, GrammarDfaEdgeArray339},
 	/* 340 */    {56, 2, GrammarDfaEdgeArray340},
 	/* 341 */    {56, 2, GrammarDfaEdgeArray341},
-	/* 342 */    {56, 2, GrammarDfaEdgeArray342},
+	/* 342 */    {87, 1, GrammarDfaEdgeArray342},
 	/* 343 */    {56, 2, GrammarDfaEdgeArray343},
 	/* 344 */    {56, 2, GrammarDfaEdgeArray344},
-	/* 345 */    {56, 2, GrammarDfaEdgeArray345},
-	/* 346 */    {86, 1, GrammarDfaEdgeArray346},
-	/* 347 */    {56, 2, GrammarDfaEdgeArray347},
-	/* 348 */    {56, 2, GrammarDfaEdgeArray348},
-	/* 349 */    {56, 2, GrammarDfaEdgeArray349},
-	/* 350 */    {87, 1, GrammarDfaEdgeArray350},
-	/* 351 */    {56, 2, GrammarDfaEdgeArray351},
-	/* 352 */    {56, 2, GrammarDfaEdgeArray352},
-	/* 353 */    {88, 1, GrammarDfaEdgeArray353},
+	/* 345 */    {88, 1, GrammarDfaEdgeArray345},
 	{-1, -1, NULL}
 };
 
@@ -15182,7 +15057,7 @@ struct GrammarStruct Grammar =
 	/* SymbolArray */        GrammarSymbolArray,
 	/* RuleCount */          178,
 	/* RuleArray */          GrammarRuleArray,
-	/* DfaStateCount */      354,
+	/* DfaStateCount */      346,
 	/* DfaArray */           GrammarDfaStateArray,
 	/* LalrStateCount */     341,
 	/* LalrArray */          GrammarLalrStateArray
