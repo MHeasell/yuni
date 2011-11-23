@@ -10,5 +10,5 @@ function main: int
 	b: bool := true;
 	c: char := '#';
 	s: string := "This is a string\n";
-	return 0;
+	return 0
 }
