@@ -45,7 +45,7 @@ public
     }
 
 private
-    head: ref ListItem<T> := nil;
+    attribute head: ref ListItem<T> := nil;
 }
 
 

@@ -62,13 +62,15 @@ namespace Ast
 			indent();
 			if (node->expression())
 			{
+				bool isList = nullptr != dynamic_cast<ExpressionListNode*>(node->expression());
 				// On single expressions, write the indent
 				// On expression lists, leave this work to the visit(expressionlistnode)
-				if (nullptr == dynamic_cast<ExpressionListNode*>(node->expression()))
+				if (!isList)
 					pOut << pIndent;
 				node->expression()->accept(this);
+				if (!isList)
+					pOut << ';' << std::endl;
 			}
-			pOut << ';' << std::endl;
 			unindent();
 			pOut << pIndent << '}' << std::endl;
 		}
@@ -98,11 +100,17 @@ namespace Ast
 
 		virtual void visit(AssignmentExpressionNode* node)
 		{
-			node->left()->accept(this);
 			if (node->type())
+			{
 				node->type()->accept(this);
+				pOut << " ";
+			}
+			node->left()->accept(this);
 			if (node->right())
+			{
+				pOut << " = ";
 				node->right()->accept(this);
+			}
 		}
 
 		virtual void visit(ReturnExpressionNode* node)
