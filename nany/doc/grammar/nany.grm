@@ -258,7 +258,6 @@ Comment End = '*#' | '*/'
                | 'typeof' <SingleThread Exp>
                | 'break'
                | 'continue'
-               | <Attribute Declaration>
                | 'if' <Expression> 'then' <Expression> <Else Expression>
                | 'while' <Expression> 'do' <Expression>
                | 'for' Identifier 'in' <Expression> 'do' <Expression>
@@ -314,6 +313,12 @@ Comment End = '*#' | '*/'
 <Power Exp>   ::= <Power Exp> '^' <Negate Exp>
                | <Negate Exp>
 
+<Is Exp>    ::= <Is Exp> 'is' <As Exp>
+               | <As Exp>
+
+<As Exp>    ::= <As Exp> 'as' <Negate Exp>
+               | <Negate Exp>
+
 <Negate Exp>  ::= '-' <Value> 
                |  '--' <Value>
                |  '++' <Value>
@@ -324,9 +329,10 @@ Comment End = '*#' | '*/'
 
 ! For use in arithmetic, requires parentheses around expressions to have proper priorities
 ! e.g. : weight := - (car.weight + passengers.weight)
-<Value>  ::= <Literal> <Subscript>
+<Value>  ::= <Literal> <Subscript> ! 2.4.round
                | '(' <SingleThread Exp> ')' <Subscript>
                | Identifier <Subscript>
+               | <Value> '[' <SingleThread Exp> ']' <Subscript>
 
 <Subscript> ::= ! Empty
                | '.' <Value> ! Property or attribute or function call with no argument

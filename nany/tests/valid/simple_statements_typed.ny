@@ -8,10 +8,10 @@ uses Dummy.Clever;
 
 function main: int
 {
-    var err: int := 1;
+    err: int := 1;
     if false then
         return err;
-    var a: uint16 := 42;
+    a: uint16 := 42;
     {
         err := 1;
         if false then

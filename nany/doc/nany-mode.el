@@ -43,7 +43,7 @@
 
 ;; Keywords
 (defconst nany-keywords
-  '("allow" "and" "as" "async" "attribute" "catch" "check" "class" "clone" "const" "default" "distributed" "do" "else" "every" "for" "forbid" "foreach" "function" "if" "in" "immutable" "is" "method" "new" "not" "notify" "operator" "on" "or" "persistent" "predicate" "private" "property" "protected" "public" "published" "read" "ref" "return" "self" "shared" "stable" "sync" "then" "threadunsafe" "timeout" "state" "states" "transitions" "type" "typeof" "var" "variadic" "when" "while" "workflow" "write" "xor" "yield")
+  '("allow" "and" "as" "async" "attribute" "catch" "check" "class" "clone" "const" "default" "distributed" "do" "else" "every" "for" "forbid" "foreach" "function" "if" "in" "immutable" "is" "method" "new" "not" "notify" "operator" "on" "or" "persistent" "predicate" "private" "property" "protected" "public" "published" "read" "ref" "return" "self" "shared" "stable" "sync" "then" "threadunsafe" "timeout" "state" "states" "transitions" "type" "typeof" "variadic" "when" "while" "workflow" "write" "xor" "yield")
   "Nany keywords"
 )
 ;; Regexped version
