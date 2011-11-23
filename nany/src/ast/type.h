@@ -53,6 +53,7 @@ namespace Ast
 		{
 			Yuni::String s;
 			sTypeMap[(s = "void")] = new Type("void");
+			sTypeMap[(s = "bool")] = new Type("bool");
 			sTypeMap[(s = "int")] = new Type("int");
 			sTypeMap[(s = "uint")] = new Type("unsigned int");
 			sTypeMap[(s = "int64")] = new Type("long long");
@@ -61,6 +62,8 @@ namespace Ast
 			sTypeMap[(s = "uint32")] = new Type("unsigned long");
 			sTypeMap[(s = "int16")] = new Type("short");
 			sTypeMap[(s = "uint16")] = new Type("unsigned short");
+			sTypeMap[(s = "float")] = new Type("float");
+			sTypeMap[(s = "double")] = new Type("double");
 			sTypeMap[(s = "char")] = new Type("char");
 			sTypeMap[(s = "string")] = new Type("char*");
 		}
