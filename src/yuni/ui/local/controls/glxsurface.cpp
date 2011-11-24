@@ -82,9 +82,8 @@ namespace Local
 	}
 
 
-	void GLXSurface::fullScreen(bool isFullScreen)
+	void GLXSurface::fullScreen(bool /*isFullScreen*/)
 	{
-		isFullScreen = isFullScreen;
 		// TODO
 	}
 
@@ -98,6 +97,8 @@ namespace Local
 	{
 		glXMakeCurrent(pDisplay, pWindow, pContext);
 	}
+
+
 
 
 } // namespace Local
