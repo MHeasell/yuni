@@ -149,6 +149,11 @@ namespace Ast
 			pOut << '\'' << node->data << '\'';
 		}
 
+		virtual void visit(LiteralNode<char*>* node)
+		{
+			pOut << '\"' << node->data << '\"';
+		}
+
 		virtual void visit(LiteralNode<const char*>* node)
 		{
 			pOut << '\"' << node->data << '\"';
