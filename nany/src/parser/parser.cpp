@@ -557,8 +557,7 @@ Nany::Ast::Node* Rule_AttributeDeclaration_ConstQualifier_attribute_Identifier3(
 // <Assignment> ::= ':=' <Expression>
 Nany::Ast::Node* Rule_Assignment_ColonEq(struct TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Not yet implemented !");
+	return ParseChild<>(token, 1);
 }
 
 
@@ -569,7 +568,12 @@ Nany::Ast::Node* Rule_Typing_Colon(struct TokenStruct* token)
 {
 	// TODO : handle qualifiers
 
-	return ParseChild<>(token, 2);
+	Nany::Ast::Node* expr = ParseChild<>(token, 2);
+
+	Nany::Ast::TypeExpressionNode* typeExpr = dynamic_cast<Nany::Ast::TypeExpressionNode*>(expr);
+	if (!typeExpr)
+		typeExpr = new Nany::Ast::TypeExpressionNode(expr);
+	return typeExpr;
 }
 
 
@@ -819,7 +823,7 @@ Nany::Ast::Node* Rule_EnumContent(struct TokenStruct* token)
 Nany::Ast::Node* Rule_FunctionDeclaration_function_Identifier_LBrace_RBrace(struct TokenStruct* token)
 {
 	// Read the body of the function
-	Nany::Ast::Node* bodyExpr = ParseChild<Nany::Ast::Node>(token, 9);
+	Nany::Ast::Node* bodyExpr = ParseChild<>(token, 9);
 	Nany::Ast::ScopeNode* body = new Nany::Ast::ScopeNode(bodyExpr);
 
 	// TODO : Almost everything... optims, parameters, type parameters, in and out blocks
@@ -853,7 +857,12 @@ Nany::Ast::Node* Rule_MethodDeclaration_method_Identifier_LBrace_RBrace(struct T
 // <Return Type Declaration> ::= ':' <Expression>
 Nany::Ast::Node* Rule_ReturnTypeDeclaration_Colon(struct TokenStruct* token)
 {
-	return new Nany::Ast::TypeExpressionNode(ParseChild<>(token, 1));
+	Nany::Ast::Node* expr = ParseChild<>(token, 1);
+
+	Nany::Ast::TypeExpressionNode* type = dynamic_cast<Nany::Ast::TypeExpressionNode*>(expr);
+	if (!type)
+		return new Nany::Ast::TypeExpressionNode(expr);
+	return type;
 }
 
 
@@ -862,7 +871,7 @@ Nany::Ast::Node* Rule_ReturnTypeDeclaration_Colon(struct TokenStruct* token)
 // <Return Type Declaration> ::= 
 Nany::Ast::Node* Rule_ReturnTypeDeclaration(struct TokenStruct* token)
 {
-	return new Nany::Ast::TypeExpressionNode(ParseChild<>(token, 1));
+	return nullptr;
 }
 
 
@@ -1212,10 +1221,14 @@ Nany::Ast::Node* Rule_TypeArgumentsContinued(struct TokenStruct* token)
 Nany::Ast::Node* Rule_Expression(struct TokenStruct* token)
 {
 	Nany::Ast::Node* expr = ParseChild<>(token, 0);
-	Nany::Ast::ExpressionListNode* list = ParseChild<Nany::Ast::ExpressionListNode>(token, 1);
+	Nany::Ast::Node* recursive = ParseChild<>(token, 1);
 
-	if (!list)
+	if (!recursive)
 		return expr;
+
+	Nany::Ast::ExpressionListNode* list = dynamic_cast<Nany::Ast::ExpressionListNode*>(recursive);
+	if (!list)
+		list = new Nany::Ast::ExpressionListNode();
 
 	list->prepend(expr);
 	return list;
@@ -1874,7 +1887,7 @@ Nany::Ast::Node* Rule_Value_LParan_RParan(struct TokenStruct* token)
 // <Value> ::= Identifier <Subscript>
 Nany::Ast::Node* Rule_Value_Identifier(struct TokenStruct* token)
 {
-	Nany::Ast::Node* child1 = ParseChild<Nany::Ast::Node>(token, 1);
+	Nany::Ast::Node* child1 = ParseChild<>(token, 1);
 	if (nullptr != child1)
 		return child1; // TODO: handle subscripts
 

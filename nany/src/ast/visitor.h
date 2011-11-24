@@ -65,6 +65,9 @@ namespace Ast
 		virtual void visit(LiteralNode<char>*)
 		{}
 
+		virtual void visit(LiteralNode<char*>*)
+		{}
+
 		virtual void visit(LiteralNode<const char*>*)
 		{}
 
