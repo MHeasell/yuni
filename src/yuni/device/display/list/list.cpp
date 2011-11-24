@@ -56,7 +56,7 @@ namespace Display
 	}
 
 
-	List::List(const List& c):
+	List::List(const List& c) :
 		pMonitors(c.pMonitors),
 		pPrimary(c.pPrimary),
 		pNullMonitor(c.pNullMonitor)
@@ -67,7 +67,7 @@ namespace Display
 	{
 		pMonitors    = rhs.pMonitors;
 		pPrimary     = rhs.pPrimary;
-		pNullMonitor = pNullMonitor;
+		pNullMonitor = rhs.pNullMonitor;
 		return *this;
 	}
 
