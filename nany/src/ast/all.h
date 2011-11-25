@@ -7,6 +7,7 @@
 # include "declarationlistnode.h"
 # include "functiondeclarationnode.h"
 # include "scopenode.h"
+# include "ifexpressionnode.h"
 # include "expressionlistnode.h"
 # include "parallelexpressionnode.h"
 # include "typeexpressionnode.h"

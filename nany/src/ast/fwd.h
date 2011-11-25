@@ -27,6 +27,9 @@ namespace Ast
 	//! List of expressions separated by semi-commas
 	class ExpressionListNode;
 
+	//! Conditional expression
+	class IfExpressionNode;
+
 	//! Expression that parallelizes the execution of a contained expression
 	class ParallelExpressionNode;
 
