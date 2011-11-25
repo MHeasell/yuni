@@ -1,6 +1,8 @@
 #ifndef __NANY_AST_VISITOR_H__
 # define __NANY_AST_VISITOR_H__
 
+# include "yuni/yuni.h"
+# include "yuni/core/string.h"
 # include "fwd.h"
 # include "type.h"
 
@@ -30,6 +32,9 @@ namespace Ast
 		{}
 
 		virtual void visit(ScopeNode*)
+		{}
+
+		virtual void visit(IfExpressionNode*)
 		{}
 
 		virtual void visit(ExpressionListNode*)
@@ -65,6 +70,9 @@ namespace Ast
 		virtual void visit(LiteralNode<char>*)
 		{}
 
+		virtual void visit(LiteralNode<wchar_t>*)
+		{}
+
 		virtual void visit(LiteralNode<char*>*)
 		{}
 
@@ -77,6 +85,22 @@ namespace Ast
 		virtual void visit(LiteralNode<Type*>*)
 		{}
 
+
+	protected:
+		void indent()
+		{
+			pIndent << '\t';
+		}
+
+		void unindent()
+		{
+			pIndent.removeLast();
+		}
+
+
+	protected:
+		//! Current indent, used by several inherited visitors
+		Yuni::String pIndent;
 	};
 
 

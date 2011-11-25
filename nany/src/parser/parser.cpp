@@ -280,8 +280,9 @@ Nany::Ast::Node* Rule_Literal_RealLiteral(struct TokenStruct* token)
 {
 	const wchar_t* symbol = GetChildSymbol(token, 0);
 	size_t len = wcslen(symbol);
-	char* buffer = new char[len];
+	char* buffer = new char[len + 1];
 	wcstombs(buffer, symbol, len);
+	buffer[len] = 0;
 	Yuni::String data(buffer);
 	return new Nany::Ast::LiteralNode<float>(data.to<float>());
 }
@@ -302,8 +303,7 @@ Nany::Ast::Node* Rule_Literal_TimeLiteral(struct TokenStruct* token)
 // <Literal> ::= CharLiteral
 Nany::Ast::Node* Rule_Literal_CharLiteral(struct TokenStruct* token)
 {
-	// FIXME : Conversion from wchar_t to char problem ?
-	return new Nany::Ast::LiteralNode<char>(GetChildSymbol(token, 0)[0]);
+	return new Nany::Ast::LiteralNode<wchar_t>(GetChildSymbol(token, 0)[1]);
 }
 
 
@@ -313,9 +313,9 @@ Nany::Ast::Node* Rule_Literal_CharLiteral(struct TokenStruct* token)
 Nany::Ast::Node* Rule_Literal_StringLiteral(struct TokenStruct* token)
 {
 	const wchar_t* symbol = GetChildSymbol(token, 0);
-	size_t len = wcslen(symbol);
+	size_t len = wcslen(symbol) - 2; // Remove the double quotes around the string
 	char* buffer = new char[len + 1];
-	wcstombs(buffer, symbol, len);
+	wcstombs(buffer, symbol + 1, len);
 	buffer[len] = 0;
 	return new Nany::Ast::LiteralNode<const char*>(buffer);
 }
@@ -1240,13 +1240,7 @@ Nany::Ast::Node* Rule_Expression(struct TokenStruct* token)
 // <Expression List> ::= ';' <Expression>
 Nany::Ast::Node* Rule_ExpressionList_Semi(struct TokenStruct* token)
 {
-	Nany::Ast::Node* expr = ParseChild<>(token, 1);
-
-	Nany::Ast::ExpressionListNode* list = dynamic_cast<Nany::Ast::ExpressionListNode*>(expr);
-	if (!list)
-		list = new Nany::Ast::ExpressionListNode();
-	list->prepend(expr);
-	return list;
+	return ParseChild<>(token, 1);
 }
 
 
@@ -1382,8 +1376,11 @@ Nany::Ast::Node* Rule_SimpleExp_continue(struct TokenStruct* token)
 // <Simple Exp> ::= if <Expression> then <Expression> <Else Expression>
 Nany::Ast::Node* Rule_SimpleExp_if_then(struct TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Not yet implemented !");
+	Nany::Ast::Node* cond = ParseChild<>(token, 1);
+	Nany::Ast::Node* thenExpr = ParseChild<>(token, 3);
+	Nany::Ast::Node* elseExpr = ParseChild<>(token, 4);
+
+	return new Nany::Ast::IfExpressionNode(cond, thenExpr, elseExpr);
 }
 
 
@@ -1452,8 +1449,10 @@ Nany::Ast::Node* Rule_SimpleExp_timeout_do_else(struct TokenStruct* token)
 // <Simple Exp> ::= '{' <Expression> '}'
 Nany::Ast::Node* Rule_SimpleExp_LBrace_RBrace(struct TokenStruct* token)
 {
-	// TODO : add an expressionlistnode inside a scope
-	return ParseChild<>(token, 0);
+	Nany::Ast::Node* expr = ParseChild<>(token, 1);
+	if (nullptr != expr)
+		return new Nany::Ast::ScopeNode(expr);
+	return nullptr;
 }
 
 
@@ -1462,8 +1461,7 @@ Nany::Ast::Node* Rule_SimpleExp_LBrace_RBrace(struct TokenStruct* token)
 // <Else Expression> ::= else <Expression>
 Nany::Ast::Node* Rule_ElseExpression_else(struct TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Not yet implemented !");
+	return ParseChild<>(token, 1);
 }
 
 
@@ -1472,8 +1470,7 @@ Nany::Ast::Node* Rule_ElseExpression_else(struct TokenStruct* token)
 // <Else Expression> ::= 
 Nany::Ast::Node* Rule_ElseExpression(struct TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Not yet implemented !");
+	return nullptr;
 }
 
 

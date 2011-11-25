@@ -87,6 +87,34 @@ namespace Ast
 			}
 		}
 
+		virtual void visit(IfExpressionNode* node)
+		{
+			pOut << "if (";
+			node->condition()->accept(this);
+			pOut << ')' << std::endl
+				 << pIndent << '{' << std::endl;
+			if (node->thenExpr())
+			{
+				indent();
+				pOut << pIndent;
+				node->thenExpr()->accept(this);
+				pOut << ';' << std::endl;
+				unindent();
+			}
+			pOut << pIndent << '}' << std::endl
+				 << pIndent << "else" << std::endl
+				 << pIndent << '{' << std::endl;
+			if (node->elseExpr())
+			{
+				indent();
+				pOut << pIndent;
+				node->elseExpr()->accept(this);
+				pOut << ';' << std::endl;
+				unindent();
+			}
+			pOut << pIndent << '}' << std::endl;
+		}
+
 		virtual void visit(ParallelExpressionNode* node)
 		{
 			// TODO : parallelize the expression
@@ -126,7 +154,7 @@ namespace Ast
 
 		virtual void visit(LiteralNode<bool>* node)
 		{
-			pOut << node->data;
+			pOut << (node->data ? "true" : "false");
 		}
 
 		virtual void visit(LiteralNode<int>* node)
@@ -144,9 +172,24 @@ namespace Ast
 			pOut << node->data << 'f';
 		}
 
+		virtual void visit(LiteralNode<double>* node)
+		{
+			pOut << node->data << 'f';
+		}
+
 		virtual void visit(LiteralNode<char>* node)
 		{
 			pOut << '\'' << node->data << '\'';
+		}
+
+		virtual void visit(LiteralNode<wchar_t>* node)
+		{
+			size_t len = wcslen(&node->data);
+			char* buffer = new char[len];
+			wctomb(buffer, node->data);
+			buffer[len] = '\0';
+
+			pOut << '\'' << buffer << '\'';
 		}
 
 		virtual void visit(LiteralNode<char*>* node)

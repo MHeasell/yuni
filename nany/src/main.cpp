@@ -3,6 +3,7 @@
 #include <fstream>
 #include "ast/fwd.h"
 #include "ast/cppwritervisitor.h"
+#include "ast/treeprintervisitor.h"
 #include "parser/parser.h"
 
 int main(int argc, char *argv[])
@@ -26,9 +27,13 @@ int main(int argc, char *argv[])
 	if (!tree)
 		return 1;
 
-	// Run a visitor on the AST
-	Nany::Ast::CppWriterVisitor visitor(outFile);
-	tree->accept(&visitor);
+	// Run the AST printer visitor on the AST
+	Nany::Ast::TreePrinterVisitor printerVisitor;
+	tree->accept(&printerVisitor);
+
+	// Run the CPP writer visitor on the AST
+	Nany::Ast::CppWriterVisitor cppVisitor(outFile);
+	tree->accept(&cppVisitor);
 
 	outFile.close();
 
