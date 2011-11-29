@@ -101,7 +101,7 @@ However, it is not allowed to write neither the type nor the
 initialization, since the identifier would then have no understandable
 type.
 
-Some examples of variable declaration
+Some examples of variable declaration :
 
     program VariableDeclarations;
     
@@ -170,18 +170,20 @@ syntax for class definitions :
 Note for C++ developers :
 No `;` (semi-colon) required after the `}` (right curly brace).
 
+
 ### Attributes
 
 The syntax for class attributes is similar to simple variable
-definitions :
+definitions, but you need to specify the `attribute` keyword :
 
     class <identifier>
     {
-        <qualifier> <identifier> : <type> := <expression> ;
+        <qualifier> attribute <identifier> : <type> := <expression> ;
     }
 
 Once again, you need to provide either typing or an initialization
 value.
+
 
 ### Methods
 
@@ -199,6 +201,7 @@ way functions are defined :
 Just as functions can not be forward-declared, methods must be
 defined directly in the class, as it is done in Java or C#. It is up
 to the tools to extract a clean public interface for external use.
+
 
 ### Constructors and destructors
 
@@ -242,6 +245,7 @@ Syntax for visibility in classes is as follows :
         myPrivateString := "";
     }
 
+
 ### Operator overloading
 
 It is possible to overload most operators using the `operator` keyword.
@@ -281,7 +285,36 @@ The `[]` (brackets) operator can be overloaded as follows :
 
 As shown above, it is possible to give a list of keys to operator[].
 
-### Genericity
+
+### Self
+
+The `self` keyword is the equivalent of `this` in major OO languages
+(C++, Java, C#, ...). Inside any instance method, `self` is a reference
+to the current object. An interesting trick is to use `typeof self` to
+get the exact type of the current object. This comes very handy to write
+type constraints for example.
+
+
+### Reflection
+
+In Nany, all objects have a preexisting set of methods, among which
+all the reflection features are provided. This reflection is meant to be
+very easy to use, and _safe_.
+
+Provided reflection methods follow :
+
+* method hasMethod(string methodName): bool
+* method hasMethod(string methodName, Type functionType): bool
+* method getMethod(string methodName): Any
+* method getMethod(string methodName, Type functionType): any
+* method getMethodType(string methodName): Type
+* method hasAttribute(string attributeName): bool
+* method hasAttribute(string attributeName, Type attributeType): bool
+* method getAttribute(string attributeName): any
+* method getAttributeType(string attributeName): Type
+
+
+### Class genericity
 
 Nany offers genericity in classes. This is one of the tools allowing
 for meta-programming. Type inference, constraints and specializations
@@ -348,7 +381,7 @@ This sample class illustrates what a class would look like in Nany :
         }
         
     private
-        const MaxSize := 65536u;
+        const MaxSize := 65535u;
         pData := T[MaxSize].create;
         pSize := 0u;
     }
@@ -475,10 +508,13 @@ Nany offers several built-in types :
 * double128
 * bool
 * any
+* Type
 
-Any represents any one type. Depending on circumstances, the
+`any` represents any one type. Depending on circumstances, the
 corresponding type may be known at compile time or not.
 
+`Type` is a specific type that represents a type. Type objects can
+be manipulated and compared easily.
 
 ### Type manipulation
 
@@ -487,7 +523,7 @@ corresponding type may be known at compile time or not.
     typeof(<expression>)
 
 The `typeof` function evaluates the type of an expression and
-returns it.
+returns an object of type `Type`.
 
 #### is
 
@@ -576,13 +612,14 @@ Conversely, it is possible to specify the constraint explicitly :
         a.bar(42)
     }
 
-The two samples are equivalent.
+The two samples are almost equivalent (there is a slight difference
+in that the explicit constraint does not allow automatic conversions).
 
-They will be evaluated statically (at compile time) on all calls
-where the type is known at compilation. If the constraint is
-violated, the compiler will produce an error.
+The constraint will be evaluated statically (at compile time) on all
+calls where the type of `a` is known at compile time. If the constraint
+is violated, the compiler will produce an error.
 
-If the type is not known at compile time, the constraint will be
+If the type of `a` is not known at compile time, the constraint will be
 evaluated dynamically (during execution). If the constraint is
 violated, the program will throw an exception (this is the default,
 but the behaviour can be modified).
@@ -597,7 +634,7 @@ Meta-programming
 ----------------
 
 Meta-programming is a very powerful way to write reusable code and
-express high-level ideas without little code redundancy. Nany offers
+express high-level ideas with little code redundancy. Nany offers
 several features to help you write meta-code.
 
 ### Function specializations
