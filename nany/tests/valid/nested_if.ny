@@ -3,6 +3,7 @@ program NestedIf;
 
 function main : int
 {
+	n: int;
     if true then
         if 4 > 0 then
         {

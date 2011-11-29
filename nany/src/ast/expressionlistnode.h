@@ -14,6 +14,9 @@ namespace Ast
 	** \brief AST node for a list of expressions separated by ';'
 	**
 	** By definition, the type of the list is the type of the last expression
+	** \code
+	** <expr> ';' <expr> ';' <expr>
+	** \endcode
 	*/
 	class ExpressionListNode: public Node
 	{
