@@ -31,6 +31,7 @@ namespace Ast
 			node->declarations()->accept(this);
 		}
 
+
 		virtual void visit(DeclarationListNode* node)
 		{
 			DeclarationListNode::List& declList = node->declarations();
@@ -38,6 +39,7 @@ namespace Ast
 			for (DeclarationListNode::List::iterator it = declList.begin(); it != end; ++it)
 				(*it)->accept(this);
 		}
+
 
 		virtual void visit(FunctionDeclarationNode* node)
 		{
@@ -56,9 +58,10 @@ namespace Ast
 			pFunctionScope = false;
 		}
 
+
 		virtual void visit(ScopeNode* node)
 		{
-			pOut << pIndent << '{' << std::endl;
+			pOut << '{' << std::endl;
 			indent();
 			if (node->expression())
 			{
@@ -75,6 +78,7 @@ namespace Ast
 			pOut << pIndent << '}' << std::endl;
 		}
 
+
 		virtual void visit(ExpressionListNode* node)
 		{
 			ExpressionListNode::List& exprList = node->expressions();
@@ -87,33 +91,42 @@ namespace Ast
 			}
 		}
 
+
 		virtual void visit(IfExpressionNode* node)
 		{
 			pOut << "if (";
 			node->condition()->accept(this);
-			pOut << ')' << std::endl
-				 << pIndent << '{' << std::endl;
+			pOut << ')' << std::endl;
+			bool isScope;
 			if (node->thenExpr())
 			{
-				indent();
+				isScope = nullptr != dynamic_cast<ScopeNode*>(node->thenExpr());
+				if (!isScope)
+					indent();
 				pOut << pIndent;
 				node->thenExpr()->accept(this);
-				pOut << ';' << std::endl;
-				unindent();
+				if (!isScope)
+				{
+				 	pOut << ';' << std::endl;
+					unindent();
+				}
 			}
-			pOut << pIndent << '}' << std::endl
-				 << pIndent << "else" << std::endl
-				 << pIndent << '{' << std::endl;
 			if (node->elseExpr())
 			{
-				indent();
+				pOut << pIndent << "else" << std::endl;
+				isScope = nullptr != dynamic_cast<ScopeNode*>(node->elseExpr());
+				if (!isScope)
+					indent();
 				pOut << pIndent;
 				node->elseExpr()->accept(this);
-				pOut << ';' << std::endl;
-				unindent();
+				if (!isScope)
+				{
+				 	pOut << ';' << std::endl;
+					unindent();
+				}
 			}
-			pOut << pIndent << '}' << std::endl;
 		}
+
 
 		virtual void visit(ParallelExpressionNode* node)
 		{
@@ -121,10 +134,12 @@ namespace Ast
 			node->expression()->accept(this);
 		}
 
+
 		virtual void visit(TypeExpressionNode* node)
 		{
 			node->expression()->accept(this);
 		}
+
 
 		virtual void visit(AssignmentExpressionNode* node)
 		{
@@ -141,46 +156,143 @@ namespace Ast
 			}
 		}
 
+
+		virtual void visit(EqualExpressionNode* node)
+		{
+			node->left()->accept(this);
+			pOut << " == ";
+			node->right()->accept(this);
+		}
+
+
+		virtual void visit(NotEqualExpressionNode* node)
+		{
+			node->left()->accept(this);
+			pOut << " != ";
+			node->right()->accept(this);
+		}
+
+
+		virtual void visit(InferiorExpressionNode* node)
+		{
+			node->left()->accept(this);
+			pOut << " < ";
+			node->right()->accept(this);
+		}
+
+
+		virtual void visit(InferiorEqualExpressionNode* node)
+		{
+			node->left()->accept(this);
+			pOut << " <= ";
+			node->right()->accept(this);
+		}
+
+
+		virtual void visit(SuperiorExpressionNode* node)
+		{
+			node->left()->accept(this);
+			pOut << " > ";
+			node->right()->accept(this);
+		}
+
+
+		virtual void visit(SuperiorEqualExpressionNode* node)
+		{
+			node->left()->accept(this);
+			pOut << " >= ";
+			node->right()->accept(this);
+		}
+
+
+		virtual void visit(PlusExpressionNode* node)
+		{
+			node->left()->accept(this);
+			pOut << " + ";
+			node->right()->accept(this);
+		}
+
+
+		virtual void visit(MinusExpressionNode* node)
+		{
+			node->left()->accept(this);
+			pOut << " - ";
+			node->right()->accept(this);
+		}
+
+
+		virtual void visit(MultiplyExpressionNode* node)
+		{
+			node->left()->accept(this);
+			pOut << " * ";
+			node->right()->accept(this);
+		}
+
+
+		virtual void visit(DivideExpressionNode* node)
+		{
+			node->left()->accept(this);
+			pOut << " / ";
+			node->right()->accept(this);
+		}
+
+
+		virtual void visit(ModulusExpressionNode* node)
+		{
+			node->left()->accept(this);
+			pOut << " % ";
+			node->right()->accept(this);
+		}
+
+
 		virtual void visit(ReturnExpressionNode* node)
 		{
-			pOut << pIndent << "return ";
+			pOut << "return ";
 			node->expression()->accept(this);
 		}
+
 
 		virtual void visit(IdentifierNode* node)
 		{
 			pOut << node->data;
 		}
 
+
 		virtual void visit(LiteralNode<bool>* node)
 		{
 			pOut << (node->data ? "true" : "false");
 		}
+
 
 		virtual void visit(LiteralNode<int>* node)
 		{
 			pOut << node->data;
 		}
 
+
 		virtual void visit(LiteralNode<unsigned int>* node)
 		{
 			pOut << node->data << 'u';
 		}
+
 
 		virtual void visit(LiteralNode<float>* node)
 		{
 			pOut << node->data << 'f';
 		}
 
+
 		virtual void visit(LiteralNode<double>* node)
 		{
 			pOut << node->data << 'f';
 		}
 
+
 		virtual void visit(LiteralNode<char>* node)
 		{
 			pOut << '\'' << node->data << '\'';
 		}
+
 
 		virtual void visit(LiteralNode<wchar_t>* node)
 		{
@@ -192,20 +304,24 @@ namespace Ast
 			pOut << '\'' << buffer << '\'';
 		}
 
+
 		virtual void visit(LiteralNode<char*>* node)
 		{
 			pOut << '\"' << node->data << '\"';
 		}
+
 
 		virtual void visit(LiteralNode<const char*>* node)
 		{
 			pOut << '\"' << node->data << '\"';
 		}
 
+
 		virtual void visit(LiteralNode<void*>* node)
 		{
 			pOut << "(void*)" << node->data;
 		}
+
 
 		virtual void visit(LiteralNode<Type*>* node)
 		{

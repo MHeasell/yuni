@@ -49,6 +49,39 @@ namespace Ast
 		virtual void visit(AssignmentExpressionNode*)
 		{}
 
+		virtual void visit(EqualExpressionNode*)
+		{}
+
+		virtual void visit(NotEqualExpressionNode*)
+		{}
+
+		virtual void visit(InferiorExpressionNode*)
+		{}
+
+		virtual void visit(InferiorEqualExpressionNode*)
+		{}
+
+		virtual void visit(SuperiorExpressionNode*)
+		{}
+
+		virtual void visit(SuperiorEqualExpressionNode*)
+		{}
+
+		virtual void visit(PlusExpressionNode*)
+		{}
+
+		virtual void visit(MinusExpressionNode*)
+		{}
+
+		virtual void visit(MultiplyExpressionNode*)
+		{}
+
+		virtual void visit(DivideExpressionNode*)
+		{}
+
+		virtual void visit(ModulusExpressionNode*)
+		{}
+
 		virtual void visit(ReturnExpressionNode*)
 		{}
 

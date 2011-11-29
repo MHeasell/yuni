@@ -179,6 +179,7 @@ Comment End = '*#' | '*/'
 <Parameter List> ::= Identifier <Typing> <Assignment> <Parameter List Continued>
                | Identifier <Assignment> <Parameter List Continued>
                | Identifier <Typing> <Parameter List Continued>
+               | Identifier <Parameter List Continued>
                | ! Empty
 
 <Parameter List Continued> ::= ',' <Parameter List>
@@ -286,13 +287,11 @@ Comment End = '*#' | '*/'
                |  <Equal Exp> '!=' <Compare Exp>    ! Not equal
                |  <Compare Exp>
 
-<Compare Exp> ::= <Compare Exp> '>'  <Regexp Exp> 
+<Compare Exp> ::= <Compare Exp> '<' <Regexp Exp>
+               |  <Compare Exp> '>'  <Regexp Exp> 
                |  <Compare Exp> '<=' <Regexp Exp> 
                |  <Compare Exp> '>=' <Regexp Exp>
-               |  <Inferior Exp>
                |  <Regexp Exp>
-
-<Inferior Exp> ::= <Compare Exp> '<' <Regexp Exp>
 
 ! Is the priority correct ?
 <Regexp Exp>  ::= <Regexp Exp> '~' <Shift Exp>
@@ -306,12 +305,13 @@ Comment End = '*#' | '*/'
                |  <Add Exp> '-' <Mult Exp>
                |  <Mult Exp> 
 
-<Mult Exp>    ::= <Mult Exp> '*' <Power Exp> 
-               |  <Mult Exp> '/' <Power Exp> 
+<Mult Exp>    ::= <Mult Exp> '*' <Power Exp>
+               |  <Mult Exp> '/' <Power Exp>
+               |  <Mult Exp> '%' <Power Exp>
                |  <Power Exp>
 
 <Power Exp>   ::= <Power Exp> '^' <Negate Exp>
-               | <Negate Exp>
+               | <Is Exp>
 
 <Is Exp>    ::= <Is Exp> 'is' <As Exp>
                | <As Exp>

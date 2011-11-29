@@ -39,6 +39,45 @@ namespace Ast
 	//! Assignment or variable declaration
 	class AssignmentExpressionNode;
 
+	//! Equal comparison
+	class EqualExpressionNode;
+
+	//! Not equal comparison
+	class NotEqualExpressionNode;
+
+	//! Inferior binary comparison
+	class InferiorExpressionNode;
+
+	//! Inferior or equal binary comparison
+	class InferiorEqualExpressionNode;
+
+	//! Superior binary comparison
+	class SuperiorExpressionNode;
+
+	//! Superior or equal binary comparison
+	class SuperiorEqualExpressionNode;
+
+	//! Addition
+	class PlusExpressionNode;
+
+	//! Subtraction
+	class MinusExpressionNode;
+
+	//! Multiplication
+	class MultiplyExpressionNode;
+
+	//! Division
+	class DivideExpressionNode;
+
+	//! Modulus
+	class ModulusExpressionNode;
+
+	//! Type-testing
+	class IsExpressionNode;
+
+	//! Type-casting
+	class AsExpressionNode;
+
 	//! Expression following a `return` keyword
 	class ReturnExpressionNode;
 

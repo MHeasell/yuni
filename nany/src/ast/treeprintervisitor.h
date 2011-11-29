@@ -27,10 +27,12 @@ namespace Ast
 			node->declarations()->accept(this);
 		}
 
+
 		virtual void visit(UnitDeclarationNode*)
 		{
 			std::cout << pIndent << "<Unit Declaration Node>" << std::endl;
 		}
+
 
 		virtual void visit(DeclarationListNode* node)
 		{
@@ -43,6 +45,7 @@ namespace Ast
 			unindent();
 		}
 
+
 		virtual void visit(FunctionDeclarationNode* node)
 		{
 			std::cout << pIndent << "<Function Declaration Node>" << std::endl;
@@ -54,6 +57,7 @@ namespace Ast
 			unindent();
 		}
 
+
 		virtual void visit(ScopeNode* node)
 		{
 			std::cout << pIndent << "<Scope Node>" << std::endl;
@@ -62,6 +66,7 @@ namespace Ast
 				node->expression()->accept(this);
 			unindent();
 		}
+
 
 		virtual void visit(IfExpressionNode* node)
 		{
@@ -75,6 +80,7 @@ namespace Ast
 			unindent();
 		}
 
+
 		virtual void visit(ExpressionListNode* node)
 		{
 			std::cout << pIndent << "<Expression List Node>" << std::endl;
@@ -86,6 +92,7 @@ namespace Ast
 			unindent();
 		}
 
+
 		virtual void visit(ParallelExpressionNode* node)
 		{
 			std::cout << pIndent << "<Parallel Expression Node>" << std::endl;
@@ -94,6 +101,7 @@ namespace Ast
 			unindent();
 		}
 
+
 		virtual void visit(TypeExpressionNode* node)
 		{
 			std::cout << pIndent << "<Type Expression Node>" << std::endl;
@@ -101,6 +109,7 @@ namespace Ast
 			node->expression()->accept(this);
 			unindent();
 		}
+
 
 		virtual void visit(AssignmentExpressionNode* node)
 		{
@@ -114,6 +123,117 @@ namespace Ast
 			unindent();
 		}
 
+
+		virtual void visit(EqualExpressionNode* node)
+		{
+			std::cout << pIndent << "<Equal Expression Node>" << std::endl;
+			indent();
+			node->left()->accept(this);
+			node->right()->accept(this);
+			unindent();
+		}
+
+
+		virtual void visit(NotEqualExpressionNode* node)
+		{
+			std::cout << pIndent << "<Not Equal Expression Node>" << std::endl;
+			indent();
+			node->left()->accept(this);
+			node->right()->accept(this);
+			unindent();
+		}
+
+
+		virtual void visit(InferiorExpressionNode* node)
+		{
+			std::cout << pIndent << "<Inferior Expression Node>" << std::endl;
+			indent();
+			node->left()->accept(this);
+			node->right()->accept(this);
+			unindent();
+		}
+
+
+		virtual void visit(InferiorEqualExpressionNode* node)
+		{
+			std::cout << pIndent << "<Inferior Equal Expression Node>" << std::endl;
+			indent();
+			node->left()->accept(this);
+			node->right()->accept(this);
+			unindent();
+		}
+
+
+		virtual void visit(SuperiorExpressionNode* node)
+		{
+			std::cout << pIndent << "<Superior Expression Node>" << std::endl;
+			indent();
+			node->left()->accept(this);
+			node->right()->accept(this);
+			unindent();
+		}
+
+
+		virtual void visit(SuperiorEqualExpressionNode* node)
+		{
+			std::cout << pIndent << "<Superior Equal Expression Node>" << std::endl;
+			indent();
+			node->left()->accept(this);
+			node->right()->accept(this);
+			unindent();
+		}
+
+
+		virtual void visit(PlusExpressionNode* node)
+		{
+			std::cout << pIndent << "<Plus Expression Node>" << std::endl;
+			indent();
+			node->left()->accept(this);
+			node->right()->accept(this);
+			unindent();
+		}
+
+
+		virtual void visit(MinusExpressionNode* node)
+		{
+			std::cout << pIndent << "<Minus Expression Node>" << std::endl;
+			indent();
+			node->left()->accept(this);
+			node->right()->accept(this);
+			unindent();
+		}
+
+
+		virtual void visit(MultiplyExpressionNode* node)
+		{
+			std::cout << pIndent << "<Multiply Expression Node>" << std::endl;
+			indent();
+			node->left()->accept(this);
+			node->right()->accept(this);
+			unindent();
+		}
+
+
+		virtual void visit(DivideExpressionNode* node)
+		{
+			std::cout << pIndent << "<Divide Expression Node>" << std::endl;
+			indent();
+			node->left()->accept(this);
+			node->right()->accept(this);
+			unindent();
+		}
+
+
+		virtual void visit(ModulusExpressionNode* node)
+		{
+			std::cout << pIndent << "<Modulus Expression Node>" << std::endl;
+			indent();
+			node->left()->accept(this);
+			node->right()->accept(this);
+			unindent();
+		}
+
+
 		virtual void visit(ReturnExpressionNode* node)
 		{
 			std::cout << pIndent << "<Return Expression Node>" << std::endl;
@@ -121,6 +241,7 @@ namespace Ast
 			node->expression()->accept(this);
 			unindent();
 		}
+
 
 		virtual void visit(IdentifierNode* node)
 		{
@@ -130,6 +251,7 @@ namespace Ast
 			unindent();
 		}
 
+
 		virtual void visit(LiteralNode<bool>* node)
 		{
 			std::cout << pIndent << "<Literal Node : bool>" << std::endl;
@@ -137,6 +259,7 @@ namespace Ast
 			std::cout << pIndent << "Symbol : " << node->data << std::endl;
 			unindent();
 		}
+
 
 		virtual void visit(LiteralNode<int>* node)
 		{
@@ -146,6 +269,7 @@ namespace Ast
 			unindent();
 		}
 
+
 		virtual void visit(LiteralNode<unsigned int>* node)
 		{
 			std::cout << pIndent << "<Literal Node : uint>" << std::endl;
@@ -153,6 +277,7 @@ namespace Ast
 			std::cout << pIndent << "Symbol : " << node->data << std::endl;
 			unindent();
 		}
+
 
 		virtual void visit(LiteralNode<float>* node)
 		{
@@ -162,6 +287,7 @@ namespace Ast
 			unindent();
 		}
 
+
 		virtual void visit(LiteralNode<double>* node)
 		{
 			std::cout << pIndent << "<Literal Node : double>" << std::endl;
@@ -170,6 +296,7 @@ namespace Ast
 			unindent();
 		}
 
+
 		virtual void visit(LiteralNode<char>* node)
 		{
 			std::cout << pIndent << "<Literal Node : char>" << std::endl;
@@ -177,6 +304,7 @@ namespace Ast
 			std::cout << pIndent << "Symbol : " << node->data << std::endl;
 			unindent();
 		}
+
 
 		virtual void visit(LiteralNode<wchar_t>* node)
 		{
@@ -187,6 +315,7 @@ namespace Ast
 			unindent();
 		}
 
+
 		virtual void visit(LiteralNode<char*>* node)
 		{
 			std::cout << pIndent << "<Literal Node : char*>" << std::endl;
@@ -194,6 +323,7 @@ namespace Ast
 			std::cout << pIndent << "Symbol : " << node->data << std::endl;
 			unindent();
 		}
+
 
 		virtual void visit(LiteralNode<const char*>* node)
 		{
@@ -203,6 +333,7 @@ namespace Ast
 			unindent();
 		}
 
+
 		virtual void visit(LiteralNode<void*>* node)
 		{
 			std::cout << pIndent << "<Literal Node : void*>" << std::endl;
@@ -210,6 +341,7 @@ namespace Ast
 			std::cout << pIndent << "Symbol : (void*)" << node->data << std::endl;
 			unindent();
 		}
+
 
 		virtual void visit(LiteralNode<Type*>* node)
 		{
