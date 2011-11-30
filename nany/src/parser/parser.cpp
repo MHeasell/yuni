@@ -161,8 +161,7 @@ Nany::Ast::Node* Rule_DependencyContinued_Dot_Identifier(struct TokenStruct* tok
 // <Dependency Continued> ::= 
 Nany::Ast::Node* Rule_DependencyContinued(struct TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Not yet implemented !");
+	return nullptr;
 }
 
 
@@ -812,8 +811,7 @@ Nany::Ast::Node* Rule_EnumContent_Identifier(struct TokenStruct* token)
 // <Enum Content> ::= 
 Nany::Ast::Node* Rule_EnumContent(struct TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Not yet implemented !");
+	return nullptr;
 }
 
 
@@ -890,8 +888,7 @@ Nany::Ast::Node* Rule_OptionalParameters_LParan_RParan(struct TokenStruct* token
 // <Optional Parameters> ::= 
 Nany::Ast::Node* Rule_OptionalParameters(struct TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Not yet implemented !");
+	return nullptr;
 }
 
 
@@ -931,7 +928,7 @@ Nany::Ast::Node* Rule_ParameterList_Identifier3(struct TokenStruct* token)
 Nany::Ast::Node* Rule_ParameterList_Identifier4(struct TokenStruct* token)
 {
 	// Not yet implemented !
-	throw;
+	assert(false && "Rule_ParameterList_Identifier4: Not yet implemented !");
 }
 
 
@@ -940,8 +937,7 @@ Nany::Ast::Node* Rule_ParameterList_Identifier4(struct TokenStruct* token)
 // <Parameter List> ::= 
 Nany::Ast::Node* Rule_ParameterList(struct TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Not yet implemented !");
+	return nullptr;
 }
 
 
@@ -960,8 +956,7 @@ Nany::Ast::Node* Rule_ParameterListContinued_Comma(struct TokenStruct* token)
 // <Parameter List Continued> ::= 
 Nany::Ast::Node* Rule_ParameterListContinued(struct TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Not yet implemented !");
+	return nullptr;
 }
 
 
@@ -980,8 +975,7 @@ Nany::Ast::Node* Rule_TypeQualifiers_TypeQualifier(struct TokenStruct* token)
 // <Type Qualifiers> ::= 
 Nany::Ast::Node* Rule_TypeQualifiers(struct TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Not yet implemented !");
+	return nullptr;
 }
 
 
@@ -1000,8 +994,7 @@ Nany::Ast::Node* Rule_TypeQualifiersContinued_TypeQualifier(struct TokenStruct* 
 // <Type Qualifiers Continued> ::= 
 Nany::Ast::Node* Rule_TypeQualifiersContinued(struct TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Not yet implemented !");
+	return nullptr;
 }
 
 
@@ -1020,8 +1013,7 @@ Nany::Ast::Node* Rule_OptionalOptimQualifier_OptimQualifier(struct TokenStruct* 
 // <Optional Optim Qualifier> ::= 
 Nany::Ast::Node* Rule_OptionalOptimQualifier(struct TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Not yet implemented !");
+	return nullptr;
 }
 
 
@@ -1040,8 +1032,7 @@ Nany::Ast::Node* Rule_OptionalVisibilityQualifier_VisibilityQualifier(struct Tok
 // <Optional Visibility Qualifier> ::= 
 Nany::Ast::Node* Rule_OptionalVisibilityQualifier(struct TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Not yet implemented !");
+	return nullptr;
 }
 
 
@@ -1050,8 +1041,9 @@ Nany::Ast::Node* Rule_OptionalVisibilityQualifier(struct TokenStruct* token)
 // <Argument List> ::= <Expression> <Argument List Continued>
 Nany::Ast::Node* Rule_ArgumentList(struct TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Not yet implemented !");
+	Nany::Ast::ArgumentListNode* list = ParseChild<Nany::Ast::ArgumentListNode>(token, 1);
+	list->prepend(ParseChild<>(token, 0));
+	return list;
 }
 
 
@@ -1060,8 +1052,7 @@ Nany::Ast::Node* Rule_ArgumentList(struct TokenStruct* token)
 // <Argument List> ::= 
 Nany::Ast::Node* Rule_ArgumentList2(struct TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Not yet implemented !");
+	return new Nany::Ast::ArgumentListNode();
 }
 
 
@@ -1070,8 +1061,15 @@ Nany::Ast::Node* Rule_ArgumentList2(struct TokenStruct* token)
 // <Argument List Continued> ::= ',' <Expression>
 Nany::Ast::Node* Rule_ArgumentListContinued_Comma(struct TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Not yet implemented !");
+	Nany::Ast::Node* expr = ParseChild<>(token, 1);
+
+	Nany::Ast::ArgumentListNode* list = dynamic_cast<Nany::Ast::ArgumentListNode*>(expr);
+	if (!list)
+	{
+		list = new Nany::Ast::ArgumentListNode();
+		list->prepend(expr);
+	}
+	return list;
 }
 
 
@@ -1080,8 +1078,7 @@ Nany::Ast::Node* Rule_ArgumentListContinued_Comma(struct TokenStruct* token)
 // <Argument List Continued> ::= 
 Nany::Ast::Node* Rule_ArgumentListContinued(struct TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Not yet implemented !");
+	return new Nany::Ast::ArgumentListNode();
 }
 
 
@@ -1191,7 +1188,7 @@ Nany::Ast::Node* Rule_TypeParametersContinued_Comma_Identifier_ColonEq(struct To
 Nany::Ast::Node* Rule_TypeParametersContinued(struct TokenStruct* token)
 {
 	// Not yet implemented !
-	assert(false && "Not yet implemented !");
+	assert(false && "Rule_TypeParametersContinued: Not yet implemented !");
 }
 
 
@@ -1201,7 +1198,7 @@ Nany::Ast::Node* Rule_TypeParametersContinued(struct TokenStruct* token)
 Nany::Ast::Node* Rule_TypeArguments_Gt(struct TokenStruct* token)
 {
 	// Not yet implemented !
-	assert(false && "Not yet implemented !");
+	assert(false && "Rule_TypeArguments_Gt: Not yet implemented !");
 }
 
 
@@ -1211,7 +1208,7 @@ Nany::Ast::Node* Rule_TypeArguments_Gt(struct TokenStruct* token)
 Nany::Ast::Node* Rule_TypeArgumentsContinued_Comma(struct TokenStruct* token)
 {
 	// Not yet implemented !
-	assert(false && "Not yet implemented !");
+	assert(false && "Rule_TypeArgumentsContinued_Comma: Not yet implemented !");
 }
 
 
@@ -1221,7 +1218,7 @@ Nany::Ast::Node* Rule_TypeArgumentsContinued_Comma(struct TokenStruct* token)
 Nany::Ast::Node* Rule_TypeArgumentsContinued(struct TokenStruct* token)
 {
 	// Not yet implemented !
-	assert(false && "Not yet implemented !");
+	assert(false && "Rule_TypeArgumentsContinued: Not yet implemented !");
 }
 
 
@@ -1302,13 +1299,13 @@ Nany::Ast::Node* Rule_SingleThreadExp(struct TokenStruct* token)
 
 
 
-// <Assignment Exp> ::= <Assignment Exp> ':=' <Simple Exp>
+// <Assignment Exp> ::= <Assignment Exp> ':=' <Is Exp>
 Nany::Ast::Node* Rule_AssignmentExp_ColonEq(struct TokenStruct* token)
 {
 	Nany::Ast::Node* left = ParseChild<>(token, 0);
 	Nany::Ast::Node* right = ParseChild<>(token, 2);
 
-	return new Nany::Ast::AssignmentExpressionNode(left, nullptr, right);
+	return new Nany::Ast::AssignmentExpressionNode(left, right);
 }
 
 
@@ -1329,14 +1326,35 @@ Nany::Ast::Node* Rule_LocalDeclarationExp(struct TokenStruct* token)
 	Nany::Ast::Node* left = ParseChild<>(token, 0);
 	Nany::Ast::TypeExpressionNode* type = ParseChild<Nany::Ast::TypeExpressionNode>(token, 1);
 
-	return new Nany::Ast::AssignmentExpressionNode(left, type, nullptr);
+	return new Nany::Ast::VarDeclarationNode(left, type);
 }
 
 
 
 
-// <Local Declaration Exp> ::= <Simple Exp>
+// <Local Declaration Exp> ::= <Is Exp>
 Nany::Ast::Node* Rule_LocalDeclarationExp2(struct TokenStruct* token)
+{
+	return ParseChild<>(token, 0);
+}
+
+
+
+
+// <Is Exp> ::= <Is Exp> is <Simple Exp>
+Nany::Ast::Node* Rule_IsExp_is(struct TokenStruct* token)
+{
+	Nany::Ast::Node* left = ParseChild<>(token, 0);
+	Nany::Ast::Node* right = ParseChild<>(token, 2);
+
+	return new Nany::Ast::IsExpressionNode(left, right);
+}
+
+
+
+
+// <Is Exp> ::= <Simple Exp>
+Nany::Ast::Node* Rule_IsExp(struct TokenStruct* token)
 {
 	return ParseChild<>(token, 0);
 }
@@ -1353,20 +1371,19 @@ Nany::Ast::Node* Rule_SimpleExp(struct TokenStruct* token)
 
 
 
-// <Simple Exp> ::= return <SingleThread Exp>
-Nany::Ast::Node* Rule_SimpleExp_return(struct TokenStruct* token)
+// <Simple Exp> ::= new <Simple Exp>
+Nany::Ast::Node* Rule_SimpleExp_new(struct TokenStruct* token)
 {
-	return new Nany::Ast::ReturnExpressionNode(ParseChild<>(token, 1));
+	return new Nany::Ast::NewExpressionNode(ParseChild<>(token, 1));
 }
 
 
 
 
-// <Simple Exp> ::= typeof <SingleThread Exp>
-Nany::Ast::Node* Rule_SimpleExp_typeof(struct TokenStruct* token)
+// <Simple Exp> ::= return <SingleThread Exp>
+Nany::Ast::Node* Rule_SimpleExp_return(struct TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Not yet implemented !");
+	return new Nany::Ast::ReturnExpressionNode(ParseChild<>(token, 1));
 }
 
 
@@ -1552,7 +1569,7 @@ Nany::Ast::Node* Rule_OrExp(struct TokenStruct* token)
 
 
 
-// <And Exp> ::= <And Exp> and <Compare Exp>
+// <And Exp> ::= <And Exp> and <Equal Exp>
 Nany::Ast::Node* Rule_AndExp_and(struct TokenStruct* token)
 {
 	// Not yet implemented !
@@ -1781,7 +1798,7 @@ Nany::Ast::Node* Rule_MultExp(struct TokenStruct* token)
 
 
 
-// <Power Exp> ::= <Power Exp> '^' <Negate Exp>
+// <Power Exp> ::= <Power Exp> '^' <As Exp>
 Nany::Ast::Node* Rule_PowerExp_Caret(struct TokenStruct* token)
 {
 	// Not yet implemented !
@@ -1791,7 +1808,7 @@ Nany::Ast::Node* Rule_PowerExp_Caret(struct TokenStruct* token)
 
 
 
-// <Power Exp> ::= <Is Exp>
+// <Power Exp> ::= <As Exp>
 Nany::Ast::Node* Rule_PowerExp(struct TokenStruct* token)
 {
 	return ParseChild<>(token, 0);
@@ -1800,28 +1817,7 @@ Nany::Ast::Node* Rule_PowerExp(struct TokenStruct* token)
 
 
 
-// <Is Exp> ::= <Is Exp> is <As Exp>
-Nany::Ast::Node* Rule_IsExp_is(struct TokenStruct* token)
-{
-	Nany::Ast::Node* left = ParseChild<>(token, 0);
-	Nany::Ast::Node* right = ParseChild<>(token, 2);
-
-	return new Nany::Ast::IsExpressionNode(left, right);
-}
-
-
-
-
-// <Is Exp> ::= <As Exp>
-Nany::Ast::Node* Rule_IsExp(struct TokenStruct* token)
-{
-	return ParseChild<>(token, 0);
-}
-
-
-
-
-// <As Exp> ::= <As Exp> as <Negate Exp>
+// <As Exp> ::= <As Exp> as <Typeof Exp>
 Nany::Ast::Node* Rule_AsExp_as(struct TokenStruct* token)
 {
 	Nany::Ast::Node* left = ParseChild<>(token, 0);
@@ -1833,8 +1829,26 @@ Nany::Ast::Node* Rule_AsExp_as(struct TokenStruct* token)
 
 
 
-// <As Exp> ::= <Negate Exp>
+// <As Exp> ::= <Typeof Exp>
 Nany::Ast::Node* Rule_AsExp(struct TokenStruct* token)
+{
+	return ParseChild<>(token, 0);
+}
+
+
+
+
+// <Typeof Exp> ::= typeof <Negate Exp>
+Nany::Ast::Node* Rule_TypeofExp_typeof(struct TokenStruct* token)
+{
+	return new Nany::Ast::TypeofExpressionNode(ParseChild<>(token, 1));
+}
+
+
+
+
+// <Typeof Exp> ::= <Negate Exp>
+Nany::Ast::Node* Rule_TypeofExp(struct TokenStruct* token)
 {
 	return ParseChild<>(token, 0);
 }
@@ -1944,7 +1958,17 @@ Nany::Ast::Node* Rule_Value_Identifier(struct TokenStruct* token)
 Nany::Ast::Node* Rule_Value_LBracket_RBracket(struct TokenStruct* token)
 {
 	// Not yet implemented !
-	throw;
+	assert(false && "Rule_Value_LBracket_RBracket: Not yet implemented !");
+}
+
+
+
+
+// <Value> ::= '[' <SingleThread Exp> ']' <Subscript>
+Nany::Ast::Node* Rule_Value_LBracket_RBracket2(struct TokenStruct* token)
+{
+	// Not yet implemented !
+	assert(false && "Rule_Value_LBracket_RBracket2: Not yet implemented !");
 }
 
 
@@ -2211,137 +2235,143 @@ Nany::Ast::Node* (*RuleJumpTable[])(struct TokenStruct* token) =
 	Rule_PossiblyParallelExp_Amp,
 	// 112. <SingleThread Exp> ::= <Assignment Exp>
 	Rule_SingleThreadExp,
-	// 113. <Assignment Exp> ::= <Assignment Exp> ':=' <Simple Exp>
+	// 113. <Assignment Exp> ::= <Assignment Exp> ':=' <Is Exp>
 	Rule_AssignmentExp_ColonEq,
 	// 114. <Assignment Exp> ::= <Local Declaration Exp>
 	Rule_AssignmentExp,
 	// 115. <Local Declaration Exp> ::= <Value> <Typing>
 	Rule_LocalDeclarationExp,
-	// 116. <Local Declaration Exp> ::= <Simple Exp>
+	// 116. <Local Declaration Exp> ::= <Is Exp>
 	Rule_LocalDeclarationExp2,
-	// 117. <Simple Exp> ::= <Binary Exp>
-	Rule_SimpleExp,
-	// 118. <Simple Exp> ::= return <SingleThread Exp>
-	Rule_SimpleExp_return,
-	// 119. <Simple Exp> ::= typeof <SingleThread Exp>
-	Rule_SimpleExp_typeof,
-	// 120. <Simple Exp> ::= break
-	Rule_SimpleExp_break,
-	// 121. <Simple Exp> ::= continue
-	Rule_SimpleExp_continue,
-	// 122. <Simple Exp> ::= if <Expression> then <Expression> <Else Expression>
-	Rule_SimpleExp_if_then,
-	// 123. <Simple Exp> ::= while <Expression> do <Expression>
-	Rule_SimpleExp_while_do,
-	// 124. <Simple Exp> ::= for Identifier in <Expression> do <Expression>
-	Rule_SimpleExp_for_Identifier_in_do,
-	// 125. <Simple Exp> ::= for Identifier in <Expression> order ':' <Expression> packedby ':' <Expression> do <Expression>
-	Rule_SimpleExp_for_Identifier_in_order_Colon_packedby_Colon_do,
-	// 126. <Simple Exp> ::= for Identifier in <Expression> order do <Expression>
-	Rule_SimpleExp_for_Identifier_in_order_do,
-	// 127. <Simple Exp> ::= timeout <Expression> do <Expression>
-	Rule_SimpleExp_timeout_do,
-	// 128. <Simple Exp> ::= timeout <Expression> do <Expression> else <Expression>
-	Rule_SimpleExp_timeout_do_else,
-	// 129. <Simple Exp> ::= '{' <Expression> '}'
-	Rule_SimpleExp_LBrace_RBrace,
-	// 130. <Else Expression> ::= else <Expression>
-	Rule_ElseExpression_else,
-	// 131. <Else Expression> ::= 
-	Rule_ElseExpression,
-	// 132. <Binary Exp> ::= <Binary Exp> '|' <Xor Exp>
-	Rule_BinaryExp_Pipe,
-	// 133. <Binary Exp> ::= <Xor Exp>
-	Rule_BinaryExp,
-	// 134. <Xor Exp> ::= <Xor Exp> xor <Or Exp>
-	Rule_XorExp_xor,
-	// 135. <Xor Exp> ::= <Or Exp>
-	Rule_XorExp,
-	// 136. <Or Exp> ::= <Or Exp> or <And Exp>
-	Rule_OrExp_or,
-	// 137. <Or Exp> ::= <And Exp>
-	Rule_OrExp,
-	// 138. <And Exp> ::= <And Exp> and <Compare Exp>
-	Rule_AndExp_and,
-	// 139. <And Exp> ::= <Equal Exp>
-	Rule_AndExp,
-	// 140. <Equal Exp> ::= <Equal Exp> '=' <Compare Exp>
-	Rule_EqualExp_Eq,
-	// 141. <Equal Exp> ::= <Equal Exp> '!=' <Compare Exp>
-	Rule_EqualExp_ExclamEq,
-	// 142. <Equal Exp> ::= <Compare Exp>
-	Rule_EqualExp,
-	// 143. <Compare Exp> ::= <Compare Exp> '<' <Regexp Exp>
-	Rule_CompareExp_Lt,
-	// 144. <Compare Exp> ::= <Compare Exp> '>' <Regexp Exp>
-	Rule_CompareExp_Gt,
-	// 145. <Compare Exp> ::= <Compare Exp> '<=' <Regexp Exp>
-	Rule_CompareExp_LtEq,
-	// 146. <Compare Exp> ::= <Compare Exp> '>=' <Regexp Exp>
-	Rule_CompareExp_GtEq,
-	// 147. <Compare Exp> ::= <Regexp Exp>
-	Rule_CompareExp,
-	// 148. <Regexp Exp> ::= <Regexp Exp> '~' <Shift Exp>
-	Rule_RegexpExp_Tilde,
-	// 149. <Regexp Exp> ::= <Shift Exp>
-	Rule_RegexpExp,
-	// 150. <Shift Exp> ::= <Shift Exp> '<<' <Add Exp>
-	Rule_ShiftExp_LtLt,
-	// 151. <Shift Exp> ::= <Shift Exp> '>>' <Add Exp>
-	Rule_ShiftExp_GtGt,
-	// 152. <Shift Exp> ::= <Add Exp>
-	Rule_ShiftExp,
-	// 153. <Add Exp> ::= <Add Exp> '+' <Mult Exp>
-	Rule_AddExp_Plus,
-	// 154. <Add Exp> ::= <Add Exp> '-' <Mult Exp>
-	Rule_AddExp_Minus,
-	// 155. <Add Exp> ::= <Mult Exp>
-	Rule_AddExp,
-	// 156. <Mult Exp> ::= <Mult Exp> '*' <Power Exp>
-	Rule_MultExp_Times,
-	// 157. <Mult Exp> ::= <Mult Exp> '/' <Power Exp>
-	Rule_MultExp_Div,
-	// 158. <Mult Exp> ::= <Mult Exp> '%' <Power Exp>
-	Rule_MultExp_Percent,
-	// 159. <Mult Exp> ::= <Power Exp>
-	Rule_MultExp,
-	// 160. <Power Exp> ::= <Power Exp> '^' <Negate Exp>
-	Rule_PowerExp_Caret,
-	// 161. <Power Exp> ::= <Is Exp>
-	Rule_PowerExp,
-	// 162. <Is Exp> ::= <Is Exp> is <As Exp>
+	// 117. <Is Exp> ::= <Is Exp> is <Simple Exp>
 	Rule_IsExp_is,
-	// 163. <Is Exp> ::= <As Exp>
+	// 118. <Is Exp> ::= <Simple Exp>
 	Rule_IsExp,
-	// 164. <As Exp> ::= <As Exp> as <Negate Exp>
+	// 119. <Simple Exp> ::= <Binary Exp>
+	Rule_SimpleExp,
+	// 120. <Simple Exp> ::= new <Simple Exp>
+	Rule_SimpleExp_new,
+	// 121. <Simple Exp> ::= return <SingleThread Exp>
+	Rule_SimpleExp_return,
+	// 122. <Simple Exp> ::= break
+	Rule_SimpleExp_break,
+	// 123. <Simple Exp> ::= continue
+	Rule_SimpleExp_continue,
+	// 124. <Simple Exp> ::= if <Expression> then <Expression> <Else Expression>
+	Rule_SimpleExp_if_then,
+	// 125. <Simple Exp> ::= while <Expression> do <Expression>
+	Rule_SimpleExp_while_do,
+	// 126. <Simple Exp> ::= for Identifier in <Expression> do <Expression>
+	Rule_SimpleExp_for_Identifier_in_do,
+	// 127. <Simple Exp> ::= for Identifier in <Expression> order ':' <Expression> packedby ':' <Expression> do <Expression>
+	Rule_SimpleExp_for_Identifier_in_order_Colon_packedby_Colon_do,
+	// 128. <Simple Exp> ::= for Identifier in <Expression> order do <Expression>
+	Rule_SimpleExp_for_Identifier_in_order_do,
+	// 129. <Simple Exp> ::= timeout <Expression> do <Expression>
+	Rule_SimpleExp_timeout_do,
+	// 130. <Simple Exp> ::= timeout <Expression> do <Expression> else <Expression>
+	Rule_SimpleExp_timeout_do_else,
+	// 131. <Simple Exp> ::= '{' <Expression> '}'
+	Rule_SimpleExp_LBrace_RBrace,
+	// 132. <Else Expression> ::= else <Expression>
+	Rule_ElseExpression_else,
+	// 133. <Else Expression> ::= 
+	Rule_ElseExpression,
+	// 134. <Binary Exp> ::= <Binary Exp> '|' <Xor Exp>
+	Rule_BinaryExp_Pipe,
+	// 135. <Binary Exp> ::= <Xor Exp>
+	Rule_BinaryExp,
+	// 136. <Xor Exp> ::= <Xor Exp> xor <Or Exp>
+	Rule_XorExp_xor,
+	// 137. <Xor Exp> ::= <Or Exp>
+	Rule_XorExp,
+	// 138. <Or Exp> ::= <Or Exp> or <And Exp>
+	Rule_OrExp_or,
+	// 139. <Or Exp> ::= <And Exp>
+	Rule_OrExp,
+	// 140. <And Exp> ::= <And Exp> and <Equal Exp>
+	Rule_AndExp_and,
+	// 141. <And Exp> ::= <Equal Exp>
+	Rule_AndExp,
+	// 142. <Equal Exp> ::= <Equal Exp> '=' <Compare Exp>
+	Rule_EqualExp_Eq,
+	// 143. <Equal Exp> ::= <Equal Exp> '!=' <Compare Exp>
+	Rule_EqualExp_ExclamEq,
+	// 144. <Equal Exp> ::= <Compare Exp>
+	Rule_EqualExp,
+	// 145. <Compare Exp> ::= <Compare Exp> '<' <Regexp Exp>
+	Rule_CompareExp_Lt,
+	// 146. <Compare Exp> ::= <Compare Exp> '>' <Regexp Exp>
+	Rule_CompareExp_Gt,
+	// 147. <Compare Exp> ::= <Compare Exp> '<=' <Regexp Exp>
+	Rule_CompareExp_LtEq,
+	// 148. <Compare Exp> ::= <Compare Exp> '>=' <Regexp Exp>
+	Rule_CompareExp_GtEq,
+	// 149. <Compare Exp> ::= <Regexp Exp>
+	Rule_CompareExp,
+	// 150. <Regexp Exp> ::= <Regexp Exp> '~' <Shift Exp>
+	Rule_RegexpExp_Tilde,
+	// 151. <Regexp Exp> ::= <Shift Exp>
+	Rule_RegexpExp,
+	// 152. <Shift Exp> ::= <Shift Exp> '<<' <Add Exp>
+	Rule_ShiftExp_LtLt,
+	// 153. <Shift Exp> ::= <Shift Exp> '>>' <Add Exp>
+	Rule_ShiftExp_GtGt,
+	// 154. <Shift Exp> ::= <Add Exp>
+	Rule_ShiftExp,
+	// 155. <Add Exp> ::= <Add Exp> '+' <Mult Exp>
+	Rule_AddExp_Plus,
+	// 156. <Add Exp> ::= <Add Exp> '-' <Mult Exp>
+	Rule_AddExp_Minus,
+	// 157. <Add Exp> ::= <Mult Exp>
+	Rule_AddExp,
+	// 158. <Mult Exp> ::= <Mult Exp> '*' <Power Exp>
+	Rule_MultExp_Times,
+	// 159. <Mult Exp> ::= <Mult Exp> '/' <Power Exp>
+	Rule_MultExp_Div,
+	// 160. <Mult Exp> ::= <Mult Exp> '%' <Power Exp>
+	Rule_MultExp_Percent,
+	// 161. <Mult Exp> ::= <Power Exp>
+	Rule_MultExp,
+	// 162. <Power Exp> ::= <Power Exp> '^' <As Exp>
+	Rule_PowerExp_Caret,
+	// 163. <Power Exp> ::= <As Exp>
+	Rule_PowerExp,
+	// 164. <As Exp> ::= <As Exp> as <Typeof Exp>
 	Rule_AsExp_as,
-	// 165. <As Exp> ::= <Negate Exp>
+	// 165. <As Exp> ::= <Typeof Exp>
 	Rule_AsExp,
-	// 166. <Negate Exp> ::= '-' <Value>
+	// 166. <Typeof Exp> ::= typeof <Negate Exp>
+	Rule_TypeofExp_typeof,
+	// 167. <Typeof Exp> ::= <Negate Exp>
+	Rule_TypeofExp,
+	// 168. <Negate Exp> ::= '-' <Value>
 	Rule_NegateExp_Minus,
-	// 167. <Negate Exp> ::= -- <Value>
+	// 169. <Negate Exp> ::= -- <Value>
 	Rule_NegateExp_MinusMinus,
-	// 168. <Negate Exp> ::= '++' <Value>
+	// 170. <Negate Exp> ::= '++' <Value>
 	Rule_NegateExp_PlusPlus,
-	// 169. <Negate Exp> ::= <Value> --
+	// 171. <Negate Exp> ::= <Value> --
 	Rule_NegateExp_MinusMinus2,
-	// 170. <Negate Exp> ::= <Value> '++'
+	// 172. <Negate Exp> ::= <Value> '++'
 	Rule_NegateExp_PlusPlus2,
-	// 171. <Negate Exp> ::= <Value>
+	// 173. <Negate Exp> ::= <Value>
 	Rule_NegateExp,
-	// 172. <Value> ::= <Literal> <Subscript>
+	// 174. <Value> ::= <Literal> <Subscript>
 	Rule_Value,
-	// 173. <Value> ::= '(' <SingleThread Exp> ')' <Subscript>
+	// 175. <Value> ::= '(' <SingleThread Exp> ')' <Subscript>
 	Rule_Value_LParan_RParan,
-	// 174. <Value> ::= Identifier <Subscript>
+	// 176. <Value> ::= Identifier <Subscript>
 	Rule_Value_Identifier,
-	// 175. <Value> ::= <Value> '[' <SingleThread Exp> ']' <Subscript>
+	// 177. <Value> ::= <Value> '[' <SingleThread Exp> ']' <Subscript>
 	Rule_Value_LBracket_RBracket,
-	// 176. <Subscript> ::= 
+	// 178. <Value> ::= '[' <SingleThread Exp> ']' <Subscript>
+	Rule_Value_LBracket_RBracket2,
+	// 179. <Subscript> ::= 
 	Rule_Subscript,
-	// 177. <Subscript> ::= '.' <Value>
+	// 180. <Subscript> ::= '.' <Value>
 	Rule_Subscript_Dot,
-	// 178. <Subscript> ::= '(' <Argument List> ')'
+	// 181. <Subscript> ::= '(' <Argument List> ')'
 	Rule_Subscript_LParan_RParan 
 };
 

@@ -27,6 +27,12 @@ namespace Ast
 	//! List of expressions separated by semi-commas
 	class ExpressionListNode;
 
+	//! List of parameters in a function / method declaration
+	class ParameterListNode;
+
+	//! List of arguments in a function / method call
+	class ArgumentListNode;
+
 	//! Conditional expression
 	class IfExpressionNode;
 
@@ -35,6 +41,9 @@ namespace Ast
 
 	//! Expression representing a type
 	class TypeExpressionNode;
+
+	//! Variable declaration
+	class VarDeclarationNode;
 
 	//! Assignment or variable declaration
 	class AssignmentExpressionNode;
@@ -77,6 +86,12 @@ namespace Ast
 
 	//! Type-casting
 	class AsExpressionNode;
+
+	//! typeof operator
+	class TypeofExpressionNode;
+
+	//! new operator
+	class NewExpressionNode;
 
 	//! Expression following a `return` keyword
 	class ReturnExpressionNode;

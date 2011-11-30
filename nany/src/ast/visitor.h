@@ -40,10 +40,19 @@ namespace Ast
 		virtual void visit(ExpressionListNode*)
 		{}
 
+		virtual void visit(ParameterListNode*)
+		{}
+
+		virtual void visit(ArgumentListNode*)
+		{}
+
 		virtual void visit(ParallelExpressionNode*)
 		{}
 
 		virtual void visit(TypeExpressionNode*)
+		{}
+
+		virtual void visit(VarDeclarationNode*)
 		{}
 
 		virtual void visit(AssignmentExpressionNode*)
@@ -80,6 +89,18 @@ namespace Ast
 		{}
 
 		virtual void visit(ModulusExpressionNode*)
+		{}
+
+		virtual void visit(AsExpressionNode*)
+		{}
+
+		virtual void visit(IsExpressionNode*)
+		{}
+
+		virtual void visit(TypeofExpressionNode*)
+		{}
+
+		virtual void visit(NewExpressionNode*)
 		{}
 
 		virtual void visit(ReturnExpressionNode*)

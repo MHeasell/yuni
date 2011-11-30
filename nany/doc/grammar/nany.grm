@@ -248,15 +248,18 @@ Comment End = '*#' | '*/'
 
 <SingleThread Exp> ::= <Assignment Exp>
 
-<Assignment Exp> ::= <Assignment Exp> ':=' <Simple Exp>
+<Assignment Exp> ::= <Assignment Exp> ':=' <Is Exp>
                | <Local Declaration Exp>
 
 <Local Declaration Exp> ::= <Value> <Typing>
+               | <Is Exp>
+
+<Is Exp>    ::= <Is Exp> 'is' <Simple Exp>
                | <Simple Exp>
 
 <Simple Exp> ::= <Binary Exp>
+               | 'new' <Simple Exp>
                | 'return' <SingleThread Exp>
-               | 'typeof' <SingleThread Exp>
                | 'break'
                | 'continue'
                | 'if' <Expression> 'then' <Expression> <Else Expression>
@@ -280,7 +283,7 @@ Comment End = '*#' | '*/'
 <Or Exp>      ::= <Or Exp> 'or' <And Exp> ! Boolean Or
                |  <And Exp>
 
-<And Exp>     ::= <And Exp> 'and' <Compare Exp> ! Boolean And
+<And Exp>     ::= <And Exp> 'and' <Equal Exp> ! Boolean And
                |  <Equal Exp>
 
 <Equal Exp>   ::= <Equal Exp> '='  <Compare Exp>    ! Equal
@@ -310,13 +313,13 @@ Comment End = '*#' | '*/'
                |  <Mult Exp> '%' <Power Exp>
                |  <Power Exp>
 
-<Power Exp>   ::= <Power Exp> '^' <Negate Exp>
-               | <Is Exp>
-
-<Is Exp>    ::= <Is Exp> 'is' <As Exp>
+<Power Exp>   ::= <Power Exp> '^' <As Exp>
                | <As Exp>
 
-<As Exp>    ::= <As Exp> 'as' <Negate Exp>
+<As Exp>    ::= <As Exp> 'as' <Typeof Exp>
+               | <Typeof Exp>
+
+<Typeof Exp> ::= 'typeof' <Negate Exp>
                | <Negate Exp>
 
 <Negate Exp>  ::= '-' <Value> 
@@ -333,6 +336,7 @@ Comment End = '*#' | '*/'
                | '(' <SingleThread Exp> ')' <Subscript>
                | Identifier <Subscript>
                | <Value> '[' <SingleThread Exp> ']' <Subscript>
+               | '[' <SingleThread Exp> ']' <Subscript>
 
 <Subscript> ::= ! Empty
                | '.' <Value> ! Property or attribute or function call with no argument

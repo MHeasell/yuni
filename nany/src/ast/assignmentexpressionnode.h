@@ -15,17 +15,14 @@ namespace Ast
 	** \brief AST node for an assignment expression
 	**
 	** \code
-	** <expr> : <expr> := <expr>
-	** <expr> : <expr>
 	** <expr> := <expr>
 	** \endcode
 	*/
 	class AssignmentExpressionNode: public Node
 	{
 	public:
-		AssignmentExpressionNode(Node* left, TypeExpressionNode* type, Node* right):
+		AssignmentExpressionNode(Node* left, Node* right):
 			pLeft(left),
-			pType(type),
 			pRight(right)
 		{}
 
@@ -38,17 +35,15 @@ namespace Ast
 		}
 
 		Node* left() const { return pLeft; }
-		TypeExpressionNode* type() const { return pType; }
 		Node* right() const { return pRight; }
 
 	public:
 		//! Left part of the assignment
 		Node* pLeft;
-		//! Type may be null if it was a simple assignment or if the type must be inferred
-		TypeExpressionNode* pType;
-		//! Right part of the assignment. May be null if it was a declaration with no assignment
+		//! Right part of the assignment
 		Node* pRight;
-	};
+
+	}; // class AssignmentExpressionNode
 
 
 

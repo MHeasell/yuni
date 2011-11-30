@@ -14,3 +14,7 @@ function foo
 	}
 }
 
+function main
+{
+	0
+}
