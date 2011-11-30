@@ -93,6 +93,30 @@ namespace Ast
 		}
 
 
+		virtual void visit(ParameterListNode* node)
+		{
+			std::cout << pIndent << "<Parameter List Node>" << std::endl;
+			indent();
+			ParameterListNode::List& paramList = node->parameters();
+			ParameterListNode::List::iterator end = paramList.end();
+			for (ParameterListNode::List::iterator it = paramList.begin(); it != end; ++it)
+				(*it)->accept(this);
+			unindent();
+		}
+
+
+		virtual void visit(ArgumentListNode* node)
+		{
+			std::cout << pIndent << "<Argument List Node>" << std::endl;
+			indent();
+			ArgumentListNode::List& argList = node->arguments();
+			ArgumentListNode::List::iterator end = argList.end();
+			for (ArgumentListNode::List::iterator it = argList.begin(); it != end; ++it)
+				(*it)->accept(this);
+			unindent();
+		}
+
+
 		virtual void visit(ParallelExpressionNode* node)
 		{
 			std::cout << pIndent << "<Parallel Expression Node>" << std::endl;
@@ -111,15 +135,22 @@ namespace Ast
 		}
 
 
+		virtual void visit(VarDeclarationNode* node)
+		{
+			std::cout << pIndent << "<Var Declaration Node>" << std::endl;
+			indent();
+			node->type()->accept(this);
+			node->left()->accept(this);
+			unindent();
+		}
+
+
 		virtual void visit(AssignmentExpressionNode* node)
 		{
 			std::cout << pIndent << "<Assignment Expression Node>" << std::endl;
 			indent();
-			if (node->type())
-				node->type()->accept(this);
 			node->left()->accept(this);
-			if (node->right())
-				node->right()->accept(this);
+			node->right()->accept(this);
 			unindent();
 		}
 
@@ -230,6 +261,44 @@ namespace Ast
 			indent();
 			node->left()->accept(this);
 			node->right()->accept(this);
+			unindent();
+		}
+
+
+		virtual void visit(AsExpressionNode* node)
+		{
+			std::cout << pIndent << "<As Expression Node>" << std::endl;
+			indent();
+			node->right()->accept(this);
+			node->left()->accept(this);
+			unindent();
+		}
+
+
+		virtual void visit(IsExpressionNode* node)
+		{
+			std::cout << pIndent << "<Is Expression Node>" << std::endl;
+			indent();
+			node->right()->accept(this);
+			node->left()->accept(this);
+			unindent();
+		}
+
+
+		virtual void visit(TypeofExpressionNode* node)
+		{
+			std::cout << pIndent << "<Typeof Expression Node>" << std::endl;
+			indent();
+			node->expression()->accept(this);
+			unindent();
+		}
+
+
+		virtual void visit(NewExpressionNode* node)
+		{
+			std::cout << pIndent << "<New Expression Node>" << std::endl;
+			indent();
+			node->expression()->accept(this);
 			unindent();
 		}
 

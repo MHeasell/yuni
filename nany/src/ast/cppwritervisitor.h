@@ -92,6 +92,34 @@ namespace Ast
 		}
 
 
+		virtual void visit(ParameterListNode* node)
+		{
+			ParameterListNode::List& paramList = node->parameters();
+			ParameterListNode::List::iterator end = paramList.end();
+			unsigned int size = paramList.size();
+			for (ParameterListNode::List::iterator it = paramList.begin(); it != end; ++it)
+			{
+				(*it)->accept(this);
+				if (--size)
+					pOut << ", " << std::endl;
+			}
+		}
+
+
+		virtual void visit(ArgumentListNode* node)
+		{
+			ArgumentListNode::List& argList = node->arguments();
+			ArgumentListNode::List::iterator end = argList.end();
+			unsigned int size = argList.size();
+			for (ArgumentListNode::List::iterator it = argList.begin(); it != end; ++it)
+			{
+				(*it)->accept(this);
+				if (--size)
+					pOut << ", " << std::endl;
+			}
+		}
+
+
 		virtual void visit(IfExpressionNode* node)
 		{
 			pOut << "if (";
@@ -141,19 +169,19 @@ namespace Ast
 		}
 
 
+		virtual void visit(VarDeclarationNode* node)
+		{
+			node->type()->accept(this);
+			pOut << " ";
+			node->left()->accept(this);
+		}
+
+
 		virtual void visit(AssignmentExpressionNode* node)
 		{
-			if (node->type())
-			{
-				node->type()->accept(this);
-				pOut << " ";
-			}
 			node->left()->accept(this);
-			if (node->right())
-			{
-				pOut << " = ";
-				node->right()->accept(this);
-			}
+			pOut << " = ";
+			node->right()->accept(this);
 		}
 
 
@@ -242,6 +270,41 @@ namespace Ast
 			node->left()->accept(this);
 			pOut << " % ";
 			node->right()->accept(this);
+		}
+
+
+		virtual void visit(AsExpressionNode* node)
+		{
+			pOut << "((";
+			node->right()->accept(this);
+			pOut << ")";
+			node->left()->accept(this);
+			pOut << ")";
+		}
+
+
+		virtual void visit(IsExpressionNode* node)
+		{
+			pOut << "(typeid(";
+			node->right()->accept(this);
+			pOut << ") == typeid(";
+			node->left()->accept(this);
+			pOut << "))";
+		}
+
+
+		virtual void visit(TypeofExpressionNode* node)
+		{
+			pOut << "typeof(";
+			node->expression()->accept(this);
+			pOut << ")";
+		}
+
+
+		virtual void visit(NewExpressionNode* node)
+		{
+			pOut << "new ";
+			node->expression()->accept(this);
 		}
 
 

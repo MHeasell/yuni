@@ -104,7 +104,7 @@ static void ReadableString(wchar_t* input, wchar_t* output, long width)
 Nany::Ast::Node* %ID%(struct TokenStruct* token)
 {
 	// Not yet implemented !
-	throw;
+	assert(false && "%ID%: Not yet implemented !");
 }
 
 
