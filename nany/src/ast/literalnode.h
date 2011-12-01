@@ -2,7 +2,6 @@
 # define __NANY_AST_LITERALNODE_H__
 
 # include "node.h"
-# include "type.h"
 
 namespace Nany
 {
@@ -20,7 +19,7 @@ namespace Ast
 		typedef DataT DataType;
 
 	public:
-		LiteralNode(DataT other): data(other)
+		LiteralNode(DataT other): Node(true), data(other)
 		{}
 
 		virtual ~LiteralNode()

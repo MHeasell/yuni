@@ -4,7 +4,7 @@
 # include "yuni/yuni.h"
 # include "yuni/core/string.h"
 # include "fwd.h"
-# include "type.h"
+# include "../typing/type.h"
 
 namespace Nany
 {
@@ -136,7 +136,7 @@ namespace Ast
 		virtual void visit(LiteralNode<void*>*)
 		{}
 
-		virtual void visit(LiteralNode<Type*>*)
+		virtual void visit(LiteralNode<Typing::Type*>*)
 		{}
 
 

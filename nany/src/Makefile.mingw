@@ -9,7 +9,7 @@ CXXFLAGS = -Wall -W -Wextra -std=gnu++0x -ggdb -I../../src/
 
 LDFLAGS = -L../../src/build/debug/lib -l"yuni-static-core"
 
-SRC = main.cpp parser/parser.cpp ast/type.cpp
+SRC = main.cpp parser/parser.cpp typing/type.cpp
 
 OBJ = $(SRC:.cpp=.o)
 

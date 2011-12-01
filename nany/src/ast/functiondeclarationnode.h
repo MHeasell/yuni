@@ -2,7 +2,6 @@
 # define __NANY_AST_FUNCTIONDECLARATIONNODE_H__
 
 # include "fwd.h"
-# include "type.h"
 # include "node.h"
 # include "visitor.h"
 # include "yuni/yuni.h"

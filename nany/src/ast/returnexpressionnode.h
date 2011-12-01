@@ -19,7 +19,7 @@ namespace Ast
 	class ReturnExpressionNode: public Node
 	{
 	public:
-		ReturnExpressionNode(Node* expr): pExpr(expr)
+		ReturnExpressionNode(Node* expr): Node(expr->isConst()), pExpr(expr)
 		{}
 
 		virtual ~ReturnExpressionNode()

@@ -3,7 +3,6 @@
 
 # include <iostream>
 # include "all.h"
-# include "type.h"
 # include "visitor.h"
 
 namespace Nany
@@ -412,7 +411,7 @@ namespace Ast
 		}
 
 
-		virtual void visit(LiteralNode<Type*>* node)
+		virtual void visit(LiteralNode<Typing::Type*>* node)
 		{
 			std::cout << pIndent << "<Literal Node : Type*>" << std::endl;
 			indent();
