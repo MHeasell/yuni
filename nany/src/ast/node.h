@@ -1,7 +1,7 @@
 #ifndef __NANY_AST_NODE_H__
 # define __NANY_AST_NODE_H__
 
-# include "type.h"
+# include "../typing/type.h"
 # include "visitor.h"
 
 namespace Nany
@@ -16,7 +16,10 @@ namespace Ast
 	class Node
 	{
 	public:
-		Node(): pType(nullptr)
+		Node(): pType(nullptr), pIsConst(false)
+		{}
+
+		Node(bool isConst): pType(nullptr), pIsConst(isConst)
 		{}
 
 		virtual ~Node() {}
@@ -24,19 +27,26 @@ namespace Ast
 		//! All nodes must implement visitor acceptance
 		virtual void accept(Visitor*) = 0;
 
-		void type(Type* newType)
+		void type(Typing::Type* newType)
 		{
 			pType = newType;
 		}
 
-		Type* type() const
+		Typing::Type* type() const
 		{
 			return pType;
 		}
 
+		bool isConst() const { return pIsConst; }
+
+		void setConst() { pIsConst = true; }
+
 	protected:
 		//! Types are flyweight patterns, stored as a static map in Nany::Ast::Type.
-		Type* pType;
+		Typing::Type* pType;
+
+		//! Has the node been identified as const ?
+		bool pIsConst;
 	};
 
 

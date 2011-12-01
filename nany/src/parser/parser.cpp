@@ -21,7 +21,7 @@ extern "C"
 #include "yuni/yuni.h"
 #include "yuni/core/string.h"
 #include "../ast/all.h"
-#include "../ast/type.h"
+#include "../typing/type.h"
 
 
 #define TRIMREDUCTIONS 0            // 0=off, 1=on
@@ -331,10 +331,10 @@ Nany::Ast::Node* Rule_Literal_BuiltInType(struct TokenStruct* token)
 	wcstombs(buffer, symbol, len);
 	buffer[len] = 0;
 
-	Nany::Ast::Type* typeObject = Nany::Ast::Type::Get(buffer);
+	Nany::Typing::Type* typeObject = Nany::Typing::Type::Get(buffer);
 	assert(nullptr != typeObject && "Built-in type was not recognized !");
 
-	Nany::Ast::LiteralNode<Nany::Ast::Type*>* literalNode = new Nany::Ast::LiteralNode<Nany::Ast::Type*>(typeObject);
+	Nany::Ast::LiteralNode<Nany::Typing::Type*>* literalNode = new Nany::Ast::LiteralNode<Nany::Typing::Type*>(typeObject);
 	literalNode->type(typeObject);
 	Nany::Ast::TypeExpressionNode* result = new Nany::Ast::TypeExpressionNode(literalNode);
 	result->type(typeObject);

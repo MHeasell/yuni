@@ -3,11 +3,11 @@
 
 namespace Nany
 {
-namespace Ast
+namespace Typing
 {
 
 	//! Defining the static map
 	Type::Map Type::sTypeMap;
 
-} // namespace Ast
+} // namespace Typing
 } // namespace Nany

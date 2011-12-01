@@ -285,17 +285,28 @@ namespace Ast
 
 		virtual void visit(IsExpressionNode* node)
 		{
-			pOut << "(typeid(";
-			node->right()->accept(this);
-			pOut << ") == typeid(";
-			node->left()->accept(this);
-			pOut << "))";
+			if (node->type()->isValue())
+			{
+				pOut << "(typeid(";
+				node->left()->accept(this);
+				pOut << ") == typeid(";
+				node->right()->accept(this);
+				pOut << "))";
+			}
+			else
+			{
+				pOut << "(0 != dynamic_cast<";
+				node->right()->accept(this);
+				pOut << ">(";
+				node->left()->accept(this);
+				pOut << "))";
+			}
 		}
 
 
 		virtual void visit(TypeofExpressionNode* node)
 		{
-			pOut << "typeof(";
+			pOut << "typeof (";
 			node->expression()->accept(this);
 			pOut << ")";
 		}
@@ -386,8 +397,10 @@ namespace Ast
 		}
 
 
-		virtual void visit(LiteralNode<Type*>* node)
+		virtual void visit(LiteralNode<Typing::Type*>* node)
 		{
+			if (node->data->isConst())
+				pOut << "const ";
 			pOut << node->data->name();
 		}
 
