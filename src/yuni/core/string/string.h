@@ -102,8 +102,8 @@ namespace Yuni
 	** \tparam ZeroTerminatedT True to make the string zero-terminated
 	*/
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
-	class CString
-		:protected Private::CStringImpl::Data<ChunkSizeT,ExpandableT,ZeroTerminatedT, char>
+	class CString :
+		protected Private::CStringImpl::Data<ChunkSizeT,ExpandableT,ZeroTerminatedT, char>
 	{
 	public:
 		//! POD type

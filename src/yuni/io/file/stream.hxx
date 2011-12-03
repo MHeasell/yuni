@@ -139,20 +139,29 @@ namespace File
 	}
 
 
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	template<class StringT>
+	inline bool
+	Stream::readline(StringT& buffer, bool trim)
+	{
+		return readline<StringT::chunkSize, StringT>(buffer, trim);
+	}
+
+
+	template<unsigned int CustomChunkT, class StringT>
 	bool
-	Stream::readline(CString<ChunkSizeT, ExpandableT,ZeroTerminatedT>& buffer)
+	Stream::readline(StringT& buffer, bool trim)
 	{
 		// The buffer must be reserved to its full capacity just before
 		// Assuming we have a mere Yuni::String, the internal may be null.
-		buffer.reserve(buffer.chunkSize);
+		buffer.reserve(CustomChunkT);
 		// Read data from the file
-		if ((NULL != ::fgets((char*)buffer.data(), static_cast<int>(buffer.chunkSize), pFd)))
+		if ((NULL != ::fgets((char*)buffer.data(), static_cast<int>(CustomChunkT), pFd)))
 		{
 			// We may have read less than expected. So we have to resize the string
 			// to perform maintenance (about the internal size and the final zero)
-			typedef typename CString<ChunkSizeT, ExpandableT,ZeroTerminatedT>::Char  Char;
-			buffer.resize(static_cast<unsigned int>(::strlen(buffer.c_str()) / sizeof(Char)));
+			buffer.resize(static_cast<unsigned int>(::strlen(buffer.c_str())));
+			if (trim)
+				buffer.trimRight("\r\n");
 			return true;
 		}
 		buffer.clear();

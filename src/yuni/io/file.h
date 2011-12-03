@@ -154,6 +154,24 @@ namespace File
 	template<class StringT, class U> bool AppendContent(const StringT& filename, const U& content);
 
 
+	/*!
+	** \brief Read a file line by line
+	**
+	** A simple `cat` :
+	** \code
+	** IO::File::ReadLineByLine("/tmp/foo.txt", [&] (const String& line)
+	** {
+	**	std::cout << line << std::endl;
+	** });
+	** \endcode
+	**
+	** \param filename A filename
+	** \param predicate A functor or a lambda function
+	*/
+	template<class StringT, class PredicateT>
+	bool ReadLineByLine(const StringT& filename, const PredicateT& predicate);
+
+
 
 
 
