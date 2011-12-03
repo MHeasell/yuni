@@ -47,7 +47,7 @@ namespace File
 	** if (file.open("myfile.txt"))
 	** {
 	** 		// A buffer. The given capacity will be the maximum length for a single line
-	** 		CString<4096> buffer;
+	** 		Clob buffer;
 	** 		while (file.readline(buffer))
 	** 		{
 	** 			// do something with the buffer
@@ -57,6 +57,7 @@ namespace File
 	** }
 	** // the file will be implicitely closed here
 	** \endcode
+	** Obviously, you can also consider \p IO::File::ReadLineByLine.
 	**
 	** When writing a data into a file, the data will be written 'as it' if it can
 	** be represented by a mere c-string. Otherwise a 'Yuni::String' will be used
@@ -207,9 +208,6 @@ namespace File
 		/*!
 		** \brief Read a line from the file
 		**
-		** It reads a line into the buffer pointed to by \p buffer until either a terminating
-		** newline or EOF, which it replaces with ’\0’.
-		**
 		** \param buffer The buffer where to write the line
 		** \param maxSize The maximum allowed size for the buffer
 		*/
@@ -227,9 +225,26 @@ namespace File
 		** The newline, if any, is retained.
 		**
 		** \param buffer The buffer where to write the line
+		** \param trim   True to remove any trailing linefeed
 		*/
-		template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
-		bool readline(CString<ChunkSizeT, ExpandableT,ZeroTerminatedT>& buffer);
+		template<class StringT> bool readline(StringT& buffer, bool trim = true);
+
+		/*!
+		** \brief Read a line from the file (with a custom chunk size)
+		**
+		** It reads a line into the buffer pointed to by #s until either a terminating
+		** newline or EOF, which it replaces with ’\0’.
+		** The maximum number of char read is `CustomChunkT`. For code robutness
+		** (to prevent against misuses) this routine will reserve space according to
+		** the chunk size.
+		**
+		** The newline, if any, is retained.
+		**
+		** \param buffer The buffer where to write the line
+		** \param trim   True to remove any trailing linefeed
+		*/
+		template<unsigned int CustomChunkT, class StringT> bool readline(StringT& buffer, bool trim = true);
+
 
 		/*!
 		** \brief Read a buffer

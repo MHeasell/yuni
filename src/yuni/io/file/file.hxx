@@ -218,6 +218,26 @@ namespace File
 
 
 
+	template<class StringT, class PredicateT>
+	bool
+	ReadLineByLine(const StringT& filename, const PredicateT& predicate)
+	{
+		IO::File::Stream file;
+		if (file.open(filename))
+		{
+			String line;
+			while (file.readline<4096u, String>(line))
+			{
+				predicate(line);
+			}
+			return true;
+		}
+		return false;
+	}
+
+
+
+
 
 
 } // namespace File
