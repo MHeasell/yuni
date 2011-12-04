@@ -1797,6 +1797,30 @@ namespace Yuni
 		void convertSlashesIntoBackslashes();
 
 		/*!
+		** \brief Iterate through all words in the string, all separated by one of the given separators
+		**
+		** \code
+		** String t = "a, b, c";
+		** t.words(" ,\t\r\n", [&] (const StringAdapter& word)
+		** {
+		**	std::cout << word << std::endl; // 3 elements
+		** });
+		** \endcode
+		**
+		** Dealing with empty words :
+		** \code
+		** String t = "a, b,, d";
+		** t.words(",", [&] (StringAdapter& word)
+		** {
+		**	word.trim();
+		**	std::cout << word << std::endl; // 4 elements
+		** });
+		** \endcode
+		*/
+		template<class StringT, class PredicateT>
+		void words(const StringT& separators, const PredicateT& predicate) const;
+
+		/*!
 		** \brief Split a string into several segments
 		**
 		** Here is an example of how to convert a string to a list of int :
@@ -1806,6 +1830,9 @@ namespace Yuni
 		** std::cout << list << std::endl;
 		** \endcode
 		**
+		** \warning Performance Tip: For better performances, the method \p words
+		**   will suit better
+		**
 		** \param[out] out All segments that have been found
 		** \param sep Sequence of chars considered as a separator
 		** \param keepEmptyElements True to keep empty items
@@ -1813,9 +1840,10 @@ namespace Yuni
 		** \param emptyBefore True to clear the vector before fulfill it
 		**
 		** \warning This method does not take care of string representation (with `'` or `"`)
+		** \see words()
 		*/
-		template<template<class,class> class U, class UType, class Alloc, typename StringT>
-		void split(U<UType,Alloc>& out, const StringT& sep,
+		template<template<class,class> class ListT, class UType, class Alloc, typename StringT>
+		void split(ListT<UType,Alloc>& out, const StringT& sep,
 			bool keepEmptyElements = false, bool trimElements = true, bool emptyBefore = true) const;
 
 		/*!
