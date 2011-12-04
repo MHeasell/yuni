@@ -2929,9 +2929,9 @@ namespace Yuni
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
-	template<template<class,class> class U, class UType, class Alloc, class StringT>
+	template<template<class,class> class ListT, class UType, class Alloc, class StringT>
 	void
-	CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::split(U<UType,Alloc>& out, const StringT& sep,
+	CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::split(ListT<UType,Alloc>& out, const StringT& sep,
 		bool keepEmptyElements, bool trimElements, bool emptyBefore) const
 	{
 		// Empty the container
@@ -3406,6 +3406,46 @@ namespace Yuni
 	}
 
 
+
+	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	template<class StringT, class PredicateT>
+	void
+	CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::words(const StringT& separators, const PredicateT& predicate) const
+	{
+		if (0 == AncestorType::size)
+			return;
+
+		// Indexes
+		Size offset = 0;
+		Size len  = 0;
+		Size newIndx;
+		// Temporary buffer
+		StringAdapter word;
+
+		do
+		{
+			newIndx = find_first_of(separators, offset);
+
+			if (newIndx < AncestorType::size)
+			{
+				len = newIndx - offset;
+				if (len)
+				{
+					word.assign(AncestorType::data + offset, len);
+					predicate(word);
+				}
+			}
+			else
+			{
+				word.adapt(AncestorType::data + offset, AncestorType::size - offset);
+				predicate(word);
+				break;
+			}
+
+			offset = newIndx + 1;
+		}
+		while (true);
+	}
 
 
 
