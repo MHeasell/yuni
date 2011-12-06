@@ -2,13 +2,14 @@
 # define __NANY_AST_NODE_H__
 
 # include "../typing/type.h"
-# include "visitor.h"
 
 namespace Nany
 {
 namespace Ast
 {
 
+	//! Forward declaration
+	class Visitor;
 
 	/*!
 	** \brief Abstract syntax tree. Base class for all types of node.
@@ -22,10 +23,18 @@ namespace Ast
 		Node(bool isConst): pType(nullptr), pIsConst(isConst)
 		{}
 
+		Node(Typing::Type* type, bool isConst): pType(type), pIsConst(isConst)
+		{}
+
 		virtual ~Node() {}
 
 		//! All nodes must implement visitor acceptance
 		virtual void accept(Visitor*) = 0;
+
+		void type(const char* typeId)
+		{
+			pType = Typing::Type::Get(typeId);
+		}
 
 		void type(Typing::Type* newType)
 		{
@@ -47,11 +56,13 @@ namespace Ast
 
 		//! Has the node been identified as const ?
 		bool pIsConst;
-	};
+
+	}; // class Node
 
 
 
 } // namespace Ast
 } // namespace Nany
+
 
 #endif // __NANY_AST_NODE_H__

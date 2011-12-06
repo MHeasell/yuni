@@ -3,8 +3,7 @@
 
 # include <fstream>
 # include "yuni/yuni.h"
-# include "all.h"
-# include "visitor.h"
+# include "simplevisitor.h"
 
 namespace Nany
 {
@@ -15,7 +14,7 @@ namespace Ast
 	/*!
 	** \brief Visitor that writes an equivalent C++ code
 	*/
-	class CppWriterVisitor: public Visitor
+	class CppWriterVisitor: public SimpleVisitor
 	{
 	public:
 		CppWriterVisitor(std::ofstream& stream):
@@ -171,7 +170,7 @@ namespace Ast
 
 		virtual void visit(VarDeclarationNode* node)
 		{
-			node->type()->accept(this);
+			node->typeDecl()->accept(this);
 			pOut << " ";
 			node->left()->accept(this);
 		}

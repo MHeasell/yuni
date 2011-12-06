@@ -1,0 +1,325 @@
+#ifndef __NANY_AST_TYPEVISITOR_H__
+# define __NANY_AST_TYPEVISITOR_H__
+
+# include <iostream>
+# include "../ast/simplevisitor.h"
+
+namespace Nany
+{
+namespace Typing
+{
+
+
+	/*!
+	** \brief A visitor that infers types and checks typing
+	*/
+	class TypeVisitor: public Ast::SimpleVisitor
+	{
+	public:
+
+		virtual void visit(Ast::FunctionDeclarationNode* node)
+		{
+			if (node->returnType())
+				node->returnType()->accept(this);
+			node->body()->accept(this);
+		}
+
+
+		virtual void visit(Ast::ScopeNode* node)
+		{
+			if (node->expression())
+			{
+				node->expression()->accept(this);
+				node->type(node->expression()->type());
+			}
+			else
+				node->type("void");
+		}
+
+
+		virtual void visit(Ast::IfExpressionNode* node)
+		{
+			node->condition()->accept(this);
+			if (node->thenExpr())
+				node->thenExpr()->accept(this);
+			if (node->elseExpr())
+				node->elseExpr()->accept(this);
+			// if (node->thenExpr() != node->elseExpr())
+			// 	std::cout << "Type mismatch :" << std::endl
+			// 			  << "\t`then` and `else` branches must return the same type !";
+		}
+
+
+		virtual void visit(Ast::ExpressionListNode* node)
+		{
+			Ast::ExpressionListNode::List& exprList = node->expressions();
+			Ast::ExpressionListNode::List::iterator end = exprList.end();
+			for (Ast::ExpressionListNode::List::iterator it = exprList.begin(); it != end; ++it)
+				(*it)->accept(this);
+			if (!exprList.size())
+				node->type("void");
+			else
+				node->type(exprList.back()->type());
+		}
+
+
+		virtual void visit(Ast::ParameterListNode* node)
+		{
+			Ast::ParameterListNode::List& paramList = node->parameters();
+			Ast::ParameterListNode::List::iterator end = paramList.end();
+			for (Ast::ParameterListNode::List::iterator it = paramList.begin(); it != end; ++it)
+				(*it)->accept(this);
+		}
+
+
+		virtual void visit(Ast::ArgumentListNode* node)
+		{
+			Ast::ArgumentListNode::List& argList = node->arguments();
+			Ast::ArgumentListNode::List::iterator end = argList.end();
+			for (Ast::ArgumentListNode::List::iterator it = argList.begin(); it != end; ++it)
+				(*it)->accept(this);
+		}
+
+
+		virtual void visit(Ast::ParallelExpressionNode* node)
+		{
+			node->expression()->accept(this);
+			node->type(node->expression()->type());
+		}
+
+
+		virtual void visit(Ast::TypeExpressionNode* node)
+		{
+			node->expression()->accept(this);
+			node->type(node->expression()->type());
+		}
+
+
+		virtual void visit(Ast::VarDeclarationNode* node)
+		{
+			node->typeDecl()->accept(this);
+			node->left()->accept(this);
+			node->type("void");
+		}
+
+
+		virtual void visit(Ast::AssignmentExpressionNode* node)
+		{
+			node->left()->accept(this);
+			node->right()->accept(this);
+			node->type("void");
+		}
+
+
+		virtual void visit(Ast::EqualExpressionNode* node)
+		{
+			node->left()->accept(this);
+			node->right()->accept(this);
+			node->type("bool");
+		}
+
+
+		virtual void visit(Ast::NotEqualExpressionNode* node)
+		{
+			node->left()->accept(this);
+			node->right()->accept(this);
+			node->type("bool");
+		}
+
+
+		virtual void visit(Ast::InferiorExpressionNode* node)
+		{
+			node->left()->accept(this);
+			node->right()->accept(this);
+			node->type("bool");
+		}
+
+
+		virtual void visit(Ast::InferiorEqualExpressionNode* node)
+		{
+			node->left()->accept(this);
+			node->right()->accept(this);
+			node->type("bool");
+		}
+
+
+		virtual void visit(Ast::SuperiorExpressionNode* node)
+		{
+			node->left()->accept(this);
+			node->right()->accept(this);
+			node->type("bool");
+		}
+
+
+		virtual void visit(Ast::SuperiorEqualExpressionNode* node)
+		{
+			node->left()->accept(this);
+			node->right()->accept(this);
+			node->type("bool");
+		}
+
+
+		virtual void visit(Ast::PlusExpressionNode* node)
+		{
+			node->left()->accept(this);
+			node->right()->accept(this);
+			// Fixme
+			node->type(node->left()->type());
+		}
+
+
+		virtual void visit(Ast::MinusExpressionNode* node)
+		{
+			node->left()->accept(this);
+			node->right()->accept(this);
+			// Fixme
+			node->type(node->left()->type());
+		}
+
+
+		virtual void visit(Ast::MultiplyExpressionNode* node)
+		{
+			node->left()->accept(this);
+			node->right()->accept(this);
+			// Fixme
+			node->type(node->left()->type());
+		}
+
+
+		virtual void visit(Ast::DivideExpressionNode* node)
+		{
+			node->left()->accept(this);
+			node->right()->accept(this);
+			// Fixme
+			node->type(node->left()->type());
+		}
+
+
+		virtual void visit(Ast::ModulusExpressionNode* node)
+		{
+			node->left()->accept(this);
+			node->right()->accept(this);
+			// Fixme
+			node->type(node->left()->type());
+		}
+
+
+		virtual void visit(Ast::AsExpressionNode* node)
+		{
+			node->right()->accept(this);
+			node->left()->accept(this);
+			node->type(node->right()->type());
+		}
+
+
+		virtual void visit(Ast::IsExpressionNode* node)
+		{
+			node->right()->accept(this);
+			node->left()->accept(this);
+			node->type("bool");
+		}
+
+
+		virtual void visit(Ast::TypeofExpressionNode* node)
+		{
+			node->expression()->accept(this);
+			// ???
+			node->type(node->expression()->type());
+		}
+
+
+		virtual void visit(Ast::NewExpressionNode* node)
+		{
+			node->expression()->accept(this);
+			node->type(node->expression()->type());
+		}
+
+
+		virtual void visit(Ast::ReturnExpressionNode* node)
+		{
+			node->expression()->accept(this);
+			node->type(node->expression()->type());
+		}
+
+
+		virtual void visit(Ast::IdentifierNode*)
+		{
+			// TODO : See if the identifier already exists
+			// in the scope to get its type, otherwise associate
+			// it with a new type class.
+		}
+
+
+		virtual void visit(Ast::LiteralNode<bool>* node)
+		{
+			node->type(Type::Get("bool"));
+		}
+
+
+		virtual void visit(Ast::LiteralNode<int>* node)
+		{
+			node->type(Type::Get("int"));
+		}
+
+
+		virtual void visit(Ast::LiteralNode<unsigned int>* node)
+		{
+			node->type(Type::Get("unsigned int"));
+		}
+
+
+		virtual void visit(Ast::LiteralNode<float>* node)
+		{
+			node->type(Type::Get("float"));
+		}
+
+
+		virtual void visit(Ast::LiteralNode<double>* node)
+		{
+			node->type(Type::Get("double"));
+		}
+
+
+		virtual void visit(Ast::LiteralNode<char>* node)
+		{
+			node->type(Type::Get("char"));
+		}
+
+
+		virtual void visit(Ast::LiteralNode<wchar_t>* node)
+		{
+			node->type(Type::Get("wchar_t"));
+		}
+
+
+		virtual void visit(Ast::LiteralNode<char*>* node)
+		{
+			node->type(Type::Get("char*"));
+		}
+
+
+		virtual void visit(Ast::LiteralNode<const char*>* node)
+		{
+			node->type(Type::Get("const char*"));
+		}
+
+
+		virtual void visit(Ast::LiteralNode<void*>* node)
+		{
+			node->type(Type::Get("void*"));
+		}
+
+
+		virtual void visit(Ast::LiteralNode<Typing::Type*>* node)
+		{
+			node->type(node->data);
+		}
+
+	}; // class TypeVisitor
+
+
+
+} // namespace Ast
+} // namespace Nany
+
+#endif // __NANY_AST_TYPEVISITOR_H__

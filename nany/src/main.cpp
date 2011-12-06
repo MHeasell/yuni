@@ -4,6 +4,7 @@
 #include "ast/fwd.h"
 #include "ast/cppwritervisitor.h"
 #include "ast/treeprintervisitor.h"
+#include "typing/typevisitor.h"
 #include "parser/parser.h"
 
 int main(int argc, char *argv[])
@@ -34,6 +35,10 @@ int main(int argc, char *argv[])
 	// Run the CPP writer visitor on the AST
 	Nany::Ast::CppWriterVisitor cppVisitor(outFile);
 	tree->accept(&cppVisitor);
+
+	// Run the type visitor on the AST
+	Nany::Typing::TypeVisitor typeVisitor;
+	tree->accept(&typeVisitor);
 
 	outFile.close();
 

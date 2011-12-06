@@ -335,7 +335,6 @@ Nany::Ast::Node* Rule_Literal_BuiltInType(struct TokenStruct* token)
 	assert(nullptr != typeObject && "Built-in type was not recognized !");
 
 	Nany::Ast::LiteralNode<Nany::Typing::Type*>* literalNode = new Nany::Ast::LiteralNode<Nany::Typing::Type*>(typeObject);
-	literalNode->type(typeObject);
 	Nany::Ast::TypeExpressionNode* result = new Nany::Ast::TypeExpressionNode(literalNode);
 	result->type(typeObject);
 	return result;
