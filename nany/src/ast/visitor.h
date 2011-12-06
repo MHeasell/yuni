@@ -1,8 +1,6 @@
 #ifndef __NANY_AST_VISITOR_H__
 # define __NANY_AST_VISITOR_H__
 
-# include "yuni/yuni.h"
-# include "yuni/core/string.h"
 # include "fwd.h"
 # include "../typing/type.h"
 
@@ -19,142 +17,85 @@ namespace Ast
 	{
 	public:
 
-		virtual void visit(ProgramNode*)
-		{}
+		virtual void visit(ProgramNode*) = 0;
 
-		virtual void visit(UnitDeclarationNode*)
-		{}
+		virtual void visit(UnitDeclarationNode*) = 0;
 
-		virtual void visit(DeclarationListNode*)
-		{}
+		virtual void visit(DeclarationListNode*) = 0;
 
-		virtual void visit(FunctionDeclarationNode*)
-		{}
+		virtual void visit(FunctionDeclarationNode*) = 0;
 
-		virtual void visit(ScopeNode*)
-		{}
+		virtual void visit(ScopeNode*) = 0;
 
-		virtual void visit(IfExpressionNode*)
-		{}
+		virtual void visit(IfExpressionNode*) = 0;
 
-		virtual void visit(ExpressionListNode*)
-		{}
+		virtual void visit(ExpressionListNode*) = 0;
 
-		virtual void visit(ParameterListNode*)
-		{}
+		virtual void visit(ParameterListNode*) = 0;
 
-		virtual void visit(ArgumentListNode*)
-		{}
+		virtual void visit(ArgumentListNode*) = 0;
 
-		virtual void visit(ParallelExpressionNode*)
-		{}
+		virtual void visit(ParallelExpressionNode*) = 0;
 
-		virtual void visit(TypeExpressionNode*)
-		{}
+		virtual void visit(TypeExpressionNode*) = 0;
 
-		virtual void visit(VarDeclarationNode*)
-		{}
+		virtual void visit(VarDeclarationNode*) = 0;
 
-		virtual void visit(AssignmentExpressionNode*)
-		{}
+		virtual void visit(AssignmentExpressionNode*) = 0;
 
-		virtual void visit(EqualExpressionNode*)
-		{}
+		virtual void visit(EqualExpressionNode*) = 0;
 
-		virtual void visit(NotEqualExpressionNode*)
-		{}
+		virtual void visit(NotEqualExpressionNode*) = 0;
 
-		virtual void visit(InferiorExpressionNode*)
-		{}
+		virtual void visit(InferiorExpressionNode*) = 0;
 
-		virtual void visit(InferiorEqualExpressionNode*)
-		{}
+		virtual void visit(InferiorEqualExpressionNode*) = 0;
 
-		virtual void visit(SuperiorExpressionNode*)
-		{}
+		virtual void visit(SuperiorExpressionNode*) = 0;
 
-		virtual void visit(SuperiorEqualExpressionNode*)
-		{}
+		virtual void visit(SuperiorEqualExpressionNode*) = 0;
 
-		virtual void visit(PlusExpressionNode*)
-		{}
+		virtual void visit(PlusExpressionNode*) = 0;
 
-		virtual void visit(MinusExpressionNode*)
-		{}
+		virtual void visit(MinusExpressionNode*) = 0;
 
-		virtual void visit(MultiplyExpressionNode*)
-		{}
+		virtual void visit(MultiplyExpressionNode*) = 0;
 
-		virtual void visit(DivideExpressionNode*)
-		{}
+		virtual void visit(DivideExpressionNode*) = 0;
 
-		virtual void visit(ModulusExpressionNode*)
-		{}
+		virtual void visit(ModulusExpressionNode*) = 0;
 
-		virtual void visit(AsExpressionNode*)
-		{}
+		virtual void visit(AsExpressionNode*) = 0;
 
-		virtual void visit(IsExpressionNode*)
-		{}
+		virtual void visit(IsExpressionNode*) = 0;
 
-		virtual void visit(TypeofExpressionNode*)
-		{}
+		virtual void visit(TypeofExpressionNode*) = 0;
 
-		virtual void visit(NewExpressionNode*)
-		{}
+		virtual void visit(NewExpressionNode*) = 0;
 
-		virtual void visit(ReturnExpressionNode*)
-		{}
+		virtual void visit(ReturnExpressionNode*) = 0;
 
-		virtual void visit(IdentifierNode*)
-		{}
+		virtual void visit(IdentifierNode*) = 0;
 
-		virtual void visit(LiteralNode<bool>*)
-		{}
+		virtual void visit(LiteralNode<bool>*) = 0;
 
-		virtual void visit(LiteralNode<int>*)
-		{}
+		virtual void visit(LiteralNode<int>*) = 0;
 
-		virtual void visit(LiteralNode<unsigned int>*)
-		{}
+		virtual void visit(LiteralNode<unsigned int>*) = 0;
 
-		virtual void visit(LiteralNode<float>*)
-		{}
+		virtual void visit(LiteralNode<float>*) = 0;
 
-		virtual void visit(LiteralNode<char>*)
-		{}
+		virtual void visit(LiteralNode<char>*) = 0;
 
-		virtual void visit(LiteralNode<wchar_t>*)
-		{}
+		virtual void visit(LiteralNode<wchar_t>*) = 0;
 
-		virtual void visit(LiteralNode<char*>*)
-		{}
+		virtual void visit(LiteralNode<char*>*) = 0;
 
-		virtual void visit(LiteralNode<const char*>*)
-		{}
+		virtual void visit(LiteralNode<const char*>*) = 0;
 
-		virtual void visit(LiteralNode<void*>*)
-		{}
+		virtual void visit(LiteralNode<void*>*) = 0;
 
-		virtual void visit(LiteralNode<Typing::Type*>*)
-		{}
-
-
-	protected:
-		void indent()
-		{
-			pIndent << '\t';
-		}
-
-		void unindent()
-		{
-			pIndent.removeLast();
-		}
-
-
-	protected:
-		//! Current indent, used by several inherited visitors
-		Yuni::String pIndent;
+		virtual void visit(LiteralNode<Typing::Type*>*) = 0;
 	};
 
 

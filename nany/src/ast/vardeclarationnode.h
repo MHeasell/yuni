@@ -35,7 +35,7 @@ namespace Ast
 		}
 
 		Node* left() const { return pLeft; }
-		TypeExpressionNode* type() const { return pType; }
+		TypeExpressionNode* typeDecl() const { return pType; }
 
 	public:
 		//! Identifier

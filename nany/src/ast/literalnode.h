@@ -32,7 +32,8 @@ namespace Ast
 
 	public:
 		DataT data;
-	};
+
+	}; // class LiteralNode
 
 
 

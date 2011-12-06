@@ -32,7 +32,7 @@ ConstQualifier = 'const'
 TypeQualifier  = ConstQualifier | 'ref' | 'volatile'
 VisibilityQualifier = 'public' | 'protected' | 'private' | 'published'
 OptimQualifier = 'immutable' | 'stable' | 'threadunsafe'
-BuiltInType    = 'void' | 'any' | 'int' | 'uint' | 'int8' | 'uint8' | 'int16' | 'uint16' | 'int32' | 'uint32' | 'int64' | 'uint64' | 'char' | 'float' | 'double' | 'bool'
+BuiltInType    = 'void' | 'any' | 'int' | 'uint' | 'int8' | 'uint8' | 'int16' | 'uint16' | 'int32' | 'uint32' | 'int64' | 'uint64' | 'char' | 'float' | 'double' | 'bool' | 'string'
 
 ! -------------------------------------------------
 ! Comments

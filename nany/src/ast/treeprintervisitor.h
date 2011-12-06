@@ -2,8 +2,7 @@
 # define __NANY_AST_TREEPRINTERVISITOR_H__
 
 # include <iostream>
-# include "all.h"
-# include "visitor.h"
+# include "simplevisitor.h"
 
 namespace Nany
 {
@@ -14,7 +13,7 @@ namespace Ast
 	/*!
 	** \brief A visitor that prints the names of the nodes to debug if the AST is correct.
 	*/
-	class TreePrinterVisitor: public Visitor
+	class TreePrinterVisitor: public SimpleVisitor
 	{
 	public:
 
@@ -138,7 +137,7 @@ namespace Ast
 		{
 			std::cout << pIndent << "<Var Declaration Node>" << std::endl;
 			indent();
-			node->type()->accept(this);
+			node->typeDecl()->accept(this);
 			node->left()->accept(this);
 			unindent();
 		}

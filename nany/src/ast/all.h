@@ -1,6 +1,19 @@
 #ifndef __NANY_AST_ALL_H__
 # define __NANY_AST_ALL_H__
 
+namespace Nany
+{
+namespace Ast
+{
+
+	//! Forward declaration
+	class Visitor;
+
+
+} // namespace Ast
+} // namespace Nany
+
+
 # include "node.h"
 # include "programnode.h"
 # include "unitdeclarationnode.h"
