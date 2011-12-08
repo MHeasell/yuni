@@ -26,6 +26,17 @@ namespace Ast
 
 		virtual void visit(ProgramNode* node)
 		{
+			pOut << "#include <yuni/yuni.h>" << std::endl;
+			pOut << "#include <yuni/core/string.h>" << std::endl;
+			pOut << "#include <yuni/io/file.h>" << std::endl;
+			pOut << "#include <yuni/io/io.h>" << std::endl;
+			pOut << "#include <iostream>" << std::endl;
+			pOut << "#include <set>" << std::endl;
+			pOut << "#include <list>" << std::endl;
+			pOut << "#include <vector>" << std::endl;
+			pOut << "#include <map>" << std::endl;
+			pOut << "#include <cassert>" << std::endl;
+			pOut << std::endl;
 			node->unitDeclaration()->accept(this);
 			node->declarations()->accept(this);
 		}
@@ -49,8 +60,10 @@ namespace Ast
 			}
 			else
 				pOut << "void ";
-			// TODO : handle parameter list
-			pOut << node->name() << '(' << ')' << std::endl;
+			pOut << node->name() << '(';
+			if (node->params())
+				node->params()->accept(this);
+			pOut << ')' << std::endl;
 
 			pFunctionScope = true;
 			node->body()->accept(this);
@@ -100,7 +113,7 @@ namespace Ast
 			{
 				(*it)->accept(this);
 				if (--size)
-					pOut << ", " << std::endl;
+					pOut << ", ";
 			}
 		}
 
@@ -114,7 +127,7 @@ namespace Ast
 			{
 				(*it)->accept(this);
 				if (--size)
-					pOut << ", " << std::endl;
+					pOut << ", ";
 			}
 		}
 
