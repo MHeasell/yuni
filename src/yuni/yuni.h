@@ -32,6 +32,10 @@ namespace Yuni
 # include "core/system/nullptr.h"
 /* All standard forward declarations */
 # include "core/fwd.h"
+/* banned.h - SDL requirement */
+# ifdef YUNI_OS_MSVC
+#	include "core/system/vs-banned.h"
+# endif
 
 # endif
 
