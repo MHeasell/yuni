@@ -14,9 +14,9 @@ for reading from and writing to a file without pain.
 String content;
 switch (IO::File::LoadFromFile(content, "myfile.txt"))
 {
-	case IO::ioErrNone:
+	case IO::errNone:
 		break;
-	case IO::ioErrMemoryLimit:
+	case IO::errMemoryLimit:
 		std::cout &lt;&lt; "The file size exceeds the limit." &lt;&lt; std::endl;
 		break;
 	default:
