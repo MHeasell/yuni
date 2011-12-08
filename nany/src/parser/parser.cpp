@@ -819,11 +819,14 @@ Nany::Ast::Node* Rule_EnumContent(struct TokenStruct* token)
 // <Function Declaration> ::= <Optional Optim Qualifier> function Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> '{' <Expression> '}'
 Nany::Ast::Node* Rule_FunctionDeclaration_function_Identifier_LBrace_RBrace(struct TokenStruct* token)
 {
+	// Read the parameters
+	Nany::Ast::ParameterListNode* params = ParseChild<Nany::Ast::ParameterListNode>(token, 4);
+
 	// Read the body of the function
 	Nany::Ast::Node* bodyExpr = ParseChild<>(token, 9);
 	Nany::Ast::ScopeNode* body = new Nany::Ast::ScopeNode(bodyExpr);
 
-	// TODO : Almost everything... optims, parameters, type parameters, in and out blocks
+	// TODO : optims, type parameters, in and out blocks
 
 	Nany::Ast::TypeExpressionNode* returnType = ParseChild<Nany::Ast::TypeExpressionNode>(token, 5);
 
@@ -834,7 +837,7 @@ Nany::Ast::Node* Rule_FunctionDeclaration_function_Identifier_LBrace_RBrace(stru
 	wcstombs(buffer, funcName, len);
 	buffer[len] = 0;
 
-	Nany::Ast::Node* result = new Nany::Ast::FunctionDeclarationNode(buffer, body, returnType);
+	Nany::Ast::Node* result = new Nany::Ast::FunctionDeclarationNode(buffer, params, body, returnType);
 	return result;
 }
 
@@ -877,8 +880,7 @@ Nany::Ast::Node* Rule_ReturnTypeDeclaration(struct TokenStruct* token)
 // <Optional Parameters> ::= '(' <Parameter List> ')'
 Nany::Ast::Node* Rule_OptionalParameters_LParan_RParan(struct TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Not yet implemented !");
+	return ParseChild<Nany::Ast::ParameterListNode>(token, 1);
 }
 
 
@@ -896,8 +898,24 @@ Nany::Ast::Node* Rule_OptionalParameters(struct TokenStruct* token)
 // <Parameter List> ::= Identifier <Typing> <Assignment> <Parameter List Continued>
 Nany::Ast::Node* Rule_ParameterList_Identifier(struct TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Not yet implemented !");
+	Nany::Ast::ParameterListNode* list = ParseChild<Nany::Ast::ParameterListNode>(token, 3);
+	if (!list)
+		list = new Nany::Ast::ParameterListNode();
+
+	// Read and convert the identifier
+	const wchar_t* symbol = GetChildSymbol(token, 0);
+	size_t len = wcslen(symbol);
+	char* buffer = new char[len + 1];
+	wcstombs(buffer, symbol, len);
+	buffer[len] = 0;
+	Nany::Ast::Node* identifier = new Nany::Ast::IdentifierNode(buffer);
+
+	Nany::Ast::TypeExpressionNode* type = ParseChild<Nany::Ast::TypeExpressionNode>(token, 1);
+	Nany::Ast::Node* value = ParseChild<>(token, 2);
+	Nany::Ast::Node* declaration = new Nany::Ast::VarDeclarationNode(identifier, type);
+	Nany::Ast::Node* assignment = new Nany::Ast::AssignmentExpressionNode(declaration, value);
+	list->prepend(assignment);
+	return list;
 }
 
 
@@ -906,8 +924,22 @@ Nany::Ast::Node* Rule_ParameterList_Identifier(struct TokenStruct* token)
 // <Parameter List> ::= Identifier <Assignment> <Parameter List Continued>
 Nany::Ast::Node* Rule_ParameterList_Identifier2(struct TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Not yet implemented !");
+	Nany::Ast::ParameterListNode* list = ParseChild<Nany::Ast::ParameterListNode>(token, 2);
+	if (!list)
+		list = new Nany::Ast::ParameterListNode();
+
+	// Read and convert the identifier
+	const wchar_t* symbol = GetChildSymbol(token, 0);
+	size_t len = wcslen(symbol);
+	char* buffer = new char[len + 1];
+	wcstombs(buffer, symbol, len);
+	buffer[len] = 0;
+	Nany::Ast::Node* identifier = new Nany::Ast::IdentifierNode(buffer);
+
+	Nany::Ast::Node* value = ParseChild<>(token, 1);
+	Nany::Ast::Node* assignment = new Nany::Ast::AssignmentExpressionNode(identifier, value);
+	list->prepend(assignment);
+	return list;
 }
 
 
@@ -916,8 +948,22 @@ Nany::Ast::Node* Rule_ParameterList_Identifier2(struct TokenStruct* token)
 // <Parameter List> ::= Identifier <Typing> <Parameter List Continued>
 Nany::Ast::Node* Rule_ParameterList_Identifier3(struct TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Not yet implemented !");
+	Nany::Ast::ParameterListNode* list = ParseChild<Nany::Ast::ParameterListNode>(token, 2);
+	if (!list)
+		list = new Nany::Ast::ParameterListNode();
+
+	// Read and convert the identifier
+	const wchar_t* symbol = GetChildSymbol(token, 0);
+	size_t len = wcslen(symbol);
+	char* buffer = new char[len + 1];
+	wcstombs(buffer, symbol, len);
+	buffer[len] = 0;
+	Nany::Ast::Node* identifier = new Nany::Ast::IdentifierNode(buffer);
+
+	Nany::Ast::TypeExpressionNode* type = ParseChild<Nany::Ast::TypeExpressionNode>(token, 1);
+	Nany::Ast::Node* declaration = new Nany::Ast::VarDeclarationNode(identifier, type);
+	list->prepend(declaration);
+	return list;
 }
 
 
@@ -926,8 +972,20 @@ Nany::Ast::Node* Rule_ParameterList_Identifier3(struct TokenStruct* token)
 // <Parameter List> ::= Identifier <Parameter List Continued>
 Nany::Ast::Node* Rule_ParameterList_Identifier4(struct TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Rule_ParameterList_Identifier4: Not yet implemented !");
+	Nany::Ast::ParameterListNode* list = ParseChild<Nany::Ast::ParameterListNode>(token, 1);
+	if (!list)
+		list = new Nany::Ast::ParameterListNode();
+
+	// Read and convert the identifier
+	const wchar_t* symbol = GetChildSymbol(token, 0);
+	size_t len = wcslen(symbol);
+	char* buffer = new char[len + 1];
+	wcstombs(buffer, symbol, len);
+	buffer[len] = 0;
+	Nany::Ast::Node* identifier = new Nany::Ast::IdentifierNode(buffer);
+
+	list->prepend(identifier);
+	return list;
 }
 
 
@@ -945,8 +1003,7 @@ Nany::Ast::Node* Rule_ParameterList(struct TokenStruct* token)
 // <Parameter List Continued> ::= ',' <Parameter List>
 Nany::Ast::Node* Rule_ParameterListContinued_Comma(struct TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Not yet implemented !");
+	return ParseChild<Nany::Ast::ParameterListNode>(token, 1);
 }
 
 
@@ -1041,6 +1098,8 @@ Nany::Ast::Node* Rule_OptionalVisibilityQualifier(struct TokenStruct* token)
 Nany::Ast::Node* Rule_ArgumentList(struct TokenStruct* token)
 {
 	Nany::Ast::ArgumentListNode* list = ParseChild<Nany::Ast::ArgumentListNode>(token, 1);
+	if (!list)
+		list = new Nany::Ast::ArgumentListNode();
 	list->prepend(ParseChild<>(token, 0));
 	return list;
 }
@@ -1051,23 +1110,19 @@ Nany::Ast::Node* Rule_ArgumentList(struct TokenStruct* token)
 // <Argument List> ::= 
 Nany::Ast::Node* Rule_ArgumentList2(struct TokenStruct* token)
 {
-	return new Nany::Ast::ArgumentListNode();
+	return nullptr;
 }
 
 
 
 
-// <Argument List Continued> ::= ',' <Expression>
+// <Argument List Continued> ::= ',' <Expression> <Argument List Continued>
 Nany::Ast::Node* Rule_ArgumentListContinued_Comma(struct TokenStruct* token)
 {
-	Nany::Ast::Node* expr = ParseChild<>(token, 1);
-
-	Nany::Ast::ArgumentListNode* list = dynamic_cast<Nany::Ast::ArgumentListNode*>(expr);
+	Nany::Ast::ArgumentListNode* list = ParseChild<Nany::Ast::ArgumentListNode>(token, 2);
 	if (!list)
-	{
 		list = new Nany::Ast::ArgumentListNode();
-		list->prepend(expr);
-	}
+	list->prepend(ParseChild<>(token, 1));
 	return list;
 }
 
@@ -1077,7 +1132,7 @@ Nany::Ast::Node* Rule_ArgumentListContinued_Comma(struct TokenStruct* token)
 // <Argument List Continued> ::= 
 Nany::Ast::Node* Rule_ArgumentListContinued(struct TokenStruct* token)
 {
-	return new Nany::Ast::ArgumentListNode();
+	return nullptr;
 }
 
 
@@ -1995,7 +2050,7 @@ Nany::Ast::Node* Rule_Subscript_Dot(struct TokenStruct* token)
 // <Subscript> ::= '(' <Argument List> ')'
 Nany::Ast::Node* Rule_Subscript_LParan_RParan(struct TokenStruct* token)
 {
-	return ParseChild<>(token, 0);
+	return ParseChild<>(token, 1);
 }
 
 
@@ -2190,7 +2245,7 @@ Nany::Ast::Node* (*RuleJumpTable[])(struct TokenStruct* token) =
 	Rule_ArgumentList,
 	// 90. <Argument List> ::= 
 	Rule_ArgumentList2,
-	// 91. <Argument List Continued> ::= ',' <Expression>
+	// 91. <Argument List Continued> ::= ',' <Expression> <Argument List Continued>
 	Rule_ArgumentListContinued_Comma,
 	// 92. <Argument List Continued> ::= 
 	Rule_ArgumentListContinued,

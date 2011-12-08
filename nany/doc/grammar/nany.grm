@@ -200,7 +200,7 @@ Comment End = '*#' | '*/'
 <Argument List> ::= <Expression> <Argument List Continued>
                | ! Empty
 
-<Argument List Continued> ::= ',' <Expression>
+<Argument List Continued> ::= ',' <Expression> <Argument List Continued>
                | ! Empty
 
 ! -------------------------------------------------
