@@ -66,7 +66,8 @@ namespace Ast
 			pOut << ')' << std::endl;
 
 			pFunctionScope = true;
-			node->body()->accept(this);
+			if (node->body())
+				node->body()->accept(this);
 			pFunctionScope = false;
 		}
 
@@ -335,6 +336,14 @@ namespace Ast
 		{
 			pOut << "return ";
 			node->expression()->accept(this);
+		}
+
+
+		virtual void visit(FunctionCallNode* node)
+		{
+			pOut << node->name() << '(';
+			node->params()->accept(this);
+			pOut << ')';
 		}
 
 

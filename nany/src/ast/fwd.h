@@ -96,6 +96,9 @@ namespace Ast
 	//! Expression following a `return` keyword
 	class ReturnExpressionNode;
 
+	//! Function or method call
+	class FunctionCallNode;
+
 	//! A type or variable identifier
 	class IdentifierNode;
 

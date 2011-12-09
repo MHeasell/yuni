@@ -75,6 +75,8 @@ namespace Ast
 
 		virtual void visit(ReturnExpressionNode*) = 0;
 
+		virtual void visit(FunctionCallNode*) = 0;
+
 		virtual void visit(IdentifierNode*) = 0;
 
 		virtual void visit(LiteralNode<bool>*) = 0;

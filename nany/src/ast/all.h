@@ -44,6 +44,7 @@ namespace Ast
 # include "typeofexpressionnode.h"
 # include "newexpressionnode.h"
 # include "returnexpressionnode.h"
+# include "functioncallnode.h"
 # include "identifiernode.h"
 # include "literalnode.h"
 

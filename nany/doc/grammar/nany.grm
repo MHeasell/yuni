@@ -167,8 +167,10 @@ Comment End = '*#' | '*/'
 ! -------------------------------------------------
 
 <Function Declaration> ::= <Optional Optim Qualifier> 'function' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> '{' <Expression> '}'
+               | <Optional Optim Qualifier> 'function' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> '{' '}' ! Empty body
 
 <Method Declaration> ::= <Optional Optim Qualifier> 'method' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> '{' <Expression> '}'
+               | <Optional Optim Qualifier> 'method' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> '{' '}' ! Empty body
 
 <Return Type Declaration> ::= ':' <Expression>
                | ! Empty
@@ -269,6 +271,7 @@ Comment End = '*#' | '*/'
                | 'for' Identifier 'in' <Expression> 'order' 'do' <Expression>
                | 'timeout' <Expression> 'do' <Expression>
                | 'timeout' <Expression> 'do' <Expression> 'else' <Expression>
+               | <Function Declaration>
                | '{' <Expression> '}'
 
 <Else Expression> ::= 'else' <Expression>

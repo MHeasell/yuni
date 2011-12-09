@@ -39,9 +39,12 @@ namespace Ast
 
 		virtual void visit(FunctionDeclarationNode* node)
 		{
+			if (node->params())
+				node->params()->accept(this);
 			if (node->returnType())
 				node->returnType()->accept(this);
-			node->body()->accept(this);
+			if (node->body())
+				node->body()->accept(this);
 		}
 
 		virtual void visit(ScopeNode* node)
@@ -196,6 +199,11 @@ namespace Ast
 		virtual void visit(ReturnExpressionNode* node)
 		{
 			node->expression()->accept(this);
+		}
+
+		virtual void visit(FunctionCallNode* node)
+		{
+			node->params()->accept(this);
 		}
 
 		virtual void visit(IdentifierNode*)
