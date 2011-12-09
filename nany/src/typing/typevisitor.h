@@ -19,9 +19,12 @@ namespace Typing
 
 		virtual void visit(Ast::FunctionDeclarationNode* node)
 		{
+			if (node->params())
+				node->params()->accept(this);
 			if (node->returnType())
 				node->returnType()->accept(this);
-			node->body()->accept(this);
+			if (node->body())
+				node->body()->accept(this);
 		}
 
 
@@ -239,6 +242,13 @@ namespace Typing
 		{
 			node->expression()->accept(this);
 			node->type(node->expression()->type());
+		}
+
+
+		virtual void visit(Ast::FunctionCallNode*)
+		{
+			// TODO : Resolve the function or method to the proper declaration
+			// The type of this node is the inferred return type
 		}
 
 

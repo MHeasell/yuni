@@ -49,9 +49,12 @@ namespace Ast
 			std::cout << pIndent << "<Function Declaration Node>" << std::endl;
 			indent();
 			std::cout << pIndent << "Symbol : " << node->name() << std::endl;
+			if (node->params())
+				node->params()->accept(this);
 			if (node->returnType())
 				node->returnType()->accept(this);
-			node->body()->accept(this);
+			if (node->body())
+				node->body()->accept(this);
 			unindent();
 		}
 
@@ -306,6 +309,16 @@ namespace Ast
 			std::cout << pIndent << "<Return Expression Node>" << std::endl;
 			indent();
 			node->expression()->accept(this);
+			unindent();
+		}
+
+
+		virtual void visit(FunctionCallNode* node)
+		{
+			std::cout << pIndent << "<Function Call Node>" << std::endl;
+			indent();
+			std::cout << pIndent << "Symbol : " << node->name() << std::endl;
+			node->params()->accept(this);
 			unindent();
 		}
 

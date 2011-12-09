@@ -16,12 +16,16 @@ function foobar()
 	k: string := "test"
 }
 
+function mini
+{
+}
 
 function main: int
 {
 	a: int := 22;
 	foo(a, 44, '@');
 	bar(1u);
-	foobar;
+	foobar();
+	mini;
 	return 0
 }
