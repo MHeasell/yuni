@@ -78,7 +78,7 @@ namespace Ast
 			indent();
 			if (node->expression())
 			{
-				bool isList = nullptr != dynamic_cast<ExpressionListNode*>(node->expression());
+				bool isList = (dynamic_cast<ExpressionListNode*>(node->expression()));
 				// On single expressions, write the indent
 				// On expression lists, leave this work to the visit(expressionlistnode)
 				if (!isList)
@@ -141,7 +141,7 @@ namespace Ast
 			bool isScope;
 			if (node->thenExpr())
 			{
-				isScope = nullptr != dynamic_cast<ScopeNode*>(node->thenExpr());
+				isScope = (dynamic_cast<ScopeNode*>(node->thenExpr()));
 				if (!isScope)
 					indent();
 				pOut << pIndent;
@@ -155,7 +155,7 @@ namespace Ast
 			if (node->elseExpr())
 			{
 				pOut << pIndent << "else" << std::endl;
-				isScope = nullptr != dynamic_cast<ScopeNode*>(node->elseExpr());
+				isScope = (dynamic_cast<ScopeNode*>(node->elseExpr()));
 				if (!isScope)
 					indent();
 				pOut << pIndent;
