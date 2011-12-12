@@ -1,0 +1,55 @@
+<title>Mini-Nany 1</title>
+<tag>nany</tag>
+<tag>grammar</tag>
+
+
+<h2>Introduction</h2>
+
+Mini-Nany is a subset of Nany, in terms of grammar and features. Its goal
+is to offer a more manageable language for compiler bootstrapping.
+The purpose of this document is to describe what parts of Nany must be
+implemented in a compiler for it to support Mini-Nany. Since most of this
+document will be expressed in terms of differences to the full Nany language,
+knowledge of the Nany language specification is required for full
+understanding.
+
+
+<h2>Typing</h2>
+
+Mini-Nany is not type-inferred, therefore types may not be omitted. All
+typing must be provided when declaring functions, methods, attributes and
+variables. A compliant implementation _should_ detect type errors but it
+is not a requirement, the most important point being the ability to generate
+a valid binary from valid Mini-Nany code.
+
+
+<h2>Workflows</h2>
+
+Mini-Nany does not support Workflows. As a rather high-level feature that
+impacts overall code flow and generates a lot of instructinos from very few
+lines of Nany, it was deemed too bulky for Mini-Nany.
+
+
+<h2>`where` overloads</h2>
+
+Mini-Nany does not support `where` overloads.
+A compliant Nany compiler should be able to discriminate,
+depending on the way functions are invoked, whether the result is constant and
+should be calculated statically, or whether the calculation is to be made
+at run time. This is a complicated feature, that requires deep static analysis.
+Also, `where` clauses imply to manipulate overloads, to check for sanity between
+conditions and sometimes to inject code directly in the function.
+
+
+<h2>`in` and `out` blocks</h2>
+
+Mini-Nany does not support `in` and `out` blocks, mostly for the same reasons
+as the `where` overloads : complicated static analysis and a lot of code to
+inject in the functions.
+
+
+<h2>Constrained sets</h2>
+
+Nany offers lists by comprehension, which are defined using constraints on a
+set, and the `|` operator. This is another very complicated feature that
+Mini-Nany does not support.

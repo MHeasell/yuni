@@ -19,7 +19,7 @@ namespace Ast
 	class IsExpressionNode: public Node
 	{
 	public:
-		IsExpressionNode(Node* left, Node* right):
+		IsExpressionNode(Node* left, TypeExpressionNode* right):
 			pLeft(left),
 			pRight(right)
 		{}
@@ -33,11 +33,11 @@ namespace Ast
 		}
 
 		Node* left() const { return pLeft; }
-		Node* right() const { return pRight; }
+		TypeExpressionNode* right() const { return pRight; }
 
 	public:
 		Node* pLeft;
-		Node* pRight;
+		TypeExpressionNode* pRight;
 	};
 
 

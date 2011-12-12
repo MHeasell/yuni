@@ -30,6 +30,7 @@ namespace Ast
 			pOut << "#include <yuni/core/string.h>" << std::endl;
 			pOut << "#include <yuni/io/file.h>" << std::endl;
 			pOut << "#include <yuni/io/io.h>" << std::endl;
+			pOut << "#include <typeinfo>" << std::endl;
 			pOut << "#include <iostream>" << std::endl;
 			pOut << "#include <set>" << std::endl;
 			pOut << "#include <list>" << std::endl;
@@ -68,6 +69,8 @@ namespace Ast
 			pFunctionScope = true;
 			if (node->body())
 				node->body()->accept(this);
+			else
+				pOut << "{}" << std::endl;
 			pFunctionScope = false;
 		}
 
@@ -298,7 +301,7 @@ namespace Ast
 
 		virtual void visit(IsExpressionNode* node)
 		{
-			if (node->type()->isValue())
+			if (!node->type() || node->type()->isValue())
 			{
 				pOut << "(typeid(";
 				node->left()->accept(this);
