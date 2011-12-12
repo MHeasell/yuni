@@ -54,7 +54,7 @@ namespace Typing
 		sTypeMap[(s = "float")] = new Type("float", true);
 		sTypeMap[(s = "double")] = new Type("double", true);
 		sTypeMap[(s = "char")] = new Type("char", true);
-		sTypeMap[(s = "string")] = new Type("char*", false);
+		sTypeMap[(s = "string")] = new Type("Yuni::String", false);
 		sTypeMap[(s = "niltype")] = new Type("void*", false);
 	}
 

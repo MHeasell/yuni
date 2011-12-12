@@ -1,7 +1,7 @@
 "Name"     = 'Nany'
 "Author"   = 'Bruno BORRI, Damien GERARD'
 "Version"  = '0.1'
-"About"    = 'Grammar for the Nany scripting language, from the Yuni project team'
+"About"    = 'Grammar for the Nany language, from the Yuni project team'
 "Character Mapping" = 'Unicode'
 "Case Sensitive" = 'True'
 "Start Symbol" = <Program>
@@ -60,10 +60,11 @@ Comment End = '*#' | '*/'
 <Dependency Continued> ::= '.' Identifier <Dependency Continued>
                | ! Empty
 
-<Declaration List> ::= <Function Declaration> <Declaration List>
+<Declaration List> ::= <Optional Visibility Qualifier> <Function Declaration> <Declaration List>
                | <Optional Visibility Qualifier> <Class Declaration> <Declaration List>
                | <Optional Visibility Qualifier> <Workflow Declaration> <Declaration List>
                | <Optional Visibility Qualifier> <Enum Declaration> <Declaration List>
+               | <Optional Visibility Qualifier> <Typedef> ';' <Declaration List>
                | ! Empty
 
 ! -------------------------------------------------
@@ -93,6 +94,7 @@ Comment End = '*#' | '*/'
                | <Attribute Declaration> ';' <Class Content>
                | <Property Declaration> ';' <Class Content>
                | <Class Declaration> <Class Content> ! Nested class
+               | <Typedef> ';' <Class Content>
                | ! Empty
 
 <Property Declaration> ::= 'property' Identifier <Typing> <Assignment> <Property Callbacks>
@@ -205,6 +207,8 @@ Comment End = '*#' | '*/'
 <Argument List Continued> ::= ',' <Expression> <Argument List Continued>
                | ! Empty
 
+<Typedef> ::= 'type' Identifier ':=' <Expression>
+
 ! -------------------------------------------------
 ! Constraint blocks
 ! -------------------------------------------------
@@ -219,19 +223,20 @@ Comment End = '*#' | '*/'
 ! Types
 ! -------------------------------------------------
 
-<Optional Type Parameters> ::= '<' <Type Parameters>
+<Optional Type Parameters> ::= <Type Parameters>
                | ! Empty
 
 ! This is for generics declarations
-<Type Parameters> ::= Identifier <Type Parameters Continued> '>'
-               | Identifier ':=' <Expression> <Type Parameters Continued> '>'
+<Type Parameters> ::= '<' Identifier <Type Parameters Continued> '>'
+               | '<' Identifier ':=' <Expression> <Type Parameters Continued> '>'
 
 <Type Parameters Continued> ::= ',' Identifier <Type Parameters Continued>
                | ',' Identifier ':=' <Expression> <Type Parameters Continued>
                | ! Empty
 
 ! This is for generics instanciations
-<Type Arguments> ::= <Expression> <Type Arguments Continued> '>'
+<Type Arguments> ::= <Expression> <Type Arguments Continued>
+               | ! Empty
 
 <Type Arguments Continued> ::= ',' <Expression> <Type Parameters Continued>
                | ! Empty
@@ -247,6 +252,8 @@ Comment End = '*#' | '*/'
 
 <Possibly Parallel Exp> ::= <SingleThread Exp>
                | '&' <SingleThread Exp>
+               | 'async' <SingleThread Exp>
+               | 'sync' <SingleThread Exp>
 
 <SingleThread Exp> ::= <Assignment Exp>
 
@@ -261,6 +268,7 @@ Comment End = '*#' | '*/'
 
 <Simple Exp> ::= <Binary Exp>
                | 'new' <Simple Exp>
+               | <Typedef>
                | 'return' <SingleThread Exp>
                | 'break'
                | 'continue'
@@ -339,6 +347,7 @@ Comment End = '*#' | '*/'
                | '(' <SingleThread Exp> ')' <Subscript>
                | Identifier <Subscript>
                | <Value> '[' <SingleThread Exp> ']' <Subscript>
+               | <Value> '<' <Type Arguments> '>' <Subscript>
                | '[' <SingleThread Exp> ']' <Subscript>
 
 <Subscript> ::= ! Empty
