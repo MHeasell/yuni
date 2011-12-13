@@ -38,7 +38,8 @@ namespace Ast
 	public:
 		Node* pLeft;
 		TypeExpressionNode* pRight;
-	};
+
+	}; // class IsExpressionNode
 
 
 

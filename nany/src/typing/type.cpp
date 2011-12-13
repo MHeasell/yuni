@@ -1,5 +1,9 @@
 
 #include "type.h"
+#include <iostream>
+
+using namespace Yuni;
+
 
 namespace Nany
 {
@@ -9,12 +13,11 @@ namespace Typing
 	//! Defining the static map
 	Type::Map Type::sTypeMap;
 
-	Type* Type::Get(const char* id)
+	Type* Type::Get(const Yuni::String& id)
 	{
 		if (sTypeMap.empty())
-		{
 			RegisterBuiltinTypes();
-		}
+
 		// Find the type
 		Map::iterator it = sTypeMap.find(id);
 		if (sTypeMap.end() == it)
@@ -23,10 +26,28 @@ namespace Typing
 	}
 
 
-	void Type::Add(const char* id, Type* newType)
+	void Type::Add(const Yuni::String& id, Type* newType)
 	{
 		if (sTypeMap.empty())
 			RegisterBuiltinTypes();
+
+		String::Size bracket = id.find('[');
+		if (bracket < id.size())
+		{
+			String::Size finalBracket = id.find(']', bracket + 1);
+			if (finalBracket < id.size())
+			{
+				StringAdapter realType(id, 0, bracket);
+				realType.trim();
+				StringAdapter cardinality(id, bracket + 1, finalBracket - bracket - 1);
+				cardinality.trim();
+				std::cout << realType << ", cardinality: " << cardinality << std::endl;
+				String s;
+				s << "std::vector<" << realType << '>';
+				Add(s, newType);
+				return;
+			}
+		}
 		Map::iterator it = sTypeMap.find(id);
 		if (sTypeMap.end() != it)
 		{
@@ -34,7 +55,9 @@ namespace Typing
 			it->second = newType;
 		}
 		else
+		{
 			sTypeMap[id] = newType;
+		}
 	}
 
 
