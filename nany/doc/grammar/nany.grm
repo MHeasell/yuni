@@ -346,6 +346,7 @@ Comment End = '*#' | '*/'
 <Value>  ::= <Literal> <Subscript> ! 2.4.round
                | '(' <SingleThread Exp> ')' <Subscript>
                | Identifier <Subscript>
+               | <Value> '[' ']'
                | <Value> '[' <SingleThread Exp> ']' <Subscript>
                | <Value> '<' <Type Arguments> '>' <Subscript>
                | '[' <SingleThread Exp> ']' <Subscript>

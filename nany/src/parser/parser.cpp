@@ -1846,6 +1846,7 @@ Nany::Ast::Node* Rule_RegexpExp_Tilde(struct TokenStruct* token)
 
 
 
+
 // <Regexp Exp> ::= <Shift Exp>
 Nany::Ast::Node* Rule_RegexpExp(struct TokenStruct* token)
 {
@@ -2128,11 +2129,54 @@ Nany::Ast::Node* Rule_Value_Identifier(struct TokenStruct* token)
 
 
 
-// <Value> ::= <Value> '[' <SingleThread Exp> ']' <Subscript>
+// <Value> ::= <Value> '[' ']'
 Nany::Ast::Node* Rule_Value_LBracket_RBracket(struct TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Rule_Value_LBracket_RBracket: Not yet implemented !");
+	Nany::Ast::Node* left = ParseChild<>(token, 0);
+
+	Nany::Ast::TypeExpressionNode* type = dynamic_cast<Nany::Ast::TypeExpressionNode*>(left);
+
+	if (type)
+	{
+		type->type(type->type()->toArrayType());
+		return type;
+	}
+
+	// TODO
+	return left;
+}
+
+
+
+
+// <Value> ::= <Value> '[' <SingleThread Exp> ']' <Subscript>
+Nany::Ast::Node* Rule_Value_LBracket_RBracket2(struct TokenStruct* token)
+{
+	Nany::Ast::Node* left = ParseChild<>(token, 0);
+
+	Nany::Ast::TypeExpressionNode* type = dynamic_cast<Nany::Ast::TypeExpressionNode*>(left);
+
+	if (type)
+	{
+		Nany::Ast::Node* cardinality = ParseChild<>(token, 2);
+		Nany::Ast::LiteralNode<int>* intCard = dynamic_cast<Nany::Ast::LiteralNode<int>*>(cardinality);
+		if (intCard)
+		{
+			type->type(type->type()->toArrayType(/*intCard->data*/));
+		}
+		else
+		{
+			Nany::Ast::LiteralNode<unsigned>* uintCard = dynamic_cast<Nany::Ast::LiteralNode<unsigned>*>(cardinality);
+			assert(uintCard && "Invalid expression for cardinality in array.");
+			type->type(type->type()->toArrayType(/*uintCard->data*/));
+		}
+		return type;
+	}
+
+	// TODO : manage subscript
+
+	// TODO
+	return left;
 }
 
 
@@ -2143,16 +2187,17 @@ Nany::Ast::Node* Rule_Value_Lt_Gt(struct TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Rule_Value_Lt_Gt: Not yet implemented !");
+	return nullptr;
 }
 
 
 
 
 // <Value> ::= '[' <SingleThread Exp> ']' <Subscript>
-Nany::Ast::Node* Rule_Value_LBracket_RBracket2(struct TokenStruct* token)
+Nany::Ast::Node* Rule_Value_LBracket_RBracket3(struct TokenStruct* token)
 {
 	// Not yet implemented !
-	assert(false && "Rule_Value_LBracket_RBracket2: Not yet implemented !");
+	assert(false && "Rule_Value_LBracket_RBracket3: Not yet implemented !");
 }
 
 
@@ -2567,17 +2612,19 @@ Nany::Ast::Node* (*RuleJumpTable[])(struct TokenStruct* token) =
 	Rule_Value_LParan_RParan,
 	// 186. <Value> ::= Identifier <Subscript>
 	Rule_Value_Identifier,
-	// 187. <Value> ::= <Value> '[' <SingleThread Exp> ']' <Subscript>
+	// 187. <Value> ::= <Value> '[' ']'
 	Rule_Value_LBracket_RBracket,
-	// 188. <Value> ::= <Value> '<' <Type Arguments> '>' <Subscript>
-	Rule_Value_Lt_Gt,
-	// 189. <Value> ::= '[' <SingleThread Exp> ']' <Subscript>
+	// 188. <Value> ::= <Value> '[' <SingleThread Exp> ']' <Subscript>
 	Rule_Value_LBracket_RBracket2,
-	// 190. <Subscript> ::= 
+	// 189. <Value> ::= <Value> '<' <Type Arguments> '>' <Subscript>
+	Rule_Value_Lt_Gt,
+	// 190. <Value> ::= '[' <SingleThread Exp> ']' <Subscript>
+	Rule_Value_LBracket_RBracket3,
+	// 191. <Subscript> ::= 
 	Rule_Subscript,
-	// 191. <Subscript> ::= '.' <Value>
+	// 192. <Subscript> ::= '.' <Value>
 	Rule_Subscript_Dot,
-	// 192. <Subscript> ::= '(' <Argument List> ')'
+	// 193. <Subscript> ::= '(' <Argument List> ')'
 	Rule_Subscript_LParan_RParan 
 };
 

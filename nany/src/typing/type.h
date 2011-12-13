@@ -20,9 +20,9 @@ namespace Typing
 
 
 	public:
-		static Type* Get(const char* id);
+		static Type* Get(const Yuni::String& id);
 
-		static void Add(const char* id, Type* newType);
+		static void Add(const Yuni::String& id, Type* newType);
 
 
 	private:
@@ -30,13 +30,27 @@ namespace Typing
 
 
 	public:
-		Type(const char* name, bool isCppValue, bool isConst = false):
+		Type(const Yuni::StringAdapter& name, bool isCppValue, bool isConst = false):
 			pName(name),
 			pIsValue(isCppValue),
 			pIsConst(isConst)
 		{}
+		Type(const Type& rhs) :
+			pName(rhs.pName),
+			pIsValue(rhs.pIsValue),
+			pIsConst(rhs.pIsConst)
+		{}
 
 		const Yuni::String& name() const { return pName; }
+		void name(const Yuni::StringAdapter& newName) { pName = newName; }
+		Type* toArrayType()
+		{
+			Type* newType = new Type(*this);
+			newType->name(Yuni::String() << pName << "[]");
+			Add(newType->name(), newType);
+			return newType;
+		}
+		template<class StringT> void toArrayType(const StringT& text) { pName << '[' << text << ']';}
 
 		bool isValue() const { return pIsValue; }
 
