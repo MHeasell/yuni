@@ -62,6 +62,13 @@ namespace Ast
 				node->elseExpr()->accept(this);
 		}
 
+		virtual void visit(WhileExpressionNode* node)
+		{
+			node->condition()->accept(this);
+			if (node->expression())
+				node->expression()->accept(this);
+		}
+
 		virtual void visit(ExpressionListNode* node)
 		{
 			ExpressionListNode::List& exprList = node->expressions();

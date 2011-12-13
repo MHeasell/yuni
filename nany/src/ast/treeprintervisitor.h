@@ -82,6 +82,17 @@ namespace Ast
 		}
 
 
+		virtual void visit(WhileExpressionNode* node)
+		{
+			std::cout << pIndent << "<While Expression Node>" << std::endl;
+			indent();
+			node->condition()->accept(this);
+			if (node->expression())
+				node->expression()->accept(this);
+			unindent();
+		}
+
+
 		virtual void visit(ExpressionListNode* node)
 		{
 			std::cout << pIndent << "<Expression List Node>" << std::endl;

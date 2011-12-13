@@ -29,6 +29,8 @@ namespace Ast
 
 		virtual void visit(IfExpressionNode*) = 0;
 
+		virtual void visit(WhileExpressionNode*) = 0;
+
 		virtual void visit(ExpressionListNode*) = 0;
 
 		virtual void visit(ParameterListNode*) = 0;
