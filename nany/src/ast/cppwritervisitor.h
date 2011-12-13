@@ -172,6 +172,29 @@ namespace Ast
 		}
 
 
+		virtual void visit(WhileExpressionNode* node)
+		{
+			pOut << "while (";
+			node->condition()->accept(this);
+			pOut << ')' << std::endl;
+			if (node->expression())
+			{
+				bool isScope =
+					(dynamic_cast<ScopeNode*>(node->expression())) ||
+					(dynamic_cast<ExpressionListNode*>(node->expression()));
+				if (!isScope)
+					indent();
+				pOut << pIndent;
+				node->expression()->accept(this);
+				if (!isScope)
+				{
+				 	pOut << ';' << std::endl;
+					unindent();
+				}
+			}
+		}
+
+
 		virtual void visit(ParallelExpressionNode* node)
 		{
 			// TODO : parallelize the expression

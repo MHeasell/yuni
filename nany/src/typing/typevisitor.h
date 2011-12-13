@@ -43,13 +43,38 @@ namespace Typing
 		virtual void visit(Ast::IfExpressionNode* node)
 		{
 			node->condition()->accept(this);
+			if (Type::Get("bool") != node->condition()->type())
+				std::cerr << "Type mismatch :" << std::endl
+						  << "\t`if` condition clause must be boolean. Found type : "
+						  << node->condition()->type()->name() << std::endl;
 			if (node->thenExpr())
 				node->thenExpr()->accept(this);
 			if (node->elseExpr())
 				node->elseExpr()->accept(this);
-			// if (node->thenExpr() != node->elseExpr())
-			// 	std::cout << "Type mismatch :" << std::endl
-			// 			  << "\t`then` and `else` branches must return the same type !";
+			if (node->thenExpr() && node->elseExpr() &&
+				node->thenExpr()->type() != node->elseExpr()->type())
+			 	std::cerr << "Type mismatch :" << std::endl
+			 			  << "\t`then` and `else` branches must return the same type !" << std::endl
+						  << "\t`then` clause is :" << std::endl
+						  << "\t\t" << node->thenExpr()->type() << std::endl
+						  << "\t`else` clause is :"
+						  << "\t\t" << node->elseExpr()->type() << std::endl;
+			node->type(node->thenExpr()->type());
+		}
+
+
+		virtual void visit(Ast::WhileExpressionNode* node)
+		{
+			node->condition()->accept(this);
+			if (Type::Get("bool") != node->condition()->type())
+			{
+				std::cerr << "Type mismatch :" << std::endl
+						  << "\t`while` condition clause must be boolean. Found type : "
+						  << node->condition()->type()->name() << std::endl;
+			}
+			if (node->expression())
+				node->expression()->accept(this);
+			node->type("void");
 		}
 
 
@@ -87,6 +112,7 @@ namespace Typing
 		virtual void visit(Ast::ParallelExpressionNode* node)
 		{
 			node->expression()->accept(this);
+			// TODO : actually, should be a special type for thread management
 			node->type(node->expression()->type());
 		}
 

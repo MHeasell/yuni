@@ -36,6 +36,9 @@ namespace Ast
 	//! Conditional expression
 	class IfExpressionNode;
 
+	//! Repetitive expression
+	class WhileExpressionNode;
+
 	//! Expression that parallelizes the execution of a contained expression
 	class ParallelExpressionNode;
 

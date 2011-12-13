@@ -21,6 +21,7 @@ namespace Ast
 # include "functiondeclarationnode.h"
 # include "scopenode.h"
 # include "ifexpressionnode.h"
+# include "whileexpressionnode.h"
 # include "expressionlistnode.h"
 # include "parameterlistnode.h"
 # include "argumentlistnode.h"

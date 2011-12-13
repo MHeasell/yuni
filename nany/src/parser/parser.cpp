@@ -1578,8 +1578,9 @@ Nany::Ast::Node* Rule_SimpleExp_if_then(struct TokenStruct* token)
 // <Simple Exp> ::= while <Expression> do <Expression>
 Nany::Ast::Node* Rule_SimpleExp_while_do(struct TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Not yet implemented !");
+	Nany::Ast::Node* cond = ParseChild<>(token, 1);
+	Nany::Ast::Node* expr = ParseChild<>(token, 3);
+	return new Nany::Ast::WhileExpressionNode(cond, expr);
 }
 
 
