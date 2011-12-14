@@ -35,6 +35,10 @@ namespace Policy
 	class SingleThreaded
 	{
 	public:
+		//! The threading policy for another class
+		template<class T> struct Class { typedef SingleThreaded<T>  Type; };
+
+	public:
 		/*!
 		** \brief Locks a mutex in the constructor and unlocks it in the destructor.
 		*/
@@ -78,6 +82,10 @@ namespace Policy
 	template<class Host>
 	class ObjectLevelLockable
 	{
+	public:
+		//! The threading policy for another class
+		template<class T> struct Class { typedef ObjectLevelLockable<T>  Type; };
+
 	public:
 		/*!
 		** \brief Locks a mutex in the constructor and unlocks it in the destructor.
@@ -135,6 +143,10 @@ namespace Policy
 	class ObjectLevelLockableNotRecursive
 	{
 	public:
+		//! The threading policy for another class
+		template<class T> struct Class { typedef ObjectLevelLockableNotRecursive<T>  Type; };
+
+	public:
 		/*!
 		** \brief Locks a mutex in the constructor and unlocks it in the destructor.
 		*/
@@ -191,6 +203,10 @@ namespace Policy
 	template<class Host>
 	class ClassLevelLockable
 	{
+	public:
+		//! The threading policy for another class
+		template<class T> struct Class { typedef ClassLevelLockable<T>  Type; };
+
 	public:
 		/*!
 		** \brief Locks a mutex in the constructor and unlocks it in the destructor.
