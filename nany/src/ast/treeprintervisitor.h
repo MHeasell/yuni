@@ -59,12 +59,47 @@ namespace Ast
 		}
 
 
+		virtual void visit(ClassDeclarationNode* node)
+		{
+			std::cout << pIndent << "<Class Declaration Node>" << std::endl;
+			indent();
+			std::cout << pIndent << "Symbol : " << node->name() << std::endl;
+			if (node->declarations())
+				node->declarations()->accept(this);
+			unindent();
+		}
+
+
+		virtual void visit(MethodDeclarationNode* node)
+		{
+			std::cout << pIndent << "<Method Declaration Node>" << std::endl;
+			indent();
+			std::cout << pIndent << "Symbol : " << node->name() << std::endl;
+			if (node->params())
+				node->params()->accept(this);
+			if (node->returnType())
+				node->returnType()->accept(this);
+			if (node->body())
+				node->body()->accept(this);
+			unindent();
+		}
+
+
 		virtual void visit(ScopeNode* node)
 		{
 			std::cout << pIndent << "<Scope Node>" << std::endl;
 			indent();
 			if (node->expression())
 				node->expression()->accept(this);
+			unindent();
+		}
+
+
+		virtual void visit(VisibilityQualifierNode* node)
+		{
+			std::cout << pIndent << "<Visibility Qualifier Node>" << std::endl;
+			indent();
+			std::cout << pIndent << "Symbol : " << node->value() << std::endl;
 			unindent();
 		}
 

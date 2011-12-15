@@ -13,7 +13,7 @@ namespace Ast
 
 
 	/*!
-	** \brief A list of declarations at program scope: classes, functions, enums and workflows
+	** \brief A list of declarations at program scope or class scope
 	*/
 	class DeclarationListNode: public Node
 	{

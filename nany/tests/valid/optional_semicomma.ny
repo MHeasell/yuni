@@ -3,11 +3,12 @@ program OptionalSemiComma;
 private class Test
 {
 public
-    enum e
+#*    enum e
     {
         Value1,
         Value2,
     }
+*#
 
     method foo(a): int
     {

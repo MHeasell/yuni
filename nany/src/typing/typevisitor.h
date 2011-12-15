@@ -25,6 +25,27 @@ namespace Typing
 				node->returnType()->accept(this);
 			if (node->body())
 				node->body()->accept(this);
+			if (node->body() && node->returnType() &&
+				node->returnType()->type() != node->body()->type())
+				std::cerr << "Type mismatch in function " << node->name() << " :" << std::endl
+						  << "\tReturn type is : " << node->body()->type()->name() << std::endl
+						  << "\tExpected : " << node->returnType()->type()->name() << std::endl;
+		}
+
+
+		virtual void visit(Ast::MethodDeclarationNode* node)
+		{
+			if (node->params())
+				node->params()->accept(this);
+			if (node->returnType())
+				node->returnType()->accept(this);
+			if (node->body())
+				node->body()->accept(this);
+			if (node->body() && node->returnType() &&
+				node->returnType()->type() != node->body()->type())
+				std::cerr << "Type mismatch in nethod " << node->name() << " :" << std::endl
+						  << "\tReturn type is : " << node->body()->type()->name() << std::endl
+						  << "\tExpected : " << node->returnType()->type()->name() << std::endl;
 		}
 
 
