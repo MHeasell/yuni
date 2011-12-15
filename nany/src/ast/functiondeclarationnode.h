@@ -15,6 +15,10 @@ namespace Ast
 
 	/*!
 	** \brief Function declaration
+	**
+	** \code
+	** function Identifier ( <Params> ) { <Expression> }
+	** \endcode
 	*/
 	class FunctionDeclarationNode: public Node
 	{
@@ -60,7 +64,8 @@ namespace Ast
 
 		//! Return type of the function
 		TypeExpressionNode* pReturnType;
-	};
+
+	}; // class FunctionDeclarationNode
 
 
 

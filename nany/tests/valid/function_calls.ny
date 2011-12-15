@@ -3,12 +3,12 @@ program FunctionCalls;
 
 function foo(a: int, b: int, c: char)
 {
-	c: int := a + b
+	c: int := a + b;
 }
 
 function bar(k: uint): bool
 {
-	return true
+	return true;
 }
 
 function foobar()

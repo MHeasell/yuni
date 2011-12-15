@@ -86,7 +86,15 @@ Comment End = '*#' | '*/'
 ! Classes
 ! -------------------------------------------------
 
-<Class Declaration> ::= 'class' Identifier <Optional Type Parameters> <In Block> <Out Block> '{' <Class Content> '}'
+<Class Declaration> ::= 'class' Identifier <Optional Type Parameters> <Optional Base Classes> <In Block> <Out Block> '{' <Class Content> '}'
+
+<Anonymous Class Declaration> ::= 'class' <Optional Type Parameters> <Optional Base Classes> <In Block> <Out Block> '{' <Class Content> '}'
+
+<Optional Base Classes> ::= ':' <Expression> <Optional Base Classes Continued>
+               | ! Empty
+
+<Optional Base Classes Continued> ::= ',' <Expression>
+               | ! Empty
 
 ! TODO
 <Class Content> ::= VisibilityQualifier <Class Content>
@@ -171,8 +179,12 @@ Comment End = '*#' | '*/'
 <Function Declaration> ::= <Optional Optim Qualifier> 'function' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> '{' <Expression> '}'
                | <Optional Optim Qualifier> 'function' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> '{' '}' ! Empty body
 
+<Anonymous Function Declaration> ::= <Optional Optim Qualifier> 'function' <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> '{' <Expression> '}'
+               | <Optional Optim Qualifier> 'function' <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> '{' '}' ! Empty body
+
 <Method Declaration> ::= <Optional Optim Qualifier> 'method' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> '{' <Expression> '}'
                | <Optional Optim Qualifier> 'method' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> '{' '}' ! Empty body
+               | <Optional Optim Qualifier> 'method' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> ';' ! Abstract method declaration
 
 <Return Type Declaration> ::= ':' <Expression>
                | ! Empty
@@ -248,6 +260,7 @@ Comment End = '*#' | '*/'
 <Expression>   ::= <Possibly Parallel Exp> <Expression List>
 
 <Expression List> ::= ';' <Expression>
+               | ';'
                | ! Empty
 
 <Possibly Parallel Exp> ::= <SingleThread Exp>
@@ -279,7 +292,8 @@ Comment End = '*#' | '*/'
                | 'for' Identifier 'in' <Expression> 'order' 'do' <Expression>
                | 'timeout' <Expression> 'do' <Expression>
                | 'timeout' <Expression> 'do' <Expression> 'else' <Expression>
-               | <Function Declaration>
+               | <Anonymous Function Declaration>
+               | <Anonymous Class Declaration>
                | '{' <Expression> '}'
 
 <Else Expression> ::= 'else' <Expression>

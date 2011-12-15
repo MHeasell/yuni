@@ -25,7 +25,13 @@ namespace Ast
 
 		virtual void visit(FunctionDeclarationNode*) = 0;
 
+		virtual void visit(ClassDeclarationNode*) = 0;
+
+		virtual void visit(MethodDeclarationNode*) = 0;
+
 		virtual void visit(ScopeNode*) = 0;
+
+		virtual void visit(VisibilityQualifierNode*) = 0;
 
 		virtual void visit(IfExpressionNode*) = 0;
 

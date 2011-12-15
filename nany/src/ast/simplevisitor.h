@@ -47,11 +47,30 @@ namespace Ast
 				node->body()->accept(this);
 		}
 
+		virtual void visit(ClassDeclarationNode* node)
+		{
+			if (node->declarations())
+				node->declarations()->accept(this);
+		}
+
+		virtual void visit(MethodDeclarationNode* node)
+		{
+			if (node->params())
+				node->params()->accept(this);
+			if (node->returnType())
+				node->returnType()->accept(this);
+			if (node->body())
+				node->body()->accept(this);
+		}
+
 		virtual void visit(ScopeNode* node)
 		{
 			if (node->expression())
 				node->expression()->accept(this);
 		}
+
+		virtual void visit(VisibilityQualifierNode*)
+		{}
 
 		virtual void visit(IfExpressionNode* node)
 		{

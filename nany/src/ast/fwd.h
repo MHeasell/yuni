@@ -21,6 +21,12 @@ namespace Ast
 	//! Function declaration
 	class FunctionDeclarationNode;
 
+	//! Class declaration
+	class ClassDeclarationNode;
+
+	//! Method declaration
+	class MethodDeclarationNode;
+
 	//! Scope
 	class ScopeNode;
 
@@ -32,6 +38,9 @@ namespace Ast
 
 	//! List of arguments in a function / method call
 	class ArgumentListNode;
+
+	//! Visibility qualifier
+	class VisibilityQualifierNode;
 
 	//! Conditional expression
 	class IfExpressionNode;

@@ -1,3 +1,5 @@
+#! Testing inheritance and automatic compliance for heterogeneous arrays
+program Inheritance;
 
 class Shape
 {

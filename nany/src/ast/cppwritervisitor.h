@@ -71,6 +71,44 @@ namespace Ast
 				node->body()->accept(this);
 			else
 				pOut << "{}" << std::endl;
+			pOut << std::endl;
+			pFunctionScope = false;
+		}
+
+
+		virtual void visit(ClassDeclarationNode* node)
+		{
+			pOut << "class " << node->name() << std::endl;
+			pOut << '{' << std::endl;
+			indent();
+			if (node->declarations())
+				node->declarations()->accept(this);
+			unindent();
+			pOut << "};" << std::endl;
+			pOut << std::endl;
+		}
+
+
+		virtual void visit(MethodDeclarationNode* node)
+		{
+			if (node->returnType())
+			{
+				node->returnType()->accept(this);
+				pOut << " ";
+			}
+			else
+				pOut << "void ";
+			pOut << node->name() << '(';
+			if (node->params())
+				node->params()->accept(this);
+			pOut << ')' << std::endl;
+
+			pFunctionScope = true;
+			if (node->body())
+				node->body()->accept(this);
+			else
+				pOut << "{}" << std::endl;
+			pOut << std::endl;
 			pFunctionScope = false;
 		}
 
@@ -92,6 +130,16 @@ namespace Ast
 			}
 			unindent();
 			pOut << pIndent << '}' << std::endl;
+		}
+
+
+		virtual void visit(VisibilityQualifierNode* node)
+		{
+			// Visibility qualifiers are displayed at the same indent level as
+			// the underlying class, so one level under the rest of the declarations
+			unindent();
+			pOut << pIndent << node->value() << ':' << std::endl;
+			indent();
 		}
 
 
