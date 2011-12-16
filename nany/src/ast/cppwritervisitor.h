@@ -113,6 +113,20 @@ namespace Ast
 		}
 
 
+		virtual void visit(AttributeDeclarationNode* node)
+		{
+			if (node->typeDecl())
+				node->typeDecl()->accept(this);
+			pOut << " " << node->name();
+			if (node->value())
+			{
+				pOut << " = ";
+				node->value()->accept(this);
+			}
+			pOut << ';' << std::endl;
+		}
+
+
 		virtual void visit(ScopeNode* node)
 		{
 			pOut << '{' << std::endl;

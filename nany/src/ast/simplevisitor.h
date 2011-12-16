@@ -63,6 +63,14 @@ namespace Ast
 				node->body()->accept(this);
 		}
 
+		virtual void visit(AttributeDeclarationNode* node)
+		{
+			if (node->typeDecl())
+				node->typeDecl()->accept(this);
+			if (node->value())
+				node->value()->accept(this);
+		}
+
 		virtual void visit(ScopeNode* node)
 		{
 			if (node->expression())
@@ -121,6 +129,9 @@ namespace Ast
 		{
 			node->expression()->accept(this);
 		}
+
+		virtual void visit(TypeQualifierListNode*)
+		{}
 
 		virtual void visit(VarDeclarationNode* node)
 		{

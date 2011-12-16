@@ -27,6 +27,9 @@ namespace Ast
 	//! Method declaration
 	class MethodDeclarationNode;
 
+	//! Attribute declaration
+	class AttributeDeclarationNode;
+
 	//! Scope
 	class ScopeNode;
 
@@ -53,6 +56,9 @@ namespace Ast
 
 	//! Expression representing a type
 	class TypeExpressionNode;
+
+	//! List of type qualifiers: ref, const, volatile
+	class TypeQualifierListNode;
 
 	//! Variable declaration
 	class VarDeclarationNode;

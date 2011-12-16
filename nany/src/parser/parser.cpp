@@ -406,7 +406,7 @@ Nany::Ast::Node* Rule_AnonymousClassDeclaration_class_LBrace_RBrace(struct Token
 
 
 
-// <Optional Base Classes> ::= ':' <Expression> <Optional Base Classes Continued>
+// <Optional Base Classes> ::= ':' <SingleThread Exp> <Optional Base Classes Continued>
 Nany::Ast::Node* Rule_OptionalBaseClasses_Colon(struct TokenStruct* token)
 {
 	// Not yet implemented !
@@ -426,7 +426,7 @@ Nany::Ast::Node* Rule_OptionalBaseClasses(struct TokenStruct* token)
 
 
 
-// <Optional Base Classes Continued> ::= ',' <Expression>
+// <Optional Base Classes Continued> ::= ',' <SingleThread Exp>
 Nany::Ast::Node* Rule_OptionalBaseClassesContinued_Comma(struct TokenStruct* token)
 {
 	// Not yet implemented !
@@ -498,9 +498,15 @@ Nany::Ast::Node* Rule_ClassContent(struct TokenStruct* token)
 // <Class Content> ::= <Attribute Declaration> ';' <Class Content>
 Nany::Ast::Node* Rule_ClassContent_Semi(struct TokenStruct* token)
 {
-	// TODO : Handle attributes
+	Nany::Ast::DeclarationListNode* decls = ParseChild<Nany::Ast::DeclarationListNode>(token, 2);
 
-	return ParseChild<Nany::Ast::DeclarationListNode>(token, 1);
+	if (!decls)
+		decls = new Nany::Ast::DeclarationListNode();
+
+	Nany::Ast::AttributeDeclarationNode* attribute = ParseChild<Nany::Ast::AttributeDeclarationNode>(token, 0);
+
+	decls->prepend(attribute);
+	return decls;
 }
 
 
@@ -617,8 +623,18 @@ Nany::Ast::Node* Rule_PropertyCallbacks(struct TokenStruct* token)
 // <Attribute Declaration> ::= attribute Identifier <Typing> <Assignment>
 Nany::Ast::Node* Rule_AttributeDeclaration_attribute_Identifier(struct TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Not yet implemented !");
+	// Read the identifier
+	const wchar_t* symbol = GetChildSymbol(token, 1);
+	size_t len = wcslen(symbol);
+	char* buffer = new char[len + 1];
+	wcstombs(buffer, symbol, len);
+	buffer[len] = 0;
+
+	Nany::Ast::TypeExpressionNode* type = ParseChild<Nany::Ast::TypeExpressionNode>(token, 2);
+
+	Nany::Ast::Node* value = ParseChild<>(token, 3);
+
+	return new Nany::Ast::AttributeDeclarationNode(buffer, type, value);
 }
 
 
@@ -627,8 +643,16 @@ Nany::Ast::Node* Rule_AttributeDeclaration_attribute_Identifier(struct TokenStru
 // <Attribute Declaration> ::= attribute Identifier <Assignment>
 Nany::Ast::Node* Rule_AttributeDeclaration_attribute_Identifier2(struct TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Not yet implemented !");
+	// Read the identifier
+	const wchar_t* symbol = GetChildSymbol(token, 1);
+	size_t len = wcslen(symbol);
+	char* buffer = new char[len + 1];
+	wcstombs(buffer, symbol, len);
+	buffer[len] = 0;
+
+	Nany::Ast::Node* value = ParseChild<>(token, 2);
+
+	return new Nany::Ast::AttributeDeclarationNode(buffer, nullptr, value);
 }
 
 
@@ -637,44 +661,22 @@ Nany::Ast::Node* Rule_AttributeDeclaration_attribute_Identifier2(struct TokenStr
 // <Attribute Declaration> ::= attribute Identifier <Typing>
 Nany::Ast::Node* Rule_AttributeDeclaration_attribute_Identifier3(struct TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Not yet implemented !");
+	// Read the identifier
+	const wchar_t* symbol = GetChildSymbol(token, 1);
+	size_t len = wcslen(symbol);
+	char* buffer = new char[len + 1];
+	wcstombs(buffer, symbol, len);
+	buffer[len] = 0;
+
+	Nany::Ast::TypeExpressionNode* type = ParseChild<Nany::Ast::TypeExpressionNode>(token, 2);
+
+	return new Nany::Ast::AttributeDeclarationNode(buffer, type, nullptr);
 }
 
 
 
 
-// <Attribute Declaration> ::= ConstQualifier attribute Identifier <Typing> <Assignment>
-Nany::Ast::Node* Rule_AttributeDeclaration_ConstQualifier_attribute_Identifier(struct TokenStruct* token)
-{
-	// Not yet implemented !
-	assert(false && "Not yet implemented !");
-}
-
-
-
-
-// <Attribute Declaration> ::= ConstQualifier attribute Identifier <Assignment>
-Nany::Ast::Node* Rule_AttributeDeclaration_ConstQualifier_attribute_Identifier2(struct TokenStruct* token)
-{
-	// Not yet implemented !
-	assert(false && "Not yet implemented !");
-}
-
-
-
-
-// <Attribute Declaration> ::= ConstQualifier attribute Identifier <Typing>
-Nany::Ast::Node* Rule_AttributeDeclaration_ConstQualifier_attribute_Identifier3(struct TokenStruct* token)
-{
-	// Not yet implemented !
-	assert(false && "Not yet implemented !");
-}
-
-
-
-
-// <Assignment> ::= ':=' <Expression>
+// <Assignment> ::= ':=' <SingleThread Exp>
 Nany::Ast::Node* Rule_Assignment_ColonEq(struct TokenStruct* token)
 {
 	return ParseChild<>(token, 1);
@@ -683,17 +685,52 @@ Nany::Ast::Node* Rule_Assignment_ColonEq(struct TokenStruct* token)
 
 
 
-// <Typing> ::= ':' <Type Qualifiers> <Simple Exp>
+// <Typing> ::= ':' <Simple Exp>
 Nany::Ast::Node* Rule_Typing_Colon(struct TokenStruct* token)
 {
 	// TODO : handle qualifiers
 
-	Nany::Ast::Node* expr = ParseChild<>(token, 2);
+	Nany::Ast::Node* expr = ParseChild<>(token, 1);
 
 	Nany::Ast::TypeExpressionNode* typeExpr = dynamic_cast<Nany::Ast::TypeExpressionNode*>(expr);
 	if (!typeExpr)
 		typeExpr = new Nany::Ast::TypeExpressionNode(expr);
 	return typeExpr;
+}
+
+
+
+
+// <Typing> ::= ':' <Type Qualifiers> <Typing Continued>
+Nany::Ast::Node* Rule_Typing_Colon2(struct TokenStruct* token)
+{
+	// TODO : handle qualifiers
+
+	Nany::Ast::Node* expr = ParseChild<>(token, 1);
+
+	Nany::Ast::TypeExpressionNode* typeExpr = dynamic_cast<Nany::Ast::TypeExpressionNode*>(expr);
+	if (!typeExpr)
+		typeExpr = new Nany::Ast::TypeExpressionNode(expr);
+	return typeExpr;
+}
+
+
+
+
+// <Typing Continued> ::= <Simple Exp>
+Nany::Ast::Node* Rule_TypingContinued(struct TokenStruct* token)
+{
+	return ParseChild<>(token, 0);
+}
+
+
+
+
+// <Typing Continued> ::= 
+Nany::Ast::Node* Rule_TypingContinued2(struct TokenStruct* token)
+{
+	// Not yet implemented !
+	assert(false && "Rule_TypingContinued2: Not yet implemented !");
 }
 
 
@@ -938,19 +975,17 @@ Nany::Ast::Node* Rule_EnumContent(struct TokenStruct* token)
 
 
 
-// <Function Declaration> ::= <Optional Optim Qualifier> function Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> '{' <Expression> '}'
-Nany::Ast::Node* Rule_FunctionDeclaration_function_Identifier_LBrace_RBrace(struct TokenStruct* token)
+// <Function Declaration> ::= <Optional Optim Qualifier> function Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> <Function Body>
+Nany::Ast::Node* Rule_FunctionDeclaration_function_Identifier(struct TokenStruct* token)
 {
 	// Read the parameters
 	Nany::Ast::ParameterListNode* params = ParseChild<Nany::Ast::ParameterListNode>(token, 4);
 
-	// Read the body of the function
-	Nany::Ast::Node* bodyExpr = ParseChild<>(token, 9);
-	Nany::Ast::ScopeNode* body = new Nany::Ast::ScopeNode(bodyExpr);
-
 	// TODO : optims, type parameters, in and out blocks
 
 	Nany::Ast::TypeExpressionNode* returnType = ParseChild<Nany::Ast::TypeExpressionNode>(token, 5);
+
+	Nany::Ast::ScopeNode* body = ParseChild<Nany::Ast::ScopeNode>(token, 8);
 
 	// Read the name of the function
 	const wchar_t* funcName = GetChildSymbol(token, 2);
@@ -965,8 +1000,8 @@ Nany::Ast::Node* Rule_FunctionDeclaration_function_Identifier_LBrace_RBrace(stru
 
 
 
-// <Function Declaration> ::= <Optional Optim Qualifier> function Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> '{' '}'
-Nany::Ast::Node* Rule_FunctionDeclaration_function_Identifier_LBrace_RBrace2(struct TokenStruct* token)
+// <Anonymous Function Declaration> ::= <Optional Optim Qualifier> function <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> <Function Body>
+Nany::Ast::Node* Rule_AnonymousFunctionDeclaration_function(struct TokenStruct* token)
 {
 	// Read the parameters
 	Nany::Ast::ParameterListNode* params = ParseChild<Nany::Ast::ParameterListNode>(token, 4);
@@ -974,6 +1009,8 @@ Nany::Ast::Node* Rule_FunctionDeclaration_function_Identifier_LBrace_RBrace2(str
 	// TODO : optims, type parameters, in and out blocks
 
 	Nany::Ast::TypeExpressionNode* returnType = ParseChild<Nany::Ast::TypeExpressionNode>(token, 5);
+
+	Nany::Ast::ScopeNode* body = ParseChild<Nany::Ast::ScopeNode>(token, 7);
 
 	// Read the name of the function
 	const wchar_t* funcName = GetChildSymbol(token, 2);
@@ -982,45 +1019,23 @@ Nany::Ast::Node* Rule_FunctionDeclaration_function_Identifier_LBrace_RBrace2(str
 	wcstombs(buffer, funcName, len);
 	buffer[len] = 0;
 
-	return new Nany::Ast::FunctionDeclarationNode(buffer, params, nullptr, returnType);
+	return new Nany::Ast::FunctionDeclarationNode(buffer, params, body, returnType);
 }
 
 
 
 
-// <Anonymous Function Declaration> ::= <Optional Optim Qualifier> function <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> '{' <Expression> '}'
-Nany::Ast::Node* Rule_AnonymousFunctionDeclaration_function_LBrace_RBrace(struct TokenStruct* token)
-{
-	// Not yet implemented !
-	assert(false && "Rule_AnonymousFunctionDeclaration_function_LBrace_RBrace: Not yet implemented !");
-}
-
-
-
-
-// <Anonymous Function Declaration> ::= <Optional Optim Qualifier> function <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> '{' '}'
-Nany::Ast::Node* Rule_AnonymousFunctionDeclaration_function_LBrace_RBrace2(struct TokenStruct* token)
-{
-	// Not yet implemented !
-	assert(false && "Rule_AnonymousFunctionDeclaration_function_LBrace_RBrace2: Not yet implemented !");
-}
-
-
-
-
-// <Method Declaration> ::= <Optional Optim Qualifier> method Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> '{' <Expression> '}'
-Nany::Ast::Node* Rule_MethodDeclaration_method_Identifier_LBrace_RBrace(struct TokenStruct* token)
+// <Method Declaration> ::= <Optional Optim Qualifier> method Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> <Function Body>
+Nany::Ast::Node* Rule_MethodDeclaration_method_Identifier(struct TokenStruct* token)
 {
 	// Read the parameters
 	Nany::Ast::ParameterListNode* params = ParseChild<Nany::Ast::ParameterListNode>(token, 4);
 
-	// Read the body of the function
-	Nany::Ast::Node* bodyExpr = ParseChild<>(token, 9);
-	Nany::Ast::ScopeNode* body = new Nany::Ast::ScopeNode(bodyExpr);
-
 	// TODO : optims, type parameters, in and out blocks
 
 	Nany::Ast::TypeExpressionNode* returnType = ParseChild<Nany::Ast::TypeExpressionNode>(token, 5);
+
+	Nany::Ast::ScopeNode* body = ParseChild<Nany::Ast::ScopeNode>(token, 8);
 
 	// Read the name of the function
 	const wchar_t* funcName = GetChildSymbol(token, 2);
@@ -1030,29 +1045,6 @@ Nany::Ast::Node* Rule_MethodDeclaration_method_Identifier_LBrace_RBrace(struct T
 	buffer[len] = 0;
 
 	return new Nany::Ast::MethodDeclarationNode(buffer, params, body, returnType, false);
-}
-
-
-
-
-// <Method Declaration> ::= <Optional Optim Qualifier> method Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> '{' '}'
-Nany::Ast::Node* Rule_MethodDeclaration_method_Identifier_LBrace_RBrace2(struct TokenStruct* token)
-{
-	// Read the parameters
-	Nany::Ast::ParameterListNode* params = ParseChild<Nany::Ast::ParameterListNode>(token, 4);
-
-	// TODO : optims, type parameters, in and out blocks
-
-	Nany::Ast::TypeExpressionNode* returnType = ParseChild<Nany::Ast::TypeExpressionNode>(token, 5);
-
-	// Read the name of the function
-	const wchar_t* funcName = GetChildSymbol(token, 2);
-	size_t len = wcslen(funcName);
-	char* buffer = new char[len + 1];
-	wcstombs(buffer, funcName, len);
-	buffer[len] = 0;
-
-	return new Nany::Ast::MethodDeclarationNode(buffer, params, nullptr, returnType, false);
 }
 
 
@@ -1081,10 +1073,28 @@ Nany::Ast::Node* Rule_MethodDeclaration_method_Identifier_Semi(struct TokenStruc
 
 
 
-// <Return Type Declaration> ::= ':' <Expression>
+// <Function Body> ::= '{' <Expression> '}'
+Nany::Ast::Node* Rule_FunctionBody_LBrace_RBrace(struct TokenStruct* token)
+{
+	return new Nany::Ast::ScopeNode(ParseChild<>(token, 1));
+}
+
+
+
+
+// <Function Body> ::= '{' '}'
+Nany::Ast::Node* Rule_FunctionBody_LBrace_RBrace2(struct TokenStruct* token)
+{
+	return nullptr;
+}
+
+
+
+
+// <Return Type Declaration> ::= ':' <Optional Type Qualifiers> <SingleThread Exp>
 Nany::Ast::Node* Rule_ReturnTypeDeclaration_Colon(struct TokenStruct* token)
 {
-	Nany::Ast::Node* expr = ParseChild<>(token, 1);
+	Nany::Ast::Node* expr = ParseChild<>(token, 2);
 
 	Nany::Ast::TypeExpressionNode* type = dynamic_cast<Nany::Ast::TypeExpressionNode*>(expr);
 	if (!type)
@@ -1245,6 +1255,24 @@ Nany::Ast::Node* Rule_ParameterListContinued(struct TokenStruct* token)
 
 
 
+// <Optional Type Qualifiers> ::= <Type Qualifiers>
+Nany::Ast::Node* Rule_OptionalTypeQualifiers(struct TokenStruct* token)
+{
+	return ParseChild<>(token, 0);
+}
+
+
+
+
+// <Optional Type Qualifiers> ::= 
+Nany::Ast::Node* Rule_OptionalTypeQualifiers2(struct TokenStruct* token)
+{
+	return nullptr;
+}
+
+
+
+
 // <Type Qualifiers> ::= TypeQualifier <Type Qualifiers Continued>
 Nany::Ast::Node* Rule_TypeQualifiers_TypeQualifier(struct TokenStruct* token)
 {
@@ -1255,20 +1283,31 @@ Nany::Ast::Node* Rule_TypeQualifiers_TypeQualifier(struct TokenStruct* token)
 
 
 
-// <Type Qualifiers> ::= 
-Nany::Ast::Node* Rule_TypeQualifiers(struct TokenStruct* token)
-{
-	return nullptr;
-}
-
-
-
-
 // <Type Qualifiers Continued> ::= TypeQualifier <Type Qualifiers Continued>
 Nany::Ast::Node* Rule_TypeQualifiersContinued_TypeQualifier(struct TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Not yet implemented !");
+	Nany::Ast::TypeQualifierListNode* list = ParseChild<Nany::Ast::TypeQualifierListNode>(token, 1);
+
+	if (!list)
+		list = new Nany::Ast::TypeQualifierListNode();
+
+	// Read and convert the qualifier
+	const wchar_t* qualifier = GetChildSymbol(token, 0);
+	size_t len = wcslen(qualifier);
+	char* buffer = new char[len + 1];
+	wcstombs(buffer, qualifier, len);
+	buffer[len] = 0;
+
+	Nany::Ast::TypeQualifierListNode::TypeQualifier tq =
+		Nany::Ast::TypeQualifierListNode::TypeQualifier::tqConst;
+	if ('r' == buffer[0])
+		tq = Nany::Ast::TypeQualifierListNode::TypeQualifier::tqRef;
+	else if ('v' == buffer[0])
+		tq = Nany::Ast::TypeQualifierListNode::TypeQualifier::tqVolatile;
+
+	list->prepend(tq);
+
+	return list;
 }
 
 
@@ -1321,7 +1360,7 @@ Nany::Ast::Node* Rule_OptionalVisibilityQualifier(struct TokenStruct* token)
 
 
 
-// <Argument List> ::= <Expression> <Argument List Continued>
+// <Argument List> ::= <Possibly Parallel Exp> <Argument List Continued>
 Nany::Ast::Node* Rule_ArgumentList(struct TokenStruct* token)
 {
 	Nany::Ast::ArgumentListNode* list = ParseChild<Nany::Ast::ArgumentListNode>(token, 1);
@@ -1343,7 +1382,7 @@ Nany::Ast::Node* Rule_ArgumentList2(struct TokenStruct* token)
 
 
 
-// <Argument List Continued> ::= ',' <Expression> <Argument List Continued>
+// <Argument List Continued> ::= ',' <Possibly Parallel Exp> <Argument List Continued>
 Nany::Ast::Node* Rule_ArgumentListContinued_Comma(struct TokenStruct* token)
 {
 	Nany::Ast::ArgumentListNode* list = ParseChild<Nany::Ast::ArgumentListNode>(token, 2);
@@ -1365,7 +1404,7 @@ Nany::Ast::Node* Rule_ArgumentListContinued(struct TokenStruct* token)
 
 
 
-// <Typedef> ::= type Identifier ':=' <Expression>
+// <Typedef> ::= type Identifier ':=' <Possibly Parallel Exp>
 Nany::Ast::Node* Rule_Typedef_type_Identifier_ColonEq(struct TokenStruct* token)
 {
 	// Not yet implemented !
@@ -1442,7 +1481,7 @@ Nany::Ast::Node* Rule_TypeParameters_Lt_Identifier_Gt(struct TokenStruct* token)
 
 
 
-// <Type Parameters> ::= '<' Identifier ':=' <Expression> <Type Parameters Continued> '>'
+// <Type Parameters> ::= '<' Identifier ':=' <SingleThread Exp> <Type Parameters Continued> '>'
 Nany::Ast::Node* Rule_TypeParameters_Lt_Identifier_ColonEq_Gt(struct TokenStruct* token)
 {
 	// Not yet implemented !
@@ -1462,7 +1501,7 @@ Nany::Ast::Node* Rule_TypeParametersContinued_Comma_Identifier(struct TokenStruc
 
 
 
-// <Type Parameters Continued> ::= ',' Identifier ':=' <Expression> <Type Parameters Continued>
+// <Type Parameters Continued> ::= ',' Identifier ':=' <SingleThread Exp> <Type Parameters Continued>
 Nany::Ast::Node* Rule_TypeParametersContinued_Comma_Identifier_ColonEq(struct TokenStruct* token)
 {
 	// Not yet implemented !
@@ -1481,7 +1520,7 @@ Nany::Ast::Node* Rule_TypeParametersContinued(struct TokenStruct* token)
 
 
 
-// <Type Arguments> ::= <Expression> <Type Arguments Continued>
+// <Type Arguments> ::= <SingleThread Exp> <Type Arguments Continued>
 Nany::Ast::Node* Rule_TypeArguments(struct TokenStruct* token)
 {
 	// Not yet implemented !
@@ -1500,7 +1539,7 @@ Nany::Ast::Node* Rule_TypeArguments2(struct TokenStruct* token)
 
 
 
-// <Type Arguments Continued> ::= ',' <Expression> <Type Parameters Continued>
+// <Type Arguments Continued> ::= ',' <SingleThread Exp> <Type Parameters Continued>
 Nany::Ast::Node* Rule_TypeArgumentsContinued_Comma(struct TokenStruct* token)
 {
 	// Not yet implemented !
@@ -1742,7 +1781,7 @@ Nany::Ast::Node* Rule_SimpleExp_continue(struct TokenStruct* token)
 
 
 
-// <Simple Exp> ::= if <Expression> then <Expression> <Else Expression>
+// <Simple Exp> ::= if <Possibly Parallel Exp> then <Expression> <Else Expression>
 Nany::Ast::Node* Rule_SimpleExp_if_then(struct TokenStruct* token)
 {
 	Nany::Ast::Node* cond = ParseChild<>(token, 1);
@@ -1796,7 +1835,7 @@ Nany::Ast::Node* Rule_SimpleExp_for_Identifier_in_order_do(struct TokenStruct* t
 
 
 
-// <Simple Exp> ::= timeout <Expression> do <Expression>
+// <Simple Exp> ::= timeout <Possibly Parallel Exp> do <Expression>
 Nany::Ast::Node* Rule_SimpleExp_timeout_do(struct TokenStruct* token)
 {
 	// Not yet implemented !
@@ -1806,7 +1845,7 @@ Nany::Ast::Node* Rule_SimpleExp_timeout_do(struct TokenStruct* token)
 
 
 
-// <Simple Exp> ::= timeout <Expression> do <Expression> else <Expression>
+// <Simple Exp> ::= timeout <Possibly Parallel Exp> do <Expression> else <Expression>
 Nany::Ast::Node* Rule_SimpleExp_timeout_do_else(struct TokenStruct* token)
 {
 	// Not yet implemented !
@@ -1819,8 +1858,7 @@ Nany::Ast::Node* Rule_SimpleExp_timeout_do_else(struct TokenStruct* token)
 // <Simple Exp> ::= <Anonymous Function Declaration>
 Nany::Ast::Node* Rule_SimpleExp3(struct TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Rule_SimpleExp3: Not yet implemented !");
+	return ParseChild<>(token, 0);
 }
 
 
@@ -1829,8 +1867,7 @@ Nany::Ast::Node* Rule_SimpleExp3(struct TokenStruct* token)
 // <Simple Exp> ::= <Anonymous Class Declaration>
 Nany::Ast::Node* Rule_SimpleExp4(struct TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Rule_SimpleExp4: Not yet implemented !");
+	return ParseChild<>(token, 0);
 }
 
 
@@ -2480,11 +2517,11 @@ Nany::Ast::Node* (*RuleJumpTable[])(struct TokenStruct* token) =
 	Rule_ClassDeclaration_class_Identifier_LBrace_RBrace,
 	// 25. <Anonymous Class Declaration> ::= class <Optional Type Parameters> <Optional Base Classes> <In Block> <Out Block> '{' <Class Content> '}'
 	Rule_AnonymousClassDeclaration_class_LBrace_RBrace,
-	// 26. <Optional Base Classes> ::= ':' <Expression> <Optional Base Classes Continued>
+	// 26. <Optional Base Classes> ::= ':' <SingleThread Exp> <Optional Base Classes Continued>
 	Rule_OptionalBaseClasses_Colon,
 	// 27. <Optional Base Classes> ::= 
 	Rule_OptionalBaseClasses,
-	// 28. <Optional Base Classes Continued> ::= ',' <Expression>
+	// 28. <Optional Base Classes Continued> ::= ',' <SingleThread Exp>
 	Rule_OptionalBaseClassesContinued_Comma,
 	// 29. <Optional Base Classes Continued> ::= 
 	Rule_OptionalBaseClassesContinued,
@@ -2520,16 +2557,16 @@ Nany::Ast::Node* (*RuleJumpTable[])(struct TokenStruct* token) =
 	Rule_AttributeDeclaration_attribute_Identifier2,
 	// 45. <Attribute Declaration> ::= attribute Identifier <Typing>
 	Rule_AttributeDeclaration_attribute_Identifier3,
-	// 46. <Attribute Declaration> ::= ConstQualifier attribute Identifier <Typing> <Assignment>
-	Rule_AttributeDeclaration_ConstQualifier_attribute_Identifier,
-	// 47. <Attribute Declaration> ::= ConstQualifier attribute Identifier <Assignment>
-	Rule_AttributeDeclaration_ConstQualifier_attribute_Identifier2,
-	// 48. <Attribute Declaration> ::= ConstQualifier attribute Identifier <Typing>
-	Rule_AttributeDeclaration_ConstQualifier_attribute_Identifier3,
-	// 49. <Assignment> ::= ':=' <Expression>
+	// 46. <Assignment> ::= ':=' <SingleThread Exp>
 	Rule_Assignment_ColonEq,
-	// 50. <Typing> ::= ':' <Type Qualifiers> <Simple Exp>
+	// 47. <Typing> ::= ':' <Simple Exp>
 	Rule_Typing_Colon,
+	// 48. <Typing> ::= ':' <Type Qualifiers> <Typing Continued>
+	Rule_Typing_Colon2,
+	// 49. <Typing Continued> ::= <Simple Exp>
+	Rule_TypingContinued,
+	// 50. <Typing Continued> ::= 
+	Rule_TypingContinued2,
 	// 51. <Workflow Declaration> ::= workflow Identifier '{' <Workflow Content> '}'
 	Rule_WorkflowDeclaration_workflow_Identifier_LBrace_RBrace,
 	// 52. <Workflow Content> ::= <State Block> <Transition Block>
@@ -2578,46 +2615,46 @@ Nany::Ast::Node* (*RuleJumpTable[])(struct TokenStruct* token) =
 	Rule_EnumContent_Identifier,
 	// 74. <Enum Content> ::= 
 	Rule_EnumContent,
-	// 75. <Function Declaration> ::= <Optional Optim Qualifier> function Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> '{' <Expression> '}'
-	Rule_FunctionDeclaration_function_Identifier_LBrace_RBrace,
-	// 76. <Function Declaration> ::= <Optional Optim Qualifier> function Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> '{' '}'
-	Rule_FunctionDeclaration_function_Identifier_LBrace_RBrace2,
-	// 77. <Anonymous Function Declaration> ::= <Optional Optim Qualifier> function <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> '{' <Expression> '}'
-	Rule_AnonymousFunctionDeclaration_function_LBrace_RBrace,
-	// 78. <Anonymous Function Declaration> ::= <Optional Optim Qualifier> function <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> '{' '}'
-	Rule_AnonymousFunctionDeclaration_function_LBrace_RBrace2,
-	// 79. <Method Declaration> ::= <Optional Optim Qualifier> method Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> '{' <Expression> '}'
-	Rule_MethodDeclaration_method_Identifier_LBrace_RBrace,
-	// 80. <Method Declaration> ::= <Optional Optim Qualifier> method Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> '{' '}'
-	Rule_MethodDeclaration_method_Identifier_LBrace_RBrace2,
-	// 81. <Method Declaration> ::= <Optional Optim Qualifier> method Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> ';'
+	// 75. <Function Declaration> ::= <Optional Optim Qualifier> function Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> <Function Body>
+	Rule_FunctionDeclaration_function_Identifier,
+	// 76. <Anonymous Function Declaration> ::= <Optional Optim Qualifier> function <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> <Function Body>
+	Rule_AnonymousFunctionDeclaration_function,
+	// 77. <Method Declaration> ::= <Optional Optim Qualifier> method Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> <Function Body>
+	Rule_MethodDeclaration_method_Identifier,
+	// 78. <Method Declaration> ::= <Optional Optim Qualifier> method Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> ';'
 	Rule_MethodDeclaration_method_Identifier_Semi,
-	// 82. <Return Type Declaration> ::= ':' <Expression>
+	// 79. <Function Body> ::= '{' <Expression> '}'
+	Rule_FunctionBody_LBrace_RBrace,
+	// 80. <Function Body> ::= '{' '}'
+	Rule_FunctionBody_LBrace_RBrace2,
+	// 81. <Return Type Declaration> ::= ':' <Optional Type Qualifiers> <SingleThread Exp>
 	Rule_ReturnTypeDeclaration_Colon,
-	// 83. <Return Type Declaration> ::= 
+	// 82. <Return Type Declaration> ::= 
 	Rule_ReturnTypeDeclaration,
-	// 84. <Optional Parameters> ::= '(' <Parameter List> ')'
+	// 83. <Optional Parameters> ::= '(' <Parameter List> ')'
 	Rule_OptionalParameters_LParan_RParan,
-	// 85. <Optional Parameters> ::= 
+	// 84. <Optional Parameters> ::= 
 	Rule_OptionalParameters,
-	// 86. <Parameter List> ::= Identifier <Typing> <Assignment> <Parameter List Continued>
+	// 85. <Parameter List> ::= Identifier <Typing> <Assignment> <Parameter List Continued>
 	Rule_ParameterList_Identifier,
-	// 87. <Parameter List> ::= Identifier <Assignment> <Parameter List Continued>
+	// 86. <Parameter List> ::= Identifier <Assignment> <Parameter List Continued>
 	Rule_ParameterList_Identifier2,
-	// 88. <Parameter List> ::= Identifier <Typing> <Parameter List Continued>
+	// 87. <Parameter List> ::= Identifier <Typing> <Parameter List Continued>
 	Rule_ParameterList_Identifier3,
-	// 89. <Parameter List> ::= Identifier <Parameter List Continued>
+	// 88. <Parameter List> ::= Identifier <Parameter List Continued>
 	Rule_ParameterList_Identifier4,
-	// 90. <Parameter List> ::= 
+	// 89. <Parameter List> ::= 
 	Rule_ParameterList,
-	// 91. <Parameter List Continued> ::= ',' <Parameter List>
+	// 90. <Parameter List Continued> ::= ',' <Parameter List>
 	Rule_ParameterListContinued_Comma,
-	// 92. <Parameter List Continued> ::= 
+	// 91. <Parameter List Continued> ::= 
 	Rule_ParameterListContinued,
-	// 93. <Type Qualifiers> ::= TypeQualifier <Type Qualifiers Continued>
+	// 92. <Optional Type Qualifiers> ::= <Type Qualifiers>
+	Rule_OptionalTypeQualifiers,
+	// 93. <Optional Type Qualifiers> ::= 
+	Rule_OptionalTypeQualifiers2,
+	// 94. <Type Qualifiers> ::= TypeQualifier <Type Qualifiers Continued>
 	Rule_TypeQualifiers_TypeQualifier,
-	// 94. <Type Qualifiers> ::= 
-	Rule_TypeQualifiers,
 	// 95. <Type Qualifiers Continued> ::= TypeQualifier <Type Qualifiers Continued>
 	Rule_TypeQualifiersContinued_TypeQualifier,
 	// 96. <Type Qualifiers Continued> ::= 
@@ -2630,15 +2667,15 @@ Nany::Ast::Node* (*RuleJumpTable[])(struct TokenStruct* token) =
 	Rule_OptionalVisibilityQualifier_VisibilityQualifier,
 	// 100. <Optional Visibility Qualifier> ::= 
 	Rule_OptionalVisibilityQualifier,
-	// 101. <Argument List> ::= <Expression> <Argument List Continued>
+	// 101. <Argument List> ::= <Possibly Parallel Exp> <Argument List Continued>
 	Rule_ArgumentList,
 	// 102. <Argument List> ::= 
 	Rule_ArgumentList2,
-	// 103. <Argument List Continued> ::= ',' <Expression> <Argument List Continued>
+	// 103. <Argument List Continued> ::= ',' <Possibly Parallel Exp> <Argument List Continued>
 	Rule_ArgumentListContinued_Comma,
 	// 104. <Argument List Continued> ::= 
 	Rule_ArgumentListContinued,
-	// 105. <Typedef> ::= type Identifier ':=' <Expression>
+	// 105. <Typedef> ::= type Identifier ':=' <Possibly Parallel Exp>
 	Rule_Typedef_type_Identifier_ColonEq,
 	// 106. <In Block> ::= in <Expression>
 	Rule_InBlock_in,
@@ -2654,19 +2691,19 @@ Nany::Ast::Node* (*RuleJumpTable[])(struct TokenStruct* token) =
 	Rule_OptionalTypeParameters2,
 	// 112. <Type Parameters> ::= '<' Identifier <Type Parameters Continued> '>'
 	Rule_TypeParameters_Lt_Identifier_Gt,
-	// 113. <Type Parameters> ::= '<' Identifier ':=' <Expression> <Type Parameters Continued> '>'
+	// 113. <Type Parameters> ::= '<' Identifier ':=' <SingleThread Exp> <Type Parameters Continued> '>'
 	Rule_TypeParameters_Lt_Identifier_ColonEq_Gt,
 	// 114. <Type Parameters Continued> ::= ',' Identifier <Type Parameters Continued>
 	Rule_TypeParametersContinued_Comma_Identifier,
-	// 115. <Type Parameters Continued> ::= ',' Identifier ':=' <Expression> <Type Parameters Continued>
+	// 115. <Type Parameters Continued> ::= ',' Identifier ':=' <SingleThread Exp> <Type Parameters Continued>
 	Rule_TypeParametersContinued_Comma_Identifier_ColonEq,
 	// 116. <Type Parameters Continued> ::= 
 	Rule_TypeParametersContinued,
-	// 117. <Type Arguments> ::= <Expression> <Type Arguments Continued>
+	// 117. <Type Arguments> ::= <SingleThread Exp> <Type Arguments Continued>
 	Rule_TypeArguments,
 	// 118. <Type Arguments> ::= 
 	Rule_TypeArguments2,
-	// 119. <Type Arguments Continued> ::= ',' <Expression> <Type Parameters Continued>
+	// 119. <Type Arguments Continued> ::= ',' <SingleThread Exp> <Type Parameters Continued>
 	Rule_TypeArgumentsContinued_Comma,
 	// 120. <Type Arguments Continued> ::= 
 	Rule_TypeArgumentsContinued,
@@ -2712,7 +2749,7 @@ Nany::Ast::Node* (*RuleJumpTable[])(struct TokenStruct* token) =
 	Rule_SimpleExp_break,
 	// 141. <Simple Exp> ::= continue
 	Rule_SimpleExp_continue,
-	// 142. <Simple Exp> ::= if <Expression> then <Expression> <Else Expression>
+	// 142. <Simple Exp> ::= if <Possibly Parallel Exp> then <Expression> <Else Expression>
 	Rule_SimpleExp_if_then,
 	// 143. <Simple Exp> ::= while <Expression> do <Expression>
 	Rule_SimpleExp_while_do,
@@ -2722,9 +2759,9 @@ Nany::Ast::Node* (*RuleJumpTable[])(struct TokenStruct* token) =
 	Rule_SimpleExp_for_Identifier_in_order_Colon_packedby_Colon_do,
 	// 146. <Simple Exp> ::= for Identifier in <Expression> order do <Expression>
 	Rule_SimpleExp_for_Identifier_in_order_do,
-	// 147. <Simple Exp> ::= timeout <Expression> do <Expression>
+	// 147. <Simple Exp> ::= timeout <Possibly Parallel Exp> do <Expression>
 	Rule_SimpleExp_timeout_do,
-	// 148. <Simple Exp> ::= timeout <Expression> do <Expression> else <Expression>
+	// 148. <Simple Exp> ::= timeout <Possibly Parallel Exp> do <Expression> else <Expression>
 	Rule_SimpleExp_timeout_do_else,
 	// 149. <Simple Exp> ::= <Anonymous Function Declaration>
 	Rule_SimpleExp3,

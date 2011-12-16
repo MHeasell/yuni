@@ -14,7 +14,7 @@ public
 
 private
 	#! A constant with inferred type
-	const attribute PI := 3.14159265359;
+	attribute PI : const := 3.14159265359;
 
 	#! An attribute
 	attribute name: string;

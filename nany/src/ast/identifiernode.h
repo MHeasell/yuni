@@ -30,7 +30,8 @@ namespace Ast
 
 	public:
 		const Yuni::String data;
-	};
+
+	}; // class IdentifierNode
 
 
 

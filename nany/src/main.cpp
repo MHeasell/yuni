@@ -32,13 +32,13 @@ int main(int argc, char *argv[])
 	Nany::Ast::TreePrinterVisitor printerVisitor;
 	tree->accept(&printerVisitor);
 
-	// Run the CPP writer visitor on the AST
-	Nany::Ast::CppWriterVisitor cppVisitor(outFile);
-	tree->accept(&cppVisitor);
-
 	// Run the type visitor on the AST
 	Nany::Typing::TypeVisitor typeVisitor;
 	tree->accept(&typeVisitor);
+
+	// Run the CPP writer visitor on the AST
+	Nany::Ast::CppWriterVisitor cppVisitor(outFile);
+	tree->accept(&cppVisitor);
 
 	outFile.close();
 
