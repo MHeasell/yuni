@@ -44,9 +44,9 @@ extern "C"
 
 // Forward declaration of generic routine for rule propagation
 template<class NodeT = Nany::Ast::Node>
-static NodeT* ParseChild(struct TokenStruct* token, unsigned int index);
+static NodeT* ParseChild(TokenStruct* token, unsigned int index);
 // Forward declaration of generic routine for symbol management
-static const wchar_t* GetChildSymbol(struct TokenStruct* token, unsigned int index);
+static const wchar_t* GetChildSymbol(TokenStruct* token, unsigned int index);
 
 
 
@@ -59,11 +59,9 @@ static const wchar_t* GetChildSymbol(struct TokenStruct* token, unsigned int ind
 static void ReadableString(wchar_t* input, wchar_t* output, long width)
 {
 	// Sanity check.
-	if (!output || (width < 1))
+	if (!output || !input || (width < 1))
 		return;
 	output[0] = 0;
-	if (input == NULL)
-		return;
 
 	long i1 = 0;
 	long i2 = 0;
@@ -101,7 +99,7 @@ static void ReadableString(wchar_t* input, wchar_t* output, long width)
 ##RULE-TABLE
 ##RULES
 // %Description%
-Nany::Ast::Node* %ID%(struct TokenStruct* token)
+Nany::Ast::Node* %ID%(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "%ID%: Not yet implemented !");
@@ -118,7 +116,7 @@ Nany::Ast::Node* %ID%(struct TokenStruct* token)
 
 
 ##RULE-TABLE
-Nany::Ast::Node* (*RuleJumpTable[])(struct TokenStruct* token) =
+Nany::Ast::Node* (*RuleJumpTable[])(TokenStruct* token) =
 {
 ##RULES
 	// %Index%. %Description%
@@ -131,13 +129,15 @@ Nany::Ast::Node* (*RuleJumpTable[])(struct TokenStruct* token) =
 
 
 template<class NodeT = Nany::Ast::Node>
-static NodeT* ParseChild(struct TokenStruct* parent, unsigned int index)
+static NodeT* ParseChild(TokenStruct* parent, unsigned int index)
 {
+	assert(parent && "ParseChild: invalid parent");
 	// Make sure the child index is not out of bounds
-	assert(index < (unsigned int)Grammar.RuleArray[parent->ReductionRule].SymbolsCount && "ParseChild: index out of bounds !");
+	assert(index < (unsigned int) Grammar.RuleArray[parent->ReductionRule].SymbolsCount
+		&& "ParseChild: index out of bounds !");
 
-	struct TokenStruct* child = parent->Tokens[index];
-
+	TokenStruct* child = parent->Tokens[index];
+	assert(child && "ParseChild: Invalid child");
 	// Make sure the child is a rule
 	assert(child->ReductionRule >= 0 && "ParseChild must be called on a rule !");
 
@@ -152,13 +152,15 @@ static NodeT* ParseChild(struct TokenStruct* parent, unsigned int index)
 }
 
 
-static const wchar_t* GetChildSymbol(struct TokenStruct* parent, unsigned int index)
+static const wchar_t* GetChildSymbol(TokenStruct* parent, unsigned int index)
 {
+	assert(parent && "GetChildSymbol: invalid parent");
 	// Make sure the child index is not out of bounds
-	assert(index < (unsigned int)Grammar.RuleArray[parent->ReductionRule].SymbolsCount && "GetChildSymbol: index out of bounds !");
+	assert(index < (unsigned int) Grammar.RuleArray[parent->ReductionRule].SymbolsCount
+		&& "GetChildSymbol: index out of bounds !");
 
-	struct TokenStruct* child = parent->Tokens[index];
-
+	TokenStruct* child = parent->Tokens[index];
+	assert(child && "GetChildSymbol: invalid child");
 	// Make sure the child is a symbol
 	assert(child->ReductionRule < 0 && "GetChildSymbol must be called on a symbol !");
 
@@ -236,7 +238,7 @@ static wchar_t* LoadInputFile(const char *fileName)
 
 
 
-static void ShowErrorMessage(struct TokenStruct* token, int result)
+static void ShowErrorMessage(TokenStruct* token, int result)
 {
 	switch (result)
 	{
@@ -256,7 +258,7 @@ static void ShowErrorMessage(struct TokenStruct* token, int result)
 			std::cerr << "Out of memory";
 			break;
 	}
-	if (token != NULL)
+	if (token)
 		std::cerr << " at line " << token->Line << " column " << token->Column;
 	std::cerr << "." << std::endl;
 
@@ -283,7 +285,7 @@ static void ShowErrorMessage(struct TokenStruct* token, int result)
 	}
 	if (result == PARSESYNTAXERROR)
 	{
-		if (token->Data != NULL)
+		if (token->Data)
 		{
 			wchar_t s1[BUFSIZ];
 			ReadableString(token->Data, s1, BUFSIZ);
@@ -293,9 +295,10 @@ static void ShowErrorMessage(struct TokenStruct* token, int result)
 		{
 			std::cerr << "Expected ";
 		}
-		for (int i = 0; i < Grammar.LalrArray[token->Symbol].ActionCount; i++)
+
+		for (unsigned int i = 0; i < (unsigned int) Grammar.LalrArray[token->Symbol].ActionCount; ++i)
 		{
-			int symbol = Grammar.LalrArray[token->Symbol].Actions[i].Entry;
+			unsigned int symbol = (unsigned int) Grammar.LalrArray[token->Symbol].Actions[i].Entry;
 			if (Grammar.SymbolArray[symbol].Kind == SYMBOLTERMINAL)
 			{
 				if (i > 0)
@@ -327,7 +330,7 @@ Nany::Ast::Node* parseFile(const char* filePath)
 
 
 	// Run the Parser.
-	struct TokenStruct* token;
+	TokenStruct* token;
 	int parseResult = Parse(inputBuf, wcslen(inputBuf), TRIMREDUCTIONS, &token);
 
 	// Interpret the results.
@@ -348,3 +351,5 @@ Nany::Ast::Node* parseFile(const char* filePath)
 	delete inputBuf;
 	return tree;
 }
+
+

@@ -217,3 +217,4 @@ struct GrammarStruct Grammar =
 	/* LalrArray */          GrammarLalrStateArray
 ##END-LALR-TABLE
 };
+
