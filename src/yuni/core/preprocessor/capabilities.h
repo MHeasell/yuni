@@ -72,6 +72,7 @@
 ** - Borland C++ : YUNI_OS_BORLAND
 ** - MinGW: YUNI_OS_MINGW
 ** - CLang: YUNI_OS_CLANG
+** - LLVM: YUNI_OS_LLVM
 ** - Cygwin : YUNI_OS_CYGWIN
 ** - Gcc/G++ : YUNI_OS_GCC, YUNI_OS_GCC_VERSION : if YUNI_OS_GCC_VERSION > 30200  (> 3.2.0)
 ** - Intel Compiler: YUNI_OS_INTELCOMPILER
@@ -112,6 +113,10 @@
 #	endif
 # endif
 
+
+# ifdef __llvm__
+#	define YUNI_OS_LLVM
+# endif
 
 # ifdef __clang__
 #	define YUNI_OS_CLANG
