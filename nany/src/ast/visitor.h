@@ -29,6 +29,8 @@ namespace Ast
 
 		virtual void visit(MethodDeclarationNode*) = 0;
 
+		virtual void visit(AttributeDeclarationNode*) = 0;
+
 		virtual void visit(ScopeNode*) = 0;
 
 		virtual void visit(VisibilityQualifierNode*) = 0;
@@ -46,6 +48,8 @@ namespace Ast
 		virtual void visit(ParallelExpressionNode*) = 0;
 
 		virtual void visit(TypeExpressionNode*) = 0;
+
+		virtual void visit(TypeQualifierListNode*) = 0;
 
 		virtual void visit(VarDeclarationNode*) = 0;
 

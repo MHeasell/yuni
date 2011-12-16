@@ -43,9 +43,22 @@ namespace Typing
 				node->body()->accept(this);
 			if (node->body() && node->returnType() &&
 				node->returnType()->type() != node->body()->type())
-				std::cerr << "Type mismatch in nethod " << node->name() << " :" << std::endl
+				std::cerr << "Type mismatch in method " << node->name() << " :" << std::endl
 						  << "\tReturn type is : " << node->body()->type()->name() << std::endl
 						  << "\tExpected : " << node->returnType()->type()->name() << std::endl;
+		}
+
+		virtual void visit(Ast::AttributeDeclarationNode* node)
+		{
+			if (node->typeDecl())
+				node->typeDecl()->accept(this);
+			if (node->value())
+				node->value()->accept(this);
+			if (node->typeDecl() && node->value() &&
+				node->typeDecl()->type() != node->value()->type())
+				std::cerr << "Type mismatch in declaration of attribute " << node->name() << " :" << std::endl
+						  << "\tDeclared type : " << node->typeDecl()->type()->name() << std::endl
+						  << "\tAssigned type : " << node->value()->type()->name() << std::endl;
 		}
 
 

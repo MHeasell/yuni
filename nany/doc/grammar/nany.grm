@@ -90,10 +90,10 @@ Comment End = '*#' | '*/'
 
 <Anonymous Class Declaration> ::= 'class' <Optional Type Parameters> <Optional Base Classes> <In Block> <Out Block> '{' <Class Content> '}'
 
-<Optional Base Classes> ::= ':' <Expression> <Optional Base Classes Continued>
+<Optional Base Classes> ::= ':' <SingleThread Exp> <Optional Base Classes Continued>
                | ! Empty
 
-<Optional Base Classes Continued> ::= ',' <Expression>
+<Optional Base Classes Continued> ::= ',' <SingleThread Exp>
                | ! Empty
 
 ! TODO
@@ -121,13 +121,14 @@ Comment End = '*#' | '*/'
 <Attribute Declaration> ::= 'attribute' Identifier <Typing> <Assignment>
                | 'attribute' Identifier <Assignment>
                | 'attribute' Identifier <Typing>
-               | ConstQualifier 'attribute' Identifier <Typing> <Assignment>
-               | ConstQualifier 'attribute' Identifier <Assignment>
-               | ConstQualifier 'attribute' Identifier <Typing>
 
-<Assignment> ::= ':=' <Expression>
+<Assignment> ::= ':=' <SingleThread Exp>
 
-<Typing> ::= ':' <Type Qualifiers> <Simple Exp>
+<Typing> ::= ':' <Simple Exp>
+               | ':' <Type Qualifiers> <Typing Continued>
+
+<Typing Continued> ::= <Simple Exp>
+               | ! Empty
 
 ! -------------------------------------------------
 ! Workflows
@@ -176,17 +177,17 @@ Comment End = '*#' | '*/'
 ! Functions and methods
 ! -------------------------------------------------
 
-<Function Declaration> ::= <Optional Optim Qualifier> 'function' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> '{' <Expression> '}'
-               | <Optional Optim Qualifier> 'function' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> '{' '}' ! Empty body
+<Function Declaration> ::= <Optional Optim Qualifier> 'function' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> <Function Body>
 
-<Anonymous Function Declaration> ::= <Optional Optim Qualifier> 'function' <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> '{' <Expression> '}'
-               | <Optional Optim Qualifier> 'function' <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> '{' '}' ! Empty body
+<Anonymous Function Declaration> ::= <Optional Optim Qualifier> 'function' <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> <Function Body>
 
-<Method Declaration> ::= <Optional Optim Qualifier> 'method' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> '{' <Expression> '}'
-               | <Optional Optim Qualifier> 'method' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> '{' '}' ! Empty body
+<Method Declaration> ::= <Optional Optim Qualifier> 'method' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> <Function Body>
                | <Optional Optim Qualifier> 'method' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> ';' ! Abstract method declaration
 
-<Return Type Declaration> ::= ':' <Expression>
+<Function Body> ::= '{' <Expression> '}'
+               | '{' '}' ! Empty body
+
+<Return Type Declaration> ::= ':' <Optional Type Qualifiers> <SingleThread Exp>
                | ! Empty
 
 <Optional Parameters> ::= '(' <Parameter List> ')'
@@ -201,8 +202,10 @@ Comment End = '*#' | '*/'
 <Parameter List Continued> ::= ',' <Parameter List>
                | ! Empty
 
-<Type Qualifiers> ::= TypeQualifier <Type Qualifiers Continued>
+<Optional Type Qualifiers> ::= <Type Qualifiers>
                | ! Empty
+
+<Type Qualifiers> ::= TypeQualifier <Type Qualifiers Continued>
 
 <Type Qualifiers Continued> ::= TypeQualifier <Type Qualifiers Continued>
                | ! Empty
@@ -213,13 +216,13 @@ Comment End = '*#' | '*/'
 <Optional Visibility Qualifier> ::= VisibilityQualifier
                | ! Empty
 
-<Argument List> ::= <Expression> <Argument List Continued>
+<Argument List> ::= <Possibly Parallel Exp> <Argument List Continued>
                | ! Empty
 
-<Argument List Continued> ::= ',' <Expression> <Argument List Continued>
+<Argument List Continued> ::= ',' <Possibly Parallel Exp> <Argument List Continued>
                | ! Empty
 
-<Typedef> ::= 'type' Identifier ':=' <Expression>
+<Typedef> ::= 'type' Identifier ':=' <Possibly Parallel Exp>
 
 ! -------------------------------------------------
 ! Constraint blocks
@@ -240,17 +243,17 @@ Comment End = '*#' | '*/'
 
 ! This is for generics declarations
 <Type Parameters> ::= '<' Identifier <Type Parameters Continued> '>'
-               | '<' Identifier ':=' <Expression> <Type Parameters Continued> '>'
+               | '<' Identifier ':=' <SingleThread Exp> <Type Parameters Continued> '>'
 
 <Type Parameters Continued> ::= ',' Identifier <Type Parameters Continued>
-               | ',' Identifier ':=' <Expression> <Type Parameters Continued>
+               | ',' Identifier ':=' <SingleThread Exp> <Type Parameters Continued>
                | ! Empty
 
 ! This is for generics instanciations
-<Type Arguments> ::= <Expression> <Type Arguments Continued>
+<Type Arguments> ::= <SingleThread Exp> <Type Arguments Continued>
                | ! Empty
 
-<Type Arguments Continued> ::= ',' <Expression> <Type Parameters Continued>
+<Type Arguments Continued> ::= ',' <SingleThread Exp> <Type Parameters Continued>
                | ! Empty
 
 ! -------------------------------------------------
@@ -285,13 +288,13 @@ Comment End = '*#' | '*/'
                | 'return' <SingleThread Exp>
                | 'break'
                | 'continue'
-               | 'if' <Expression> 'then' <Expression> <Else Expression>
+               | 'if' <Possibly Parallel Exp> 'then' <Expression> <Else Expression>
                | 'while' <Expression> 'do' <Expression>
                | 'for' Identifier 'in' <Expression> 'do' <Expression>
                | 'for' Identifier 'in' <Expression> 'order' ':' <Expression> 'packedby' ':' <Expression> 'do' <Expression>
                | 'for' Identifier 'in' <Expression> 'order' 'do' <Expression>
-               | 'timeout' <Expression> 'do' <Expression>
-               | 'timeout' <Expression> 'do' <Expression> 'else' <Expression>
+               | 'timeout' <Possibly Parallel Exp> 'do' <Expression>
+               | 'timeout' <Possibly Parallel Exp> 'do' <Expression> 'else' <Expression>
                | <Anonymous Function Declaration>
                | <Anonymous Class Declaration>
                | '{' <Expression> '}'

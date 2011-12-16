@@ -85,6 +85,19 @@ namespace Ast
 		}
 
 
+		virtual void visit(AttributeDeclarationNode* node)
+		{
+			std::cout << pIndent << "<Method Declaration Node>" << std::endl;
+			indent();
+			std::cout << pIndent << "Symbol : " << node->name() << std::endl;
+			if (node->typeDecl())
+				node->typeDecl()->accept(this);
+			if (node->value())
+				node->value()->accept(this);
+			unindent();
+		}
+
+
 		virtual void visit(ScopeNode* node)
 		{
 			std::cout << pIndent << "<Scope Node>" << std::endl;
