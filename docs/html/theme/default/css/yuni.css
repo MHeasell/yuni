@@ -1,16 +1,17 @@
 body,html {
-	background-color		:white;
-	font: 1em/1.2em 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
-	color					:#444;
-	margin					:0;
-	padding					:0;
-	background:white;
-	font-size				:85%;
+	background-color				:#FBFBFB;
+	font							:13px/21px 'Open Sans', HelveticaNeue, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	color							:#444;
+	margin							:0;
+	padding							:0;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
+	-webkit-text-size-adjust: 100%;
 }
 .layout {
-	border-collapse			:collapse;
-	padding					:0;
-	margin					:0;
+	border-collapse:collapse;
+	padding:0;
+	margin:0;
 	padding-left:210px;
 }
 .leftspace {
@@ -33,15 +34,16 @@ body,html {
 	min-width:170px;
 	width:170px;
 	vertical-align:top;
-	padding					:2em 2.5em 2em 2.5em;
-	font: 1em/1.25em 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
+	padding:2em 2.5em 2em 2.5em;
+	font: 12px/14px 'Open Sans', 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
 	background-color:#f8f8f8;
+	background-color:#f2f2f2;
 	background-image:url('../images/shadow.png');
 	background-position:100% center;
 	background-repeat:repeat-y;
 }
 .leftmenu .titled {
-	font: 1.5em 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
+	font: 13px/14px 'Open Sans', 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
 	background-image:url('../images/logo.png');
 	background-repeat:no-repeat;
 	background-position:center 0;
@@ -111,23 +113,25 @@ body,html {
 .laycontent {
 	padding-right:5em;
 	padding-left			:5em;
+	padding-top:4.6em;
 	border:1px solid #ccc;
 	border-top-style:none;
 	border-bottom-style:none;
 	border-right-style:none;
 }
-.laycontent h1 {
-	font: 2em 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
+.headertop h1 {
+	font: 24px/31px 'Open Sans', 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
+	font: 24px/31px "Open Sans", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	color:#933;
 	text-shadow				:1px 1px 3px #ddd;
-	margin-top:62px;
+	margin-top:12px;
 	margin-bottom:0.5em;
 }
-.laycontent h1 strong {
+.headertop h1 strong {
 	color					:#000;
 	text-shadow				:1px 1px 4px #aaa;
 }
-.laycontent h1 span {
+.headertop h1 span {
 	color:#ccc;
 	font-weight:normal;
 }
@@ -135,15 +139,17 @@ body,html {
 .toc {
 	float					:right;
 	border					:1px solid #ccc;
-	background-color:#f8f8f8;
 	background-color:#f8f8fc;
 	border-color:#b6c2ca;
 	padding					:0.5em 1em 0 1em;
-	margin					:2em 1.5em 2em 2em;
-	font: 0.97em/1.1em 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
-	-moz-box-shadow: 0 2px 5px #bbb;
-	-webkit-box-shadow: 0 2px 5px #bbb;
-	box-shadow: 0 2px 5px #bbb;
+	margin:4em 1em 2em 2em;
+	position:fixed;
+	top:1.3em;
+	right:0;
+	font: 11px/13px 'Open Sans', 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
+	-moz-box-shadow: 0 2px 5px #ddd;
+	-webkit-box-shadow: 0 2px 5px #ddd;
+	box-shadow: 0 2px 5px #ddd;
 }
 .toc div {
 	padding-bottom			:0.5em;
@@ -194,7 +200,9 @@ body,html {
 	padding-top				:200pt;
 	margin-bottom			:40pt;
 	text-align				:right;
-	font: 0.92em/1em 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
+	font: 0.92em/1em 'Open Sans', 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
+	font: 12px/13px 'Open Sans', 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
+	color:#668;
 }
 .footer td {
 	vertical-align:bottom;
@@ -231,11 +239,12 @@ body,html {
 	width:10px;
 }
 .content {
-	font: 1em/1.35em 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
+	font: 1em/1.35em 'Open Sans', 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
+	font: 13px/16px 'Open Sans', 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
 }
 .content .directoryindex {
-	margin					:45pt 0 0 0;
-	text-shadow				:2px 2px 2px #bbb;
+	margin:45pt 0 0 0;
+	text-shadow:2px 2px 2px #bbb;
 	color:#689BD6 !important;
 	padding-left:25px;
 	padding-top:0.2em;
@@ -243,6 +252,7 @@ body,html {
 	background-image:url('../images/folder.png');
 	background-position:left 1px;
 	background-repeat:no-repeat;
+	font-size:12px;
 }
 .content .directoryindex ul {
 	color:#666 !important;
@@ -288,11 +298,13 @@ body,html {
 	margin					:31pt 0 0 0;
 }
 .content h2 {
-	font: 1.6em/1.8em 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
+	font: 1.6em/1.8em 'Open Sans', 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
+	font: 22px/22px 'Open Sans', 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
 	margin: 55pt 0 15pt 0;
-	text-shadow: 2px 2px 5px #aaa;
-	font-weight: bold;
-	color: #000;
+	text-shadow: 2px 2px 5px #cecece;
+	/*font-weight: bold;*/
+	color: #181818;
+	padding-bottom:5px;
 }
 .content h2 code {
 	background-color:transparent;
@@ -307,11 +319,11 @@ td > h2:first-child {
 	padding-top:0 !important;
 }
 .content h3 {
-	font: 1.3em/1.4em 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
-	text-shadow				:2px 2px 5px #bbb;
-	color					:#245079;
-	padding-left			:2em;
-	margin					:30pt 0 0 0;
+	font:16px/18px 'Open Sans','ColaborateThinRegular','Hiragino Kaku Gothic Pro',Optima,Lucida,'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
+	text-shadow	:2px 2px 5px #cecece;
+	color:#245079;
+	padding-left:2em;
+	margin:30pt 0 0 0;
 }
 .content .h2noleftspace {
 	padding-left			:0em !important;
@@ -329,10 +341,11 @@ td > h2:first-child {
 }
 .content code {
 	color					:#33A;
-	font-family				:Monaco, 'Lucida Console', monospace;
+	font: 12px/14px Monaco, Consolas, 'Andale Mono', 'DejaVu Sans Mono', monospace;
 	background-color:#f2f2ff;
+	background-color:#f8f8fe;
 	padding:0.1em 0.4em 0.1em 0.4em;
-	color:#778 !important;
+	color:#557 !important;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
@@ -343,13 +356,17 @@ td > h2:first-child {
 }
 .content pre {
 	font-family				:Monaco, 'Lucida Console', 'monospace';
-	font-size:0.92em;
+	font: 12px/14px Monaco, Consolas, 'Andale Mono', 'DejaVu Sans Mono', monospace;
 	padding					:0.5em 1em 0.5em 1em;
 	margin-left				:3.5em !important;
-	border					:1px solid #ddd;
+	border					:1px solid #d8d8d8;
+	/*
 	border-top-style		:none;
 	border-bottom-style		:none;
 	border-right-style		:none;
+	*/
+	font-size:11px;
+	background-color:white;
 }
 .content pre .keyword {
 	color:#922;
@@ -473,7 +490,8 @@ td > h2:first-child {
 	text-decoration:none;
 	padding:0.1em 0.8em !important;
 	padding-right:0.3em !important;
-	font: 1em/1.27em 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
+	font: 12px/14px 'Open Sans', 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
+	line-height:1.3;
 }
 .spotlight a:hover {
 	background-color:#933 !important;
@@ -496,8 +514,23 @@ td > h2:first-child {
 	color					:#245079 !important;
 	padding-bottom:0.5em;
 }
+.headertop {
+	border:1px solid #ccc;
+	border-left-style:none;
+	border-right-style:none;
+	border-top-style:none;
+	position:fixed;
+	top:0;
+	width:100%;
+	padding-bottom:1.5em;
+	padding-left			:5em;
+	background-color:#f2f2f2;
+}
 .path {
 	padding-bottom:2em;
+	font: 11px/13px 'Open Sans', 'ColaborateThinRegular', 'Hiragino Kaku Gothic Pro', Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', helvetica, arial, sans-serif;
+	position:fixed;
+	top:4.2em;
 }
 .path ul {
 	background-image:url('../images/home.png');
@@ -516,7 +549,7 @@ td > h2:first-child {
 	padding:0 0px 0 12px;
 	margin:0;
 	padding-top:5px;
-	padding-bottom:5px;
+	padding-bottom:2px;
 }
 .path ul li ul {
 	float:left;
@@ -524,22 +557,22 @@ td > h2:first-child {
 	position:absolute;
 	background-color:#000;
 	background-image:none;
-	margin-top:3px;
+	margin-top:1px;
 	margin-left:-12px;
 	padding-top:3px;
 	padding-bottom:3px;
 	padding-right:2px;
 	overflow:auto;
-	max-height:80%;
+	max-height:400px;
 	opacity:0.85;
 }
 .path ul li a {
-	font-size:1em;
 	text-decoration:none;
 	color:#224f7b;
 	border:1px solid transparent;
 	padding-left:4px;
 	padding-right:4px;
+	white-space: nowrap;
 }
 .path ul li:hover {
 	background-color:black;
@@ -559,7 +592,6 @@ td > h2:first-child {
 	padding-left:3px;
 }
 .path ul li ul li a {
-	font-size:1em;
 	display:block;
 	background-color:#000;
 	background-image:none;
@@ -608,9 +640,10 @@ td > h2:first-child {
 	-webkit-border-radius: 6px;
 	-moz-border-radius: 6px;
 	border-radius: 6px;
-	background-color:#fbfbfb;
-	border:1px solid #f0f0f0;
+	background-color:#f3f3f3;
+	border:1px solid #e0e0e0;
 	padding:0.6em 1em;
+	margin-top:1em;
 }
 .doxygen_brief code {
 	background-color:transparent;
@@ -645,7 +678,6 @@ td > h2:first-child {
 }
 .doxygen_visibility {
 	float:right;
-	font-size:0.9em;
 	font-weight:normal !important;
 	color:#666 !important;
 	text-shadow:none;

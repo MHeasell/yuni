@@ -10,21 +10,6 @@ set of coherent API and to be a reliable and simple bridge between different
 worlds, allowing to write all sorts of applications while letting the developer
 focus on her real work.
 </p>
-
-<chart>
-	<legend position="ne" />
-	<curve label="" type="bars">
-		<x> 0, 1,  2,  3, 4,   8,  9   6 </x>
-		<y> 3, -3, 12, 8, 5.7, 13  -3  43</y>
-	</curve>
-	<curve label="2nd curve" type="lines" fill="false">
-		<x> 1, 5, 7, 8  </x>
-		<y> 3, 8, 5, 13 </y>
-	</curve>
-</chart>
-
-
-
 <p>
 The Yuni project is connected to all these domains :
 </p>

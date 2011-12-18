@@ -1,16 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="@{LANG}" lang="@{LANG}">
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="${LANG}"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="${LANG}"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="${LANG}"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="${LANG}"> <!--<![endif]-->
 <head>
-<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
-<meta http-equiv="content-language" content="@{LANG}" />
+<meta charset="utf-8" />
 <title>@{TITLE} - Yuni Framework</title>
+<meta name="description" content="@{DESCRIPTION}" />
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<meta name="keywords" content="@{KEYWORDS}" />
+<meta name="viewport" content="width=1024, initial-scale=1, maximum-scale=1" />
+<meta http-equiv="content-language" content="@{LANG}" />
 <meta name="copyright" content="libyuni.org, 2008 / 2011" />
 <meta name="rating" content="general" />
 <meta name="author" content="libyuni.org" />
-<meta name="description" content="@{DESCRIPTION}" />
-<meta name="keywords" content="@{KEYWORDS}" />
-<meta name="viewport" content="width=1024" />
 <meta name="DC.title" lang="@{LANG}" content="@{TITLE}" />
 <meta name="DC.publisher"  content="Yuni Team" />
 <meta name="DC.date" content="@{MODIFIED_ISO8601}" />
@@ -83,10 +88,7 @@ function toggle_toc() {
 
 <div class="layout">
 
-<div class="laycontent">
-
-
-
+<div id="top" class="headertop">
 <h1>@{TITLE}</h1>
 <div class="path">
 <ul>
@@ -94,13 +96,18 @@ function toggle_toc() {
 @{URL_PARTS}
 </ul>
 </div>
+</div>
+
+
+<div class="laycontent">
+
 
 
 @{TOC_BEGIN}
 <div id="toc" class="toc">
 <div>
-<span><b>&nbsp;Table of Contents</b> <a id="toclink" href="javascript:toggle_toc()">[ Hide ]</a></span>
-<div id="toclist" style="display:block">
+<span><b>&nbsp;Table of Contents</b> <a id="toclink" href="javascript:toggle_toc()">[ Show ]</a></span>
+<div id="toclist" style="display:none">
 @{TOC_CONTENT}
 </div>
 </div>
