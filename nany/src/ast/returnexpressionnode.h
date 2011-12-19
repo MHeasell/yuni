@@ -34,7 +34,8 @@ namespace Ast
 
 	public:
 		Node* pExpr;
-	};
+
+	}; // class ReturnExpressionNode
 
 
 

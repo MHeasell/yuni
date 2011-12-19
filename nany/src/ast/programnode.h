@@ -14,6 +14,10 @@ namespace Ast
 
 	/*!
 	** \brief Root node, the full file : either a program or a unit
+	**
+	** \code
+	** 'program' Identifier ';'
+	** \endcode
 	*/
 	class ProgramNode: public Node
 	{
@@ -42,7 +46,8 @@ namespace Ast
 		UnitDeclarationNode* pUnitDeclaration;
 
 		DeclarationListNode* pDeclarations;
-	};
+
+	}; // class ProgramNode
 
 
 

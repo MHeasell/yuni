@@ -28,8 +28,7 @@ HexLiteral     = '0'[xX]{Hex Digit}+ ( [UuLl] | [Uu][Ll] | [Ll][Uu] )?
 RealLiteral    = {Digit}*'.'{Digit}+ ( [FfDd] )?
 CharLiteral    = '' ( {Char Chars} | '\'{Printable} ) ''
 TimeLiteral    = ( {Digit}+ | {Digit}*'.'{Digit}+ ) ( 'ms' | 's' | 'm' | 'h' )
-ConstQualifier = 'const'
-TypeQualifier  = ConstQualifier | 'ref' | 'volatile'
+TypeQualifier  = 'const' | 'ref' | 'volatile'
 VisibilityQualifier = 'public' | 'protected' | 'private' | 'published'
 OptimQualifier = 'immutable' | 'stable' | 'threadunsafe'
 BuiltInType    = 'void' | 'any' | 'int' | 'uint' | 'int8' | 'uint8' | 'int16' | 'uint16' | 'int32' | 'uint32' | 'int64' | 'uint64' | 'char' | 'float' | 'double' | 'bool' | 'string'
@@ -113,11 +112,6 @@ Comment End = '*#' | '*/'
                | 'write' <SingleThread Exp> <Property Callbacks>
                | ! Empty
 
-! Strict version, works fine and is clean but not powerful enough
-!<Attribute Declaration> ::= Identifier ':' <Type Qualifiers> Identifier <Optional Assignment>
-!               | ConstQualifier Identifier ':=' <Expression>
-!               | Identifier ':=' <Expression>
-! Loose version, very powerful but requires a keyword and a lot of work in the type-checking
 <Attribute Declaration> ::= 'attribute' Identifier <Typing> <Assignment>
                | 'attribute' Identifier <Assignment>
                | 'attribute' Identifier <Typing>

@@ -54,14 +54,14 @@ namespace Ast
 
 		virtual void visit(FunctionDeclarationNode* node)
 		{
-			if (node->returnType())
-			{
-				node->returnType()->accept(this);
-				pOut << " ";
-			}
-			else
-				pOut << "void ";
-			pOut << node->name() << '(';
+			pOut << pIndent;
+			if (node->returnType() && node->returnType()->type())
+				writeType(node->returnType()->type());
+			else if (node->type())
+				writeType(node->type());
+			else // Default to void
+				pOut << "void";
+			pOut << " " << node->name() << '(';
 			if (node->params())
 				node->params()->accept(this);
 			pOut << ')' << std::endl;
@@ -91,17 +91,17 @@ namespace Ast
 
 		virtual void visit(MethodDeclarationNode* node)
 		{
-			if (node->returnType())
-			{
-				node->returnType()->accept(this);
-				pOut << " ";
-			}
-			else
-				pOut << "void ";
-			pOut << node->name() << '(';
+			pOut << pIndent;
+			if (node->returnType() && node->returnType()->type())
+				writeType(node->returnType()->type());
+			else if (node->type())
+				writeType(node->type());
+			else // Default to void
+				pOut << "void";
+			pOut << " " << node->name() << '(';
 			if (node->params())
 				node->params()->accept(this);
-			pOut << ')' << std::endl;
+			pOut << ')' << std::endl << pIndent;
 
 			pFunctionScope = true;
 			if (node->body())
@@ -115,8 +115,13 @@ namespace Ast
 
 		virtual void visit(AttributeDeclarationNode* node)
 		{
-			if (node->typeDecl())
-				node->typeDecl()->accept(this);
+			pOut << pIndent;
+			if (node->typeDecl() && node->typeDecl()->type())
+				writeType(node->typeDecl()->type());
+			else if (node->type())
+				writeType(node->type());
+			else // Default to int...
+				pOut << "int";
 			pOut << " " << node->name();
 			if (node->value())
 			{
@@ -137,7 +142,14 @@ namespace Ast
 				// On single expressions, write the indent
 				// On expression lists, leave this work to the visit(expressionlistnode)
 				if (!isList)
+				{
 					pOut << pIndent;
+					// On one-liners, add `return` when necessary
+					if (pFunctionScope && node->expression()->type() &&
+						node->expression()->type() != Typing::Type::Get("void") &&
+						!dynamic_cast<ReturnExpressionNode*>(node->expression()))
+						pOut << "return ";
+				}
 				node->expression()->accept(this);
 				if (!isList)
 					pOut << ';' << std::endl;
@@ -152,7 +164,19 @@ namespace Ast
 			// Visibility qualifiers are displayed at the same indent level as
 			// the underlying class, so one level under the rest of the declarations
 			unindent();
-			pOut << pIndent << node->value() << ':' << std::endl;
+			pOut << pIndent;
+			switch (node->value())
+			{
+				case 0:
+					pOut << "private:" << std::endl;
+					break;
+				case 1:
+					pOut << "protected:" << std::endl;
+					break;
+				default: // public + published
+					pOut << "public:" << std::endl;
+					break;
+			}
 			indent();
 		}
 
@@ -161,9 +185,18 @@ namespace Ast
 		{
 			ExpressionListNode::List& exprList = node->expressions();
 			ExpressionListNode::List::iterator end = exprList.end();
+			unsigned int size = exprList.size();
 			for (ExpressionListNode::List::iterator it = exprList.begin(); it != end; ++it)
 			{
 				pOut << pIndent;
+
+				// If on last expression, check if we may add `return`
+				if (!--size && pFunctionScope && !dynamic_cast<ReturnExpressionNode*>(*it))
+				{
+					// If the type is null, we might as well treat is as `void`
+					if ((*it)->type() && (*it)->type() != Typing::Type::Get("void"))
+						pOut << "return ";
+				}
 				(*it)->accept(this);
 				pOut << ';' << std::endl;
 			}
@@ -508,13 +541,20 @@ namespace Ast
 
 		virtual void visit(LiteralNode<Typing::Type*>* node)
 		{
-			if (node->data->isConst())
-				pOut << "const ";
-			pOut << node->data->name();
+			writeType(node->data);
 		}
 
 
 	private:
+		void writeType(Typing::Type* type)
+		{
+			if (!type)
+				return;
+			if (type->isConst())
+				pOut << "const ";
+			pOut << type->name();
+		}
+
 		void indent()
 		{
 			pIndent << '\t';
@@ -536,6 +576,13 @@ namespace Ast
 		** This is useful to know when we might need to add a return keyword.
 		*/
 		bool pFunctionScope;
+
+		/*!
+		** \brief Is this expression the last one in a list, or a single one ?
+		**
+		** This is useful to know when we might need to add a return keyword.
+		*/
+		bool pLastExpression;
 
 		//! Current indent
 		Yuni::String pIndent;

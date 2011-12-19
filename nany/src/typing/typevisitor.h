@@ -26,8 +26,9 @@ namespace Typing
 			if (node->body())
 				node->body()->accept(this);
 			if (node->body() && node->returnType() &&
+				node->body()->type() && node->returnType()->type() &&
 				node->returnType()->type() != node->body()->type())
-				std::cerr << "Type mismatch in function " << node->name() << " :" << std::endl
+				std::cerr << "Type mismatch in function \"" << node->name() << "\" :" << std::endl
 						  << "\tReturn type is : " << node->body()->type()->name() << std::endl
 						  << "\tExpected : " << node->returnType()->type()->name() << std::endl;
 		}
@@ -41,11 +42,22 @@ namespace Typing
 				node->returnType()->accept(this);
 			if (node->body())
 				node->body()->accept(this);
-			if (node->body() && node->returnType() &&
-				node->returnType()->type() != node->body()->type())
-				std::cerr << "Type mismatch in method " << node->name() << " :" << std::endl
-						  << "\tReturn type is : " << node->body()->type()->name() << std::endl
-						  << "\tExpected : " << node->returnType()->type()->name() << std::endl;
+
+			if (node->returnType())
+			{
+				// If the return type was given, use it as the whole node's type
+				node->type(node->returnType()->type());
+				// And make a few checks
+				if (node->body() && node->returnType() &&
+					node->body()->type() && node->returnType()->type() &&
+					node->returnType()->type() != node->body()->type())
+					std::cerr << "Type mismatch in method \"" << node->name() << "\" :" << std::endl
+							  << "\tReturn type is : " << node->body()->type()->name() << std::endl
+							  << "\tExpected : " << node->returnType()->type()->name() << std::endl;
+			}
+			else
+				// If the type was not given, try to get the type from the body
+				node->type(node->body()->type());
 		}
 
 		virtual void visit(Ast::AttributeDeclarationNode* node)
@@ -55,6 +67,7 @@ namespace Typing
 			if (node->value())
 				node->value()->accept(this);
 			if (node->typeDecl() && node->value() &&
+				node->typeDecl()->type() && node->value()->type() &&
 				node->typeDecl()->type() != node->value()->type())
 				std::cerr << "Type mismatch in declaration of attribute " << node->name() << " :" << std::endl
 						  << "\tDeclared type : " << node->typeDecl()->type()->name() << std::endl

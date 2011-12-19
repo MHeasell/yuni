@@ -379,7 +379,7 @@ Nany::Ast::Node* Rule_Literal_self(struct TokenStruct* token)
 // <Class Declaration> ::= class Identifier <Optional Type Parameters> <Optional Base Classes> <In Block> <Out Block> '{' <Class Content> '}'
 Nany::Ast::Node* Rule_ClassDeclaration_class_Identifier_LBrace_RBrace(struct TokenStruct* token)
 {
-	Nany::Ast::DeclarationListNode* decls = ParseChild<Nany::Ast::DeclarationListNode>(token, 6);
+	Nany::Ast::DeclarationListNode* decls = ParseChild<Nany::Ast::DeclarationListNode>(token, 7);
 
 	// Read the name of the function
 	const wchar_t* funcName = GetChildSymbol(token, 1);
@@ -517,7 +517,7 @@ Nany::Ast::Node* Rule_ClassContent_Semi2(struct TokenStruct* token)
 {
 	// TODO : Handle properties
 
-	return ParseChild<Nany::Ast::DeclarationListNode>(token, 1);
+	return ParseChild<Nany::Ast::DeclarationListNode>(token, 2);
 }
 
 
@@ -1276,8 +1276,27 @@ Nany::Ast::Node* Rule_OptionalTypeQualifiers2(struct TokenStruct* token)
 // <Type Qualifiers> ::= TypeQualifier <Type Qualifiers Continued>
 Nany::Ast::Node* Rule_TypeQualifiers_TypeQualifier(struct TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Not yet implemented !");
+	Nany::Ast::TypeQualifierListNode* list = ParseChild<Nany::Ast::TypeQualifierListNode>(token, 1);
+
+	if (!list)
+		list = new Nany::Ast::TypeQualifierListNode();
+
+	// Read and convert the qualifier
+	const wchar_t* qualifier = GetChildSymbol(token, 0);
+	size_t len = wcslen(qualifier);
+	char* buffer = new char[len + 1];
+	wcstombs(buffer, qualifier, len);
+	buffer[len] = 0;
+
+	Nany::Ast::TypeQualifierListNode::TypeQualifier tq =
+		Nany::Ast::TypeQualifierListNode::TypeQualifier::tqConst;
+	if ('r' == buffer[0])
+		tq = Nany::Ast::TypeQualifierListNode::TypeQualifier::tqRef;
+	else if ('v' == buffer[0])
+		tq = Nany::Ast::TypeQualifierListNode::TypeQualifier::tqVolatile;
+
+	list->prepend(tq);
+	return list;
 }
 
 
