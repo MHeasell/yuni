@@ -11,6 +11,10 @@ namespace Ast
 
 	/*!
 	** \brief AST node for an if-then or if-then-else expression.
+	**
+	** \code
+	** 'if' <Expr> 'then' <Expr> [ 'else' <Expr> ]
+	** \endcode
 	*/
 	class IfExpressionNode: public Node
 	{
@@ -37,7 +41,8 @@ namespace Ast
 		Node* pCondition;
 		Node* pThenExpr;
 		Node* pElseExpr;
-	};
+
+	}; // class IfExpressionNode
 
 
 

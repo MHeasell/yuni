@@ -38,7 +38,8 @@ namespace Ast
 	public:
 		Node* pLeft;
 		Node* pRight;
-	};
+
+	}; // class SuperiorEqualExpressionNode
 
 
 
