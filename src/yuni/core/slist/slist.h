@@ -16,7 +16,7 @@ namespace Yuni
 	** \brief A singly linked list
 	*/
 	template<class T, class Alloc = None>
-	class LinkedList
+	class YUNI_DECL LinkedList
 	{
 	public:
 		//! Size type

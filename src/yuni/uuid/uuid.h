@@ -44,7 +44,7 @@ namespace Yuni
 	** std::cout << uuid << std::endl;
 	** \endcode
 	*/
-	class UUID
+	class YUNI_DECL UUID
 	{
 	public:
 		enum Flag

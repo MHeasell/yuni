@@ -19,7 +19,7 @@ namespace Yuni
 	**
 	** \ingroup Threads
 	*/
-	class Mutex
+	class YUNI_DECL Mutex
 	{
 	public:
 		/*!

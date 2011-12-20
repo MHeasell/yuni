@@ -94,7 +94,7 @@ namespace Yuni
 	** \tparam P The prototype of the targetted function/member
 	*/
 	template<class P = void (), class Dummy = void>
-	class Bind
+	class YUNI_DECL Bind
 	{
 	public:
 		// This class can not be used like that. We must use one the specialization

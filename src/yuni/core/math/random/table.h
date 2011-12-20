@@ -64,7 +64,7 @@ namespace Random
 		bool Cyclic = true,                                   // Cycle through the list or regenerate a new set ?
 		template<class> class TP = Policy::SingleThreaded     // The Threading policy
 		>
-	class Table
+	class YUNI_DECL Table
 		:public TP<Table<D,TableSize, Cyclic, TP> >
 		,public D
 	{

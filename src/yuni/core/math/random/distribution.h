@@ -23,7 +23,7 @@ namespace Random
 	** \param Derived The real class (CRTP)
 	*/
 	template<typename T, class Derived>
-	class ADistribution
+	class YUNI_DECL ADistribution
 	{
 	public:
 		//! Type of a single random number

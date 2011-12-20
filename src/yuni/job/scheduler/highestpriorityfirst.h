@@ -20,7 +20,7 @@ namespace Scheduler
 	/*!
 	** \brief Basic Scheduler, where the job with the highest priority is executed in first
 	*/
-	class HighestPriorityFirst
+	class YUNI_DECL HighestPriorityFirst
 	{
 	public:
 		//! The scheduler itself
