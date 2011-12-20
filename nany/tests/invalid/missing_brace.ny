@@ -1,4 +1,4 @@
-program missingBrace;
+# This test has a trailing then clause with no closing brace
 
 function main
 {

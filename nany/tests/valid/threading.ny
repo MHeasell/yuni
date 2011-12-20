@@ -1,5 +1,4 @@
 # This test is a remix of the Fibonacci test with threading added
-program threading;
 
 //! Fibonacci (recursive way)
 immutable function Fibonacci(n) : typeof n

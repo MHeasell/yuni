@@ -1,5 +1,4 @@
 # This test uses a `while` clause
-program While;
 
 function main
 {

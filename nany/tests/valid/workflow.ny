@@ -1,5 +1,4 @@
 # Test containing a workflow
-program document;
 
 workflow DocumentWorkflow
 {

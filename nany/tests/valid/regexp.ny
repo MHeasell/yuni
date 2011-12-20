@@ -1,5 +1,4 @@
 # Test for regular expression syntax
-program RegExp;
 
 function name
 {

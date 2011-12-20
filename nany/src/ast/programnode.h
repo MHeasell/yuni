@@ -43,8 +43,10 @@ namespace Ast
 		DeclarationListNode* declarations() { return pDeclarations; }
 
 	private:
+		//! Unit declaration can be null if the file is not a unit
 		UnitDeclarationNode* pUnitDeclaration;
 
+		//! List of declarations in the file or stream
 		DeclarationListNode* pDeclarations;
 
 	}; // class ProgramNode

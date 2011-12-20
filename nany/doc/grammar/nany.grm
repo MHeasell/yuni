@@ -49,7 +49,7 @@ Comment End = '*#' | '*/'
 <Program> ::= <Unit Declaration> <Dependencies> <Declaration List>
 
 <Unit Declaration> ::= <Optional Visibility Qualifier> 'unit' Identifier ';'
-               | 'program' Identifier ';'
+               | ! Empty
 
 <Dependencies> ::= <Dependency> <Dependencies>
                | ! Empty
@@ -282,10 +282,10 @@ Comment End = '*#' | '*/'
                | 'return' <SingleThread Exp>
                | 'break'
                | 'continue'
-               | 'if' <Possibly Parallel Exp> 'then' <Expression> <Else Expression>
-               | 'while' <Expression> 'do' <Expression>
+               | 'if' <Possibly Parallel Exp> 'then' <Possibly Parallel Exp> <Else Expression>
+               | 'while' <Possibly Parallel Exp> 'do' <Possibly Parallel Exp>
                | 'for' Identifier 'in' <Expression> 'do' <Expression>
-               | 'for' Identifier 'in' <Expression> 'order' ':' <Expression> 'packedby' ':' <Expression> 'do' <Expression>
+               | 'for' Identifier 'in' <Expression> 'order' ':' <Expression> 'packedby' ':' <Expression> 'do' <Possibly Parallel Exp>
                | 'for' Identifier 'in' <Expression> 'order' 'do' <Expression>
                | 'timeout' <Possibly Parallel Exp> 'do' <Expression>
                | 'timeout' <Possibly Parallel Exp> 'do' <Expression> 'else' <Expression>
@@ -293,7 +293,7 @@ Comment End = '*#' | '*/'
                | <Anonymous Class Declaration>
                | '{' <Expression> '}'
 
-<Else Expression> ::= 'else' <Expression>
+<Else Expression> ::= 'else' <Possibly Parallel Exp>
                | ! Empty
 
 <Binary Exp> ::= <Binary Exp> '|' <Xor Exp> ! Constraint

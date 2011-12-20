@@ -1,4 +1,4 @@
-program missingBrace2;
+# This test has a trailing else clause, with no closing brace
 
 function foo
 {
