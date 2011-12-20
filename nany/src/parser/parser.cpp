@@ -1813,8 +1813,10 @@ Nany::Ast::Node* Rule_SimpleExp_if_then(TokenStruct* token)
 // <Simple Exp> ::= while <Possibly Parallel Exp> do <Possibly Parallel Exp>
 Nany::Ast::Node* Rule_SimpleExp_while_do(TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Rule_SimpleExp_while_do: Not yet implemented !");
+	Nany::Ast::Node* cond = ParseChild<>(token, 1);
+	Nany::Ast::Node* expr = ParseChild<>(token, 3);
+
+	return new Nany::Ast::WhileExpressionNode(cond, expr);
 }
 
 
