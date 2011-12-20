@@ -102,7 +102,7 @@ namespace Yuni
 	** \tparam ZeroTerminatedT True to make the string zero-terminated
 	*/
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
-	class CString :
+	class YUNI_DECL CString :
 		protected Private::CStringImpl::Data<ChunkSizeT,ExpandableT,ZeroTerminatedT, char>
 	{
 	public:

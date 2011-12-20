@@ -16,7 +16,7 @@ namespace Yuni
 	** \endcode
 	*/
 	template <class T>
-	class NonCopyable
+	class YUNI_DECL NonCopyable
 	{
 	protected:
 		//! \name Constructor & Destructor

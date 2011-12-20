@@ -158,7 +158,7 @@ namespace Yuni
 		template <class> class StorP = Policy::Storage::Pointer,              // Storage policy
 		template <class> class ConsP = Policy::Constness::DontPropagateConst  // Constness policy
 		>
-	class SmartPtr :
+	class YUNI_DECL SmartPtr :
 		public StorP<T>,                              // inherits from the storage policy
 		public OwspP<typename StorP<T>::PointerType>, // inherits from the ownership policy
 		public ChckP<typename StorP<T>::StoredType>,  // inherits from the checking policy

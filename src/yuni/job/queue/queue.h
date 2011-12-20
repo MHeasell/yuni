@@ -24,7 +24,7 @@ namespace Job
 	template<
 		class SchedulerT = Scheduler::HighestPriorityFirst // The Scheduler Policy
 		>
-	class QueueService
+	class YUNI_DECL QueueService
 		:public Policy::ObjectLevelLockable<QueueService<SchedulerT> >
 		,public SchedulerT
 	{
