@@ -1,6 +1,4 @@
 
-program array;
-
 function main() : int
 {
 		l: int[];

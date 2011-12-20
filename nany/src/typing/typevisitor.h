@@ -28,7 +28,7 @@ namespace Typing
 			if (node->body() && node->returnType() &&
 				node->body()->type() && node->returnType()->type() &&
 				node->returnType()->type() != node->body()->type())
-				std::cerr << "Type mismatch in function \"" << node->name() << "\" :" << std::endl
+				std::cerr << "Type mismatch for function \"" << node->name() << "\" :" << std::endl
 						  << "\tReturn type is : " << node->body()->type()->name() << std::endl
 						  << "\tExpected : " << node->returnType()->type()->name() << std::endl;
 		}
@@ -51,7 +51,7 @@ namespace Typing
 				if (node->body() && node->returnType() &&
 					node->body()->type() && node->returnType()->type() &&
 					node->returnType()->type() != node->body()->type())
-					std::cerr << "Type mismatch in method \"" << node->name() << "\" :" << std::endl
+					std::cerr << "Type mismatch for method \"" << node->name() << "\" :" << std::endl
 							  << "\tReturn type is : " << node->body()->type()->name() << std::endl
 							  << "\tExpected : " << node->returnType()->type()->name() << std::endl;
 			}
@@ -72,6 +72,10 @@ namespace Typing
 				std::cerr << "Type mismatch in declaration of attribute " << node->name() << " :" << std::endl
 						  << "\tDeclared type : " << node->typeDecl()->type()->name() << std::endl
 						  << "\tAssigned type : " << node->value()->type()->name() << std::endl;
+			// If there is no declared type, try to use the one from the value
+			if ((!node->typeDecl() || !node->typeDecl()->type()) &&
+				node->value() && node->value()->type())
+				node->type(node->value()->type());
 		}
 
 
@@ -103,9 +107,9 @@ namespace Typing
 			 	std::cerr << "Type mismatch :" << std::endl
 			 			  << "\t`then` and `else` branches must return the same type !" << std::endl
 						  << "\t`then` clause is :" << std::endl
-						  << "\t\t" << node->thenExpr()->type() << std::endl
-						  << "\t`else` clause is :"
-						  << "\t\t" << node->elseExpr()->type() << std::endl;
+						  << "\t\t" << node->thenExpr()->type()->name() << std::endl
+						  << "\t`else` clause is :" << std::endl
+						  << "\t\t" << node->elseExpr()->type()->name() << std::endl;
 			node->type(node->thenExpr()->type());
 		}
 

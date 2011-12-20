@@ -22,7 +22,8 @@ namespace Ast
 
 		virtual void visit(ProgramNode* node)
 		{
-			node->unitDeclaration()->accept(this);
+			if (node->unitDeclaration())
+				node->unitDeclaration()->accept(this);
 			node->declarations()->accept(this);
 		}
 

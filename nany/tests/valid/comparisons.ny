@@ -1,6 +1,4 @@
 #! This tests involves several types of comparisons
-program Comparisons;
-
 
 function main: int
 {

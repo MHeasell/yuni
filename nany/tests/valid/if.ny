@@ -1,5 +1,4 @@
 # This test checks for a simple if-else
-program NestedIf;
 
 function main : int
 {

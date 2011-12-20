@@ -1,12 +1,12 @@
-program OptionalSemiComma;
+#! This test uses optional semi-colons and commas, and the parser should ideally allow them
 
-private class Test
+private class OptionalPunctuation
 {
 public
 #*    enum e
     {
         Value1,
-        Value2,
+        Value2, # Optional comma
     }
 *#
 
@@ -20,10 +20,10 @@ public
         else
             foo(a + 1);
     }
-};
+}; # Optional semi-colon
 
 function main()
 {
-  0;
+  0; # Optional return
 }
 

@@ -1,6 +1,4 @@
 
-program Assignment;
-
 function main : int
 {
 	a: int := 0;

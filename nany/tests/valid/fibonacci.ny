@@ -1,5 +1,4 @@
 # This test checks a simple recursive program with no class, and simple math
-program fibonacci;
 
 #! \brief Fibonacci (recursive way)
 immutable function Fibonacci(n) : typeof n

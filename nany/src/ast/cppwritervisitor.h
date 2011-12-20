@@ -38,7 +38,8 @@ namespace Ast
 			pOut << "#include <map>" << std::endl;
 			pOut << "#include <cassert>" << std::endl;
 			pOut << std::endl;
-			node->unitDeclaration()->accept(this);
+			if (node->unitDeclaration())
+				node->unitDeclaration()->accept(this);
 			node->declarations()->accept(this);
 		}
 

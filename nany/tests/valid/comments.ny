@@ -1,7 +1,6 @@
 # This test checks for comment recognition
 /*! Spreading doc comment
 */
-program Comments;
 
 # Simple comment
 

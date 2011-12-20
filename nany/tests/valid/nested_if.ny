@@ -1,5 +1,4 @@
 # This test checks for complex nested if-else situations
-program NestedIf;
 
 function main : int
 {
@@ -13,8 +12,10 @@ function main : int
                 n := 21
             }
         }
-        else
-            n := 1
+        else if false then
+			n := 1
+		else
+			n:= 3
     else
         n := 2;
     return 0

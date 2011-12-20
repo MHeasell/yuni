@@ -1,5 +1,4 @@
-
-program Literals;
+# This simple tests assigns values to variables of various built-in types
 
 function main: int
 {
@@ -10,5 +9,5 @@ function main: int
 	b: bool := true;
 	c: char := '#';
 	s: string := "This is a string\n";
-	return 0
+	return 0;
 }

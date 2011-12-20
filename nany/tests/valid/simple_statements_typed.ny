@@ -1,6 +1,4 @@
 # This test checks for several simple statements
-program SimpleStatements;
-
 uses Dummy;
 uses Dummy.Stupid;
 uses Dummy.Stupid.Clever;

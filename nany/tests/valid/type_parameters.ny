@@ -1,5 +1,4 @@
 # Test for type parameters on both classes and methods
-program TypeParameters;
 
 class ListItem<T>
 {
@@ -64,5 +63,6 @@ function main
     l.prepend(12);
     l.addToEach(2);
     printList(l);
-    l.get(1)
+    l.get(1);
+	0
 }

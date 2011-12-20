@@ -1,4 +1,4 @@
-program ifMissingExpression;
+# This test has a then clause with nothing in it
 
 function main
 {

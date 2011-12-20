@@ -1,5 +1,4 @@
 # This test is another twist on Fibonacci with timeout features added
-program TimeOut;
 
 //! Fibonacci (recursive way)
 immutable function Fibonacci(n) : typeof n

@@ -1,6 +1,4 @@
 #! This test concerns dynamic type-checking and casting
-program RTTI;
-
 
 function main : int
 {

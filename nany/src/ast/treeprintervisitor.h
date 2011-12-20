@@ -21,8 +21,10 @@ namespace Ast
 		{
 			std::cout << "<Program Node>" << std::endl;
 			indent();
-			node->unitDeclaration()->accept(this);
+			if (node->unitDeclaration())
+				node->unitDeclaration()->accept(this);
 			node->declarations()->accept(this);
+			unindent();
 		}
 
 

@@ -1,5 +1,4 @@
 #! Several function declarations and calls
-program FunctionCalls;
 
 function foo(a: int, b: int, c: char)
 {

@@ -304,7 +304,7 @@ static void ShowErrorMessage(TokenStruct* token, int result)
 				if (i > 0)
 				{
 					std::cerr << ", ";
-					if (i >= Grammar.LalrArray[token->Symbol].ActionCount - 2)
+					if (i + 2 >= (unsigned int) Grammar.LalrArray[token->Symbol].ActionCount)
 						std::cerr << "or ";
 				}
 				std::wcerr << L'\'' << Grammar.SymbolArray[symbol].Name << L'\'';

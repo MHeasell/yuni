@@ -31,9 +31,9 @@ extern "C"
 
 // Forward declaration of generic routine for rule propagation
 template<class NodeT = Nany::Ast::Node>
-static NodeT* ParseChild(struct TokenStruct* token, unsigned int index);
+static NodeT* ParseChild(TokenStruct* token, unsigned int index);
 // Forward declaration of generic routine for symbol management
-static const wchar_t* GetChildSymbol(struct TokenStruct* token, unsigned int index);
+static const wchar_t* GetChildSymbol(TokenStruct* token, unsigned int index);
 
 
 
@@ -46,11 +46,9 @@ static const wchar_t* GetChildSymbol(struct TokenStruct* token, unsigned int ind
 static void ReadableString(wchar_t* input, wchar_t* output, long width)
 {
 	// Sanity check.
-	if (!output || (width < 1))
+	if (!output || !input || (width < 1))
 		return;
 	output[0] = 0;
-	if (input == NULL)
-		return;
 
 	long i1 = 0;
 	long i2 = 0;
@@ -86,7 +84,7 @@ static void ReadableString(wchar_t* input, wchar_t* output, long width)
 
 
 // <Program> ::= <Unit Declaration> <Dependencies> <Declaration List>
-Nany::Ast::Node* Rule_Program(struct TokenStruct* token)
+Nany::Ast::Node* Rule_Program(TokenStruct* token)
 {
 	Nany::Ast::UnitDeclarationNode* unitDecl = ParseChild<Nany::Ast::UnitDeclarationNode>(token, 0);
 	Nany::Ast::DeclarationListNode* declarations = ParseChild<Nany::Ast::DeclarationListNode>(token, 2);
@@ -98,7 +96,7 @@ Nany::Ast::Node* Rule_Program(struct TokenStruct* token)
 
 
 // <Unit Declaration> ::= <Optional Visibility Qualifier> unit Identifier ';'
-Nany::Ast::Node* Rule_UnitDeclaration_unit_Identifier_Semi(struct TokenStruct* token)
+Nany::Ast::Node* Rule_UnitDeclaration_unit_Identifier_Semi(TokenStruct* token)
 {
 	// TODO : handle visibility qualifiers
 
@@ -109,18 +107,17 @@ Nany::Ast::Node* Rule_UnitDeclaration_unit_Identifier_Semi(struct TokenStruct* t
 
 
 
-// <Unit Declaration> ::= program Identifier ';'
-Nany::Ast::Node* Rule_UnitDeclaration_program_Identifier_Semi(struct TokenStruct* token)
+// <Unit Declaration> ::= 
+Nany::Ast::Node* Rule_UnitDeclaration(TokenStruct* token)
 {
-	Nany::Ast::Node* node = new Nany::Ast::UnitDeclarationNode(true, GetChildSymbol(token, 1));
-	return node;
+	return nullptr;
 }
 
 
 
 
 // <Dependencies> ::= <Dependency> <Dependencies>
-Nany::Ast::Node* Rule_Dependencies(struct TokenStruct* token)
+Nany::Ast::Node* Rule_Dependencies(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -130,7 +127,7 @@ Nany::Ast::Node* Rule_Dependencies(struct TokenStruct* token)
 
 
 // <Dependencies> ::= 
-Nany::Ast::Node* Rule_Dependencies2(struct TokenStruct* token)
+Nany::Ast::Node* Rule_Dependencies2(TokenStruct* token)
 {
 	return nullptr;
 }
@@ -139,7 +136,7 @@ Nany::Ast::Node* Rule_Dependencies2(struct TokenStruct* token)
 
 
 // <Dependency> ::= uses Identifier <Dependency Continued> ';'
-Nany::Ast::Node* Rule_Dependency_uses_Identifier_Semi(struct TokenStruct* token)
+Nany::Ast::Node* Rule_Dependency_uses_Identifier_Semi(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -149,7 +146,7 @@ Nany::Ast::Node* Rule_Dependency_uses_Identifier_Semi(struct TokenStruct* token)
 
 
 // <Dependency Continued> ::= '.' Identifier <Dependency Continued>
-Nany::Ast::Node* Rule_DependencyContinued_Dot_Identifier(struct TokenStruct* token)
+Nany::Ast::Node* Rule_DependencyContinued_Dot_Identifier(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -159,7 +156,7 @@ Nany::Ast::Node* Rule_DependencyContinued_Dot_Identifier(struct TokenStruct* tok
 
 
 // <Dependency Continued> ::= 
-Nany::Ast::Node* Rule_DependencyContinued(struct TokenStruct* token)
+Nany::Ast::Node* Rule_DependencyContinued(TokenStruct* token)
 {
 	return nullptr;
 }
@@ -168,7 +165,7 @@ Nany::Ast::Node* Rule_DependencyContinued(struct TokenStruct* token)
 
 
 // <Declaration List> ::= <Optional Visibility Qualifier> <Function Declaration> <Declaration List>
-Nany::Ast::Node* Rule_DeclarationList(struct TokenStruct* token)
+Nany::Ast::Node* Rule_DeclarationList(TokenStruct* token)
 {
 	Nany::Ast::FunctionDeclarationNode* funcDecl = ParseChild<Nany::Ast::FunctionDeclarationNode>(token, 1);
 
@@ -182,7 +179,7 @@ Nany::Ast::Node* Rule_DeclarationList(struct TokenStruct* token)
 
 
 // <Declaration List> ::= <Optional Visibility Qualifier> <Class Declaration> <Declaration List>
-Nany::Ast::Node* Rule_DeclarationList2(struct TokenStruct* token)
+Nany::Ast::Node* Rule_DeclarationList2(TokenStruct* token)
 {
 	Nany::Ast::ClassDeclarationNode* classDecl = ParseChild<Nany::Ast::ClassDeclarationNode>(token, 1);
 
@@ -196,7 +193,7 @@ Nany::Ast::Node* Rule_DeclarationList2(struct TokenStruct* token)
 
 
 // <Declaration List> ::= <Optional Visibility Qualifier> <Workflow Declaration> <Declaration List>
-Nany::Ast::Node* Rule_DeclarationList3(struct TokenStruct* token)
+Nany::Ast::Node* Rule_DeclarationList3(TokenStruct* token)
 {
 	// TODO : Handle workflows
 
@@ -208,7 +205,7 @@ Nany::Ast::Node* Rule_DeclarationList3(struct TokenStruct* token)
 
 
 // <Declaration List> ::= <Optional Visibility Qualifier> <Enum Declaration> <Declaration List>
-Nany::Ast::Node* Rule_DeclarationList4(struct TokenStruct* token)
+Nany::Ast::Node* Rule_DeclarationList4(TokenStruct* token)
 {
 	// TODO : Handle enums
 
@@ -220,7 +217,7 @@ Nany::Ast::Node* Rule_DeclarationList4(struct TokenStruct* token)
 
 
 // <Declaration List> ::= <Optional Visibility Qualifier> <Typedef> ';' <Declaration List>
-Nany::Ast::Node* Rule_DeclarationList_Semi(struct TokenStruct* token)
+Nany::Ast::Node* Rule_DeclarationList_Semi(TokenStruct* token)
 {
 	// TODO : Handle typedefs
 
@@ -232,7 +229,7 @@ Nany::Ast::Node* Rule_DeclarationList_Semi(struct TokenStruct* token)
 
 
 // <Declaration List> ::= 
-Nany::Ast::Node* Rule_DeclarationList5(struct TokenStruct* token)
+Nany::Ast::Node* Rule_DeclarationList5(TokenStruct* token)
 {
 	return new Nany::Ast::DeclarationListNode();
 }
@@ -241,7 +238,7 @@ Nany::Ast::Node* Rule_DeclarationList5(struct TokenStruct* token)
 
 
 // <Literal> ::= BooleanLiteral
-Nany::Ast::Node* Rule_Literal_BooleanLiteral(struct TokenStruct* token)
+Nany::Ast::Node* Rule_Literal_BooleanLiteral(TokenStruct* token)
 {
 	const wchar_t* data = GetChildSymbol(token, 0);
 	return new Nany::Ast::LiteralNode<bool>(L't' == data[0]);
@@ -251,7 +248,7 @@ Nany::Ast::Node* Rule_Literal_BooleanLiteral(struct TokenStruct* token)
 
 
 // <Literal> ::= DecLiteral
-Nany::Ast::Node* Rule_Literal_DecLiteral(struct TokenStruct* token)
+Nany::Ast::Node* Rule_Literal_DecLiteral(TokenStruct* token)
 {
 	const wchar_t* symbol = GetChildSymbol(token, 0);
 	size_t len = wcslen(symbol);
@@ -270,7 +267,7 @@ Nany::Ast::Node* Rule_Literal_DecLiteral(struct TokenStruct* token)
 
 
 // <Literal> ::= HexLiteral
-Nany::Ast::Node* Rule_Literal_HexLiteral(struct TokenStruct* token)
+Nany::Ast::Node* Rule_Literal_HexLiteral(TokenStruct* token)
 {
 	const wchar_t* symbol = GetChildSymbol(token, 0);
 	size_t len = wcslen(symbol);
@@ -289,7 +286,7 @@ Nany::Ast::Node* Rule_Literal_HexLiteral(struct TokenStruct* token)
 
 
 // <Literal> ::= RealLiteral
-Nany::Ast::Node* Rule_Literal_RealLiteral(struct TokenStruct* token)
+Nany::Ast::Node* Rule_Literal_RealLiteral(TokenStruct* token)
 {
 	const wchar_t* symbol = GetChildSymbol(token, 0);
 	size_t len = wcslen(symbol);
@@ -304,7 +301,7 @@ Nany::Ast::Node* Rule_Literal_RealLiteral(struct TokenStruct* token)
 
 
 // <Literal> ::= TimeLiteral
-Nany::Ast::Node* Rule_Literal_TimeLiteral(struct TokenStruct* token)
+Nany::Ast::Node* Rule_Literal_TimeLiteral(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -314,7 +311,7 @@ Nany::Ast::Node* Rule_Literal_TimeLiteral(struct TokenStruct* token)
 
 
 // <Literal> ::= CharLiteral
-Nany::Ast::Node* Rule_Literal_CharLiteral(struct TokenStruct* token)
+Nany::Ast::Node* Rule_Literal_CharLiteral(TokenStruct* token)
 {
 	return new Nany::Ast::LiteralNode<wchar_t>(GetChildSymbol(token, 0)[1]);
 }
@@ -323,7 +320,7 @@ Nany::Ast::Node* Rule_Literal_CharLiteral(struct TokenStruct* token)
 
 
 // <Literal> ::= StringLiteral
-Nany::Ast::Node* Rule_Literal_StringLiteral(struct TokenStruct* token)
+Nany::Ast::Node* Rule_Literal_StringLiteral(TokenStruct* token)
 {
 	const wchar_t* symbol = GetChildSymbol(token, 0);
 	size_t len = wcslen(symbol) - 2; // Remove the double quotes around the string
@@ -337,7 +334,7 @@ Nany::Ast::Node* Rule_Literal_StringLiteral(struct TokenStruct* token)
 
 
 // <Literal> ::= BuiltInType
-Nany::Ast::Node* Rule_Literal_BuiltInType(struct TokenStruct* token)
+Nany::Ast::Node* Rule_Literal_BuiltInType(TokenStruct* token)
 {
 	const wchar_t* symbol = GetChildSymbol(token, 0);
 	size_t len = wcslen(symbol);
@@ -358,7 +355,7 @@ Nany::Ast::Node* Rule_Literal_BuiltInType(struct TokenStruct* token)
 
 
 // <Literal> ::= nil
-Nany::Ast::Node* Rule_Literal_nil(struct TokenStruct* token)
+Nany::Ast::Node* Rule_Literal_nil(TokenStruct* token)
 {
 	return new Nany::Ast::LiteralNode<void*>(nullptr);
 }
@@ -367,7 +364,7 @@ Nany::Ast::Node* Rule_Literal_nil(struct TokenStruct* token)
 
 
 // <Literal> ::= self
-Nany::Ast::Node* Rule_Literal_self(struct TokenStruct* token)
+Nany::Ast::Node* Rule_Literal_self(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -377,7 +374,7 @@ Nany::Ast::Node* Rule_Literal_self(struct TokenStruct* token)
 
 
 // <Class Declaration> ::= class Identifier <Optional Type Parameters> <Optional Base Classes> <In Block> <Out Block> '{' <Class Content> '}'
-Nany::Ast::Node* Rule_ClassDeclaration_class_Identifier_LBrace_RBrace(struct TokenStruct* token)
+Nany::Ast::Node* Rule_ClassDeclaration_class_Identifier_LBrace_RBrace(TokenStruct* token)
 {
 	Nany::Ast::DeclarationListNode* decls = ParseChild<Nany::Ast::DeclarationListNode>(token, 7);
 
@@ -395,7 +392,7 @@ Nany::Ast::Node* Rule_ClassDeclaration_class_Identifier_LBrace_RBrace(struct Tok
 
 
 // <Anonymous Class Declaration> ::= class <Optional Type Parameters> <Optional Base Classes> <In Block> <Out Block> '{' <Class Content> '}'
-Nany::Ast::Node* Rule_AnonymousClassDeclaration_class_LBrace_RBrace(struct TokenStruct* token)
+Nany::Ast::Node* Rule_AnonymousClassDeclaration_class_LBrace_RBrace(TokenStruct* token)
 {
 	Nany::Ast::DeclarationListNode* decls = ParseChild<Nany::Ast::DeclarationListNode>(token, 6);
 
@@ -407,7 +404,7 @@ Nany::Ast::Node* Rule_AnonymousClassDeclaration_class_LBrace_RBrace(struct Token
 
 
 // <Optional Base Classes> ::= ':' <SingleThread Exp> <Optional Base Classes Continued>
-Nany::Ast::Node* Rule_OptionalBaseClasses_Colon(struct TokenStruct* token)
+Nany::Ast::Node* Rule_OptionalBaseClasses_Colon(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Rule_OptionalBaseClasses_Colon: Not yet implemented !");
@@ -417,7 +414,7 @@ Nany::Ast::Node* Rule_OptionalBaseClasses_Colon(struct TokenStruct* token)
 
 
 // <Optional Base Classes> ::= 
-Nany::Ast::Node* Rule_OptionalBaseClasses(struct TokenStruct* token)
+Nany::Ast::Node* Rule_OptionalBaseClasses(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Rule_OptionalBaseClasses: Not yet implemented !");
@@ -427,7 +424,7 @@ Nany::Ast::Node* Rule_OptionalBaseClasses(struct TokenStruct* token)
 
 
 // <Optional Base Classes Continued> ::= ',' <SingleThread Exp>
-Nany::Ast::Node* Rule_OptionalBaseClassesContinued_Comma(struct TokenStruct* token)
+Nany::Ast::Node* Rule_OptionalBaseClassesContinued_Comma(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Rule_OptionalBaseClassesContinued_Comma: Not yet implemented !");
@@ -437,7 +434,7 @@ Nany::Ast::Node* Rule_OptionalBaseClassesContinued_Comma(struct TokenStruct* tok
 
 
 // <Optional Base Classes Continued> ::= 
-Nany::Ast::Node* Rule_OptionalBaseClassesContinued(struct TokenStruct* token)
+Nany::Ast::Node* Rule_OptionalBaseClassesContinued(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Rule_OptionalBaseClassesContinued: Not yet implemented !");
@@ -447,7 +444,7 @@ Nany::Ast::Node* Rule_OptionalBaseClassesContinued(struct TokenStruct* token)
 
 
 // <Class Content> ::= VisibilityQualifier <Class Content>
-Nany::Ast::Node* Rule_ClassContent_VisibilityQualifier(struct TokenStruct* token)
+Nany::Ast::Node* Rule_ClassContent_VisibilityQualifier(TokenStruct* token)
 {
 	Nany::Ast::DeclarationListNode* decls = ParseChild<Nany::Ast::DeclarationListNode>(token, 1);
 
@@ -479,7 +476,7 @@ Nany::Ast::Node* Rule_ClassContent_VisibilityQualifier(struct TokenStruct* token
 
 
 // <Class Content> ::= <Method Declaration> <Class Content>
-Nany::Ast::Node* Rule_ClassContent(struct TokenStruct* token)
+Nany::Ast::Node* Rule_ClassContent(TokenStruct* token)
 {
 	Nany::Ast::DeclarationListNode* decls = ParseChild<Nany::Ast::DeclarationListNode>(token, 1);
 
@@ -496,7 +493,7 @@ Nany::Ast::Node* Rule_ClassContent(struct TokenStruct* token)
 
 
 // <Class Content> ::= <Attribute Declaration> ';' <Class Content>
-Nany::Ast::Node* Rule_ClassContent_Semi(struct TokenStruct* token)
+Nany::Ast::Node* Rule_ClassContent_Semi(TokenStruct* token)
 {
 	Nany::Ast::DeclarationListNode* decls = ParseChild<Nany::Ast::DeclarationListNode>(token, 2);
 
@@ -513,7 +510,7 @@ Nany::Ast::Node* Rule_ClassContent_Semi(struct TokenStruct* token)
 
 
 // <Class Content> ::= <Property Declaration> ';' <Class Content>
-Nany::Ast::Node* Rule_ClassContent_Semi2(struct TokenStruct* token)
+Nany::Ast::Node* Rule_ClassContent_Semi2(TokenStruct* token)
 {
 	// TODO : Handle properties
 
@@ -524,7 +521,7 @@ Nany::Ast::Node* Rule_ClassContent_Semi2(struct TokenStruct* token)
 
 
 // <Class Content> ::= <Class Declaration> <Class Content>
-Nany::Ast::Node* Rule_ClassContent2(struct TokenStruct* token)
+Nany::Ast::Node* Rule_ClassContent2(TokenStruct* token)
 {
 	Nany::Ast::DeclarationListNode* decls = ParseChild<Nany::Ast::DeclarationListNode>(token, 1);
 
@@ -541,7 +538,7 @@ Nany::Ast::Node* Rule_ClassContent2(struct TokenStruct* token)
 
 
 // <Class Content> ::= <Typedef> ';' <Class Content>
-Nany::Ast::Node* Rule_ClassContent_Semi3(struct TokenStruct* token)
+Nany::Ast::Node* Rule_ClassContent_Semi3(TokenStruct* token)
 {
 	// TODO : implement a class-scope typedef
 
@@ -552,7 +549,7 @@ Nany::Ast::Node* Rule_ClassContent_Semi3(struct TokenStruct* token)
 
 
 // <Class Content> ::= 
-Nany::Ast::Node* Rule_ClassContent3(struct TokenStruct* token)
+Nany::Ast::Node* Rule_ClassContent3(TokenStruct* token)
 {
 	return nullptr;
 }
@@ -561,7 +558,7 @@ Nany::Ast::Node* Rule_ClassContent3(struct TokenStruct* token)
 
 
 // <Property Declaration> ::= property Identifier <Typing> <Assignment> <Property Callbacks>
-Nany::Ast::Node* Rule_PropertyDeclaration_property_Identifier(struct TokenStruct* token)
+Nany::Ast::Node* Rule_PropertyDeclaration_property_Identifier(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -571,7 +568,7 @@ Nany::Ast::Node* Rule_PropertyDeclaration_property_Identifier(struct TokenStruct
 
 
 // <Property Declaration> ::= property Identifier <Assignment> <Property Callbacks>
-Nany::Ast::Node* Rule_PropertyDeclaration_property_Identifier2(struct TokenStruct* token)
+Nany::Ast::Node* Rule_PropertyDeclaration_property_Identifier2(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -581,7 +578,7 @@ Nany::Ast::Node* Rule_PropertyDeclaration_property_Identifier2(struct TokenStruc
 
 
 // <Property Declaration> ::= property Identifier <Typing> <Property Callbacks>
-Nany::Ast::Node* Rule_PropertyDeclaration_property_Identifier3(struct TokenStruct* token)
+Nany::Ast::Node* Rule_PropertyDeclaration_property_Identifier3(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -591,7 +588,7 @@ Nany::Ast::Node* Rule_PropertyDeclaration_property_Identifier3(struct TokenStruc
 
 
 // <Property Callbacks> ::= read <SingleThread Exp> <Property Callbacks>
-Nany::Ast::Node* Rule_PropertyCallbacks_read(struct TokenStruct* token)
+Nany::Ast::Node* Rule_PropertyCallbacks_read(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -601,7 +598,7 @@ Nany::Ast::Node* Rule_PropertyCallbacks_read(struct TokenStruct* token)
 
 
 // <Property Callbacks> ::= write <SingleThread Exp> <Property Callbacks>
-Nany::Ast::Node* Rule_PropertyCallbacks_write(struct TokenStruct* token)
+Nany::Ast::Node* Rule_PropertyCallbacks_write(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -611,7 +608,7 @@ Nany::Ast::Node* Rule_PropertyCallbacks_write(struct TokenStruct* token)
 
 
 // <Property Callbacks> ::= 
-Nany::Ast::Node* Rule_PropertyCallbacks(struct TokenStruct* token)
+Nany::Ast::Node* Rule_PropertyCallbacks(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -621,7 +618,7 @@ Nany::Ast::Node* Rule_PropertyCallbacks(struct TokenStruct* token)
 
 
 // <Attribute Declaration> ::= attribute Identifier <Typing> <Assignment>
-Nany::Ast::Node* Rule_AttributeDeclaration_attribute_Identifier(struct TokenStruct* token)
+Nany::Ast::Node* Rule_AttributeDeclaration_attribute_Identifier(TokenStruct* token)
 {
 	// Read the identifier
 	const wchar_t* symbol = GetChildSymbol(token, 1);
@@ -641,7 +638,7 @@ Nany::Ast::Node* Rule_AttributeDeclaration_attribute_Identifier(struct TokenStru
 
 
 // <Attribute Declaration> ::= attribute Identifier <Assignment>
-Nany::Ast::Node* Rule_AttributeDeclaration_attribute_Identifier2(struct TokenStruct* token)
+Nany::Ast::Node* Rule_AttributeDeclaration_attribute_Identifier2(TokenStruct* token)
 {
 	// Read the identifier
 	const wchar_t* symbol = GetChildSymbol(token, 1);
@@ -659,7 +656,7 @@ Nany::Ast::Node* Rule_AttributeDeclaration_attribute_Identifier2(struct TokenStr
 
 
 // <Attribute Declaration> ::= attribute Identifier <Typing>
-Nany::Ast::Node* Rule_AttributeDeclaration_attribute_Identifier3(struct TokenStruct* token)
+Nany::Ast::Node* Rule_AttributeDeclaration_attribute_Identifier3(TokenStruct* token)
 {
 	// Read the identifier
 	const wchar_t* symbol = GetChildSymbol(token, 1);
@@ -677,7 +674,7 @@ Nany::Ast::Node* Rule_AttributeDeclaration_attribute_Identifier3(struct TokenStr
 
 
 // <Assignment> ::= ':=' <SingleThread Exp>
-Nany::Ast::Node* Rule_Assignment_ColonEq(struct TokenStruct* token)
+Nany::Ast::Node* Rule_Assignment_ColonEq(TokenStruct* token)
 {
 	return ParseChild<>(token, 1);
 }
@@ -686,7 +683,7 @@ Nany::Ast::Node* Rule_Assignment_ColonEq(struct TokenStruct* token)
 
 
 // <Typing> ::= ':' <Simple Exp>
-Nany::Ast::Node* Rule_Typing_Colon(struct TokenStruct* token)
+Nany::Ast::Node* Rule_Typing_Colon(TokenStruct* token)
 {
 	// TODO : handle qualifiers
 
@@ -702,7 +699,7 @@ Nany::Ast::Node* Rule_Typing_Colon(struct TokenStruct* token)
 
 
 // <Typing> ::= ':' <Type Qualifiers> <Typing Continued>
-Nany::Ast::Node* Rule_Typing_Colon2(struct TokenStruct* token)
+Nany::Ast::Node* Rule_Typing_Colon2(TokenStruct* token)
 {
 	// TODO : handle qualifiers
 
@@ -718,7 +715,7 @@ Nany::Ast::Node* Rule_Typing_Colon2(struct TokenStruct* token)
 
 
 // <Typing Continued> ::= <Simple Exp>
-Nany::Ast::Node* Rule_TypingContinued(struct TokenStruct* token)
+Nany::Ast::Node* Rule_TypingContinued(TokenStruct* token)
 {
 	return ParseChild<>(token, 0);
 }
@@ -727,7 +724,7 @@ Nany::Ast::Node* Rule_TypingContinued(struct TokenStruct* token)
 
 
 // <Typing Continued> ::= 
-Nany::Ast::Node* Rule_TypingContinued2(struct TokenStruct* token)
+Nany::Ast::Node* Rule_TypingContinued2(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Rule_TypingContinued2: Not yet implemented !");
@@ -737,7 +734,7 @@ Nany::Ast::Node* Rule_TypingContinued2(struct TokenStruct* token)
 
 
 // <Workflow Declaration> ::= workflow Identifier '{' <Workflow Content> '}'
-Nany::Ast::Node* Rule_WorkflowDeclaration_workflow_Identifier_LBrace_RBrace(struct TokenStruct* token)
+Nany::Ast::Node* Rule_WorkflowDeclaration_workflow_Identifier_LBrace_RBrace(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -747,7 +744,7 @@ Nany::Ast::Node* Rule_WorkflowDeclaration_workflow_Identifier_LBrace_RBrace(stru
 
 
 // <Workflow Content> ::= <State Block> <Transition Block>
-Nany::Ast::Node* Rule_WorkflowContent(struct TokenStruct* token)
+Nany::Ast::Node* Rule_WorkflowContent(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -757,7 +754,7 @@ Nany::Ast::Node* Rule_WorkflowContent(struct TokenStruct* token)
 
 
 // <State Block> ::= states <Workflow States>
-Nany::Ast::Node* Rule_StateBlock_states(struct TokenStruct* token)
+Nany::Ast::Node* Rule_StateBlock_states(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -767,7 +764,7 @@ Nany::Ast::Node* Rule_StateBlock_states(struct TokenStruct* token)
 
 
 // <State Block> ::= 
-Nany::Ast::Node* Rule_StateBlock(struct TokenStruct* token)
+Nany::Ast::Node* Rule_StateBlock(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -777,7 +774,7 @@ Nany::Ast::Node* Rule_StateBlock(struct TokenStruct* token)
 
 
 // <Workflow States> ::= default Identifier ';' <Workflow States>
-Nany::Ast::Node* Rule_WorkflowStates_default_Identifier_Semi(struct TokenStruct* token)
+Nany::Ast::Node* Rule_WorkflowStates_default_Identifier_Semi(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -787,7 +784,7 @@ Nany::Ast::Node* Rule_WorkflowStates_default_Identifier_Semi(struct TokenStruct*
 
 
 // <Workflow States> ::= state Identifier ';' <Workflow States>
-Nany::Ast::Node* Rule_WorkflowStates_state_Identifier_Semi(struct TokenStruct* token)
+Nany::Ast::Node* Rule_WorkflowStates_state_Identifier_Semi(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -797,7 +794,7 @@ Nany::Ast::Node* Rule_WorkflowStates_state_Identifier_Semi(struct TokenStruct* t
 
 
 // <Workflow States> ::= 
-Nany::Ast::Node* Rule_WorkflowStates(struct TokenStruct* token)
+Nany::Ast::Node* Rule_WorkflowStates(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -807,7 +804,7 @@ Nany::Ast::Node* Rule_WorkflowStates(struct TokenStruct* token)
 
 
 // <Transition Block> ::= transitions <Workflow Transitions>
-Nany::Ast::Node* Rule_TransitionBlock_transitions(struct TokenStruct* token)
+Nany::Ast::Node* Rule_TransitionBlock_transitions(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -817,7 +814,7 @@ Nany::Ast::Node* Rule_TransitionBlock_transitions(struct TokenStruct* token)
 
 
 // <Transition Block> ::= 
-Nany::Ast::Node* Rule_TransitionBlock(struct TokenStruct* token)
+Nany::Ast::Node* Rule_TransitionBlock(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -827,7 +824,7 @@ Nany::Ast::Node* Rule_TransitionBlock(struct TokenStruct* token)
 
 
 // <Workflow Transitions> ::= default allow ';' <Workflow Transitions>
-Nany::Ast::Node* Rule_WorkflowTransitions_default_allow_Semi(struct TokenStruct* token)
+Nany::Ast::Node* Rule_WorkflowTransitions_default_allow_Semi(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -837,7 +834,7 @@ Nany::Ast::Node* Rule_WorkflowTransitions_default_allow_Semi(struct TokenStruct*
 
 
 // <Workflow Transitions> ::= default forbid ';' <Workflow Transitions>
-Nany::Ast::Node* Rule_WorkflowTransitions_default_forbid_Semi(struct TokenStruct* token)
+Nany::Ast::Node* Rule_WorkflowTransitions_default_forbid_Semi(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -847,7 +844,7 @@ Nany::Ast::Node* Rule_WorkflowTransitions_default_forbid_Semi(struct TokenStruct
 
 
 // <Workflow Transitions> ::= allow <Workflow Permissions> '=>' <Workflow Permissions> ';' <Workflow Transitions>
-Nany::Ast::Node* Rule_WorkflowTransitions_allow_EqGt_Semi(struct TokenStruct* token)
+Nany::Ast::Node* Rule_WorkflowTransitions_allow_EqGt_Semi(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -857,7 +854,7 @@ Nany::Ast::Node* Rule_WorkflowTransitions_allow_EqGt_Semi(struct TokenStruct* to
 
 
 // <Workflow Transitions> ::= forbid <Workflow Permissions> '=>' <Workflow Permissions> ';' <Workflow Transitions>
-Nany::Ast::Node* Rule_WorkflowTransitions_forbid_EqGt_Semi(struct TokenStruct* token)
+Nany::Ast::Node* Rule_WorkflowTransitions_forbid_EqGt_Semi(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -867,7 +864,7 @@ Nany::Ast::Node* Rule_WorkflowTransitions_forbid_EqGt_Semi(struct TokenStruct* t
 
 
 // <Workflow Transitions> ::= 
-Nany::Ast::Node* Rule_WorkflowTransitions(struct TokenStruct* token)
+Nany::Ast::Node* Rule_WorkflowTransitions(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -877,7 +874,7 @@ Nany::Ast::Node* Rule_WorkflowTransitions(struct TokenStruct* token)
 
 
 // <Workflow Permission> ::= '*'
-Nany::Ast::Node* Rule_WorkflowPermission_Times(struct TokenStruct* token)
+Nany::Ast::Node* Rule_WorkflowPermission_Times(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -887,7 +884,7 @@ Nany::Ast::Node* Rule_WorkflowPermission_Times(struct TokenStruct* token)
 
 
 // <Workflow Permission> ::= Identifier
-Nany::Ast::Node* Rule_WorkflowPermission_Identifier(struct TokenStruct* token)
+Nany::Ast::Node* Rule_WorkflowPermission_Identifier(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -897,7 +894,7 @@ Nany::Ast::Node* Rule_WorkflowPermission_Identifier(struct TokenStruct* token)
 
 
 // <Workflow Permission> ::= '+' Identifier
-Nany::Ast::Node* Rule_WorkflowPermission_Plus_Identifier(struct TokenStruct* token)
+Nany::Ast::Node* Rule_WorkflowPermission_Plus_Identifier(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -907,7 +904,7 @@ Nany::Ast::Node* Rule_WorkflowPermission_Plus_Identifier(struct TokenStruct* tok
 
 
 // <Workflow Permission> ::= '-' Identifier
-Nany::Ast::Node* Rule_WorkflowPermission_Minus_Identifier(struct TokenStruct* token)
+Nany::Ast::Node* Rule_WorkflowPermission_Minus_Identifier(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -917,7 +914,7 @@ Nany::Ast::Node* Rule_WorkflowPermission_Minus_Identifier(struct TokenStruct* to
 
 
 // <Workflow Permissions> ::= <Workflow Permission> ',' <Workflow Permissions>
-Nany::Ast::Node* Rule_WorkflowPermissions_Comma(struct TokenStruct* token)
+Nany::Ast::Node* Rule_WorkflowPermissions_Comma(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -927,7 +924,7 @@ Nany::Ast::Node* Rule_WorkflowPermissions_Comma(struct TokenStruct* token)
 
 
 // <Workflow Permissions> ::= <Workflow Permission>
-Nany::Ast::Node* Rule_WorkflowPermissions(struct TokenStruct* token)
+Nany::Ast::Node* Rule_WorkflowPermissions(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -937,7 +934,7 @@ Nany::Ast::Node* Rule_WorkflowPermissions(struct TokenStruct* token)
 
 
 // <Enum Declaration> ::= enum Identifier '{' <Enum Content> '}'
-Nany::Ast::Node* Rule_EnumDeclaration_enum_Identifier_LBrace_RBrace(struct TokenStruct* token)
+Nany::Ast::Node* Rule_EnumDeclaration_enum_Identifier_LBrace_RBrace(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -947,7 +944,7 @@ Nany::Ast::Node* Rule_EnumDeclaration_enum_Identifier_LBrace_RBrace(struct Token
 
 
 // <Enum Content> ::= Identifier ',' <Enum Content>
-Nany::Ast::Node* Rule_EnumContent_Identifier_Comma(struct TokenStruct* token)
+Nany::Ast::Node* Rule_EnumContent_Identifier_Comma(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -957,7 +954,7 @@ Nany::Ast::Node* Rule_EnumContent_Identifier_Comma(struct TokenStruct* token)
 
 
 // <Enum Content> ::= Identifier
-Nany::Ast::Node* Rule_EnumContent_Identifier(struct TokenStruct* token)
+Nany::Ast::Node* Rule_EnumContent_Identifier(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -967,7 +964,7 @@ Nany::Ast::Node* Rule_EnumContent_Identifier(struct TokenStruct* token)
 
 
 // <Enum Content> ::= 
-Nany::Ast::Node* Rule_EnumContent(struct TokenStruct* token)
+Nany::Ast::Node* Rule_EnumContent(TokenStruct* token)
 {
 	return nullptr;
 }
@@ -976,7 +973,7 @@ Nany::Ast::Node* Rule_EnumContent(struct TokenStruct* token)
 
 
 // <Function Declaration> ::= <Optional Optim Qualifier> function Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> <Function Body>
-Nany::Ast::Node* Rule_FunctionDeclaration_function_Identifier(struct TokenStruct* token)
+Nany::Ast::Node* Rule_FunctionDeclaration_function_Identifier(TokenStruct* token)
 {
 	// Read the parameters
 	Nany::Ast::ParameterListNode* params = ParseChild<Nany::Ast::ParameterListNode>(token, 4);
@@ -1001,7 +998,7 @@ Nany::Ast::Node* Rule_FunctionDeclaration_function_Identifier(struct TokenStruct
 
 
 // <Anonymous Function Declaration> ::= <Optional Optim Qualifier> function <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> <Function Body>
-Nany::Ast::Node* Rule_AnonymousFunctionDeclaration_function(struct TokenStruct* token)
+Nany::Ast::Node* Rule_AnonymousFunctionDeclaration_function(TokenStruct* token)
 {
 	// Read the parameters
 	Nany::Ast::ParameterListNode* params = ParseChild<Nany::Ast::ParameterListNode>(token, 4);
@@ -1026,7 +1023,7 @@ Nany::Ast::Node* Rule_AnonymousFunctionDeclaration_function(struct TokenStruct* 
 
 
 // <Method Declaration> ::= <Optional Optim Qualifier> method Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> <Function Body>
-Nany::Ast::Node* Rule_MethodDeclaration_method_Identifier(struct TokenStruct* token)
+Nany::Ast::Node* Rule_MethodDeclaration_method_Identifier(TokenStruct* token)
 {
 	// Read the parameters
 	Nany::Ast::ParameterListNode* params = ParseChild<Nany::Ast::ParameterListNode>(token, 4);
@@ -1051,7 +1048,7 @@ Nany::Ast::Node* Rule_MethodDeclaration_method_Identifier(struct TokenStruct* to
 
 
 // <Method Declaration> ::= <Optional Optim Qualifier> method Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> ';'
-Nany::Ast::Node* Rule_MethodDeclaration_method_Identifier_Semi(struct TokenStruct* token)
+Nany::Ast::Node* Rule_MethodDeclaration_method_Identifier_Semi(TokenStruct* token)
 {
 	// Read the parameters
 	Nany::Ast::ParameterListNode* params = ParseChild<Nany::Ast::ParameterListNode>(token, 4);
@@ -1074,7 +1071,7 @@ Nany::Ast::Node* Rule_MethodDeclaration_method_Identifier_Semi(struct TokenStruc
 
 
 // <Function Body> ::= '{' <Expression> '}'
-Nany::Ast::Node* Rule_FunctionBody_LBrace_RBrace(struct TokenStruct* token)
+Nany::Ast::Node* Rule_FunctionBody_LBrace_RBrace(TokenStruct* token)
 {
 	return new Nany::Ast::ScopeNode(ParseChild<>(token, 1));
 }
@@ -1083,7 +1080,7 @@ Nany::Ast::Node* Rule_FunctionBody_LBrace_RBrace(struct TokenStruct* token)
 
 
 // <Function Body> ::= '{' '}'
-Nany::Ast::Node* Rule_FunctionBody_LBrace_RBrace2(struct TokenStruct* token)
+Nany::Ast::Node* Rule_FunctionBody_LBrace_RBrace2(TokenStruct* token)
 {
 	return nullptr;
 }
@@ -1092,7 +1089,7 @@ Nany::Ast::Node* Rule_FunctionBody_LBrace_RBrace2(struct TokenStruct* token)
 
 
 // <Return Type Declaration> ::= ':' <Optional Type Qualifiers> <SingleThread Exp>
-Nany::Ast::Node* Rule_ReturnTypeDeclaration_Colon(struct TokenStruct* token)
+Nany::Ast::Node* Rule_ReturnTypeDeclaration_Colon(TokenStruct* token)
 {
 	Nany::Ast::Node* expr = ParseChild<>(token, 2);
 
@@ -1106,7 +1103,7 @@ Nany::Ast::Node* Rule_ReturnTypeDeclaration_Colon(struct TokenStruct* token)
 
 
 // <Return Type Declaration> ::= 
-Nany::Ast::Node* Rule_ReturnTypeDeclaration(struct TokenStruct* token)
+Nany::Ast::Node* Rule_ReturnTypeDeclaration(TokenStruct* token)
 {
 	return nullptr;
 }
@@ -1115,7 +1112,7 @@ Nany::Ast::Node* Rule_ReturnTypeDeclaration(struct TokenStruct* token)
 
 
 // <Optional Parameters> ::= '(' <Parameter List> ')'
-Nany::Ast::Node* Rule_OptionalParameters_LParan_RParan(struct TokenStruct* token)
+Nany::Ast::Node* Rule_OptionalParameters_LParan_RParan(TokenStruct* token)
 {
 	return ParseChild<Nany::Ast::ParameterListNode>(token, 1);
 }
@@ -1124,7 +1121,7 @@ Nany::Ast::Node* Rule_OptionalParameters_LParan_RParan(struct TokenStruct* token
 
 
 // <Optional Parameters> ::= 
-Nany::Ast::Node* Rule_OptionalParameters(struct TokenStruct* token)
+Nany::Ast::Node* Rule_OptionalParameters(TokenStruct* token)
 {
 	return nullptr;
 }
@@ -1133,7 +1130,7 @@ Nany::Ast::Node* Rule_OptionalParameters(struct TokenStruct* token)
 
 
 // <Parameter List> ::= Identifier <Typing> <Assignment> <Parameter List Continued>
-Nany::Ast::Node* Rule_ParameterList_Identifier(struct TokenStruct* token)
+Nany::Ast::Node* Rule_ParameterList_Identifier(TokenStruct* token)
 {
 	Nany::Ast::ParameterListNode* list = ParseChild<Nany::Ast::ParameterListNode>(token, 3);
 	if (!list)
@@ -1159,7 +1156,7 @@ Nany::Ast::Node* Rule_ParameterList_Identifier(struct TokenStruct* token)
 
 
 // <Parameter List> ::= Identifier <Assignment> <Parameter List Continued>
-Nany::Ast::Node* Rule_ParameterList_Identifier2(struct TokenStruct* token)
+Nany::Ast::Node* Rule_ParameterList_Identifier2(TokenStruct* token)
 {
 	Nany::Ast::ParameterListNode* list = ParseChild<Nany::Ast::ParameterListNode>(token, 2);
 	if (!list)
@@ -1183,7 +1180,7 @@ Nany::Ast::Node* Rule_ParameterList_Identifier2(struct TokenStruct* token)
 
 
 // <Parameter List> ::= Identifier <Typing> <Parameter List Continued>
-Nany::Ast::Node* Rule_ParameterList_Identifier3(struct TokenStruct* token)
+Nany::Ast::Node* Rule_ParameterList_Identifier3(TokenStruct* token)
 {
 	Nany::Ast::ParameterListNode* list = ParseChild<Nany::Ast::ParameterListNode>(token, 2);
 	if (!list)
@@ -1207,7 +1204,7 @@ Nany::Ast::Node* Rule_ParameterList_Identifier3(struct TokenStruct* token)
 
 
 // <Parameter List> ::= Identifier <Parameter List Continued>
-Nany::Ast::Node* Rule_ParameterList_Identifier4(struct TokenStruct* token)
+Nany::Ast::Node* Rule_ParameterList_Identifier4(TokenStruct* token)
 {
 	Nany::Ast::ParameterListNode* list = ParseChild<Nany::Ast::ParameterListNode>(token, 1);
 	if (!list)
@@ -1229,7 +1226,7 @@ Nany::Ast::Node* Rule_ParameterList_Identifier4(struct TokenStruct* token)
 
 
 // <Parameter List> ::= 
-Nany::Ast::Node* Rule_ParameterList(struct TokenStruct* token)
+Nany::Ast::Node* Rule_ParameterList(TokenStruct* token)
 {
 	return nullptr;
 }
@@ -1238,7 +1235,7 @@ Nany::Ast::Node* Rule_ParameterList(struct TokenStruct* token)
 
 
 // <Parameter List Continued> ::= ',' <Parameter List>
-Nany::Ast::Node* Rule_ParameterListContinued_Comma(struct TokenStruct* token)
+Nany::Ast::Node* Rule_ParameterListContinued_Comma(TokenStruct* token)
 {
 	return ParseChild<Nany::Ast::ParameterListNode>(token, 1);
 }
@@ -1247,7 +1244,7 @@ Nany::Ast::Node* Rule_ParameterListContinued_Comma(struct TokenStruct* token)
 
 
 // <Parameter List Continued> ::= 
-Nany::Ast::Node* Rule_ParameterListContinued(struct TokenStruct* token)
+Nany::Ast::Node* Rule_ParameterListContinued(TokenStruct* token)
 {
 	return nullptr;
 }
@@ -1256,7 +1253,7 @@ Nany::Ast::Node* Rule_ParameterListContinued(struct TokenStruct* token)
 
 
 // <Optional Type Qualifiers> ::= <Type Qualifiers>
-Nany::Ast::Node* Rule_OptionalTypeQualifiers(struct TokenStruct* token)
+Nany::Ast::Node* Rule_OptionalTypeQualifiers(TokenStruct* token)
 {
 	return ParseChild<>(token, 0);
 }
@@ -1265,7 +1262,7 @@ Nany::Ast::Node* Rule_OptionalTypeQualifiers(struct TokenStruct* token)
 
 
 // <Optional Type Qualifiers> ::= 
-Nany::Ast::Node* Rule_OptionalTypeQualifiers2(struct TokenStruct* token)
+Nany::Ast::Node* Rule_OptionalTypeQualifiers2(TokenStruct* token)
 {
 	return nullptr;
 }
@@ -1274,7 +1271,7 @@ Nany::Ast::Node* Rule_OptionalTypeQualifiers2(struct TokenStruct* token)
 
 
 // <Type Qualifiers> ::= TypeQualifier <Type Qualifiers Continued>
-Nany::Ast::Node* Rule_TypeQualifiers_TypeQualifier(struct TokenStruct* token)
+Nany::Ast::Node* Rule_TypeQualifiers_TypeQualifier(TokenStruct* token)
 {
 	Nany::Ast::TypeQualifierListNode* list = ParseChild<Nany::Ast::TypeQualifierListNode>(token, 1);
 
@@ -1303,7 +1300,7 @@ Nany::Ast::Node* Rule_TypeQualifiers_TypeQualifier(struct TokenStruct* token)
 
 
 // <Type Qualifiers Continued> ::= TypeQualifier <Type Qualifiers Continued>
-Nany::Ast::Node* Rule_TypeQualifiersContinued_TypeQualifier(struct TokenStruct* token)
+Nany::Ast::Node* Rule_TypeQualifiersContinued_TypeQualifier(TokenStruct* token)
 {
 	Nany::Ast::TypeQualifierListNode* list = ParseChild<Nany::Ast::TypeQualifierListNode>(token, 1);
 
@@ -1333,7 +1330,7 @@ Nany::Ast::Node* Rule_TypeQualifiersContinued_TypeQualifier(struct TokenStruct* 
 
 
 // <Type Qualifiers Continued> ::= 
-Nany::Ast::Node* Rule_TypeQualifiersContinued(struct TokenStruct* token)
+Nany::Ast::Node* Rule_TypeQualifiersContinued(TokenStruct* token)
 {
 	return nullptr;
 }
@@ -1342,7 +1339,7 @@ Nany::Ast::Node* Rule_TypeQualifiersContinued(struct TokenStruct* token)
 
 
 // <Optional Optim Qualifier> ::= OptimQualifier
-Nany::Ast::Node* Rule_OptionalOptimQualifier_OptimQualifier(struct TokenStruct* token)
+Nany::Ast::Node* Rule_OptionalOptimQualifier_OptimQualifier(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -1352,7 +1349,7 @@ Nany::Ast::Node* Rule_OptionalOptimQualifier_OptimQualifier(struct TokenStruct* 
 
 
 // <Optional Optim Qualifier> ::= 
-Nany::Ast::Node* Rule_OptionalOptimQualifier(struct TokenStruct* token)
+Nany::Ast::Node* Rule_OptionalOptimQualifier(TokenStruct* token)
 {
 	return nullptr;
 }
@@ -1361,7 +1358,7 @@ Nany::Ast::Node* Rule_OptionalOptimQualifier(struct TokenStruct* token)
 
 
 // <Optional Visibility Qualifier> ::= VisibilityQualifier
-Nany::Ast::Node* Rule_OptionalVisibilityQualifier_VisibilityQualifier(struct TokenStruct* token)
+Nany::Ast::Node* Rule_OptionalVisibilityQualifier_VisibilityQualifier(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -1371,7 +1368,7 @@ Nany::Ast::Node* Rule_OptionalVisibilityQualifier_VisibilityQualifier(struct Tok
 
 
 // <Optional Visibility Qualifier> ::= 
-Nany::Ast::Node* Rule_OptionalVisibilityQualifier(struct TokenStruct* token)
+Nany::Ast::Node* Rule_OptionalVisibilityQualifier(TokenStruct* token)
 {
 	return nullptr;
 }
@@ -1380,7 +1377,7 @@ Nany::Ast::Node* Rule_OptionalVisibilityQualifier(struct TokenStruct* token)
 
 
 // <Argument List> ::= <Possibly Parallel Exp> <Argument List Continued>
-Nany::Ast::Node* Rule_ArgumentList(struct TokenStruct* token)
+Nany::Ast::Node* Rule_ArgumentList(TokenStruct* token)
 {
 	Nany::Ast::ArgumentListNode* list = ParseChild<Nany::Ast::ArgumentListNode>(token, 1);
 	if (!list)
@@ -1393,7 +1390,7 @@ Nany::Ast::Node* Rule_ArgumentList(struct TokenStruct* token)
 
 
 // <Argument List> ::= 
-Nany::Ast::Node* Rule_ArgumentList2(struct TokenStruct* token)
+Nany::Ast::Node* Rule_ArgumentList2(TokenStruct* token)
 {
 	return nullptr;
 }
@@ -1402,7 +1399,7 @@ Nany::Ast::Node* Rule_ArgumentList2(struct TokenStruct* token)
 
 
 // <Argument List Continued> ::= ',' <Possibly Parallel Exp> <Argument List Continued>
-Nany::Ast::Node* Rule_ArgumentListContinued_Comma(struct TokenStruct* token)
+Nany::Ast::Node* Rule_ArgumentListContinued_Comma(TokenStruct* token)
 {
 	Nany::Ast::ArgumentListNode* list = ParseChild<Nany::Ast::ArgumentListNode>(token, 2);
 	if (!list)
@@ -1415,7 +1412,7 @@ Nany::Ast::Node* Rule_ArgumentListContinued_Comma(struct TokenStruct* token)
 
 
 // <Argument List Continued> ::= 
-Nany::Ast::Node* Rule_ArgumentListContinued(struct TokenStruct* token)
+Nany::Ast::Node* Rule_ArgumentListContinued(TokenStruct* token)
 {
 	return nullptr;
 }
@@ -1424,7 +1421,7 @@ Nany::Ast::Node* Rule_ArgumentListContinued(struct TokenStruct* token)
 
 
 // <Typedef> ::= type Identifier ':=' <Possibly Parallel Exp>
-Nany::Ast::Node* Rule_Typedef_type_Identifier_ColonEq(struct TokenStruct* token)
+Nany::Ast::Node* Rule_Typedef_type_Identifier_ColonEq(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Rule_Typedef_type_Identifier_ColonEq: Not yet implemented !");
@@ -1434,7 +1431,7 @@ Nany::Ast::Node* Rule_Typedef_type_Identifier_ColonEq(struct TokenStruct* token)
 
 
 // <In Block> ::= in <Expression>
-Nany::Ast::Node* Rule_InBlock_in(struct TokenStruct* token)
+Nany::Ast::Node* Rule_InBlock_in(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -1444,7 +1441,7 @@ Nany::Ast::Node* Rule_InBlock_in(struct TokenStruct* token)
 
 
 // <In Block> ::= 
-Nany::Ast::Node* Rule_InBlock(struct TokenStruct* token)
+Nany::Ast::Node* Rule_InBlock(TokenStruct* token)
 {
 	return nullptr;
 }
@@ -1453,7 +1450,7 @@ Nany::Ast::Node* Rule_InBlock(struct TokenStruct* token)
 
 
 // <Out Block> ::= out <Expression>
-Nany::Ast::Node* Rule_OutBlock_out(struct TokenStruct* token)
+Nany::Ast::Node* Rule_OutBlock_out(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -1463,7 +1460,7 @@ Nany::Ast::Node* Rule_OutBlock_out(struct TokenStruct* token)
 
 
 // <Out Block> ::= 
-Nany::Ast::Node* Rule_OutBlock(struct TokenStruct* token)
+Nany::Ast::Node* Rule_OutBlock(TokenStruct* token)
 {
 	return nullptr;
 }
@@ -1472,7 +1469,7 @@ Nany::Ast::Node* Rule_OutBlock(struct TokenStruct* token)
 
 
 // <Optional Type Parameters> ::= <Type Parameters>
-Nany::Ast::Node* Rule_OptionalTypeParameters(struct TokenStruct* token)
+Nany::Ast::Node* Rule_OptionalTypeParameters(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -1482,7 +1479,7 @@ Nany::Ast::Node* Rule_OptionalTypeParameters(struct TokenStruct* token)
 
 
 // <Optional Type Parameters> ::= 
-Nany::Ast::Node* Rule_OptionalTypeParameters2(struct TokenStruct* token)
+Nany::Ast::Node* Rule_OptionalTypeParameters2(TokenStruct* token)
 {
 	return nullptr;
 }
@@ -1491,7 +1488,7 @@ Nany::Ast::Node* Rule_OptionalTypeParameters2(struct TokenStruct* token)
 
 
 // <Type Parameters> ::= '<' Identifier <Type Parameters Continued> '>'
-Nany::Ast::Node* Rule_TypeParameters_Lt_Identifier_Gt(struct TokenStruct* token)
+Nany::Ast::Node* Rule_TypeParameters_Lt_Identifier_Gt(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Rule_TypeParameters_Lt_Identifier_Gt: Not yet implemented !");
@@ -1501,7 +1498,7 @@ Nany::Ast::Node* Rule_TypeParameters_Lt_Identifier_Gt(struct TokenStruct* token)
 
 
 // <Type Parameters> ::= '<' Identifier ':=' <SingleThread Exp> <Type Parameters Continued> '>'
-Nany::Ast::Node* Rule_TypeParameters_Lt_Identifier_ColonEq_Gt(struct TokenStruct* token)
+Nany::Ast::Node* Rule_TypeParameters_Lt_Identifier_ColonEq_Gt(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Rule_TypeParameters_Lt_Identifier_ColonEq_Gt: Not yet implemented !");
@@ -1511,7 +1508,7 @@ Nany::Ast::Node* Rule_TypeParameters_Lt_Identifier_ColonEq_Gt(struct TokenStruct
 
 
 // <Type Parameters Continued> ::= ',' Identifier <Type Parameters Continued>
-Nany::Ast::Node* Rule_TypeParametersContinued_Comma_Identifier(struct TokenStruct* token)
+Nany::Ast::Node* Rule_TypeParametersContinued_Comma_Identifier(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -1521,7 +1518,7 @@ Nany::Ast::Node* Rule_TypeParametersContinued_Comma_Identifier(struct TokenStruc
 
 
 // <Type Parameters Continued> ::= ',' Identifier ':=' <SingleThread Exp> <Type Parameters Continued>
-Nany::Ast::Node* Rule_TypeParametersContinued_Comma_Identifier_ColonEq(struct TokenStruct* token)
+Nany::Ast::Node* Rule_TypeParametersContinued_Comma_Identifier_ColonEq(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -1531,7 +1528,7 @@ Nany::Ast::Node* Rule_TypeParametersContinued_Comma_Identifier_ColonEq(struct To
 
 
 // <Type Parameters Continued> ::= 
-Nany::Ast::Node* Rule_TypeParametersContinued(struct TokenStruct* token)
+Nany::Ast::Node* Rule_TypeParametersContinued(TokenStruct* token)
 {
 	return nullptr;
 }
@@ -1540,7 +1537,7 @@ Nany::Ast::Node* Rule_TypeParametersContinued(struct TokenStruct* token)
 
 
 // <Type Arguments> ::= <SingleThread Exp> <Type Arguments Continued>
-Nany::Ast::Node* Rule_TypeArguments(struct TokenStruct* token)
+Nany::Ast::Node* Rule_TypeArguments(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Rule_TypeArguments: Not yet implemented !");
@@ -1550,7 +1547,7 @@ Nany::Ast::Node* Rule_TypeArguments(struct TokenStruct* token)
 
 
 // <Type Arguments> ::= 
-Nany::Ast::Node* Rule_TypeArguments2(struct TokenStruct* token)
+Nany::Ast::Node* Rule_TypeArguments2(TokenStruct* token)
 {
 	return nullptr;
 }
@@ -1559,7 +1556,7 @@ Nany::Ast::Node* Rule_TypeArguments2(struct TokenStruct* token)
 
 
 // <Type Arguments Continued> ::= ',' <SingleThread Exp> <Type Parameters Continued>
-Nany::Ast::Node* Rule_TypeArgumentsContinued_Comma(struct TokenStruct* token)
+Nany::Ast::Node* Rule_TypeArgumentsContinued_Comma(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Rule_TypeArgumentsContinued_Comma: Not yet implemented !");
@@ -1569,7 +1566,7 @@ Nany::Ast::Node* Rule_TypeArgumentsContinued_Comma(struct TokenStruct* token)
 
 
 // <Type Arguments Continued> ::= 
-Nany::Ast::Node* Rule_TypeArgumentsContinued(struct TokenStruct* token)
+Nany::Ast::Node* Rule_TypeArgumentsContinued(TokenStruct* token)
 {
 	return nullptr;
 }
@@ -1578,7 +1575,7 @@ Nany::Ast::Node* Rule_TypeArgumentsContinued(struct TokenStruct* token)
 
 
 // <Expression> ::= <Possibly Parallel Exp> <Expression List>
-Nany::Ast::Node* Rule_Expression(struct TokenStruct* token)
+Nany::Ast::Node* Rule_Expression(TokenStruct* token)
 {
 	Nany::Ast::Node* expr = ParseChild<>(token, 0);
 	Nany::Ast::Node* recursive = ParseChild<>(token, 1);
@@ -1598,7 +1595,7 @@ Nany::Ast::Node* Rule_Expression(struct TokenStruct* token)
 
 
 // <Expression List> ::= ';' <Expression>
-Nany::Ast::Node* Rule_ExpressionList_Semi(struct TokenStruct* token)
+Nany::Ast::Node* Rule_ExpressionList_Semi(TokenStruct* token)
 {
 	Nany::Ast::Node* recursive = ParseChild<>(token, 1);
 
@@ -1616,7 +1613,7 @@ Nany::Ast::Node* Rule_ExpressionList_Semi(struct TokenStruct* token)
 
 
 // <Expression List> ::= ';'
-Nany::Ast::Node* Rule_ExpressionList_Semi2(struct TokenStruct* token)
+Nany::Ast::Node* Rule_ExpressionList_Semi2(TokenStruct* token)
 {
 	return nullptr;
 }
@@ -1625,7 +1622,7 @@ Nany::Ast::Node* Rule_ExpressionList_Semi2(struct TokenStruct* token)
 
 
 // <Expression List> ::= 
-Nany::Ast::Node* Rule_ExpressionList(struct TokenStruct* token)
+Nany::Ast::Node* Rule_ExpressionList(TokenStruct* token)
 {
 	return nullptr;
 }
@@ -1634,7 +1631,7 @@ Nany::Ast::Node* Rule_ExpressionList(struct TokenStruct* token)
 
 
 // <Possibly Parallel Exp> ::= <SingleThread Exp>
-Nany::Ast::Node* Rule_PossiblyParallelExp(struct TokenStruct* token)
+Nany::Ast::Node* Rule_PossiblyParallelExp(TokenStruct* token)
 {
 	return ParseChild<>(token, 0);
 }
@@ -1643,7 +1640,7 @@ Nany::Ast::Node* Rule_PossiblyParallelExp(struct TokenStruct* token)
 
 
 // <Possibly Parallel Exp> ::= '&' <SingleThread Exp>
-Nany::Ast::Node* Rule_PossiblyParallelExp_Amp(struct TokenStruct* token)
+Nany::Ast::Node* Rule_PossiblyParallelExp_Amp(TokenStruct* token)
 {
 	Nany::Ast::Node* child = ParseChild<>(token, 0);
 	return new Nany::Ast::ParallelExpressionNode(child);
@@ -1653,7 +1650,7 @@ Nany::Ast::Node* Rule_PossiblyParallelExp_Amp(struct TokenStruct* token)
 
 
 // <Possibly Parallel Exp> ::= async <SingleThread Exp>
-Nany::Ast::Node* Rule_PossiblyParallelExp_async(struct TokenStruct* token)
+Nany::Ast::Node* Rule_PossiblyParallelExp_async(TokenStruct* token)
 {
 	Nany::Ast::Node* child = ParseChild<>(token, 0);
 	return new Nany::Ast::ParallelExpressionNode(child);
@@ -1663,7 +1660,7 @@ Nany::Ast::Node* Rule_PossiblyParallelExp_async(struct TokenStruct* token)
 
 
 // <Possibly Parallel Exp> ::= sync <SingleThread Exp>
-Nany::Ast::Node* Rule_PossiblyParallelExp_sync(struct TokenStruct* token)
+Nany::Ast::Node* Rule_PossiblyParallelExp_sync(TokenStruct* token)
 {
 	return ParseChild<>(token, 0);
 }
@@ -1672,7 +1669,7 @@ Nany::Ast::Node* Rule_PossiblyParallelExp_sync(struct TokenStruct* token)
 
 
 // <SingleThread Exp> ::= <Assignment Exp>
-Nany::Ast::Node* Rule_SingleThreadExp(struct TokenStruct* token)
+Nany::Ast::Node* Rule_SingleThreadExp(TokenStruct* token)
 {
 	return ParseChild<>(token, 0);
 }
@@ -1681,7 +1678,7 @@ Nany::Ast::Node* Rule_SingleThreadExp(struct TokenStruct* token)
 
 
 // <Assignment Exp> ::= <Assignment Exp> ':=' <Is Exp>
-Nany::Ast::Node* Rule_AssignmentExp_ColonEq(struct TokenStruct* token)
+Nany::Ast::Node* Rule_AssignmentExp_ColonEq(TokenStruct* token)
 {
 	Nany::Ast::Node* left = ParseChild<>(token, 0);
 	Nany::Ast::Node* right = ParseChild<>(token, 2);
@@ -1693,7 +1690,7 @@ Nany::Ast::Node* Rule_AssignmentExp_ColonEq(struct TokenStruct* token)
 
 
 // <Assignment Exp> ::= <Local Declaration Exp>
-Nany::Ast::Node* Rule_AssignmentExp(struct TokenStruct* token)
+Nany::Ast::Node* Rule_AssignmentExp(TokenStruct* token)
 {
 	return ParseChild<>(token, 0);
 }
@@ -1702,7 +1699,7 @@ Nany::Ast::Node* Rule_AssignmentExp(struct TokenStruct* token)
 
 
 // <Local Declaration Exp> ::= <Value> <Typing>
-Nany::Ast::Node* Rule_LocalDeclarationExp(struct TokenStruct* token)
+Nany::Ast::Node* Rule_LocalDeclarationExp(TokenStruct* token)
 {
 	Nany::Ast::Node* left = ParseChild<>(token, 0);
 	Nany::Ast::TypeExpressionNode* type = ParseChild<Nany::Ast::TypeExpressionNode>(token, 1);
@@ -1714,7 +1711,7 @@ Nany::Ast::Node* Rule_LocalDeclarationExp(struct TokenStruct* token)
 
 
 // <Local Declaration Exp> ::= <Is Exp>
-Nany::Ast::Node* Rule_LocalDeclarationExp2(struct TokenStruct* token)
+Nany::Ast::Node* Rule_LocalDeclarationExp2(TokenStruct* token)
 {
 	return ParseChild<>(token, 0);
 }
@@ -1723,7 +1720,7 @@ Nany::Ast::Node* Rule_LocalDeclarationExp2(struct TokenStruct* token)
 
 
 // <Is Exp> ::= <Is Exp> is <Simple Exp>
-Nany::Ast::Node* Rule_IsExp_is(struct TokenStruct* token)
+Nany::Ast::Node* Rule_IsExp_is(TokenStruct* token)
 {
 	Nany::Ast::Node* left = ParseChild<>(token, 0);
 	Nany::Ast::TypeExpressionNode* right = ParseChild<Nany::Ast::TypeExpressionNode>(token, 2);
@@ -1735,7 +1732,7 @@ Nany::Ast::Node* Rule_IsExp_is(struct TokenStruct* token)
 
 
 // <Is Exp> ::= <Simple Exp>
-Nany::Ast::Node* Rule_IsExp(struct TokenStruct* token)
+Nany::Ast::Node* Rule_IsExp(TokenStruct* token)
 {
 	return ParseChild<>(token, 0);
 }
@@ -1744,7 +1741,7 @@ Nany::Ast::Node* Rule_IsExp(struct TokenStruct* token)
 
 
 // <Simple Exp> ::= <Binary Exp>
-Nany::Ast::Node* Rule_SimpleExp(struct TokenStruct* token)
+Nany::Ast::Node* Rule_SimpleExp(TokenStruct* token)
 {
 	return ParseChild<>(token, 0);
 }
@@ -1753,7 +1750,7 @@ Nany::Ast::Node* Rule_SimpleExp(struct TokenStruct* token)
 
 
 // <Simple Exp> ::= new <Simple Exp>
-Nany::Ast::Node* Rule_SimpleExp_new(struct TokenStruct* token)
+Nany::Ast::Node* Rule_SimpleExp_new(TokenStruct* token)
 {
 	return new Nany::Ast::NewExpressionNode(ParseChild<>(token, 1));
 }
@@ -1762,7 +1759,7 @@ Nany::Ast::Node* Rule_SimpleExp_new(struct TokenStruct* token)
 
 
 // <Simple Exp> ::= <Typedef>
-Nany::Ast::Node* Rule_SimpleExp2(struct TokenStruct* token)
+Nany::Ast::Node* Rule_SimpleExp2(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Rule_SimpleExp2: Not yet implemented !");
@@ -1772,7 +1769,7 @@ Nany::Ast::Node* Rule_SimpleExp2(struct TokenStruct* token)
 
 
 // <Simple Exp> ::= return <SingleThread Exp>
-Nany::Ast::Node* Rule_SimpleExp_return(struct TokenStruct* token)
+Nany::Ast::Node* Rule_SimpleExp_return(TokenStruct* token)
 {
 	return new Nany::Ast::ReturnExpressionNode(ParseChild<>(token, 1));
 }
@@ -1781,7 +1778,7 @@ Nany::Ast::Node* Rule_SimpleExp_return(struct TokenStruct* token)
 
 
 // <Simple Exp> ::= break
-Nany::Ast::Node* Rule_SimpleExp_break(struct TokenStruct* token)
+Nany::Ast::Node* Rule_SimpleExp_break(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -1791,7 +1788,7 @@ Nany::Ast::Node* Rule_SimpleExp_break(struct TokenStruct* token)
 
 
 // <Simple Exp> ::= continue
-Nany::Ast::Node* Rule_SimpleExp_continue(struct TokenStruct* token)
+Nany::Ast::Node* Rule_SimpleExp_continue(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -1800,8 +1797,8 @@ Nany::Ast::Node* Rule_SimpleExp_continue(struct TokenStruct* token)
 
 
 
-// <Simple Exp> ::= if <Possibly Parallel Exp> then <Expression> <Else Expression>
-Nany::Ast::Node* Rule_SimpleExp_if_then(struct TokenStruct* token)
+// <Simple Exp> ::= if <Possibly Parallel Exp> then <Possibly Parallel Exp> <Else Expression>
+Nany::Ast::Node* Rule_SimpleExp_if_then(TokenStruct* token)
 {
 	Nany::Ast::Node* cond = ParseChild<>(token, 1);
 	Nany::Ast::Node* thenExpr = ParseChild<>(token, 3);
@@ -1813,19 +1810,18 @@ Nany::Ast::Node* Rule_SimpleExp_if_then(struct TokenStruct* token)
 
 
 
-// <Simple Exp> ::= while <Expression> do <Expression>
-Nany::Ast::Node* Rule_SimpleExp_while_do(struct TokenStruct* token)
+// <Simple Exp> ::= while <Possibly Parallel Exp> do <Possibly Parallel Exp>
+Nany::Ast::Node* Rule_SimpleExp_while_do(TokenStruct* token)
 {
-	Nany::Ast::Node* cond = ParseChild<>(token, 1);
-	Nany::Ast::Node* expr = ParseChild<>(token, 3);
-	return new Nany::Ast::WhileExpressionNode(cond, expr);
+	// Not yet implemented !
+	assert(false && "Rule_SimpleExp_while_do: Not yet implemented !");
 }
 
 
 
 
 // <Simple Exp> ::= for Identifier in <Expression> do <Expression>
-Nany::Ast::Node* Rule_SimpleExp_for_Identifier_in_do(struct TokenStruct* token)
+Nany::Ast::Node* Rule_SimpleExp_for_Identifier_in_do(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -1834,8 +1830,8 @@ Nany::Ast::Node* Rule_SimpleExp_for_Identifier_in_do(struct TokenStruct* token)
 
 
 
-// <Simple Exp> ::= for Identifier in <Expression> order ':' <Expression> packedby ':' <Expression> do <Expression>
-Nany::Ast::Node* Rule_SimpleExp_for_Identifier_in_order_Colon_packedby_Colon_do(struct TokenStruct* token)
+// <Simple Exp> ::= for Identifier in <Expression> order ':' <Expression> packedby ':' <Expression> do <Possibly Parallel Exp>
+Nany::Ast::Node* Rule_SimpleExp_for_Identifier_in_order_Colon_packedby_Colon_do(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -1845,7 +1841,7 @@ Nany::Ast::Node* Rule_SimpleExp_for_Identifier_in_order_Colon_packedby_Colon_do(
 
 
 // <Simple Exp> ::= for Identifier in <Expression> order do <Expression>
-Nany::Ast::Node* Rule_SimpleExp_for_Identifier_in_order_do(struct TokenStruct* token)
+Nany::Ast::Node* Rule_SimpleExp_for_Identifier_in_order_do(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -1855,7 +1851,7 @@ Nany::Ast::Node* Rule_SimpleExp_for_Identifier_in_order_do(struct TokenStruct* t
 
 
 // <Simple Exp> ::= timeout <Possibly Parallel Exp> do <Expression>
-Nany::Ast::Node* Rule_SimpleExp_timeout_do(struct TokenStruct* token)
+Nany::Ast::Node* Rule_SimpleExp_timeout_do(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -1865,7 +1861,7 @@ Nany::Ast::Node* Rule_SimpleExp_timeout_do(struct TokenStruct* token)
 
 
 // <Simple Exp> ::= timeout <Possibly Parallel Exp> do <Expression> else <Expression>
-Nany::Ast::Node* Rule_SimpleExp_timeout_do_else(struct TokenStruct* token)
+Nany::Ast::Node* Rule_SimpleExp_timeout_do_else(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -1875,7 +1871,7 @@ Nany::Ast::Node* Rule_SimpleExp_timeout_do_else(struct TokenStruct* token)
 
 
 // <Simple Exp> ::= <Anonymous Function Declaration>
-Nany::Ast::Node* Rule_SimpleExp3(struct TokenStruct* token)
+Nany::Ast::Node* Rule_SimpleExp3(TokenStruct* token)
 {
 	return ParseChild<>(token, 0);
 }
@@ -1884,7 +1880,7 @@ Nany::Ast::Node* Rule_SimpleExp3(struct TokenStruct* token)
 
 
 // <Simple Exp> ::= <Anonymous Class Declaration>
-Nany::Ast::Node* Rule_SimpleExp4(struct TokenStruct* token)
+Nany::Ast::Node* Rule_SimpleExp4(TokenStruct* token)
 {
 	return ParseChild<>(token, 0);
 }
@@ -1893,7 +1889,7 @@ Nany::Ast::Node* Rule_SimpleExp4(struct TokenStruct* token)
 
 
 // <Simple Exp> ::= '{' <Expression> '}'
-Nany::Ast::Node* Rule_SimpleExp_LBrace_RBrace(struct TokenStruct* token)
+Nany::Ast::Node* Rule_SimpleExp_LBrace_RBrace(TokenStruct* token)
 {
 	Nany::Ast::Node* expr = ParseChild<>(token, 1);
 	if (nullptr != expr)
@@ -1904,8 +1900,8 @@ Nany::Ast::Node* Rule_SimpleExp_LBrace_RBrace(struct TokenStruct* token)
 
 
 
-// <Else Expression> ::= else <Expression>
-Nany::Ast::Node* Rule_ElseExpression_else(struct TokenStruct* token)
+// <Else Expression> ::= else <Possibly Parallel Exp>
+Nany::Ast::Node* Rule_ElseExpression_else(TokenStruct* token)
 {
 	return ParseChild<>(token, 1);
 }
@@ -1914,7 +1910,7 @@ Nany::Ast::Node* Rule_ElseExpression_else(struct TokenStruct* token)
 
 
 // <Else Expression> ::= 
-Nany::Ast::Node* Rule_ElseExpression(struct TokenStruct* token)
+Nany::Ast::Node* Rule_ElseExpression(TokenStruct* token)
 {
 	return nullptr;
 }
@@ -1923,7 +1919,7 @@ Nany::Ast::Node* Rule_ElseExpression(struct TokenStruct* token)
 
 
 // <Binary Exp> ::= <Binary Exp> '|' <Xor Exp>
-Nany::Ast::Node* Rule_BinaryExp_Pipe(struct TokenStruct* token)
+Nany::Ast::Node* Rule_BinaryExp_Pipe(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -1933,7 +1929,7 @@ Nany::Ast::Node* Rule_BinaryExp_Pipe(struct TokenStruct* token)
 
 
 // <Binary Exp> ::= <Xor Exp>
-Nany::Ast::Node* Rule_BinaryExp(struct TokenStruct* token)
+Nany::Ast::Node* Rule_BinaryExp(TokenStruct* token)
 {
 	return ParseChild<>(token, 0);
 }
@@ -1942,7 +1938,7 @@ Nany::Ast::Node* Rule_BinaryExp(struct TokenStruct* token)
 
 
 // <Xor Exp> ::= <Xor Exp> xor <Or Exp>
-Nany::Ast::Node* Rule_XorExp_xor(struct TokenStruct* token)
+Nany::Ast::Node* Rule_XorExp_xor(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -1952,7 +1948,7 @@ Nany::Ast::Node* Rule_XorExp_xor(struct TokenStruct* token)
 
 
 // <Xor Exp> ::= <Or Exp>
-Nany::Ast::Node* Rule_XorExp(struct TokenStruct* token)
+Nany::Ast::Node* Rule_XorExp(TokenStruct* token)
 {
 	return ParseChild<>(token, 0);
 }
@@ -1961,7 +1957,7 @@ Nany::Ast::Node* Rule_XorExp(struct TokenStruct* token)
 
 
 // <Or Exp> ::= <Or Exp> or <And Exp>
-Nany::Ast::Node* Rule_OrExp_or(struct TokenStruct* token)
+Nany::Ast::Node* Rule_OrExp_or(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -1971,7 +1967,7 @@ Nany::Ast::Node* Rule_OrExp_or(struct TokenStruct* token)
 
 
 // <Or Exp> ::= <And Exp>
-Nany::Ast::Node* Rule_OrExp(struct TokenStruct* token)
+Nany::Ast::Node* Rule_OrExp(TokenStruct* token)
 {
 	return ParseChild<>(token, 0);
 }
@@ -1980,7 +1976,7 @@ Nany::Ast::Node* Rule_OrExp(struct TokenStruct* token)
 
 
 // <And Exp> ::= <And Exp> and <Equal Exp>
-Nany::Ast::Node* Rule_AndExp_and(struct TokenStruct* token)
+Nany::Ast::Node* Rule_AndExp_and(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -1990,7 +1986,7 @@ Nany::Ast::Node* Rule_AndExp_and(struct TokenStruct* token)
 
 
 // <And Exp> ::= <Equal Exp>
-Nany::Ast::Node* Rule_AndExp(struct TokenStruct* token)
+Nany::Ast::Node* Rule_AndExp(TokenStruct* token)
 {
 	return ParseChild<>(token, 0);
 }
@@ -1999,7 +1995,7 @@ Nany::Ast::Node* Rule_AndExp(struct TokenStruct* token)
 
 
 // <Equal Exp> ::= <Equal Exp> '=' <Compare Exp>
-Nany::Ast::Node* Rule_EqualExp_Eq(struct TokenStruct* token)
+Nany::Ast::Node* Rule_EqualExp_Eq(TokenStruct* token)
 {
 	Nany::Ast::Node* left = ParseChild<>(token, 0);
 	Nany::Ast::Node* right = ParseChild<>(token, 2);
@@ -2010,7 +2006,7 @@ Nany::Ast::Node* Rule_EqualExp_Eq(struct TokenStruct* token)
 
 
 // <Equal Exp> ::= <Equal Exp> '!=' <Compare Exp>
-Nany::Ast::Node* Rule_EqualExp_ExclamEq(struct TokenStruct* token)
+Nany::Ast::Node* Rule_EqualExp_ExclamEq(TokenStruct* token)
 {
 	Nany::Ast::Node* left = ParseChild<>(token, 0);
 	Nany::Ast::Node* right = ParseChild<>(token, 2);
@@ -2021,7 +2017,7 @@ Nany::Ast::Node* Rule_EqualExp_ExclamEq(struct TokenStruct* token)
 
 
 // <Equal Exp> ::= <Compare Exp>
-Nany::Ast::Node* Rule_EqualExp(struct TokenStruct* token)
+Nany::Ast::Node* Rule_EqualExp(TokenStruct* token)
 {
 	return ParseChild<>(token, 0);
 }
@@ -2030,7 +2026,7 @@ Nany::Ast::Node* Rule_EqualExp(struct TokenStruct* token)
 
 
 // <Compare Exp> ::= <Compare Exp> '<' <Regexp Exp>
-Nany::Ast::Node* Rule_CompareExp_Lt(struct TokenStruct* token)
+Nany::Ast::Node* Rule_CompareExp_Lt(TokenStruct* token)
 {
 	Nany::Ast::Node* left = ParseChild<>(token, 0);
 	Nany::Ast::Node* right = ParseChild<>(token, 2);
@@ -2041,7 +2037,7 @@ Nany::Ast::Node* Rule_CompareExp_Lt(struct TokenStruct* token)
 
 
 // <Compare Exp> ::= <Compare Exp> '>' <Regexp Exp>
-Nany::Ast::Node* Rule_CompareExp_Gt(struct TokenStruct* token)
+Nany::Ast::Node* Rule_CompareExp_Gt(TokenStruct* token)
 {
 	Nany::Ast::Node* left = ParseChild<>(token, 0);
 	Nany::Ast::Node* right = ParseChild<>(token, 2);
@@ -2052,7 +2048,7 @@ Nany::Ast::Node* Rule_CompareExp_Gt(struct TokenStruct* token)
 
 
 // <Compare Exp> ::= <Compare Exp> '<=' <Regexp Exp>
-Nany::Ast::Node* Rule_CompareExp_LtEq(struct TokenStruct* token)
+Nany::Ast::Node* Rule_CompareExp_LtEq(TokenStruct* token)
 {
 	Nany::Ast::Node* left = ParseChild<>(token, 0);
 	Nany::Ast::Node* right = ParseChild<>(token, 2);
@@ -2063,7 +2059,7 @@ Nany::Ast::Node* Rule_CompareExp_LtEq(struct TokenStruct* token)
 
 
 // <Compare Exp> ::= <Compare Exp> '>=' <Regexp Exp>
-Nany::Ast::Node* Rule_CompareExp_GtEq(struct TokenStruct* token)
+Nany::Ast::Node* Rule_CompareExp_GtEq(TokenStruct* token)
 {
 	Nany::Ast::Node* left = ParseChild<>(token, 0);
 	Nany::Ast::Node* right = ParseChild<>(token, 2);
@@ -2074,7 +2070,7 @@ Nany::Ast::Node* Rule_CompareExp_GtEq(struct TokenStruct* token)
 
 
 // <Compare Exp> ::= <Regexp Exp>
-Nany::Ast::Node* Rule_CompareExp(struct TokenStruct* token)
+Nany::Ast::Node* Rule_CompareExp(TokenStruct* token)
 {
 	return ParseChild<>(token, 0);
 }
@@ -2083,7 +2079,7 @@ Nany::Ast::Node* Rule_CompareExp(struct TokenStruct* token)
 
 
 // <Regexp Exp> ::= <Regexp Exp> '~' <Shift Exp>
-Nany::Ast::Node* Rule_RegexpExp_Tilde(struct TokenStruct* token)
+Nany::Ast::Node* Rule_RegexpExp_Tilde(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -2094,7 +2090,7 @@ Nany::Ast::Node* Rule_RegexpExp_Tilde(struct TokenStruct* token)
 
 
 // <Regexp Exp> ::= <Shift Exp>
-Nany::Ast::Node* Rule_RegexpExp(struct TokenStruct* token)
+Nany::Ast::Node* Rule_RegexpExp(TokenStruct* token)
 {
 	return ParseChild<>(token, 0);
 }
@@ -2103,7 +2099,7 @@ Nany::Ast::Node* Rule_RegexpExp(struct TokenStruct* token)
 
 
 // <Shift Exp> ::= <Shift Exp> '<<' <Add Exp>
-Nany::Ast::Node* Rule_ShiftExp_LtLt(struct TokenStruct* token)
+Nany::Ast::Node* Rule_ShiftExp_LtLt(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -2113,7 +2109,7 @@ Nany::Ast::Node* Rule_ShiftExp_LtLt(struct TokenStruct* token)
 
 
 // <Shift Exp> ::= <Shift Exp> '>>' <Add Exp>
-Nany::Ast::Node* Rule_ShiftExp_GtGt(struct TokenStruct* token)
+Nany::Ast::Node* Rule_ShiftExp_GtGt(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -2123,7 +2119,7 @@ Nany::Ast::Node* Rule_ShiftExp_GtGt(struct TokenStruct* token)
 
 
 // <Shift Exp> ::= <Add Exp>
-Nany::Ast::Node* Rule_ShiftExp(struct TokenStruct* token)
+Nany::Ast::Node* Rule_ShiftExp(TokenStruct* token)
 {
 	return ParseChild<>(token, 0);
 }
@@ -2132,7 +2128,7 @@ Nany::Ast::Node* Rule_ShiftExp(struct TokenStruct* token)
 
 
 // <Add Exp> ::= <Add Exp> '+' <Mult Exp>
-Nany::Ast::Node* Rule_AddExp_Plus(struct TokenStruct* token)
+Nany::Ast::Node* Rule_AddExp_Plus(TokenStruct* token)
 {
 	Nany::Ast::Node* left = ParseChild<>(token, 0);
 	Nany::Ast::Node* right = ParseChild<>(token, 2);
@@ -2144,7 +2140,7 @@ Nany::Ast::Node* Rule_AddExp_Plus(struct TokenStruct* token)
 
 
 // <Add Exp> ::= <Add Exp> '-' <Mult Exp>
-Nany::Ast::Node* Rule_AddExp_Minus(struct TokenStruct* token)
+Nany::Ast::Node* Rule_AddExp_Minus(TokenStruct* token)
 {
 	Nany::Ast::Node* left = ParseChild<>(token, 0);
 	Nany::Ast::Node* right = ParseChild<>(token, 2);
@@ -2156,7 +2152,7 @@ Nany::Ast::Node* Rule_AddExp_Minus(struct TokenStruct* token)
 
 
 // <Add Exp> ::= <Mult Exp>
-Nany::Ast::Node* Rule_AddExp(struct TokenStruct* token)
+Nany::Ast::Node* Rule_AddExp(TokenStruct* token)
 {
 	return ParseChild<>(token, 0);
 }
@@ -2165,7 +2161,7 @@ Nany::Ast::Node* Rule_AddExp(struct TokenStruct* token)
 
 
 // <Mult Exp> ::= <Mult Exp> '*' <Power Exp>
-Nany::Ast::Node* Rule_MultExp_Times(struct TokenStruct* token)
+Nany::Ast::Node* Rule_MultExp_Times(TokenStruct* token)
 {
 	Nany::Ast::Node* left = ParseChild<>(token, 0);
 	Nany::Ast::Node* right = ParseChild<>(token, 2);
@@ -2177,7 +2173,7 @@ Nany::Ast::Node* Rule_MultExp_Times(struct TokenStruct* token)
 
 
 // <Mult Exp> ::= <Mult Exp> '/' <Power Exp>
-Nany::Ast::Node* Rule_MultExp_Div(struct TokenStruct* token)
+Nany::Ast::Node* Rule_MultExp_Div(TokenStruct* token)
 {
 	Nany::Ast::Node* left = ParseChild<>(token, 0);
 	Nany::Ast::Node* right = ParseChild<>(token, 2);
@@ -2189,7 +2185,7 @@ Nany::Ast::Node* Rule_MultExp_Div(struct TokenStruct* token)
 
 
 // <Mult Exp> ::= <Mult Exp> '%' <Power Exp>
-Nany::Ast::Node* Rule_MultExp_Percent(struct TokenStruct* token)
+Nany::Ast::Node* Rule_MultExp_Percent(TokenStruct* token)
 {
 	Nany::Ast::Node* left = ParseChild<>(token, 0);
 	Nany::Ast::Node* right = ParseChild<>(token, 2);
@@ -2201,7 +2197,7 @@ Nany::Ast::Node* Rule_MultExp_Percent(struct TokenStruct* token)
 
 
 // <Mult Exp> ::= <Power Exp>
-Nany::Ast::Node* Rule_MultExp(struct TokenStruct* token)
+Nany::Ast::Node* Rule_MultExp(TokenStruct* token)
 {
 	return ParseChild<>(token, 0);
 }
@@ -2210,7 +2206,7 @@ Nany::Ast::Node* Rule_MultExp(struct TokenStruct* token)
 
 
 // <Power Exp> ::= <Power Exp> '^' <As Exp>
-Nany::Ast::Node* Rule_PowerExp_Caret(struct TokenStruct* token)
+Nany::Ast::Node* Rule_PowerExp_Caret(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -2220,7 +2216,7 @@ Nany::Ast::Node* Rule_PowerExp_Caret(struct TokenStruct* token)
 
 
 // <Power Exp> ::= <As Exp>
-Nany::Ast::Node* Rule_PowerExp(struct TokenStruct* token)
+Nany::Ast::Node* Rule_PowerExp(TokenStruct* token)
 {
 	return ParseChild<>(token, 0);
 }
@@ -2229,7 +2225,7 @@ Nany::Ast::Node* Rule_PowerExp(struct TokenStruct* token)
 
 
 // <As Exp> ::= <As Exp> as <Typeof Exp>
-Nany::Ast::Node* Rule_AsExp_as(struct TokenStruct* token)
+Nany::Ast::Node* Rule_AsExp_as(TokenStruct* token)
 {
 	Nany::Ast::Node* left = ParseChild<>(token, 0);
 	Nany::Ast::TypeExpressionNode* right = ParseChild<Nany::Ast::TypeExpressionNode>(token, 2);
@@ -2241,7 +2237,7 @@ Nany::Ast::Node* Rule_AsExp_as(struct TokenStruct* token)
 
 
 // <As Exp> ::= <Typeof Exp>
-Nany::Ast::Node* Rule_AsExp(struct TokenStruct* token)
+Nany::Ast::Node* Rule_AsExp(TokenStruct* token)
 {
 	return ParseChild<>(token, 0);
 }
@@ -2250,7 +2246,7 @@ Nany::Ast::Node* Rule_AsExp(struct TokenStruct* token)
 
 
 // <Typeof Exp> ::= typeof <Negate Exp>
-Nany::Ast::Node* Rule_TypeofExp_typeof(struct TokenStruct* token)
+Nany::Ast::Node* Rule_TypeofExp_typeof(TokenStruct* token)
 {
 	Nany::Ast::Node* expr = ParseChild<>(token, 1);
 	Nany::Ast::TypeofExpressionNode* typeOf = new Nany::Ast::TypeofExpressionNode(expr);
@@ -2261,7 +2257,7 @@ Nany::Ast::Node* Rule_TypeofExp_typeof(struct TokenStruct* token)
 
 
 // <Typeof Exp> ::= <Negate Exp>
-Nany::Ast::Node* Rule_TypeofExp(struct TokenStruct* token)
+Nany::Ast::Node* Rule_TypeofExp(TokenStruct* token)
 {
 	return ParseChild<>(token, 0);
 }
@@ -2270,7 +2266,7 @@ Nany::Ast::Node* Rule_TypeofExp(struct TokenStruct* token)
 
 
 // <Negate Exp> ::= '-' <Value>
-Nany::Ast::Node* Rule_NegateExp_Minus(struct TokenStruct* token)
+Nany::Ast::Node* Rule_NegateExp_Minus(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -2280,7 +2276,7 @@ Nany::Ast::Node* Rule_NegateExp_Minus(struct TokenStruct* token)
 
 
 // <Negate Exp> ::= -- <Value>
-Nany::Ast::Node* Rule_NegateExp_MinusMinus(struct TokenStruct* token)
+Nany::Ast::Node* Rule_NegateExp_MinusMinus(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -2290,7 +2286,7 @@ Nany::Ast::Node* Rule_NegateExp_MinusMinus(struct TokenStruct* token)
 
 
 // <Negate Exp> ::= '++' <Value>
-Nany::Ast::Node* Rule_NegateExp_PlusPlus(struct TokenStruct* token)
+Nany::Ast::Node* Rule_NegateExp_PlusPlus(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -2300,7 +2296,7 @@ Nany::Ast::Node* Rule_NegateExp_PlusPlus(struct TokenStruct* token)
 
 
 // <Negate Exp> ::= <Value> --
-Nany::Ast::Node* Rule_NegateExp_MinusMinus2(struct TokenStruct* token)
+Nany::Ast::Node* Rule_NegateExp_MinusMinus2(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -2310,7 +2306,7 @@ Nany::Ast::Node* Rule_NegateExp_MinusMinus2(struct TokenStruct* token)
 
 
 // <Negate Exp> ::= <Value> '++'
-Nany::Ast::Node* Rule_NegateExp_PlusPlus2(struct TokenStruct* token)
+Nany::Ast::Node* Rule_NegateExp_PlusPlus2(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -2320,7 +2316,7 @@ Nany::Ast::Node* Rule_NegateExp_PlusPlus2(struct TokenStruct* token)
 
 
 // <Negate Exp> ::= <Value>
-Nany::Ast::Node* Rule_NegateExp(struct TokenStruct* token)
+Nany::Ast::Node* Rule_NegateExp(TokenStruct* token)
 {
 	return ParseChild<>(token, 0);
 }
@@ -2329,7 +2325,7 @@ Nany::Ast::Node* Rule_NegateExp(struct TokenStruct* token)
 
 
 // <Value> ::= <Literal> <Subscript>
-Nany::Ast::Node* Rule_Value(struct TokenStruct* token)
+Nany::Ast::Node* Rule_Value(TokenStruct* token)
 {
 	// TODO : Handle subscripts on literals
 	return ParseChild<>(token, 0);
@@ -2339,7 +2335,7 @@ Nany::Ast::Node* Rule_Value(struct TokenStruct* token)
 
 
 // <Value> ::= '(' <SingleThread Exp> ')' <Subscript>
-Nany::Ast::Node* Rule_Value_LParan_RParan(struct TokenStruct* token)
+Nany::Ast::Node* Rule_Value_LParan_RParan(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -2349,7 +2345,7 @@ Nany::Ast::Node* Rule_Value_LParan_RParan(struct TokenStruct* token)
 
 
 // <Value> ::= Identifier <Subscript>
-Nany::Ast::Node* Rule_Value_Identifier(struct TokenStruct* token)
+Nany::Ast::Node* Rule_Value_Identifier(TokenStruct* token)
 {
 	// Read the identifier
 	const wchar_t* symbol = GetChildSymbol(token, 0);
@@ -2376,7 +2372,7 @@ Nany::Ast::Node* Rule_Value_Identifier(struct TokenStruct* token)
 
 
 // <Value> ::= <Value> '[' ']'
-Nany::Ast::Node* Rule_Value_LBracket_RBracket(struct TokenStruct* token)
+Nany::Ast::Node* Rule_Value_LBracket_RBracket(TokenStruct* token)
 {
 	Nany::Ast::Node* left = ParseChild<>(token, 0);
 
@@ -2396,7 +2392,7 @@ Nany::Ast::Node* Rule_Value_LBracket_RBracket(struct TokenStruct* token)
 
 
 // <Value> ::= <Value> '[' <SingleThread Exp> ']' <Subscript>
-Nany::Ast::Node* Rule_Value_LBracket_RBracket2(struct TokenStruct* token)
+Nany::Ast::Node* Rule_Value_LBracket_RBracket2(TokenStruct* token)
 {
 	Nany::Ast::Node* left = ParseChild<>(token, 0);
 
@@ -2429,7 +2425,7 @@ Nany::Ast::Node* Rule_Value_LBracket_RBracket2(struct TokenStruct* token)
 
 
 // <Value> ::= <Value> '<' <Type Arguments> '>' <Subscript>
-Nany::Ast::Node* Rule_Value_Lt_Gt(struct TokenStruct* token)
+Nany::Ast::Node* Rule_Value_Lt_Gt(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Rule_Value_Lt_Gt: Not yet implemented !");
@@ -2440,7 +2436,7 @@ Nany::Ast::Node* Rule_Value_Lt_Gt(struct TokenStruct* token)
 
 
 // <Value> ::= '[' <SingleThread Exp> ']' <Subscript>
-Nany::Ast::Node* Rule_Value_LBracket_RBracket3(struct TokenStruct* token)
+Nany::Ast::Node* Rule_Value_LBracket_RBracket3(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Rule_Value_LBracket_RBracket3: Not yet implemented !");
@@ -2450,7 +2446,7 @@ Nany::Ast::Node* Rule_Value_LBracket_RBracket3(struct TokenStruct* token)
 
 
 // <Subscript> ::= 
-Nany::Ast::Node* Rule_Subscript(struct TokenStruct* token)
+Nany::Ast::Node* Rule_Subscript(TokenStruct* token)
 {
 	return nullptr;
 }
@@ -2459,7 +2455,7 @@ Nany::Ast::Node* Rule_Subscript(struct TokenStruct* token)
 
 
 // <Subscript> ::= '.' <Value>
-Nany::Ast::Node* Rule_Subscript_Dot(struct TokenStruct* token)
+Nany::Ast::Node* Rule_Subscript_Dot(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
@@ -2469,7 +2465,7 @@ Nany::Ast::Node* Rule_Subscript_Dot(struct TokenStruct* token)
 
 
 // <Subscript> ::= '(' <Argument List> ')'
-Nany::Ast::Node* Rule_Subscript_LParan_RParan(struct TokenStruct* token)
+Nany::Ast::Node* Rule_Subscript_LParan_RParan(TokenStruct* token)
 {
 	return ParseChild<>(token, 1);
 }
@@ -2482,14 +2478,14 @@ Nany::Ast::Node* Rule_Subscript_LParan_RParan(struct TokenStruct* token)
 
 
 
-Nany::Ast::Node* (*RuleJumpTable[])(struct TokenStruct* token) =
+Nany::Ast::Node* (*RuleJumpTable[])(TokenStruct* token) =
 {
 	// 0. <Program> ::= <Unit Declaration> <Dependencies> <Declaration List>
 	Rule_Program,
 	// 1. <Unit Declaration> ::= <Optional Visibility Qualifier> unit Identifier ';'
 	Rule_UnitDeclaration_unit_Identifier_Semi,
-	// 2. <Unit Declaration> ::= program Identifier ';'
-	Rule_UnitDeclaration_program_Identifier_Semi,
+	// 2. <Unit Declaration> ::= 
+	Rule_UnitDeclaration,
 	// 3. <Dependencies> ::= <Dependency> <Dependencies>
 	Rule_Dependencies,
 	// 4. <Dependencies> ::= 
@@ -2768,13 +2764,13 @@ Nany::Ast::Node* (*RuleJumpTable[])(struct TokenStruct* token) =
 	Rule_SimpleExp_break,
 	// 141. <Simple Exp> ::= continue
 	Rule_SimpleExp_continue,
-	// 142. <Simple Exp> ::= if <Possibly Parallel Exp> then <Expression> <Else Expression>
+	// 142. <Simple Exp> ::= if <Possibly Parallel Exp> then <Possibly Parallel Exp> <Else Expression>
 	Rule_SimpleExp_if_then,
-	// 143. <Simple Exp> ::= while <Expression> do <Expression>
+	// 143. <Simple Exp> ::= while <Possibly Parallel Exp> do <Possibly Parallel Exp>
 	Rule_SimpleExp_while_do,
 	// 144. <Simple Exp> ::= for Identifier in <Expression> do <Expression>
 	Rule_SimpleExp_for_Identifier_in_do,
-	// 145. <Simple Exp> ::= for Identifier in <Expression> order ':' <Expression> packedby ':' <Expression> do <Expression>
+	// 145. <Simple Exp> ::= for Identifier in <Expression> order ':' <Expression> packedby ':' <Expression> do <Possibly Parallel Exp>
 	Rule_SimpleExp_for_Identifier_in_order_Colon_packedby_Colon_do,
 	// 146. <Simple Exp> ::= for Identifier in <Expression> order do <Expression>
 	Rule_SimpleExp_for_Identifier_in_order_do,
@@ -2788,7 +2784,7 @@ Nany::Ast::Node* (*RuleJumpTable[])(struct TokenStruct* token) =
 	Rule_SimpleExp4,
 	// 151. <Simple Exp> ::= '{' <Expression> '}'
 	Rule_SimpleExp_LBrace_RBrace,
-	// 152. <Else Expression> ::= else <Expression>
+	// 152. <Else Expression> ::= else <Possibly Parallel Exp>
 	Rule_ElseExpression_else,
 	// 153. <Else Expression> ::= 
 	Rule_ElseExpression,
@@ -2898,13 +2894,15 @@ Nany::Ast::Node* (*RuleJumpTable[])(struct TokenStruct* token) =
 
 
 template<class NodeT = Nany::Ast::Node>
-static NodeT* ParseChild(struct TokenStruct* parent, unsigned int index)
+static NodeT* ParseChild(TokenStruct* parent, unsigned int index)
 {
+	assert(parent && "ParseChild: invalid parent");
 	// Make sure the child index is not out of bounds
-	assert(index < (unsigned int)Grammar.RuleArray[parent->ReductionRule].SymbolsCount && "ParseChild: index out of bounds !");
+	assert(index < (unsigned int) Grammar.RuleArray[parent->ReductionRule].SymbolsCount
+		&& "ParseChild: index out of bounds !");
 
-	struct TokenStruct* child = parent->Tokens[index];
-
+	TokenStruct* child = parent->Tokens[index];
+	assert(child && "ParseChild: Invalid child");
 	// Make sure the child is a rule
 	assert(child->ReductionRule >= 0 && "ParseChild must be called on a rule !");
 
@@ -2919,13 +2917,15 @@ static NodeT* ParseChild(struct TokenStruct* parent, unsigned int index)
 }
 
 
-static const wchar_t* GetChildSymbol(struct TokenStruct* parent, unsigned int index)
+static const wchar_t* GetChildSymbol(TokenStruct* parent, unsigned int index)
 {
+	assert(parent && "GetChildSymbol: invalid parent");
 	// Make sure the child index is not out of bounds
-	assert(index < (unsigned int)Grammar.RuleArray[parent->ReductionRule].SymbolsCount && "GetChildSymbol: index out of bounds !");
+	assert(index < (unsigned int) Grammar.RuleArray[parent->ReductionRule].SymbolsCount
+		&& "GetChildSymbol: index out of bounds !");
 
-	struct TokenStruct* child = parent->Tokens[index];
-
+	TokenStruct* child = parent->Tokens[index];
+	assert(child && "GetChildSymbol: invalid child");
 	// Make sure the child is a symbol
 	assert(child->ReductionRule < 0 && "GetChildSymbol must be called on a symbol !");
 
@@ -3003,7 +3003,7 @@ static wchar_t* LoadInputFile(const char *fileName)
 
 
 
-static void ShowErrorMessage(struct TokenStruct* token, int result)
+static void ShowErrorMessage(TokenStruct* token, int result)
 {
 	switch (result)
 	{
@@ -3023,7 +3023,7 @@ static void ShowErrorMessage(struct TokenStruct* token, int result)
 			std::cerr << "Out of memory";
 			break;
 	}
-	if (token != NULL)
+	if (token)
 		std::cerr << " at line " << token->Line << " column " << token->Column;
 	std::cerr << "." << std::endl;
 
@@ -3050,7 +3050,7 @@ static void ShowErrorMessage(struct TokenStruct* token, int result)
 	}
 	if (result == PARSESYNTAXERROR)
 	{
-		if (token->Data != NULL)
+		if (token->Data)
 		{
 			wchar_t s1[BUFSIZ];
 			ReadableString(token->Data, s1, BUFSIZ);
@@ -3060,15 +3060,16 @@ static void ShowErrorMessage(struct TokenStruct* token, int result)
 		{
 			std::cerr << "Expected ";
 		}
-		for (int i = 0; i < Grammar.LalrArray[token->Symbol].ActionCount; i++)
+
+		for (unsigned int i = 0; i < (unsigned int) Grammar.LalrArray[token->Symbol].ActionCount; ++i)
 		{
-			int symbol = Grammar.LalrArray[token->Symbol].Actions[i].Entry;
+			unsigned int symbol = (unsigned int) Grammar.LalrArray[token->Symbol].Actions[i].Entry;
 			if (Grammar.SymbolArray[symbol].Kind == SYMBOLTERMINAL)
 			{
 				if (i > 0)
 				{
 					std::cerr << ", ";
-					if (i >= Grammar.LalrArray[token->Symbol].ActionCount - 2)
+					if (i + 2 >= (unsigned int) Grammar.LalrArray[token->Symbol].ActionCount)
 						std::cerr << "or ";
 				}
 				std::wcerr << L'\'' << Grammar.SymbolArray[symbol].Name << L'\'';
@@ -3094,7 +3095,7 @@ Nany::Ast::Node* parseFile(const char* filePath)
 
 
 	// Run the Parser.
-	struct TokenStruct* token;
+	TokenStruct* token;
 	int parseResult = Parse(inputBuf, wcslen(inputBuf), TRIMREDUCTIONS, &token);
 
 	// Interpret the results.
@@ -3115,3 +3116,5 @@ Nany::Ast::Node* parseFile(const char* filePath)
 	delete inputBuf;
 	return tree;
 }
+
+

@@ -1,5 +1,4 @@
 # This test contains function specializations
-program Specializations;
 
 #! Default behaviour
 function fibonacci(n)
