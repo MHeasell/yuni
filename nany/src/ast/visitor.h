@@ -31,6 +31,8 @@ namespace Ast
 
 		virtual void visit(AttributeDeclarationNode*) = 0;
 
+		virtual void visit(TypeAliasNode*) = 0;
+
 		virtual void visit(ScopeNode*) = 0;
 
 		virtual void visit(VisibilityQualifierNode*) = 0;

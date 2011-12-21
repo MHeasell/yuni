@@ -30,6 +30,9 @@ namespace Ast
 	//! Attribute declaration
 	class AttributeDeclarationNode;
 
+	//! Attribute declaration
+	class TypeAliasNode;
+
 	//! Scope
 	class ScopeNode;
 

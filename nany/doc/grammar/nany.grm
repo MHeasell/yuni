@@ -59,11 +59,11 @@ Comment End = '*#' | '*/'
 <Dependency Continued> ::= '.' Identifier <Dependency Continued>
                | ! Empty
 
-<Declaration List> ::= <Optional Visibility Qualifier> <Function Declaration> <Declaration List>
-               | <Optional Visibility Qualifier> <Class Declaration> <Declaration List>
-               | <Optional Visibility Qualifier> <Workflow Declaration> <Declaration List>
-               | <Optional Visibility Qualifier> <Enum Declaration> <Declaration List>
-               | <Optional Visibility Qualifier> <Typedef> ';' <Declaration List>
+<Declaration List> ::= <Function Declaration> <Declaration List>
+               | <Class Declaration> <Declaration List>
+               | <Workflow Declaration> <Declaration List>
+               | <Enum Declaration> <Declaration List>
+               | <Typedef> ';' <Declaration List>
                | ! Empty
 
 ! -------------------------------------------------
@@ -244,11 +244,12 @@ Comment End = '*#' | '*/'
                | ! Empty
 
 ! This is for generics instanciations
-<Type Arguments> ::= <SingleThread Exp> <Type Arguments Continued>
-               | ! Empty
+! Disabled for now because it breaks operator <
+!<Type Arguments> ::= <SingleThread Exp> <Type Arguments Continued>
+!               | ! Empty
 
-<Type Arguments Continued> ::= ',' <SingleThread Exp> <Type Parameters Continued>
-               | ! Empty
+!<Type Arguments Continued> ::= ',' <SingleThread Exp> <Type Parameters Continued>
+!               | ! Empty
 
 ! -------------------------------------------------
 ! Expressions
@@ -359,7 +360,7 @@ Comment End = '*#' | '*/'
                | Identifier <Subscript>
                | <Value> '[' ']'
                | <Value> '[' <SingleThread Exp> ']' <Subscript>
-               | <Value> '<' <Type Arguments> '>' <Subscript>
+!               | <Value> '<' <Type Arguments> '>' <Subscript>
                | '[' <SingleThread Exp> ']' <Subscript>
 
 <Subscript> ::= ! Empty

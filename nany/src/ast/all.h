@@ -22,6 +22,7 @@ namespace Ast
 # include "classdeclarationnode.h"
 # include "methoddeclarationnode.h"
 # include "attributedeclarationnode.h"
+# include "typealiasnode.h"
 # include "scopenode.h"
 # include "visibilityqualifiernode.h"
 # include "ifexpressionnode.h"
