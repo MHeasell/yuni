@@ -164,12 +164,12 @@ Nany::Ast::Node* Rule_DependencyContinued(TokenStruct* token)
 
 
 
-// <Declaration List> ::= <Optional Visibility Qualifier> <Function Declaration> <Declaration List>
+// <Declaration List> ::= <Function Declaration> <Declaration List>
 Nany::Ast::Node* Rule_DeclarationList(TokenStruct* token)
 {
-	Nany::Ast::FunctionDeclarationNode* funcDecl = ParseChild<Nany::Ast::FunctionDeclarationNode>(token, 1);
+	Nany::Ast::FunctionDeclarationNode* funcDecl = ParseChild<Nany::Ast::FunctionDeclarationNode>(token, 0);
 
-	Nany::Ast::DeclarationListNode* declList = ParseChild<Nany::Ast::DeclarationListNode>(token, 2);
+	Nany::Ast::DeclarationListNode* declList = ParseChild<Nany::Ast::DeclarationListNode>(token, 1);
 	declList->prepend(funcDecl);
 
 	return declList;
@@ -178,12 +178,12 @@ Nany::Ast::Node* Rule_DeclarationList(TokenStruct* token)
 
 
 
-// <Declaration List> ::= <Optional Visibility Qualifier> <Class Declaration> <Declaration List>
+// <Declaration List> ::= <Class Declaration> <Declaration List>
 Nany::Ast::Node* Rule_DeclarationList2(TokenStruct* token)
 {
-	Nany::Ast::ClassDeclarationNode* classDecl = ParseChild<Nany::Ast::ClassDeclarationNode>(token, 1);
+	Nany::Ast::ClassDeclarationNode* classDecl = ParseChild<Nany::Ast::ClassDeclarationNode>(token, 0);
 
-	Nany::Ast::DeclarationListNode* declList = ParseChild<Nany::Ast::DeclarationListNode>(token, 2);
+	Nany::Ast::DeclarationListNode* declList = ParseChild<Nany::Ast::DeclarationListNode>(token, 1);
 	declList->prepend(classDecl);
 
 	return declList;
@@ -192,36 +192,37 @@ Nany::Ast::Node* Rule_DeclarationList2(TokenStruct* token)
 
 
 
-// <Declaration List> ::= <Optional Visibility Qualifier> <Workflow Declaration> <Declaration List>
+// <Declaration List> ::= <Workflow Declaration> <Declaration List>
 Nany::Ast::Node* Rule_DeclarationList3(TokenStruct* token)
 {
 	// TODO : Handle workflows
 
-	Nany::Ast::DeclarationListNode* declList = ParseChild<Nany::Ast::DeclarationListNode>(token, 2);
+	Nany::Ast::DeclarationListNode* declList = ParseChild<Nany::Ast::DeclarationListNode>(token, 1);
 	return declList;
 }
 
 
 
 
-// <Declaration List> ::= <Optional Visibility Qualifier> <Enum Declaration> <Declaration List>
+// <Declaration List> ::= <Enum Declaration> <Declaration List>
 Nany::Ast::Node* Rule_DeclarationList4(TokenStruct* token)
 {
 	// TODO : Handle enums
 
-	Nany::Ast::DeclarationListNode* declList = ParseChild<Nany::Ast::DeclarationListNode>(token, 2);
+	Nany::Ast::DeclarationListNode* declList = ParseChild<Nany::Ast::DeclarationListNode>(token, 1);
 	return declList;
 }
 
 
 
 
-// <Declaration List> ::= <Optional Visibility Qualifier> <Typedef> ';' <Declaration List>
+// <Declaration List> ::= <Typedef> ';' <Declaration List>
 Nany::Ast::Node* Rule_DeclarationList_Semi(TokenStruct* token)
 {
-	// TODO : Handle typedefs
+	Nany::Ast::TypeAliasNode* typeDef = ParseChild<Nany::Ast::TypeAliasNode>(token, 0);
 
-	Nany::Ast::DeclarationListNode* declList = ParseChild<Nany::Ast::DeclarationListNode>(token, 3);
+	Nany::Ast::DeclarationListNode* declList = ParseChild<Nany::Ast::DeclarationListNode>(token, 2);
+	declList->prepend(typeDef);
 	return declList;
 }
 
@@ -540,9 +541,17 @@ Nany::Ast::Node* Rule_ClassContent2(TokenStruct* token)
 // <Class Content> ::= <Typedef> ';' <Class Content>
 Nany::Ast::Node* Rule_ClassContent_Semi3(TokenStruct* token)
 {
-	// TODO : implement a class-scope typedef
+	Nany::Ast::DeclarationListNode* decls = ParseChild<Nany::Ast::DeclarationListNode>(token, 2);
 
-	return ParseChild<>(token, 2);
+	if (!decls)
+		decls = new Nany::Ast::DeclarationListNode();
+
+	// TODO : class-scoping ?
+
+	Nany::Ast::TypeAliasNode* typeAlias = ParseChild<Nany::Ast::TypeAliasNode>(token, 0);
+
+	decls->prepend(typeAlias);
+	return decls;
 }
 
 
@@ -1423,8 +1432,16 @@ Nany::Ast::Node* Rule_ArgumentListContinued(TokenStruct* token)
 // <Typedef> ::= type Identifier ':=' <Possibly Parallel Exp>
 Nany::Ast::Node* Rule_Typedef_type_Identifier_ColonEq(TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Rule_Typedef_type_Identifier_ColonEq: Not yet implemented !");
+	// Read the identifier
+	const wchar_t* symbol = GetChildSymbol(token, 1);
+	size_t len = wcslen(symbol);
+	char* buffer = new char[len + 1];
+	wcstombs(buffer, symbol, len);
+	buffer[len] = 0;
+
+	Nany::Ast::TypeExpressionNode* type = ParseChild<Nany::Ast::TypeExpressionNode>(token, 3);
+
+	return new Nany::Ast::TypeAliasNode(buffer, type);
 }
 
 
@@ -1761,8 +1778,7 @@ Nany::Ast::Node* Rule_SimpleExp_new(TokenStruct* token)
 // <Simple Exp> ::= <Typedef>
 Nany::Ast::Node* Rule_SimpleExp2(TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Rule_SimpleExp2: Not yet implemented !");
+	return ParseChild<>(token, 0);
 }
 
 

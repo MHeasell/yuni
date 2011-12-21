@@ -72,6 +72,11 @@ namespace Ast
 				node->value()->accept(this);
 		}
 
+		virtual void visit(TypeAliasNode* node)
+		{
+			node->expression()->accept(this);
+		}
+
 		virtual void visit(ScopeNode* node)
 		{
 			if (node->expression())

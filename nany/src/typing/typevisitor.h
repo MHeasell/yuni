@@ -79,6 +79,13 @@ namespace Typing
 		}
 
 
+		virtual void visit(Ast::TypeAliasNode* node)
+		{
+			node->expression()->accept(this);
+			node->type(node->expression()->type());
+		}
+
+
 		virtual void visit(Ast::ScopeNode* node)
 		{
 			if (node->expression())

@@ -100,6 +100,16 @@ namespace Ast
 		}
 
 
+		virtual void visit(TypeAliasNode* node)
+		{
+			std::cout << pIndent << "<Method Declaration Node>" << std::endl;
+			indent();
+			std::cout << pIndent << "Symbol : " << node->name() << std::endl;
+			node->expression()->accept(this);
+			unindent();
+		}
+
+
 		virtual void visit(ScopeNode* node)
 		{
 			std::cout << pIndent << "<Scope Node>" << std::endl;

@@ -133,6 +133,15 @@ namespace Ast
 		}
 
 
+		virtual void visit(TypeAliasNode* node)
+		{
+			pOut << pIndent;
+			std::cout << pIndent << "typedef ";
+			node->expression()->accept(this);
+			pOut << "  " << node->name() << std::endl;
+		}
+
+
 		virtual void visit(ScopeNode* node)
 		{
 			pOut << '{' << std::endl;
