@@ -7,24 +7,6 @@ namespace DynamicLibrary
 {
 
 
-	inline File::File(const String& filename, const Relocation r, const Visibility v) :
-		pHandle(NullHandle)
-	{
-		(void)loadFromFile(filename.c_str(), r, v);
-	}
-
-
-	inline File::File() :
-		pHandle(NullHandle)
-	{}
-
-	inline File::~File()
-	{
-		if (NullHandle != pHandle)
-			wrapperDlClose(pHandle);
-	}
-
-
 
 
 	template<class StringT>
