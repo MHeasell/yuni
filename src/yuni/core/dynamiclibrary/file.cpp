@@ -108,10 +108,30 @@ namespace DynamicLibrary
 		**/
 		inline bool FindLibrary(String& out, const StringAdapter& filename)
 		{
-			return (FindLibraryFile(out, filename, "lib") || FindLibraryFile(out, filename, ""))
+			return (FindLibraryFile(out, filename, "lib") || FindLibraryFile(out, filename, ""));
 		}
 
 	} // Anonymous namespace
+
+
+	File::File(const StringAdapter& filename, const Relocation r, const Visibility v) :
+		pHandle(NullHandle)
+	{
+		(void)loadFromFile(filename, r, v);
+	}
+
+
+	File::File() :
+		pHandle(NullHandle)
+	{}
+
+
+	File::~File()
+	{
+		if (NullHandle != pHandle)
+			wrapperDlClose(pHandle);
+	}
+
 
 
 
