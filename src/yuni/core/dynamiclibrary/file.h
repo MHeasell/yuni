@@ -88,7 +88,7 @@ namespace DynamicLibrary
 	** }
 	** \endcode
 	*/
-	class File
+	class YUNI_DECL File
 	{
 	public:
 		//! OS Dependant Handle of a shared library
