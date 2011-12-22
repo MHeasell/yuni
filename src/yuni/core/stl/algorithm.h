@@ -21,10 +21,9 @@ namespace STL
 	template <typename T>
 	struct Delete
 	{
-		inline const Delete& operator () (T* ptr) const
+		inline void operator () (T* ptr) const
 		{
 			delete ptr;
-			return *this;
 		}
 	}; // class Delete
 
