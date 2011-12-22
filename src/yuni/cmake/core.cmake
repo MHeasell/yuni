@@ -632,6 +632,15 @@ set(SRC_IO_FILE
 )
 source_group(io\\file FILES ${SRC_IO_FILE})
 
+set(SRC_IO_SEARCHPATH
+		io/searchpath.h
+		io/searchpath/searchpath.h
+		io/searchpath/searchpath.hxx
+		io/searchpath/searchpath.cpp
+)
+source_group(io\\searchpath FILES ${SRC_IO_SEARCHPATH})
+
+
 
 set(SRC_CORE_GETOPT
 		core/getopt.h
@@ -772,6 +781,7 @@ add_library(yuni-static-core STATIC
 		${SRC_IO_DIRECTORY_INFO}
 		${SRC_IO_DIRECTORY_ITERATOR}
 		${SRC_IO_FILE}
+		${SRC_IO_SEARCHPATH}
 		${SRC_CORE_PROCESS}
 		${SRC_CORE_LOGS}
 		${SRC_CORE_ATOMIC}
