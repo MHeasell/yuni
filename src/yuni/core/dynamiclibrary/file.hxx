@@ -7,15 +7,15 @@ namespace DynamicLibrary
 {
 
 
-	inline File::File(const String& filename, const Relocation r, const Visibility v)
-		:pHandle(NullHandle)
+	inline File::File(const String& filename, const Relocation r, const Visibility v) :
+		pHandle(NullHandle)
 	{
 		(void)loadFromFile(filename.c_str(), r, v);
 	}
 
 
-	inline File::File()
-		:pHandle(NullHandle)
+	inline File::File() :
+		pHandle(NullHandle)
 	{}
 
 	inline File::~File()
@@ -25,27 +25,22 @@ namespace DynamicLibrary
 	}
 
 
-	inline bool File::loadFromRawFilename(const String& filename,
-		const File::Relocation r,
-		const File::Visibility v)
+
+
+	template<class StringT>
+	inline bool File::hasSymbol(const StringT& name) const
 	{
-		return loadFromRawFilename(filename.c_str(), r, v);
+		const char* const query = Traits::CString<StringT>::Perform(name);
+		return NullHandle != pHandle && NULL != wrapperDlSym(pHandle, query);
 	}
 
 
-
-
-	inline bool File::hasSymbol(const String& name) const
+	template<class StringT>
+	inline Symbol File::resolve(const StringT& name) const
 	{
-		return NullHandle != pHandle && NULL != wrapperDlSym(pHandle, name.c_str());
+		const char* const query = Traits::CString<StringT>::Perform(name);
+		return NullHandle != pHandle ? wrapperDlSym(pHandle, query) : NULL;
 	}
-
-
-	inline Symbol File::resolve(const String& name) const
-	{
-		return NullHandle != pHandle ? wrapperDlSym(pHandle, name.c_str()) : NULL;
-	}
-
 
 
 	inline bool File::loaded() const
@@ -66,10 +61,12 @@ namespace DynamicLibrary
 	}
 
 
-	inline Symbol File::operator [] (const String& name) const
+	template<class StringT>
+	inline Symbol File::operator [] (const StringT& name) const
 	{
-		return (NullHandle != pHandle) ? wrapperDlSym(pHandle, name.c_str()) : NULL;
+		return resolve(name);
 	}
+
 
 
 

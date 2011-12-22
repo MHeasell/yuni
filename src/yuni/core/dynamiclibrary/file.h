@@ -194,12 +194,13 @@ namespace DynamicLibrary
 		** \param v The visibility mode (no effect on Windows)
 		** \return True if the library has been loaded
 		*/
-		bool loadFromFile(const String& filename, const Relocation r = relocationLazy, const Visibility v = visibilityDefault);
+		bool loadFromFile(const StringAdapter& filename, const Relocation r = relocationLazy,
+			const Visibility v = visibilityDefault);
 
 		/*!
 		** \brief Load a dynamic library from its filename
 		**
-		** No operation will be made on the filename, contrary to
+		** No modification will be made on the provided filename, contrary to
 		** load() where a suffic and/or a prefix might be added.
 		**
 		** If a library is already loaded, it will be unloaded first.
@@ -209,9 +210,7 @@ namespace DynamicLibrary
 		** \param v The visibility mode (no effect on Windows)
 		** \return True if the library has been loaded
 		*/
-		bool loadFromRawFilename(const char* filename, const Relocation r = relocationLazy,
-			const Visibility v = visibilityDefault);
-		bool loadFromRawFilename(const String& filename, const Relocation r = relocationLazy,
+		bool loadFromRawFilename(const StringAdapter& filename, const Relocation r = relocationLazy,
 			const Visibility v = visibilityDefault);
 
 		/*!
@@ -242,7 +241,7 @@ namespace DynamicLibrary
 		** \param name Name of the exported symbol
 		** \return True if the library is loaded and the symbol exists, False otherwise
 		*/
-		bool hasSymbol(const String& name) const;
+		template<class StringT> bool hasSymbol(const StringT& name) const;
 
 		/*!
 		** \brief Try to resolve the address of an exported symbol by the library
@@ -270,7 +269,7 @@ namespace DynamicLibrary
 		** \return The Symbol. Use Symbol::valid() or Symbol::null() to know if
 		** the result is valid
 		*/
-		Symbol resolve(const String& name) const;
+		template<class StringT> Symbol resolve(const StringT& name) const;
 		//@}
 
 		//! \name Handle
@@ -287,7 +286,7 @@ namespace DynamicLibrary
 		** \brief The operator []
 		** \see resolve()
 		*/
-		Symbol operator [] (const String& name) const;
+		template<class StringT> Symbol operator [] (const StringT& name) const;
 		//@}
 
 

@@ -3,6 +3,8 @@
 #include "file.h"
 #ifndef YUNI_OS_WINDOWS
 # include <dlfcn.h>
+#else
+# include "../../core/string/wstring.h"
 #endif
 #include <stdio.h>
 #include "../../io/file.h"
@@ -55,21 +57,21 @@ namespace DynamicLibrary
 
 	namespace // Anonymous namespace
 	{
+
 		/*!
 		** \brief Try to find a file from a single path, a filename and a prefix
 		**
-		** \param path List of paths where to look for the library
 		** \param[out] s A temporary string, where to write the absolute filename
 		** \param prefix The prefix to use for the filename
 		** \return True if the filename in `s` exists and should be loaded, False otherwise
 		**/
-		template<class StringT1, class StringT2, class StringT3>
-		inline bool FindLibraryFile(StringT1& out, const StringT2& path, const String& filename, const StringT3& prefix)
+		template<class StringT>
+		inline bool FindLibraryFile(StringT& out, /*const StringT2& path,*/ const StringAdapter& filename, const char* prefix)
 		{
 			# define TEST_THEN_LOAD(EXT) \
 				out.clear(); \
-				if (!path.empty()) \
-					out << path << IO::Separator; \
+				/*if (!path.empty()) */ \
+					/*out << path << IO::Separator; */ \
 				out << prefix << filename << EXT; \
 				if (IO::File::Exists(out)) \
 					return true
@@ -100,34 +102,27 @@ namespace DynamicLibrary
 		/*!
 		** \brief Try to find a file from a list of paths, a filename and a prefix
 		**
-		** \param searchPaths List of paths where to look for the library
 		** \param[out] s A temporary string, where to write the absolute filename
 		** \param prefix The prefix to use for the filename
 		** \return True if the filename in `s` exists and should be loaded, False otherwise
 		**/
-		bool FindLibrary(String& out, const String::Vector& searchPaths, const String& filename)
+		inline bool FindLibrary(String& out, const StringAdapter& filename)
 		{
-			const String::Vector::const_iterator& end = searchPaths.end();
-			for (String::Vector::const_iterator i = searchPaths.begin(); i != end; ++i)
-			{
-				if (FindLibraryFile(out, *i, filename, "lib") || FindLibraryFile(out, *i, filename, ""))
-					return true;
-			}
-			return false;
+			return (FindLibraryFile(out, filename, "lib") || FindLibraryFile(out, filename, ""))
 		}
 
 	} // Anonymous namespace
 
 
 
-	bool File::loadFromFile(const String& filename, const File::Relocation r, const File::Visibility v)
+	bool File::loadFromFile(const StringAdapter& filename, const File::Relocation r, const File::Visibility v)
 	{
 		// No filename
 		if (!filename.empty())
 		{
 			// If the file name is absolute, there is no need for research
 			if (IO::IsAbsolute(filename))
-				return loadFromRawFilename(filename.c_str(), r, v);
+				return loadFromRawFilename(filename, r, v);
 
 			// A temporary string, where to write the absolute filename
 			String s;
@@ -135,10 +130,8 @@ namespace DynamicLibrary
 
 			// Search paths
 			// TODO : find a far more efficient way for doing this
-			String::Vector searchPaths;
-			searchPaths.push_back("");
-			if (FindLibrary(s, searchPaths, filename))
-				return loadFromRawFilename(s.c_str(), r, v);
+			if (FindLibrary(s, filename))
+				return loadFromRawFilename(s, r, v);
 		}
 		// Make sure the library has been unloaded
 		// This unloading would have been done by `loadFromRawFilename()` if
@@ -168,32 +161,19 @@ namespace DynamicLibrary
 	# ifdef YUNI_OS_WINDOWS
 
 	// Specific implementation for the Windows platform
-	bool File::loadFromRawFilename(const char* filename, const File::Relocation, const File::Visibility)
+	bool File::loadFromRawFilename(const StringAdapter& filename, const File::Relocation, const File::Visibility)
 	{
 		// Unload the library if already loaded
 		unload();
 
-		if (filename)
+		if (filename.notEmpty())
 		{
 			// Loading
-			const unsigned int length = (unsigned int) strlen(filename);
-			if (!length)
+			WString<true> buffer(filename);
+			if (buffer.empty())
 				return false;
-			wchar_t* buffer = new wchar_t[length + 10];
-			buffer[0] = L'\\';
-			buffer[1] = L'\\';
-			buffer[2] = L'?';
-			buffer[3] = L'\\';
-			int n = MultiByteToWideChar(CP_UTF8, 0, filename, length, buffer + 4, length);
-			if (n <= 0)
-			{
-				delete[] buffer;
-				return false;
-			}
-			buffer[n] = L'\0';
 
-			pHandle = YUNI_DYNLIB_DLOPEN(buffer);
-			delete[] buffer;
+			pHandle = YUNI_DYNLIB_DLOPEN(buffer.c_str());
 			if (NullHandle != pHandle)
 			{
 				pFilename = filename;
@@ -203,22 +183,22 @@ namespace DynamicLibrary
 		return false;
 	}
 
-# else
+	# else
 
 	// Specific implementation for the Unix platforms
-	bool File::loadFromRawFilename(const char* filename, const File::Relocation r, const File::Visibility v)
+	bool File::loadFromRawFilename(const StringAdapter& filename, const File::Relocation r, const File::Visibility v)
 	{
 		// Unload the library if already loaded
 		unload();
 
-		if (filename)
+		if (filename.notEmpty())
 		{
 			// The mode
 			int mode = ((relocationLazy == r) ? RTLD_LAZY : RTLD_NOW);
 			if (visibilityDefault != v)
 				mode |= ((visibilityGlobal == v) ? RTLD_GLOBAL : RTLD_LOCAL);
 			// Loading
-			pHandle = YUNI_DYNLIB_DLOPEN(filename, mode);
+			pHandle = YUNI_DYNLIB_DLOPEN(filename.c_str(), mode);
 			if (NullHandle != pHandle)
 			{
 				pFilename = filename;
@@ -229,6 +209,8 @@ namespace DynamicLibrary
 	}
 
 # endif
+
+
 
 
 
