@@ -22,7 +22,7 @@ namespace Yuni
 	template<class StringT>
 	bool UUID::assign(const StringT& string)
 	{
-		YUNI_STATIC_ASSERT(Extension::IntoCString<StringT>::valid, InvalidString);
+		// YUNI_STATIC_ASSERT(Extension::IntoCString<StringT>::valid, InvalidString);
 		const char* cstr = Traits::CString<StringT>::Perform(string);
 		const unsigned int length = Traits::Length<StringT,unsigned int>::Value(string);
 

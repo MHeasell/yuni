@@ -26,6 +26,30 @@ namespace Policy
 	//@{
 
 	/*!
+	** \brief Helper class for retrieving the reference to the mutex in any situations
+	*/
+	template<class T>
+	class MutexExtractor
+	{
+	public:
+		static Mutex& Reference(const T& rhs)
+		{
+			return const_cast<Mutex&>(rhs.pMutex);
+		}
+	};
+
+	template<>
+	class MutexExtractor<Yuni::Mutex>
+	{
+	public:
+		static Mutex& Reference(const Mutex& rhs)
+		{
+			return const_cast<Mutex&>(rhs);
+		}
+	};
+
+
+	/*!
 	** \brief Implementation of the Threading Model policy in a single-threaded environnement
 	** \ingroup Policies
 	**
@@ -74,7 +98,6 @@ namespace Policy
 
 
 
-
 	/*!
 	** \brief Implementation of the Threading Model policy in a multi-threaded environnement (one mutex per object)
 	** \ingroup Policies
@@ -93,19 +116,19 @@ namespace Policy
 		class MutexLocker
 		{
 		public:
-			template<class C> MutexLocker(const C& h)
-				:pHostToLock(static_cast<const Host&>(h))
+			template<class C> MutexLocker(const C& h) :
+				pHostToLock(MutexExtractor<C>::Reference(h))
 			{
-				pHostToLock.pMutex.lock();
+				pHostToLock.lock();
 			}
-
+			
 			~MutexLocker()
 			{
-				pHostToLock.pMutex.unlock();
+				pHostToLock.unlock();
 			}
 
 		private:
-			const Host& pHostToLock;
+			Mutex& pHostToLock;
 		}; // class MutexLocker
 
 		/*!
@@ -130,6 +153,7 @@ namespace Policy
 	protected:
 		//! Mutex
 		mutable Mutex pMutex;
+		template<class> friend class MutexExtractor;
 
 	}; // class ObjectLevelLockable
 
@@ -153,19 +177,19 @@ namespace Policy
 		class MutexLocker
 		{
 		public:
-			template<class C> MutexLocker(const C& h)
-				:pHostToLock(static_cast<const Host&>(h))
+			template<class C> MutexLocker(const C& h) :
+				pHostToLock(MutexExtractor<C>::Reference(h))
 			{
-				pHostToLock.pMutex.lock();
+				pHostToLock.lock();
 			}
 
 			~MutexLocker()
 			{
-				pHostToLock.pMutex.unlock();
+				pHostToLock.unlock();
 			}
 
 		private:
-			const Host& pHostToLock;
+			Mutex& pHostToLock;
 		}; // class MutexLocker
 
 		/*!
@@ -190,6 +214,7 @@ namespace Policy
 	protected:
 		//! Mutex
 		mutable Mutex pMutex;
+		template<class> friend class MutexExtractor;
 
 	}; // class ObjectLevelLockableNotRecursive
 
