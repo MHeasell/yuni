@@ -19,7 +19,7 @@ namespace Variant
 		// Please use Yuni::String << bool
 		static bool Value(const bool& from, String& to)
 		{
-			to = (from) ? "True" : "False";
+			to = (from) ? "true" : "false";
 			return true;
 		}
 	};
@@ -46,6 +46,9 @@ namespace Variant
 		convertUsing(dc);
 		return dc.result;
 	}
+
+
+
 
 
 

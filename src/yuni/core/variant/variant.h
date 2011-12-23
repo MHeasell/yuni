@@ -56,12 +56,10 @@ namespace Yuni
 		void assign(const Variant& rhs);
 
 		//! Assignment from a simple type.
-		template <typename T>
-		void assign(const T& rhs);
+		template <typename T> void assign(const T& rhs);
 
 		//! Specific assignment from C strings
-		void assign(const char* rhs)
-		{ assign(String(rhs)); }
+		void assign(const char* rhs);
 
 		//! Resets the Variant to an empty one.
 		void clear();
@@ -78,7 +76,6 @@ namespace Yuni
 		//! \name Operator overloads
 		//@{
 		Variant & operator = (const Variant& rhs);
-
 		template <typename T>
 		Variant & operator = (const T& rhs);
 		//@}
@@ -98,9 +95,11 @@ namespace Yuni
 
 
 
+
+
+
 } // namespace Yuni
 
 # include "variant.hxx"
-
 
 #endif // __YUNI_CORE_VARIANT_VARIANT_H__
