@@ -16,10 +16,10 @@ namespace Yuni
 
 	void Variant::assign(const Variant& rhs)
 	{
-		if (pData)
-			delete pData;
+		delete pData;
 		pData = (rhs.pData) ? rhs.pData->clone() : NULL;
 	}
+
 
 	void Variant::clear()
 	{
@@ -30,5 +30,8 @@ namespace Yuni
 
 		}
 	}
+
+
+
 
 } // namespace Yuni

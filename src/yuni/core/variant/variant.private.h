@@ -24,10 +24,13 @@ namespace Variant
 
 		//! \name From- converters for base types
 		//@{
-		virtual bool convertFrom(const bool v) = 0;
-		virtual bool convertFrom(const int v) = 0;
-		virtual bool convertFrom(const float v) = 0;
-		virtual bool convertFrom(const double v) = 0;
+		virtual bool convertFrom(bool v) = 0;
+		virtual bool convertFrom(sint32 v) = 0;
+		virtual bool convertFrom(uint32 v) = 0;
+		virtual bool convertFrom(sint64 v) = 0;
+		virtual bool convertFrom(uint64 v) = 0;
+		virtual bool convertFrom(float v) = 0;
+		virtual bool convertFrom(double v) = 0;
 		virtual bool convertFrom(const String& v) = 0;
 		//@}
 
@@ -38,7 +41,7 @@ namespace Variant
 	/*!
 	** \brief The real convertor structure.
 	*/
-	template <typename From, typename To>
+	template<class From, class To>
 	struct Converter
 	{
 		static bool Value(const From& from, To& to)
@@ -49,7 +52,7 @@ namespace Variant
 	};
 
 	// Specialization to avoid warning from Visual Studio (C4800)
-	template <typename From>
+	template<class From>
 	struct Converter<From, bool>
 	{
 		static bool Value(const From& from, bool& to)
@@ -63,23 +66,32 @@ namespace Variant
 	/*!
 	** \brief Concrete DataConverter implementation
 	*/
-	template <typename TargetType>
+	template<class TargetType>
 	struct DataConverter : public IDataConverter
 	{
 	public:
 		DataConverter() : result()
 		{}
 
-		virtual bool convertFrom(const bool v)
+		virtual bool convertFrom(bool v)
 		{ return Converter<bool,TargetType>::Value(v, result); }
 
-		virtual bool convertFrom(const int v)
-		{ return Converter<int,TargetType>::Value(v, result); }
+		virtual bool convertFrom(sint32 v)
+		{ return Converter<sint32,TargetType>::Value(v, result); }
 
-		virtual bool convertFrom(const float v)
+		virtual bool convertFrom(uint32 v)
+		{ return Converter<uint32, TargetType>::Value(v, result); }
+
+		virtual bool convertFrom(sint64 v)
+		{ return Converter<sint32,TargetType>::Value(v, result); }
+
+		virtual bool convertFrom(uint64 v)
+		{ return Converter<uint32, TargetType>::Value(v, result); }
+
+		virtual bool convertFrom(float v)
 		{ return Converter<float,TargetType>::Value(v, result); }
 
-		virtual bool convertFrom(const double v)
+		virtual bool convertFrom(double v)
 		{ return Converter<double,TargetType>::Value(v, result); }
 
 		virtual bool convertFrom(const String& v)
@@ -108,8 +120,7 @@ namespace Variant
 		{}
 
 		//! Converts the data to the type T.
-		template <typename T>
-		T to() const;
+		template<class T> T to() const;
 
 		/*!
 		** \brief Clones the enclosed data
@@ -136,7 +147,7 @@ namespace Variant
 	**
 	** This is templated with the real data type.
 	*/
-	template <typename T>
+	template<class T>
 	class Data : public AData
 	{
 	public:
@@ -161,6 +172,8 @@ namespace Variant
 		T pValue;
 
 	}; // class Data
+
+
 
 
 
