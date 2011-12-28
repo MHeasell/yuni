@@ -7,10 +7,9 @@ namespace Yuni
 namespace Thread
 {
 
-
 	template<class T>
-	inline Array<T>::Array()
-		:pAutoStart(false)
+	inline Array<T>::Array() :
+		pAutoStart(false)
 	{}
 
 
@@ -24,8 +23,8 @@ namespace Thread
 
 
 	template<class T>
-	inline Array<T>::Array(unsigned int n)
-		:pAutoStart(false)
+	inline Array<T>::Array(unsigned int n) :
+		pAutoStart(false)
 	{
 		// Bound checks
 		if (n > maxThreadsLimit)
@@ -35,8 +34,8 @@ namespace Thread
 
 
 	template<class T>
-	inline Array<T>::Array(unsigned int n, bool autoStart)
-		:pAutoStart(autoStart)
+	inline Array<T>::Array(unsigned int n, bool autoStart) :
+		pAutoStart(autoStart)
 	{
 		// Bound checks
 		if (n > maxThreadsLimit)

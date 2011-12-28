@@ -35,8 +35,8 @@ namespace Yuni
 			}
 			else
 			{
-				char buffer[37];
-				for (unsigned int i = 0; i != 36; ++i)
+				char buffer[64]; // 8 Byte Stack Alignment
+				for (unsigned int i = 0; i != 64; ++i)
 					buffer[i] = cstr[i];
 				buffer[36] = '\0';
 				if (initializeFromCString(buffer))

@@ -51,7 +51,7 @@ namespace Process
 					const unsigned int csize = args[i].size();
 					const char* source = args[i].c_str();
 					char* target = new char[csize + 1];
-					memcpy(target, source, csize);
+					YUNI_MEMCPY(target, csize + 1, source, csize);
 					target[csize] = '\0';
 					pArguments[i] = target;
 				}

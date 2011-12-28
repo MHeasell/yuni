@@ -150,7 +150,7 @@ namespace Checksum
 					else
 					{
 						// not aligned
-						memcpy(xbuf, data, 64);
+						YUNI_MEMCPY(xbuf, 64, data, 64);
 						X = xbuf;
 					}
 				}
@@ -322,7 +322,7 @@ namespace Checksum
 			{
 				const unsigned int copy = (offset + nbytes > 64 ? 64 - offset : nbytes);
 
-				memcpy(pms->buf + offset, p, static_cast<size_t>(copy));
+				YUNI_MEMCPY(pms->buf + offset, sizeof(pms->buf) - offset, p, static_cast<size_t>(copy));
 				if (offset + copy < 64)
 					return;
 				p += copy;
@@ -336,7 +336,7 @@ namespace Checksum
 
 			// Process a final partial block
 			if (left)
-				memcpy(pms->buf, p, static_cast<size_t>(left));
+				YUNI_MEMCPY(pms->buf, sizeof(pms->buf), p, static_cast<size_t>(left));
 		}
 
 

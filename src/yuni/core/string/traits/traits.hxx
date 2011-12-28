@@ -26,7 +26,7 @@ namespace CStringImpl
 			{
 				capacity += zeroTerminated;
 				data = (C*)::malloc(sizeof(C) * capacity);
-				(void)::memcpy(const_cast<void*>(static_cast<const void*>(data)), rhs.data, sizeof(C) * size);
+				YUNI_MEMCPY(const_cast<void*>(static_cast<const void*>(data)), capacity, rhs.data, sizeof(C) * size);
 				if (zeroTerminated)
 					(const_cast<char*>(data))[size] = C();
 			}
@@ -55,7 +55,7 @@ namespace CStringImpl
 	Data<ChunkSizeT,ExpandableT,ZeroTerminatedT,C>::adapt(const char* const cstring)
 	{
 		data = const_cast<char*>(cstring);
-		capacity = size = (data ? ::strlen(data) : 0);
+		capacity = size = (data ? (Size)::strlen(data) : 0);
 	}
 
 
@@ -115,7 +115,7 @@ namespace CStringImpl
 		// Move the existing block of data
 		(void)::memmove(const_cast<char*>(data) + sizeof(C) * (offset + len), const_cast<char*>(data) + sizeof(C) * (offset), sizeof(C) * (size - offset));
 		// Copying the given buffer
-		(void)::memcpy (const_cast<char*>(data) + sizeof(C) * (offset), buffer, sizeof(C) * len);
+		YUNI_MEMCPY(const_cast<char*>(data) + sizeof(C) * (offset), capacity, buffer, sizeof(C) * len);
 		// Updating the size
 		size += len;
 		// zero-terminated
@@ -191,7 +191,7 @@ namespace CStringImpl
 			// The new blocksize is actually the capacity itself
 			// The capacity can not be null
 			// Raw copy
-			(void)::memcpy(const_cast<char*>(data), block, sizeof(C) * capacity);
+			YUNI_MEMCPY(const_cast<char*>(data), capacity, block, sizeof(C) * capacity);
 			// New size
 			size = capacity;
 			if (zeroTerminated)
@@ -201,7 +201,7 @@ namespace CStringImpl
 		// else
 		{
 			// Raw copy
-			(void)::memcpy(const_cast<char*>(data), block, sizeof(C) * blockSize);
+			YUNI_MEMCPY(const_cast<char*>(data), capacity, block, sizeof(C) * blockSize);
 			// New size
 			size = blockSize;
 			if (zeroTerminated)
@@ -230,7 +230,7 @@ namespace CStringImpl
 			if (!blockSize)
 				return 0;
 			// Raw copy
-			(void)::memcpy(data + size * sizeof(C), block, sizeof(C) * blockSize);
+			YUNI_MEMCPY(data + size * sizeof(C), capacity, block, sizeof(C) * blockSize);
 			// New size
 			size = capacity;
 			if (zeroTerminated)
@@ -240,7 +240,7 @@ namespace CStringImpl
 		// else
 		{
 			// Raw copy
-			(void)::memcpy(data + size * sizeof(C), block, sizeof(C) * blockSize);
+			YUNI_MEMCPY(data + size * sizeof(C), capacity, block, sizeof(C) * blockSize);
 			// New size
 			size += blockSize;
 			if (zeroTerminated)

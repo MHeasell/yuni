@@ -237,6 +237,10 @@ namespace Thread
 		void appendNThreadsWL(unsigned int n, bool autostart);
 
 	private:
+		# ifdef YUNI_OS_MSVC
+		class YUNI_DECL ThreadList; // see http://support.microsoft.com/kb/168958/en-us/
+		# endif
+
 		//! The list of threads in the pool
 		ThreadList pList;
 		//! Auto start thread (when created)

@@ -33,7 +33,7 @@ namespace IO
 		Yuni::IO::NodeType TypeOfStaticBuffer(const char* p, unsigned int len)
 		{
 			char path[1024];
-			(void)::memcpy(path, p, len * sizeof(char));
+			YUNI_MEMCPY(path, sizeof(path), p, len);
 			path[len] = '\0';
 			return Yuni::Private::IO::TypeOf(path, len);
 		}

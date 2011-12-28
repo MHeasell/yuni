@@ -15,7 +15,7 @@ namespace Job
 {
 
 	// forward declaration
-	class IJob;
+	class YUNI_DECL IJob;
 
 } // namespace Job
 } // namespace Yuni
