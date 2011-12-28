@@ -237,6 +237,10 @@ namespace Thread
 
 	Error IThread::stop(unsigned int timeout)
 	{
+		# ifdef YUNI_NO_THREAD_SAFE
+		(void) timeout;
+		# endif
+
 		# ifndef YUNI_NO_THREAD_SAFE
 		assert(timeout < 2147483648u && "Invalid range for timeout (IThread::stop(timeout))");
 		ThreadingPolicy::MutexLocker locker(*this);
