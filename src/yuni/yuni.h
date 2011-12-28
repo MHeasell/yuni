@@ -34,7 +34,7 @@ namespace Yuni
 # include "core/fwd.h"
 /* banned.h - SDL requirement */
 # ifdef YUNI_OS_MSVC
-#	include "core/system/vs-banned.h"
+//#	include "core/system/vs-banned.h"
 # endif
 
 # endif

@@ -47,7 +47,7 @@ namespace IO
 						if (iterateThroughPrefixes<true>(*i))
 							return true;
 					}
-					return outIsRawString ? false : pResultCount;
+					return outIsRawString ? false : (0 != pResultCount);
 				}
 			}
 

@@ -7,6 +7,11 @@
 
 
 # ifdef YUNI_OS_WINDOWS
+#	ifdef YUNI_OS_MSVC
+#		pragma warning(push)
+#		pragma warning(disable : 4995)
+#		pragma warning(push, 0)
+#	endif
 #	ifndef WIN32_LEAN_AND_MEAN
 #		define WIN32_LEAN_AND_MEAN 1
 #	endif
@@ -19,6 +24,9 @@
 #	include <stdlib.h>
 #	include <time.h>
 #	define __PRETTY_FUNCTION__ __FUNCDNAME__
+#	ifdef YUNI_OS_MSVC
+#		pragma warning(pop)
+#	endif
 # endif
 
 

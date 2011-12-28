@@ -93,7 +93,7 @@ namespace Yuni
 		*/
 		void clear();
 
-		//! Get if the UUID is null (e.g. 000000000-0000-0000-0000-0000000000000)
+		//! Get if the UUID is null (e.g. 000000000-0000-0000-0000-00000000000)
 		bool null() const;
 
 		/*!

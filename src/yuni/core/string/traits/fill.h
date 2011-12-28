@@ -34,7 +34,7 @@ namespace CString
 			typename CStringT::Size p = 0;
 			while (p + patternSize <= size)
 			{
-				(void)::memcpy(data + p, cstr, patternSize * sizeof(char));
+				YUNI_MEMCPY(data + p, patternSize * sizeof(char), cstr, patternSize * sizeof(char));
 				p += patternSize;
 			}
 			for (; p < size; ++p)
@@ -53,6 +53,7 @@ namespace CString
 				data[i] = rhs;
 		}
 	};
+
 
 
 

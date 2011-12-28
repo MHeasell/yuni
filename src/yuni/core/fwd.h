@@ -12,15 +12,15 @@ namespace Yuni
 
 
 	//! Type for a default behavior / policy
-	struct Default {};
+	struct YUNI_DECL Default {};
 
 	//! Absence Option
-	struct None {};
+	struct YUNI_DECL None {};
 
 
 	// Forward declaration for the base class String
 	template<unsigned int ChunkSizeT = 128, bool ExpandableT = true, bool ZeroTerminatedT = true>
-	class CString;
+	class YUNI_DECL CString;
 
 
 } // namespace Yuni

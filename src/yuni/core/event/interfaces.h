@@ -39,7 +39,7 @@ namespace Yuni
 	** \brief
 	** \ingroup Events
 	*/
-	class IEvent
+	class YUNI_DECL IEvent
 	{
 	public:
 		//! IEvent list
@@ -69,7 +69,7 @@ namespace Yuni
 
 
 
-	class IEventObserverBase
+	class YUNI_DECL IEventObserverBase
 	{
 	public:
 		IEventObserverBase() {}
@@ -110,8 +110,8 @@ namespace Yuni
 
 
 	template<class Derived, template<class> class TP = Policy::ObjectLevelLockable>
-	class IEventObserver
-		: public IEventObserverBase, public TP<IEventObserver<Derived,TP> >
+	class YUNI_DECL IEventObserver :
+		public IEventObserverBase, public TP<IEventObserver<Derived,TP> >
 	{
 	public:
 		//! Type of the Event observer

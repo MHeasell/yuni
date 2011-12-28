@@ -80,7 +80,7 @@ namespace Directory
 	bool ChangeCurrentDirectoryNotZeroTerminated(const char* path, unsigned int length)
 	{
 		char* p = new char[length * sizeof(char) + 1];
-		(void)::memcpy(p, path, length);
+		YUNI_MEMCPY(p, length * sizeof(char) + 1, path, length);
 		p[length] = '\0';
 		const bool r = ChangeCurrentDirectory(p, length);
 		delete[] p;

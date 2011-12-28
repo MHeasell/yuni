@@ -161,11 +161,17 @@ namespace CString
 		template<class StringT> static bool Perform(const StringT& s, char*& out)
 		{
 			if (StringT::zeroTerminated)
+			{
 				// We have to copy the final zero in the same time
-				(void)::memcpy(out, s.data(), (N-1) < s.sizeInBytes() ? N : s.sizeInBytes() + 1);
+				size_t length = (N-1) < s.sizeInBytes() ? N : s.sizeInBytes() + 1;
+				YUNI_MEMCPY(out, length, s.data(), length);
+			}
 			else
+			{
 				// The N char can be used
-				(void)::memcpy(out, s.data(), (N) < s.sizeInBytes() ? N : s.sizeInBytes());
+				size_t length = (N) < s.sizeInBytes() ? N : s.sizeInBytes();
+				YUNI_MEMCPY(out, length, s.data(), length);
+			}
 			return true;
 		}
 
@@ -271,12 +277,12 @@ namespace CString
 			{ \
 				if (s.size() < bufferSize) \
 				{ \
-					(void)::memcpy(buffer, s.data(), s.size()); \
+					YUNI_MEMCPY(buffer, bufferSize, s.data(), s.size()); \
 					buffer[s.size()] = '\0'; \
 				} \
 				else \
 				{ \
-					(void)::memcpy(buffer, s.data(), bufferSize - 1); \
+					YUNI_MEMCPY(buffer, bufferSize, s.data(), bufferSize - 1); \
 					buffer[bufferSize - 1] = '\0'; \
 				} \
 				const char* p = AutoDetectBaseNumber::Value(buffer, s.size(), base); \
@@ -302,12 +308,12 @@ namespace CString
 			{ \
 				if (s.size() < bufferSize) \
 				{ \
-					(void)::memcpy(buffer, s.data(), s.size()); \
+					YUNI_MEMCPY(buffer, bufferSize, s.data(), s.size()); \
 					buffer[s.size()] = '\0'; \
 				} \
 				else \
 				{ \
-					(void)::memcpy(buffer, s.data(), bufferSize - 1); \
+					YUNI_MEMCPY(buffer, bufferSize, s.data(), bufferSize - 1); \
 					buffer[bufferSize - 1] = '\0'; \
 				} \
 				const char* p = AutoDetectBaseNumber::Value(buffer, s.size(), base); \
@@ -372,12 +378,12 @@ namespace CString
 				{
 					if (s.size() < bufferSize)
 					{
-						memcpy(buffer, s.data(), s.size());
+						YUNI_MEMCPY(buffer, bufferSize, s.data(), s.size());
 						buffer[s.size()] = '\0';
 					}
 					else
 					{
-						memcpy(buffer, s.data(), bufferSize - 1);
+						YUNI_MEMCPY(buffer, bufferSize, s.data(), bufferSize - 1);
 						buffer[bufferSize - 1] = '\0';
 					}
 					cstr = buffer;
@@ -408,12 +414,12 @@ namespace CString
 				{
 					if (s.size() < bufferSize)
 					{
-						memcpy(buffer, s.data(), s.size());
+						YUNI_MEMCPY(buffer, bufferSize, s.data(), s.size());
 						buffer[s.size()] = '\0';
 					}
 					else
 					{
-						memcpy(buffer, s.data(), bufferSize - 1);
+						YUNI_MEMCPY(buffer, bufferSize, s.data(), bufferSize - 1);
 						buffer[bufferSize - 1] = '\0';
 					}
 					cstr = buffer;
@@ -454,12 +460,12 @@ namespace CString
 				{
 					if (s.size() < bufferSize)
 					{
-						memcpy(buffer, s.data(), s.size());
+						YUNI_MEMCPY(buffer, bufferSize, s.data(), s.size());
 						buffer[s.size()] = '\0';
 					}
 					else
 					{
-						memcpy(buffer, s.data(), bufferSize - 1);
+						YUNI_MEMCPY(buffer, bufferSize, s.data(), bufferSize - 1);
 						buffer[bufferSize - 1] = '\0';
 					}
 					cstr = buffer;
@@ -485,12 +491,12 @@ namespace CString
 				{
 					if (s.size() < bufferSize)
 					{
-						memcpy(buffer, s.data(), s.size());
+						YUNI_MEMCPY(buffer, bufferSize, s.data(), s.size());
 						buffer[s.size()] = '\0';
 					}
 					else
 					{
-						memcpy(buffer, s.data(), bufferSize - 1);
+						YUNI_MEMCPY(buffer, bufferSize, s.data(), bufferSize - 1);
 						buffer[bufferSize - 1] = '\0';
 					}
 					cstr = buffer;

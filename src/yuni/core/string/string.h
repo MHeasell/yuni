@@ -8,15 +8,28 @@
 # include "../traits/length.h"
 # include "../smartptr.h"
 
+# ifdef YUNI_OS_MSVC
+#	pragma warning(push)
+#	pragma warning(disable : 4995)
+#	pragma warning(push, 0)
+# endif
+
 # include <cstdio>
 # ifdef YUNI_HAS_STDARG_H
 #	include <stdarg.h>
 # endif
+
 # include <string>
+
+
 # ifdef YUNI_HAS_VECTOR
 #	include <vector>
 # endif
 # include <list>
+
+# ifdef YUNI_OS_MSVC
+#	pragma warning(pop)
+# endif
 
 # include "utf8char.h"
 # include "../iterator.h"
@@ -33,10 +46,10 @@ namespace Yuni
 {
 
 	//! Standard string implementation
-	typedef CString<> String;
+	typedef YUNI_DECL CString<> String;
 
 	//! Character Large Object
-	typedef CString<4096>  Clob;
+	typedef YUNI_DECL CString<4096>  Clob;
 
 
 

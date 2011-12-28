@@ -32,7 +32,7 @@ namespace Atomic
 		int Size = 8 * sizeof(int), /* 32 or 64Bits */          // Size in Bits of the scalar type
 		template<class> class TP = Policy::ObjectLevelLockable  // The threading policy
 		>
-	class Int YUNI_ATOMIC_INHERITS
+	class YUNI_DECL  Int YUNI_ATOMIC_INHERITS
 	{
 	public:
 		enum

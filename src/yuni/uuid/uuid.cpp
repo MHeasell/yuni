@@ -12,7 +12,6 @@
 namespace Yuni
 {
 
-
 	void UUID::generate()
 	{
 		assert(sizeof(StorageType) == 16 && "Invalid storage size for uuid");
@@ -39,7 +38,9 @@ namespace Yuni
 		wchar_t buffer[39];
 		::StringFromGUID2(*(::GUID*)pValue.cstring, buffer, 39);
 		// Convert to non-wide string, and cut the prepended and appended braces
-		::wcstombs(cstring, buffer + 1, 36);
+		size_t converted = 0;
+		if (::wcstombs_s(&converted, cstring, 36, buffer + 1, 36))
+			strcpy_s(cstring, 36, "000000000-0000-0000-0000-00000000000");
 		// Do not forget the null terminator
 		cstring[36] = '\0';
 		# endif

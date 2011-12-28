@@ -123,7 +123,7 @@ namespace CStringImpl
 			// Making sure that we have enough space
 			reserve(blockSize + zeroTerminated);
 			// Raw copy
-			(void)::memcpy(const_cast<char*>(data), block, sizeof(C) * blockSize);
+			YUNI_MEMCPY(const_cast<char*>(data), capacity, block, sizeof(C) * blockSize);
 			// New size
 			size = blockSize;
 			if (zeroTerminated)
@@ -137,7 +137,7 @@ namespace CStringImpl
 			// Making sure that we have enough space
 			reserve(size + blockSize + zeroTerminated);
 			// Raw copy
-			(void)::memcpy(const_cast<char*>(data) + size * sizeof(C), block, blockSize * sizeof(C));
+			YUNI_MEMCPY(const_cast<char*>(data) + size * sizeof(C), capacity, block, blockSize * sizeof(C));
 			// New size
 			size += blockSize;
 			if (zeroTerminated)
@@ -224,18 +224,18 @@ namespace CStringImpl
 		};
 
 	public:
-		Data()
-			:size(0)
+		Data() :
+			size(0)
 		{
 			// The buffer must be properly initialized
 			if (zeroTerminated)
 				data[0] = C();
 		}
 
-		Data(const Data& rhs)
-			:size(rhs.size)
+		Data(const Data& rhs) :
+			size(rhs.size)
 		{
-			(void)::memcpy(data, rhs.data, sizeof(C) * (size + zeroTerminated));
+			YUNI_MEMCPY(data, capacity, rhs.data, sizeof(C) * (size + zeroTerminated));
 		}
 
 		void clear()
@@ -280,7 +280,7 @@ namespace CStringImpl
 			if (offset + len >= capacity)
 			{
 				// The new buffer will take the whole space
-				(void)::memcpy(data + sizeof(C) * (offset), buffer, sizeof(C) * (capacity - offset));
+				YUNI_MEMCPY(data + sizeof(C) * (offset), capacity - offset, buffer, sizeof(C) * (capacity - offset));
 				size = capacity;
 				if (zeroTerminated)
 					data[capacity] = C();
@@ -291,7 +291,7 @@ namespace CStringImpl
 				// Move the existing block of data
 				(void)::memmove(data + sizeof(C) * (offset + len), data + sizeof(C) * (offset), sizeof(C) * (size - offset));
 				// Copying the given buffer
-				(void)::memcpy (data + sizeof(C) * (offset), buffer, sizeof(C) * len);
+				YUNI_MEMCPY (data + sizeof(C) * (offset), capacity, buffer, sizeof(C) * len);
 				// Updating the size
 				size += len;
 				// zero-terminated
@@ -303,7 +303,7 @@ namespace CStringImpl
 				// Move the existing block of data
 				(void)::memmove(data + sizeof(C) * (offset + len), data + sizeof(C) * (offset), sizeof(C) * (capacity - offset - len));
 				// Copying the given buffer
-				(void)::memcpy (data + sizeof(C) * (offset), buffer, sizeof(C) * len);
+				YUNI_MEMCPY(data + sizeof(C) * (offset), capacity, buffer, sizeof(C) * len);
 				// Updating the size
 				size = capacity;
 				// zero-terminated

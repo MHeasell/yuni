@@ -2070,9 +2070,9 @@ namespace Yuni
 		if (offset < AncestorType::size && size)
 		{
 			if (offset + size > AncestorType::size)
-				(void)::memcpy(AncestorType::data + offset, cstr, sizeof(Char) * (AncestorType::size - offset));
+				YUNI_MEMCPY(AncestorType::data + offset, AncestorType::capacity, cstr, sizeof(Char) * (AncestorType::size - offset));
 			else
-				(void)::memcpy(AncestorType::data + offset, cstr, sizeof(Char) * size);
+				YUNI_MEMCPY(AncestorType::data + offset, AncestorType::capacity, cstr, sizeof(Char) * size);
 		}
 	}
 
@@ -3042,9 +3042,9 @@ namespace Yuni
 				while (offset < AncestorType::size)
 				{
 					if (seglen + offset > AncestorType::size)
-						(void)::memcpy(AncestorType::data + offset, AncestorType::data, AncestorType::size - offset);
+						YUNI_MEMCPY(AncestorType::data + offset, AncestorType::capacity, AncestorType::data, AncestorType::size - offset);
 					else
-						(void)::memcpy(AncestorType::data + offset, AncestorType::data, seglen);
+						YUNI_MEMCPY(AncestorType::data + offset, AncestorType::capacity, AncestorType::data, seglen);
 					offset += seglen;
 				}
 			}

@@ -189,7 +189,7 @@ namespace DynamicLibrary
 		if (filename.notEmpty())
 		{
 			// Loading
-			WString<true> buffer(filename);
+			Private::WString<true> buffer(filename);
 			if (buffer.empty())
 				return false;
 

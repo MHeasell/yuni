@@ -350,4 +350,13 @@ namespace System
 # endif
 
 
+
+
+/* Memcopy*/
+# ifdef YUNI_OS_MSVC
+#	define YUNI_MEMCPY(dst, dstsize, source, count)   memcpy_s(dst, (size_t)dstsize, source, (size_t)count)
+# else
+#	define YUNI_MEMCPY(dst, dstsize, source, count)   memcpy(dst, source, (size_t)count)
+# endif
+
 #endif /* __YUNI_PREPROCESSOR_OS_DETECTION_H__ */
