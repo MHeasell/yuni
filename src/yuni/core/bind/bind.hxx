@@ -24,8 +24,8 @@ namespace Yuni
 
 	// Constructor
 	template<class R>
-	inline Bind<R (), void>::Bind(const Bind<R (), void>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (), void>::Bind(const Bind<R (), void>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -34,6 +34,23 @@ namespace Yuni
 	inline Bind<R (), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class R>
+	inline Bind<R (), void>::Bind(R (*pointer)())
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class R>
+	template<class C>
+	inline Bind<R (), void>::Bind(C* c, R (C::*member)())
+	{
+		bind(c, member);
 	}
 
 
@@ -356,8 +373,8 @@ namespace Yuni
 
 	// Constructor
 	template<class R>
-	inline Bind<R (*)(), void>::Bind(const Bind<R (*)(), void>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (*)(), void>::Bind(const Bind<R (*)(), void>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -366,6 +383,23 @@ namespace Yuni
 	inline Bind<R (*)(), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class R>
+	inline Bind<R (*)(), void>::Bind(R (*pointer)())
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class R>
+	template<class C>
+	inline Bind<R (*)(), void>::Bind(C* c, R (C::*member)())
+	{
+		bind(c, member);
 	}
 
 
@@ -688,8 +722,8 @@ namespace Yuni
 
 	// Constructor
 	template<class ClassT, class R>
-	inline Bind<R (ClassT::*)(), ClassT>::Bind(const Bind<R (ClassT::*)(), ClassT>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (ClassT::*)(), ClassT>::Bind(const Bind<R (ClassT::*)(), ClassT>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -698,6 +732,23 @@ namespace Yuni
 	inline Bind<R (ClassT::*)(), ClassT>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class ClassT, class R>
+	inline Bind<R (ClassT::*)(), ClassT>::Bind(R (*pointer)())
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class ClassT, class R>
+	template<class C>
+	inline Bind<R (ClassT::*)(), ClassT>::Bind(C* c, R (C::*member)())
+	{
+		bind(c, member);
 	}
 
 
@@ -1020,8 +1071,8 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0>
-	inline Bind<R (A0), void>::Bind(const Bind<R (A0), void>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (A0), void>::Bind(const Bind<R (A0), void>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -1030,6 +1081,23 @@ namespace Yuni
 	inline Bind<R (A0), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class R, class A0>
+	inline Bind<R (A0), void>::Bind(R (*pointer)(A0))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class R, class A0>
+	template<class C>
+	inline Bind<R (A0), void>::Bind(C* c, R (C::*member)(A0))
+	{
+		bind(c, member);
 	}
 
 
@@ -1352,8 +1420,8 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0>
-	inline Bind<R (*)(A0), void>::Bind(const Bind<R (*)(A0), void>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (*)(A0), void>::Bind(const Bind<R (*)(A0), void>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -1362,6 +1430,23 @@ namespace Yuni
 	inline Bind<R (*)(A0), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class R, class A0>
+	inline Bind<R (*)(A0), void>::Bind(R (*pointer)(A0))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class R, class A0>
+	template<class C>
+	inline Bind<R (*)(A0), void>::Bind(C* c, R (C::*member)(A0))
+	{
+		bind(c, member);
 	}
 
 
@@ -1684,8 +1769,8 @@ namespace Yuni
 
 	// Constructor
 	template<class ClassT, class R, class A0>
-	inline Bind<R (ClassT::*)(A0), ClassT>::Bind(const Bind<R (ClassT::*)(A0), ClassT>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (ClassT::*)(A0), ClassT>::Bind(const Bind<R (ClassT::*)(A0), ClassT>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -1694,6 +1779,23 @@ namespace Yuni
 	inline Bind<R (ClassT::*)(A0), ClassT>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class ClassT, class R, class A0>
+	inline Bind<R (ClassT::*)(A0), ClassT>::Bind(R (*pointer)(A0))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class ClassT, class R, class A0>
+	template<class C>
+	inline Bind<R (ClassT::*)(A0), ClassT>::Bind(C* c, R (C::*member)(A0))
+	{
+		bind(c, member);
 	}
 
 
@@ -2016,8 +2118,8 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1>
-	inline Bind<R (A0, A1), void>::Bind(const Bind<R (A0, A1), void>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (A0, A1), void>::Bind(const Bind<R (A0, A1), void>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -2026,6 +2128,23 @@ namespace Yuni
 	inline Bind<R (A0, A1), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class R, class A0, class A1>
+	inline Bind<R (A0, A1), void>::Bind(R (*pointer)(A0, A1))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class R, class A0, class A1>
+	template<class C>
+	inline Bind<R (A0, A1), void>::Bind(C* c, R (C::*member)(A0, A1))
+	{
+		bind(c, member);
 	}
 
 
@@ -2349,8 +2468,8 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1>
-	inline Bind<R (*)(A0, A1), void>::Bind(const Bind<R (*)(A0, A1), void>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (*)(A0, A1), void>::Bind(const Bind<R (*)(A0, A1), void>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -2359,6 +2478,23 @@ namespace Yuni
 	inline Bind<R (*)(A0, A1), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class R, class A0, class A1>
+	inline Bind<R (*)(A0, A1), void>::Bind(R (*pointer)(A0, A1))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class R, class A0, class A1>
+	template<class C>
+	inline Bind<R (*)(A0, A1), void>::Bind(C* c, R (C::*member)(A0, A1))
+	{
+		bind(c, member);
 	}
 
 
@@ -2682,8 +2818,8 @@ namespace Yuni
 
 	// Constructor
 	template<class ClassT, class R, class A0, class A1>
-	inline Bind<R (ClassT::*)(A0, A1), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1), ClassT>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (ClassT::*)(A0, A1), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1), ClassT>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -2692,6 +2828,23 @@ namespace Yuni
 	inline Bind<R (ClassT::*)(A0, A1), ClassT>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class ClassT, class R, class A0, class A1>
+	inline Bind<R (ClassT::*)(A0, A1), ClassT>::Bind(R (*pointer)(A0, A1))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class ClassT, class R, class A0, class A1>
+	template<class C>
+	inline Bind<R (ClassT::*)(A0, A1), ClassT>::Bind(C* c, R (C::*member)(A0, A1))
+	{
+		bind(c, member);
 	}
 
 
@@ -3015,8 +3168,8 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2>
-	inline Bind<R (A0, A1, A2), void>::Bind(const Bind<R (A0, A1, A2), void>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (A0, A1, A2), void>::Bind(const Bind<R (A0, A1, A2), void>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -3025,6 +3178,23 @@ namespace Yuni
 	inline Bind<R (A0, A1, A2), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class R, class A0, class A1, class A2>
+	inline Bind<R (A0, A1, A2), void>::Bind(R (*pointer)(A0, A1, A2))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class R, class A0, class A1, class A2>
+	template<class C>
+	inline Bind<R (A0, A1, A2), void>::Bind(C* c, R (C::*member)(A0, A1, A2))
+	{
+		bind(c, member);
 	}
 
 
@@ -3348,8 +3518,8 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2>
-	inline Bind<R (*)(A0, A1, A2), void>::Bind(const Bind<R (*)(A0, A1, A2), void>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (*)(A0, A1, A2), void>::Bind(const Bind<R (*)(A0, A1, A2), void>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -3358,6 +3528,23 @@ namespace Yuni
 	inline Bind<R (*)(A0, A1, A2), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class R, class A0, class A1, class A2>
+	inline Bind<R (*)(A0, A1, A2), void>::Bind(R (*pointer)(A0, A1, A2))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class R, class A0, class A1, class A2>
+	template<class C>
+	inline Bind<R (*)(A0, A1, A2), void>::Bind(C* c, R (C::*member)(A0, A1, A2))
+	{
+		bind(c, member);
 	}
 
 
@@ -3681,8 +3868,8 @@ namespace Yuni
 
 	// Constructor
 	template<class ClassT, class R, class A0, class A1, class A2>
-	inline Bind<R (ClassT::*)(A0, A1, A2), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2), ClassT>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (ClassT::*)(A0, A1, A2), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2), ClassT>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -3691,6 +3878,23 @@ namespace Yuni
 	inline Bind<R (ClassT::*)(A0, A1, A2), ClassT>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class ClassT, class R, class A0, class A1, class A2>
+	inline Bind<R (ClassT::*)(A0, A1, A2), ClassT>::Bind(R (*pointer)(A0, A1, A2))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2>
+	template<class C>
+	inline Bind<R (ClassT::*)(A0, A1, A2), ClassT>::Bind(C* c, R (C::*member)(A0, A1, A2))
+	{
+		bind(c, member);
 	}
 
 
@@ -4014,8 +4218,8 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3>
-	inline Bind<R (A0, A1, A2, A3), void>::Bind(const Bind<R (A0, A1, A2, A3), void>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (A0, A1, A2, A3), void>::Bind(const Bind<R (A0, A1, A2, A3), void>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -4024,6 +4228,23 @@ namespace Yuni
 	inline Bind<R (A0, A1, A2, A3), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3>
+	inline Bind<R (A0, A1, A2, A3), void>::Bind(R (*pointer)(A0, A1, A2, A3))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3>
+	template<class C>
+	inline Bind<R (A0, A1, A2, A3), void>::Bind(C* c, R (C::*member)(A0, A1, A2, A3))
+	{
+		bind(c, member);
 	}
 
 
@@ -4348,8 +4569,8 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3>
-	inline Bind<R (*)(A0, A1, A2, A3), void>::Bind(const Bind<R (*)(A0, A1, A2, A3), void>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (*)(A0, A1, A2, A3), void>::Bind(const Bind<R (*)(A0, A1, A2, A3), void>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -4358,6 +4579,23 @@ namespace Yuni
 	inline Bind<R (*)(A0, A1, A2, A3), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3>
+	inline Bind<R (*)(A0, A1, A2, A3), void>::Bind(R (*pointer)(A0, A1, A2, A3))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3>
+	template<class C>
+	inline Bind<R (*)(A0, A1, A2, A3), void>::Bind(C* c, R (C::*member)(A0, A1, A2, A3))
+	{
+		bind(c, member);
 	}
 
 
@@ -4682,8 +4920,8 @@ namespace Yuni
 
 	// Constructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -4692,6 +4930,23 @@ namespace Yuni
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::Bind(R (*pointer)(A0, A1, A2, A3))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3>
+	template<class C>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::Bind(C* c, R (C::*member)(A0, A1, A2, A3))
+	{
+		bind(c, member);
 	}
 
 
@@ -5016,8 +5271,8 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4>
-	inline Bind<R (A0, A1, A2, A3, A4), void>::Bind(const Bind<R (A0, A1, A2, A3, A4), void>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (A0, A1, A2, A3, A4), void>::Bind(const Bind<R (A0, A1, A2, A3, A4), void>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -5026,6 +5281,23 @@ namespace Yuni
 	inline Bind<R (A0, A1, A2, A3, A4), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	inline Bind<R (A0, A1, A2, A3, A4), void>::Bind(R (*pointer)(A0, A1, A2, A3, A4))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	template<class C>
+	inline Bind<R (A0, A1, A2, A3, A4), void>::Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4))
+	{
+		bind(c, member);
 	}
 
 
@@ -5350,8 +5622,8 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4>
-	inline Bind<R (*)(A0, A1, A2, A3, A4), void>::Bind(const Bind<R (*)(A0, A1, A2, A3, A4), void>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (*)(A0, A1, A2, A3, A4), void>::Bind(const Bind<R (*)(A0, A1, A2, A3, A4), void>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -5360,6 +5632,23 @@ namespace Yuni
 	inline Bind<R (*)(A0, A1, A2, A3, A4), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	inline Bind<R (*)(A0, A1, A2, A3, A4), void>::Bind(R (*pointer)(A0, A1, A2, A3, A4))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4>
+	template<class C>
+	inline Bind<R (*)(A0, A1, A2, A3, A4), void>::Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4))
+	{
+		bind(c, member);
 	}
 
 
@@ -5684,8 +5973,8 @@ namespace Yuni
 
 	// Constructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -5694,6 +5983,23 @@ namespace Yuni
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::Bind(R (*pointer)(A0, A1, A2, A3, A4))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
+	template<class C>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4))
+	{
+		bind(c, member);
 	}
 
 
@@ -6018,8 +6324,8 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	inline Bind<R (A0, A1, A2, A3, A4, A5), void>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5), void>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (A0, A1, A2, A3, A4, A5), void>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5), void>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -6028,6 +6334,23 @@ namespace Yuni
 	inline Bind<R (A0, A1, A2, A3, A4, A5), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline Bind<R (A0, A1, A2, A3, A4, A5), void>::Bind(R (*pointer)(A0, A1, A2, A3, A4, A5))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	template<class C>
+	inline Bind<R (A0, A1, A2, A3, A4, A5), void>::Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5))
+	{
+		bind(c, member);
 	}
 
 
@@ -6353,8 +6676,8 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::Bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5), void>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::Bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5), void>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -6363,6 +6686,23 @@ namespace Yuni
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::Bind(R (*pointer)(A0, A1, A2, A3, A4, A5))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	template<class C>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5))
+	{
+		bind(c, member);
 	}
 
 
@@ -6688,8 +7028,8 @@ namespace Yuni
 
 	// Constructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -6698,6 +7038,23 @@ namespace Yuni
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::Bind(R (*pointer)(A0, A1, A2, A3, A4, A5))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	template<class C>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5))
+	{
+		bind(c, member);
 	}
 
 
@@ -7023,8 +7380,8 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6), void>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6), void>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -7033,6 +7390,23 @@ namespace Yuni
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	template<class C>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6))
+	{
+		bind(c, member);
 	}
 
 
@@ -7358,8 +7732,8 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::Bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::Bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -7368,6 +7742,23 @@ namespace Yuni
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	template<class C>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6))
+	{
+		bind(c, member);
 	}
 
 
@@ -7693,8 +8084,8 @@ namespace Yuni
 
 	// Constructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -7703,6 +8094,23 @@ namespace Yuni
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	template<class C>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6))
+	{
+		bind(c, member);
 	}
 
 
@@ -8028,8 +8436,8 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -8038,6 +8446,23 @@ namespace Yuni
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	template<class C>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7))
+	{
+		bind(c, member);
 	}
 
 
@@ -8364,8 +8789,8 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::Bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::Bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -8374,6 +8799,23 @@ namespace Yuni
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	template<class C>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7))
+	{
+		bind(c, member);
 	}
 
 
@@ -8700,8 +9142,8 @@ namespace Yuni
 
 	// Constructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -8710,6 +9152,23 @@ namespace Yuni
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	template<class C>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7))
+	{
+		bind(c, member);
 	}
 
 
@@ -9036,8 +9495,8 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -9046,6 +9505,23 @@ namespace Yuni
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	template<class C>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8))
+	{
+		bind(c, member);
 	}
 
 
@@ -9372,8 +9848,8 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::Bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::Bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -9382,6 +9858,23 @@ namespace Yuni
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	template<class C>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8))
+	{
+		bind(c, member);
 	}
 
 
@@ -9708,8 +10201,8 @@ namespace Yuni
 
 	// Constructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -9718,6 +10211,23 @@ namespace Yuni
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	template<class C>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8))
+	{
+		bind(c, member);
 	}
 
 
@@ -10044,8 +10554,8 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -10054,6 +10564,23 @@ namespace Yuni
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	template<class C>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9))
+	{
+		bind(c, member);
 	}
 
 
@@ -10381,8 +10908,8 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::Bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::Bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -10391,6 +10918,23 @@ namespace Yuni
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	template<class C>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9))
+	{
+		bind(c, member);
 	}
 
 
@@ -10718,8 +11262,8 @@ namespace Yuni
 
 	// Constructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -10728,6 +11272,23 @@ namespace Yuni
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	template<class C>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9))
+	{
+		bind(c, member);
 	}
 
 
@@ -11055,8 +11616,8 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -11065,6 +11626,23 @@ namespace Yuni
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	template<class C>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10))
+	{
+		bind(c, member);
 	}
 
 
@@ -11392,8 +11970,8 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::Bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::Bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -11402,6 +11980,23 @@ namespace Yuni
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	template<class C>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10))
+	{
+		bind(c, member);
 	}
 
 
@@ -11729,8 +12324,8 @@ namespace Yuni
 
 	// Constructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -11739,6 +12334,23 @@ namespace Yuni
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	template<class C>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10))
+	{
+		bind(c, member);
 	}
 
 
@@ -12066,8 +12678,8 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -12076,6 +12688,23 @@ namespace Yuni
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	template<class C>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11))
+	{
+		bind(c, member);
 	}
 
 
@@ -12404,8 +13033,8 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::Bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::Bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -12414,6 +13043,23 @@ namespace Yuni
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	template<class C>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11))
+	{
+		bind(c, member);
 	}
 
 
@@ -12742,8 +13388,8 @@ namespace Yuni
 
 	// Constructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -12752,6 +13398,23 @@ namespace Yuni
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	template<class C>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11))
+	{
+		bind(c, member);
 	}
 
 
@@ -13080,8 +13743,8 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -13090,6 +13753,23 @@ namespace Yuni
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	template<class C>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12))
+	{
+		bind(c, member);
 	}
 
 
@@ -13418,8 +14098,8 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::Bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::Bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -13428,6 +14108,23 @@ namespace Yuni
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	template<class C>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12))
+	{
+		bind(c, member);
 	}
 
 
@@ -13756,8 +14453,8 @@ namespace Yuni
 
 	// Constructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -13766,6 +14463,23 @@ namespace Yuni
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	template<class C>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12))
+	{
+		bind(c, member);
 	}
 
 
@@ -14094,8 +14808,8 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -14104,6 +14818,23 @@ namespace Yuni
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	template<class C>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13))
+	{
+		bind(c, member);
 	}
 
 
@@ -14433,8 +15164,8 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::Bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::Bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -14443,6 +15174,23 @@ namespace Yuni
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	template<class C>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13))
+	{
+		bind(c, member);
 	}
 
 
@@ -14772,8 +15520,8 @@ namespace Yuni
 
 	// Constructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -14782,6 +15530,23 @@ namespace Yuni
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	template<class C>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13))
+	{
+		bind(c, member);
 	}
 
 
@@ -15111,8 +15876,8 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -15121,6 +15886,23 @@ namespace Yuni
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	template<class C>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14))
+	{
+		bind(c, member);
 	}
 
 
@@ -15450,8 +16232,8 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::Bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::Bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -15460,6 +16242,23 @@ namespace Yuni
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	template<class C>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14))
+	{
+		bind(c, member);
 	}
 
 
@@ -15789,8 +16588,8 @@ namespace Yuni
 
 	// Constructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -15799,6 +16598,23 @@ namespace Yuni
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	template<class C>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14))
+	{
+		bind(c, member);
 	}
 
 
@@ -16128,8 +16944,8 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::Bind(const Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -16138,6 +16954,23 @@ namespace Yuni
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	template<class C>
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15))
+	{
+		bind(c, member);
 	}
 
 
@@ -16468,8 +17301,8 @@ namespace Yuni
 
 	// Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::Bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::Bind(const Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -16478,6 +17311,23 @@ namespace Yuni
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	template<class C>
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15))
+	{
+		bind(c, member);
 	}
 
 
@@ -16808,8 +17658,8 @@ namespace Yuni
 
 	// Constructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::Bind(const Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -16818,6 +17668,23 @@ namespace Yuni
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	template<class C>
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15))
+	{
+		bind(c, member);
 	}
 
 

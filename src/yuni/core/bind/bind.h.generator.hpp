@@ -188,10 +188,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(<%=generator.list(i)%>));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(<%=generator.list(i)%>));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -201,7 +210,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(<%=generator.list(i)%>));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -246,7 +254,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(<%=generator.list(i)%>) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data

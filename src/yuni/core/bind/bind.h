@@ -95,7 +95,7 @@ namespace Yuni
 	** \tparam P The prototype of the targetted function/member
 	*/
 	template<class P = void (), class Dummy = void>
-	class Bind
+	class YUNI_DECL Bind
 	{
 	public:
 		// This class can not be used like that. We must use one the specialization
@@ -263,10 +263,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)());
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)());
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -276,7 +285,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)());
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -321,7 +329,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)() const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -607,10 +614,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)());
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)());
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -620,7 +636,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)());
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -665,7 +680,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)() const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -951,10 +965,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)());
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)());
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -964,7 +987,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)());
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -1009,7 +1031,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)() const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -1295,10 +1316,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -1308,7 +1338,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -1353,7 +1382,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -1639,10 +1667,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -1652,7 +1689,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -1697,7 +1733,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -1983,10 +2018,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -1996,7 +2040,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -2041,7 +2084,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -2327,10 +2369,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -2340,7 +2391,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -2385,7 +2435,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -2671,10 +2720,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -2684,7 +2742,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -2729,7 +2786,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -3015,10 +3071,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -3028,7 +3093,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -3073,7 +3137,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -3359,10 +3422,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -3372,7 +3444,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -3417,7 +3488,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -3703,10 +3773,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -3716,7 +3795,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -3761,7 +3839,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -4047,10 +4124,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -4060,7 +4146,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -4105,7 +4190,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -4391,10 +4475,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -4404,7 +4497,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -4449,7 +4541,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -4735,10 +4826,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -4748,7 +4848,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -4793,7 +4892,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -5079,10 +5177,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -5092,7 +5199,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -5137,7 +5243,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -5423,10 +5528,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3, A4));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -5436,7 +5550,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3, A4));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -5481,7 +5594,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -5767,10 +5879,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3, A4));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -5780,7 +5901,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3, A4));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -5825,7 +5945,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -6111,10 +6230,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3, A4));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -6124,7 +6252,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3, A4));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -6169,7 +6296,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -6455,10 +6581,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -6468,7 +6603,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3, A4, A5));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -6513,7 +6647,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -6799,10 +6932,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -6812,7 +6954,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3, A4, A5));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -6857,7 +6998,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -7143,10 +7283,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -7156,7 +7305,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3, A4, A5));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -7201,7 +7349,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -7487,10 +7634,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -7500,7 +7656,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -7545,7 +7700,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -7831,10 +7985,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -7844,7 +8007,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -7889,7 +8051,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -8175,10 +8336,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -8188,7 +8358,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -8233,7 +8402,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -8519,10 +8687,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -8532,7 +8709,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -8577,7 +8753,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -8863,10 +9038,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -8876,7 +9060,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -8921,7 +9104,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -9207,10 +9389,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -9220,7 +9411,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -9265,7 +9455,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -9551,10 +9740,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -9564,7 +9762,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -9609,7 +9806,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -9895,10 +10091,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -9908,7 +10113,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -9953,7 +10157,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -10239,10 +10442,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -10252,7 +10464,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -10297,7 +10508,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -10583,10 +10793,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -10596,7 +10815,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -10641,7 +10859,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -10927,10 +11144,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -10940,7 +11166,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -10985,7 +11210,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -11271,10 +11495,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -11284,7 +11517,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -11329,7 +11561,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -11615,10 +11846,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -11628,7 +11868,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -11673,7 +11912,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -11959,10 +12197,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -11972,7 +12219,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -12017,7 +12263,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -12303,10 +12548,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -12316,7 +12570,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -12361,7 +12614,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -12647,10 +12899,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -12660,7 +12921,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -12705,7 +12965,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -12991,10 +13250,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -13004,7 +13272,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -13049,7 +13316,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -13335,10 +13601,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -13348,7 +13623,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -13393,7 +13667,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -13679,10 +13952,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -13692,7 +13974,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -13737,7 +14018,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -14023,10 +14303,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -14036,7 +14325,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -14081,7 +14369,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -14367,10 +14654,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -14380,7 +14676,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -14425,7 +14720,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -14711,10 +15005,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -14724,7 +15027,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -14769,7 +15071,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -15055,10 +15356,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -15068,7 +15378,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -15113,7 +15422,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -15399,10 +15707,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -15412,7 +15729,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -15457,7 +15773,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -15743,10 +16058,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -15756,7 +16080,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -15801,7 +16124,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -16087,10 +16409,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -16100,7 +16431,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -16145,7 +16475,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -16431,10 +16760,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -16444,7 +16782,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -16489,7 +16826,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -16775,10 +17111,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -16788,7 +17133,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -16833,7 +17177,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -17119,10 +17462,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -17132,7 +17484,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -17177,7 +17528,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
@@ -17463,10 +17813,19 @@ namespace Yuni
 		*/
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
 		/*!
+		** \brief Constructor from a pointer-to-function
+		*/
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15));
+		/*!
+		** \brief Constructor, from a pointer-to-method
+		*/
+		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15));
+		/*!
 		** \brief Destructor
 		*/
 		~Bind();
 		//@}
+
 
 		//! \name Bind
 		//@{
@@ -17476,7 +17835,6 @@ namespace Yuni
 		** \param pointer A pointer-to-function
 		*/
 		void bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15));
-
 
 		/*!
 		** \brief Bind to a function with a custom and persistent user data
@@ -17521,7 +17879,6 @@ namespace Yuni
 		** \param member A pointer-to-member
 		*/
 		template<class C> void bind(const C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) const);
-
 
 		/*!
 		** \brief Bind to an object member with a custom and persistent user data
