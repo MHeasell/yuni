@@ -29,8 +29,8 @@ namespace Yuni
 
 	// Constructor
 	template<<%=tmpl[0]%>>
-	inline Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::Bind(const Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>& rhs)
-		:pHolder(rhs.pHolder)
+	inline Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::Bind(const Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>& rhs) :
+		pHolder(rhs.pHolder)
 	{}
 
 
@@ -39,6 +39,23 @@ namespace Yuni
 	inline Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
 	{
 		bind(symbol);
+	}
+
+
+	// Constructor: Pointer-to-function
+	template<<%=tmpl[0]%>>
+	inline Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::Bind(R (*pointer)(<%=generator.list(i)%>))
+	{
+		bind(pointer);
+	}
+
+
+	// Constructor: pointer-to-member
+	template<<%=tmpl[0]%>>
+	template<class C>
+	inline Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::Bind(C* c, R (C::*member)(<%=generator.list(i)%>))
+	{
+		bind(c, member);
 	}
 
 
