@@ -41,11 +41,11 @@ namespace Directory
 	class DirInfo
 	{
 	public:
-		DirInfo()
+		DirInfo() :
 			# ifndef YUNI_OS_WINDOWS
-			:pdir(NULL)
+			pdir(NULL)
 			# else
-			:h(-1)
+			h(-1)
 			# endif
 		{}
 
@@ -55,7 +55,8 @@ namespace Directory
 			if (h >= 0)
 				_findclose(h);
 			# else
-			closedir(pdir);
+			if (pdir) // check required to avoid segv
+				closedir(pdir);
 			# endif
 		}
 
