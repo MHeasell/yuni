@@ -8,18 +8,18 @@ namespace DynamicLibrary
 {
 
 
-	inline Symbol::Symbol()
-		:pPtr(NULL)
+	inline Symbol::Symbol() :
+		pPtr(NULL)
 	{}
 
 
-	inline Symbol::Symbol(const Symbol::Handle p)
-		:pPtr(p)
+	inline Symbol::Symbol(Symbol::Handle p) :
+		pPtr(p)
 	{}
 
 
-	inline Symbol::Symbol(const Symbol& copy)
-		:pPtr(copy.pPtr)
+	inline Symbol::Symbol(const Symbol& copy) :
+		pPtr(copy.pPtr)
 	{}
 
 
@@ -42,7 +42,7 @@ namespace DynamicLibrary
 	}
 
 
-	inline Symbol& Symbol::operator = (const Symbol::Handle hndl)
+	inline Symbol& Symbol::operator = (Symbol::Handle hndl)
 	{
 		this->pPtr = hndl;
 		return *this;

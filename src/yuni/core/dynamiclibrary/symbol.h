@@ -32,7 +32,7 @@ namespace DynamicLibrary
 		/*!
 		** \brief Constructor with a given handle
 		*/
-		Symbol(const Handle p);
+		Symbol(Handle p);
 
 		/*!
 		** \brief Copy constructor
@@ -49,7 +49,7 @@ namespace DynamicLibrary
 		Symbol& operator = (const Symbol& rhs);
 
 		//! Copy operator
-		Symbol& operator = (const Symbol::Handle hndl);
+		Symbol& operator = (Symbol::Handle hndl);
 
 		/*!
 		** \brief Get the handle of the symbol
@@ -62,6 +62,7 @@ namespace DynamicLibrary
 		Handle pPtr;
 
 	}; // class Symbol
+
 
 
 
