@@ -142,8 +142,8 @@ public:
 			}
 
 		protected:
-			Iterator()
-				:pData(NULL)
+			Iterator() :
+				pData(NULL)
 			{}
 			template<class StringT> explicit Iterator(const StringT& directory)
 			{
