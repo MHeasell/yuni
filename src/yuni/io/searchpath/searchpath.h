@@ -3,6 +3,7 @@
 
 # include "../../yuni.h"
 # include "../../core/string.h"
+# include "../../core/bind.h"
 # include <map>
 
 
@@ -68,6 +69,26 @@ namespace IO
 		** \brief Find all matching filenames/folders in the search paths which math the criteria
 		*/
 		bool find(String::List& out, const StringAdapter& filename) const;
+
+		/*!
+		** \brief Iterate through all files and folders
+		**
+		** \code
+		** void print(const String& name, const String& filename)
+		** {
+		**	std::cout << name << " -> " << filename << std::endl;
+		** }
+		**
+		** int main()
+		** {
+		**	IO::SearchPath searchpath;
+		**	searchpath.directories.push_back("/lib");
+		**	searchpath.extensions.push_back(".so");
+		**	searchpath.foreach(&print);
+		** \endcode
+		*/
+		void foreach(const Bind<void (const String&, const String&)>& callback,
+			bool recursive = false, bool catchfolder = false) const;
 		//@}
 
 
