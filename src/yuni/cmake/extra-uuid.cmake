@@ -35,15 +35,16 @@ add_library(yuni-static-uuid STATIC
 )
 
 # Setting output path
-SET_TARGET_PROPERTIES(yuni-static-uuid PROPERTIES 
+SET_TARGET_PROPERTIES(yuni-static-uuid PROPERTIES
 		ARCHIVE_OUTPUT_DIRECTORY "${YUNI_OUTPUT_DIRECTORY}/lib")
 
 # Installation
-INSTALL(TARGETS yuni-static-uuid ARCHIVE DESTINATION lib/${YUNI_VERSIONED_INST_PATH})
+install(TARGETS yuni-static-uuid COMPONENT yuni-uuid ARCHIVE DESTINATION lib/${YUNI_VERSIONED_INST_PATH})
 
 # Install UUID-related headers
-INSTALL(
+install(
 	DIRECTORY uuid
+	COMPONENT yuni-uuid
 	DESTINATION include/${YUNI_VERSIONED_INST_PATH}
 	FILES_MATCHING
 		PATTERN "*.h"

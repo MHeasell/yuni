@@ -18,15 +18,16 @@ add_library(yuni-static-algorithms STATIC
 )
 
 # Setting output path
-SET_TARGET_PROPERTIES(yuni-static-algorithms PROPERTIES 
+SET_TARGET_PROPERTIES(yuni-static-algorithms PROPERTIES
 		ARCHIVE_OUTPUT_DIRECTORY "${YUNI_OUTPUT_DIRECTORY}/lib")
 
 # Installation
-INSTALL(TARGETS yuni-static-algorithms ARCHIVE DESTINATION lib/${YUNI_VERSIONED_INST_PATH})
+install(TARGETS yuni-static-algorithms COMPONENT yuni-algorithms ARCHIVE DESTINATION lib/${YUNI_VERSIONED_INST_PATH})
 
 # Install Algo-related headers
-INSTALL(
+install(
 	DIRECTORY algorithm
+	COMPONENT yuni-algorithms
 	DESTINATION include/${YUNI_VERSIONED_INST_PATH}
 	FILES_MATCHING
 		PATTERN "*.h"

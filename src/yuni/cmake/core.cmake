@@ -817,11 +817,12 @@ set_target_properties(yuni-static-core PROPERTIES
 		ARCHIVE_OUTPUT_DIRECTORY "${YUNI_OUTPUT_DIRECTORY}/lib")
 
 # Installation
-install(TARGETS yuni-static-core ARCHIVE DESTINATION lib/${YUNI_VERSIONED_INST_PATH})
+install(TARGETS yuni-static-core COMPONENT yuni-core ARCHIVE DESTINATION lib/${YUNI_VERSIONED_INST_PATH})
 
 # Install Core-related headers
 install(
 	DIRECTORY core job thread
+	COMPONENT yuni-core
 	DESTINATION include/${YUNI_VERSIONED_INST_PATH}/yuni
 	FILES_MATCHING
 		PATTERN "*.h"
@@ -836,9 +837,10 @@ install(FILES
 	doxygen.h
 	platform.h
 	yuni.h
+	COMPONENT yuni-core
 	DESTINATION include/${YUNI_VERSIONED_INST_PATH}/yuni
 )
 
-install(FILES yuni.version DESTINATION include/${YUNI_VERSIONED_INST_PATH}/ RENAME "yuni.version")
-install(FILES "${YUNI_LIBYUNI_CONFIG_TARGET_INIFILE}" DESTINATION include/${YUNI_VERSIONED_INST_PATH}/ RENAME "yuni.config.${YUNI_LIBYUNI_CONFIG_COMPILER}")
+install(FILES yuni.version COMPONENT yuni-core DESTINATION include/${YUNI_VERSIONED_INST_PATH}/ RENAME "yuni.version")
+install(FILES "${YUNI_LIBYUNI_CONFIG_TARGET_INIFILE}" COMPONENT yuni-core DESTINATION include/${YUNI_VERSIONED_INST_PATH}/ RENAME "yuni.config.${YUNI_LIBYUNI_CONFIG_COMPILER}")
 
