@@ -70,6 +70,20 @@ namespace Yuni
 		//@}
 
 
+		//! \name Initialization
+		//@{
+		/*!
+		** \brief Assign a new version numner
+		*/
+		void assign(unsigned int h, unsigned int lo = 0, unsigned int r = 0);
+
+		/*!
+		** \brief Set the version to 0.0.0
+		*/
+		void clear();
+		//@}
+
+
 		//! \name Comparisons
 		//@{
 		/*!
