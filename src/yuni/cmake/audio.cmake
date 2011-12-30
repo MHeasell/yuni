@@ -121,12 +121,14 @@ set_target_properties(yuni-static-audio-core PROPERTIES
 		ARCHIVE_OUTPUT_DIRECTORY "${YUNI_OUTPUT_DIRECTORY}/lib")
 
 # Installation
-install(TARGETS yuni-static-audio-core COMPONENT yuni-audio-core ARCHIVE DESTINATION lib/${YUNI_VERSIONED_INST_PATH})
+install(TARGETS yuni-static-audio-core
+	COMPONENT ${YUNICOMPONENT_AUDIO_CORE}
+	ARCHIVE DESTINATION lib/${YUNI_VERSIONED_INST_PATH})
 
 # Install Audio-related headers
 install(
 	DIRECTORY audio
-	COMPONENT yuni-audio-core
+	COMPONENT ${YUNICOMPONENT_AUDIO_CORE}
 	DESTINATION include/${YUNI_VERSIONED_INST_PATH}/yuni
 	FILES_MATCHING
 		PATTERN "*.h"
