@@ -2,6 +2,23 @@
 #
 # --- Modules - Default settings ---
 #
+if (WIN32 OR WIN64)
+	# NSIS does not support semicolons.....
+	set(YUNICOMPONENT_CORE              "yuni_core")
+	set(YUNICOMPONENT_ALGORITHMS        "yuni_algorithms")
+	set(YUNICOMPONENT_AUDIO_CORE        "yuni_audio_core")
+	set(YUNICOMPONENT_DEVICE_DISPLAY    "yuni_device_display")
+	set(YUNICOMPONENT_UUID              "yuni_uuid")
+else()
+	set(YUNICOMPONENT_CORE              "yuni-core")
+	set(YUNICOMPONENT_ALGORITHMS        "yuni-algorithms")
+	set(YUNICOMPONENT_AUDIO_CORE        "yuni-audio-core")
+	set(YUNICOMPONENT_DEVICE_DISPLAY    "yuni-device-display")
+	set(YUNICOMPONENT_DEVICE_DISPLAY    "yuni-uuid")
+endif()
+
+
+
 
 # Core
 set(YUNI_MODULE_CORE                      true) # Must be True

@@ -75,12 +75,14 @@ set_target_properties(yuni-static-device-display PROPERTIES
 		ARCHIVE_OUTPUT_DIRECTORY "${YUNI_OUTPUT_DIRECTORY}/lib")
 
 # Installation
-install(TARGETS yuni-static-device-display COMPONENT yuni-device-display ARCHIVE DESTINATION lib/${YUNI_VERSIONED_INST_PATH})
+install(TARGETS yuni-static-device-display
+		COMPONENT ${YUNICOMPONENT_DEVICE_DISPLAY}
+		ARCHIVE DESTINATION lib/${YUNI_VERSIONED_INST_PATH})
 
 # Install Device-related headers
 install(
 	DIRECTORY device
-	COMPONENT yuni-device-display
+	COMPONENT ${YUNICOMPONENT_DEVICE_DISPLAY}
 	DESTINATION include/${YUNI_VERSIONED_INST_PATH}/yuni
 	FILES_MATCHING
 		PATTERN "*.h"
