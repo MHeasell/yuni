@@ -169,6 +169,10 @@ set(YUNI_PROFILE_SSE4_1    "auto")    # SSE 4.1 (depends on SSE3)
 set(YUNI_PROFILE_SSE4_2    "auto")    # SSE 4.2 (depends on SSE3)
 
 
+# yuni-config
+# Enable this option to skip the build of yuni-config
+set(YUNI_SKIP_YUNI_CONFIG  false)
+
 # Custom C/C++ Flags
 #
 # Advanced users only : it may not a good idea to use your own CFlags
