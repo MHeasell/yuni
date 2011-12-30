@@ -5,6 +5,9 @@
 # include "../../core/string.h"
 # include "../../core/bind.h"
 # include <map>
+# ifdef SearchPath
+#	undef SearchPath // On Windows, SearchPath is a macro...
+# endif
 
 
 namespace Yuni
