@@ -684,6 +684,8 @@ set(SRC_THREADS
 		thread/mutex.hxx
 		thread/thread.h
 		thread/thread.hxx
+		thread/id.h
+		thread/id.cpp
 		thread/thread.cpp
 		thread/signal.h
 		thread/signal.hxx
