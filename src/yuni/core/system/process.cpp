@@ -1,5 +1,4 @@
 
-#include "../../yuni.h"
 #include "process.h"
 #ifndef YUNI_OS_WINDOWS
 #	ifndef YUNI_OS_HAIKU
@@ -22,9 +21,9 @@
 namespace Yuni
 {
 
-	unsigned int ProcessID()
+	uint64 ProcessID()
 	{
-		return (unsigned int) YUNI_OS_GETPID();
+		return (uint64) YUNI_OS_GETPID();
 	}
 
 

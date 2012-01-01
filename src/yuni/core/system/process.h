@@ -1,6 +1,7 @@
 #ifndef __YUNI_CORE_SYSTEM_PROCESS_H__
 # define __YUNI_CORE_SYSTEM_PROCESS_H__
 
+# include "../../yuni.h"
 
 
 namespace Yuni
@@ -9,7 +10,7 @@ namespace Yuni
 	/*!
 	** \brief Get the current process ID
 	*/
-	unsigned int ProcessID();
+	YUNI_DECL uint64 ProcessID();
 
 
 
