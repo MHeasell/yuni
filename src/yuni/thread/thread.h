@@ -28,13 +28,6 @@ namespace Thread
 {
 
 	/*!
-	** \brief Get the current process ID
-	*/
-	unsigned int ProcessID();
-
-
-
-	/*!
 	** \brief Base class interface for Threads (abstract)
 	**
 	** \internal The thread is really created when started (with the method start()), and
