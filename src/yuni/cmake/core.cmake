@@ -507,6 +507,8 @@ set(SRC_CORE_SYSTEM
 		core/system/username.h
 		core/system/username.hxx
 		core/system/endian.h
+		core/system/process.h
+		core/system/process.cpp
 )
 if(WIN32 OR WIN64)
 	set(SRC_CORE_SYSTEM ${SRC_CORE_SYSTEM} core/system/username.cpp)

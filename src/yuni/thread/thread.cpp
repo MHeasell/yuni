@@ -19,13 +19,6 @@
 #include "thread.h"
 
 
-#if defined(YUNI_OS_WINDOWS) && defined(YUNI_OS_MSVC)
-#	define YUNI_OS_GETPID  _getpid
-#else
-#	define YUNI_OS_GETPID   getpid
-#endif
-
-
 
 namespace Yuni
 {
@@ -33,6 +26,7 @@ namespace Private
 {
 namespace Thread
 {
+
 
 	# ifndef YUNI_NO_THREAD_SAFE
 
@@ -136,13 +130,6 @@ namespace Yuni
 {
 namespace Thread
 {
-
-
-	unsigned int ProcessID()
-	{
-		return (unsigned int) YUNI_OS_GETPID();
-	}
-
 
 
 
