@@ -273,6 +273,7 @@ source_group(core\\linkedlist FILES ${SRC_CORE_SLIST})
 
 set(SRC_CORE_STRING
 		core/string/string.h
+		core/string/string.cpp
 		core/string/string.hxx
 		core/string/operators.hxx
 		core/string/iterator.h
