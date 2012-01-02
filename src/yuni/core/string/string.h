@@ -2025,6 +2025,14 @@ namespace Yuni
 	typedef CString<0, true, false>  StringAdapter;
 
 
+	/*!
+	** \brief An empty string
+	**
+	** This string will always remain empty. It is mainly used
+	** for returning references
+	*/
+	extern const String emptyString;
+
 
 } // namespace Yuni
 
