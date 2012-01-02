@@ -10,8 +10,8 @@
 #endif
 
 
-#if defined(YUNI_OS_WINDOWS) && defined(YUNI_OS_MSVC)
-#	define YUNI_OS_GETPID  _getpid
+#if defined(YUNI_OS_WINDOWS)
+#	define YUNI_OS_GETPID  GetCurrentProcessId
 #else
 #	define YUNI_OS_GETPID   getpid
 #endif
