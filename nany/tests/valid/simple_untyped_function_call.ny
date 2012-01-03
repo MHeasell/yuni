@@ -1,6 +1,6 @@
 #! A function declaration and call with no type
 
-function foo(a, b, c)
+function foo(a, b: uint, c)
 {
 	a << b << c;
 }
