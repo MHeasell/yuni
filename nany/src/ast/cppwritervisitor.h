@@ -20,7 +20,7 @@ namespace Ast
 		CppWriterVisitor(std::ofstream& stream):
 			pOut(stream),
 			pFunctionScope(false),
-			pInVarDeclaration(false),
+			pSkipCOW(0u),
 			pIndent()
 		{}
 
@@ -38,6 +38,9 @@ namespace Ast
 			pOut << "#include <vector>" << std::endl;
 			pOut << "#include <map>" << std::endl;
 			pOut << "#include <cassert>" << std::endl;
+			pOut << std::endl;
+			pOut << "using namespace ::Yuni;" << std::endl;
+			pOut << std::endl;
 			pOut << std::endl;
 			if (node->unitDeclaration())
 				node->unitDeclaration()->accept(this);
@@ -65,8 +68,10 @@ namespace Ast
 				ParameterListNode::List::iterator end = paramList.end();
 				unsigned int count = 0;
 				for (ParameterListNode::List::iterator it = paramList.begin(); it != end; ++it)
+				{
 					if (!(*it)->type())
 						++count;
+				}
 				if (count > 0)
 				{
 					pOut << "template<";
@@ -76,7 +81,7 @@ namespace Ast
 						if (increment < count)
 							pOut << ", ";
 					}
-					pOut << ">" << std::endl << pIndent;
+					pOut << '>' << std::endl << pIndent;
 				}
 			}
 
@@ -88,7 +93,7 @@ namespace Ast
 			else // Default to void
 				pOut << "void";
 			// Function name
-			pOut << " " << node->name() << '(';
+			pOut << ' ' << node->name() << '(';
 			// Function parameters
 			if (node->params())
 			{
@@ -100,7 +105,7 @@ namespace Ast
 				{
 					// If there is no type, we have declared a template parameter for it
 					if (!(*it)->type())
-						pOut << "MT" << count++ << " ";
+						pOut << "COW<MT" << count++ << "> ";
 					(*it)->accept(this);
 					if (--size)
 						pOut << ", ";
@@ -143,8 +148,10 @@ namespace Ast
 				ParameterListNode::List::iterator end = paramList.end();
 				unsigned int count = 0;
 				for (ParameterListNode::List::iterator it = paramList.begin(); it != end; ++it)
+				{
 					if (!(*it)->type())
 						++count;
+				}
 				if (count > 0)
 				{
 					pOut << "template<";
@@ -154,7 +161,7 @@ namespace Ast
 						if (increment < count)
 							pOut << ", ";
 					}
-					pOut << ">" << std::endl << pIndent;
+					pOut << '>' << std::endl << pIndent;
 				}
 			}
 
@@ -166,7 +173,7 @@ namespace Ast
 			else // Default to void
 				pOut << "void";
 			// Method name
-			pOut << " " << node->name() << '(';
+			pOut << ' ' << node->name() << '(';
 			// Method parameters
 			if (node->params())
 			{
@@ -178,7 +185,7 @@ namespace Ast
 				{
 					// If there is no type, we have declared a template parameter for it
 					if (!(*it)->type())
-						pOut << "MT" << count++ << " ";
+						pOut << "COW<MT" << count++ << "> ";
 					(*it)->accept(this);
 					if (--size)
 						pOut << ", ";
@@ -392,31 +399,53 @@ namespace Ast
 
 		virtual void visit(TypeExpressionNode* node)
 		{
-			node->expression()->accept(this);
-			if (node->isArray() && !pInVarDeclaration)
+			if (!pSkipCOW)
 			{
-				if (node->arrayCardinality() == 0)
-					pOut << "[]";
+				if (node->isArray())
+				{
+					pOut << "COW<std::vector<COW<";
+					node->expression()->accept(this);
+					pOut << " > > >";
+				}
+				else if (!node->type()->isValue())
+				{
+					pOut << "COW<";
+					node->expression()->accept(this);
+					pOut << " >";
+				}
 				else
-					pOut << '[' << node->arrayCardinality() << ']';
+					node->expression()->accept(this);
+			}
+			else
+			{
+				if (node->isArray())
+				{
+					pOut << "std::vector<";
+					node->expression()->accept(this);
+					pOut << " >";
+				}
+				else
+					node->expression()->accept(this);
 			}
 		}
 
 
 		virtual void visit(VarDeclarationNode* node)
 		{
-			pInVarDeclaration = true;
+			pOut << "COW<";
 			node->typeDecl()->accept(this);
-			pOut << " ";
+			pOut << " > ";
 			node->left()->accept(this);
-			if (node->typeDecl()->isArray())
+			if (node->typeDecl()->isArray() && node->typeDecl()->arrayCardinality() > 0)
 			{
-				if (node->typeDecl()->arrayCardinality() == 0)
-					pOut << "[]";
-				else
-					pOut << '[' << node->typeDecl()->arrayCardinality() << ']';
+				++pSkipCOW;
+				pOut << " = COW<";
+				node->typeDecl()->accept(this);
+				pOut << " >(new ";
+				node->typeDecl()->accept(this);
+				pOut << '(' << node->typeDecl()->arrayCardinality() << "))";
+				--pSkipCOW;
 			}
-			pInVarDeclaration = false;
 		}
 
 
@@ -430,9 +459,25 @@ namespace Ast
 
 		virtual void visit(EqualExpressionNode* node)
 		{
-			node->left()->accept(this);
+			if (node->left()->type() && node->left()->type()->isValue())
+				node->left()->accept(this);
+			else
+			{
+				pOut << "(*";
+				node->left()->accept(this);
+				pOut << ")";
+			}
+
 			pOut << " == ";
-			node->right()->accept(this);
+
+			if (node->right()->type() && node->right()->type()->isValue())
+				node->right()->accept(this);
+			else
+			{
+				pOut << "(*";
+				node->right()->accept(this);
+				pOut << ")";
+			}
 		}
 
 
@@ -573,8 +618,11 @@ namespace Ast
 
 		virtual void visit(NewExpressionNode* node)
 		{
-			pOut << "new ";
+			pOut << "COW<";
 			node->expression()->accept(this);
+			pOut << " >(new ";
+			node->expression()->accept(this);
+			pOut << ')';
 		}
 
 
@@ -601,19 +649,21 @@ namespace Ast
 
 		virtual void visit(LiteralNode<bool>* node)
 		{
-			pOut << (node->data ? "true" : "false");
+			pOut << (node->data
+				? "COW<bool>(new bool(true))"
+				: "COW<bool>(new bool(false))");
 		}
 
 
 		virtual void visit(LiteralNode<int>* node)
 		{
-			pOut << node->data;
+			pOut << "COW<int>(new int(" << node->data << "))";
 		}
 
 
 		virtual void visit(LiteralNode<unsigned int>* node)
 		{
-			pOut << node->data << 'u';
+			pOut << "COW<unsigned int>(new unsigned int(" << node->data << "u))";
 		}
 
 
@@ -625,13 +675,13 @@ namespace Ast
 
 		virtual void visit(LiteralNode<double>* node)
 		{
-			pOut << node->data << 'f';
+			pOut << node->data;
 		}
 
 
 		virtual void visit(LiteralNode<char>* node)
 		{
-			pOut << '\'' << node->data << '\'';
+			pOut << "COW<char>(new char('" << node->data << "'))";
 		}
 
 
@@ -642,19 +692,19 @@ namespace Ast
 			wctomb(buffer, node->data);
 			buffer[len] = '\0';
 
-			pOut << '\'' << buffer << '\'';
+			pOut << "COW<char>(new char('" << buffer << "'))";
 		}
 
 
 		virtual void visit(LiteralNode<char*>* node)
 		{
-			pOut << '\"' << node->data << '\"';
+			pOut << "COW<String>(new String(\"" << node->data << "\"))";
 		}
 
 
 		virtual void visit(LiteralNode<const char*>* node)
 		{
-			pOut << '\"' << node->data << '\"';
+			pOut << "COW<String>(new String(\"" << node->data << "\"))";
 		}
 
 
@@ -710,11 +760,11 @@ namespace Ast
 		bool pLastExpression;
 
 		/*!
-		** \brief Are we currently in a variable declaration ?
+		** \brief How many times should we skip the COW declaration in types ?
 		**
-		** This is useful to know when / where array brackets must be written.
+		** This is useful to know when / where we must not use the COW wrapper
 		*/
-		bool pInVarDeclaration;
+		unsigned int pSkipCOW;
 
 		//! Current indent
 		Yuni::String pIndent;

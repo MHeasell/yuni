@@ -25,12 +25,24 @@ namespace Typing
 				node->returnType()->accept(this);
 			if (node->body())
 				node->body()->accept(this);
-			if (node->body() && node->returnType() &&
-				node->body()->type() && node->returnType()->type() &&
-				node->returnType()->type() != node->body()->type())
-				std::cerr << "Type mismatch for function \"" << node->name() << "\" :" << std::endl
-						  << "\tReturn type is : " << node->body()->type()->name() << std::endl
-						  << "\tExpected : " << node->returnType()->type()->name() << std::endl;
+
+			if (node->returnType())
+			{
+				// If the return type was given, use it as the whole node's type
+				node->type(node->returnType()->type());
+				// And make a few checks
+				if (node->body() && node->returnType() &&
+					node->body()->type() && node->returnType()->type() &&
+					node->returnType()->type() != node->body()->type())
+				{
+					std::cerr << "Type mismatch for method \"" << node->name() << "\" :" << std::endl
+							  << "\tReturn type is : " << node->body()->type()->name() << std::endl
+							  << "\tExpected : " << node->returnType()->type()->name() << std::endl;
+				}
+			}
+			else
+				// If the type was not given, try to get the type from the body
+				node->type(node->body()->type());
 		}
 
 
@@ -51,9 +63,11 @@ namespace Typing
 				if (node->body() && node->returnType() &&
 					node->body()->type() && node->returnType()->type() &&
 					node->returnType()->type() != node->body()->type())
+				{
 					std::cerr << "Type mismatch for method \"" << node->name() << "\" :" << std::endl
 							  << "\tReturn type is : " << node->body()->type()->name() << std::endl
 							  << "\tExpected : " << node->returnType()->type()->name() << std::endl;
+				}
 			}
 			else
 				// If the type was not given, try to get the type from the body
@@ -75,7 +89,9 @@ namespace Typing
 			// If there is no declared type, try to use the one from the value
 			if ((!node->typeDecl() || !node->typeDecl()->type()) &&
 				node->value() && node->value()->type())
+			{
 				node->type(node->value()->type());
+			}
 		}
 
 
@@ -243,6 +259,22 @@ namespace Typing
 			node->left()->accept(this);
 			node->right()->accept(this);
 			node->type("bool");
+		}
+
+
+		virtual void visit(Ast::ShiftLeftExpressionNode* node)
+		{
+			node->left()->accept(this);
+			node->right()->accept(this);
+			node->type(node->left()->type());
+		}
+
+
+		virtual void visit(Ast::ShiftRightExpressionNode* node)
+		{
+			node->left()->accept(this);
+			node->right()->accept(this);
+			node->type(node->left()->type());
 		}
 
 
