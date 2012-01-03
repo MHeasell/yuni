@@ -20,6 +20,7 @@ namespace Ast
 		CppWriterVisitor(std::ofstream& stream):
 			pOut(stream),
 			pFunctionScope(false),
+			pInVarDeclaration(false),
 			pIndent()
 		{}
 
@@ -56,17 +57,58 @@ namespace Ast
 		virtual void visit(FunctionDeclarationNode* node)
 		{
 			pOut << pIndent;
+
+			// Generate a template parameter for untyped function parameters
+			if (node->params())
+			{
+				ParameterListNode::List& paramList = node->params()->parameters();
+				ParameterListNode::List::iterator end = paramList.end();
+				unsigned int count = 0;
+				for (ParameterListNode::List::iterator it = paramList.begin(); it != end; ++it)
+					if (!(*it)->type())
+						++count;
+				if (count > 0)
+				{
+					pOut << "template<";
+					for (unsigned int increment = 1; increment <= count; ++increment)
+					{
+						pOut << "class MT" << increment;
+						if (increment < count)
+							pOut << ", ";
+					}
+					pOut << ">" << std::endl << pIndent;
+				}
+			}
+
+			// Return type
 			if (node->returnType() && node->returnType()->type())
 				writeType(node->returnType()->type());
 			else if (node->type())
 				writeType(node->type());
 			else // Default to void
 				pOut << "void";
+			// Function name
 			pOut << " " << node->name() << '(';
+			// Function parameters
 			if (node->params())
-				node->params()->accept(this);
+			{
+				ParameterListNode::List& paramList = node->params()->parameters();
+				ParameterListNode::List::iterator end = paramList.end();
+				unsigned int size = paramList.size();
+				unsigned int count = 1;
+				for (ParameterListNode::List::iterator it = paramList.begin(); it != end; ++it)
+				{
+					// If there is no type, we have declared a template parameter for it
+					if (!(*it)->type())
+						pOut << "MT" << count++ << " ";
+					(*it)->accept(this);
+					if (--size)
+						pOut << ", ";
+				}
+			}
 			pOut << ')' << std::endl;
 
+			// Body
 			pFunctionScope = true;
 			if (node->body())
 				node->body()->accept(this);
@@ -93,17 +135,58 @@ namespace Ast
 		virtual void visit(MethodDeclarationNode* node)
 		{
 			pOut << pIndent;
+
+			// Generate a template parameter for untyped method parameters
+			if (node->params())
+			{
+				ParameterListNode::List& paramList = node->params()->parameters();
+				ParameterListNode::List::iterator end = paramList.end();
+				unsigned int count = 0;
+				for (ParameterListNode::List::iterator it = paramList.begin(); it != end; ++it)
+					if (!(*it)->type())
+						++count;
+				if (count > 0)
+				{
+					pOut << "template<";
+					for (unsigned int increment = 1; increment <= count; ++increment)
+					{
+						pOut << "class MT" << increment;
+						if (increment < count)
+							pOut << ", ";
+					}
+					pOut << ">" << std::endl << pIndent;
+				}
+			}
+
+			// Return type
 			if (node->returnType() && node->returnType()->type())
 				writeType(node->returnType()->type());
 			else if (node->type())
 				writeType(node->type());
 			else // Default to void
 				pOut << "void";
+			// Method name
 			pOut << " " << node->name() << '(';
+			// Method parameters
 			if (node->params())
-				node->params()->accept(this);
-			pOut << ')' << std::endl << pIndent;
+			{
+				ParameterListNode::List& paramList = node->params()->parameters();
+				ParameterListNode::List::iterator end = paramList.end();
+				unsigned int size = paramList.size();
+				unsigned int count = 1;
+				for (ParameterListNode::List::iterator it = paramList.begin(); it != end; ++it)
+				{
+					// If there is no type, we have declared a template parameter for it
+					if (!(*it)->type())
+						pOut << "MT" << count++ << " ";
+					(*it)->accept(this);
+					if (--size)
+						pOut << ", ";
+				}
+			}
+			pOut << ')' << std::endl;
 
+			// Body
 			pFunctionScope = true;
 			if (node->body())
 				node->body()->accept(this);
@@ -310,14 +393,30 @@ namespace Ast
 		virtual void visit(TypeExpressionNode* node)
 		{
 			node->expression()->accept(this);
+			if (node->isArray() && !pInVarDeclaration)
+			{
+				if (node->arrayCardinality() == 0)
+					pOut << "[]";
+				else
+					pOut << '[' << node->arrayCardinality() << ']';
+			}
 		}
 
 
 		virtual void visit(VarDeclarationNode* node)
 		{
+			pInVarDeclaration = true;
 			node->typeDecl()->accept(this);
 			pOut << " ";
 			node->left()->accept(this);
+			if (node->typeDecl()->isArray())
+			{
+				if (node->typeDecl()->arrayCardinality() == 0)
+					pOut << "[]";
+				else
+					pOut << '[' << node->typeDecl()->arrayCardinality() << ']';
+			}
+			pInVarDeclaration = false;
 		}
 
 
@@ -373,6 +472,22 @@ namespace Ast
 		{
 			node->left()->accept(this);
 			pOut << " >= ";
+			node->right()->accept(this);
+		}
+
+
+		virtual void visit(ShiftLeftExpressionNode* node)
+		{
+			node->left()->accept(this);
+			pOut << " << ";
+			node->right()->accept(this);
+		}
+
+
+		virtual void visit(ShiftRightExpressionNode* node)
+		{
+			node->left()->accept(this);
+			pOut << " >> ";
 			node->right()->accept(this);
 		}
 
@@ -593,6 +708,13 @@ namespace Ast
 		** This is useful to know when we might need to add a return keyword.
 		*/
 		bool pLastExpression;
+
+		/*!
+		** \brief Are we currently in a variable declaration ?
+		**
+		** This is useful to know when / where array brackets must be written.
+		*/
+		bool pInVarDeclaration;
 
 		//! Current indent
 		Yuni::String pIndent;

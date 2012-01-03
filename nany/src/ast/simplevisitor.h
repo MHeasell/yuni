@@ -187,6 +187,18 @@ namespace Ast
 			node->right()->accept(this);
 		}
 
+		virtual void visit(ShiftLeftExpressionNode* node)
+		{
+			node->left()->accept(this);
+			node->right()->accept(this);
+		}
+
+		virtual void visit(ShiftRightExpressionNode* node)
+		{
+			node->left()->accept(this);
+			node->right()->accept(this);
+		}
+
 		virtual void visit(PlusExpressionNode* node)
 		{
 			node->left()->accept(this);

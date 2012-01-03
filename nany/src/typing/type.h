@@ -33,16 +33,19 @@ namespace Typing
 		Type(const Yuni::StringAdapter& name, bool isCppValue, bool isConst = false):
 			pName(name),
 			pIsValue(isCppValue),
+			pIsArray(false),
 			pIsConst(isConst)
 		{}
 		Type(const Type& rhs) :
 			pName(rhs.pName),
 			pIsValue(rhs.pIsValue),
+			pIsArray(rhs.pIsArray),
 			pIsConst(rhs.pIsConst)
 		{}
 
 		const Yuni::String& name() const { return pName; }
 		void name(const Yuni::StringAdapter& newName) { pName = newName; }
+
 		Type* toArrayType()
 		{
 			Type* newType = new Type(*this);
@@ -66,6 +69,9 @@ namespace Typing
 
 		//! Is the type a value type in C / C++ ?
 		bool pIsValue;
+
+		//! Is the type an array ?
+		bool pIsArray;
 
 		//! Is the type const ? (values of this type cannot be changed)
 		bool pIsConst;
