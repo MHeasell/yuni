@@ -41,6 +41,8 @@ namespace Ast
 # include "inferiorequalexpressionnode.h"
 # include "superiorexpressionnode.h"
 # include "superiorequalexpressionnode.h"
+# include "shiftleftexpressionnode.h"
+# include "shiftrightexpressionnode.h"
 # include "plusexpressionnode.h"
 # include "minusexpressionnode.h"
 # include "multiplyexpressionnode.h"

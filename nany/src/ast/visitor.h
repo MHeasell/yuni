@@ -69,6 +69,10 @@ namespace Ast
 
 		virtual void visit(SuperiorEqualExpressionNode*) = 0;
 
+		virtual void visit(ShiftLeftExpressionNode*) = 0;
+
+		virtual void visit(ShiftRightExpressionNode*) = 0;
+
 		virtual void visit(PlusExpressionNode*) = 0;
 
 		virtual void visit(MinusExpressionNode*) = 0;

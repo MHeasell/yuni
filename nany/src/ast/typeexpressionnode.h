@@ -20,11 +20,15 @@ namespace Ast
 	{
 	public:
 		TypeExpressionNode(Node* expr):
-			pExpression(expr)
+			pExpression(expr),
+			pIsArray(false),
+			pCardinality(0u)
 		{}
 
 		virtual ~TypeExpressionNode()
-		{}
+		{
+			delete pExpression;
+		}
 
 		virtual void accept(Visitor* visitor)
 		{
@@ -33,9 +37,26 @@ namespace Ast
 
 		Node* expression() const { return pExpression; }
 
+		void toArray() { pIsArray = true; }
+		void toArray(unsigned int cardinality)
+		{
+			pIsArray = true;
+			pCardinality = cardinality;
+		}
+
+		bool isArray() const { return pIsArray; }
+
+		unsigned int arrayCardinality() const { return pCardinality; }
+
 	private:
 		//! Expression to evaluate to get the type
 		Node* pExpression;
+
+		//! Is it an array ?
+		bool pIsArray;
+
+		//! Array cardinality, 0 for unknown size
+		unsigned int pCardinality;
 	};
 
 

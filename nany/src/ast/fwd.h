@@ -87,6 +87,12 @@ namespace Ast
 	//! Superior or equal binary comparison
 	class SuperiorEqualExpressionNode;
 
+	//! Shift left operator
+	class ShiftLeftExpressionNode;
+
+	//! Shift right operator
+	class ShiftRightExpressionNode;
+
 	//! Addition
 	class PlusExpressionNode;
 
