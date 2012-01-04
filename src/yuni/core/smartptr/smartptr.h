@@ -206,7 +206,6 @@ namespace Yuni
 		typedef std::vector<SmartPtrType>  Vector;
 		//! List
 		typedef std::list<SmartPtrType>  List;
-
 		//@} // alias
 
 	public:
@@ -300,10 +299,24 @@ namespace Yuni
 		void swap(SmartPtr& rhs);
 		//@}
 
+
+		//! \name Pointer
+		//@{
 		//! Get a pointer to the object, like operator -> would do
 		PointerType pointer();
 		//! Get a pointer to the object, like operator -> would do
 		ConstPointerType pointer() const;
+		//@}
+
+
+		//! \name Unicity
+		//@{
+		/*!
+		** \brief Get if the inner data is held by an unique reference
+		*/
+		bool unique() const;
+		//@}
+
 
 		//! \name Operator * / ->
 		//@{
@@ -315,7 +328,6 @@ namespace Yuni
 
 		//! \name Operator =
 		//@{
-
 		//! Copy
 		SmartPtr& operator = (CopyType& rhs);
 

@@ -52,18 +52,18 @@ namespace Ownership
 		//! \name Constructors
 		//@{
 		//! Default constructor
-		ReferenceCounted()
-			:pCount(new unsigned int(1))
+		ReferenceCounted() :
+			pCount(new unsigned int(1))
 		{}
 
 		//! Copy constructor
-		ReferenceCounted(const ReferenceCounted& c)
-			:pCount(c.pCount)
+		ReferenceCounted(const ReferenceCounted& c) :
+			pCount(c.pCount)
 		{}
 
 		//! Copy constructor for any king of template parameter
-		template<typename U> ReferenceCounted(const ReferenceCounted<U>& c)
-			:pCount(reinterpret_cast<const ReferenceCounted&>(c).pCount)
+		template<typename U> ReferenceCounted(const ReferenceCounted<U>& c) :
+			pCount(reinterpret_cast<const ReferenceCounted&>(c).pCount)
 		{}
 		//@}
 
@@ -72,6 +72,11 @@ namespace Ownership
 		*/
 		void initFromRawPointer(const T&)
 		{
+		}
+
+		bool unique() const
+		{
+			return (*pCount == 1);
 		}
 
 		/*!
@@ -137,6 +142,13 @@ namespace Ownership
 		template<typename U> COMReferenceCounted(const COMReferenceCounted<U>&)
 		{}
 		//@}
+
+
+		bool unique() const
+		{
+			assert(false && "not implemented");
+			return false;
+		}
 
 		/*!
 		** \brief Initialization from a raw pointer
@@ -215,6 +227,11 @@ namespace Ownership
 		{
 		}
 
+		bool unique() const
+		{
+			return (pCount == 1);
+		}
+
 		/*!
 		** \brief Clone this object
 		** \param rhs The original object
@@ -279,6 +296,11 @@ namespace Ownership
 		{}
 		//@}
 
+		bool unique() const
+		{
+			return true;
+		}
+
 		/*!
 		** \brief Initialization from a raw pointer
 		*/
@@ -337,6 +359,11 @@ namespace Ownership
 		{
 		}
 
+		bool unique() const
+		{
+			return true;
+		}
+
 		/*!
 		** \brief Clone this object
 		**
@@ -352,6 +379,8 @@ namespace Ownership
 		static void swapPointer(NoCopy&) {}
 
 	}; // class NoCopy
+
+
 
 
 
