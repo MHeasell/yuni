@@ -102,6 +102,13 @@ namespace Ast
 				node->expression()->accept(this);
 		}
 
+		virtual void visit(ForExpressionNode* node)
+		{
+			node->set()->accept(this);
+			if (node->body())
+				node->body()->accept(this);
+		}
+
 		virtual void visit(ExpressionListNode* node)
 		{
 			ExpressionListNode::List& exprList = node->expressions();

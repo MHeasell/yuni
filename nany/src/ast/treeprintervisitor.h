@@ -153,6 +153,18 @@ namespace Ast
 		}
 
 
+		virtual void visit(ForExpressionNode* node)
+		{
+			std::cout << pIndent << "<For Expression Node>" << std::endl;
+			indent();
+			std::cout << pIndent << "Symbol : " << node->identifier() << std::endl;
+			node->set()->accept(this);
+			if (node->body())
+				node->body()->accept(this);
+			unindent();
+		}
+
+
 		virtual void visit(ExpressionListNode* node)
 		{
 			std::cout << pIndent << "<Expression List Node>" << std::endl;
@@ -280,6 +292,26 @@ namespace Ast
 		virtual void visit(SuperiorEqualExpressionNode* node)
 		{
 			std::cout << pIndent << "<Superior Equal Expression Node>" << std::endl;
+			indent();
+			node->left()->accept(this);
+			node->right()->accept(this);
+			unindent();
+		}
+
+
+		virtual void visit(ShiftLeftExpressionNode* node)
+		{
+			std::cout << pIndent << "<Shift Left Expression Node>" << std::endl;
+			indent();
+			node->left()->accept(this);
+			node->right()->accept(this);
+			unindent();
+		}
+
+
+		virtual void visit(ShiftRightExpressionNode* node)
+		{
+			std::cout << pIndent << "<Shift Right Expression Node>" << std::endl;
 			indent();
 			node->left()->accept(this);
 			node->right()->accept(this);
