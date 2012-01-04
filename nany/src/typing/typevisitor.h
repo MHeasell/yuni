@@ -152,6 +152,15 @@ namespace Typing
 		}
 
 
+		virtual void visit(Ast::ForExpressionNode* node)
+		{
+			node->set()->accept(this);
+			if (node->body())
+				node->body()->accept(this);
+			node->type("void");
+		}
+
+
 		virtual void visit(Ast::ExpressionListNode* node)
 		{
 			Ast::ExpressionListNode::List& exprList = node->expressions();

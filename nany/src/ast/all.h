@@ -27,6 +27,7 @@ namespace Ast
 # include "visibilityqualifiernode.h"
 # include "ifexpressionnode.h"
 # include "whileexpressionnode.h"
+# include "forexpressionnode.h"
 # include "expressionlistnode.h"
 # include "parameterlistnode.h"
 # include "argumentlistnode.h"

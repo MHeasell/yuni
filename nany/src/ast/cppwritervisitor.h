@@ -390,6 +390,35 @@ namespace Ast
 		}
 
 
+		virtual void visit(ForExpressionNode* node)
+		{
+			pOut << "for (";
+			++pSkipCOW;
+			writeType(node->set()->type());
+			--pSkipCOW;
+			pOut << "::iterator" << node->identifier() << " = ";
+			node->set()->accept(this);
+			pOut << ".begin(); " << node->identifier() << " != ";
+			node->set()->accept(this);
+			pOut << ".end(); ++" << node->identifier() << ')';
+			if (node->body())
+			{
+				bool isScope =
+					(dynamic_cast<ScopeNode*>(node->body())) ||
+					(dynamic_cast<ExpressionListNode*>(node->body()));
+				if (!isScope)
+					indent();
+				pOut << pIndent;
+				node->body()->accept(this);
+				if (!isScope)
+				{
+				 	pOut << ';' << std::endl;
+					unindent();
+				}
+			}
+		}
+
+
 		virtual void visit(ParallelExpressionNode* node)
 		{
 			// TODO : parallelize the expression
@@ -725,7 +754,7 @@ namespace Ast
 		{
 			if (!type)
 				return;
-			if (type->isConst())
+			if (type->isConst() && !type->isValue())
 				pOut << "const ";
 			pOut << type->name();
 		}

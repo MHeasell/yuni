@@ -54,6 +54,9 @@ namespace Ast
 	//! Repetitive expression
 	class WhileExpressionNode;
 
+	//! Repetitive expression for iterating on a set of data
+	class ForExpressionNode;
+
 	//! Expression that parallelizes the execution of a contained expression
 	class ParallelExpressionNode;
 

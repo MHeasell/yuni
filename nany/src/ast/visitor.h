@@ -41,6 +41,8 @@ namespace Ast
 
 		virtual void visit(WhileExpressionNode*) = 0;
 
+		virtual void visit(ForExpressionNode*) = 0;
+
 		virtual void visit(ExpressionListNode*) = 0;
 
 		virtual void visit(ParameterListNode*) = 0;

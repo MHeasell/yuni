@@ -25,7 +25,10 @@ namespace Ast
 		{}
 
 		virtual ~WhileExpressionNode()
-		{}
+		{
+			delete pCondition;
+			delete pExpr;
+		}
 
 		virtual void accept(Visitor* visitor)
 		{
