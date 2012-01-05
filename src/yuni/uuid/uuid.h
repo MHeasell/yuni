@@ -131,7 +131,8 @@ namespace Yuni
 		/*!
 		** \brief Write the UUID into string in a C-String
 		**
-		** \param cstring A char* string, which must be 37-bytes length
+		** \param cstring A char* string, which must be 42-bytes length
+		** \internal 42 bytes are required on Windows (more rooms are needed)
 		*/
 		void writeToCString(char* cstring) const;
 
