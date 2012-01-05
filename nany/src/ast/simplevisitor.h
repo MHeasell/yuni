@@ -158,6 +158,11 @@ namespace Ast
 			node->right()->accept(this);
 		}
 
+		virtual void visit(DotExpressionNode* node)
+		{
+			node->left()->accept(this);
+		}
+
 		virtual void visit(EqualExpressionNode* node)
 		{
 			node->left()->accept(this);

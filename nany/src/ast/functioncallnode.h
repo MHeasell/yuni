@@ -23,9 +23,8 @@ namespace Ast
 	class FunctionCallNode: public Node
 	{
 	public:
-		template<class StringT>
-		FunctionCallNode(const StringT& name, ArgumentListNode* params):
-			pFunctionName(name),
+		FunctionCallNode(Node* function, ArgumentListNode* params):
+			pFunction(function),
 			pParams(params)
 		{}
 
@@ -34,13 +33,13 @@ namespace Ast
 			visitor->visit(this);
 		}
 
-		const Yuni::String& name() const { return pFunctionName; }
+		Node* function() const { return pFunction; }
 
 		ArgumentListNode* params() const { return pParams; }
 
 	private:
-		//! Identifier representing the name of the function
-		Yuni::String pFunctionName;
+		//! Expr representing the function
+		Node* pFunction;
 
 		//! Function parameters
 		ArgumentListNode* pParams;

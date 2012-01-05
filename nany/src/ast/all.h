@@ -35,6 +35,7 @@ namespace Ast
 # include "typeexpressionnode.h"
 # include "typequalifierlistnode.h"
 # include "assignmentexpressionnode.h"
+# include "dotexpressionnode.h"
 # include "vardeclarationnode.h"
 # include "equalexpressionnode.h"
 # include "notequalexpressionnode.h"

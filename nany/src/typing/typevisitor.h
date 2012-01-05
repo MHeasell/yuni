@@ -223,6 +223,15 @@ namespace Typing
 		}
 
 
+		virtual void visit(Ast::DotExpressionNode* node)
+		{
+			node->left()->accept(this);
+			// TODO : Resolve the call to node->field, and find the type
+			// This is wrong, it is just a temporary placeholder
+			node->type("void");
+		}
+
+
 		virtual void visit(Ast::EqualExpressionNode* node)
 		{
 			node->left()->accept(this);

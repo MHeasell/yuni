@@ -72,6 +72,9 @@ namespace Ast
 	//! Assignment or variable declaration
 	class AssignmentExpressionNode;
 
+	//! Access to a class field
+	class DotExpressionNode;
+
 	//! Equal comparison
 	class EqualExpressionNode;
 

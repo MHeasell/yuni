@@ -173,7 +173,8 @@ Comment End = '*#' | '*/'
 
 <Function Declaration> ::= <Optional Optim Qualifier> 'function' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> <Function Body>
 
-<Anonymous Function Declaration> ::= <Optional Optim Qualifier> 'function' <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> <Function Body>
+<Anonymous Function Declaration> ::= 'function' <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> <Function Body>
+               | OptimQualifier 'function' <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> <Function Body>
 
 <Method Declaration> ::= <Optional Optim Qualifier> 'method' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> <Function Body>
                | <Optional Optim Qualifier> 'method' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> ';' ! Abstract method declaration
@@ -274,8 +275,12 @@ Comment End = '*#' | '*/'
 <Local Declaration Exp> ::= <Value> <Typing>
                | <Is Exp>
 
-<Is Exp>    ::= <Is Exp> 'is' <Simple Exp>
-               | <Simple Exp>
+<Is Exp>    ::= <Is Exp> 'is' <Anonymous Decl Exp>
+               | <Anonymous Decl Exp>
+
+<Anonymous Decl Exp> ::= <Simple Exp>
+               | <Anonymous Function Declaration>
+               | <Anonymous Class Declaration>
 
 <Simple Exp> ::= <Binary Exp>
                | 'new' <Simple Exp>
@@ -290,8 +295,6 @@ Comment End = '*#' | '*/'
                | 'for' Identifier 'in' <Expression> 'order' 'do' <Expression>
                | 'timeout' <Possibly Parallel Exp> 'do' <Expression>
                | 'timeout' <Possibly Parallel Exp> 'do' <Expression> 'else' <Expression>
-               | <Anonymous Function Declaration>
-               | <Anonymous Class Declaration>
                | '{' <Expression> '}'
 
 <Else Expression> ::= 'else' <Possibly Parallel Exp>
@@ -355,15 +358,23 @@ Comment End = '*#' | '*/'
 
 ! For use in arithmetic, requires parentheses around expressions to have proper priorities
 ! e.g. : weight := - (car.weight + passengers.weight)
-<Value>  ::= <Literal> <Subscript> ! 2.4.round
-               | '(' <SingleThread Exp> ')' <Subscript>
-               | Identifier <Subscript>
+<Value>  ::= <Literal> ! 2.4.round
+               | <Value> '.' Identifier ! Property / attribute / method call with no argument
+               | <Value> '(' <Argument List> ')' ! Function or method call with arguments
+               | '(' <SingleThread Exp> ')'
+               | Identifier
                | <Value> '[' ']'
-               | <Value> '[' <SingleThread Exp> ']' <Subscript>
-!               | <Value> '<' <Type Arguments> '>' <Subscript>
-               | '[' <SingleThread Exp> ']' <Subscript>
+               | <Value> '[' <SingleThread Exp> ']'
+!               | <Value> '<' <Type Arguments> '>'
+               | '[' <Array Arguments> ']'
+               | '[:' <Array Arguments> ':]'
+               | '[:' <Array Arguments> ':['
+               | ']:' <Array Arguments> ':]'
+               | ']:' <Array Arguments> ':['
 
-<Subscript> ::= ! Empty
-               | '.' <Value> ! Property or attribute or function call with no argument
-               | '(' <Argument List> ')' ! Function / Method call with arguments
+<Array Arguments> ::= <SingleThread Exp> <Array Arguments Continued>
+               | <SingleThread Exp> '..' <SingleThread Exp> <Array Arguments Continued>
 
+<Array Arguments Continued> ::= ! Empty
+               | <SingleThread Exp> ',' <Array Arguments Continued>
+               | <SingleThread Exp> '..' <SingleThread Exp> ',' <Array Arguments Continued>

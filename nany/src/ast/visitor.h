@@ -59,6 +59,8 @@ namespace Ast
 
 		virtual void visit(AssignmentExpressionNode*) = 0;
 
+		virtual void visit(DotExpressionNode*) = 0;
+
 		virtual void visit(EqualExpressionNode*) = 0;
 
 		virtual void visit(NotEqualExpressionNode*) = 0;
