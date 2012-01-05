@@ -20,8 +20,7 @@ namespace Yuni
 		assert(sizeof(uuid_t) == 16);
 		uuid_generate(pValue.cstring);
 		# else
-		if (S_OK != ::CoCreateGuid((::GUID*)pValue.cstring))
-			// Sadly, the call can fail
+		if (S_OK != ::CoCreateGuid((::GUID*)pValue.cstring)) // Sadly, the call can fail
 			clear();
 		# endif
 	}
@@ -39,8 +38,15 @@ namespace Yuni
 		::StringFromGUID2(*(::GUID*)pValue.cstring, buffer, 39);
 		// Convert to non-wide string, and cut the prepended and appended braces
 		size_t converted = 0;
-		if (::wcstombs_s(&converted, cstring, 36, buffer + 1, 36))
+		// we should have something like {000000000-0000-0000-0000-00000000000} in buffer
+		if (::wcstombs_s(&converted, cstring, 42, buffer + 1, 36))
 			strcpy_s(cstring, 36, "000000000-0000-0000-0000-00000000000");
+		else
+		{
+			// The guid produced on Windows is uppercase
+			for (unsigned int i = 0; i != 36; ++i)
+				cstring[i] = String::ToLower(cstring[i]);
+		}
 		// Do not forget the null terminator
 		cstring[36] = '\0';
 		# endif
@@ -148,7 +154,8 @@ namespace Yuni
 
 std::ostream& operator << (std::ostream& out, const Yuni::UUID& rhs)
 {
-	char cstring[37];
+	// WriteToCString is guarantee to have 42 chars
+	char cstring[42];
 	Yuni::Private::UUID::Helper::WriteToCString(cstring, rhs);
 	out.write(cstring, 36);
 	return out;

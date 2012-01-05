@@ -105,9 +105,11 @@ namespace CString
 		static void Perform(CStringT& s, const Yuni::UUID& rhs)
 		{
 			const unsigned int currentLength = s.size();
-			s.resize(s.size() + 37); // 36 + 1 zero-terminated
+			// writeToCString is guarantee to have 42 chars
+			s.reserve(currentLength + 42); // at least 36 + 1 zero-terminated
 			Yuni::Private::UUID::Helper::WriteToCString((char*)s.data() + currentLength, rhs);
-			s.removeLast();
+			s.resize(currentLength + 36); // guid is 36-bytes length
+			//s.removeLast();
 		}
 
 	}; // class Append
