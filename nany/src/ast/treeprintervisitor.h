@@ -239,6 +239,16 @@ namespace Ast
 		}
 
 
+		virtual void visit(DotExpressionNode* node)
+		{
+			std::cout << pIndent << "<Dot Expression Node>" << std::endl;
+			indent();
+			node->left()->accept(this);
+			std::cout << pIndent << "Symbol : " << node->field() << std::endl;
+			unindent();
+		}
+
+
 		virtual void visit(EqualExpressionNode* node)
 		{
 			std::cout << pIndent << "<Equal Expression Node>" << std::endl;

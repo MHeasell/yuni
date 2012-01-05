@@ -486,6 +486,13 @@ namespace Ast
 		}
 
 
+		virtual void visit(DotExpressionNode* node)
+		{
+			node->left()->accept(this);
+			pOut << '.' << node->field();
+		}
+
+
 		virtual void visit(EqualExpressionNode* node)
 		{
 			if (node->left()->type() && node->left()->type()->isValue())
