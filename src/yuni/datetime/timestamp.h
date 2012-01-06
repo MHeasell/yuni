@@ -22,7 +22,7 @@ namespace DateTime
 	/*!
 	** \brief Get the current timestamp
 	*/
-	Timestamp CurrentTimestamp();
+	Timestamp Now();
 
 
 	/*!
