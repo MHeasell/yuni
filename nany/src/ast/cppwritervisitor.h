@@ -28,6 +28,7 @@ namespace Ast
 		virtual void visit(ProgramNode* node)
 		{
 			pOut << "#include <yuni/yuni.h>" << std::endl;
+			pOut << "#include <yuni/core/cow.h>" << std::endl;
 			pOut << "#include <yuni/core/string.h>" << std::endl;
 			pOut << "#include <yuni/io/file.h>" << std::endl;
 			pOut << "#include <yuni/io/io.h>" << std::endl;
@@ -671,7 +672,8 @@ namespace Ast
 
 		virtual void visit(FunctionCallNode* node)
 		{
-			pOut << node->name() << '(';
+			node->function()->accept(this);
+			pOut << '(';
 			node->params()->accept(this);
 			pOut << ')';
 		}
@@ -685,21 +687,19 @@ namespace Ast
 
 		virtual void visit(LiteralNode<bool>* node)
 		{
-			pOut << (node->data
-				? "COW<bool>(new bool(true))"
-				: "COW<bool>(new bool(false))");
+			pOut << (node->data ? "true" : "false");
 		}
 
 
 		virtual void visit(LiteralNode<int>* node)
 		{
-			pOut << "COW<int>(new int(" << node->data << "))";
+			pOut << node->data;
 		}
 
 
 		virtual void visit(LiteralNode<unsigned int>* node)
 		{
-			pOut << "COW<unsigned int>(new unsigned int(" << node->data << "u))";
+			pOut << node->data << 'u';
 		}
 
 
@@ -717,7 +717,7 @@ namespace Ast
 
 		virtual void visit(LiteralNode<char>* node)
 		{
-			pOut << "COW<char>(new char('" << node->data << "'))";
+			pOut << '\'' << node->data << '\'';
 		}
 
 
@@ -728,7 +728,7 @@ namespace Ast
 			wctomb(buffer, node->data);
 			buffer[len] = '\0';
 
-			pOut << "COW<char>(new char('" << buffer << "'))";
+			pOut << '\'' << buffer << '\'';
 		}
 
 
@@ -761,9 +761,14 @@ namespace Ast
 		{
 			if (!type)
 				return;
-			if (type->isConst() && !type->isValue())
+			if (type->isValue())
+			{
+				pOut << type->name();
+				return;
+			}
+			if (type->isConst())
 				pOut << "const ";
-			pOut << type->name();
+			pOut << "COW<" << type->name()<< " >";
 		}
 
 		void indent()

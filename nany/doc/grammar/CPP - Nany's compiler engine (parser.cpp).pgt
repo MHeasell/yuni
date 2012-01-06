@@ -33,6 +33,7 @@ extern "C"
 #include "parser.h"
 #include "yuni/yuni.h"
 #include "yuni/core/string.h"
+#include "yuni/uuid/uuid.h"
 #include "../ast/all.h"
 #include "../typing/type.h"
 

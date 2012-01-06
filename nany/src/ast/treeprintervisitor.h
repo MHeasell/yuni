@@ -430,7 +430,7 @@ namespace Ast
 		{
 			std::cout << pIndent << "<Function Call Node>" << std::endl;
 			indent();
-			std::cout << pIndent << "Symbol : " << node->name() << std::endl;
+			node->function()->accept(this);
 			node->params()->accept(this);
 			unindent();
 		}

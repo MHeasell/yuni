@@ -7,7 +7,7 @@ CFLAGS = -Wall -W -Wextra -ggdb -I../../src/
 
 CXXFLAGS = -Wall -W -Wextra -std=gnu++0x -ggdb -I../../src/
 
-LDFLAGS = -L../../src/build/debug/lib -l"yuni-static-core"
+LDFLAGS = -L../../src/build/debug/lib -l"yuni-static-core" -l"yuni-static-uuid" -lole32 -lrpcrt4
 
 SRC = main.cpp parser/parser.cpp typing/type.cpp
 
