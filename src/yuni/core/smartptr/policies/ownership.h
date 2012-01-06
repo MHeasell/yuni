@@ -15,6 +15,7 @@
 */
 
 
+# include <cassert>
 # include "../../../thread/policy.h"
 # include "../../static/assert.h"
 # include "../../atomic/int.h"
@@ -229,7 +230,7 @@ namespace Ownership
 
 		bool unique() const
 		{
-			return (pCount == 1);
+			return (*pCount == 1);
 		}
 
 		/*!
