@@ -87,7 +87,7 @@ namespace Yuni
 namespace DateTime
 {
 
-	Timestamp CurrentTimestamp()
+	Timestamp Now()
 	{
 		# ifdef YUNI_OS_MSVC
 		return static_cast<sint64>(::_time64(nullptr));
