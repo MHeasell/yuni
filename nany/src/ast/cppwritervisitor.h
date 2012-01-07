@@ -384,7 +384,6 @@ namespace Ast
 				node->expression()->accept(this);
 				if (!isScope)
 				{
-				 	pOut << ';' << std::endl;
 					unindent();
 				}
 			}
@@ -397,7 +396,7 @@ namespace Ast
 			++pSkipCOW;
 			writeType(node->set()->type());
 			--pSkipCOW;
-			pOut << "::iterator" << node->identifier() << " = ";
+			pOut << "::iterator " << node->identifier() << " = ";
 			node->set()->accept(this);
 			pOut << ".begin(); " << node->identifier() << " != ";
 			node->set()->accept(this);
@@ -413,7 +412,6 @@ namespace Ast
 				node->body()->accept(this);
 				if (!isScope)
 				{
-				 	pOut << ';' << std::endl;
 					unindent();
 				}
 			}
@@ -433,9 +431,9 @@ namespace Ast
 			{
 				if (node->isArray())
 				{
-					pOut << "COW<std::vector<COW<";
+					pOut << "COW<std::vector<";
 					node->expression()->accept(this);
-					pOut << " > > >";
+					pOut << " > >";
 				}
 				else if (!node->type()->isValue())
 				{
@@ -462,9 +460,18 @@ namespace Ast
 
 		virtual void visit(VarDeclarationNode* node)
 		{
-			pOut << "COW<";
-			node->typeDecl()->accept(this);
-			pOut << " > ";
+			if (!node->typeDecl()->type()->isValue())
+			{
+				pOut << "COW<";
+				node->typeDecl()->accept(this);
+				pOut << " > ";
+			}
+			else
+			{
+				node->typeDecl()->accept(this);
+				pOut << ' ';
+			}
+
 			node->left()->accept(this);
 			if (node->typeDecl()->isArray() && node->typeDecl()->arrayCardinality() > 0)
 			{
