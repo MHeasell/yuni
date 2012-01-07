@@ -2,8 +2,9 @@
 
 function main : int
 {
-	mySet := new int[];
+	mySet : int[] := new int[];
 	for i in mySet do
 		io.cout << i;
+	myStringSet : string[] := new string[];
 	return 0;
 }

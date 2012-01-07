@@ -1841,7 +1841,7 @@ Nany::Ast::Node* Rule_SimpleExp_while_do(TokenStruct* token)
 
 
 
-// <Simple Exp> ::= for Identifier in <Expression> do <Expression>
+// <Simple Exp> ::= for Identifier in <Expression> do <Possibly Parallel Exp>
 Nany::Ast::Node* Rule_SimpleExp_for_Identifier_in_do(TokenStruct* token)
 {
 	// Read the identifier
@@ -1870,7 +1870,7 @@ Nany::Ast::Node* Rule_SimpleExp_for_Identifier_in_order_Colon_packedby_Colon_do(
 
 
 
-// <Simple Exp> ::= for Identifier in <Expression> order do <Expression>
+// <Simple Exp> ::= for Identifier in <Expression> order do <Possibly Parallel Exp>
 Nany::Ast::Node* Rule_SimpleExp_for_Identifier_in_order_do(TokenStruct* token)
 {
 	// Read the identifier
@@ -1891,7 +1891,7 @@ Nany::Ast::Node* Rule_SimpleExp_for_Identifier_in_order_do(TokenStruct* token)
 
 
 
-// <Simple Exp> ::= timeout <Possibly Parallel Exp> do <Expression>
+// <Simple Exp> ::= timeout <Possibly Parallel Exp> do <Possibly Parallel Exp>
 Nany::Ast::Node* Rule_SimpleExp_timeout_do(TokenStruct* token)
 {
 	// Not yet implemented !
@@ -1901,7 +1901,7 @@ Nany::Ast::Node* Rule_SimpleExp_timeout_do(TokenStruct* token)
 
 
 
-// <Simple Exp> ::= timeout <Possibly Parallel Exp> do <Expression> else <Expression>
+// <Simple Exp> ::= timeout <Possibly Parallel Exp> do <Possibly Parallel Exp> else <Possibly Parallel Exp>
 Nany::Ast::Node* Rule_SimpleExp_timeout_do_else(TokenStruct* token)
 {
 	// Not yet implemented !
@@ -2862,15 +2862,15 @@ Nany::Ast::Node* (*RuleJumpTable[])(TokenStruct* token) =
 	Rule_SimpleExp_if_then,
 	// 142. <Simple Exp> ::= while <Possibly Parallel Exp> do <Possibly Parallel Exp>
 	Rule_SimpleExp_while_do,
-	// 143. <Simple Exp> ::= for Identifier in <Expression> do <Expression>
+	// 143. <Simple Exp> ::= for Identifier in <Expression> do <Possibly Parallel Exp>
 	Rule_SimpleExp_for_Identifier_in_do,
 	// 144. <Simple Exp> ::= for Identifier in <Expression> order ':' <Expression> packedby ':' <Expression> do <Possibly Parallel Exp>
 	Rule_SimpleExp_for_Identifier_in_order_Colon_packedby_Colon_do,
-	// 145. <Simple Exp> ::= for Identifier in <Expression> order do <Expression>
+	// 145. <Simple Exp> ::= for Identifier in <Expression> order do <Possibly Parallel Exp>
 	Rule_SimpleExp_for_Identifier_in_order_do,
-	// 146. <Simple Exp> ::= timeout <Possibly Parallel Exp> do <Expression>
+	// 146. <Simple Exp> ::= timeout <Possibly Parallel Exp> do <Possibly Parallel Exp>
 	Rule_SimpleExp_timeout_do,
-	// 147. <Simple Exp> ::= timeout <Possibly Parallel Exp> do <Expression> else <Expression>
+	// 147. <Simple Exp> ::= timeout <Possibly Parallel Exp> do <Possibly Parallel Exp> else <Possibly Parallel Exp>
 	Rule_SimpleExp_timeout_do_else,
 	// 148. <Simple Exp> ::= '{' <Expression> '}'
 	Rule_SimpleExp_LBrace_RBrace,
