@@ -403,9 +403,7 @@ namespace Ast
 			pOut << ".end(); ++" << node->identifier() << ')';
 			if (node->body())
 			{
-				bool isScope =
-					(dynamic_cast<ScopeNode*>(node->body())) ||
-					(dynamic_cast<ExpressionListNode*>(node->body()));
+				bool isScope = dynamic_cast<ScopeNode*>(node->body());
 				if (!isScope)
 					indent();
 				pOut << pIndent;
