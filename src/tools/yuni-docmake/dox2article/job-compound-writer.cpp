@@ -380,7 +380,7 @@ namespace Job
 
 			out << "<tr>";
 
-			id.clear() << member.name << '_' << (++GenerationNumericID) << DateTime::CurrentTimestamp();
+			id.clear() << member.name << '_' << (++GenerationNumericID) << DateTime::Now();
 			id.replace('-', '_'); // prevent against int overflow
 			toggle.clear() << "toggleVisibility('" << id << "')";
 
