@@ -148,7 +148,7 @@ namespace Ownership
 		bool unique() const
 		{
 			assert(false && "not implemented");
-			return false;
+			return rhs && rhs->unique();
 		}
 
 		/*!
@@ -206,8 +206,8 @@ namespace Ownership
 		//! \name Constructors
 		//@{
 		//! Default constructor
-		ReferenceCountedMT()
-			:pCount(new AtomicType(1))
+		ReferenceCountedMT() :
+			pCount(new AtomicType(1))
 		{}
 		//! Copy constructor
 		ReferenceCountedMT(const ReferenceCountedMT& c)

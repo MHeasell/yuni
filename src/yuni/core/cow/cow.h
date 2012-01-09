@@ -9,7 +9,7 @@ namespace Yuni
 {
 
 	/*!
-	** \brief COW Idiom (copy-on-write)
+	** \brief COW Idiom (copy-on-write, also known as implicit sharing)
 	*/
 	template <class T,                                                        // The original type
 		template <class> class OwspP = Policy::Ownership::ReferenceCountedMT, // Ownership policy
@@ -90,7 +90,6 @@ namespace Yuni
 
 		const T& operator * () const
 		{
-			copy();
 			return *pValue;
 		}
 
@@ -124,13 +123,20 @@ namespace Yuni
 			return !pValue;
 		}
 
-	private:
-		void copy()
+		bool operator == (const COW& rhs) const
 		{
-			T* pointer = SmartPtrType::WeakPointer(pValue);
-			if (!(!pointer || pValue.unique()))
-				pValue = new T(*pointer);
+			return pValue == rhs.pValue;
 		}
+
+		bool operator != (const COW& rhs) const
+		{
+			return pValue != rhs.pValue;
+		}
+
+
+	private:
+		//! Perform a deep-copy if required
+		void copy();
 
 	private:
 		//! The real value
