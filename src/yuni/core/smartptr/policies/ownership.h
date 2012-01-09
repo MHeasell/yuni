@@ -148,7 +148,8 @@ namespace Ownership
 		bool unique() const
 		{
 			assert(false && "not implemented");
-			return rhs && rhs->unique();
+			//return rhs && rhs->unique();
+			return false;
 		}
 
 		/*!

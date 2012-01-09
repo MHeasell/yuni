@@ -37,10 +37,16 @@ namespace Yuni
 		wchar_t buffer[39];
 		::StringFromGUID2(*(::GUID*)pValue.cstring, buffer, 39);
 		// Convert to non-wide string, and cut the prepended and appended braces
+#ifdef YUNI_OS_MINGW
+		// we should have something like {000000000-0000-0000-0000-00000000000} in buffer
+		if (::wcstombs(cstring, buffer + 1, 36))
+			::strncpy(cstring, "000000000-0000-0000-0000-00000000000", 36);
+#else
 		size_t converted = 0;
 		// we should have something like {000000000-0000-0000-0000-00000000000} in buffer
 		if (::wcstombs_s(&converted, cstring, 42, buffer + 1, 36))
-			strcpy_s(cstring, 36, "000000000-0000-0000-0000-00000000000");
+			::strcpy_s(cstring, 36, "000000000-0000-0000-0000-00000000000");
+#endif // YUNI_OS_MINGW
 		else
 		{
 			// The guid produced on Windows is uppercase
