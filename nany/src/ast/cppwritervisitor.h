@@ -458,17 +458,8 @@ namespace Ast
 
 		virtual void visit(VarDeclarationNode* node)
 		{
-			if (!node->typeDecl()->type()->isValue())
-			{
-				pOut << "COW<";
-				node->typeDecl()->accept(this);
-				pOut << " > ";
-			}
-			else
-			{
-				node->typeDecl()->accept(this);
-				pOut << ' ';
-			}
+			node->typeDecl()->accept(this);
+			pOut << ' ';
 
 			node->left()->accept(this);
 			if (node->typeDecl()->isArray() && node->typeDecl()->arrayCardinality() > 0)
@@ -679,7 +670,8 @@ namespace Ast
 		{
 			node->function()->accept(this);
 			pOut << '(';
-			node->params()->accept(this);
+			if (node->params())
+				node->params()->accept(this);
 			pOut << ')';
 		}
 

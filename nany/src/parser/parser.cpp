@@ -208,9 +208,10 @@ Nany::Ast::Node* Rule_DeclarationList3(TokenStruct* token)
 // <Declaration List> ::= <Enum Declaration> <Declaration List>
 Nany::Ast::Node* Rule_DeclarationList4(TokenStruct* token)
 {
-	// TODO : Handle enums
+	Nany::Ast::EnumDeclarationNode* enumDecl = ParseChild<Nany::Ast::EnumDeclarationNode>(token, 0);
 
 	Nany::Ast::DeclarationListNode* declList = ParseChild<Nany::Ast::DeclarationListNode>(token, 1);
+	declList->prepend(enumDecl);
 	return declList;
 }
 
@@ -936,8 +937,14 @@ Nany::Ast::Node* Rule_WorkflowPermissions(TokenStruct* token)
 // <Enum Declaration> ::= enum Identifier '{' <Enum Content> '}'
 Nany::Ast::Node* Rule_EnumDeclaration_enum_Identifier_LBrace_RBrace(TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Not yet implemented !");
+	// Read the name of the enum
+	const wchar_t* qualifier = GetChildSymbol(token, 1);
+	size_t len = wcslen(qualifier);
+	char* buffer = new char[len + 1];
+	wcstombs(buffer, qualifier, len);
+	buffer[len] = 0;
+
+	return new Nany::Ast::EnumDeclarationNode(buffer, nullptr);
 }
 
 

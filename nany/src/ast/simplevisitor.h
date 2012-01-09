@@ -48,6 +48,10 @@ namespace Ast
 				node->body()->accept(this);
 		}
 
+		virtual void visit(EnumDeclarationNode*)
+		{
+		}
+
 		virtual void visit(ClassDeclarationNode* node)
 		{
 			if (node->declarations())

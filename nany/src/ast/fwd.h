@@ -21,6 +21,9 @@ namespace Ast
 	//! Function declaration
 	class FunctionDeclarationNode;
 
+	//! Enum declaration
+	class EnumDeclarationNode;
+
 	//! Class declaration
 	class ClassDeclarationNode;
 

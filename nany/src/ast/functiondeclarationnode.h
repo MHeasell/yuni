@@ -6,6 +6,9 @@
 # include "visitor.h"
 # include "yuni/yuni.h"
 # include "yuni/core/string.h"
+# include "parameterlistnode.h"
+# include "scopenode.h"
+# include "typeexpressionnode.h"
 
 namespace Nany
 {
@@ -38,6 +41,13 @@ namespace Ast
 			pBody(body),
 			pReturnType(returnType)
 		{}
+
+		virtual ~FunctionDeclarationNode()
+		{
+			delete pParams;
+			delete pBody;
+			delete pReturnType;
+		}
 
 		virtual void accept(Visitor* visitor)
 		{

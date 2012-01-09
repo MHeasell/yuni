@@ -37,6 +37,13 @@ namespace Ast
 			visitor->visit(this);
 		}
 
+		virtual ~MethodDeclarationNode()
+		{
+			delete pParams;
+			delete pBody;
+			delete pReturnType;
+		}
+
 		const Yuni::String& name() const { return pMethodName; }
 
 		ParameterListNode* params() const { return pParams; }
