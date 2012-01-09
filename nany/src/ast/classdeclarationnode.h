@@ -29,6 +29,11 @@ namespace Ast
 			pDeclarations(decls)
 		{}
 
+		virtual ~ClassDeclarationNode()
+		{
+			delete pDeclarations;
+		}
+
 		virtual void accept(Visitor* visitor)
 		{
 			visitor->visit(this);

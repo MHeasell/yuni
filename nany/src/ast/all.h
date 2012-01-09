@@ -19,6 +19,7 @@ namespace Ast
 # include "unitdeclarationnode.h"
 # include "declarationlistnode.h"
 # include "functiondeclarationnode.h"
+# include "enumdeclarationnode.h"
 # include "classdeclarationnode.h"
 # include "methoddeclarationnode.h"
 # include "attributedeclarationnode.h"

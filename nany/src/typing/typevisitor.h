@@ -42,7 +42,7 @@ namespace Typing
 			}
 			else
 				// If the type was not given, try to get the type from the body
-				node->type(node->body()->type());
+				node->type(node->body() ? node->body()->type() : Type::Get("void"));
 		}
 
 

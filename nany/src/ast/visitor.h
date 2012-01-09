@@ -25,6 +25,8 @@ namespace Ast
 
 		virtual void visit(FunctionDeclarationNode*) = 0;
 
+		virtual void visit(EnumDeclarationNode*) = 0;
+
 		virtual void visit(ClassDeclarationNode*) = 0;
 
 		virtual void visit(MethodDeclarationNode*) = 0;

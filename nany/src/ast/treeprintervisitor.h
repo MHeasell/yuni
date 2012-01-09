@@ -61,6 +61,19 @@ namespace Ast
 		}
 
 
+		virtual void visit(EnumDeclarationNode* node)
+		{
+			std::cout << pIndent << "<Enum Declaration Node>" << std::endl;
+			indent();
+			std::cout << pIndent << "Symbol : " << node->name() << std::endl;
+			EnumDeclarationNode::EnumValueMap* values = node->values();
+			EnumDeclarationNode::EnumValueMap::iterator end = values->end();
+			for (EnumDeclarationNode::EnumValueMap::iterator it = values->begin(); it != end; ++it)
+				std::cout << pIndent << it->first << " : " << it->second << std::endl;
+			unindent();
+		}
+
+
 		virtual void visit(ClassDeclarationNode* node)
 		{
 			std::cout << pIndent << "<Class Declaration Node>" << std::endl;
@@ -431,7 +444,8 @@ namespace Ast
 			std::cout << pIndent << "<Function Call Node>" << std::endl;
 			indent();
 			node->function()->accept(this);
-			node->params()->accept(this);
+			if (node->params())
+				node->params()->accept(this);
 			unindent();
 		}
 
