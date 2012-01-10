@@ -387,20 +387,18 @@ namespace Ast
 					unindent();
 				}
 			}
+			else
+				pOut << "{}";
 		}
 
 
 		virtual void visit(ForExpressionNode* node)
 		{
-			pOut << "for (";
-			++pSkipCOW;
-			writeType(node->set()->type());
-			--pSkipCOW;
-			pOut << "::iterator " << node->identifier() << " = ";
+			pOut << "for (auto " << node->identifier() << " = ";
 			node->set()->accept(this);
-			pOut << ".begin(); " << node->identifier() << " != ";
+			pOut << "->begin(); " << node->identifier() << " != ";
 			node->set()->accept(this);
-			pOut << ".end(); ++" << node->identifier() << ')';
+			pOut << "->end(); ++" << node->identifier() << ')' << std::endl;
 			if (node->body())
 			{
 				bool isScope = dynamic_cast<ScopeNode*>(node->body());
@@ -413,6 +411,8 @@ namespace Ast
 					unindent();
 				}
 			}
+			else
+				pOut << "{}";
 		}
 
 
@@ -651,11 +651,10 @@ namespace Ast
 
 		virtual void visit(NewExpressionNode* node)
 		{
-			pOut << "COW<";
+			pOut << "new ";
+			pSkipCOW++;
 			node->expression()->accept(this);
-			pOut << " >(new ";
-			node->expression()->accept(this);
-			pOut << ')';
+			pSkipCOW--;
 		}
 
 
