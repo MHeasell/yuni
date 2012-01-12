@@ -112,7 +112,7 @@ namespace Ast
 						pOut << ", ";
 				}
 			}
-			pOut << ')' << std::endl;
+			pOut << ')' << std::endl << pIndent;
 
 			// Body
 			pFunctionScope = true;
@@ -192,7 +192,7 @@ namespace Ast
 						pOut << ", ";
 				}
 			}
-			pOut << ')' << std::endl;
+			pOut << ')' << std::endl << pIndent;
 
 			// Body
 			pFunctionScope = true;
