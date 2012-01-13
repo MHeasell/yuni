@@ -5,6 +5,7 @@
 #else
 # include <objbase.h>
 #endif
+#include "../core/string.h"
 #include <cassert>
 
 
