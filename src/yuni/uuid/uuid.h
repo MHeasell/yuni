@@ -2,8 +2,10 @@
 # define __YUNI_UUID_UUID_H__
 
 # include "../yuni.h"
-# include "../core/string.h"
 # include "fwd.h"
+# include "../core/traits/cstring.h"
+# include "../core/traits/length.h"
+
 
 
 namespace Yuni
@@ -106,6 +108,15 @@ namespace Yuni
 		//@}
 
 
+		//! \name Hashing
+		//@{
+		/*!
+		** \brief Get the hash of the uuid
+		*/
+		size_t hash() const;
+		//@}
+
+
 		//! \name Operators
 		//@{
 		//! Copy operator
@@ -145,6 +156,7 @@ namespace Yuni
 		union StorageType
 		{
 			unsigned char cstring[16];
+			char signedcstring[16];
 			uint32 n32[4];
 		};
 
