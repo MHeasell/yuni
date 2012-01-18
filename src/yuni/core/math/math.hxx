@@ -565,6 +565,24 @@ namespace Math
 	}
 
 
+	template<class U, class V>
+	U GCD(U u, V v)
+	{
+		// Euclidean algorithm
+		if (!u)
+			return v;
+		while (v)
+		{
+			if (u > v)
+				u = u - v;
+			else
+				v = v - u;
+		}
+		return u;
+	}
+
+
+
 
 } // namespace Math
 } // namespace Yuni

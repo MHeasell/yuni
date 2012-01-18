@@ -365,6 +365,17 @@ namespace Math
 	template<class T> inline bool IsInteger(T x);
 
 
+	/*!
+	** ** \brief Compute the greatest common divisor of two integers (GCD)
+	** **
+	** ** \param u An integer
+	** ** \param v An integer
+	** ** \return gcd(u, v)
+	** */
+	template<class U, class V> U GCD(U u, V v);
+
+
+
 
 
 } // namespace Math
