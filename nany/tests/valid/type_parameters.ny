@@ -3,20 +3,20 @@
 class ListItem<:T:>
 {
 public
-    # Constructor with item value
+    #! Constructor with item value
     method create(value) { item := value; }
 
-    attribute next: ListItem<:T:> := nil;
-    attribute item: T;
+    var next: ListItem<:T:> := nil;
+    var item: T;
 }
 
 class List<:T:>
 {
 public
-    # Empty constructor
+    #! Empty constructor
     method create {}
 
-    # Get the nth item or nil if there are not enough items
+    #! Get the nth item or nil if there are not enough items
     method get(n)
     {
         if head = nil then return nil;
@@ -30,7 +30,7 @@ public
         current
     }
 
-    # Add an item to the beginning of the list
+    #! Add an item to the beginning of the list
     method prepend(item)
     {
         queue := if head = nil then nil else head.next;
@@ -38,13 +38,13 @@ public
         head.next := queue
     }
 
-    # Test method type parameters
+    #! Test method type parameters
     method addToEach<:ValType:>(value)
     {
     }
 
 private
-    attribute head: ref ListItem<:T:> := nil;
+	var head: ref ListItem<:T:> := nil;
 }
 
 
@@ -58,7 +58,7 @@ function printList<:ListType:>(list: ListType)
 
 function main
 {
-    l = List<:int:>.create;
+    l := new List<:int:>;
     l.prepend(24);
     l.prepend(12);
     l.addToEach(2);
