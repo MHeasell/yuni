@@ -43,9 +43,9 @@ published
 
 protected
    #! Timestamp of the last update
-   attribute pLastUpdate: timestamp;
+   var pLastUpdate: timestamp;
    #! Date of creation
-   attribute pCreationDate: timestamp;
+   var pCreationDate: timestamp;
 }
 
 function main

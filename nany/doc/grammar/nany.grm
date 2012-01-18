@@ -110,7 +110,7 @@ Comment End = '*#' | '*/'
                | 'write' <SingleThread Exp> <Property Callbacks>
                | ! Empty
 
-<Attribute Declaration> ::= 'attribute' Identifier <Typing> <Assignment>
+<Attribute Declaration> ::= 'var' Identifier <Typing> <Assignment>
                | 'attribute' Identifier <Assignment>
                | 'attribute' Identifier <Typing>
 
@@ -235,20 +235,18 @@ Comment End = '*#' | '*/'
                | ! Empty
 
 ! This is for generics declarations
-<Type Parameters> ::= '<' Identifier <Type Parameters Continued> '>'
-               | '<' Identifier ':=' <SingleThread Exp> <Type Parameters Continued> '>'
+<Type Parameters> ::= '<:' Identifier <Type Parameters Continued> ':>'
+               | '<:' Identifier ':=' <SingleThread Exp> <Type Parameters Continued> ':>'
 
 <Type Parameters Continued> ::= ',' Identifier <Type Parameters Continued>
                | ',' Identifier ':=' <SingleThread Exp> <Type Parameters Continued>
                | ! Empty
 
-! This is for generics instanciations
-! Disabled for now because it breaks operator <
-!<Type Arguments> ::= <SingleThread Exp> <Type Arguments Continued>
-!               | ! Empty
+<Type Arguments> ::= <SingleThread Exp> <Type Arguments Continued>
+               | ! Empty
 
-!<Type Arguments Continued> ::= ',' <SingleThread Exp> <Type Parameters Continued>
-!               | ! Empty
+<Type Arguments Continued> ::= ',' <SingleThread Exp> <Type Parameters Continued>
+               | ! Empty
 
 ! -------------------------------------------------
 ! Expressions
@@ -363,7 +361,7 @@ Comment End = '*#' | '*/'
                | Identifier
                | <Value> '[' ']'
                | <Value> '[' <SingleThread Exp> ']'
-!               | <Value> '<' <Type Arguments> '>'
+               | <Value> '<:' <Type Arguments> ':>'
                | '[' <Array Arguments> ']'
                | '[:' <Array Arguments> ':]'
                | '[:' <Array Arguments> ':['
