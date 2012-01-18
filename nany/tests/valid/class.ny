@@ -1,9 +1,9 @@
 # This test checks a simple class
-unit SimpleClass;
+published unit SimpleClass;
 
 uses Dummy.Package;
 
-published class MyClass
+class MyClass
 {
 public
 	#! A method declaration
@@ -14,8 +14,8 @@ public
 
 private
 	#! A constant with inferred type
-	attribute PI : const := 3.14159265359;
+	var PI : const := 3.14159265359;
 
 	#! An attribute
-	attribute name: string;
+	var name: string;
 }

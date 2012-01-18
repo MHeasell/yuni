@@ -1,16 +1,16 @@
 # Test for type parameters on both classes and methods
 
-class ListItem<T>
+class ListItem<:T:>
 {
 public
     # Constructor with item value
     method create(value) { item := value; }
 
-    attribute next: ListItem<T> := nil;
+    attribute next: ListItem<:T:> := nil;
     attribute item: T;
 }
 
-class List<T>
+class List<:T:>
 {
 public
     # Empty constructor
@@ -34,22 +34,22 @@ public
     method prepend(item)
     {
         queue := if head = nil then nil else head.next;
-        head := new ListItem<T>(item);
+        head := new ListItem<:T:>(item);
         head.next := queue
     }
 
     # Test method type parameters
-    method addToEach<ValType>(value)
+    method addToEach<:ValType:>(value)
     {
     }
 
 private
-    attribute head: ref ListItem<T> := nil;
+    attribute head: ref ListItem<:T:> := nil;
 }
 
 
 # Test function type parameters
-function printList<ListType>(list: ListType)
+function printList<:ListType:>(list: ListType)
 {
     for item in list do
         println("\t" << item)
@@ -58,7 +58,7 @@ function printList<ListType>(list: ListType)
 
 function main
 {
-    l = List<int>.create;
+    l = List<:int:>.create;
     l.prepend(24);
     l.prepend(12);
     l.addToEach(2);

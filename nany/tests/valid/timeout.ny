@@ -13,7 +13,7 @@ function main
 {
     x := & Fibonacci(50) ^ Fibonacci(10);
     countdown := 5;
-    timeout 1s do
+    timeout 1.seconds do
     {
         // we wait here for the asynchronous result of x
         println("Fibonacci(50) ^ Fibonacci(10) = ", x)
