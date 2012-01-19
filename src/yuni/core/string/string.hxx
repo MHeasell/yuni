@@ -3349,9 +3349,28 @@ namespace Yuni
 
 		// If not a section, it should be a key/value
 		// Looking for the symbol `=`
-		Size equal = find_first_of("=/;", left);
-		if (equal == npos || equal == left || '=' != AncestorType::data[equal])
+		Size equal = left;
+		do
+		{
+			equal = find_first_of("=/;", equal);
+			if (equal < AncestorType::size)
+			{
+				if ('/' == AncestorType::data[equal])
+				{
+					if (equal + 1 < AncestorType::size && AncestorType::data[equal + 1] != '/')
+					{
+						++equal;
+						continue;
+					}
+				}
+				if (equal == left)
+					return;
+				if ('=' == AncestorType::data[equal])
+					break;
+			}
 			return;
+		}
+		while (true);
 
 		// Getting our key
 		key.assign(*this, equal - left, left);
