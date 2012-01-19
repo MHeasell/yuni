@@ -237,7 +237,7 @@ answering network requests.
 In terms of detection of the failure, several possibilities are open.
 An intuitive answer would be to regularly ping the nodes to ensure
 that they are still responsive. This can be done either by a master
-node, or more subtly using a neighbour machanism where neighbour nodes
+node, or more subtly using a neighbour mechanism where neighbour nodes
 check on each other. Even further down that road is a group mechanism
 with a sentinel node for the group. A different approach is to simply
 wait for a request to this node to fail. We will now study more closely
