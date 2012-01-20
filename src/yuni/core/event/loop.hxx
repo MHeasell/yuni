@@ -223,6 +223,16 @@ namespace EventLoop
 	}
 
 
+
+	template<class ParentT, template<class> class FlowT, template<class> class StatsT,
+		bool DetachedT>
+	bool IEventLoop<ParentT,FlowT,StatsT,DetachedT>::running() const
+	{
+		return pIsRunning;
+	}
+
+
+
 	template<class ParentT, template<class> class FlowT, template<class> class StatsT,
 		bool DetachedT>
 	void IEventLoop<ParentT,FlowT,StatsT,DetachedT>::dispatch(const typename IEventLoop<ParentT,FlowT,StatsT,DetachedT>::RequestType& request)

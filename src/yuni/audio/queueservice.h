@@ -216,6 +216,11 @@ namespace Audio
 		*/
 		void stop();
 
+		/*!
+		** \brief Is the audio service running ?
+		*/
+		bool running() const { return pAudioLoop.running(); }
+
 	public:
 		//! Control block for emitters
 		Emitters emitter;
