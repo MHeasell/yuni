@@ -1,19 +1,17 @@
 
 #include <vector>
 #include <yuni/yuni.h>
-#include <yuni/application/console.h>
 #include <yuni/core/string.h>
+#include <yuni/core/system/suspend.h>
 #include <yuni/audio/queueservice.h>
-#include <yuni/core/system/sleep.h>
 
 using namespace Yuni;
 
 
-class LoadAndPlay : public Application::Console
+class LoadAndPlay
 {
 public:
 	LoadAndPlay(int argc, char* argv[])
-		:Application::Console(argc, argv), audio()
 	{
 		for (int i = 1; i < argc; ++i)
 		{
@@ -23,16 +21,20 @@ public:
 			audio.start();
 	}
 
-	virtual ~LoadAndPlay()
+	~LoadAndPlay()
 	{
 		if (!pFilenames.empty())
 			audio.stop();
 	}
 
-	virtual void onExecute()
+	void onExecute()
 	{
+		if (!audio.running())
+			return;
+
 		String emitterName;
 
+		uint i = 0;
 		const String::Vector::const_iterator end = pFilenames.end();
 		for (String::Vector::const_iterator it = pFilenames.begin(); it != end; ++it)
 		{
@@ -102,9 +104,9 @@ private:
 
 int main(int argc, char* argv[])
 {
-	// Yuni main loop
+
 	LoadAndPlay app(argc, argv);
 	app.onExecute();
-	return app.exitCode();
+	return 0;
 }
 
