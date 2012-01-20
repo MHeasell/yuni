@@ -138,6 +138,10 @@ namespace EventLoop
 		*/
 		void dispatch(const RequestType& request);
 
+		/*!
+		** \brief Is the event loop running ?
+		*/
+		bool running() const;
 
 		//! \name Operators
 		//@{
