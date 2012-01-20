@@ -64,8 +64,10 @@ public:
 
 		}
 		sint64 elapsed = 0;
+		// Play for 3000 * 100ms = 300s = 5min
 		for (unsigned int i = 0; i < 3000; ++i)
 		{
+			// Every 100ms
 			Yuni::SuspendMilliSeconds(100);
 
 			// Get elapsed playback time
@@ -73,6 +75,7 @@ public:
 			// Only update if different
 			if (newTime != elapsed)
 			{
+				// Display elapsed time
 				elapsed = newTime;
 				std::cout << "Elapsed time: ";
 				writeTime(elapsed);
@@ -83,6 +86,7 @@ public:
 
 private:
 
+	// Display the time in seconds using an MM:SS format
 	template<typename T>
 	void writeTime(T timeInSeconds)
 	{
@@ -94,7 +98,9 @@ private:
 
 
 private:
+	// Store the file names given on the command line
 	String::Vector pFilenames;
+	// The audio queue service is the center point for audio manipulation
 	Audio::QueueService audio;
 
 }; // class LoadAndPlay
@@ -104,7 +110,6 @@ private:
 
 int main(int argc, char* argv[])
 {
-
 	LoadAndPlay app(argc, argv);
 	app.onExecute();
 	return 0;
