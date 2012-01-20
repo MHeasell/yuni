@@ -2041,7 +2041,7 @@ namespace BindImpl
 
 		virtual R invoke() const
 		{
-			return (*pPointer)(pUserdata);
+			return (*pPointer)(*const_cast<UserDataTypeByCopy*>(&pUserdata));
 		}
 
 		virtual const void* object() const
@@ -2098,7 +2098,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0) const
 		{
-			return (*pPointer)(a0, pUserdata);
+			return (*pPointer)(a0, *const_cast<UserDataTypeByCopy*>(&pUserdata));
 		}
 
 		virtual const void* object() const
@@ -2155,7 +2155,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1) const
 		{
-			return (*pPointer)(a0, a1, pUserdata);
+			return (*pPointer)(a0, a1, *const_cast<UserDataTypeByCopy*>(&pUserdata));
 		}
 
 		virtual const void* object() const
@@ -2212,7 +2212,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2) const
 		{
-			return (*pPointer)(a0, a1, a2, pUserdata);
+			return (*pPointer)(a0, a1, a2, *const_cast<UserDataTypeByCopy*>(&pUserdata));
 		}
 
 		virtual const void* object() const
@@ -2269,7 +2269,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3) const
 		{
-			return (*pPointer)(a0, a1, a2, a3, pUserdata);
+			return (*pPointer)(a0, a1, a2, a3, *const_cast<UserDataTypeByCopy*>(&pUserdata));
 		}
 
 		virtual const void* object() const
@@ -2326,7 +2326,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const
 		{
-			return (*pPointer)(a0, a1, a2, a3, a4, pUserdata);
+			return (*pPointer)(a0, a1, a2, a3, a4, *const_cast<UserDataTypeByCopy*>(&pUserdata));
 		}
 
 		virtual const void* object() const
@@ -2383,7 +2383,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const
 		{
-			return (*pPointer)(a0, a1, a2, a3, a4, a5, pUserdata);
+			return (*pPointer)(a0, a1, a2, a3, a4, a5, *const_cast<UserDataTypeByCopy*>(&pUserdata));
 		}
 
 		virtual const void* object() const
@@ -2440,7 +2440,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const
 		{
-			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, pUserdata);
+			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, *const_cast<UserDataTypeByCopy*>(&pUserdata));
 		}
 
 		virtual const void* object() const
@@ -2497,7 +2497,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const
 		{
-			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, pUserdata);
+			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, *const_cast<UserDataTypeByCopy*>(&pUserdata));
 		}
 
 		virtual const void* object() const
@@ -2554,7 +2554,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const
 		{
-			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, pUserdata);
+			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, *const_cast<UserDataTypeByCopy*>(&pUserdata));
 		}
 
 		virtual const void* object() const
@@ -2611,7 +2611,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const
 		{
-			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, pUserdata);
+			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, *const_cast<UserDataTypeByCopy*>(&pUserdata));
 		}
 
 		virtual const void* object() const
@@ -2668,7 +2668,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const
 		{
-			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, pUserdata);
+			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, *const_cast<UserDataTypeByCopy*>(&pUserdata));
 		}
 
 		virtual const void* object() const
@@ -2725,7 +2725,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const
 		{
-			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, pUserdata);
+			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, *const_cast<UserDataTypeByCopy*>(&pUserdata));
 		}
 
 		virtual const void* object() const
@@ -2782,7 +2782,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const
 		{
-			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, pUserdata);
+			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, *const_cast<UserDataTypeByCopy*>(&pUserdata));
 		}
 
 		virtual const void* object() const
@@ -2839,7 +2839,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const
 		{
-			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, pUserdata);
+			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, *const_cast<UserDataTypeByCopy*>(&pUserdata));
 		}
 
 		virtual const void* object() const
@@ -2896,7 +2896,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const
 		{
-			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, pUserdata);
+			return (*pPointer)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, *const_cast<UserDataTypeByCopy*>(&pUserdata));
 		}
 
 		virtual const void* object() const
@@ -3920,7 +3920,7 @@ namespace BindImpl
 
 		virtual R invoke() const
 		{
-			return (pThis->*pMember)(pUserdata);
+			return (pThis->*pMember)(*const_cast<UserDataTypeByCopy*>(&pUserdata));
 		}
 
 		virtual const void* object() const
@@ -3981,7 +3981,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0) const
 		{
-			return (pThis->*pMember)(a0, pUserdata);
+			return (pThis->*pMember)(a0, *const_cast<UserDataTypeByCopy*>(&pUserdata));
 		}
 
 		virtual const void* object() const
@@ -4042,7 +4042,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1) const
 		{
-			return (pThis->*pMember)(a0, a1, pUserdata);
+			return (pThis->*pMember)(a0, a1, *const_cast<UserDataTypeByCopy*>(&pUserdata));
 		}
 
 		virtual const void* object() const
@@ -4103,7 +4103,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2) const
 		{
-			return (pThis->*pMember)(a0, a1, a2, pUserdata);
+			return (pThis->*pMember)(a0, a1, a2, *const_cast<UserDataTypeByCopy*>(&pUserdata));
 		}
 
 		virtual const void* object() const
@@ -4164,7 +4164,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3) const
 		{
-			return (pThis->*pMember)(a0, a1, a2, a3, pUserdata);
+			return (pThis->*pMember)(a0, a1, a2, a3, *const_cast<UserDataTypeByCopy*>(&pUserdata));
 		}
 
 		virtual const void* object() const
@@ -4225,7 +4225,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const
 		{
-			return (pThis->*pMember)(a0, a1, a2, a3, a4, pUserdata);
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, *const_cast<UserDataTypeByCopy*>(&pUserdata));
 		}
 
 		virtual const void* object() const
@@ -4286,7 +4286,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const
 		{
-			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, pUserdata);
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, *const_cast<UserDataTypeByCopy*>(&pUserdata));
 		}
 
 		virtual const void* object() const
@@ -4347,7 +4347,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const
 		{
-			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, pUserdata);
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, *const_cast<UserDataTypeByCopy*>(&pUserdata));
 		}
 
 		virtual const void* object() const
@@ -4408,7 +4408,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const
 		{
-			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, pUserdata);
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, *const_cast<UserDataTypeByCopy*>(&pUserdata));
 		}
 
 		virtual const void* object() const
@@ -4469,7 +4469,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const
 		{
-			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, pUserdata);
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, *const_cast<UserDataTypeByCopy*>(&pUserdata));
 		}
 
 		virtual const void* object() const
@@ -4530,7 +4530,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const
 		{
-			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, pUserdata);
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, *const_cast<UserDataTypeByCopy*>(&pUserdata));
 		}
 
 		virtual const void* object() const
@@ -4591,7 +4591,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const
 		{
-			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, pUserdata);
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, *const_cast<UserDataTypeByCopy*>(&pUserdata));
 		}
 
 		virtual const void* object() const
@@ -4652,7 +4652,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const
 		{
-			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, pUserdata);
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, *const_cast<UserDataTypeByCopy*>(&pUserdata));
 		}
 
 		virtual const void* object() const
@@ -4713,7 +4713,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const
 		{
-			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, pUserdata);
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, *const_cast<UserDataTypeByCopy*>(&pUserdata));
 		}
 
 		virtual const void* object() const
@@ -4774,7 +4774,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const
 		{
-			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, pUserdata);
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, *const_cast<UserDataTypeByCopy*>(&pUserdata));
 		}
 
 		virtual const void* object() const
@@ -4835,7 +4835,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const
 		{
-			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, pUserdata);
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, *const_cast<UserDataTypeByCopy*>(&pUserdata));
 		}
 
 		virtual const void* object() const
