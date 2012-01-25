@@ -58,60 +58,49 @@ namespace Audio
 
 		public:
 			//! Get an emitter
-			template<typename StringT>
-			Emitter::Ptr get(const StringT& name);
+			Emitter::Ptr get(const StringAdapter& name);
 
 			//! Add an emitter
-			template<typename StringT>
-			bool add(const StringT& name);
+			bool add(const StringAdapter& name);
 
 			//! Attach an emitter to a buffer
-			template<typename StringT, typename StringT2>
-			bool attach(const StringT& name, const StringT2& attachedBuffer);
+			bool attach(const StringAdapter& name, const StringAdapter& attachedBuffer);
 			//! Attach an emitter to a buffer
-			template<typename StringT>
-			bool attach(Emitter::Ptr name, const StringT& attachedBuffer);
+			bool attach(Emitter::Ptr name, const StringAdapter& attachedBuffer);
 
 			//! Modify an emitter's data
-			template<typename StringT>
-			bool modify(const StringT& name, bool loop);
+			bool modify(const StringAdapter& name, bool loop);
 			//! Modify an emitter's data
 			bool modify(Emitter::Ptr name, bool loop);
 
 			//! Move an emitter around
-			template<typename StringT>
-			bool move(const StringT& name, const Point3D<>& position);
+			bool move(const StringAdapter& name, const Point3D<>& position);
 			//! Move an emitter around
 			bool move(Emitter::Ptr emitter, const Point3D<>& position);
-			template<typename StringT>
 			//! Move an emitter around
-			bool move(const StringT& name, const Point3D<>& position,
+			bool move(const StringAdapter& name, const Point3D<>& position,
 				const Vector3D<>& velocity, const Vector3D<>& direction);
 			//! Move an emitter around
 			bool move(Emitter::Ptr emitter, const Point3D<>& position,
 				const Vector3D<>& velocity, const Vector3D<>& direction);
 
 			//! Get elapsed playback time on an emitter
-			template<typename StringT>
-			sint64 elapsedTime(const StringT& name);
+			sint64 elapsedTime(const StringAdapter& name);
 			//! Get elapsed playback time on an emitter
 			sint64 elapsedTime(Emitter::Ptr emitter);
 
 			//! Start playback on an emitter
-			template<typename StringT>
-			bool play(const StringT& name);
+			bool play(const StringAdapter& name);
 			//! Start playback on an emitter
 			bool play(Emitter::Ptr emitter);
 
 			//! Stop playback on an emitter
-			template<typename StringT>
-			bool stop(const StringT& name);
+			bool stop(const StringAdapter& name);
 			//! Stop playback on an emitter
 			bool stop(const Emitter::Ptr& emitter);
 
 			//! Remove an emitter
-			template<typename StringT>
-			bool remove(const StringT& name);
+			bool remove(const StringAdapter& name);
 			//! Remove an emitter
 			bool remove(Emitter::Ptr name);
 
@@ -161,18 +150,15 @@ namespace Audio
 			**
 			** \param name Path to file, used from now on as an identifier for the sound
 			*/
-			template<typename StringT>
-			bool load(const StringT& name);
+			bool load(const StringAdapter& name);
 
 			//! Get the duration of a loaded sound
-			template<typename StringT>
-			unsigned int duration(const StringT& name);
+			unsigned int duration(const StringAdapter& name);
 
 
 		private:
 			//! Get a sound from the bank
-			template<typename StringT>
-			Sound::Ptr get(const StringT& name);
+			Sound::Ptr get(const StringAdapter& name);
 
 		private:
 			//! Friend declaration
@@ -220,6 +206,11 @@ namespace Audio
 		** \brief Is the audio service running ?
 		*/
 		bool running() const { return pAudioLoop.running(); }
+
+		/*!
+		** \brief Is there at least one emitter playing ?
+		*/
+		bool playing() const { return pAudioLoop.running(); }
 
 	public:
 		//! Control block for emitters

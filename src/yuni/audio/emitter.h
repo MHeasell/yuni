@@ -92,6 +92,9 @@ namespace Audio
 
 		//! \name Accessors
 		//@{
+		//! Is the emitter currently playing ?
+		bool playing() const;
+
 		//! Set the 3D position of the emitter
 		void position(const Point3D<>& position);
 		//! Get the 3D position of the emitter

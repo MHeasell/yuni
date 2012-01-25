@@ -27,6 +27,13 @@ namespace Audio
 	{}
 
 
+	inline bool Emitter::playing() const
+	{
+		ThreadingPolicy::MutexLocker locker(*this);
+		return pPlaying;
+	}
+
+
 	inline void Emitter::position(const Point3D<>& position)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
