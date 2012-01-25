@@ -8,15 +8,7 @@ namespace Audio
 {
 
 
-	template<typename StringT>
-	inline Emitter::Ptr QueueService::Emitters::get(const StringT& name)
-	{
-		return get(String(name));
-	}
-
-
-	template<>
-	inline Emitter::Ptr QueueService::Emitters::get<String>(const String& name)
+	inline Emitter::Ptr QueueService::Emitters::get(const StringAdapter& name)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 
@@ -27,15 +19,7 @@ namespace Audio
 	}
 
 
-	template<typename StringT>
-	inline Sound::Ptr QueueService::Bank::get(const StringT& name)
-	{
-		return get(String(name));
-	}
-
-
-	template<>
-	inline Sound::Ptr QueueService::Bank::get<String>(const String& name)
+	inline Sound::Ptr QueueService::Bank::get(const StringAdapter& name)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 
@@ -48,17 +32,10 @@ namespace Audio
 
 
 
-	template<typename StringT>
-	bool QueueService::Emitters::add(const StringT& emitterName)
+	inline bool QueueService::Emitters::add(const StringAdapter& emitterName)
 	{
-		return add(String(emitterName));
-	}
-
-	template<>
-	inline bool QueueService::Emitters::add<String>(const String& emitterName)
-	{
-
 		ThreadingPolicy::MutexLocker locker(*this);
+
 		if (!pQueueService->pReady)
 			return false;
 
@@ -75,21 +52,8 @@ namespace Audio
 	}
 
 
-	template<typename StringT, typename StringT2>
-	bool QueueService::Emitters::attach(const StringT& name, const StringT2& attachedBuffer)
-	{
-		return attach(String(name), String(attachedBuffer));
-	}
-
-	template<typename StringT>
-	bool QueueService::Emitters::attach(Emitter::Ptr name, const StringT& attachedBuffer)
-	{
-		return attach(name, String(attachedBuffer));
-	}
-
-	template<>
-	inline bool QueueService::Emitters::attach<String, String>(const String& emitterName,
-		const String& bufferName)
+	inline bool QueueService::Emitters::attach(const StringAdapter& emitterName,
+		const StringAdapter& bufferName)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 		if (!pQueueService->pReady)
@@ -112,8 +76,7 @@ namespace Audio
 	}
 
 
-	template<>
-	inline bool QueueService::Emitters::attach<String>(Emitter::Ptr emitter, const String& bufferName)
+	inline bool QueueService::Emitters::attach(Emitter::Ptr emitter, const StringAdapter& bufferName)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 		if (!pQueueService->pReady)
@@ -135,14 +98,8 @@ namespace Audio
 	}
 
 
-	template<typename StringT>
-	bool QueueService::Emitters::move(const StringT& emitterName, const Point3D<>& position)
-	{
-		return move(String(emitterName), position);
-	}
 
-	template<>
-	inline bool QueueService::Emitters::move<String>(const String& emitterName,
+	inline bool QueueService::Emitters::move(const StringAdapter& emitterName,
 		const Point3D<>& position)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
@@ -155,15 +112,7 @@ namespace Audio
 	}
 
 
-	template<typename StringT>
-	bool QueueService::Emitters::move(const StringT& emitterStr, const Point3D<>& position,
-		const Vector3D<>& velocity, const Vector3D<>& direction)
-	{
-		return move(String(emitterStr), position, velocity, direction);
-	}
-
-	template<>
-	inline bool QueueService::Emitters::move<String>(const String& emitterStr, const Point3D<>& position,
+	inline bool QueueService::Emitters::move(const StringAdapter& emitterStr, const Point3D<>& position,
 		const Vector3D<>& velocity, const Vector3D<>& direction)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
@@ -179,14 +128,7 @@ namespace Audio
 	}
 
 
-	template<typename StringT>
-	inline sint64 QueueService::Emitters::elapsedTime(const StringT& name)
-	{
-		return elapsedTime(get(String(name)));
-	}
-
-	template<>
-	inline sint64 QueueService::Emitters::elapsedTime<String>(const String& name)
+	inline sint64 QueueService::Emitters::elapsedTime(const StringAdapter& name)
 	{
 		return elapsedTime(get(name));
 	}
@@ -200,14 +142,7 @@ namespace Audio
 	}
 
 
-	template<typename StringT>
-	inline bool QueueService::Emitters::play(const StringT& name)
-	{
-		return play(get(String(name)));
-	}
-
-	template<>
-	inline bool QueueService::Emitters::play<String>(const String& name)
+	inline bool QueueService::Emitters::play(const StringAdapter& name)
 	{
 		return play(get(name));
 	}
@@ -224,18 +159,10 @@ namespace Audio
 	}
 
 
-	template<typename StringT>
-	inline bool QueueService::Emitters::stop(const StringT& name)
-	{
-		return stop<String>(String(name));
-	}
-
-	template<>
-	inline bool QueueService::Emitters::stop<String>(const String& name)
+	inline bool QueueService::Emitters::stop(const StringAdapter& name)
 	{
 		return stop(get(name));
 	}
-
 
 	inline bool QueueService::Emitters::stop(const Emitter::Ptr& emitter)
 	{
@@ -261,14 +188,7 @@ namespace Audio
 	}
 
 
-	template<typename StringT>
-	inline bool QueueService::Bank::load(const StringT& filePath)
-	{
-		return load(String(filePath));
-	}
-
-	template<>
-	inline bool QueueService::Bank::load<String>(const String& filePath)
+	inline bool QueueService::Bank::load(const StringAdapter& filePath)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 
@@ -284,14 +204,7 @@ namespace Audio
 		return true;
 	}
 
-	template<typename StringT>
-	inline unsigned int QueueService::Bank::duration(const StringT& name)
-	{
-		return duration(String(name));
-	}
-
-	template<>
-	inline unsigned int QueueService::Bank::duration(const String& name)
+	inline unsigned int QueueService::Bank::duration(const StringAdapter& name)
 	{
 		Sound::Ptr buffer = get(name);
 		if (!buffer)
