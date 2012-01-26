@@ -205,12 +205,12 @@ namespace Audio
 		/*!
 		** \brief Is the audio service running ?
 		*/
-		bool running() const { return pAudioLoop.running(); }
+		bool running() const;
 
 		/*!
 		** \brief Is there at least one emitter playing ?
 		*/
-		bool playing() const { return pAudioLoop.running(); }
+		bool playing() const;
 
 	public:
 		//! Control block for emitters

@@ -8,6 +8,27 @@ namespace Audio
 {
 
 
+	inline bool QueueService::running() const
+	{
+		ThreadingPolicy::MutexLocker locker(*this);
+
+		return pReady && pAudioLoop.running();
+	}
+
+
+	inline bool QueueService::playing() const
+	{
+		ThreadingPolicy::MutexLocker locker(*this);
+
+		Emitter::Map::const_iterator end = emitter.pEmitters.end();
+		for (Emitter::Map::const_iterator it = emitter.pEmitters.begin(); it != end; ++it)
+			if (it->second->playing())
+				return true;
+		return false;
+	}
+
+
+
 	inline Emitter::Ptr QueueService::Emitters::get(const StringAdapter& name)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);

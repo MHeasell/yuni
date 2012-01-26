@@ -15,7 +15,7 @@ namespace Audio
 
 
 	inline Emitter::Emitter(const Point3D<>& position, bool loop)
-		: pPosition(position), pLoop(loop), pGain(1.0f), pBuffer(NULL),
+		: pPosition(position), pLoop(loop), pGain(DefaultGain), pBuffer(NULL),
 		pReady(false), pPlaying(false), pModified(false)
 	{}
 
@@ -23,7 +23,7 @@ namespace Audio
 	inline Emitter::Emitter(const Point3D<>& position, const Vector3D<>& velocity,
 		const Vector3D<>& direction, bool loop = false)
 		: pPosition(position), pVelocity(velocity), pDirection(direction), pLoop(loop),
-		pGain(1.0f), pBuffer(NULL), pReady(false), pPlaying(false), pModified(false)
+		pGain(DefaultGain), pBuffer(NULL), pReady(false), pPlaying(false), pModified(false)
 	{}
 
 
