@@ -22,6 +22,9 @@
 <a href="../class/model/utf8iterator/@{INDEX}">Model::UTF8Iterator</a>
 </td><td></td></tr>
 <tr><td>
+<a href="../class/ostreamyunihelper/@{INDEX}">OStreamYuniHelper</a>
+</td><td></td></tr>
+<tr><td>
 <a href="../class/private/eventimpl/withnarguments/@{INDEX}">Private::EventImpl::WithNArguments</a>
 </td><td></td></tr>
 <tr><td>
@@ -71,6 +74,9 @@
 </td><td></td></tr>
 <tr><td>
 <a href="../class/yuni/boundingbox/@{INDEX}">Yuni::BoundingBox</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/cow/@{INDEX}">Yuni::COW</a>
 </td><td></td></tr>
 <tr><td>
 <a href="../class/yuni/cstring/@{INDEX}">Yuni::CString</a>
@@ -340,6 +346,9 @@
 <a href="../class/yuni/io/file/stream/@{INDEX}">Yuni::IO::File::Stream</a>
 </td><td></td></tr>
 <tr><td>
+<a href="../class/yuni/io/searchpath/@{INDEX}">Yuni::IO::SearchPath</a>
+</td><td></td></tr>
+<tr><td>
 <a href="../class/yuni/index/asc/@{INDEX}">Yuni::Index::Asc</a>
 </td><td></td></tr>
 <tr><td>
@@ -553,6 +562,9 @@
 <a href="../class/yuni/policy/classlevellockable/@{INDEX}">Yuni::Policy::ClassLevelLockable</a>
 </td><td></td></tr>
 <tr><td>
+<a href="../class/yuni/policy/classlevellockable/class/@{INDEX}">Yuni::Policy::ClassLevelLockable::Class</a>
+</td><td></td></tr>
+<tr><td>
 <a href="../class/yuni/policy/classlevellockable/mutexlocker/@{INDEX}">Yuni::Policy::ClassLevelLockable::MutexLocker</a>
 </td><td></td></tr>
 <tr><td>
@@ -583,7 +595,13 @@
 <a href="../class/yuni/policy/lifetime/withlongevity/@{INDEX}">Yuni::Policy::Lifetime::WithLongevity</a>
 </td><td></td></tr>
 <tr><td>
+<a href="../class/yuni/policy/mutexextractor/@{INDEX}">Yuni::Policy::MutexExtractor</a>
+</td><td></td></tr>
+<tr><td>
 <a href="../class/yuni/policy/objectlevellockable/@{INDEX}">Yuni::Policy::ObjectLevelLockable</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/policy/objectlevellockable/class/@{INDEX}">Yuni::Policy::ObjectLevelLockable::Class</a>
 </td><td></td></tr>
 <tr><td>
 <a href="../class/yuni/policy/objectlevellockable/mutexlocker/@{INDEX}">Yuni::Policy::ObjectLevelLockable::MutexLocker</a>
@@ -593,6 +611,9 @@
 </td><td></td></tr>
 <tr><td>
 <a href="../class/yuni/policy/objectlevellockablenotrecursive/@{INDEX}">Yuni::Policy::ObjectLevelLockableNotRecursive</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/policy/objectlevellockablenotrecursive/class/@{INDEX}">Yuni::Policy::ObjectLevelLockableNotRecursive::Class</a>
 </td><td></td></tr>
 <tr><td>
 <a href="../class/yuni/policy/objectlevellockablenotrecursive/mutexlocker/@{INDEX}">Yuni::Policy::ObjectLevelLockableNotRecursive::MutexLocker</a>
@@ -617,6 +638,9 @@
 </td><td></td></tr>
 <tr><td>
 <a href="../class/yuni/policy/singlethreaded/@{INDEX}">Yuni::Policy::SingleThreaded</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/yuni/policy/singlethreaded/class/@{INDEX}">Yuni::Policy::SingleThreaded::Class</a>
 </td><td></td></tr>
 <tr><td>
 <a href="../class/yuni/policy/singlethreaded/mutexlocker/@{INDEX}">Yuni::Policy::SingleThreaded::MutexLocker</a>
@@ -942,5 +966,11 @@
 <tr><td>
 <a href="../class/imaxdiv_t/@{INDEX}">imaxdiv_t</a>
 </td><td></td></tr>
+<tr><td>
+<a href="../class/mg_request_info/@{INDEX}">mg_request_info</a>
+</td><td></td></tr>
+<tr><td>
+<a href="../class/mg_request_info/mg_header/@{INDEX}">mg_request_info::mg_header</a>
+</td><td></td></tr>
 </table>
-<p><i>(total: 313 classes)</i></p>
+<p><i>(total: 323 classes)</i></p>

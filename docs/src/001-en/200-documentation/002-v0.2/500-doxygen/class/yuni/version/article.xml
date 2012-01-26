@@ -16,6 +16,9 @@
 <tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Version_1a1e6780751d09211d25b20835a0f4bc31">Version</a></span>(const Version&amp; c)</code></td></tr>
 <tr><td></td><td><br /><h4>Conversions</h4></td></tr>
 <tr><td class="doxygen_index"><code>String </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Version_1a9f12927afb0d03f4f45b94fc36e10dad">toString</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td></td><td><br /><h4>Initialization</h4></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Version_1a4125992d5f668daa1aa2d0a360e3d457">assign</a></span>(unsigned int h, unsigned int lo, unsigned int r)</code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Version_1a0e7a7349feca90530c4bce38603be195">clear</a></span>()</code></td></tr>
 <tr><td></td><td><br /><h4>Comparisons</h4></td></tr>
 <tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Version_1a9b3b281a0eb31e5353c66a769089fe97">null</a></span>() <span class="keyword">const</span></code></td></tr>
 <tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Version_1a487eaa09470d7ec95627bac3df79586e">isLessThan</a></span>(const Version&amp; rhs) <span class="keyword">const</span></code></td></tr>
@@ -83,6 +86,24 @@
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get the version in an human-readable string.<br /></b><div class="doxygen_name_spacer"></div>
 <code> <span class="method"><a name="classYuni_1_1Version_1a9f12927afb0d03f4f45b94fc36e10dad" href="#">+ toString</a></span>: String () <span class="keyword">const</span>;
+</code>
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Initialization <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Assign a new version numner.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Version_1a4125992d5f668daa1aa2d0a360e3d457" href="#">+ assign</a></span>: void (unsigned int h, unsigned int lo, unsigned int r);
+</code>
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Set the version to 0.0.0.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Version_1a0e7a7349feca90530c4bce38603be195" href="#">+ clear</a></span>: void ();
 </code>
 </div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>

@@ -27,6 +27,7 @@
 <tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1Emitter_1a480b12df9acc926a85f5f8788680866f">playSoundDispatched</a></span>(Sound::Ptr&amp; buffer)</code></td></tr>
 <tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1Emitter_1a20b5a2e9348740ebd8f8131b6051aff5">updateDispatched</a></span>()</code></td></tr>
 <tr><td></td><td><br /><h4>Accessors</h4></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1Emitter_1a7685b9326821d94ad75f2b6b7a1ac8cb">playing</a></span>() <span class="keyword">const</span></code></td></tr>
 <tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1Emitter_1a5ada5bf9c7a99ead2e361c77f3e88592">position</a></span>(const Point3D &lt;&gt;&amp; position)</code></td></tr>
 <tr><td class="doxygen_index"><code>Point3D </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1Emitter_1ad76ec66aaab865b12a80094aea546597">position</a></span>() <span class="keyword">const</span></code></td></tr>
 <tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1Emitter_1ae4eb189df7dbd3a24ea671af4e7b61e9">velocity</a></span>(const Vector3D &lt;&gt;&amp; position)</code></td></tr>
@@ -157,6 +158,14 @@
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Accessors <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Is the emitter currently playing ?<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Audio_1_1Emitter_1a7685b9326821d94ad75f2b6b7a1ac8cb" href="#">+ playing</a></span>: bool () <span class="keyword">const</span>;
+</code>
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Set the 3D position of the emitter.<br /></b><div class="doxygen_name_spacer"></div>
 <code> <span class="method"><a name="classYuni_1_1Audio_1_1Emitter_1a5ada5bf9c7a99ead2e361c77f3e88592" href="#">+ position</a></span>: void (const Point3D &lt;&gt;&amp; position);

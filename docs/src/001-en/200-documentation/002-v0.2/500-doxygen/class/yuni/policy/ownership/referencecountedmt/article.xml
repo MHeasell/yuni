@@ -19,6 +19,7 @@
 <tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Ownership_1_1ReferenceCountedMT_1a33c81d7f9185bd5456b8a77fc0cff078">ReferenceCountedMT</a></span>(const ReferenceCountedMT&lt;U&gt;&amp; c)</code></td></tr>
 <tr><td></td><td><br /><h4></h4></td></tr>
 <tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Ownership_1_1ReferenceCountedMT_1a1c37d76ce502cd12446d0c9c6bbdb8ea">initFromRawPointer</a></span>(const T&amp; )</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Ownership_1_1ReferenceCountedMT_1a4fe787a15dae68953fef2dbf79970704">unique</a></span>() <span class="keyword">const</span></code></td></tr>
 <tr><td class="doxygen_index"><code>T </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Ownership_1_1ReferenceCountedMT_1aa0cf1a5a1a9d8cbcffa7321719ade267">clone</a></span>(const T&amp; rhs)</code></td></tr>
 <tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Ownership_1_1ReferenceCountedMT_1aae0cc30bebf6cbf432c8121bd49f3bc2">release</a></span>(const T&amp; )</code></td></tr>
 <tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Ownership_1_1ReferenceCountedMT_1a3464b10a9a99178c2a7d4064e538bf22">swapPointer</a></span>(ReferenceCountedMT&amp; rhs)</code></td></tr>
@@ -71,6 +72,13 @@
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Initialization from a raw pointer.<br /></b><div class="doxygen_name_spacer"></div>
 <code> <span class="method"><a name="classYuni_1_1Policy_1_1Ownership_1_1ReferenceCountedMT_1a1c37d76ce502cd12446d0c9c6bbdb8ea" href="#">+ initFromRawPointer</a></span>: void (const T&amp; );
+</code>
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1Policy_1_1Ownership_1_1ReferenceCountedMT_1a4fe787a15dae68953fef2dbf79970704" href="#">+ unique</a></span>: bool () <span class="keyword">const</span>;
 </code>
 </div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>

@@ -34,7 +34,8 @@
 <tr><td></td><td><br /><h4>Read</h4></td></tr>
 <tr><td class="doxygen_index"><code>char </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1File_1_1Stream_1a1c1ffc1f1354c59d76906d4f8d97adb7">get</a></span>()</code></td></tr>
 <tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1File_1_1Stream_1a147d009193ec7217f992e9b118676f70">readline</a></span>(char* buffer, size_t maxSize)</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1File_1_1Stream_1a6cf725d92d33d317c64fd6b2f30d1c5d">readline</a></span>(CString&lt;ChunkSizeT, ExpandableT, ZeroTerminatedT&gt;&amp; buffer)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1File_1_1Stream_1a2bbe86c2363f086a58b74081f30b87e4">readline</a></span>(StringT&amp; buffer, bool trim)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1File_1_1Stream_1a4ab13dcff2add635eef2a84c063af2d6">readline</a></span>(StringT&amp; buffer, bool trim)</code></td></tr>
 <tr><td class="doxygen_index"><code>size_t </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1File_1_1Stream_1a9a5e0d9d9c7c8609a5decd670890eb70">read</a></span>(char* buffer, const size_t size)</code></td></tr>
 <tr><td class="doxygen_index"><code>size_t </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1File_1_1Stream_1a7c373bb42f8c87803535070692db7d53">read</a></span>(CString&lt;CSizeT, ExpT, ZeroT&gt;&amp; buffer)</code></td></tr>
 <tr><td></td><td><br /><h4>Write</h4></td></tr>
@@ -62,7 +63,7 @@
   if  (file.open( "myfile.txt" ))
   {
          //  A  buffer.  The  given  capacity  will  be  the  maximum  length  for  a  single  line
-         CString&lt;4096&gt;  buffer;
+         Clob  buffer;
          while  (file.readline(buffer))
          {
              //  do  something  with  the  buffer
@@ -72,7 +73,7 @@
   }
   //  the  file  will  be  implicitely  closed  here
 </source>
-<br /> When writing a data into a file, the data will be written 'as it' if it can be represented by a mere c-string. Otherwise a 'Yuni String ' will be used to perform the convertion.<source type="cpp">  IO::File::Stream  file ;
+ Obviously, you can also consider<code> IO::File::ReadLineByLine</code> .<br /> When writing a data into a file, the data will be written 'as it' if it can be represented by a mere c-string. Otherwise a 'Yuni String ' will be used to perform the convertion.<source type="cpp">  IO::File::Stream  file ;
   if  (file.open( "out.txt" ,  IO::OpenMode::write  |  IO::OpenMode::truncate ))
   {
          file  &lt;&lt;  "Without  implicit  convertion:  Hello  world  !\n" ;
@@ -237,16 +238,25 @@
 </code>
 </div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">It reads a line into the buffer pointed to by<code> buffer</code> until either a terminating newline or EOF, which it replaces with ’\0’.<br /><div class="doxygen_params">Parameters :</div><ul><li><code> buffer</code> The buffer where to write the line<br /></li><li><code> maxSize</code> The maximum allowed size for the buffer<br /></li></ul><br />
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> buffer</code> The buffer where to write the line<br /></li><li><code> maxSize</code> The maximum allowed size for the buffer<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Read a line from the file.<br /></b><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT&gt;</div>
- <span class="method"><a name="classYuni_1_1IO_1_1File_1_1Stream_1a6cf725d92d33d317c64fd6b2f30d1c5d" href="#">+ readline</a></span>: bool (CString&lt;ChunkSizeT, ExpandableT, ZeroTerminatedT&gt;&amp; buffer);
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class StringT &gt;</div>
+ <span class="method"><a name="classYuni_1_1IO_1_1File_1_1Stream_1a2bbe86c2363f086a58b74081f30b87e4" href="#">+ readline</a></span>: bool (StringT&amp; buffer, bool trim);
 </code>
 </div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">It reads a line into the buffer pointed to by #s until either a terminating newline or EOF, which it replaces with ’\0’. The maximum number of char read is `buffer.chunkSize`. For code robutness (to prevent against misuses) this routine will reserve space according to the chunk size.<br /> The newline, if any, is retained.<br /><div class="doxygen_params">Parameters :</div><ul><li><code> buffer</code> The buffer where to write the line<br /></li></ul><br />
+<div class="doxygen_desc">It reads a line into the buffer pointed to by #s until either a terminating newline or EOF, which it replaces with ’\0’. The maximum number of char read is `buffer.chunkSize`. For code robutness (to prevent against misuses) this routine will reserve space according to the chunk size.<br /> The newline, if any, is retained.<br /><div class="doxygen_params">Parameters :</div><ul><li><code> buffer</code> The buffer where to write the line<br /></li><li><code> trim</code> True to remove any trailing linefeed<br /></li></ul><br />
+</div>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Read a line from the file (with a custom chunk size)<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;unsigned int CustomChunkT, class StringT &gt;</div>
+ <span class="method"><a name="classYuni_1_1IO_1_1File_1_1Stream_1a4ab13dcff2add635eef2a84c063af2d6" href="#">+ readline</a></span>: bool (StringT&amp; buffer, bool trim);
+</code>
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">It reads a line into the buffer pointed to by #s until either a terminating newline or EOF, which it replaces with ’\0’. The maximum number of char read is `CustomChunkT`. For code robutness (to prevent against misuses) this routine will reserve space according to the chunk size.<br /> The newline, if any, is retained.<br /><div class="doxygen_params">Parameters :</div><ul><li><code> buffer</code> The buffer where to write the line<br /></li><li><code> trim</code> True to remove any trailing linefeed<br /></li></ul><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Read a buffer.<br /></b><div class="doxygen_name_spacer"></div>
@@ -309,7 +319,7 @@
 </code>
 </div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><div><b>warning</b> :  The implementation is missing on Windows (#346)<br /></div><br />
+<div class="doxygen_desc"><div><b>warning</b> :  The implementation is missing on Windows (#346)<br /> The user must call `unlock`<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Lock the file for an exclusive access.<br /></b><div class="doxygen_name_spacer"></div>
@@ -317,7 +327,7 @@
 </code>
 </div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc"><div><b>warning</b> :  The implementation is missing on Windows (#346)<br /></div><br />
+<div class="doxygen_desc"><div><b>warning</b> :  The implementation is missing on Windows (#346)<br /> The user must call `unlock`<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Unlock the file.<br /></b><div class="doxygen_name_spacer"></div>

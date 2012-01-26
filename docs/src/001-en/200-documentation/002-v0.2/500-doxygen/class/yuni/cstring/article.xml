@@ -231,7 +231,8 @@
 <tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1CString_1a4655d64336ae38e51277ed11316d2b7f">glob</a></span>(const StringT&amp; pattern) <span class="keyword">const</span></code></td></tr>
 <tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1CString_1a62ce3331408a53208867420407a9c0b1">convertBackslashesIntoSlashes</a></span>()</code></td></tr>
 <tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1CString_1a56d140cbeba1c03209afd006ab4cd20a">convertSlashesIntoBackslashes</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1CString_1a6505efe18c87ce9cf9b40b8672869c11">split</a></span>(U&lt; UType, Alloc&gt;&amp; out, const StringT&amp; sep, bool keepEmptyElements, bool trimElements, bool emptyBefore) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1CString_1a8aa372e4182d3ce6a4c01038ce2a96fe">words</a></span>(const StringT&amp; separators, const PredicateT&amp; predicate) <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1CString_1adfde684caadabb90f009cee115468b00">split</a></span>(ListT&lt; UType, Alloc&gt;&amp; out, const StringT&amp; sep, bool keepEmptyElements, bool trimElements, bool emptyBefore) <span class="keyword">const</span></code></td></tr>
 <tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1CString_1ae15a019026834b52bfef2201e76450a2">duplicate</a></span>(int n)</code></td></tr>
 <tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1CString_1a68b1e941128dda64c0070a63928e5146">extractKeyValue</a></span>(StringT1&amp; key, StringT2&amp; value, bool ignoreCase) <span class="keyword">const</span></code></td></tr>
 <tr><td></td><td><br /><h4>Adaptor only</h4></td></tr>
@@ -271,7 +272,7 @@
 
 <h2>Detailed Description</h2><div>The class manipulates and stores sequences of characters.<br /> The class is a template class, you may prefer the convenient alias<code> Yuni::String</code> most of the time.<br /> The following external types can be inserted / converted to a<code> Yuni::CString</code> :<ul><li><code> C</code><br /></li><li><code> char*</code><br /></li><li><code> C[]</code><br /></li><li><code> std::basic_string&lt;char&gt;</code><br /></li><li><code> Yuni::CString &lt;...&gt;</code><br /></li><li><code> SmartPtr &lt;std::basic_string&lt;char&gt;, ...&gt;</code><br /></li><li><code> SmartPtr &lt; CString &lt;...&gt;, ...&gt;</code><br /></li></ul><br /> Example for iterating through all characters (the recommended way)<source type="cpp">  String  t  =  "こんにちは" ;
   const  String::const_utf8iterator  end  =  t.utf8end();
-  for  ( String::const_utf8iterator  i  =  t.utf8begin();  i  !=  end ;  ++i)
+  for  (String::const_utf8iterator  i  =  t.utf8begin();  i  !=  end ;  ++i)
      std::cout  &lt;&lt;  "char  at  offset  "  &lt;&lt;  i.offset()  &lt;&lt;  ":  "  &lt;&lt;  *i  &lt;&lt;  std::endl;
 </source>
 <br /> Example for conversions :<source type="cpp">  String  s;
@@ -2165,9 +2166,31 @@
 <div class="doxygen_desc">
 </div>
 </td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Iterate through all words in the string, all separated by one of the given separators.<br /></b><div class="doxygen_name_spacer"></div>
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class StringT , class PredicateT &gt;</div>
+ <span class="method"><a name="classYuni_1_1CString_1a8aa372e4182d3ce6a4c01038ce2a96fe" href="#">+ words</a></span>: void (const StringT&amp; separators, const PredicateT&amp; predicate) <span class="keyword">const</span>;
+</code>
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><source type="cpp">  String  t  =  "a,  b,  c" ;
+  t.words( "  ,\t\r\n" ,  [&amp;]  ( const  StringAdapter &amp;  word)
+  {
+     std::cout  &lt;&lt;  word  &lt;&lt;  std::endl;  //  3  elements
+  });
+</source>
+<br /> Dealing with empty words :<source type="cpp">  String  t  =  "a,  b,,  d" ;
+  t.words( "," ,  [&amp;]  ( StringAdapter &amp;  word)
+  {
+     word.trim();
+     std::cout  &lt;&lt;  word  &lt;&lt;  std::endl;  //  4  elements
+  });
+</source>
+<br />
+</div>
+</td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Split a string into several segments.<br /></b><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;template&lt; class, class&gt;class U, class UType , class Alloc , typename StringT &gt;</div>
- <span class="method"><a name="classYuni_1_1CString_1a6505efe18c87ce9cf9b40b8672869c11" href="#">+ split</a></span>: void (U&lt; UType, Alloc&gt;&amp; out, const StringT&amp; sep, bool keepEmptyElements, bool trimElements, bool emptyBefore) <span class="keyword">const</span>;
+<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;template&lt; class, class&gt;class ListT, class UType , class Alloc , typename StringT &gt;</div>
+ <span class="method"><a name="classYuni_1_1CString_1adfde684caadabb90f009cee115468b00" href="#">+ split</a></span>: void (ListT&lt; UType, Alloc&gt;&amp; out, const StringT&amp; sep, bool keepEmptyElements, bool trimElements, bool emptyBefore) <span class="keyword">const</span>;
 </code>
 </div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
@@ -2175,7 +2198,7 @@
   String ( "22::80::443::993" ).split(list,  ":" );
   std::cout  &lt;&lt;  list  &lt;&lt;  std::endl;
 </source>
-<br /><div class="doxygen_params">Parameters :</div><ul><li><code> out</code> All segments that have been found<br /></li><li><code> sep</code> Sequence of chars considered as a separator<br /></li><li><code> keepEmptyElements</code> True to keep empty items<br /></li><li><code> trimElements</code> Trim each item found<br /></li><li><code> emptyBefore</code> True to clear the vector before fulfill it<br /></li></ul><div><b>warning</b> :  This method does not take care of string representation (with `'` or `"`)<br /></div><br />
+<br /><div><b>warning</b> :  Performance Tip: For better performances, the method<code> words</code> will suit better<br /></div><div class="doxygen_params">Parameters :</div><ul><li><code> out</code> All segments that have been found<br /></li><li><code> sep</code> Sequence of chars considered as a separator<br /></li><li><code> keepEmptyElements</code> True to keep empty items<br /></li><li><code> trimElements</code> Trim each item found<br /></li><li><code> emptyBefore</code> True to clear the vector before fulfill it<br /></li></ul><div><b>warning</b> :  This method does not take care of string representation (with `'` or `"`)<br /></div><div><code>see</code> :  words()<br /></div><br />
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Duplicate N times the content of the string.<br /></b><div class="doxygen_name_spacer"></div>

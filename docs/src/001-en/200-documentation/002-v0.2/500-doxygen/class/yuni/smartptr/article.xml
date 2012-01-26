@@ -41,6 +41,11 @@
 <tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1SmartPtr_1a1bd5c9b53b6f499c6363ce3c7c87f75e"><b> ~ </b>SmartPtr</a></span>()</code></td></tr>
 <tr><td></td><td><br /><h4>Swap</h4></td></tr>
 <tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1SmartPtr_1a92105a9475d2566db87d9e48e38de288">swap</a></span>(SmartPtr&amp; rhs)</code></td></tr>
+<tr><td></td><td><br /><h4>Pointer</h4></td></tr>
+<tr><td class="doxygen_index"><code>PointerType </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1SmartPtr_1a2f42e03ebcda9c766b107591a483017d">pointer</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>ConstPointerType </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1SmartPtr_1a4f478b12884a4c04d62aead3b716552c">pointer</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td></td><td><br /><h4>Unicity</h4></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1SmartPtr_1aaca3ef9844c8315f00943c57a9d548c2">unique</a></span>() <span class="keyword">const</span></code></td></tr>
 <tr><td></td><td><br /><h4>Operator * / -&gt;</h4></td></tr>
 <tr><td class="doxygen_index"><code>PointerType </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1SmartPtr_1ad87aff38afb1e28ecbde230a7ec8b2fb">operator-&gt;</a></span>()</code></td></tr>
 <tr><td class="doxygen_index"><code>ConstPointerType </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1SmartPtr_1aee3c2a10bd7076e1c8f98a6760b51171">operator-&gt;</a></span>() <span class="keyword">const</span></code></td></tr>
@@ -68,8 +73,6 @@
 <tr><td class="doxygen_index"><code><span class="keyword">static</span> T* </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1SmartPtr_1add3258c4865e737648f69224a7cd2c1e">WeakPointer</a></span>(const SmartPtr&amp; p)</code></td></tr>
 <tr><td class="doxygen_index"><code><span class="keyword">static</span> S1 </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1SmartPtr_1a5ffb2f4edb4fe31530b0e6c3b08af688">DynamicCast</a></span>(SmartPtr p)</code></td></tr>
 <tr><td></td><td><br /><h4></h4></td></tr>
-<tr><td class="doxygen_index"><code>PointerType </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1SmartPtr_1a2f42e03ebcda9c766b107591a483017d">pointer</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code>ConstPointerType </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1SmartPtr_1a4f478b12884a4c04d62aead3b716552c">pointer</a></span>() <span class="keyword">const</span></code></td></tr>
 <tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1SmartPtr_1aa23bcc15c7b3f5ab5f06572470e1c676">SmartPtr</a></span>(const SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs, const DynamicCastArg&amp; )</code></td></tr>
 <tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1SmartPtr_1a3daab359999bbc25a9188a3c198fa680">SmartPtr</a></span>(SmartPtr&lt;T1, OwspP1, ChckP1, ConvP1, StorP1, ConsP1&gt;&amp; rhs, const DynamicCastArg&amp; )</code></td></tr>
 <tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1SmartPtr_1a88431272999e4935c42c30d380c39ac3">SmartPtr</a></span>(typename SmartPtr&lt;T, OwspP, ChckP, ConvP, StorP, ConsP&gt;::ExplicitStoredType ptr)</code></td></tr>
@@ -411,6 +414,34 @@
 <div class="doxygen_desc">
 </div>
 </td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Pointer <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get a pointer to the object, like operator -&gt; would do.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1SmartPtr_1a2f42e03ebcda9c766b107591a483017d" href="#">+ pointer</a></span>: PointerType ();
+</code>
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get a pointer to the object, like operator -&gt; would do.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1SmartPtr_1a4f478b12884a4c04d62aead3b716552c" href="#">+ pointer</a></span>: ConstPointerType () <span class="keyword">const</span>;
+</code>
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Unicity <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get if the inner data is held by an unique reference.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1SmartPtr_1aaca3ef9844c8315f00943c57a9d548c2" href="#">+ unique</a></span>: bool () <span class="keyword">const</span>;
+</code>
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Operator * / -&gt; <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1SmartPtr_1ad87aff38afb1e28ecbde230a7ec8b2fb" href="#">+ operator-&gt;</a></span>: PointerType ();
@@ -599,22 +630,6 @@
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get a pointer to the object, like operator -&gt; would do.<br /></b><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a name="classYuni_1_1SmartPtr_1a2f42e03ebcda9c766b107591a483017d" href="#">+ pointer</a></span>: PointerType ();
-</code>
-</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">
-</div>
-</td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get a pointer to the object, like operator -&gt; would do.<br /></b><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a name="classYuni_1_1SmartPtr_1a4f478b12884a4c04d62aead3b716552c" href="#">+ pointer</a></span>: ConstPointerType () <span class="keyword">const</span>;
-</code>
-</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
-<div class="doxygen_name_spacer"></div>
-<div class="doxygen_desc">
-</div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Copy constructor with Dynamic casting.<br /></b><div class="doxygen_name_spacer"></div>
 <code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;typename T1 , template&lt; class&gt;class OwspP1, template&lt; class&gt;class ChckP1, class ConvP1 , template&lt; class&gt;class StorP1, template&lt; class&gt;class ConsP1&gt;</div>

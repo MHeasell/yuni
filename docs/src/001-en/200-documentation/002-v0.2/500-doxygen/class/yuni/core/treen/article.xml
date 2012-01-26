@@ -99,6 +99,7 @@
 <tr><td></td><td><br /><h4>Pointer management</h4></td></tr>
 <tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Core_1_1TreeN_1aa582ddca743e1c33ebcbbc8685841f97">addRef</a></span>() <span class="keyword">const</span></code></td></tr>
 <tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Core_1_1TreeN_1ab69a2ed9464d592bcbd22cb3e97c61f5">release</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Core_1_1TreeN_1a4af1dd885cb5a15a0c3783cde1f5157a">unique</a></span>() <span class="keyword">const</span></code></td></tr>
 <tr><td></td><td><br /><h4></h4></td></tr>
 <tr><td class="doxygen_index"><code>std::ostream&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Core_1_1TreeN_1abdc38a348da53c5975db934db4ebc67e">print</a></span>(std::ostream&amp; out, bool recursive, unsigned int level)</code></td></tr>
 </table></div>
@@ -812,6 +813,14 @@
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Decrement the internal reference counter.<br /></b><div class="doxygen_name_spacer"></div>
 <code> <span class="method"><a name="classYuni_1_1Core_1_1TreeN_1ab69a2ed9464d592bcbd22cb3e97c61f5" href="#">+ release</a></span>: void () <span class="keyword">const</span>;
+</code>
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get if the object is an unique reference.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Core_1_1TreeN_1a4af1dd885cb5a15a0c3783cde1f5157a" href="#">+ unique</a></span>: bool () <span class="keyword">const</span>;
 </code>
 </div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
