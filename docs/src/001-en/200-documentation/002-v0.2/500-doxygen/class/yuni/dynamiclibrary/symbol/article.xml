@@ -15,12 +15,12 @@
 <h3>Public function</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4></h4></td></tr>
 <tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1DynamicLibrary_1_1Symbol_1ad7281bef8ec07a6b2f537f17934ef484">Symbol</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1DynamicLibrary_1_1Symbol_1a259c6f11d3fd976310752971fab4ae36">Symbol</a></span>(const Handle p)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1DynamicLibrary_1_1Symbol_1a31c40014ba09769cc745fa835eb127b5">Symbol</a></span>(Handle p)</code></td></tr>
 <tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1DynamicLibrary_1_1Symbol_1a7d5b3c40c73fa4e6ba8e68ccc3df77fa">Symbol</a></span>(const Symbol&amp; rhs)</code></td></tr>
 <tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1DynamicLibrary_1_1Symbol_1a6a4cd82f72222a1c02b489f9ce2bd76d">null</a></span>() <span class="keyword">const</span></code></td></tr>
 <tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1DynamicLibrary_1_1Symbol_1afbc98bf59cdbf9c5308cb7643762373d">valid</a></span>() <span class="keyword">const</span></code></td></tr>
 <tr><td class="doxygen_index"><code>Symbol&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1DynamicLibrary_1_1Symbol_1a0eb28ca9ae8eb9b58724aa97531ec292">operator=</a></span>(const Symbol&amp; rhs)</code></td></tr>
-<tr><td class="doxygen_index"><code>Symbol&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1DynamicLibrary_1_1Symbol_1a194a217b86f0f2f9a79954bf4782a4b4">operator=</a></span>(const Symbol::Handle hndl)</code></td></tr>
+<tr><td class="doxygen_index"><code>Symbol&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1DynamicLibrary_1_1Symbol_1ad162521b81219263def5c83ad47fbae7">operator=</a></span>(Symbol::Handle hndl)</code></td></tr>
 <tr><td class="doxygen_index"><code>Handle </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1DynamicLibrary_1_1Symbol_1ae25c2922050cf586864b28afdff47879">ptr</a></span>() <span class="keyword">const</span></code></td></tr>
 </table></div>
 
@@ -46,7 +46,7 @@
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Constructor with a given handle.<br /></b><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a name="classYuni_1_1DynamicLibrary_1_1Symbol_1a259c6f11d3fd976310752971fab4ae36" href="#">+ Symbol</a></span>:  (const Handle p);
+<code> <span class="method"><a name="classYuni_1_1DynamicLibrary_1_1Symbol_1a31c40014ba09769cc745fa835eb127b5" href="#">+ Symbol</a></span>:  (Handle p);
 </code>
 </div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
@@ -86,7 +86,7 @@
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Copy operator.<br /></b><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a name="classYuni_1_1DynamicLibrary_1_1Symbol_1a194a217b86f0f2f9a79954bf4782a4b4" href="#">+ operator=</a></span>: Symbol&amp; (const Symbol::Handle hndl);
+<code> <span class="method"><a name="classYuni_1_1DynamicLibrary_1_1Symbol_1ad162521b81219263def5c83ad47fbae7" href="#">+ operator=</a></span>: Symbol&amp; (Symbol::Handle hndl);
 </code>
 </div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>

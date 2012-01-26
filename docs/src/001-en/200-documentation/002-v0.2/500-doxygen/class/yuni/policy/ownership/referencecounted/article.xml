@@ -14,6 +14,7 @@
 <tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Ownership_1_1ReferenceCounted_1a858b6eef9c63515f611b2c165095c2aa">ReferenceCounted</a></span>(const ReferenceCounted&lt;U&gt;&amp; c)</code></td></tr>
 <tr><td></td><td><br /><h4></h4></td></tr>
 <tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Ownership_1_1ReferenceCounted_1a755753c7b398e6c51da0523b17680693">initFromRawPointer</a></span>(const T&amp; )</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Ownership_1_1ReferenceCounted_1aeb76a9f596cf841ac5ca266c5b1985d7">unique</a></span>() <span class="keyword">const</span></code></td></tr>
 <tr><td class="doxygen_index"><code>T </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Ownership_1_1ReferenceCounted_1a0edbaa421b4fe05c40d5cef30bc30a0b">clone</a></span>(const T&amp; rhs)</code></td></tr>
 <tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Ownership_1_1ReferenceCounted_1a0ece65580eea126e1b2276a5041662b1">release</a></span>(const T&amp; )</code></td></tr>
 <tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Ownership_1_1ReferenceCounted_1aa7661fb73896300cbf722cc5c9f39dc4">swapPointer</a></span>(ReferenceCounted&amp; rhs)</code></td></tr>
@@ -59,6 +60,13 @@
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Initialization from a raw pointer.<br /></b><div class="doxygen_name_spacer"></div>
 <code> <span class="method"><a name="classYuni_1_1Policy_1_1Ownership_1_1ReferenceCounted_1a755753c7b398e6c51da0523b17680693" href="#">+ initFromRawPointer</a></span>: void (const T&amp; );
+</code>
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1Policy_1_1Ownership_1_1ReferenceCounted_1aeb76a9f596cf841ac5ca266c5b1985d7" href="#">+ unique</a></span>: bool () <span class="keyword">const</span>;
 </code>
 </div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>

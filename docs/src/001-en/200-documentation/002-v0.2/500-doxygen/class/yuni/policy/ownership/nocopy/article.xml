@@ -13,6 +13,7 @@
 <tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Ownership_1_1NoCopy_1a8e09109cffa1262e6e839f6c32de032f">NoCopy</a></span>(const NoCopy&lt;U&gt;&amp; )</code></td></tr>
 <tr><td></td><td><br /><h4></h4></td></tr>
 <tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Ownership_1_1NoCopy_1acc05be1ecfab05584aaf8337d28a3b5e">initFromRawPointer</a></span>(const T&amp; )</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Ownership_1_1NoCopy_1a658838a0c609def8c977d29c11338f77">unique</a></span>() <span class="keyword">const</span></code></td></tr>
 <tr><td></td><td><br /><h4></h4></td></tr>
 <tr><td class="doxygen_index"><code><span class="keyword">static</span> T </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Ownership_1_1NoCopy_1a2112f1e88e701f1cb3f5f68c4fa3278a">clone</a></span>(const T&amp; )</code></td></tr>
 <tr><td class="doxygen_index"><code><span class="keyword">static</span> bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Ownership_1_1NoCopy_1a56ec688de22346d26a70b0f0a9a06561">release</a></span>(const T&amp; )</code></td></tr>
@@ -51,6 +52,13 @@
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Initialization from a raw pointer.<br /></b><div class="doxygen_name_spacer"></div>
 <code> <span class="method"><a name="classYuni_1_1Policy_1_1Ownership_1_1NoCopy_1acc05be1ecfab05584aaf8337d28a3b5e" href="#">+ initFromRawPointer</a></span>: void (const T&amp; );
+</code>
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1Policy_1_1Ownership_1_1NoCopy_1a658838a0c609def8c977d29c11338f77" href="#">+ unique</a></span>: bool () <span class="keyword">const</span>;
 </code>
 </div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>

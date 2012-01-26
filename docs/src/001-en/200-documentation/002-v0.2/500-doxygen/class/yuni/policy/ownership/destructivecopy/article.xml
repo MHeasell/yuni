@@ -12,6 +12,7 @@
 <tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Ownership_1_1DestructiveCopy_1ae875059032637f7544735a2f63f82001">DestructiveCopy</a></span>()</code></td></tr>
 <tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Ownership_1_1DestructiveCopy_1ab37a80ee7768da307b4d7ccd3c3a92ae">DestructiveCopy</a></span>(const DestructiveCopy&lt;U&gt;&amp; )</code></td></tr>
 <tr><td></td><td><br /><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Ownership_1_1DestructiveCopy_1a2181e58a9338c4cae0e6752c53231cd2">unique</a></span>() <span class="keyword">const</span></code></td></tr>
 <tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Ownership_1_1DestructiveCopy_1a694ad83ef460b8703f88664ddfa2e868">initFromRawPointer</a></span>(const T&amp; )</code></td></tr>
 <tr><td></td><td><br /><h4></h4></td></tr>
 <tr><td class="doxygen_index"><code><span class="keyword">static</span> T </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Ownership_1_1DestructiveCopy_1a5ea94f8ad864e9e700de6131fb5ba28f">clone</a></span>(U&amp; rhs)</code></td></tr>
@@ -48,6 +49,13 @@
 </div>
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1Policy_1_1Ownership_1_1DestructiveCopy_1a2181e58a9338c4cae0e6752c53231cd2" href="#">+ unique</a></span>: bool () <span class="keyword">const</span>;
+</code>
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Initialization from a raw pointer.<br /></b><div class="doxygen_name_spacer"></div>
 <code> <span class="method"><a name="classYuni_1_1Policy_1_1Ownership_1_1DestructiveCopy_1a694ad83ef460b8703f88664ddfa2e868" href="#">+ initFromRawPointer</a></span>: void (const T&amp; );

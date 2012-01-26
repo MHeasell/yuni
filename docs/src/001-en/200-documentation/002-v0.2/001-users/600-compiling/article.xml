@@ -113,15 +113,15 @@ Should the download fail, you may download the devpacks manually from <a href="h
 <h3>yuni-config</h3>
 <p>
   Once Yuni is compiled, yuni-config is available from <code>yuni/build/&lt;target&gt;/bin</code>.
-  <ul>
+</p>
+<ul>
 	<li>
 	  <code>yuni-config --cxxflags</code> for includes and defines.
 	</li>
 	<li>
 	  <code>yuni-config --libs</code> for linker options.
 	</li>
-  </ul>
-</p>
+</ul>
 
 <!--
 <h2>Embedding Yuni in your CMake-using project</h2>
@@ -129,3 +129,4 @@ Should the download fail, you may download the devpacks manually from <a href="h
 <h3>Profile</h3>
 <h3>Skipping yuni-config compilation</h3>
 -->
+

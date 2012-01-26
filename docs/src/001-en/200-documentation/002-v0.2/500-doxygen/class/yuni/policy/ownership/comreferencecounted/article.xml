@@ -12,6 +12,8 @@
 <tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Ownership_1_1COMReferenceCounted_1adb338a8ea64865f1ffc0c22b898aae67">COMReferenceCounted</a></span>()</code></td></tr>
 <tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Ownership_1_1COMReferenceCounted_1a3eb13bf7757d544d2f3b778dedbd3c01">COMReferenceCounted</a></span>(const COMReferenceCounted&lt;U&gt;&amp; )</code></td></tr>
 <tr><td></td><td><br /><h4></h4></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Ownership_1_1COMReferenceCounted_1a4808026cef072f9b176d61f32fe9342c">unique</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td></td><td><br /><h4></h4></td></tr>
 <tr><td class="doxygen_index"><code><span class="keyword">static</span> void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Ownership_1_1COMReferenceCounted_1a046612c37a415cad3483fbb6eab7f50c">initFromRawPointer</a></span>(const T&amp; rhs)</code></td></tr>
 <tr><td class="doxygen_index"><code><span class="keyword">static</span> T </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Ownership_1_1COMReferenceCounted_1a9e6fcc6a29b8f6edd8815cad778d2cfe">clone</a></span>(const T&amp; rhs)</code></td></tr>
 <tr><td class="doxygen_index"><code><span class="keyword">static</span> bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Policy_1_1Ownership_1_1COMReferenceCounted_1abb2401af23d6ae8a0abdf444463be1fd">release</a></span>(const T&amp; rhs)</code></td></tr>
@@ -40,6 +42,15 @@
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Copy constructor for any king of template parameter.<br /></b><div class="doxygen_name_spacer"></div>
 <code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;typename U &gt;</div>
  <span class="method"><a name="classYuni_1_1Policy_1_1Ownership_1_1COMReferenceCounted_1a3eb13bf7757d544d2f3b778dedbd3c01" href="#">+ COMReferenceCounted</a></span>:  (const COMReferenceCounted&lt;U&gt;&amp; );
+</code>
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Public <code class="doxygen_visibility">Public</code></h3>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1Policy_1_1Ownership_1_1COMReferenceCounted_1a4808026cef072f9b176d61f32fe9342c" href="#">+ unique</a></span>: bool () <span class="keyword">const</span>;
 </code>
 </div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>

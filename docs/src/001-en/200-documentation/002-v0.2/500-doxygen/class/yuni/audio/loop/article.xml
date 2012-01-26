@@ -45,6 +45,7 @@
 <tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Core_1_1EventLoop_1_1IEventLoop_1a126e3a21fa7861dc19748c4ca5df7a99">start</a></span>()</code></td></tr>
 <tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Core_1_1EventLoop_1_1IEventLoop_1a1411bb43efed973cc100c12355e689e3">stop</a></span>(unsigned int timeout)</code></td></tr>
 <tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Core_1_1EventLoop_1_1IEventLoop_1ac7cead9d8c26b6d259265242aa51ced8">dispatch</a></span>(const RequestType&amp; request)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Core_1_1EventLoop_1_1IEventLoop_1a17b5b04d1a643877eed9a83492dc4128">running</a></span>() <span class="keyword">const</span></code></td></tr>
 <tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Core_1_1EventLoop_1_1Flow_1_1Timer_1a579e66d778391a4477c62a948badb58d">timeout</a></span>(unsigned int t)</code></td></tr>
 </table></div>
 
@@ -293,6 +294,14 @@
 </div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> request</code> A request, which is merely a delegate via the class Bind&lt;&gt;)<br /></li></ul><br />
+</div>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Is the event loop running ?<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Core_1_1EventLoop_1_1IEventLoop_1a17b5b04d1a643877eed9a83492dc4128" href="#">+ running</a></span>: bool () <span class="keyword">const</span>;
+</code>
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Set the timeout to wait between each cycle.<br /></b><div class="doxygen_name_spacer"></div>
