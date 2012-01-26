@@ -675,7 +675,9 @@ namespace DocIndex
 					href.replace("'", "&apos;");
 					href.replace("\"", "&quot;");
 					href.replace("<", "&lt;");
+					href.replace("≤", "&le;");
 					href.replace(">", "&gt;");
+					href.replace("≥", "&ge;");
 					href.replace("//", "/");
 
 					dat << "<url>\n";
