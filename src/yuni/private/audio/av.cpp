@@ -92,7 +92,11 @@ namespace Audio
 		}
 		free(file->Streams);
 
+# if LIBAVFORMAT_VERSION_MAJOR < 53
 		av_close_input_file(file->FormatContext);
+# else
+		avformat_close_input(&file->FormatContext);
+# endif // LIBAVFORMAT_VERSION_MAJOR < 53
 		free(file);
 	}
 
@@ -105,7 +109,7 @@ namespace Audio
 		for (unsigned int i = 0; i < file->FormatContext->nb_streams; ++i)
 		{
 			// Reject streams that are not AUDIO
-			if (file->FormatContext->streams[i]->codec->codec_type != CODEC_TYPE_AUDIO)
+			if (file->FormatContext->streams[i]->codec->codec_type != AVMEDIA_TYPE_AUDIO)
 				continue;
 
 			// Continue until we find the requested stream
@@ -135,7 +139,11 @@ namespace Audio
 
 			// Try to find the codec for the given codec ID, and open it
 			AVCodec* codec = avcodec_find_decoder(stream->CodecContext->codec_id);
+# if LIBAVFORMAT_VERSION_MAJOR < 53
 			if (!codec || avcodec_open(stream->CodecContext, codec) < 0)
+# else
+				if (!codec || avcodec_open2(stream->CodecContext, codec, NULL) < 0)
+# endif // LIBAVFORMAT_VERSION_MAJOR < 53
 			{
 				free(stream);
 				return NULL;
@@ -177,7 +185,7 @@ namespace Audio
 
 	int AV::GetAudioInfo(AudioStream* stream, int& rate, int& channels, int& bits)
 	{
-		if (!stream || stream->CodecContext->codec_type != CODEC_TYPE_AUDIO)
+		if (!stream || stream->CodecContext->codec_type != AVMEDIA_TYPE_AUDIO)
 			return 1;
 
 		rate = stream->CodecContext->sample_rate;
@@ -200,7 +208,7 @@ namespace Audio
 	{
 		size_t dec = 0;
 
-		if (!stream || stream->CodecContext->codec_type != CODEC_TYPE_AUDIO)
+		if (!stream || stream->CodecContext->codec_type != AVMEDIA_TYPE_AUDIO)
 			return 0;
 
 		while (dec < length)
@@ -249,9 +257,12 @@ namespace Audio
 				// Decode some data, and check for errors
 				size = AVCODEC_MAX_AUDIO_FRAME_SIZE;
 				AVPacket pkt;
+//				AvFrame* decodedFrame = NULL;
+
 				av_init_packet(&pkt);
 				pkt.data = (uint8_t*)stream->Data;
 				pkt.size = insize;
+
 				while ((len = avcodec_decode_audio3(stream->CodecContext,
 					(int16_t*)stream->DecodedData, &size, &pkt)) == 0)
 				{

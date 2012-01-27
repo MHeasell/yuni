@@ -200,10 +200,12 @@ namespace Audio
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 
+		Yuni::Bind<bool()> callback;
 		Sound::Map::iterator bEnd = pBuffers.end();
 		for (Sound::Map::iterator it = pBuffers.begin(); it != bEnd; ++it)
 		{
-			it->second->destroyDispatched();
+			callback.bind(it->second, &Sound::destroyDispatched);
+			pQueueService->pAudioLoop.dispatch(callback);
 		}
 		pBuffers.clear();
 	}
@@ -225,11 +227,36 @@ namespace Audio
 		return true;
 	}
 
-	inline unsigned int QueueService::Bank::duration(const StringAdapter& name)
+
+	inline bool QueueService::Bank::unload(const StringAdapter& name)
 	{
+		ThreadingPolicy::MutexLocker locker(*this);
+
+		if (!pQueueService->pReady)
+			return false;
+
 		Sound::Ptr buffer = get(name);
 		if (!buffer)
 			return false;
+
+		Yuni::Bind<bool()> callback;
+		callback.bind(buffer, &Sound::destroyDispatched);
+		pQueueService->pAudioLoop.dispatch(callback);
+		pBuffers.erase(name);
+		return true;
+	}
+
+
+	inline unsigned int QueueService::Bank::duration(const StringAdapter& name)
+	{
+		ThreadingPolicy::MutexLocker locker(*this);
+
+		if (!pQueueService->pReady)
+			return 0;
+
+		Sound::Ptr buffer = get(name);
+		if (!buffer)
+			return 0;
 
 		return buffer->duration();
 	}
