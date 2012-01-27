@@ -138,9 +138,6 @@ namespace Audio
 			Bank(const Bank&);
 			//@}
 
-			//! Map of currently loaded buffers, with string tags as keys
-			Sound::Map pBuffers;
-
 		public:
 			//! Clear the bank, free the loaded buffers
 			void clear();
@@ -151,6 +148,13 @@ namespace Audio
 			** \param name Path to file, used from now on as an identifier for the sound
 			*/
 			bool load(const StringAdapter& name);
+
+			/*!
+			** \brief Load sound file from given path
+			**
+			** \param name Path to file, used from now on as an identifier for the sound
+			*/
+			bool unload(const StringAdapter& name);
 
 			//! Get the duration of a loaded sound
 			unsigned int duration(const StringAdapter& name);
@@ -165,6 +169,9 @@ namespace Audio
 			friend class QueueService;
 			//! Friend declaration
 			friend class QueueService::Emitters;
+
+			//! Map of currently loaded buffers, with string tags as keys
+			Sound::Map pBuffers;
 
 			//! Associated queue service
 			QueueService* pQueueService;

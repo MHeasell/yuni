@@ -42,23 +42,23 @@ int main(int argc, char* argv[])
 	if (!audio.running())
 		return 1;
 
-	String emitterName;
+	// Generate a name for the emitter ...
+	String emitterName = "Emitter 1";
+	// ... and create it
+	if (!audio.emitter.add(emitterName))
+	{
+		std::cerr << "Emitter creation failed !" << std::endl;
+		return 1;
+	}
+
 	for (int i = 1; i < argc; ++i)
 	{
 		// Load sound file
 		if (!audio.bank.load(argv[i]))
 		{
 			std::cerr << "Failed to load \"" << argv[i] << "\"" << std::endl;
-			return 1;
-		}
-
-		// Generate a unique name for the emitter ...
-		emitterName.clear() << "Emitter " << i;
-		// ... and create it
-		if (!audio.emitter.add(emitterName))
-		{
-			std::cerr << "Emitter creation failed !" << std::endl;
-			return 1;
+			// Play the next song rather than just quitting
+			continue;
 		}
 
 		// Attach the emitter to the buffer

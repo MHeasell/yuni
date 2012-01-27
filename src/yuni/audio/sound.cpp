@@ -61,7 +61,7 @@ namespace Audio
 			pStream->CodecContext->sample_rate))
 			return false;
 
-		return (Private::Audio::OpenAL::QueueBufferToSource(buffer, source));
+		return Private::Audio::OpenAL::QueueBufferToSource(buffer, source);
 	}
 
 
