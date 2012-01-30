@@ -61,6 +61,9 @@ endif()
 
 YMESSAGE("      -> OpenAL Libraries: ${OPENAL_INCLUDE_DIR}")
 # Check if we really have a al.h
+if (NOT OPENAL_INCLUDE_DIR)
+	FIND_PATH(OPENAL_INCLUDE_DIR al.h)
+endif()
 set(CMAKE_REQUIRED_INCLUDES "${OPENAL_INCLUDE_DIR}")
 check_include_files("al.h" YUNI_HAS_AL_AL_H)
 check_include_files("AL/al.h" YUNI_HAS_AL_AL_H)
