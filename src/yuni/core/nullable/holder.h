@@ -5,7 +5,7 @@
 namespace Yuni
 {
 
-	template<typename T, class Alloc> class Nullable;
+	template<typename T, class Alloc> class YUNI_DECL Nullable;
 
 
 namespace Private
@@ -31,17 +31,17 @@ namespace NullableImpl
 
 	// Forward declaration
 	template<class T, int S>
-	class Holder
+	class YUNI_DECL Holder
 	{
 	public:
-		Holder()
-			:pHasData(false)
+		Holder() :
+			pHasData(false)
 		{}
-		Holder(const Holder& rhs)
-			:pData(rhs.pData), pHasData(rhs.pHasData)
+		Holder(const Holder& rhs) :
+			pData(rhs.pData), pHasData(rhs.pHasData)
 		{}
-		template<typename U> Holder(const U& rhs)
-			:pData(rhs), pHasData(true)
+		template<typename U> Holder(const U& rhs) :
+			pData(rhs), pHasData(true)
 		{}
 
 		void clear() {pHasData = false;}
@@ -89,16 +89,16 @@ namespace NullableImpl
 
 
 	template<class T>
-	class Holder<T,0>
+	class YUNI_DECL Holder<T,0>
 	{
 	public:
 		Holder()
 		{}
-		Holder(const Holder& rhs)
-			:pData(rhs.pData)
+		Holder(const Holder& rhs) :
+			pData(rhs.pData)
 		{}
-		template<typename U> Holder(const U& rhs)
-			:pData(new T(rhs))
+		template<typename U> Holder(const U& rhs) :
+			pData(new T(rhs))
 		{}
 
 		void clear()
