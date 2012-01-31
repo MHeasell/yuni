@@ -510,7 +510,7 @@ namespace BindImpl
 
 		virtual R invoke(<%=generator.variableList(i)%>) const
 		{
-			return (pThis->*pMember)(<%=generator.list(i, 'a')%>);
+			return ((pThis.pointer())->*pMember)(<%=generator.list(i, 'a')%>);
 		}
 
 		virtual const void* object() const
@@ -579,7 +579,7 @@ namespace BindImpl
 
 		virtual R invoke(<%=generator.variableList(i-1)%>) const
 		{
-			return (pThis->*pMember)(<%=generator.list(i-1, 'a', "", ", ")%>const_cast<UserDataTypeByCopy&>(pUserdata));
+			return ((pThis.pointer())->*pMember)(<%=generator.list(i-1, 'a', "", ", ")%>const_cast<UserDataTypeByCopy&>(pUserdata));
 		}
 
 		virtual const void* object() const
