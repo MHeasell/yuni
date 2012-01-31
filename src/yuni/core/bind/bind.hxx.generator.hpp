@@ -36,7 +36,7 @@ namespace Yuni
 
 	// Constructor
 	template<<%=tmpl[0]%>>
-	inline Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)	
+	inline Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::Bind(const Yuni::DynamicLibrary::Symbol& symbol)
 	{
 		bind(symbol);
 	}

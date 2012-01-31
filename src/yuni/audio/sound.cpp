@@ -65,11 +65,16 @@ namespace Audio
 	}
 
 
-	bool Sound::destroyDispatched()
+	bool Sound::destroyDispatched(Thread::Signal& signal)
 	{
+		if (!pStream)
+			return false;
+
+		Private::Audio::AV::CloseFile(pStream->parent);
+		pStream = nullptr;
 		Private::Audio::OpenAL::DestroyBuffers(pBufferCount, pIDs);
 		pBufferCount = 0;
-		Private::Audio::AV::CloseFile(pStream->parent);
+		signal.notify();
 		return true;
 	}
 

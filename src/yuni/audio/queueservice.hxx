@@ -218,12 +218,17 @@ namespace Audio
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 
-		Yuni::Bind<bool()> callback;
-		Sound::Map::iterator bEnd = pBuffers.end();
-		for (Sound::Map::iterator it = pBuffers.begin(); it != bEnd; ++it)
 		{
-			callback.bind(it->second, &Sound::destroyDispatched);
-			pQueueService->pAudioLoop.dispatch(callback);
+			Thread::Signal signal;
+			Yuni::Bind<bool()> callback;
+			Sound::Map::iterator bEnd = pBuffers.end();
+			for (Sound::Map::iterator it = pBuffers.begin(); it != bEnd; ++it)
+			{
+				callback.bind(it->second, &Sound::destroyDispatched, signal);
+				pQueueService->pAudioLoop.dispatch(callback);
+				signal.wait();
+				signal.reset();
+			}
 		}
 		pBuffers.clear();
 	}
@@ -253,14 +258,21 @@ namespace Audio
 		if (!pQueueService->pReady)
 			return false;
 
-		Sound::Ptr buffer = get(name);
-		if (!buffer)
+		Sound::Map::iterator it = pBuffers.find(name);
+		if (pBuffers.end() == it)
 			return false;
 
-		Yuni::Bind<bool()> callback;
-		callback.bind(buffer, &Sound::destroyDispatched);
-		pQueueService->pAudioLoop.dispatch(callback);
-		pBuffers.erase(name);
+		{
+			Thread::Signal signal;
+			Yuni::Bind<bool()> callback;
+
+			callback.bind(it->second, &Sound::destroyDispatched, signal);
+			pQueueService->pAudioLoop.dispatch(callback);
+			signal.wait();
+		}
+		// Wait for data to be properly unloaded before removing from the list
+		pBuffers.erase(it);
+
 		return true;
 	}
 
