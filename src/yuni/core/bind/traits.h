@@ -72,6 +72,24 @@ namespace BindImpl
 	template<class U, class C, class P> class BoundWithMemberAndUserData;
 
 
+	/*!
+	** \brief Binding with a member
+	**
+	** \tparam C Any class
+	** \tparam P The prototype of the member
+	*/
+	template<class C, class P> class BoundWithSmartPtrMember;
+
+	/*!
+	** \brief Binding with a member and a user data
+	**
+	** \tparam U Type of the user data
+	** \tparam C Any class
+	** \tparam P The prototype of the member
+	*/
+	template<class U, class C, class P> class BoundWithSmartPtrMemberAndUserData;
+
+
 
 
 
@@ -3920,7 +3938,7 @@ namespace BindImpl
 
 		virtual R invoke() const
 		{
-			return (pThis->*pMember)(*const_cast<UserDataTypeByCopy*>(&pUserdata));
+			return (pThis->*pMember)(const_cast<UserDataTypeByCopy&>(pUserdata));
 		}
 
 		virtual const void* object() const
@@ -3981,7 +3999,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0) const
 		{
-			return (pThis->*pMember)(a0, *const_cast<UserDataTypeByCopy*>(&pUserdata));
+			return (pThis->*pMember)(a0, const_cast<UserDataTypeByCopy&>(pUserdata));
 		}
 
 		virtual const void* object() const
@@ -4042,7 +4060,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1) const
 		{
-			return (pThis->*pMember)(a0, a1, *const_cast<UserDataTypeByCopy*>(&pUserdata));
+			return (pThis->*pMember)(a0, a1, const_cast<UserDataTypeByCopy&>(pUserdata));
 		}
 
 		virtual const void* object() const
@@ -4103,7 +4121,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2) const
 		{
-			return (pThis->*pMember)(a0, a1, a2, *const_cast<UserDataTypeByCopy*>(&pUserdata));
+			return (pThis->*pMember)(a0, a1, a2, const_cast<UserDataTypeByCopy&>(pUserdata));
 		}
 
 		virtual const void* object() const
@@ -4164,7 +4182,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3) const
 		{
-			return (pThis->*pMember)(a0, a1, a2, a3, *const_cast<UserDataTypeByCopy*>(&pUserdata));
+			return (pThis->*pMember)(a0, a1, a2, a3, const_cast<UserDataTypeByCopy&>(pUserdata));
 		}
 
 		virtual const void* object() const
@@ -4225,7 +4243,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const
 		{
-			return (pThis->*pMember)(a0, a1, a2, a3, a4, *const_cast<UserDataTypeByCopy*>(&pUserdata));
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, const_cast<UserDataTypeByCopy&>(pUserdata));
 		}
 
 		virtual const void* object() const
@@ -4286,7 +4304,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const
 		{
-			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, *const_cast<UserDataTypeByCopy*>(&pUserdata));
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, const_cast<UserDataTypeByCopy&>(pUserdata));
 		}
 
 		virtual const void* object() const
@@ -4347,7 +4365,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const
 		{
-			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, *const_cast<UserDataTypeByCopy*>(&pUserdata));
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, const_cast<UserDataTypeByCopy&>(pUserdata));
 		}
 
 		virtual const void* object() const
@@ -4408,7 +4426,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const
 		{
-			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, *const_cast<UserDataTypeByCopy*>(&pUserdata));
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, const_cast<UserDataTypeByCopy&>(pUserdata));
 		}
 
 		virtual const void* object() const
@@ -4469,7 +4487,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const
 		{
-			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, *const_cast<UserDataTypeByCopy*>(&pUserdata));
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, const_cast<UserDataTypeByCopy&>(pUserdata));
 		}
 
 		virtual const void* object() const
@@ -4530,7 +4548,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const
 		{
-			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, *const_cast<UserDataTypeByCopy*>(&pUserdata));
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, const_cast<UserDataTypeByCopy&>(pUserdata));
 		}
 
 		virtual const void* object() const
@@ -4591,7 +4609,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const
 		{
-			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, *const_cast<UserDataTypeByCopy*>(&pUserdata));
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, const_cast<UserDataTypeByCopy&>(pUserdata));
 		}
 
 		virtual const void* object() const
@@ -4652,7 +4670,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const
 		{
-			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, *const_cast<UserDataTypeByCopy*>(&pUserdata));
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, const_cast<UserDataTypeByCopy&>(pUserdata));
 		}
 
 		virtual const void* object() const
@@ -4713,7 +4731,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const
 		{
-			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, *const_cast<UserDataTypeByCopy*>(&pUserdata));
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, const_cast<UserDataTypeByCopy&>(pUserdata));
 		}
 
 		virtual const void* object() const
@@ -4774,7 +4792,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const
 		{
-			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, *const_cast<UserDataTypeByCopy*>(&pUserdata));
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, const_cast<UserDataTypeByCopy&>(pUserdata));
 		}
 
 		virtual const void* object() const
@@ -4835,7 +4853,7 @@ namespace BindImpl
 
 		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const
 		{
-			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, *const_cast<UserDataTypeByCopy*>(&pUserdata));
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, const_cast<UserDataTypeByCopy&>(pUserdata));
 		}
 
 		virtual const void* object() const
@@ -4879,6 +4897,2003 @@ namespace BindImpl
 		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>
+
+
+
+
+
+
+	template<class PtrT, class R>
+	class BoundWithSmartPtrMember<PtrT, R()>
+		:public IPointer<R()>
+	{
+	public:
+		typedef typename PtrT::Type  C;
+
+	public:
+		//! \name Constructor
+		//@{
+		//! Constructor
+		BoundWithSmartPtrMember(const PtrT& c, R(C::*member)())
+			:pThis(c), pMember(member)
+		{}
+		//@}
+
+		virtual R invoke() const
+		{
+			return (pThis->*pMember)();
+		}
+
+		virtual const void* object() const
+		{
+			return reinterpret_cast<void*>(pThis.pointer());
+		}
+
+		virtual const IEventObserverBase* observerBaseObject() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::PerformConst(pThis.pointer());
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis.pointer());
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*)()) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return (reinterpret_cast<const C*>(object) == pThis.pointer());
+		}
+
+
+	private:
+		//! Pointer to the object
+		mutable PtrT pThis;
+		//! Pointer-to-member
+		mutable R (C::*pMember)();
+
+	}; // class BoundWithSmartPtrMember<C, R()>
+
+
+
+	template<class PtrT, class R, class A0>
+	class BoundWithSmartPtrMember<PtrT, R(A0)>
+		:public IPointer<R(A0)>
+	{
+	public:
+		typedef typename PtrT::Type  C;
+
+	public:
+		//! \name Constructor
+		//@{
+		//! Constructor
+		BoundWithSmartPtrMember(const PtrT& c, R(C::*member)(A0))
+			:pThis(c), pMember(member)
+		{}
+		//@}
+
+		virtual R invoke(A0 a0) const
+		{
+			return (pThis->*pMember)(a0);
+		}
+
+		virtual const void* object() const
+		{
+			return reinterpret_cast<void*>(pThis.pointer());
+		}
+
+		virtual const IEventObserverBase* observerBaseObject() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::PerformConst(pThis.pointer());
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis.pointer());
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*)(A0)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return (reinterpret_cast<const C*>(object) == pThis.pointer());
+		}
+
+
+	private:
+		//! Pointer to the object
+		mutable PtrT pThis;
+		//! Pointer-to-member
+		mutable R (C::*pMember)(A0);
+
+	}; // class BoundWithSmartPtrMember<C, R(A0)>
+
+
+
+	template<class PtrT, class R, class A0, class A1>
+	class BoundWithSmartPtrMember<PtrT, R(A0, A1)>
+		:public IPointer<R(A0, A1)>
+	{
+	public:
+		typedef typename PtrT::Type  C;
+
+	public:
+		//! \name Constructor
+		//@{
+		//! Constructor
+		BoundWithSmartPtrMember(const PtrT& c, R(C::*member)(A0, A1))
+			:pThis(c), pMember(member)
+		{}
+		//@}
+
+		virtual R invoke(A0 a0, A1 a1) const
+		{
+			return (pThis->*pMember)(a0, a1);
+		}
+
+		virtual const void* object() const
+		{
+			return reinterpret_cast<void*>(pThis.pointer());
+		}
+
+		virtual const IEventObserverBase* observerBaseObject() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::PerformConst(pThis.pointer());
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis.pointer());
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return (reinterpret_cast<const C*>(object) == pThis.pointer());
+		}
+
+
+	private:
+		//! Pointer to the object
+		mutable PtrT pThis;
+		//! Pointer-to-member
+		mutable R (C::*pMember)(A0, A1);
+
+	}; // class BoundWithSmartPtrMember<C, R(A0, A1)>
+
+
+
+	template<class PtrT, class R, class A0, class A1, class A2>
+	class BoundWithSmartPtrMember<PtrT, R(A0, A1, A2)>
+		:public IPointer<R(A0, A1, A2)>
+	{
+	public:
+		typedef typename PtrT::Type  C;
+
+	public:
+		//! \name Constructor
+		//@{
+		//! Constructor
+		BoundWithSmartPtrMember(const PtrT& c, R(C::*member)(A0, A1, A2))
+			:pThis(c), pMember(member)
+		{}
+		//@}
+
+		virtual R invoke(A0 a0, A1 a1, A2 a2) const
+		{
+			return (pThis->*pMember)(a0, a1, a2);
+		}
+
+		virtual const void* object() const
+		{
+			return reinterpret_cast<void*>(pThis.pointer());
+		}
+
+		virtual const IEventObserverBase* observerBaseObject() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::PerformConst(pThis.pointer());
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis.pointer());
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return (reinterpret_cast<const C*>(object) == pThis.pointer());
+		}
+
+
+	private:
+		//! Pointer to the object
+		mutable PtrT pThis;
+		//! Pointer-to-member
+		mutable R (C::*pMember)(A0, A1, A2);
+
+	}; // class BoundWithSmartPtrMember<C, R(A0, A1, A2)>
+
+
+
+	template<class PtrT, class R, class A0, class A1, class A2, class A3>
+	class BoundWithSmartPtrMember<PtrT, R(A0, A1, A2, A3)>
+		:public IPointer<R(A0, A1, A2, A3)>
+	{
+	public:
+		typedef typename PtrT::Type  C;
+
+	public:
+		//! \name Constructor
+		//@{
+		//! Constructor
+		BoundWithSmartPtrMember(const PtrT& c, R(C::*member)(A0, A1, A2, A3))
+			:pThis(c), pMember(member)
+		{}
+		//@}
+
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3) const
+		{
+			return (pThis->*pMember)(a0, a1, a2, a3);
+		}
+
+		virtual const void* object() const
+		{
+			return reinterpret_cast<void*>(pThis.pointer());
+		}
+
+		virtual const IEventObserverBase* observerBaseObject() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::PerformConst(pThis.pointer());
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis.pointer());
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return (reinterpret_cast<const C*>(object) == pThis.pointer());
+		}
+
+
+	private:
+		//! Pointer to the object
+		mutable PtrT pThis;
+		//! Pointer-to-member
+		mutable R (C::*pMember)(A0, A1, A2, A3);
+
+	}; // class BoundWithSmartPtrMember<C, R(A0, A1, A2, A3)>
+
+
+
+	template<class PtrT, class R, class A0, class A1, class A2, class A3, class A4>
+	class BoundWithSmartPtrMember<PtrT, R(A0, A1, A2, A3, A4)>
+		:public IPointer<R(A0, A1, A2, A3, A4)>
+	{
+	public:
+		typedef typename PtrT::Type  C;
+
+	public:
+		//! \name Constructor
+		//@{
+		//! Constructor
+		BoundWithSmartPtrMember(const PtrT& c, R(C::*member)(A0, A1, A2, A3, A4))
+			:pThis(c), pMember(member)
+		{}
+		//@}
+
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const
+		{
+			return (pThis->*pMember)(a0, a1, a2, a3, a4);
+		}
+
+		virtual const void* object() const
+		{
+			return reinterpret_cast<void*>(pThis.pointer());
+		}
+
+		virtual const IEventObserverBase* observerBaseObject() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::PerformConst(pThis.pointer());
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis.pointer());
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return (reinterpret_cast<const C*>(object) == pThis.pointer());
+		}
+
+
+	private:
+		//! Pointer to the object
+		mutable PtrT pThis;
+		//! Pointer-to-member
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4);
+
+	}; // class BoundWithSmartPtrMember<C, R(A0, A1, A2, A3, A4)>
+
+
+
+	template<class PtrT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	class BoundWithSmartPtrMember<PtrT, R(A0, A1, A2, A3, A4, A5)>
+		:public IPointer<R(A0, A1, A2, A3, A4, A5)>
+	{
+	public:
+		typedef typename PtrT::Type  C;
+
+	public:
+		//! \name Constructor
+		//@{
+		//! Constructor
+		BoundWithSmartPtrMember(const PtrT& c, R(C::*member)(A0, A1, A2, A3, A4, A5))
+			:pThis(c), pMember(member)
+		{}
+		//@}
+
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const
+		{
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5);
+		}
+
+		virtual const void* object() const
+		{
+			return reinterpret_cast<void*>(pThis.pointer());
+		}
+
+		virtual const IEventObserverBase* observerBaseObject() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::PerformConst(pThis.pointer());
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis.pointer());
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return (reinterpret_cast<const C*>(object) == pThis.pointer());
+		}
+
+
+	private:
+		//! Pointer to the object
+		mutable PtrT pThis;
+		//! Pointer-to-member
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5);
+
+	}; // class BoundWithSmartPtrMember<C, R(A0, A1, A2, A3, A4, A5)>
+
+
+
+	template<class PtrT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	class BoundWithSmartPtrMember<PtrT, R(A0, A1, A2, A3, A4, A5, A6)>
+		:public IPointer<R(A0, A1, A2, A3, A4, A5, A6)>
+	{
+	public:
+		typedef typename PtrT::Type  C;
+
+	public:
+		//! \name Constructor
+		//@{
+		//! Constructor
+		BoundWithSmartPtrMember(const PtrT& c, R(C::*member)(A0, A1, A2, A3, A4, A5, A6))
+			:pThis(c), pMember(member)
+		{}
+		//@}
+
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const
+		{
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6);
+		}
+
+		virtual const void* object() const
+		{
+			return reinterpret_cast<void*>(pThis.pointer());
+		}
+
+		virtual const IEventObserverBase* observerBaseObject() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::PerformConst(pThis.pointer());
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis.pointer());
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return (reinterpret_cast<const C*>(object) == pThis.pointer());
+		}
+
+
+	private:
+		//! Pointer to the object
+		mutable PtrT pThis;
+		//! Pointer-to-member
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6);
+
+	}; // class BoundWithSmartPtrMember<C, R(A0, A1, A2, A3, A4, A5, A6)>
+
+
+
+	template<class PtrT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	class BoundWithSmartPtrMember<PtrT, R(A0, A1, A2, A3, A4, A5, A6, A7)>
+		:public IPointer<R(A0, A1, A2, A3, A4, A5, A6, A7)>
+	{
+	public:
+		typedef typename PtrT::Type  C;
+
+	public:
+		//! \name Constructor
+		//@{
+		//! Constructor
+		BoundWithSmartPtrMember(const PtrT& c, R(C::*member)(A0, A1, A2, A3, A4, A5, A6, A7))
+			:pThis(c), pMember(member)
+		{}
+		//@}
+
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const
+		{
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7);
+		}
+
+		virtual const void* object() const
+		{
+			return reinterpret_cast<void*>(pThis.pointer());
+		}
+
+		virtual const IEventObserverBase* observerBaseObject() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::PerformConst(pThis.pointer());
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis.pointer());
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return (reinterpret_cast<const C*>(object) == pThis.pointer());
+		}
+
+
+	private:
+		//! Pointer to the object
+		mutable PtrT pThis;
+		//! Pointer-to-member
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7);
+
+	}; // class BoundWithSmartPtrMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7)>
+
+
+
+	template<class PtrT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	class BoundWithSmartPtrMember<PtrT, R(A0, A1, A2, A3, A4, A5, A6, A7, A8)>
+		:public IPointer<R(A0, A1, A2, A3, A4, A5, A6, A7, A8)>
+	{
+	public:
+		typedef typename PtrT::Type  C;
+
+	public:
+		//! \name Constructor
+		//@{
+		//! Constructor
+		BoundWithSmartPtrMember(const PtrT& c, R(C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8))
+			:pThis(c), pMember(member)
+		{}
+		//@}
+
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const
+		{
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8);
+		}
+
+		virtual const void* object() const
+		{
+			return reinterpret_cast<void*>(pThis.pointer());
+		}
+
+		virtual const IEventObserverBase* observerBaseObject() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::PerformConst(pThis.pointer());
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis.pointer());
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return (reinterpret_cast<const C*>(object) == pThis.pointer());
+		}
+
+
+	private:
+		//! Pointer to the object
+		mutable PtrT pThis;
+		//! Pointer-to-member
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8);
+
+	}; // class BoundWithSmartPtrMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8)>
+
+
+
+	template<class PtrT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	class BoundWithSmartPtrMember<PtrT, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>
+		:public IPointer<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>
+	{
+	public:
+		typedef typename PtrT::Type  C;
+
+	public:
+		//! \name Constructor
+		//@{
+		//! Constructor
+		BoundWithSmartPtrMember(const PtrT& c, R(C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9))
+			:pThis(c), pMember(member)
+		{}
+		//@}
+
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const
+		{
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9);
+		}
+
+		virtual const void* object() const
+		{
+			return reinterpret_cast<void*>(pThis.pointer());
+		}
+
+		virtual const IEventObserverBase* observerBaseObject() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::PerformConst(pThis.pointer());
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis.pointer());
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return (reinterpret_cast<const C*>(object) == pThis.pointer());
+		}
+
+
+	private:
+		//! Pointer to the object
+		mutable PtrT pThis;
+		//! Pointer-to-member
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9);
+
+	}; // class BoundWithSmartPtrMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>
+
+
+
+	template<class PtrT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	class BoundWithSmartPtrMember<PtrT, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>
+		:public IPointer<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>
+	{
+	public:
+		typedef typename PtrT::Type  C;
+
+	public:
+		//! \name Constructor
+		//@{
+		//! Constructor
+		BoundWithSmartPtrMember(const PtrT& c, R(C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10))
+			:pThis(c), pMember(member)
+		{}
+		//@}
+
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const
+		{
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
+		}
+
+		virtual const void* object() const
+		{
+			return reinterpret_cast<void*>(pThis.pointer());
+		}
+
+		virtual const IEventObserverBase* observerBaseObject() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::PerformConst(pThis.pointer());
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis.pointer());
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return (reinterpret_cast<const C*>(object) == pThis.pointer());
+		}
+
+
+	private:
+		//! Pointer to the object
+		mutable PtrT pThis;
+		//! Pointer-to-member
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10);
+
+	}; // class BoundWithSmartPtrMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>
+
+
+
+	template<class PtrT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	class BoundWithSmartPtrMember<PtrT, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>
+		:public IPointer<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>
+	{
+	public:
+		typedef typename PtrT::Type  C;
+
+	public:
+		//! \name Constructor
+		//@{
+		//! Constructor
+		BoundWithSmartPtrMember(const PtrT& c, R(C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11))
+			:pThis(c), pMember(member)
+		{}
+		//@}
+
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const
+		{
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11);
+		}
+
+		virtual const void* object() const
+		{
+			return reinterpret_cast<void*>(pThis.pointer());
+		}
+
+		virtual const IEventObserverBase* observerBaseObject() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::PerformConst(pThis.pointer());
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis.pointer());
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return (reinterpret_cast<const C*>(object) == pThis.pointer());
+		}
+
+
+	private:
+		//! Pointer to the object
+		mutable PtrT pThis;
+		//! Pointer-to-member
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11);
+
+	}; // class BoundWithSmartPtrMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>
+
+
+
+	template<class PtrT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	class BoundWithSmartPtrMember<PtrT, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>
+		:public IPointer<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>
+	{
+	public:
+		typedef typename PtrT::Type  C;
+
+	public:
+		//! \name Constructor
+		//@{
+		//! Constructor
+		BoundWithSmartPtrMember(const PtrT& c, R(C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12))
+			:pThis(c), pMember(member)
+		{}
+		//@}
+
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const
+		{
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12);
+		}
+
+		virtual const void* object() const
+		{
+			return reinterpret_cast<void*>(pThis.pointer());
+		}
+
+		virtual const IEventObserverBase* observerBaseObject() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::PerformConst(pThis.pointer());
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis.pointer());
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return (reinterpret_cast<const C*>(object) == pThis.pointer());
+		}
+
+
+	private:
+		//! Pointer to the object
+		mutable PtrT pThis;
+		//! Pointer-to-member
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12);
+
+	}; // class BoundWithSmartPtrMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>
+
+
+
+	template<class PtrT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	class BoundWithSmartPtrMember<PtrT, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>
+		:public IPointer<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>
+	{
+	public:
+		typedef typename PtrT::Type  C;
+
+	public:
+		//! \name Constructor
+		//@{
+		//! Constructor
+		BoundWithSmartPtrMember(const PtrT& c, R(C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13))
+			:pThis(c), pMember(member)
+		{}
+		//@}
+
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const
+		{
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13);
+		}
+
+		virtual const void* object() const
+		{
+			return reinterpret_cast<void*>(pThis.pointer());
+		}
+
+		virtual const IEventObserverBase* observerBaseObject() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::PerformConst(pThis.pointer());
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis.pointer());
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return (reinterpret_cast<const C*>(object) == pThis.pointer());
+		}
+
+
+	private:
+		//! Pointer to the object
+		mutable PtrT pThis;
+		//! Pointer-to-member
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13);
+
+	}; // class BoundWithSmartPtrMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>
+
+
+
+	template<class PtrT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	class BoundWithSmartPtrMember<PtrT, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>
+		:public IPointer<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>
+	{
+	public:
+		typedef typename PtrT::Type  C;
+
+	public:
+		//! \name Constructor
+		//@{
+		//! Constructor
+		BoundWithSmartPtrMember(const PtrT& c, R(C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14))
+			:pThis(c), pMember(member)
+		{}
+		//@}
+
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const
+		{
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14);
+		}
+
+		virtual const void* object() const
+		{
+			return reinterpret_cast<void*>(pThis.pointer());
+		}
+
+		virtual const IEventObserverBase* observerBaseObject() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::PerformConst(pThis.pointer());
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis.pointer());
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return (reinterpret_cast<const C*>(object) == pThis.pointer());
+		}
+
+
+	private:
+		//! Pointer to the object
+		mutable PtrT pThis;
+		//! Pointer-to-member
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14);
+
+	}; // class BoundWithSmartPtrMember<C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>
+
+
+
+
+
+
+
+
+
+
+	// class BoundWithMemberAndUserData
+
+
+	template<class U, class PtrT, class R, class A0>
+	class BoundWithSmartPtrMemberAndUserData<U, PtrT, R(A0)>
+		:public IPointer<R()>
+	{
+	public:
+		typedef typename PtrT::Type  C;
+		typedef typename Static::Remove::RefOnly<A0>::Type UserDataTypeByCopy;
+
+	public:
+		BoundWithSmartPtrMemberAndUserData(const PtrT& c, R(C::*member)(A0), U userdata)
+			:pThis(c), pMember(member), pUserdata(userdata)
+		{}
+
+		virtual R invoke() const
+		{
+			return (pThis->*pMember)(const_cast<UserDataTypeByCopy&>(pUserdata));
+		}
+
+		virtual const void* object() const
+		{
+			return reinterpret_cast<void*>(pThis.pointer());
+		}
+
+		virtual const IEventObserverBase* observerBaseObject() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::PerformConst(pThis.pointer());
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis.pointer());
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+
+		virtual bool compareWithPointerToFunction(R (*)()) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return (reinterpret_cast<const C*>(object) == pThis.pointer());
+		}
+
+
+	private:
+		//! Pointer to the object
+		mutable PtrT pThis;
+		//! Pointer-to-member
+		mutable R (C::*pMember)(A0);
+		//! Userdata
+		UserDataTypeByCopy pUserdata;
+
+	}; // class BoundWithSmartPtrMemberAndUserData<U, C, R(A0)>
+
+
+
+	template<class U, class PtrT, class R, class A0, class A1>
+	class BoundWithSmartPtrMemberAndUserData<U, PtrT, R(A0, A1)>
+		:public IPointer<R(A0)>
+	{
+	public:
+		typedef typename PtrT::Type  C;
+		typedef typename Static::Remove::RefOnly<A1>::Type UserDataTypeByCopy;
+
+	public:
+		BoundWithSmartPtrMemberAndUserData(const PtrT& c, R(C::*member)(A0, A1), U userdata)
+			:pThis(c), pMember(member), pUserdata(userdata)
+		{}
+
+		virtual R invoke(A0 a0) const
+		{
+			return (pThis->*pMember)(a0, const_cast<UserDataTypeByCopy&>(pUserdata));
+		}
+
+		virtual const void* object() const
+		{
+			return reinterpret_cast<void*>(pThis.pointer());
+		}
+
+		virtual const IEventObserverBase* observerBaseObject() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::PerformConst(pThis.pointer());
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis.pointer());
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+
+		virtual bool compareWithPointerToFunction(R (*)(A0)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return (reinterpret_cast<const C*>(object) == pThis.pointer());
+		}
+
+
+	private:
+		//! Pointer to the object
+		mutable PtrT pThis;
+		//! Pointer-to-member
+		mutable R (C::*pMember)(A0, A1);
+		//! Userdata
+		UserDataTypeByCopy pUserdata;
+
+	}; // class BoundWithSmartPtrMemberAndUserData<U, C, R(A0, A1)>
+
+
+
+	template<class U, class PtrT, class R, class A0, class A1, class A2>
+	class BoundWithSmartPtrMemberAndUserData<U, PtrT, R(A0, A1, A2)>
+		:public IPointer<R(A0, A1)>
+	{
+	public:
+		typedef typename PtrT::Type  C;
+		typedef typename Static::Remove::RefOnly<A2>::Type UserDataTypeByCopy;
+
+	public:
+		BoundWithSmartPtrMemberAndUserData(const PtrT& c, R(C::*member)(A0, A1, A2), U userdata)
+			:pThis(c), pMember(member), pUserdata(userdata)
+		{}
+
+		virtual R invoke(A0 a0, A1 a1) const
+		{
+			return (pThis->*pMember)(a0, a1, const_cast<UserDataTypeByCopy&>(pUserdata));
+		}
+
+		virtual const void* object() const
+		{
+			return reinterpret_cast<void*>(pThis.pointer());
+		}
+
+		virtual const IEventObserverBase* observerBaseObject() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::PerformConst(pThis.pointer());
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis.pointer());
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return (reinterpret_cast<const C*>(object) == pThis.pointer());
+		}
+
+
+	private:
+		//! Pointer to the object
+		mutable PtrT pThis;
+		//! Pointer-to-member
+		mutable R (C::*pMember)(A0, A1, A2);
+		//! Userdata
+		UserDataTypeByCopy pUserdata;
+
+	}; // class BoundWithSmartPtrMemberAndUserData<U, C, R(A0, A1, A2)>
+
+
+
+	template<class U, class PtrT, class R, class A0, class A1, class A2, class A3>
+	class BoundWithSmartPtrMemberAndUserData<U, PtrT, R(A0, A1, A2, A3)>
+		:public IPointer<R(A0, A1, A2)>
+	{
+	public:
+		typedef typename PtrT::Type  C;
+		typedef typename Static::Remove::RefOnly<A3>::Type UserDataTypeByCopy;
+
+	public:
+		BoundWithSmartPtrMemberAndUserData(const PtrT& c, R(C::*member)(A0, A1, A2, A3), U userdata)
+			:pThis(c), pMember(member), pUserdata(userdata)
+		{}
+
+		virtual R invoke(A0 a0, A1 a1, A2 a2) const
+		{
+			return (pThis->*pMember)(a0, a1, a2, const_cast<UserDataTypeByCopy&>(pUserdata));
+		}
+
+		virtual const void* object() const
+		{
+			return reinterpret_cast<void*>(pThis.pointer());
+		}
+
+		virtual const IEventObserverBase* observerBaseObject() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::PerformConst(pThis.pointer());
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis.pointer());
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return (reinterpret_cast<const C*>(object) == pThis.pointer());
+		}
+
+
+	private:
+		//! Pointer to the object
+		mutable PtrT pThis;
+		//! Pointer-to-member
+		mutable R (C::*pMember)(A0, A1, A2, A3);
+		//! Userdata
+		UserDataTypeByCopy pUserdata;
+
+	}; // class BoundWithSmartPtrMemberAndUserData<U, C, R(A0, A1, A2, A3)>
+
+
+
+	template<class U, class PtrT, class R, class A0, class A1, class A2, class A3, class A4>
+	class BoundWithSmartPtrMemberAndUserData<U, PtrT, R(A0, A1, A2, A3, A4)>
+		:public IPointer<R(A0, A1, A2, A3)>
+	{
+	public:
+		typedef typename PtrT::Type  C;
+		typedef typename Static::Remove::RefOnly<A4>::Type UserDataTypeByCopy;
+
+	public:
+		BoundWithSmartPtrMemberAndUserData(const PtrT& c, R(C::*member)(A0, A1, A2, A3, A4), U userdata)
+			:pThis(c), pMember(member), pUserdata(userdata)
+		{}
+
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3) const
+		{
+			return (pThis->*pMember)(a0, a1, a2, a3, const_cast<UserDataTypeByCopy&>(pUserdata));
+		}
+
+		virtual const void* object() const
+		{
+			return reinterpret_cast<void*>(pThis.pointer());
+		}
+
+		virtual const IEventObserverBase* observerBaseObject() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::PerformConst(pThis.pointer());
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis.pointer());
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return (reinterpret_cast<const C*>(object) == pThis.pointer());
+		}
+
+
+	private:
+		//! Pointer to the object
+		mutable PtrT pThis;
+		//! Pointer-to-member
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4);
+		//! Userdata
+		UserDataTypeByCopy pUserdata;
+
+	}; // class BoundWithSmartPtrMemberAndUserData<U, C, R(A0, A1, A2, A3, A4)>
+
+
+
+	template<class U, class PtrT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
+	class BoundWithSmartPtrMemberAndUserData<U, PtrT, R(A0, A1, A2, A3, A4, A5)>
+		:public IPointer<R(A0, A1, A2, A3, A4)>
+	{
+	public:
+		typedef typename PtrT::Type  C;
+		typedef typename Static::Remove::RefOnly<A5>::Type UserDataTypeByCopy;
+
+	public:
+		BoundWithSmartPtrMemberAndUserData(const PtrT& c, R(C::*member)(A0, A1, A2, A3, A4, A5), U userdata)
+			:pThis(c), pMember(member), pUserdata(userdata)
+		{}
+
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4) const
+		{
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, const_cast<UserDataTypeByCopy&>(pUserdata));
+		}
+
+		virtual const void* object() const
+		{
+			return reinterpret_cast<void*>(pThis.pointer());
+		}
+
+		virtual const IEventObserverBase* observerBaseObject() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::PerformConst(pThis.pointer());
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis.pointer());
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return (reinterpret_cast<const C*>(object) == pThis.pointer());
+		}
+
+
+	private:
+		//! Pointer to the object
+		mutable PtrT pThis;
+		//! Pointer-to-member
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5);
+		//! Userdata
+		UserDataTypeByCopy pUserdata;
+
+	}; // class BoundWithSmartPtrMemberAndUserData<U, C, R(A0, A1, A2, A3, A4, A5)>
+
+
+
+	template<class U, class PtrT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
+	class BoundWithSmartPtrMemberAndUserData<U, PtrT, R(A0, A1, A2, A3, A4, A5, A6)>
+		:public IPointer<R(A0, A1, A2, A3, A4, A5)>
+	{
+	public:
+		typedef typename PtrT::Type  C;
+		typedef typename Static::Remove::RefOnly<A6>::Type UserDataTypeByCopy;
+
+	public:
+		BoundWithSmartPtrMemberAndUserData(const PtrT& c, R(C::*member)(A0, A1, A2, A3, A4, A5, A6), U userdata)
+			:pThis(c), pMember(member), pUserdata(userdata)
+		{}
+
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) const
+		{
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, const_cast<UserDataTypeByCopy&>(pUserdata));
+		}
+
+		virtual const void* object() const
+		{
+			return reinterpret_cast<void*>(pThis.pointer());
+		}
+
+		virtual const IEventObserverBase* observerBaseObject() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::PerformConst(pThis.pointer());
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis.pointer());
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return (reinterpret_cast<const C*>(object) == pThis.pointer());
+		}
+
+
+	private:
+		//! Pointer to the object
+		mutable PtrT pThis;
+		//! Pointer-to-member
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6);
+		//! Userdata
+		UserDataTypeByCopy pUserdata;
+
+	}; // class BoundWithSmartPtrMemberAndUserData<U, C, R(A0, A1, A2, A3, A4, A5, A6)>
+
+
+
+	template<class U, class PtrT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
+	class BoundWithSmartPtrMemberAndUserData<U, PtrT, R(A0, A1, A2, A3, A4, A5, A6, A7)>
+		:public IPointer<R(A0, A1, A2, A3, A4, A5, A6)>
+	{
+	public:
+		typedef typename PtrT::Type  C;
+		typedef typename Static::Remove::RefOnly<A7>::Type UserDataTypeByCopy;
+
+	public:
+		BoundWithSmartPtrMemberAndUserData(const PtrT& c, R(C::*member)(A0, A1, A2, A3, A4, A5, A6, A7), U userdata)
+			:pThis(c), pMember(member), pUserdata(userdata)
+		{}
+
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6) const
+		{
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, const_cast<UserDataTypeByCopy&>(pUserdata));
+		}
+
+		virtual const void* object() const
+		{
+			return reinterpret_cast<void*>(pThis.pointer());
+		}
+
+		virtual const IEventObserverBase* observerBaseObject() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::PerformConst(pThis.pointer());
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis.pointer());
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return (reinterpret_cast<const C*>(object) == pThis.pointer());
+		}
+
+
+	private:
+		//! Pointer to the object
+		mutable PtrT pThis;
+		//! Pointer-to-member
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7);
+		//! Userdata
+		UserDataTypeByCopy pUserdata;
+
+	}; // class BoundWithSmartPtrMemberAndUserData<U, C, R(A0, A1, A2, A3, A4, A5, A6, A7)>
+
+
+
+	template<class U, class PtrT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
+	class BoundWithSmartPtrMemberAndUserData<U, PtrT, R(A0, A1, A2, A3, A4, A5, A6, A7, A8)>
+		:public IPointer<R(A0, A1, A2, A3, A4, A5, A6, A7)>
+	{
+	public:
+		typedef typename PtrT::Type  C;
+		typedef typename Static::Remove::RefOnly<A8>::Type UserDataTypeByCopy;
+
+	public:
+		BoundWithSmartPtrMemberAndUserData(const PtrT& c, R(C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8), U userdata)
+			:pThis(c), pMember(member), pUserdata(userdata)
+		{}
+
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7) const
+		{
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, const_cast<UserDataTypeByCopy&>(pUserdata));
+		}
+
+		virtual const void* object() const
+		{
+			return reinterpret_cast<void*>(pThis.pointer());
+		}
+
+		virtual const IEventObserverBase* observerBaseObject() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::PerformConst(pThis.pointer());
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis.pointer());
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return (reinterpret_cast<const C*>(object) == pThis.pointer());
+		}
+
+
+	private:
+		//! Pointer to the object
+		mutable PtrT pThis;
+		//! Pointer-to-member
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8);
+		//! Userdata
+		UserDataTypeByCopy pUserdata;
+
+	}; // class BoundWithSmartPtrMemberAndUserData<U, C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8)>
+
+
+
+	template<class U, class PtrT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
+	class BoundWithSmartPtrMemberAndUserData<U, PtrT, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>
+		:public IPointer<R(A0, A1, A2, A3, A4, A5, A6, A7, A8)>
+	{
+	public:
+		typedef typename PtrT::Type  C;
+		typedef typename Static::Remove::RefOnly<A9>::Type UserDataTypeByCopy;
+
+	public:
+		BoundWithSmartPtrMemberAndUserData(const PtrT& c, R(C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), U userdata)
+			:pThis(c), pMember(member), pUserdata(userdata)
+		{}
+
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8) const
+		{
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, const_cast<UserDataTypeByCopy&>(pUserdata));
+		}
+
+		virtual const void* object() const
+		{
+			return reinterpret_cast<void*>(pThis.pointer());
+		}
+
+		virtual const IEventObserverBase* observerBaseObject() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::PerformConst(pThis.pointer());
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis.pointer());
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return (reinterpret_cast<const C*>(object) == pThis.pointer());
+		}
+
+
+	private:
+		//! Pointer to the object
+		mutable PtrT pThis;
+		//! Pointer-to-member
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9);
+		//! Userdata
+		UserDataTypeByCopy pUserdata;
+
+	}; // class BoundWithSmartPtrMemberAndUserData<U, C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>
+
+
+
+	template<class U, class PtrT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
+	class BoundWithSmartPtrMemberAndUserData<U, PtrT, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>
+		:public IPointer<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>
+	{
+	public:
+		typedef typename PtrT::Type  C;
+		typedef typename Static::Remove::RefOnly<A10>::Type UserDataTypeByCopy;
+
+	public:
+		BoundWithSmartPtrMemberAndUserData(const PtrT& c, R(C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), U userdata)
+			:pThis(c), pMember(member), pUserdata(userdata)
+		{}
+
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9) const
+		{
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, const_cast<UserDataTypeByCopy&>(pUserdata));
+		}
+
+		virtual const void* object() const
+		{
+			return reinterpret_cast<void*>(pThis.pointer());
+		}
+
+		virtual const IEventObserverBase* observerBaseObject() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::PerformConst(pThis.pointer());
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis.pointer());
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return (reinterpret_cast<const C*>(object) == pThis.pointer());
+		}
+
+
+	private:
+		//! Pointer to the object
+		mutable PtrT pThis;
+		//! Pointer-to-member
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10);
+		//! Userdata
+		UserDataTypeByCopy pUserdata;
+
+	}; // class BoundWithSmartPtrMemberAndUserData<U, C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>
+
+
+
+	template<class U, class PtrT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
+	class BoundWithSmartPtrMemberAndUserData<U, PtrT, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>
+		:public IPointer<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>
+	{
+	public:
+		typedef typename PtrT::Type  C;
+		typedef typename Static::Remove::RefOnly<A11>::Type UserDataTypeByCopy;
+
+	public:
+		BoundWithSmartPtrMemberAndUserData(const PtrT& c, R(C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), U userdata)
+			:pThis(c), pMember(member), pUserdata(userdata)
+		{}
+
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) const
+		{
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, const_cast<UserDataTypeByCopy&>(pUserdata));
+		}
+
+		virtual const void* object() const
+		{
+			return reinterpret_cast<void*>(pThis.pointer());
+		}
+
+		virtual const IEventObserverBase* observerBaseObject() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::PerformConst(pThis.pointer());
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis.pointer());
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return (reinterpret_cast<const C*>(object) == pThis.pointer());
+		}
+
+
+	private:
+		//! Pointer to the object
+		mutable PtrT pThis;
+		//! Pointer-to-member
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11);
+		//! Userdata
+		UserDataTypeByCopy pUserdata;
+
+	}; // class BoundWithSmartPtrMemberAndUserData<U, C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>
+
+
+
+	template<class U, class PtrT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
+	class BoundWithSmartPtrMemberAndUserData<U, PtrT, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>
+		:public IPointer<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>
+	{
+	public:
+		typedef typename PtrT::Type  C;
+		typedef typename Static::Remove::RefOnly<A12>::Type UserDataTypeByCopy;
+
+	public:
+		BoundWithSmartPtrMemberAndUserData(const PtrT& c, R(C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), U userdata)
+			:pThis(c), pMember(member), pUserdata(userdata)
+		{}
+
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) const
+		{
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, const_cast<UserDataTypeByCopy&>(pUserdata));
+		}
+
+		virtual const void* object() const
+		{
+			return reinterpret_cast<void*>(pThis.pointer());
+		}
+
+		virtual const IEventObserverBase* observerBaseObject() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::PerformConst(pThis.pointer());
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis.pointer());
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return (reinterpret_cast<const C*>(object) == pThis.pointer());
+		}
+
+
+	private:
+		//! Pointer to the object
+		mutable PtrT pThis;
+		//! Pointer-to-member
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12);
+		//! Userdata
+		UserDataTypeByCopy pUserdata;
+
+	}; // class BoundWithSmartPtrMemberAndUserData<U, C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>
+
+
+
+	template<class U, class PtrT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
+	class BoundWithSmartPtrMemberAndUserData<U, PtrT, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>
+		:public IPointer<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>
+	{
+	public:
+		typedef typename PtrT::Type  C;
+		typedef typename Static::Remove::RefOnly<A13>::Type UserDataTypeByCopy;
+
+	public:
+		BoundWithSmartPtrMemberAndUserData(const PtrT& c, R(C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), U userdata)
+			:pThis(c), pMember(member), pUserdata(userdata)
+		{}
+
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12) const
+		{
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, const_cast<UserDataTypeByCopy&>(pUserdata));
+		}
+
+		virtual const void* object() const
+		{
+			return reinterpret_cast<void*>(pThis.pointer());
+		}
+
+		virtual const IEventObserverBase* observerBaseObject() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::PerformConst(pThis.pointer());
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis.pointer());
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return (reinterpret_cast<const C*>(object) == pThis.pointer());
+		}
+
+
+	private:
+		//! Pointer to the object
+		mutable PtrT pThis;
+		//! Pointer-to-member
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13);
+		//! Userdata
+		UserDataTypeByCopy pUserdata;
+
+	}; // class BoundWithSmartPtrMemberAndUserData<U, C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>
+
+
+
+	template<class U, class PtrT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
+	class BoundWithSmartPtrMemberAndUserData<U, PtrT, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>
+		:public IPointer<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>
+	{
+	public:
+		typedef typename PtrT::Type  C;
+		typedef typename Static::Remove::RefOnly<A14>::Type UserDataTypeByCopy;
+
+	public:
+		BoundWithSmartPtrMemberAndUserData(const PtrT& c, R(C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), U userdata)
+			:pThis(c), pMember(member), pUserdata(userdata)
+		{}
+
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13) const
+		{
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, const_cast<UserDataTypeByCopy&>(pUserdata));
+		}
+
+		virtual const void* object() const
+		{
+			return reinterpret_cast<void*>(pThis.pointer());
+		}
+
+		virtual const IEventObserverBase* observerBaseObject() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::PerformConst(pThis.pointer());
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis.pointer());
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return (reinterpret_cast<const C*>(object) == pThis.pointer());
+		}
+
+
+	private:
+		//! Pointer to the object
+		mutable PtrT pThis;
+		//! Pointer-to-member
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14);
+		//! Userdata
+		UserDataTypeByCopy pUserdata;
+
+	}; // class BoundWithSmartPtrMemberAndUserData<U, C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>
+
+
+
+	template<class U, class PtrT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
+	class BoundWithSmartPtrMemberAndUserData<U, PtrT, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>
+		:public IPointer<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>
+	{
+	public:
+		typedef typename PtrT::Type  C;
+		typedef typename Static::Remove::RefOnly<A15>::Type UserDataTypeByCopy;
+
+	public:
+		BoundWithSmartPtrMemberAndUserData(const PtrT& c, R(C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), U userdata)
+			:pThis(c), pMember(member), pUserdata(userdata)
+		{}
+
+		virtual R invoke(A0 a0, A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11, A12 a12, A13 a13, A14 a14) const
+		{
+			return (pThis->*pMember)(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, const_cast<UserDataTypeByCopy&>(pUserdata));
+		}
+
+		virtual const void* object() const
+		{
+			return reinterpret_cast<void*>(pThis.pointer());
+		}
+
+		virtual const IEventObserverBase* observerBaseObject() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::PerformConst(pThis.pointer());
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis.pointer());
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+
+		virtual bool compareWithPointerToFunction(R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return (reinterpret_cast<const C*>(object) == pThis.pointer());
+		}
+
+
+	private:
+		//! Pointer to the object
+		mutable PtrT pThis;
+		//! Pointer-to-member
+		mutable R (C::*pMember)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15);
+		//! Userdata
+		UserDataTypeByCopy pUserdata;
+
+	}; // class BoundWithSmartPtrMemberAndUserData<U, C, R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>
 
 
 
