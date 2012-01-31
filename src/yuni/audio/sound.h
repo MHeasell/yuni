@@ -6,6 +6,7 @@
 # include "../core/string.h"
 # include "../core/smartptr.h"
 # include "../core/string.h"
+# include "../thread/signal.h"
 # include "../private/audio/av.h"
 
 namespace Yuni
@@ -41,7 +42,7 @@ namespace Audio
 
 		bool prepareDispatched(unsigned int source);
 
-		bool destroyDispatched();
+		bool destroyDispatched(Thread::Signal& signal);
 
 		bool updateDispatched(unsigned int source);
 

@@ -72,13 +72,18 @@ namespace Audio
 	bool AV::Init()
 	{
 		av_register_all();
+# ifdef NDEBUG
  		// Silence warning output from the lib
 		av_log_set_level(AV_LOG_ERROR);
+# else // NDEBUG
+		// Only write output when encountering unrecoverable errors
+		av_log_set_level(AV_LOG_FATAL);
+# endif // NDEBUG
 		return true;
 	}
 
 
-	void AV::CloseFile(AudioFile* file)
+	void AV::CloseFile(AudioFile*& file)
 	{
 		if (!file)
 			return;
@@ -98,6 +103,7 @@ namespace Audio
 		avformat_close_input(&file->FormatContext);
 # endif // LIBAVFORMAT_VERSION_MAJOR < 53
 		free(file);
+		file = nullptr;
 	}
 
 
@@ -142,7 +148,7 @@ namespace Audio
 # if LIBAVFORMAT_VERSION_MAJOR < 53
 			if (!codec || avcodec_open(stream->CodecContext, codec) < 0)
 # else
-				if (!codec || avcodec_open2(stream->CodecContext, codec, NULL) < 0)
+			if (!codec || avcodec_open2(stream->CodecContext, codec, NULL) < 0)
 # endif // LIBAVFORMAT_VERSION_MAJOR < 53
 			{
 				free(stream);

@@ -37,7 +37,7 @@ namespace Audio
 		static AudioFile* OpenFile(const StringT& fname);
 
 		//! Close an opened file and any of its streams
-		static void CloseFile(AudioFile* file);
+		static void CloseFile(AudioFile*& file);
 
 		/*!
 		** \brief Retrieve a handle for the given audio stream number

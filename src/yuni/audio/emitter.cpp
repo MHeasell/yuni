@@ -39,7 +39,7 @@ namespace Audio
 
 	bool Emitter::detachBufferDispatched()
 	{
-		if (!pBuffer)
+		if (!pReady || !pBuffer)
 			return false;
 
 		stopSoundDispatched();
