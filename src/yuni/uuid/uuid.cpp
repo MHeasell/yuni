@@ -52,7 +52,7 @@ namespace Yuni
 		{
 			// The guid produced on Windows is uppercase
 			for (unsigned int i = 0; i != 36; ++i)
-				cstring[i] = String::ToLower(cstring[i]);
+				cstring[i] = static_cast<char>(String::ToLower(cstring[i]));
 		}
 		// Do not forget the null terminator
 		cstring[36] = '\0';

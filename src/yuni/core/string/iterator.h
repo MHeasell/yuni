@@ -56,6 +56,15 @@ struct Model
 		*/
 		Size rawOffset() const {return StringType::npos;}
 
+		/*!
+		** \brief Get the current value of the iterator
+		*/
+		char value() const
+		{
+			return '\0';
+		}
+
+
 	protected:
 		NullIterator(const StringType& s)
 			:pString(s)
@@ -184,6 +193,14 @@ struct Model
 			}
 			while (true);
 			return true;
+		}
+
+		/*!
+		** \brief Get the current value of the iterator
+		*/
+		UTF8::Char value() const
+		{
+			return pChar;
 		}
 
 
@@ -353,6 +370,15 @@ struct Model
 			}
 			while (true);
 			return true;
+		}
+
+
+		/*!
+		** \brief Get the current value of the iterator
+		*/
+		char value() const
+		{
+			return static_cast<char>(pString.at(pOffset));
 		}
 
 
