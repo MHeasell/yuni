@@ -77,6 +77,9 @@ namespace Audio
 		//! Attach a buffer to the emitter
 		bool attachBufferDispatched(Sound::Ptr& buffer);
 
+		//! Detach the emitter from any buffer
+		bool detachBufferDispatched();
+
 		//! Prepare the emitter for playing
 		bool prepareDispatched();
 
@@ -85,6 +88,12 @@ namespace Audio
 		//! Play the sound
 		bool playSoundDispatched(Sound::Ptr& buffer);
 
+		//! Stop the sound
+		bool stopSoundDispatched();
+
+		//! Pause the sound
+		bool pauseSoundDispatched();
+
 		//! Update buffers if necessary
 		bool updateDispatched();
 		//@}
@@ -92,6 +101,9 @@ namespace Audio
 
 		//! \name Accessors
 		//@{
+		//! Is the emitter attached to a buffer ?
+		bool attached() const;
+
 		//! Is the emitter currently playing ?
 		bool playing() const;
 
@@ -151,8 +163,8 @@ namespace Audio
 		float pGain;
 		//! Current playback position
 		sint64 pStartTime;
-		//! Sound to play. NULL if none
-		Sound::Ptr  pBuffer;
+		//! Sound to play. nullptr if none
+		Sound::Ptr pBuffer;
 
 		//! Is the emitter ready for use?
 		bool pReady;

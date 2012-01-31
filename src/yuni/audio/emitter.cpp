@@ -37,6 +37,19 @@ namespace Audio
 	}
 
 
+	bool Emitter::detachBufferDispatched()
+	{
+		if (!pBuffer)
+			return false;
+
+		stopSoundDispatched();
+
+		Private::Audio::OpenAL::UnbindBufferFromSource(pID);
+		pBuffer = nullptr;
+		return true;
+	}
+
+
 	bool Emitter::playSoundDispatched()
 	{
 		if (!pBuffer)
@@ -69,6 +82,16 @@ namespace Audio
 			return false;
 
 		return playSoundDispatched();
+	}
+
+
+	bool Emitter::stopSoundDispatched()
+	{
+		if (!pPlaying)
+			return false;
+
+		Private::Audio::OpenAL::StopSource(pID);
+		return true;
 	}
 
 

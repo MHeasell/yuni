@@ -164,16 +164,37 @@ namespace Audio
 	bool OpenAL::PlaySource(ALuint source)
 	{
 		alGetError();
-		alSourceRewind(source);
 		alSourcePlay(source);
-		return alGetError() == AL_NO_ERROR;
+		return AL_NO_ERROR == alGetError();
+	}
+
+	bool OpenAL::PauseSource(ALuint source)
+	{
+		alGetError();
+		alSourcePause(source);
+		return AL_NO_ERROR == alGetError();
+	}
+
+	bool OpenAL::StopSource(unsigned int source)
+	{
+		alGetError();
+		alSourceStop(source);
+		return AL_NO_ERROR == alGetError();
 	}
 
 	bool OpenAL::IsSourcePlaying(unsigned int source)
 	{
+		alGetError();
 		ALint state;
 		alGetSourcei(source, AL_SOURCE_STATE, &state);
-		return state == AL_PLAYING;
+		return AL_NO_ERROR == alGetError() && AL_PLAYING == state;
+	}
+
+	bool OpenAL::IsSourcePaused(unsigned int source)
+	{
+		ALint state;
+		alGetSourcei(source, AL_SOURCE_STATE, &state);
+		return AL_NO_ERROR == alGetError() && AL_PAUSED == state;
 	}
 
 	bool OpenAL::ModifySource(unsigned int source, float pitch, float gain,
