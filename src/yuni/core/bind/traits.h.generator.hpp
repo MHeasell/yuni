@@ -71,6 +71,24 @@ namespace BindImpl
 	template<class U, class C, class P> class BoundWithMemberAndUserData;
 
 
+	/*!
+	** \brief Binding with a member
+	**
+	** \tparam C Any class
+	** \tparam P The prototype of the member
+	*/
+	template<class C, class P> class BoundWithSmartPtrMember;
+
+	/*!
+	** \brief Binding with a member and a user data
+	**
+	** \tparam U Type of the user data
+	** \tparam C Any class
+	** \tparam P The prototype of the member
+	*/
+	template<class U, class C, class P> class BoundWithSmartPtrMemberAndUserData;
+
+
 
 
 
@@ -468,6 +486,143 @@ namespace BindImpl
 		UserDataTypeByCopy pUserdata;
 
 	}; // class BoundWithMemberAndUserData<U, C, R(<%=generator.list(i)%>)>
+
+
+<% end %>
+
+
+<% (0..generator.argumentCount-1).each do |i| %>
+	template<class PtrT, class R<%=generator.templateParameterList(i) %>>
+	class BoundWithSmartPtrMember<PtrT, R(<%=generator.list(i)%>)>
+		:public IPointer<R(<%=generator.list(i)%>)>
+	{
+	public:
+		typedef typename PtrT::Type  C;
+
+	public:
+		//! \name Constructor
+		//@{
+		//! Constructor
+		BoundWithSmartPtrMember(const PtrT& c, R(C::*member)(<%=generator.list(i)%>))
+			:pThis(c), pMember(member)
+		{}
+		//@}
+
+		virtual R invoke(<%=generator.variableList(i)%>) const
+		{
+			return (pThis->*pMember)(<%=generator.list(i, 'a')%>);
+		}
+
+		virtual const void* object() const
+		{
+			return reinterpret_cast<void*>(pThis.pointer());
+		}
+
+		virtual const IEventObserverBase* observerBaseObject() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::PerformConst(pThis.pointer());
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis.pointer());
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+		virtual bool compareWithPointerToFunction(R (*)(<%=generator.list(i)%>)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return (reinterpret_cast<const C*>(object) == pThis.pointer());
+		}
+
+
+	private:
+		//! Pointer to the object
+		mutable PtrT pThis;
+		//! Pointer-to-member
+		mutable R (C::*pMember)(<%=generator.list(i)%>);
+
+	}; // class BoundWithSmartPtrMember<C, R(<%=generator.list(i)%>)>
+
+
+<% end %>
+
+
+
+
+
+
+
+	// class BoundWithMemberAndUserData
+
+<% (1..generator.argumentCount).each do |i| %>
+	template<class U, class PtrT, class R<%=generator.templateParameterList(i) %>>
+	class BoundWithSmartPtrMemberAndUserData<U, PtrT, R(<%=generator.list(i)%>)>
+		:public IPointer<R(<%=generator.list(i-1)%>)>
+	{
+	public:
+		typedef typename PtrT::Type  C;
+		typedef typename Static::Remove::RefOnly<A<%=i-1%>>::Type UserDataTypeByCopy;
+
+	public:
+		BoundWithSmartPtrMemberAndUserData(const PtrT& c, R(C::*member)(<%=generator.list(i)%>), U userdata)
+			:pThis(c), pMember(member), pUserdata(userdata)
+		{}
+
+		virtual R invoke(<%=generator.variableList(i-1)%>) const
+		{
+			return (pThis->*pMember)(<%=generator.list(i-1, 'a', "", ", ")%>*const_cast<UserDataTypeByCopy*>(&pUserdata));
+		}
+
+		virtual const void* object() const
+		{
+			return reinterpret_cast<void*>(pThis.pointer());
+		}
+
+		virtual const IEventObserverBase* observerBaseObject() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::PerformConst(pThis.pointer());
+		}
+
+		virtual bool isDescendantOf(const IEventObserverBase* obj) const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Equals(obj, pThis.pointer());
+		}
+
+		virtual bool isDescendantOfIEventObserverBase() const
+		{
+			return Static::DynamicCastWhenInherits<C,IEventObserverBase>::Yes;
+		}
+
+
+		virtual bool compareWithPointerToFunction(R (*)(<%=generator.list(i-1)%>)) const
+		{
+			return false;
+		}
+
+		virtual bool compareWithPointerToObject(const void* object) const
+		{
+			return (reinterpret_cast<const C*>(object) == pThis.pointer());
+		}
+
+
+	private:
+		//! Pointer to the object
+		mutable PtrT pThis;
+		//! Pointer-to-member
+		mutable R (C::*pMember)(<%=generator.list(i)%>);
+		//! Userdata
+		UserDataTypeByCopy pUserdata;
+
+	}; // class BoundWithSmartPtrMemberAndUserData<U, C, R(<%=generator.list(i)%>)>
 
 
 <% end %>
