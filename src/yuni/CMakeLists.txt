@@ -34,7 +34,7 @@ include("${CMAKE_CURRENT_SOURCE_DIR}/../cmake/Modules.cmake")
 if(YUNI_MODULE_CORE)
 	# The header yuni.h must be available
 	CONFIGURE_FILE("${CMAKE_CURRENT_SOURCE_DIR}/cmake/config.h.cmake" "${CMAKE_CURRENT_BINARY_DIR}/config.h")
-	# 
+	#
 	if(EXISTS "${CMAKE_CURRENT_BINARY_DIR}/yuni.h" AND EXISTS "${CMAKE_CURRENT_BINARY_DIR}/core/customstring/customstring.h")
 		# The file config.h is at the same place that the sources.
 		# Consequently there is no need to specify a path
@@ -106,9 +106,9 @@ if(YUNI_MODULE_AUDIO)
 endif()
 
 
-#if(YUNI_MODULE_ALGORITHMS)
-#	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/algorithms.cmake")
-#endif(YUNI_MODULE_ALGORITHMS)
+if(YUNI_MODULE_ALGORITHMS)
+	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/algorithms.cmake")
+endif(YUNI_MODULE_ALGORITHMS)
 
 
 if(YUNI_MODULE_DOCUMENTATION)

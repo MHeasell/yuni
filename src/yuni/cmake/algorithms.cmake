@@ -29,7 +29,7 @@ install(TARGETS yuni-static-algorithms
 # Install Algo-related headers
 install(
 	DIRECTORY algorithm
-	COMPONENT ${YUNICOMPONENT_ALGORITHMS} 
+	COMPONENT ${YUNICOMPONENT_ALGORITHMS}
 	DESTINATION include/${YUNI_VERSIONED_INST_PATH}
 	FILES_MATCHING
 		PATTERN "*.h"

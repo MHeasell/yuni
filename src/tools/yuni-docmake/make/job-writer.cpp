@@ -78,7 +78,7 @@ namespace // anonymous
 					<< "\t\t\tlabel: \"" << curve.caption << "\",\n"
 					<< "\t\t\tdata: [";
 
-				unsigned int max = Math::Max(curve.x.size(), curve.y.size());
+				unsigned int max = static_cast<unsigned int>(Math::Max(curve.x.size(), curve.y.size()));
 				for (unsigned int pt = 0; pt != max; ++pt)
 				{
 					if (pt)

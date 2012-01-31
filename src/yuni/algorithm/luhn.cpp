@@ -8,7 +8,7 @@ namespace Yuni
 namespace Algorithm
 {
 
-	int Luhn::Mod10(const String& s)
+	int Luhn::Mod10(const StringAdapter& s)
 	{
 		// The string must have at least one char
 		if (s.size() > 1)
@@ -27,14 +27,15 @@ namespace Algorithm
 			int sum = 0;
 			bool alternate = true;
 
+			const StringAdapter::iterator end = s.end();
 			// For each char
-			for (const String::Char* c = s.c_str(); *c != '\0'; ++c)
+			for (StringAdapter::iterator i = s.begin(); end != i; ++i)
 			{
 				// Each char in the string must be a digit
-				if (!String::IsDigit(*c))
+				if (!String::IsDigit(i.value()))
 					return false;
 				// The `real` digit
-				n = *c - '0';
+				n = i.value() - '0';
 				// Computing the sum
 				sum += (alternate = !alternate) ? prefetch[n] : n;
 			}

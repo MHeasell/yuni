@@ -38,7 +38,7 @@ namespace Algorithm
 		** \param s A string with an arbitrary length (> 1, returns false otherwise)
 		** \return True if the string is a valid credit card number, False otherwise
 		*/
-		static bool IsValidCreditCardNumber(const String& s);
+		static bool IsValidCreditCardNumber(const StringAdapter& s);
 
 	public:
 		/*!
@@ -47,11 +47,13 @@ namespace Algorithm
 		** \param s A string with an arbitrary length (> 1, error otherwise)
 		** \return The check digit, -1 if an error has occured
 		*/
-		static int Mod10(const String& s);
+		static int Mod10(const StringAdapter& s);
+
 
 		/*!
 		** \brief Generate the check character of a string using the `Luhn mode N` algorithm
 		**
+		** TODO !
 		** A mapping between valid input characters and code-points is needed, to
 		** specify what characters are valid, and the numerical order of those characters.
 		**
@@ -76,7 +78,7 @@ namespace Algorithm
 		**
 		** int main(void)
 		** {
-		** 	char check = Yuni::Algorithms::Luhn::ModN("a340bd2f", &CodePointsHexa);	
+		** 	char check = Yuni::Algorithms::Luhn::ModN("a340bd2f", &CodePointsHexa);
 		** 	std::
 		** 	return 0;
 		** }
@@ -86,8 +88,7 @@ namespace Algorithm
 		** \return The check digit, -1 if an error has occured
 		*/
 		//! TODO Need implementation for `Luhn Mod N`
-		//		template<class StringT>
-		//		static int ModN(const StringT& s, int (*codepoint)(const StringT::Char));
+		//		static int ModN(const StringAdapterT& s, int (*codepoint)(const StringT::Char));
 
 	}; // class Luhn
 
