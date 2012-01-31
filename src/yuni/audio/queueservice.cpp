@@ -1,8 +1,11 @@
 
+#include "queueservice.h"
 #include <cassert>
+#include "../core/point3D.h"
+#include "../core/vector3D.h"
+#include "../thread/signal.h"
 #include "../private/audio/av.h"
 #include "../private/audio/openal.h"
-#include "queueservice.h"
 
 namespace Yuni
 {
@@ -10,6 +13,23 @@ namespace Audio
 {
 
 	Atomic::Int<32> QueueService::sHasRunningInstance = 0;
+
+
+	QueueService::QueueService():
+		pReady(false),
+		pAudioLoop(this)
+	{
+		bank.pQueueService = this;
+		emitter.pQueueService = this;
+		emitter.pBank = &bank;
+	}
+
+
+	QueueService::~QueueService()
+	{
+		if (pReady)
+			stop();
+	}
 
 
 	bool QueueService::start()

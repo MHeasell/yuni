@@ -2,14 +2,7 @@
 # define __YUNI_AUDIO_QUEUESERVICE_H__
 
 # include "../yuni.h"
-# include <map>
-# include "../core/atomic/int.h"
-# include "../core/point3D.h"
-# include "../core/vector3D.h"
 # include "../core/string.h"
-# include "../core/smartptr.h"
-# include "../thread/policy.h"
-# include "../thread/signal.h"
 # include "emitter.h"
 # include "loop.h"
 # include "sound.h"
@@ -33,7 +26,6 @@ namespace Audio
 		typedef Policy::ObjectLevelLockable<QueueService>  ThreadingPolicy;
 
 	public:
-
 		//! Forward declaration
 		class Bank;
 
@@ -189,18 +181,10 @@ namespace Audio
 		//! \name Constructor and destructor
 		//@{
 		//! Constructor
-		QueueService(): pReady(false), pAudioLoop(this)
-		{
-			bank.pQueueService = this;
-			emitter.pQueueService = this;
-			emitter.pBank = &bank;
-		}
+		QueueService();
+
 		//! Destructor
-		~QueueService()
-		{
-			if (pReady)
-				stop();
-		}
+		~QueueService();
 		//@}
 
 	public:
