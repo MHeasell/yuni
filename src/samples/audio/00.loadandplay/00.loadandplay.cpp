@@ -92,6 +92,8 @@ int main(int argc, char* argv[])
 				std::cout << std::endl;
 			}
 		}
+		//audio.emitter.detach(emitterName);
+		audio.bank.unload(argv[i]);
 	}
 
 	// Properly stop the queue service and unload everything

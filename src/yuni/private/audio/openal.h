@@ -79,24 +79,51 @@ namespace Audio
 		*/
 		static unsigned int CreateSource(Point3D<> position, Vector3D<> velocity,
 			Vector3D<> direction, float pitch, float gain, bool attenuate, bool loop);
+
 		//! Destroy an OpenAL source
 		static void DestroySource(unsigned int source);
 
+		//! Play an OpenAL source
 		static bool PlaySource(unsigned int source);
+
+		//! Stop an OpenAL source
+		static bool StopSource(unsigned int source);
+
+		//! Pause an OpenAL source
+		static bool PauseSource(unsigned int source);
+
+		//! Is the source currently playing ?
 		static bool IsSourcePlaying(unsigned int source);
+
+		//! Is the source currently playing ?
+		static bool IsSourcePaused(unsigned int source);
+
+		//! Modify characteristics of an existing source
 		static bool ModifySource(unsigned int source, float pitch, float gain,
 			bool attenuate, bool loop);
+		//! Move an existing source
 		static bool MoveSource(unsigned int source, const Point3D<>& position,
 			const Vector3D<>& velocity, const Vector3D<>& direction);
 
+		//! Bind a sound buffer to an OpenAL source
 		static bool BindBufferToSource(unsigned int buffer, unsigned int source);
+
+		//! Unind an OpenAL source from any buffer
 		static void UnbindBufferFromSource(unsigned int source);
+
+		//! Queue a sound buffer for playing on a source
 		static bool QueueBufferToSource(unsigned int buffer, unsigned int source);
+
+		//! Unqueue a sound buffer from a source
 		static unsigned int UnqueueBufferFromSource(unsigned int source);
 
+		//! Get current playback position on a source
 		static float SourcePlaybackPosition(unsigned int source);
+
+		//! Set current playback position on a source
 		static void SetSourcePlaybackPosition(unsigned int source, float position);
 
+		//! Set data on a sound buffer
 		static bool SetBufferData(unsigned int buffer, int format, void* data,
 			size_t count, int rate);
 

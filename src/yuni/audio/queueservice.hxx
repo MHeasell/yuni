@@ -119,6 +119,24 @@ namespace Audio
 	}
 
 
+	inline void QueueService::Emitters::detach(const StringAdapter& name)
+	{
+		return detach(get(name));
+	}
+
+
+	inline void QueueService::Emitters::detach(Emitter::Ptr emitter)
+	{
+		if (!emitter)
+			return;
+
+		Audio::Loop::RequestType callback;
+ 		callback.bind(emitter, &Emitter::detachBufferDispatched);
+		// Dispatching...
+ 		pQueueService->pAudioLoop.dispatch(callback);
+	}
+
+
 
 	inline bool QueueService::Emitters::move(const StringAdapter& emitterName,
 		const Point3D<>& position)
