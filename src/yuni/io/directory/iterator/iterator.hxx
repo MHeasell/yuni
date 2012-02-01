@@ -53,7 +53,7 @@ namespace Directory
 	{
 		typename ThreadingPolicy::MutexLocker locker(*this);
 		typename ThreadingPolicy::MutexLocker locker2(rhs);
-		rhs.pRootFolder = rhs.pRootFolder;
+		pRootFolder = rhs.pRootFolder;
 	}
 
 
@@ -62,8 +62,7 @@ namespace Directory
 	{
 		# ifndef YUNI_NO_THREAD_SAFE
 		stop();
-		if (pThread)
-			delete pThread;
+		delete pThread;
 		# endif
 	}
 
