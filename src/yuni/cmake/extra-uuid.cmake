@@ -16,8 +16,9 @@ if (WIN32 OR WIN64)
 endif()
 
 if (UNIX)
-	check_include_files("uuid/uuid.h" YUNI_HAS_UUID_H)
-	if(NOT YUNI_HAS_UUID_H)
+	#FIXME
+	find_path(UUID_INCLUDE_DIR NAMES uuid/uuid.h PATHS /usr/include /usr/local/include /opt/local/include /sw/include)
+	if(NOT UUID_INCLUDE_DIR)
 		set(YUNI_CMAKE_ERROR 1)
 		YMESSAGE(    "[!!] Impossible to find uuid/uuid.h.")
 		YMESSAGE(    " * Packages needed on Debian: libuuid1, uuid-dev")
