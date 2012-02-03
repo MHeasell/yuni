@@ -115,7 +115,11 @@ namespace Audio
 		for (unsigned int i = 0; i < file->FormatContext->nb_streams; ++i)
 		{
 			// Reject streams that are not AUDIO
+# if LIBAVFORMAT_VERSION_MAJOR < 53
+			if (file->FormatContext->streams[i]->codec->codec_type != CODEC_TYPE_AUDIO)
+# else
 			if (file->FormatContext->streams[i]->codec->codec_type != AVMEDIA_TYPE_AUDIO)
+# endif // LIBAVFORMAT_VERSION_MAJOR < 53
 				continue;
 
 			// Continue until we find the requested stream
@@ -191,7 +195,11 @@ namespace Audio
 
 	int AV::GetAudioInfo(AudioStream* stream, int& rate, int& channels, int& bits)
 	{
+# if LIBAVFORMAT_VERSION_MAJOR < 53
+		if (!stream || stream->CodecContext->codec_type != CODEC_TYPE_AUDIO)
+# else
 		if (!stream || stream->CodecContext->codec_type != AVMEDIA_TYPE_AUDIO)
+# endif // LIBAVFORMAT_VERSION_MAJOR < 53
 			return 1;
 
 		rate = stream->CodecContext->sample_rate;
@@ -214,7 +222,11 @@ namespace Audio
 	{
 		size_t dec = 0;
 
+# if LIBAVFORMAT_VERSION_MAJOR < 53
+		if (!stream || stream->CodecContext->codec_type != CODEC_TYPE_AUDIO)
+# else
 		if (!stream || stream->CodecContext->codec_type != AVMEDIA_TYPE_AUDIO)
+# endif // LIBAVFORMAT_VERSION_MAJOR < 53
 			return 0;
 
 		while (dec < length)

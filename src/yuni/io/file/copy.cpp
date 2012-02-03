@@ -4,7 +4,7 @@
 # include <sys/sendfile.h>
 #endif
 #include <sys/stat.h>
-
+#include <unistd.h>
 
 
 namespace Yuni
