@@ -326,8 +326,7 @@ namespace GetOpt
 
 	Parser::~Parser()
 	{
-        if (pRemains)
-			delete pRemains;
+		delete pRemains;
 
 		if (!pAllOptions.empty())
 		{
@@ -353,11 +352,8 @@ namespace GetOpt
 				delete *i;
 			pAllOptions.clear();
 		}
-		if (pRemains)
-		{
-			delete pRemains;
-			pRemains = NULL;
-		}
+		delete pRemains;
+		pRemains = NULL;
 	}
 
 
