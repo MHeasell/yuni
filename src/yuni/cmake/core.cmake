@@ -23,6 +23,7 @@ else()
 	LIBYUNI_CONFIG_DEFINITION("both" "core" "UNICODE")
 	LIBYUNI_CONFIG_DEFINITION("both" "core" "_UNICODE")
 endif()
+LIBYUNI_CONFIG_DEFINITION("both" "core" "_REENTRANT")
 
 
 include(CheckCXXSourceCompiles)
