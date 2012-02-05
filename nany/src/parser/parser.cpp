@@ -22,6 +22,7 @@ extern "C"
 #include "yuni/core/string.h"
 #include "yuni/uuid/uuid.h"
 #include "../ast/all.h"
+#include "../ast/fwd.h"
 #include "../typing/type.h"
 
 
@@ -31,7 +32,7 @@ extern "C"
 
 
 // Forward declaration of generic routine for rule propagation
-template<class NodeT = Nany::Ast::Node>
+template<class NodeT>
 static NodeT* ParseChild(TokenStruct* token, unsigned int index);
 // Forward declaration of generic routine for symbol management
 static const wchar_t* GetChildSymbol(TokenStruct* token, unsigned int index);
@@ -3056,7 +3057,7 @@ Nany::Ast::Node* (*RuleJumpTable[])(TokenStruct* token) =
 ///// Rule subroutine template
 
 
-template<class NodeT = Nany::Ast::Node>
+template<class NodeT>
 static NodeT* ParseChild(TokenStruct* parent, unsigned int index)
 {
 	assert(parent && "ParseChild: invalid parent");
