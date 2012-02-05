@@ -127,6 +127,7 @@ Nany::Ast::Node* Rule_Dependencies(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
+	return nullptr;
 }
 
 
@@ -146,6 +147,7 @@ Nany::Ast::Node* Rule_Dependency_uses_Identifier_Semi(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
+	return nullptr;
 }
 
 
@@ -156,6 +158,7 @@ Nany::Ast::Node* Rule_DependencyContinued_Dot_Identifier(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
+	return nullptr;
 }
 
 
@@ -366,6 +369,7 @@ Nany::Ast::Node* Rule_Literal_self(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
+	return nullptr;
 }
 
 
@@ -406,6 +410,7 @@ Nany::Ast::Node* Rule_OptionalBaseClasses_Colon(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Rule_OptionalBaseClasses_Colon: Not yet implemented !");
+	return nullptr;
 }
 
 
@@ -416,6 +421,7 @@ Nany::Ast::Node* Rule_OptionalBaseClasses(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Rule_OptionalBaseClasses: Not yet implemented !");
+	return nullptr;
 }
 
 
@@ -426,6 +432,7 @@ Nany::Ast::Node* Rule_OptionalBaseClassesContinued_Comma(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Rule_OptionalBaseClassesContinued_Comma: Not yet implemented !");
+	return nullptr;
 }
 
 
@@ -436,6 +443,7 @@ Nany::Ast::Node* Rule_OptionalBaseClassesContinued(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Rule_OptionalBaseClassesContinued: Not yet implemented !");
+	return nullptr;
 }
 
 
@@ -1395,6 +1403,7 @@ Nany::Ast::Node* Rule_OptionalOptimQualifier_OptimQualifier(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
+	return nullptr;
 }
 
 
@@ -1414,6 +1423,7 @@ Nany::Ast::Node* Rule_OptionalVisibilityQualifier_VisibilityQualifier(TokenStruc
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
+	return nullptr;
 }
 
 
@@ -1641,6 +1651,7 @@ Nany::Ast::Node* Rule_TypeArgumentsContinued(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Rule_TypeArgumentsContinued: Not yet implemented !");
+	return nullptr;
 }
 
 
@@ -2194,7 +2205,7 @@ Nany::Ast::Node* Rule_RegexpExp_Tilde(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Not yet implemented !");
-
+	return nullptr;
 }
 
 
@@ -2489,6 +2500,7 @@ Nany::Ast::Node* Rule_Value_LParan_RParan2(TokenStruct* token)
 {
 	// Not yet implemented !
 	assert(false && "Rule_Value_LParan_RParan2: Not yet implemented !");
+	return nullptr;
 }
 
 
