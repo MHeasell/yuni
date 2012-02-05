@@ -16,7 +16,6 @@ namespace Ast
 	class Visitor
 	{
 	public:
-
 		virtual void visit(ProgramNode*) = 0;
 
 		virtual void visit(UnitDeclarationNode*) = 0;

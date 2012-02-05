@@ -109,6 +109,59 @@ add_executable(nany-bootstrap
 	parser/engine.c
 	parser/engine.h
 	parser/grammar.h
+
+	ast/all.h
+	ast/argumentlistnode.h
+	ast/asexpressionnode.h
+	ast/assignmentexpressionnode.h
+	ast/attributedeclarationnode.h
+	ast/classdeclarationnode.h
+	ast/cppwritervisitor.cpp
+	ast/cppwritervisitor.h
+	ast/declarationlistnode.h
+	ast/divideexpressionnode.h
+	ast/dotexpressionnode.h
+	ast/enumdeclarationnode.h
+	ast/equalexpressionnode.h
+	ast/expressionlistnode.h
+	ast/forexpressionnode.h
+	ast/functioncallnode.h
+	ast/functiondeclarationnode.h
+	ast/fwd.h
+	ast/identifiernode.h
+	ast/ifexpressionnode.h
+	ast/inferiorequalexpressionnode.h
+	ast/inferiorexpressionnode.h
+	ast/isexpressionnode.h
+	ast/literalnode.h
+	ast/methoddeclarationnode.h
+	ast/minusexpressionnode.h
+	ast/modulusexpressionnode.h
+	ast/multiplyexpressionnode.h
+	ast/newexpressionnode.h
+	ast/node.h
+	ast/notequalexpressionnode.h
+	ast/parallelexpressionnode.h
+	ast/parameterlistnode.h
+	ast/plusexpressionnode.h
+	ast/programnode.h
+	ast/returnexpressionnode.h
+	ast/scopenode.h
+	ast/shiftleftexpressionnode.h
+	ast/shiftrightexpressionnode.h
+	ast/simplevisitor.h
+	ast/superiorequalexpressionnode.h
+	ast/superiorexpressionnode.h
+	ast/treeprintervisitor.h
+	ast/typealiasnode.h
+	ast/typeexpressionnode.h
+	ast/typeofexpressionnode.h
+	ast/typequalifierlistnode.h
+	ast/unitdeclarationnode.h
+	ast/vardeclarationnode.h
+	ast/visibilityqualifiernode.h
+	ast/visitor.h
+	ast/whileexpressionnode.h
 )
 
 
