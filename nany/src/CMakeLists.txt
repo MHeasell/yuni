@@ -96,13 +96,19 @@ link_libraries(yuni-static-uuid)
 if (WIN32 OR WIN64)
 	link_libraries(ole32)
 	link_libraries(rpcrt4)
+else()
+	link_libraries(uuid)
 endif()
 
 
 add_executable(nany-bootstrap
 	main.cpp
 	parser/parser.cpp
+	parser/parser.h
 	typing/type.cpp
+	parser/engine.c
+	parser/engine.h
+	parser/grammar.h
 )
 
 
