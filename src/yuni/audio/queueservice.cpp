@@ -252,6 +252,24 @@ namespace Audio
 	}
 
 
+	bool QueueService::Emitters::attach(Emitter::Ptr name, Sound::Ptr buffer)
+	{
+		ThreadingPolicy::MutexLocker locker(*this);
+		if (!pQueueService->pReady)
+			return false;
+
+		if (!emitter || !buffer)
+			return false;
+
+		Audio::Loop::RequestType callback;
+ 		callback.bind(emitter, &Emitter::attachBufferDispatched, buffer);
+		// Dispatching...
+ 		pQueueService->pAudioLoop.dispatch(callback);
+
+		return true;
+	}
+
+
 	void QueueService::Emitters::detach(const StringAdapter& name)
 	{
 		return detach(get(name));
