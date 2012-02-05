@@ -7,32 +7,37 @@ namespace Nany
 namespace Ast
 {
 	
-	CppWriterVisitor::CppWriterVisitor(std::ofstream& stream):
-		pOut(stream),
+	CppWriterVisitor::CppWriterVisitor() :
 		pFunctionScope(false),
 		pSkipCOW(0u),
 		pIndent()
 	{}
 
 
+	CppWriterVisitor::~CppWriterVisitor()
+	{
+	}
+
+
+
 	void CppWriterVisitor::visit(ProgramNode* node)
 	{
-		pOut << "#include <yuni/yuni.h>" << std::endl;
-		pOut << "#include <yuni/core/cow.h>" << std::endl;
-		pOut << "#include <yuni/core/string.h>" << std::endl;
-		pOut << "#include <yuni/io/file.h>" << std::endl;
-		pOut << "#include <yuni/io/io.h>" << std::endl;
-		pOut << "#include <typeinfo>" << std::endl;
-		pOut << "#include <iostream>" << std::endl;
-		pOut << "#include <set>" << std::endl;
-		pOut << "#include <list>" << std::endl;
-		pOut << "#include <vector>" << std::endl;
-		pOut << "#include <map>" << std::endl;
-		pOut << "#include <cassert>" << std::endl;
-		pOut << std::endl;
-		pOut << "using namespace ::Yuni;" << std::endl;
-		pOut << std::endl;
-		pOut << std::endl;
+		out << "#include <yuni/yuni.h>\n";
+		out << "#include <yuni/core/cow.h>\n";
+		out << "#include <yuni/core/string.h>\n";
+		out << "#include <yuni/io/file.h>\n";
+		out << "#include <yuni/io/io.h>\n";
+		out << "#include <typeinfo>\n";
+		out << "#include <iostream>\n";
+		out << "#include <set>\n";
+		out << "#include <list>\n";
+		out << "#include <vector>\n";
+		out << "#include <map>\n";
+		out << "#include <cassert>\n";
+		out << '\n';
+		out << "using namespace ::Yuni;\n";
+		out << '\n';
+		out << '\n';
 		if (node->unitDeclaration())
 			node->unitDeclaration()->accept(this);
 		node->declarations()->accept(this);
@@ -49,7 +54,7 @@ namespace Ast
 
 	void CppWriterVisitor::visit(FunctionDeclarationNode* node)
 	{
-		pOut << pIndent;
+		out << pIndent;
 
 		// Generate a template parameter for untyped function parameters
 		if (node->params())
@@ -64,14 +69,14 @@ namespace Ast
 			}
 			if (count > 0)
 			{
-				pOut << "template<";
+				out << "template<";
 				for (unsigned int increment = 1; increment <= count; ++increment)
 				{
-					pOut << "class MT" << increment;
+					out << "class MT" << increment;
 					if (increment < count)
-						pOut << ", ";
+						out << ", ";
 				}
-				pOut << '>' << std::endl << pIndent;
+				out << '>' << '\n' << pIndent;
 			}
 		}
 
@@ -81,9 +86,9 @@ namespace Ast
 		else if (node->type())
 			writeType(node->type());
 		else // Default to void
-			pOut << "void";
+			out << "void";
 		// Function name
-		pOut << ' ' << node->name() << '(';
+		out << ' ' << node->name() << '(';
 		// Function parameters
 		if (node->params())
 		{
@@ -96,41 +101,41 @@ namespace Ast
 			{
 				// If there is no type, we have declared a template parameter for it
 				if (!(*it)->type())
-					pOut << "COW<MT" << count++ << "> ";
+					out << "COW<MT" << count++ << "> ";
 				(*it)->accept(this);
 				if (--size)
-					pOut << ", ";
+					out << ", ";
 			}
 		}
-		pOut << ')' << std::endl << pIndent;
+		out << ')' << '\n' << pIndent;
 
 		// Body
 		pFunctionScope = true;
 		if (node->body())
 			node->body()->accept(this);
 		else
-			pOut << "{}" << std::endl;
-		pOut << std::endl;
+			out << "{}\n";
+		out << '\n';
 		pFunctionScope = false;
 	}
 
 
 	void CppWriterVisitor::visit(ClassDeclarationNode* node)
 	{
-		pOut << "class " << node->name() << std::endl;
-		pOut << '{' << std::endl;
+		out << "class " << node->name() << '\n';
+		out << '{' << '\n';
 		indent();
 		if (node->declarations())
 			node->declarations()->accept(this);
 		unindent();
-		pOut << "};" << std::endl;
-		pOut << std::endl;
+		out << "};\n";
+		out << '\n';
 	}
 
 
 	void CppWriterVisitor::visit(MethodDeclarationNode* node)
 	{
-		pOut << pIndent;
+		out << pIndent;
 
 		// Generate a template parameter for untyped method parameters
 		if (node->params())
@@ -145,14 +150,14 @@ namespace Ast
 			}
 			if (count > 0)
 			{
-				pOut << "template<";
+				out << "template<";
 				for (unsigned int increment = 1; increment <= count; ++increment)
 				{
-					pOut << "class MT" << increment;
+					out << "class MT" << increment;
 					if (increment < count)
-						pOut << ", ";
+						out << ", ";
 				}
-				pOut << '>' << std::endl << pIndent;
+				out << '>' << '\n' << pIndent;
 			}
 		}
 
@@ -162,9 +167,9 @@ namespace Ast
 		else if (node->type())
 			writeType(node->type());
 		else // Default to void
-			pOut << "void";
+			out << "void";
 		// Method name
-		pOut << ' ' << node->name() << '(';
+		out << ' ' << node->name() << '(';
 		// Method parameters
 		if (node->params())
 		{
@@ -177,56 +182,56 @@ namespace Ast
 			{
 				// If there is no type, we have declared a template parameter for it
 				if (!(*it)->type())
-					pOut << "COW<MT" << count++ << "> ";
+					out << "COW<MT" << count++ << "> ";
 				(*it)->accept(this);
 				if (--size)
-					pOut << ", ";
+					out << ", ";
 			}
 		}
-		pOut << ')' << std::endl << pIndent;
+		out << ')' << '\n' << pIndent;
 
 		// Body
 		pFunctionScope = true;
 		if (node->body())
 			node->body()->accept(this);
 		else
-			pOut << "{}" << std::endl;
-		pOut << std::endl;
+			out << "{}\n";
+		out << '\n';
 		pFunctionScope = false;
 	}
 
 
 	void CppWriterVisitor::visit(AttributeDeclarationNode* node)
 	{
-		pOut << pIndent;
+		out << pIndent;
 		if (node->typeDecl() && node->typeDecl()->type())
 			writeType(node->typeDecl()->type());
 		else if (node->type())
 			writeType(node->type());
 		else // Default to int...
-			pOut << "int";
-		pOut << " " << node->name();
+			out << "int";
+		out << " " << node->name();
 		if (node->value())
 		{
-			pOut << " = ";
+			out << " = ";
 			node->value()->accept(this);
 		}
-		pOut << ';' << std::endl;
+		out << ';' << '\n';
 	}
 
 
 	void CppWriterVisitor::visit(TypeAliasNode* node)
 	{
-		pOut << pIndent;
+		out << pIndent;
 		std::cout << pIndent << "typedef ";
 		node->expression()->accept(this);
-		pOut << "  " << node->name() << std::endl;
+		out << "  " << node->name() << '\n';
 	}
 
 
 	void CppWriterVisitor::visit(ScopeNode* node)
 	{
-		pOut << '{' << std::endl;
+		out << '{' << '\n';
 		indent();
 		if (node->expression())
 		{
@@ -235,19 +240,19 @@ namespace Ast
 			// On expression lists, leave this work to the visit(expressionlistnode)
 			if (!isList)
 			{
-				pOut << pIndent;
+				out << pIndent;
 				// On one-liners, add `return` when necessary
 				if (pFunctionScope && node->expression()->type() &&
 					node->expression()->type() != Typing::Type::Get("void") &&
 					!dynamic_cast<ReturnExpressionNode*>(node->expression()))
-					pOut << "return ";
+					out << "return ";
 			}
 			node->expression()->accept(this);
 			if (!isList)
-				pOut << ';' << std::endl;
+				out << ';' << '\n';
 		}
 		unindent();
-		pOut << pIndent << '}' << std::endl;
+		out << pIndent << '}' << '\n';
 	}
 
 
@@ -256,17 +261,17 @@ namespace Ast
 		// Visibility qualifiers are displayed at the same indent level as
 		// the underlying class, so one level under the rest of the declarations
 		unindent();
-		pOut << pIndent;
+		out << pIndent;
 		switch (node->value())
 		{
 			case 0:
-				pOut << "private:" << std::endl;
+				out << "private:\n";
 				break;
 			case 1:
-				pOut << "protected:" << std::endl;
+				out << "protected:\n";
 				break;
 			default: // public + published
-				pOut << "public:" << std::endl;
+				out << "public:\n";
 				break;
 		}
 		indent();
@@ -281,17 +286,17 @@ namespace Ast
 		ExpressionListNode::List::iterator end = exprList.end();
 		for (ExpressionListNode::List::iterator it = exprList.begin(); it != end; ++it)
 		{
-			pOut << pIndent;
+			out << pIndent;
 
 			// If on last expression, check if we may add `return`
 			if (!--size && pFunctionScope && !dynamic_cast<ReturnExpressionNode*>(*it))
 			{
 				// If the type is null, we might as well treat is as `void`
 				if ((*it)->type() && (*it)->type() != Typing::Type::Get("void"))
-					pOut << "return ";
+					out << "return ";
 			}
 			(*it)->accept(this);
-			pOut << ';' << std::endl;
+			out << ';' << '\n';
 		}
 	}
 
@@ -306,7 +311,7 @@ namespace Ast
 		{
 			(*it)->accept(this);
 			if (--size)
-				pOut << ", ";
+				out << ", ";
 		}
 	}
 
@@ -321,41 +326,41 @@ namespace Ast
 		{
 			(*it)->accept(this);
 			if (--size)
-				pOut << ", ";
+				out << ", ";
 		}
 	}
 
 
 	void CppWriterVisitor::visit(IfExpressionNode* node)
 	{
-		pOut << "if (";
+		out << "if (";
 		node->condition()->accept(this);
-		pOut << ')' << std::endl;
+		out << ')' << '\n';
 		bool isScope;
 		if (node->thenExpr())
 		{
 			isScope = (dynamic_cast<ScopeNode*>(node->thenExpr()));
 			if (!isScope)
 				indent();
-			pOut << pIndent;
+			out << pIndent;
 			node->thenExpr()->accept(this);
 			if (!isScope)
 			{
-				pOut << ';' << std::endl;
+				out << ';' << '\n';
 				unindent();
 			}
 		}
 		if (node->elseExpr())
 		{
-			pOut << pIndent << "else" << std::endl;
+			out << pIndent << "else\n";
 			isScope = (dynamic_cast<ScopeNode*>(node->elseExpr()));
 			if (!isScope)
 				indent();
-			pOut << pIndent;
+			out << pIndent;
 			node->elseExpr()->accept(this);
 			if (!isScope)
 			{
-				pOut << ';' << std::endl;
+				out << ';' << '\n';
 				unindent();
 			}
 		}
@@ -364,9 +369,9 @@ namespace Ast
 
 	void CppWriterVisitor::visit(WhileExpressionNode* node)
 	{
-		pOut << "while (";
+		out << "while (";
 		node->condition()->accept(this);
-		pOut << ')' << std::endl;
+		out << ')' << '\n';
 		if (node->expression())
 		{
 			bool isScope =
@@ -374,7 +379,7 @@ namespace Ast
 				(dynamic_cast<ExpressionListNode*>(node->expression()));
 			if (!isScope)
 				indent();
-			pOut << pIndent;
+			out << pIndent;
 			node->expression()->accept(this);
 			if (!isScope)
 			{
@@ -382,31 +387,30 @@ namespace Ast
 			}
 		}
 		else
-			pOut << "{}";
+			out << "{}";
 	}
 
 
 	void CppWriterVisitor::visit(ForExpressionNode* node)
 	{
-		pOut << "for (auto " << node->identifier() << " = ";
+		out << "for (auto " << node->identifier() << " = ";
 		node->set()->accept(this);
-		pOut << "->begin(); " << node->identifier() << " != ";
+		out << "->begin(); " << node->identifier() << " != ";
 		node->set()->accept(this);
-		pOut << "->end(); ++" << node->identifier() << ')' << std::endl;
+		out << "->end(); ++" << node->identifier() << ')' << '\n';
 		if (node->body())
 		{
 			bool isScope = dynamic_cast<ScopeNode*>(node->body());
 			if (!isScope)
 				indent();
-			pOut << pIndent;
+			out << pIndent;
 			node->body()->accept(this);
+
 			if (!isScope)
-			{
 				unindent();
-			}
 		}
 		else
-			pOut << "{}";
+			out << "{}";
 	}
 
 
@@ -423,15 +427,15 @@ namespace Ast
 		{
 			if (node->isArray())
 			{
-				pOut << "COW<std::vector<";
+				out << "COW<std::vector<";
 				node->expression()->accept(this);
-				pOut << " > >";
+				out << " > >";
 			}
 			else if (!node->type()->isValue())
 			{
-				pOut << "COW<";
+				out << "COW<";
 				node->expression()->accept(this);
-				pOut << " >";
+				out << " >";
 			}
 			else
 				node->expression()->accept(this);
@@ -440,9 +444,9 @@ namespace Ast
 		{
 			if (node->isArray())
 			{
-				pOut << "std::vector<";
+				out << "std::vector<";
 				node->expression()->accept(this);
-				pOut << " >";
+				out << " >";
 			}
 			else
 				node->expression()->accept(this);
@@ -453,17 +457,17 @@ namespace Ast
 	void CppWriterVisitor::visit(VarDeclarationNode* node)
 	{
 		node->typeDecl()->accept(this);
-		pOut << ' ';
+		out << ' ';
 
 		node->left()->accept(this);
 		if (node->typeDecl()->isArray() && node->typeDecl()->arrayCardinality() > 0)
 		{
 			++pSkipCOW;
-			pOut << " = COW<";
+			out << " = COW<";
 			node->typeDecl()->accept(this);
-			pOut << " >(new ";
+			out << " >(new ";
 			node->typeDecl()->accept(this);
-			pOut << '(' << node->typeDecl()->arrayCardinality() << "))";
+			out << '(' << node->typeDecl()->arrayCardinality() << "))";
 			--pSkipCOW;
 		}
 	}
@@ -472,7 +476,7 @@ namespace Ast
 	void CppWriterVisitor::visit(AssignmentExpressionNode* node)
 	{
 		node->left()->accept(this);
-		pOut << " = ";
+		out << " = ";
 		node->right()->accept(this);
 	}
 
@@ -480,7 +484,7 @@ namespace Ast
 	void CppWriterVisitor::visit(DotExpressionNode* node)
 	{
 		node->left()->accept(this);
-		pOut << '.' << node->field();
+		out << '.' << node->field();
 	}
 
 
@@ -490,20 +494,20 @@ namespace Ast
 			node->left()->accept(this);
 		else
 		{
-			pOut << "(*";
+			out << "(*";
 			node->left()->accept(this);
-			pOut << ")";
+			out << ")";
 		}
 
-		pOut << " == ";
+		out << " == ";
 
 		if (node->right()->type() && node->right()->type()->isValue())
 			node->right()->accept(this);
 		else
 		{
-			pOut << "(*";
+			out << "(*";
 			node->right()->accept(this);
-			pOut << ")";
+			out << ")";
 		}
 	}
 
@@ -511,7 +515,7 @@ namespace Ast
 	void CppWriterVisitor::visit(NotEqualExpressionNode* node)
 	{
 		node->left()->accept(this);
-		pOut << " != ";
+		out << " != ";
 		node->right()->accept(this);
 	}
 
@@ -519,7 +523,7 @@ namespace Ast
 	void CppWriterVisitor::visit(InferiorExpressionNode* node)
 	{
 		node->left()->accept(this);
-		pOut << " < ";
+		out << " < ";
 		node->right()->accept(this);
 	}
 
@@ -527,7 +531,7 @@ namespace Ast
 	void CppWriterVisitor::visit(InferiorEqualExpressionNode* node)
 	{
 		node->left()->accept(this);
-		pOut << " <= ";
+		out << " <= ";
 		node->right()->accept(this);
 	}
 
@@ -535,7 +539,7 @@ namespace Ast
 	void CppWriterVisitor::visit(SuperiorExpressionNode* node)
 	{
 		node->left()->accept(this);
-		pOut << " > ";
+		out << " > ";
 		node->right()->accept(this);
 	}
 
@@ -543,7 +547,7 @@ namespace Ast
 	void CppWriterVisitor::visit(SuperiorEqualExpressionNode* node)
 	{
 		node->left()->accept(this);
-		pOut << " >= ";
+		out << " >= ";
 		node->right()->accept(this);
 	}
 
@@ -551,7 +555,7 @@ namespace Ast
 	void CppWriterVisitor::visit(ShiftLeftExpressionNode* node)
 	{
 		node->left()->accept(this);
-		pOut << " << ";
+		out << " << ";
 		node->right()->accept(this);
 	}
 
@@ -559,7 +563,7 @@ namespace Ast
 	void CppWriterVisitor::visit(ShiftRightExpressionNode* node)
 	{
 		node->left()->accept(this);
-		pOut << " >> ";
+		out << " >> ";
 		node->right()->accept(this);
 	}
 
@@ -567,7 +571,7 @@ namespace Ast
 	void CppWriterVisitor::visit(PlusExpressionNode* node)
 	{
 		node->left()->accept(this);
-		pOut << " + ";
+		out << " + ";
 		node->right()->accept(this);
 	}
 
@@ -575,7 +579,7 @@ namespace Ast
 	void CppWriterVisitor::visit(MinusExpressionNode* node)
 	{
 		node->left()->accept(this);
-		pOut << " - ";
+		out << " - ";
 		node->right()->accept(this);
 	}
 
@@ -583,7 +587,7 @@ namespace Ast
 	void CppWriterVisitor::visit(MultiplyExpressionNode* node)
 	{
 		node->left()->accept(this);
-		pOut << " * ";
+		out << " * ";
 		node->right()->accept(this);
 	}
 
@@ -591,7 +595,7 @@ namespace Ast
 	void CppWriterVisitor::visit(DivideExpressionNode* node)
 	{
 		node->left()->accept(this);
-		pOut << " / ";
+		out << " / ";
 		node->right()->accept(this);
 	}
 
@@ -599,18 +603,18 @@ namespace Ast
 	void CppWriterVisitor::visit(ModulusExpressionNode* node)
 	{
 		node->left()->accept(this);
-		pOut << " % ";
+		out << " % ";
 		node->right()->accept(this);
 	}
 
 
 	void CppWriterVisitor::visit(AsExpressionNode* node)
 	{
-		pOut << "((";
+		out << "((";
 		node->right()->accept(this);
-		pOut << ")";
+		out << ")";
 		node->left()->accept(this);
-		pOut << ")";
+		out << ")";
 	}
 
 
@@ -618,34 +622,34 @@ namespace Ast
 	{
 		if (!node->type() || node->type()->isValue())
 		{
-			pOut << "(typeid(";
+			out << "(typeid(";
 			node->left()->accept(this);
-			pOut << ") == typeid(";
+			out << ") == typeid(";
 			node->right()->accept(this);
-			pOut << "))";
+			out << "))";
 		}
 		else
 		{
-			pOut << "(0 != dynamic_cast<";
+			out << "(0 != dynamic_cast<";
 			node->right()->accept(this);
-			pOut << ">(";
+			out << ">(";
 			node->left()->accept(this);
-			pOut << "))";
+			out << "))";
 		}
 	}
 
 
 	void CppWriterVisitor::visit(TypeofExpressionNode* node)
 	{
-		pOut << "typeof (";
+		out << "typeof (";
 		node->expression()->accept(this);
-		pOut << ")";
+		out << ")";
 	}
 
 
 	void CppWriterVisitor::visit(NewExpressionNode* node)
 	{
-		pOut << "new ";
+		out << "new ";
 		pSkipCOW++;
 		node->expression()->accept(this);
 		pSkipCOW--;
@@ -654,7 +658,7 @@ namespace Ast
 
 	void CppWriterVisitor::visit(ReturnExpressionNode* node)
 	{
-		pOut << "return ";
+		out << "return ";
 		node->expression()->accept(this);
 	}
 
@@ -662,52 +666,52 @@ namespace Ast
 	void CppWriterVisitor::visit(FunctionCallNode* node)
 	{
 		node->function()->accept(this);
-		pOut << '(';
+		out << '(';
 		if (node->params())
 			node->params()->accept(this);
-		pOut << ')';
+		out << ')';
 	}
 
 
 	void CppWriterVisitor::visit(IdentifierNode* node)
 	{
-		pOut << node->data;
+		out << node->data;
 	}
 
 
 	void CppWriterVisitor::visit(LiteralNode<bool>* node)
 	{
-		pOut << (node->data ? "true" : "false");
+		out << (node->data ? "true" : "false");
 	}
 
 
 	void CppWriterVisitor::visit(LiteralNode<int>* node)
 	{
-		pOut << node->data;
+		out << node->data;
 	}
 
 
 	void CppWriterVisitor::visit(LiteralNode<unsigned int>* node)
 	{
-		pOut << node->data << 'u';
+		out << node->data << 'u';
 	}
 
 
 	void CppWriterVisitor::visit(LiteralNode<float>* node)
 	{
-		pOut << node->data << 'f';
+		out << node->data << 'f';
 	}
 
 
 	void CppWriterVisitor::visit(LiteralNode<double>* node)
 	{
-		pOut << node->data;
+		out << node->data;
 	}
 
 
 	void CppWriterVisitor::visit(LiteralNode<char>* node)
 	{
-		pOut << '\'' << node->data << '\'';
+		out << '\'' << node->data << '\'';
 	}
 
 
@@ -718,25 +722,25 @@ namespace Ast
 		wctomb(buffer, node->data);
 		buffer[len] = '\0';
 
-		pOut << '\'' << buffer << '\'';
+		out << '\'' << buffer << '\'';
 	}
 
 
 	void CppWriterVisitor::visit(LiteralNode<char*>* node)
 	{
-		pOut << "COW<String>(new String(\"" << node->data << "\"))";
+		out << "COW<String>(new String(\"" << node->data << "\"))";
 	}
 
 
 	void CppWriterVisitor::visit(LiteralNode<const char*>* node)
 	{
-		pOut << "COW<String>(new String(\"" << node->data << "\"))";
+		out << "COW<String>(new String(\"" << node->data << "\"))";
 	}
 
 
 	void CppWriterVisitor::visit(LiteralNode<void*>* node)
 	{
-		pOut << "(void*)" << node->data;
+		out << "(void*)" << node->data;
 	}
 
 
@@ -752,12 +756,12 @@ namespace Ast
 			return;
 		if (type->isValue())
 		{
-			pOut << type->name();
+			out << type->name();
 			return;
 		}
 		if (type->isConst())
-			pOut << "const ";
-		pOut << "COW<" << type->name()<< " >";
+			out << "const ";
+		out << "COW<" << type->name()<< " >";
 	}
 
 
