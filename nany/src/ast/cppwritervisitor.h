@@ -1,15 +1,15 @@
 #ifndef __NANY_AST_CPPWRITERVISITOR_H__
 # define __NANY_AST_CPPWRITERVISITOR_H__
 
-# include <fstream>
-# include "yuni/yuni.h"
+# include <yuni/yuni.h>
+# include <yuni/io/file.h>
 # include "simplevisitor.h"
+
 
 namespace Nany
 {
 namespace Ast
 {
-
 
 	/*!
 	** \brief Visitor that writes an equivalent C++ code
@@ -17,7 +17,9 @@ namespace Ast
 	class CppWriterVisitor: public SimpleVisitor
 	{
 	public:
-		CppWriterVisitor(std::ofstream& stream);
+		CppWriterVisitor();
+		~CppWriterVisitor();
+
 
 		virtual void visit(ProgramNode* node);
 
@@ -172,6 +174,10 @@ namespace Ast
 		virtual void visit(LiteralNode<Typing::Type*>* node);
 
 
+	public:
+		//! Stream to the destination C++ file
+		Yuni::IO::File::Stream out;
+
 	private:
 		void writeType(Typing::Type* type);
 
@@ -187,9 +193,6 @@ namespace Ast
 
 
 	private:
-		//! Stream to the destination C++ file
-		std::ofstream& pOut;
-
 		/*!
 		** \brief Are we at the lowest scope inside a function ?
 		**
@@ -213,7 +216,8 @@ namespace Ast
 
 		//! Current indent
 		Yuni::String pIndent;
-	};
+
+	}; // class CppWriterVisitor
 
 
 
