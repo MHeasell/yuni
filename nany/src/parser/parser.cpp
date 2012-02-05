@@ -116,6 +116,7 @@ Nany::Ast::Node* Rule_UnitDeclaration_unit_Identifier_Semi(TokenStruct* token)
 // <Unit Declaration> ::= 
 Nany::Ast::Node* Rule_UnitDeclaration(TokenStruct* token)
 {
+	(void) token; // unused parameter
 	return nullptr;
 }
 
@@ -126,6 +127,7 @@ Nany::Ast::Node* Rule_UnitDeclaration(TokenStruct* token)
 Nany::Ast::Node* Rule_Dependencies(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -136,6 +138,7 @@ Nany::Ast::Node* Rule_Dependencies(TokenStruct* token)
 // <Dependencies> ::= 
 Nany::Ast::Node* Rule_Dependencies2(TokenStruct* token)
 {
+	(void) token; // unused parameter
 	return nullptr;
 }
 
@@ -146,6 +149,7 @@ Nany::Ast::Node* Rule_Dependencies2(TokenStruct* token)
 Nany::Ast::Node* Rule_Dependency_uses_Identifier_Semi(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -157,6 +161,7 @@ Nany::Ast::Node* Rule_Dependency_uses_Identifier_Semi(TokenStruct* token)
 Nany::Ast::Node* Rule_DependencyContinued_Dot_Identifier(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -167,6 +172,7 @@ Nany::Ast::Node* Rule_DependencyContinued_Dot_Identifier(TokenStruct* token)
 // <Dependency Continued> ::= 
 Nany::Ast::Node* Rule_DependencyContinued(TokenStruct* token)
 {
+	(void) token; // unused parameter
 	return nullptr;
 }
 
@@ -240,7 +246,7 @@ Nany::Ast::Node* Rule_DeclarationList_Semi(TokenStruct* token)
 
 
 // <Declaration List> ::= 
-Nany::Ast::Node* Rule_DeclarationList5(TokenStruct* token)
+Nany::Ast::Node* Rule_DeclarationList5(TokenStruct* /*token*/)
 {
 	return new Nany::Ast::DeclarationListNode();
 }
@@ -356,7 +362,7 @@ Nany::Ast::Node* Rule_Literal_BuiltInType(TokenStruct* token)
 
 
 // <Literal> ::= nil
-Nany::Ast::Node* Rule_Literal_nil(TokenStruct* token)
+Nany::Ast::Node* Rule_Literal_nil(TokenStruct* /*token*/)
 {
 	return new Nany::Ast::LiteralNode<void*>(nullptr);
 }
@@ -368,6 +374,7 @@ Nany::Ast::Node* Rule_Literal_nil(TokenStruct* token)
 Nany::Ast::Node* Rule_Literal_self(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -409,6 +416,7 @@ Nany::Ast::Node* Rule_AnonymousClassDeclaration_class_LBrace_RBrace(TokenStruct*
 Nany::Ast::Node* Rule_OptionalBaseClasses_Colon(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Rule_OptionalBaseClasses_Colon: Not yet implemented !");
 	return nullptr;
 }
@@ -420,6 +428,7 @@ Nany::Ast::Node* Rule_OptionalBaseClasses_Colon(TokenStruct* token)
 Nany::Ast::Node* Rule_OptionalBaseClasses(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Rule_OptionalBaseClasses: Not yet implemented !");
 	return nullptr;
 }
@@ -431,6 +440,7 @@ Nany::Ast::Node* Rule_OptionalBaseClasses(TokenStruct* token)
 Nany::Ast::Node* Rule_OptionalBaseClassesContinued_Comma(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Rule_OptionalBaseClassesContinued_Comma: Not yet implemented !");
 	return nullptr;
 }
@@ -442,6 +452,7 @@ Nany::Ast::Node* Rule_OptionalBaseClassesContinued_Comma(TokenStruct* token)
 Nany::Ast::Node* Rule_OptionalBaseClassesContinued(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Rule_OptionalBaseClassesContinued: Not yet implemented !");
 	return nullptr;
 }
@@ -559,7 +570,7 @@ Nany::Ast::Node* Rule_ClassContent_Semi3(TokenStruct* token)
 
 
 // <Class Content> ::= 
-Nany::Ast::Node* Rule_ClassContent3(TokenStruct* token)
+Nany::Ast::Node* Rule_ClassContent3(TokenStruct* /*token*/)
 {
 	return nullptr;
 }
@@ -571,6 +582,7 @@ Nany::Ast::Node* Rule_ClassContent3(TokenStruct* token)
 Nany::Ast::Node* Rule_PropertyDeclaration_property_Identifier(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -582,6 +594,7 @@ Nany::Ast::Node* Rule_PropertyDeclaration_property_Identifier(TokenStruct* token
 Nany::Ast::Node* Rule_PropertyDeclaration_property_Identifier2(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -593,6 +606,7 @@ Nany::Ast::Node* Rule_PropertyDeclaration_property_Identifier2(TokenStruct* toke
 Nany::Ast::Node* Rule_PropertyDeclaration_property_Identifier3(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -604,6 +618,7 @@ Nany::Ast::Node* Rule_PropertyDeclaration_property_Identifier3(TokenStruct* toke
 Nany::Ast::Node* Rule_PropertyCallbacks_read(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -615,6 +630,7 @@ Nany::Ast::Node* Rule_PropertyCallbacks_read(TokenStruct* token)
 Nany::Ast::Node* Rule_PropertyCallbacks_write(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -626,6 +642,7 @@ Nany::Ast::Node* Rule_PropertyCallbacks_write(TokenStruct* token)
 Nany::Ast::Node* Rule_PropertyCallbacks(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -637,6 +654,7 @@ Nany::Ast::Node* Rule_PropertyCallbacks(TokenStruct* token)
 Nany::Ast::Node* Rule_AttributeDeclaration_var_Identifier(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Rule_AttributeDeclaration_var_Identifier: Not yet implemented !");
 	return nullptr;
 }
@@ -735,6 +753,7 @@ Nany::Ast::Node* Rule_TypingContinued(TokenStruct* token)
 Nany::Ast::Node* Rule_TypingContinued2(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Rule_TypingContinued2: Not yet implemented !");
 	return nullptr;
 }
@@ -746,6 +765,7 @@ Nany::Ast::Node* Rule_TypingContinued2(TokenStruct* token)
 Nany::Ast::Node* Rule_WorkflowDeclaration_workflow_Identifier_LBrace_RBrace(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -757,6 +777,7 @@ Nany::Ast::Node* Rule_WorkflowDeclaration_workflow_Identifier_LBrace_RBrace(Toke
 Nany::Ast::Node* Rule_WorkflowContent(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -768,6 +789,7 @@ Nany::Ast::Node* Rule_WorkflowContent(TokenStruct* token)
 Nany::Ast::Node* Rule_StateBlock_states(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -779,6 +801,7 @@ Nany::Ast::Node* Rule_StateBlock_states(TokenStruct* token)
 Nany::Ast::Node* Rule_StateBlock(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -790,6 +813,7 @@ Nany::Ast::Node* Rule_StateBlock(TokenStruct* token)
 Nany::Ast::Node* Rule_WorkflowStates_default_Identifier_Semi(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -801,6 +825,7 @@ Nany::Ast::Node* Rule_WorkflowStates_default_Identifier_Semi(TokenStruct* token)
 Nany::Ast::Node* Rule_WorkflowStates_state_Identifier_Semi(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -812,6 +837,7 @@ Nany::Ast::Node* Rule_WorkflowStates_state_Identifier_Semi(TokenStruct* token)
 Nany::Ast::Node* Rule_WorkflowStates(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -823,6 +849,7 @@ Nany::Ast::Node* Rule_WorkflowStates(TokenStruct* token)
 Nany::Ast::Node* Rule_TransitionBlock_transitions(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -834,6 +861,7 @@ Nany::Ast::Node* Rule_TransitionBlock_transitions(TokenStruct* token)
 Nany::Ast::Node* Rule_TransitionBlock(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -845,6 +873,7 @@ Nany::Ast::Node* Rule_TransitionBlock(TokenStruct* token)
 Nany::Ast::Node* Rule_WorkflowTransitions_default_allow_Semi(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -856,6 +885,7 @@ Nany::Ast::Node* Rule_WorkflowTransitions_default_allow_Semi(TokenStruct* token)
 Nany::Ast::Node* Rule_WorkflowTransitions_default_forbid_Semi(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -867,6 +897,7 @@ Nany::Ast::Node* Rule_WorkflowTransitions_default_forbid_Semi(TokenStruct* token
 Nany::Ast::Node* Rule_WorkflowTransitions_allow_EqGt_Semi(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -878,6 +909,7 @@ Nany::Ast::Node* Rule_WorkflowTransitions_allow_EqGt_Semi(TokenStruct* token)
 Nany::Ast::Node* Rule_WorkflowTransitions_forbid_EqGt_Semi(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -889,6 +921,7 @@ Nany::Ast::Node* Rule_WorkflowTransitions_forbid_EqGt_Semi(TokenStruct* token)
 Nany::Ast::Node* Rule_WorkflowTransitions(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -900,6 +933,7 @@ Nany::Ast::Node* Rule_WorkflowTransitions(TokenStruct* token)
 Nany::Ast::Node* Rule_WorkflowPermission_Times(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -911,6 +945,7 @@ Nany::Ast::Node* Rule_WorkflowPermission_Times(TokenStruct* token)
 Nany::Ast::Node* Rule_WorkflowPermission_Identifier(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -922,6 +957,7 @@ Nany::Ast::Node* Rule_WorkflowPermission_Identifier(TokenStruct* token)
 Nany::Ast::Node* Rule_WorkflowPermission_Plus_Identifier(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -933,6 +969,7 @@ Nany::Ast::Node* Rule_WorkflowPermission_Plus_Identifier(TokenStruct* token)
 Nany::Ast::Node* Rule_WorkflowPermission_Minus_Identifier(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -944,6 +981,7 @@ Nany::Ast::Node* Rule_WorkflowPermission_Minus_Identifier(TokenStruct* token)
 Nany::Ast::Node* Rule_WorkflowPermissions_Comma(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -955,6 +993,7 @@ Nany::Ast::Node* Rule_WorkflowPermissions_Comma(TokenStruct* token)
 Nany::Ast::Node* Rule_WorkflowPermissions(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -982,6 +1021,7 @@ Nany::Ast::Node* Rule_EnumDeclaration_enum_Identifier_LBrace_RBrace(TokenStruct*
 Nany::Ast::Node* Rule_EnumContent_Identifier_Comma(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -993,6 +1033,7 @@ Nany::Ast::Node* Rule_EnumContent_Identifier_Comma(TokenStruct* token)
 Nany::Ast::Node* Rule_EnumContent_Identifier(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -1003,6 +1044,7 @@ Nany::Ast::Node* Rule_EnumContent_Identifier(TokenStruct* token)
 // <Enum Content> ::= 
 Nany::Ast::Node* Rule_EnumContent(TokenStruct* token)
 {
+	(void) token; // unused parameter
 	return nullptr;
 }
 
@@ -1142,6 +1184,7 @@ Nany::Ast::Node* Rule_FunctionBody_LBrace_RBrace(TokenStruct* token)
 // <Function Body> ::= '{' '}'
 Nany::Ast::Node* Rule_FunctionBody_LBrace_RBrace2(TokenStruct* token)
 {
+	(void) token; // unused parameter
 	return nullptr;
 }
 
@@ -1165,6 +1208,7 @@ Nany::Ast::Node* Rule_ReturnTypeDeclaration_Colon(TokenStruct* token)
 // <Return Type Declaration> ::= 
 Nany::Ast::Node* Rule_ReturnTypeDeclaration(TokenStruct* token)
 {
+	(void) token; // unused parameter
 	return nullptr;
 }
 
@@ -1183,6 +1227,7 @@ Nany::Ast::Node* Rule_OptionalParameters_LParan_RParan(TokenStruct* token)
 // <Optional Parameters> ::= 
 Nany::Ast::Node* Rule_OptionalParameters(TokenStruct* token)
 {
+	(void) token; // unused parameter
 	return nullptr;
 }
 
@@ -1288,6 +1333,7 @@ Nany::Ast::Node* Rule_ParameterList_Identifier4(TokenStruct* token)
 // <Parameter List> ::= 
 Nany::Ast::Node* Rule_ParameterList(TokenStruct* token)
 {
+	(void) token; // unused parameter
 	return nullptr;
 }
 
@@ -1306,6 +1352,7 @@ Nany::Ast::Node* Rule_ParameterListContinued_Comma(TokenStruct* token)
 // <Parameter List Continued> ::= 
 Nany::Ast::Node* Rule_ParameterListContinued(TokenStruct* token)
 {
+	(void) token; // unused parameter
 	return nullptr;
 }
 
@@ -1324,6 +1371,7 @@ Nany::Ast::Node* Rule_OptionalTypeQualifiers(TokenStruct* token)
 // <Optional Type Qualifiers> ::= 
 Nany::Ast::Node* Rule_OptionalTypeQualifiers2(TokenStruct* token)
 {
+	(void) token; // unused parameter
 	return nullptr;
 }
 
@@ -1392,6 +1440,7 @@ Nany::Ast::Node* Rule_TypeQualifiersContinued_TypeQualifier(TokenStruct* token)
 // <Type Qualifiers Continued> ::= 
 Nany::Ast::Node* Rule_TypeQualifiersContinued(TokenStruct* token)
 {
+	(void) token; // unused parameter
 	return nullptr;
 }
 
@@ -1402,6 +1451,7 @@ Nany::Ast::Node* Rule_TypeQualifiersContinued(TokenStruct* token)
 Nany::Ast::Node* Rule_OptionalOptimQualifier_OptimQualifier(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -1412,6 +1462,7 @@ Nany::Ast::Node* Rule_OptionalOptimQualifier_OptimQualifier(TokenStruct* token)
 // <Optional Optim Qualifier> ::= 
 Nany::Ast::Node* Rule_OptionalOptimQualifier(TokenStruct* token)
 {
+	(void) token; // unused parameter
 	return nullptr;
 }
 
@@ -1422,6 +1473,7 @@ Nany::Ast::Node* Rule_OptionalOptimQualifier(TokenStruct* token)
 Nany::Ast::Node* Rule_OptionalVisibilityQualifier_VisibilityQualifier(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -1432,6 +1484,7 @@ Nany::Ast::Node* Rule_OptionalVisibilityQualifier_VisibilityQualifier(TokenStruc
 // <Optional Visibility Qualifier> ::= 
 Nany::Ast::Node* Rule_OptionalVisibilityQualifier(TokenStruct* token)
 {
+	(void) token; // unused parameter
 	return nullptr;
 }
 
@@ -1454,6 +1507,7 @@ Nany::Ast::Node* Rule_ArgumentList(TokenStruct* token)
 // <Argument List> ::= 
 Nany::Ast::Node* Rule_ArgumentList2(TokenStruct* token)
 {
+	(void) token; // unused parameter
 	return nullptr;
 }
 
@@ -1476,6 +1530,7 @@ Nany::Ast::Node* Rule_ArgumentListContinued_Comma(TokenStruct* token)
 // <Argument List Continued> ::= 
 Nany::Ast::Node* Rule_ArgumentListContinued(TokenStruct* token)
 {
+	(void) token; // unused parameter
 	return nullptr;
 }
 
@@ -1504,6 +1559,7 @@ Nany::Ast::Node* Rule_Typedef_type_Identifier_ColonEq(TokenStruct* token)
 Nany::Ast::Node* Rule_InBlock_in(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -1514,6 +1570,7 @@ Nany::Ast::Node* Rule_InBlock_in(TokenStruct* token)
 // <In Block> ::= 
 Nany::Ast::Node* Rule_InBlock(TokenStruct* token)
 {
+	(void) token; // unused parameter
 	return nullptr;
 }
 
@@ -1524,6 +1581,7 @@ Nany::Ast::Node* Rule_InBlock(TokenStruct* token)
 Nany::Ast::Node* Rule_OutBlock_out(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -1534,6 +1592,7 @@ Nany::Ast::Node* Rule_OutBlock_out(TokenStruct* token)
 // <Out Block> ::= 
 Nany::Ast::Node* Rule_OutBlock(TokenStruct* token)
 {
+	(void) token; // unused parameter
 	return nullptr;
 }
 
@@ -1544,6 +1603,7 @@ Nany::Ast::Node* Rule_OutBlock(TokenStruct* token)
 Nany::Ast::Node* Rule_OptionalTypeParameters(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -1554,6 +1614,7 @@ Nany::Ast::Node* Rule_OptionalTypeParameters(TokenStruct* token)
 // <Optional Type Parameters> ::= 
 Nany::Ast::Node* Rule_OptionalTypeParameters2(TokenStruct* token)
 {
+	(void) token; // unused parameter
 	return nullptr;
 }
 
@@ -1564,6 +1625,7 @@ Nany::Ast::Node* Rule_OptionalTypeParameters2(TokenStruct* token)
 Nany::Ast::Node* Rule_TypeParameters_LtColon_Identifier_ColonGt(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Rule_TypeParameters_LtColon_Identifier_ColonGt: Not yet implemented !");
 	return nullptr;
 }
@@ -1575,6 +1637,7 @@ Nany::Ast::Node* Rule_TypeParameters_LtColon_Identifier_ColonGt(TokenStruct* tok
 Nany::Ast::Node* Rule_TypeParameters_LtColon_Identifier_ColonEq_ColonGt(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Rule_TypeParameters_LtColon_Identifier_ColonEq_ColonGt: Not yet implemented !");
 	return nullptr;
 }
@@ -1586,6 +1649,7 @@ Nany::Ast::Node* Rule_TypeParameters_LtColon_Identifier_ColonEq_ColonGt(TokenStr
 Nany::Ast::Node* Rule_TypeParametersContinued_Comma_Identifier(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -1597,6 +1661,7 @@ Nany::Ast::Node* Rule_TypeParametersContinued_Comma_Identifier(TokenStruct* toke
 Nany::Ast::Node* Rule_TypeParametersContinued_Comma_Identifier_ColonEq(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -1607,6 +1672,7 @@ Nany::Ast::Node* Rule_TypeParametersContinued_Comma_Identifier_ColonEq(TokenStru
 // <Type Parameters Continued> ::= 
 Nany::Ast::Node* Rule_TypeParametersContinued(TokenStruct* token)
 {
+	(void) token; // unused parameter
 	return nullptr;
 }
 
@@ -1617,6 +1683,7 @@ Nany::Ast::Node* Rule_TypeParametersContinued(TokenStruct* token)
 Nany::Ast::Node* Rule_TypeArguments(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Rule_TypeArguments: Not yet implemented !");
 	return nullptr;
 }
@@ -1628,6 +1695,7 @@ Nany::Ast::Node* Rule_TypeArguments(TokenStruct* token)
 Nany::Ast::Node* Rule_TypeArguments2(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Rule_TypeArguments2: Not yet implemented !");
 	return nullptr;
 }
@@ -1639,6 +1707,7 @@ Nany::Ast::Node* Rule_TypeArguments2(TokenStruct* token)
 Nany::Ast::Node* Rule_TypeArgumentsContinued_Comma(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Rule_TypeArgumentsContinued_Comma: Not yet implemented !");
 	return nullptr;
 }
@@ -1650,6 +1719,7 @@ Nany::Ast::Node* Rule_TypeArgumentsContinued_Comma(TokenStruct* token)
 Nany::Ast::Node* Rule_TypeArgumentsContinued(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Rule_TypeArgumentsContinued: Not yet implemented !");
 	return nullptr;
 }
@@ -1698,6 +1768,7 @@ Nany::Ast::Node* Rule_ExpressionList_Semi(TokenStruct* token)
 // <Expression List> ::= ';'
 Nany::Ast::Node* Rule_ExpressionList_Semi2(TokenStruct* token)
 {
+	(void) token; // unused parameter
 	return nullptr;
 }
 
@@ -1707,6 +1778,7 @@ Nany::Ast::Node* Rule_ExpressionList_Semi2(TokenStruct* token)
 // <Expression List> ::= 
 Nany::Ast::Node* Rule_ExpressionList(TokenStruct* token)
 {
+	(void) token; // unused parameter
 	return nullptr;
 }
 
@@ -1890,6 +1962,7 @@ Nany::Ast::Node* Rule_SimpleExp_return(TokenStruct* token)
 Nany::Ast::Node* Rule_SimpleExp_break(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -1901,6 +1974,7 @@ Nany::Ast::Node* Rule_SimpleExp_break(TokenStruct* token)
 Nany::Ast::Node* Rule_SimpleExp_continue(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -1956,6 +2030,7 @@ Nany::Ast::Node* Rule_SimpleExp_for_Identifier_in_do(TokenStruct* token)
 Nany::Ast::Node* Rule_SimpleExp_for_Identifier_in_order_Colon_packedby_Colon_do(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -1988,6 +2063,7 @@ Nany::Ast::Node* Rule_SimpleExp_for_Identifier_in_order_do(TokenStruct* token)
 Nany::Ast::Node* Rule_SimpleExp_timeout_do(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -1999,6 +2075,7 @@ Nany::Ast::Node* Rule_SimpleExp_timeout_do(TokenStruct* token)
 Nany::Ast::Node* Rule_SimpleExp_timeout_do_else(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -2030,6 +2107,7 @@ Nany::Ast::Node* Rule_ElseExpression_else(TokenStruct* token)
 // <Else Expression> ::= 
 Nany::Ast::Node* Rule_ElseExpression(TokenStruct* token)
 {
+	(void) token; // unused parameter
 	return nullptr;
 }
 
@@ -2040,6 +2118,7 @@ Nany::Ast::Node* Rule_ElseExpression(TokenStruct* token)
 Nany::Ast::Node* Rule_BinaryExp_Pipe(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -2060,6 +2139,7 @@ Nany::Ast::Node* Rule_BinaryExp(TokenStruct* token)
 Nany::Ast::Node* Rule_XorExp_xor(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -2080,6 +2160,7 @@ Nany::Ast::Node* Rule_XorExp(TokenStruct* token)
 Nany::Ast::Node* Rule_OrExp_or(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -2100,6 +2181,7 @@ Nany::Ast::Node* Rule_OrExp(TokenStruct* token)
 Nany::Ast::Node* Rule_AndExp_and(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -2204,6 +2286,7 @@ Nany::Ast::Node* Rule_CompareExp(TokenStruct* token)
 Nany::Ast::Node* Rule_RegexpExp_Tilde(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -2335,6 +2418,7 @@ Nany::Ast::Node* Rule_MultExp(TokenStruct* token)
 Nany::Ast::Node* Rule_PowerExp_Caret(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -2396,6 +2480,7 @@ Nany::Ast::Node* Rule_TypeofExp(TokenStruct* token)
 Nany::Ast::Node* Rule_NegateExp_Minus(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -2407,6 +2492,7 @@ Nany::Ast::Node* Rule_NegateExp_Minus(TokenStruct* token)
 Nany::Ast::Node* Rule_NegateExp_MinusMinus(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -2418,6 +2504,7 @@ Nany::Ast::Node* Rule_NegateExp_MinusMinus(TokenStruct* token)
 Nany::Ast::Node* Rule_NegateExp_PlusPlus(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -2429,6 +2516,7 @@ Nany::Ast::Node* Rule_NegateExp_PlusPlus(TokenStruct* token)
 Nany::Ast::Node* Rule_NegateExp_MinusMinus2(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -2440,6 +2528,7 @@ Nany::Ast::Node* Rule_NegateExp_MinusMinus2(TokenStruct* token)
 Nany::Ast::Node* Rule_NegateExp_PlusPlus2(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Not yet implemented !");
 	return nullptr;
 }
@@ -2499,6 +2588,7 @@ Nany::Ast::Node* Rule_Value_LParan_RParan(TokenStruct* token)
 Nany::Ast::Node* Rule_Value_LParan_RParan2(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Rule_Value_LParan_RParan2: Not yet implemented !");
 	return nullptr;
 }
@@ -2579,6 +2669,7 @@ Nany::Ast::Node* Rule_Value_LBracket_RBracket2(TokenStruct* token)
 Nany::Ast::Node* Rule_Value_LtColon_ColonGt(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Rule_Value_LtColon_ColonGt: Not yet implemented !");
 	return nullptr;
 }
@@ -2590,6 +2681,7 @@ Nany::Ast::Node* Rule_Value_LtColon_ColonGt(TokenStruct* token)
 Nany::Ast::Node* Rule_Value_LBracket_RBracket3(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Rule_Value_LBracket_RBracket3: Not yet implemented !");
 	return nullptr;
 }
@@ -2601,6 +2693,7 @@ Nany::Ast::Node* Rule_Value_LBracket_RBracket3(TokenStruct* token)
 Nany::Ast::Node* Rule_Value_LBracketColon_ColonRBracket(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Rule_Value_LBracketColon_ColonRBracket: Not yet implemented !");
 	return nullptr;
 }
@@ -2612,6 +2705,7 @@ Nany::Ast::Node* Rule_Value_LBracketColon_ColonRBracket(TokenStruct* token)
 Nany::Ast::Node* Rule_Value_LBracketColon_ColonLBracket(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Rule_Value_LBracketColon_ColonLBracket: Not yet implemented !");
 	return nullptr;
 }
@@ -2623,6 +2717,7 @@ Nany::Ast::Node* Rule_Value_LBracketColon_ColonLBracket(TokenStruct* token)
 Nany::Ast::Node* Rule_Value_RBracketColon_ColonRBracket(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Rule_Value_RBracketColon_ColonRBracket: Not yet implemented !");
 	return nullptr;
 }
@@ -2634,6 +2729,7 @@ Nany::Ast::Node* Rule_Value_RBracketColon_ColonRBracket(TokenStruct* token)
 Nany::Ast::Node* Rule_Value_RBracketColon_ColonLBracket(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Rule_Value_RBracketColon_ColonLBracket: Not yet implemented !");
 	return nullptr;
 }
@@ -2645,6 +2741,7 @@ Nany::Ast::Node* Rule_Value_RBracketColon_ColonLBracket(TokenStruct* token)
 Nany::Ast::Node* Rule_ArrayArguments(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Rule_ArrayArguments: Not yet implemented !");
 	return nullptr;
 }
@@ -2656,6 +2753,7 @@ Nany::Ast::Node* Rule_ArrayArguments(TokenStruct* token)
 Nany::Ast::Node* Rule_ArrayArguments_DotDot(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Rule_ArrayArguments_DotDot: Not yet implemented !");
 	return nullptr;
 }
@@ -2667,6 +2765,7 @@ Nany::Ast::Node* Rule_ArrayArguments_DotDot(TokenStruct* token)
 Nany::Ast::Node* Rule_ArrayArgumentsContinued(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Rule_ArrayArgumentsContinued: Not yet implemented !");
 	return nullptr;
 }
@@ -2678,6 +2777,7 @@ Nany::Ast::Node* Rule_ArrayArgumentsContinued(TokenStruct* token)
 Nany::Ast::Node* Rule_ArrayArgumentsContinued_Comma(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Rule_ArrayArgumentsContinued_Comma: Not yet implemented !");
 	return nullptr;
 }
@@ -2689,6 +2789,7 @@ Nany::Ast::Node* Rule_ArrayArgumentsContinued_Comma(TokenStruct* token)
 Nany::Ast::Node* Rule_ArrayArgumentsContinued_DotDot_Comma(TokenStruct* token)
 {
 	// Not yet implemented !
+	(void) token; // unused parameter
 	assert(false && "Rule_ArrayArgumentsContinued_DotDot_Comma: Not yet implemented !");
 	return nullptr;
 }
