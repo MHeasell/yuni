@@ -15,7 +15,7 @@ namespace Audio
 	Atomic::Int<32> QueueService::sHasRunningInstance = 0;
 
 
-	QueueService::QueueService():
+	QueueService::QueueService() :
 		pReady(false),
 		pAudioLoop(this)
 	{
@@ -95,7 +95,7 @@ namespace Audio
 		data.ready = Private::Audio::AV::Init() && Private::Audio::OpenAL::Init();
 		// The variable must be considered as destroyed as soon as the method
 		// 'notify()' is called
-		const bool ready = data.ready;
+		bool ready = data.ready;
 		data.signal.notify();
 		return ready;
 	}
@@ -217,19 +217,20 @@ namespace Audio
 			return false;
 
 		ThreadingPolicy::MutexLocker locker(*this);
-		if (!pQueueService->pReady)
-			return false;
+		{
+			if (!pQueueService->pReady)
+				return false;
 
-		Emitter::Map::iterator it = pEmitters.find(emitterName);
-		if (it == pEmitters.end())
-			return false;
-		Emitter::Ptr emitter = it->second;
+			Emitter::Map::iterator it = pEmitters.find(emitterName);
+			if (it == pEmitters.end())
+				return false;
+			Emitter::Ptr emitter = it->second;
 
-		Audio::Loop::RequestType callback;
- 		callback.bind(emitter, &Emitter::attachBufferDispatched, buffer);
-		// Dispatching...
- 		pQueueService->pAudioLoop.dispatch(callback);
-
+			Audio::Loop::RequestType callback;
+			callback.bind(emitter, &Emitter::attachBufferDispatched, buffer);
+			// Dispatching...
+			pQueueService->pAudioLoop.dispatch(callback);
+		}
 		return true;
 	}
 
@@ -244,14 +245,15 @@ namespace Audio
 			return false;
 
 		ThreadingPolicy::MutexLocker locker(*this);
-		if (!pQueueService->pReady)
-			return false;
+		{
+			if (!pQueueService->pReady)
+				return false;
 
-		Audio::Loop::RequestType callback;
- 		callback.bind(emitter, &Emitter::attachBufferDispatched, buffer);
-		// Dispatching...
- 		pQueueService->pAudioLoop.dispatch(callback);
-
+			Audio::Loop::RequestType callback;
+			callback.bind(emitter, &Emitter::attachBufferDispatched, buffer);
+			// Dispatching...
+			pQueueService->pAudioLoop.dispatch(callback);
+		}
 		return true;
 	}
 
@@ -262,14 +264,15 @@ namespace Audio
 			return false;
 
 		ThreadingPolicy::MutexLocker locker(*this);
-		if (!pQueueService->pReady)
-			return false;
-		
-		Audio::Loop::RequestType callback;
- 		callback.bind(emitter, &Emitter::attachBufferDispatched, buffer);
-		// Dispatching...
- 		pQueueService->pAudioLoop.dispatch(callback);
+		{
+			if (!pQueueService->pReady)
+				return false;
 
+			Audio::Loop::RequestType callback;
+			callback.bind(emitter, &Emitter::attachBufferDispatched, buffer);
+			// Dispatching...
+	 		pQueueService->pAudioLoop.dispatch(callback);
+		}
 		return true;
 	}
 
@@ -422,17 +425,17 @@ namespace Audio
 
 	unsigned int QueueService::Bank::duration(const StringAdapter& name)
 	{
-		ThreadingPolicy::MutexLocker locker(*this);
-
-		if (!pQueueService->pReady)
-			return 0;
-
 		Sound::Ptr buffer = get(name);
 		if (!buffer)
 			return 0;
 
+		ThreadingPolicy::MutexLocker locker(*this);
+		if (!pQueueService->pReady)
+			return 0;
 		return buffer->duration();
 	}
+
+
 
 
 
