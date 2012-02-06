@@ -213,9 +213,10 @@ namespace Audio
 		if (!pQueueService->pReady)
 			return false;
 
-		Emitter::Ptr emitter = get(emitterName);
-		if (!emitter)
+		Emitter::Map::iterator it = pEmitters.find(emitterName);
+		if (it == pEmitters.end())
 			return false;
+		Emitter::Ptr emitter = it->second;
 
 		Sound::Ptr buffer = pBank->get(bufferName);
 		if (!buffer)
