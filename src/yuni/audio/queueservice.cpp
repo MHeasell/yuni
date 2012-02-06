@@ -209,6 +209,10 @@ namespace Audio
 	bool QueueService::Emitters::attach(const StringAdapter& emitterName,
 		const StringAdapter& bufferName)
 	{
+		Sound::Ptr buffer = pBank->get(bufferName);
+		if (!buffer)
+			return false;
+
 		ThreadingPolicy::MutexLocker locker(*this);
 		if (!pQueueService->pReady)
 			return false;
@@ -217,10 +221,6 @@ namespace Audio
 		if (it == pEmitters.end())
 			return false;
 		Emitter::Ptr emitter = it->second;
-
-		Sound::Ptr buffer = pBank->get(bufferName);
-		if (!buffer)
-			return false;
 
 		Audio::Loop::RequestType callback;
  		callback.bind(emitter, &Emitter::attachBufferDispatched, buffer);
@@ -233,15 +233,15 @@ namespace Audio
 
 	bool QueueService::Emitters::attach(Emitter::Ptr emitter, const StringAdapter& bufferName)
 	{
+		Sound::Ptr buffer = pBank->get(bufferName);
+		if (!buffer)
+			return false;
+
 		ThreadingPolicy::MutexLocker locker(*this);
 		if (!pQueueService->pReady)
 			return false;
 
 		if (!emitter)
-			return false;
-
-		Sound::Ptr buffer = pBank->get(bufferName);
-		if (!buffer)
 			return false;
 
 		Audio::Loop::RequestType callback;
