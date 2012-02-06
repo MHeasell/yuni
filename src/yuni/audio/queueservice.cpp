@@ -253,7 +253,7 @@ namespace Audio
 	}
 
 
-	bool QueueService::Emitters::attach(Emitter::Ptr name, Sound::Ptr buffer)
+	bool QueueService::Emitters::attach(Emitter::Ptr emitter, Sound::Ptr buffer)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 		if (!pQueueService->pReady)
