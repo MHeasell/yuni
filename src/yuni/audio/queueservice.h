@@ -58,9 +58,9 @@ namespace Audio
 			//! Attach an emitter to a buffer
 			bool attach(const StringAdapter& name, const StringAdapter& attachedBuffer);
 			//! Attach an emitter to a buffer
-			bool attach(Emitter::Ptr name, const StringAdapter& attachedBuffer);
+			bool attach(Emitter::Ptr emitter, const StringAdapter& attachedBuffer);
 			//! Attach an emitter to a buffer
-			bool attach(Emitter::Ptr name, Sound::Ptr attachedBuffer);
+			bool attach(Emitter::Ptr emitter, Sound::Ptr attachedBuffer);
 
 			//! Detach an emitter from any buffer
 			void detach(const StringAdapter& name);
