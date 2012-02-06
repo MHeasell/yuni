@@ -165,8 +165,10 @@ namespace Audio
 
 		Emitter::Map::const_iterator end = emitter.pEmitters.end();
 		for (Emitter::Map::const_iterator it = emitter.pEmitters.begin(); it != end; ++it)
+		{
 			if (it->second->playing())
 				return true;
+		}
 		return false;
 	}
 
@@ -188,13 +190,14 @@ namespace Audio
 
 	bool QueueService::Emitters::add(const StringAdapter& emitterName)
 	{
+		Emitter::Ptr newEmitter(new Emitter());
+
 		ThreadingPolicy::MutexLocker locker(*this);
 
 		if (!pQueueService->pReady)
 			return false;
 
 		// Create the emitter and add it
-		Emitter::Ptr newEmitter(new Emitter());
 		pEmitters[emitterName] = newEmitter;
 
 		Audio::Loop::RequestType callback;
@@ -233,15 +236,15 @@ namespace Audio
 
 	bool QueueService::Emitters::attach(Emitter::Ptr emitter, const StringAdapter& bufferName)
 	{
+		if (!emitter || !bufferName)
+			return false;
+
 		Sound::Ptr buffer = pBank->get(bufferName);
 		if (!buffer)
 			return false;
 
 		ThreadingPolicy::MutexLocker locker(*this);
 		if (!pQueueService->pReady)
-			return false;
-
-		if (!emitter)
 			return false;
 
 		Audio::Loop::RequestType callback;
@@ -255,13 +258,13 @@ namespace Audio
 
 	bool QueueService::Emitters::attach(Emitter::Ptr emitter, Sound::Ptr buffer)
 	{
-		ThreadingPolicy::MutexLocker locker(*this);
-		if (!pQueueService->pReady)
-			return false;
-
 		if (!emitter || !buffer)
 			return false;
 
+		ThreadingPolicy::MutexLocker locker(*this);
+		if (!pQueueService->pReady)
+			return false;
+		
 		Audio::Loop::RequestType callback;
  		callback.bind(emitter, &Emitter::attachBufferDispatched, buffer);
 		// Dispatching...
