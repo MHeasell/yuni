@@ -214,10 +214,9 @@ namespace Window
 	void X11::doUpdateStyle()
 	{
 		// TODO : translate pStyleSet to the correct values
-		unsigned long valueMask;
 		XSetWindowAttributes attributes;
 
-		XChangeWindowAttributes(pDisplay, pWindow, valueMask, &attributes);
+		XChangeWindowAttributes(pDisplay, pWindow, 0, &attributes);
 	}
 
 
