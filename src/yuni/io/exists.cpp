@@ -28,53 +28,14 @@ namespace Private
 namespace IO
 {
 
-	namespace // anonymous
+
+	Yuni::IO::NodeType TypeOf(const StringAdapter& filename)
 	{
-		Yuni::IO::NodeType TypeOfStaticBuffer(const char* p, unsigned int len)
-		{
-			char path[1024];
-			YUNI_MEMCPY(path, sizeof(path), p, len);
-			path[len] = '\0';
-			return Yuni::Private::IO::TypeOf(path, len);
-		}
-
-	} // anonymous namespace
-
-
-
-	Yuni::IO::NodeType TypeOfNotZeroTerminated(const char* p, unsigned int len)
-	{
-		// As this routine may be extensively used, we should make it as fast as possible
-		// Consequently we make here a tiny optimisation when the length of the path
-		// can be safely contained into a static buffer
-		// However, on Windows, we already use temporary buffers
-		# ifdef YUNI_OS_WINDOWS
-		return Yuni::Private::IO::TypeOf(p, len);
-		# else
-		if (len < 1020)
-		{
-			return TypeOfStaticBuffer(p, len);
-		}
-		else
-		{
-			char* path = new char[len + 1];
-			memcpy(path, p, len * sizeof(char));
-			path[len] = '\0';
-
-			Yuni::IO::NodeType type = Yuni::Private::IO::TypeOf(path, len);
-			delete[] path;
-			return type;
-		}
-		# endif
-	}
-
-
-	Yuni::IO::NodeType TypeOf(const char* p, unsigned int len)
-	{
-		if (!p || !len)
+		if (!filename)
 			return Yuni::IO::typeUnknown;
 
 		# ifdef YUNI_OS_WINDOWS
+		const char* p = filename.c_str();
 		if (p[len - 1] == '\\' || p[len - 1] == '/')
 		{
 			if (!--len)
@@ -110,7 +71,7 @@ namespace IO
 		# else // WINDOWS
 
 		struct stat s;
-		if (stat(p, &s) != 0)
+		if (stat(filename.c_str(), &s) != 0)
 			return Yuni::IO::typeUnknown;
 
 		return (S_ISDIR(s.st_mode))
@@ -118,6 +79,8 @@ namespace IO
 			: Yuni::IO::typeFile;
 		# endif
 	}
+
+
 
 
 

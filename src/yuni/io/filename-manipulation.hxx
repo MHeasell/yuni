@@ -63,8 +63,6 @@ namespace IO
 	template<class StringT>
 	inline bool IsRelative(const StringT& filename)
 	{
-		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CString_InvalidTypeForBuffer);
-		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  CString_InvalidTypeForBufferSize);
 		return !IsAbsolute(filename);
 	}
 

@@ -23,7 +23,7 @@ namespace IO
 	** \param filename The file/directory to test
 	** \return True if it exists, false otherwise
 	*/
-	template<class StringT> bool Exists(const StringT& filename);
+	bool Exists(const StringAdapter& filename);
 
 	/*!
 	** \brief Get the type of a node
@@ -31,7 +31,7 @@ namespace IO
 	** \param filename The file/directory to test
 	** \return True if it exists, false otherwise
 	*/
-	template<class StringT> NodeType TypeOf(const StringT& filename);
+	NodeType TypeOf(const StringAdapter& filename);
 
 
 

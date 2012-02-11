@@ -27,7 +27,7 @@ namespace IO
 
 	# ifdef YUNI_OS_WINDOWS
 
-	bool Size(const char* const filename, unsigned int len, uint64& value)
+	bool Size(const StringAdapter& filename, uint64& value)
 	{
 		if (!len)
 		{
@@ -35,7 +35,7 @@ namespace IO
 			return false;
 		}
 
-		const char* const p = filename;
+		const char* const p = filename.c_str();
 
 		if (p[len - 1] == '\\' || p[len - 1] == '/')
 			--len;
@@ -78,12 +78,12 @@ namespace IO
 
 	# else
 
-	bool Size(const char* const filename, unsigned int, uint64& value)
+	bool Size(const StringAdapter& filename, unsigned int, uint64& value)
 	{
 		struct stat results;
-		if (filename && '\0' != *filename && stat(filename, &results) == 0)
+		if (filename.notEmpty() && stat(filename.c_str(), &results) == 0)
 		{
-			value = static_cast<uint64>(results.st_size);
+			value = (uint64) results.st_size;
 			return true;
 		}
 		value = 0u;
@@ -94,44 +94,21 @@ namespace IO
 
 
 
-	bool SizeNotZeroTerminated(const char* filename, unsigned int len, uint64& value)
+	Yuni::IO::Error Delete(const StringAdapter& filename)
 	{
-		# ifdef YUNI_OS_WINDOWS
-		// on Windows, we already have to use temporary buffers
-		return Yuni::Private::IO::Size(filename, len, value);
-		# else
-		if (len < 1020)
-		{
-			CString<1024, false, true> copy;
-			copy.assign(filename, len);
-			return Yuni::Private::IO::Size(copy.c_str(), copy.size(), value);
-		}
-		else
-		{
-			char* p = new char[len + 1];
-			(void)::memcpy(p, filename, len * sizeof(char));
-			p[len] = '\0';
-			bool r = Yuni::Private::IO::Size(p, len, value);
-			delete[] p;
-			return r;
-		}
-		# endif
-	}
+		// DeleteFile is actually a macro and will be replaced by DeleteFileW
+		// with Visual Studio. Consequently we can not use the word DeleteFile.....
 
-
-
-	Yuni::IO::Error YnDeleteFile(const char* const filename, unsigned int len)
-	{
-		if (!len)
+		if (!filename)
 			return Yuni::IO::errUnknown;
 
 		# ifndef YUNI_OS_WINDOWS
-		if (unlink(filename))
+		if (unlink(filename.c_str()))
 			return Yuni::IO::errUnknown;
 		return Yuni::IO::errNone;
 		# else
 
-		const char* const p = filename;
+		const char* const p = filename.c_str();
 
 		if (p[len - 1] == '\\' || p[len - 1] == '/')
 			--len;
@@ -151,27 +128,6 @@ namespace IO
 		if (DeleteFileW(wstr.c_str()))
 			return Yuni::IO::errNone;
 		return Yuni::IO::errUnknown;
-		# endif
-	}
-
-
-	Yuni::IO::Error DeleteFileNotZeroTerminated(const char* const filename, unsigned int len)
-	{
-		# ifndef YUNI_OS_WINDOWS
-		if (len < 1020)
-		{
-			CString<1024, false, true> copy;
-			copy.assign(filename, len);
-			return YnDeleteFile(copy.c_str(), copy.size());
-		}
-		else
-		{
-			CString<> copy;
-			copy.assign(filename, len);
-			return YnDeleteFile(copy.c_str(), copy.size());
-		}
-		# else
-		return YnDeleteFile(filename, len);
 		# endif
 	}
 

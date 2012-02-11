@@ -24,14 +24,11 @@ namespace Directory
 	*/
 	char* CurrentDirectory();
 
-	bool ChangeCurrentDirectory(const char* src, unsigned int srclen);
-	bool ChangeCurrentDirectoryNotZeroTerminated(const char* path, unsigned int length);
 
-
-	bool RecursiveCopy(const char* src, unsigned int srclen, const char* dst, unsigned int dstlen, bool recursive,
-		bool overwrite, const Yuni::IO::Directory::CopyOnUpdateBind& onUpdate);
-
-	bool DummyCopyUpdateEvent(Yuni::IO::Directory::CopyState, const String&, const String&, uint64, uint64);
+	inline bool DummyCopyUpdateEvent(Yuni::IO::Directory::CopyState, const String&, const String&, uint64, uint64)
+	{
+		return true;
+	}
 
 
 
@@ -50,48 +47,19 @@ namespace Directory
 {
 
 
-
-	template<class StringT>
-	inline bool Exists(const StringT& path)
+	inline bool Exists(const StringAdapter& path)
 	{
-		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, DirectoryExists_InvalidTypeForBuffer);
-		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  DirectoryExists_InvalidTypeForBufferSize);
-
-		return ((Yuni::IO::typeFolder & Yuni::IO::TypeOf(path)) != 0);
+		return ((IO::typeFolder & IO::TypeOf(path)) != 0);
 	}
 
 
-
-	template<class StringT1, class StringT2>
-	inline bool Copy(const StringT1& source, const StringT2& destination, bool recursive, bool overwrite)
+	inline bool Copy(const StringAdapter& source, const StringAdapter& destination, bool recursive, bool overwrite)
 	{
-		YUNI_STATIC_ASSERT(Traits::CString<StringT1>::valid, CString_InvalidTypeForBuffer1);
-		YUNI_STATIC_ASSERT(Traits::CString<StringT2>::valid, CString_InvalidTypeForBuffer2);
-		YUNI_STATIC_ASSERT(Traits::Length<StringT1>::valid,  CString_InvalidTypeForBufferSize1);
-		YUNI_STATIC_ASSERT(Traits::Length<StringT2>::valid,  CString_InvalidTypeForBufferSize2);
-
 		CopyOnUpdateBind e;
 		e.bind(&Private::IO::Directory::DummyCopyUpdateEvent);
-		return Private::IO::Directory::RecursiveCopy(
-			Traits::CString<StringT1>::Perform(source),      Traits::Length<StringT1,unsigned int>::Value(source),
-			Traits::CString<StringT2>::Perform(destination), Traits::Length<StringT1,unsigned int>::Value(destination),
-			recursive, overwrite, e);
+		return Copy(source, destination, recursive, overwrite, e);
 	}
 
-	template<class StringT1, class StringT2>
-	inline bool Copy(const StringT1& source, const StringT2& destination, bool recursive,
-		bool overwrite, const CopyOnUpdateBind& onUpdate)
-	{
-		YUNI_STATIC_ASSERT(Traits::CString<StringT1>::valid, CString_InvalidTypeForBuffer1);
-		YUNI_STATIC_ASSERT(Traits::CString<StringT2>::valid, CString_InvalidTypeForBuffer2);
-		YUNI_STATIC_ASSERT(Traits::Length<StringT1>::valid,  CString_InvalidTypeForBufferSize1);
-		YUNI_STATIC_ASSERT(Traits::Length<StringT2>::valid,  CString_InvalidTypeForBufferSize2);
-
-		return Private::IO::Directory::RecursiveCopy(
-			Traits::CString<StringT1>::Perform(source),      Traits::Length<StringT1,unsigned int>::Value(source),
-			Traits::CString<StringT2>::Perform(destination), Traits::Length<StringT1,unsigned int>::Value(destination),
-			recursive, overwrite, onUpdate);
-	}
 
 
 
@@ -116,31 +84,21 @@ namespace Current
 	inline void Get(StringT& out, bool clearBefore)
 	{
 		char* c = Yuni::Private::IO::Directory::CurrentDirectory();
-		if (clearBefore)
-			out = c;
-		else
-			out += c;
-		::free(c);
-	}
-
-
-	template<class StringT>
-	inline bool Set(const StringT& path)
-	{
-		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, DirectoryExists_InvalidTypeForBuffer);
-		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  DirectoryExists_InvalidTypeForBufferSize);
-
-		if (Traits::CString<StringT>::zeroTerminated)
+		if (c)
 		{
-			return Yuni::Private::IO::Directory::ChangeCurrentDirectory(
-				Traits::CString<StringT>::Perform(path), Traits::Length<StringT,unsigned int>::Value(path));
+			if (clearBefore)
+				out = c;
+			else
+				out += c;
+			::free(c);
 		}
 		else
 		{
-			return Yuni::Private::IO::Directory::ChangeCurrentDirectoryNotZeroTerminated(
-				Traits::CString<StringT>::Perform(path), Traits::Length<StringT,unsigned int>::Value(path));
+			if (clearBefore)
+				out.clear();
 		}
 	}
+
 
 
 
