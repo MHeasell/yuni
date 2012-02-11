@@ -14,14 +14,6 @@ namespace Private
 namespace IO
 {
 
-	bool Size(const char* filename, unsigned int len, uint64& value);
-	bool SizeNotZeroTerminated(const char* filename, unsigned int len, uint64& value);
-
-	// DeleteFile is actually a macro and will be replaced by DeleteFileW
-	// with Visual Studio. Consequently we can not use the word DeleteFile.....
-	Yuni::IO::Error YnDeleteFile(const char* const filename, unsigned int len);
-	Yuni::IO::Error DeleteFileNotZeroTerminated(const char* const filename, unsigned int len);
-
 	sint64 LastModificationTime(const StringAdapter& filename);
 
 
@@ -39,55 +31,17 @@ namespace File
 {
 
 
-	template<class StringT>
-	inline bool Size(const StringT& filename, uint64& size)
+	inline uint64 Size(const StringAdapter& filename)
 	{
-		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, IOFileSize_InvalidTypeForBuffer);
-		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  IOFileSize_InvalidTypeForLength);
-
-		if (0 == Traits::CString<StringT>::zeroTerminated)
-		{
-			return Yuni::Private::IO::SizeNotZeroTerminated(
-				Traits::CString<StringT>::Perform(filename), Traits::Length<StringT,unsigned int>::Value(filename), size);
-		}
-		else
-		{
-			return Yuni::Private::IO::Size(
-				Traits::CString<StringT>::Perform(filename), Traits::Length<StringT,unsigned int>::Value(filename), size);
-		}
-	}
-
-
-	template<class StringT>
-	inline uint64 Size(const StringT& filename)
-	{
-		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, IOFileSize_InvalidTypeForBuffer);
-		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  IOFileSize_InvalidTypeForLength);
-
 		uint64 size;
-
-		if (Traits::CString<StringT>::zeroTerminated)
-		{
-			return Yuni::Private::IO::Size(
-				Traits::CString<StringT>::Perform(filename), Traits::Length<StringT,unsigned int>::Value(filename), size)
-				? size : 0;
-		}
-		else
-		{
-			return Yuni::Private::IO::Size(
-				Traits::CString<StringT>::Perform(filename), Traits::Length<StringT,unsigned int>::Value(filename), size)
-				? size : 0;
-		}
+		return (Size(filename, size)) ? size : 0;
 	}
 
 
 
 
-	template<class StringT> inline bool Exists(const StringT& filename)
+	inline bool Exists(const StringAdapter& filename)
 	{
-		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, IOFileExists_InvalidTypeForBuffer);
-		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  IOFileExists_InvalidTypeForBufferSize);
-
 		return ((Yuni::IO::typeFile & Yuni::IO::TypeOf(filename)) != 0);
 	}
 
@@ -177,28 +131,6 @@ namespace File
 			return errNone;
 		}
 		return errNotFound;
-	}
-
-
-
-	template<class StringT>
-	inline Error Delete(const StringT& filename)
-	{
-		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, IOFileExists_InvalidTypeForBuffer);
-		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  IOFileExists_InvalidTypeForBufferSize);
-
-		if (0 == Traits::CString<StringT>::zeroTerminated)
-		{
-			return Yuni::Private::IO::DeleteFileNotZeroTerminated(
-				Traits::CString<StringT>::Perform(filename),
-				Traits::Length<StringT,unsigned int>::Value(filename));
-		}
-		else
-		{
-			return Yuni::Private::IO::YnDeleteFile(
-				Traits::CString<StringT>::Perform(filename),
-				Traits::Length<StringT,unsigned int>::Value(filename));
-		}
 	}
 
 

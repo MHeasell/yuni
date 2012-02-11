@@ -9,18 +9,10 @@
 
 namespace Yuni
 {
-namespace Private
-{
 namespace IO
 {
 namespace Directory
 {
-
-
-	bool DummyCopyUpdateEvent(Yuni::IO::Directory::CopyState, const String&, const String&, uint64, uint64)
-	{
-		return true;
-	}
 
 
 	struct InfoItem
@@ -33,19 +25,17 @@ namespace Directory
 
 
 
-	bool RecursiveCopy(const char* src, unsigned int srclen, const char* dst, unsigned int dstlen, bool recursive,
-		bool overwrite, const Yuni::IO::Directory::CopyOnUpdateBind& onUpdate)
+	bool Copy(const StringAdapter& src, const StringAdapter& dst, bool recursive,
+		bool overwrite, const IO::Directory::CopyOnUpdateBind& onUpdate)
 	{
-		using namespace Yuni::IO::Directory;
-
 		// normalize paths
 		String fsrc;
-		Yuni::IO::Normalize(fsrc, src, srclen);
+		IO::Normalize(fsrc, src);
 		if (fsrc.empty())
 			return false;
 
 		String fdst;
-		Yuni::IO::Normalize(fdst, dst, dstlen);
+		IO::Normalize(fdst, dst);
 
 		// The list of files to copy
 		List list;
@@ -54,14 +44,14 @@ namespace Directory
 		// Adding the target folder, to create it if required
 		if (!onUpdate(cpsGatheringInformation, fdst, fdst, 0, 1))
 			return false;
-		Yuni::IO::Directory::Create(fdst);
+		IO::Directory::Create(fdst);
 
 		{
-			Yuni::IO::Directory::Info info(fsrc);
+			IO::Directory::Info info(fsrc);
 			if (recursive)
 			{
-				const Yuni::IO::Directory::Info::recursive_iterator& end = info.recursive_end();
-				for (Yuni::IO::Directory::Info::recursive_iterator i = info.recursive_begin(); i != end; ++i)
+				const IO::Directory::Info::recursive_iterator& end = info.recursive_end();
+				for (IO::Directory::Info::recursive_iterator i = info.recursive_begin(); i != end; ++i)
 				{
 					list.push_back();
 					InfoItem& info = list.back();
@@ -74,8 +64,8 @@ namespace Directory
 			}
 			else
 			{
-				const Yuni::IO::Directory::Info::recursive_iterator& end = info.recursive_end();
-				for (Yuni::IO::Directory::Info::recursive_iterator i = info.recursive_begin(); i != end; ++i)
+				const IO::Directory::Info::recursive_iterator& end = info.recursive_end();
+				for (IO::Directory::Info::recursive_iterator i = info.recursive_begin(); i != end; ++i)
 				{
 					list.push_back();
 					InfoItem& info = list.back();
@@ -96,9 +86,9 @@ namespace Directory
 		// Streams : in the worst scenario, the last file to copy will be closed
 		// at the end of this routine
 		// Stream on the source file
-		Yuni::IO::File::Stream fromFile;
+		IO::File::Stream fromFile;
 		// Stream on the target file
-		Yuni::IO::File::Stream toFile;
+		IO::File::Stream toFile;
 
 		// A temporary buffer for copying files' contents
 		// 16k seems to be a good choice (better than smaller block size when used
@@ -125,7 +115,7 @@ namespace Directory
 				// The target file is actually a folder
 				// We have to create it before copying its content
 				if (!onUpdate(cpsCopying, info.filename, tmp, current, totalSize)
-					|| !Yuni::IO::Directory::Create(tmp))
+					|| !IO::Directory::Create(tmp))
 				{
 					delete[] buffer;
 					return false;
@@ -135,16 +125,16 @@ namespace Directory
 			{
 				// The target file is a real file (and not a folder)
 				// Checking first for overwritting
-				if (!overwrite && Yuni::IO::Exists(tmp))
+				if (!overwrite && IO::Exists(tmp))
 					continue;
 
 				// Try to open the source file
 				// The previous opened source file will be closed here
-				if (fromFile.open(info.filename, Yuni::IO::OpenMode::read))
+				if (fromFile.open(info.filename, IO::OpenMode::read))
 				{
 					// Try to open for writing the target file
 					// The previous opened target file will be closed here
-					if (toFile.open(tmp, Yuni::IO::OpenMode::write | Yuni::IO::OpenMode::truncate))
+					if (toFile.open(tmp, IO::OpenMode::write | IO::OpenMode::truncate))
 					{
 						// reading the whole source file
 						size_t numRead;
@@ -184,8 +174,8 @@ namespace Directory
 
 
 
+
 } // namespace Directory
 } // namespace IO
-} // namespace Private
 } // namespace Yuni
 

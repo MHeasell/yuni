@@ -22,38 +22,36 @@ namespace Directory
 
 		# ifdef YUNI_OS_WINDOWS
 
-		static bool WindowsMake(const char* path, unsigned int len)
+		static bool WindowsMake(const StringAdapter& path)
 		{
-			if (len)
+			unsigned int len = path.size();
+			String norm;
+			Yuni::IO::Normalize(norm, path, len);
+
+			Private::WString<true> wstr(norm);
+			if (wstr.size() < 4)
+				return false;
+			wchar_t* t = wstr.c_str() + 4;
+
+			while (*t != L'\0')
 			{
-				String norm;
-				Yuni::IO::Normalize(norm, path, len);
-
-				Private::WString<true> wstr(norm);
-				if (wstr.size() < 4)
-					return false;
-				wchar_t* t = wstr.c_str() + 4;
-
-				while (*t != L'\0')
+				if ((*t == L'\\' || *t == L'/') && (*(t-1) != ':'))
 				{
-					if ((*t == L'\\' || *t == L'/') && (*(t-1) != ':'))
+					*t = L'\0';
+					if (!CreateDirectoryW(wstr.c_str(), nullptr))
 					{
-						*t = L'\0';
-						if (!CreateDirectoryW(wstr.c_str(), nullptr))
-						{
-							if (GetLastError() != ERROR_ALREADY_EXISTS)
-								return false;
-						}
-						*t = L'\\';
+						if (GetLastError() != ERROR_ALREADY_EXISTS)
+							return false;
 					}
-					++t;
+					*t = L'\\';
 				}
+				++t;
+			}
 
-				if (!CreateDirectoryW(wstr.c_str(), nullptr))
-				{
-					if (GetLastError() != ERROR_ALREADY_EXISTS)
-						return false;
-				}
+			if (!CreateDirectoryW(wstr.c_str(), nullptr))
+			{
+				if (GetLastError() != ERROR_ALREADY_EXISTS)
+					return false;
 			}
 			return true;
 		}
@@ -64,13 +62,12 @@ namespace Directory
 
 
 
-		static bool UnixMake(const char* path, unsigned int len, unsigned int mode)
+		static bool UnixMake(const StringAdapter& path, unsigned int mode)
 		{
-			if (!len || !path || '\0' == *path)
-				return true;
+			unsigned int len = path.size();
 
 			char* buffer = new char[len + 1];
-			memcpy(buffer, path, len);
+			memcpy(buffer, path.c_str(), len);
 			buffer[len] = '\0';
 			char* pt = buffer;
 			char tmp;
@@ -109,17 +106,19 @@ namespace Directory
 
 	bool Create(const StringAdapter& path, unsigned int mode)
 	{
-		if (Yuni::IO::Exists(path))
-			return true;
-
-		# ifdef YUNI_OS_WINDOWS
-		// `mode` is not used on Windows
-		(void) mode;
-		return WindowsMake(path.c_str(), (unsigned int) path.size());
-		# else
-		return UnixMake(path.c_str(), (unsigned int) path.size(), mode);
-		# endif
+		if (path.notEmpty() && !Yuni::IO::Exists(path))
+		{
+			# ifdef YUNI_OS_WINDOWS
+			// `mode` is not used on Windows
+			(void) mode;
+			return WindowsMake(path);
+			# else
+			return UnixMake(path, mode);
+			# endif
+		}
+		return true;
 	}
+
 
 
 

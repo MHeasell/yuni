@@ -37,18 +37,18 @@ namespace Directory
 	namespace // Anonymous namespace
 	{
 
-		static bool RmDirRecursiveInternal(const char* path)
+		static bool RmDirRecursiveInternal(const StringAdapter& path)
 		{
 			DIR* dp;
 			struct dirent* ep;
 			CString<2096> buffer;
 			struct stat st;
 
-			if (NULL != (dp = ::opendir(path)))
+			if (NULL != (dp = ::opendir(path.c_str())))
 			{
 				while (NULL != (ep = ::readdir(dp)))
 				{
-					buffer.clear() << path << SEP << (const char*)ep->d_name;
+					buffer.clear() << path << SEP << (const char*) ep->d_name;
 					if (0 == ::stat(buffer.c_str(), &st))
 					{
 						if (S_ISDIR(st.st_mode))
@@ -65,7 +65,7 @@ namespace Directory
 				}
 				(void)::closedir(dp);
 			}
-			return (0 == rmdir(path));
+			return (0 == rmdir(path.c_str()));
 		}
 
 	} // anonymous namespace
@@ -181,9 +181,11 @@ namespace Directory
 		fsource.replace(L'/', L'\\');
 		return RecursiveDeleteWindow(fsource.c_str());
 		# else
-		return RmDirRecursiveInternal(path.c_str());
+		String p(path);
+		return RmDirRecursiveInternal(p);
 		# endif
 	}
+
 
 
 
