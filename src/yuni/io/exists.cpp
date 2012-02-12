@@ -23,8 +23,6 @@
 
 namespace Yuni
 {
-namespace Private
-{
 namespace IO
 {
 
@@ -83,8 +81,6 @@ namespace IO
 
 
 
-
-
 } // namespace IO
-} // namespace Private
 } // namespace Yuni
+

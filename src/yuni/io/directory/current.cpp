@@ -14,6 +14,63 @@
 
 namespace Yuni
 {
+namespace Private
+{
+namespace IO
+{
+namespace Directory
+{
+
+
+	char* CurrentDirectory()
+	{
+
+		# ifdef YUNI_OS_WINDOWS
+
+
+		char* ret = NULL;
+		const wchar_t* c = _wgetcwd(NULL, 0 /* Arbitrary value */);
+
+		const int sizeRequired = WideCharToMultiByte(CP_UTF8, 0, c, -1, NULL, 0,  NULL, NULL);
+		if (sizeRequired > 0)
+		{
+			ret = (char*) ::malloc(sizeRequired * sizeof(char) + 1);
+			if (ret)
+			{
+				if (WideCharToMultiByte(CP_UTF8, 0, c, -1, ret, sizeRequired,  NULL, NULL) > 0)
+				{
+					ret[sizeRequired] = '\0';
+				}
+				else
+				{
+					::free(ret);
+					ret = NULL;
+				}
+			}
+		}
+
+		return ret;
+
+		# else
+
+		return ::getcwd(NULL, 0 /* arbitrary value */);
+
+		# endif
+
+	}
+
+
+
+} // namespace Directory
+} // namespace IO
+} // namespace Private
+} // namespace Yuni
+
+
+
+
+namespace Yuni
+{
 namespace IO
 {
 namespace Directory
@@ -57,6 +114,4 @@ namespace Current
 } // namespace Directory
 } // namespace IO
 } // namespace Yuni
-
-
 
