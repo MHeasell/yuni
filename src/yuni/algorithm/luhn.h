@@ -38,7 +38,7 @@ namespace Algorithm
 		** \param s A string with an arbitrary length (> 1, returns false otherwise)
 		** \return True if the string is a valid credit card number, False otherwise
 		*/
-		static bool IsValidCreditCardNumber(const StringAdapter& s);
+		static bool IsValidCreditCardNumber(const AnyString& s);
 
 	public:
 		/*!
@@ -47,7 +47,7 @@ namespace Algorithm
 		** \param s A string with an arbitrary length (> 1, error otherwise)
 		** \return The check digit, -1 if an error has occured
 		*/
-		static int Mod10(const StringAdapter& s);
+		static int Mod10(const AnyString& s);
 
 
 		/*!
@@ -88,7 +88,7 @@ namespace Algorithm
 		** \return The check digit, -1 if an error has occured
 		*/
 		//! TODO Need implementation for `Luhn Mod N`
-		//		static int ModN(const StringAdapterT& s, int (*codepoint)(const StringT::Char));
+		//		static int ModN(const AnyStringT& s, int (*codepoint)(const StringT::Char));
 
 	}; // class Luhn
 

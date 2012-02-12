@@ -25,7 +25,7 @@ namespace Directory
 
 
 
-	bool Copy(const StringAdapter& src, const StringAdapter& dst, bool recursive,
+	bool Copy(const AnyString& src, const AnyString& dst, bool recursive,
 		bool overwrite, const IO::Directory::CopyOnUpdateBind& onUpdate)
 	{
 		// normalize paths

@@ -37,7 +37,7 @@ namespace Directory
 	namespace // Anonymous namespace
 	{
 
-		static bool RmDirRecursiveInternal(const StringAdapter& path)
+		static bool RmDirRecursiveInternal(const AnyString& path)
 		{
 			DIR* dp;
 			struct dirent* ep;
@@ -166,7 +166,7 @@ namespace Directory
 
 
 
-	bool Remove(const StringAdapter& path)
+	bool Remove(const AnyString& path)
 	{
 		if (path.empty())
 			return true;

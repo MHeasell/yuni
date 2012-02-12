@@ -80,8 +80,8 @@ namespace Markdown
 
 	private:
 		void beginDocument();
-		void internalHintFilename(const StringAdapter& filename);
-		void parse(const StringAdapter& text);
+		void internalHintFilename(const AnyString& filename);
+		void parse(const AnyString& text);
 
 	private:
 		//! Type for the internal data

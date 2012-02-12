@@ -37,7 +37,7 @@ namespace Markdown
 	}
 
 
-	void Reader::internalHintFilename(const StringAdapter& filename)
+	void Reader::internalHintFilename(const AnyString& filename)
 	{
 		assert(pData && "The internal state engine must be initialized at this point");
 		String& s = pData->filename;
@@ -82,7 +82,7 @@ namespace Markdown
 	}
 
 
-	void Reader::parse(const StringAdapter& text)
+	void Reader::parse(const AnyString& text)
 	{
 		assert(pData && "The internal state engine must be initialized at this point");
 

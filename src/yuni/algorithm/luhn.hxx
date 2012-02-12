@@ -8,7 +8,7 @@ namespace Algorithm
 {
 
 
-	inline bool Luhn::IsValidCreditCardNumber(const StringAdapter& s)
+	inline bool Luhn::IsValidCreditCardNumber(const AnyString& s)
 	{
 		return (Mod10(s) == 0);
 	}

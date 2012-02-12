@@ -28,7 +28,7 @@ namespace Directory
 	** \param path The directory to test
 	** \return True if it exists, false otherwise
 	*/
-	bool Exists(const StringAdapter& path);
+	bool Exists(const AnyString& path);
 	//@}
 
 
@@ -59,7 +59,7 @@ namespace Directory
 		** \param path The new current directory
 		** \return True if the operation succeeded
 		*/
-		bool Set(const StringAdapter& path);
+		bool Set(const AnyString& path);
 
 	} // namespace Current
 
@@ -75,7 +75,7 @@ namespace Directory
 	** \param mode Access permissions (ignored on the MS Windows platforms)
 	** \return True if the operation succeeded, false otherwise
 	*/
-	bool Create(const StringAdapter& path, unsigned int mode = 0755);
+	bool Create(const AnyString& path, unsigned int mode = 0755);
 	//@}
 
 
@@ -87,7 +87,7 @@ namespace Directory
 	** \param path The path to delete
 	** \return True if the operation succeeded False otherwise
 	*/
-	bool Remove(const StringAdapter& path);
+	bool Remove(const AnyString& path);
 	//@}
 
 
@@ -111,7 +111,7 @@ namespace Directory
 	** \param overwrite True to overwrite the files even if they already exist
 	** \return True if the operation succeeded, false otherwise
 	*/
-	bool Copy(const StringAdapter& source, const StringAdapter& destination, bool recursive = true, bool overwrite = true);
+	bool Copy(const AnyString& source, const AnyString& destination, bool recursive = true, bool overwrite = true);
 
 	/*!
 	** \brief Copy a directory
@@ -123,7 +123,7 @@ namespace Directory
 	** \param onUpdate Event
 	** \return True if the operation succeeded, false otherwise
 	*/
-	bool Copy(const StringAdapter& source, const StringAdapter& destination, bool recursive,
+	bool Copy(const AnyString& source, const AnyString& destination, bool recursive,
 		bool overwrite, const CopyOnUpdateBind& onUpdate);
 	//@}
 

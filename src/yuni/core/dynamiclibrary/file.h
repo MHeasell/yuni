@@ -156,7 +156,7 @@ namespace DynamicLibrary
 		** \param r The relocation mode (no effect on Windows)
 		** \param v The visibility mode (no effect on Windows)
 		*/
-		explicit File(const StringAdapter& filename, const Relocation r = relocationLazy, const Visibility v = visibilityDefault);
+		explicit File(const AnyString& filename, const Relocation r = relocationLazy, const Visibility v = visibilityDefault);
 
 		/*!
 		** \brief Destructor
@@ -194,7 +194,7 @@ namespace DynamicLibrary
 		** \param v The visibility mode (no effect on Windows)
 		** \return True if the library has been loaded
 		*/
-		bool loadFromFile(const StringAdapter& filename, const Relocation r = relocationLazy,
+		bool loadFromFile(const AnyString& filename, const Relocation r = relocationLazy,
 			const Visibility v = visibilityDefault);
 
 		/*!
@@ -210,7 +210,7 @@ namespace DynamicLibrary
 		** \param v The visibility mode (no effect on Windows)
 		** \return True if the library has been loaded
 		*/
-		bool loadFromRawFilename(const StringAdapter& filename, const Relocation r = relocationLazy,
+		bool loadFromRawFilename(const AnyString& filename, const Relocation r = relocationLazy,
 			const Visibility v = visibilityDefault);
 
 		/*!

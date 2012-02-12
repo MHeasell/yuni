@@ -11,7 +11,7 @@ namespace Markdown
 	template<class StringT>
 	inline void Reader::append(const StringT& text)
 	{
-		StringAdapter adapter;
+		AnyString adapter;
 		adapter.adapt(text);
 		if (adapter.notEmpty())
 			parse(adapter);
@@ -21,7 +21,7 @@ namespace Markdown
 	template<class StringT>
 	inline void Reader::hintFilename(const StringT& filename)
 	{
-		StringAdapter adapter;
+		AnyString adapter;
 		adapter.adapt(filename);
 		internalHintFilename(adapter);
 	}

@@ -66,7 +66,7 @@ namespace DynamicLibrary
 		** \return True if the filename in `s` exists and should be loaded, False otherwise
 		**/
 		template<class StringT>
-		inline bool FindLibraryFile(StringT& out, /*const StringT2& path,*/ const StringAdapter& filename, const char* prefix)
+		inline bool FindLibraryFile(StringT& out, /*const StringT2& path,*/ const AnyString& filename, const char* prefix)
 		{
 			# define TEST_THEN_LOAD(EXT) \
 				out.clear(); \
@@ -106,7 +106,7 @@ namespace DynamicLibrary
 		** \param prefix The prefix to use for the filename
 		** \return True if the filename in `s` exists and should be loaded, False otherwise
 		**/
-		inline bool FindLibrary(String& out, const StringAdapter& filename)
+		inline bool FindLibrary(String& out, const AnyString& filename)
 		{
 			return (FindLibraryFile(out, filename, "lib") || FindLibraryFile(out, filename, ""));
 		}
@@ -114,7 +114,7 @@ namespace DynamicLibrary
 	} // Anonymous namespace
 
 
-	File::File(const StringAdapter& filename, const Relocation r, const Visibility v) :
+	File::File(const AnyString& filename, const Relocation r, const Visibility v) :
 		pHandle(NullHandle)
 	{
 		(void)loadFromFile(filename, r, v);
@@ -135,7 +135,7 @@ namespace DynamicLibrary
 
 
 
-	bool File::loadFromFile(const StringAdapter& filename, const File::Relocation r, const File::Visibility v)
+	bool File::loadFromFile(const AnyString& filename, const File::Relocation r, const File::Visibility v)
 	{
 		// No filename
 		if (!filename.empty())
@@ -181,7 +181,7 @@ namespace DynamicLibrary
 	# ifdef YUNI_OS_WINDOWS
 
 	// Specific implementation for the Windows platform
-	bool File::loadFromRawFilename(const StringAdapter& filename, const File::Relocation, const File::Visibility)
+	bool File::loadFromRawFilename(const AnyString& filename, const File::Relocation, const File::Visibility)
 	{
 		// Unload the library if already loaded
 		unload();
@@ -206,7 +206,7 @@ namespace DynamicLibrary
 	# else
 
 	// Specific implementation for the Unix platforms
-	bool File::loadFromRawFilename(const StringAdapter& filename, const File::Relocation r, const File::Visibility v)
+	bool File::loadFromRawFilename(const AnyString& filename, const File::Relocation r, const File::Visibility v)
 	{
 		// Unload the library if already loaded
 		unload();

@@ -22,7 +22,7 @@ namespace Directory
 
 		# ifdef YUNI_OS_WINDOWS
 
-		static bool WindowsMake(const StringAdapter& path)
+		static bool WindowsMake(const AnyString& path)
 		{
 			unsigned int len = path.size();
 			String norm;
@@ -62,7 +62,7 @@ namespace Directory
 
 
 
-		static bool UnixMake(const StringAdapter& path, unsigned int mode)
+		static bool UnixMake(const AnyString& path, unsigned int mode)
 		{
 			unsigned int len = path.size();
 
@@ -104,7 +104,7 @@ namespace Directory
 
 
 
-	bool Create(const StringAdapter& path, unsigned int mode)
+	bool Create(const AnyString& path, unsigned int mode)
 	{
 		if (path.notEmpty() && !Yuni::IO::Exists(path))
 		{

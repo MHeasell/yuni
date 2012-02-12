@@ -38,7 +38,7 @@ namespace Markdown
 
 		void reset();
 
-		void parse(const StringAdapter& text);
+		void parse(const AnyString& text);
 
 		void flush();
 
@@ -55,7 +55,7 @@ namespace Markdown
 		bool executePragma();
 		void updateStack();
 		void pushNewNode();
-		void appendParagraphText(const StringAdapter& text);
+		void appendParagraphText(const AnyString& text);
 		void postParseTree(const Node::Ptr& node);
 		void appendTOCEntry(const Node& node, unsigned int level);
 

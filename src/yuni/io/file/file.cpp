@@ -19,15 +19,15 @@
 
 namespace Yuni
 {
-namespace Private
-{
 namespace IO
+{
+namespace File
 {
 
 
 	# ifdef YUNI_OS_WINDOWS
 
-	bool Size(const StringAdapter& filename, uint64& value)
+	bool Size(const AnyString& filename, uint64& value)
 	{
 		if (!len)
 		{
@@ -78,7 +78,7 @@ namespace IO
 
 	# else
 
-	bool Size(const StringAdapter& filename, unsigned int, uint64& value)
+	bool Size(const AnyString& filename, uint64& value)
 	{
 		struct stat results;
 		if (filename.notEmpty() && stat(filename.c_str(), &results) == 0)
@@ -94,7 +94,7 @@ namespace IO
 
 
 
-	Yuni::IO::Error Delete(const StringAdapter& filename)
+	Yuni::IO::Error Delete(const AnyString& filename)
 	{
 		// DeleteFile is actually a macro and will be replaced by DeleteFileW
 		// with Visual Studio. Consequently we can not use the word DeleteFile.....
@@ -103,9 +103,11 @@ namespace IO
 			return Yuni::IO::errUnknown;
 
 		# ifndef YUNI_OS_WINDOWS
-		if (unlink(filename.c_str()))
-			return Yuni::IO::errUnknown;
-		return Yuni::IO::errNone;
+
+		return (unlink(filename.c_str()))
+			? Yuni::IO::errUnknown
+			: Yuni::IO::errNone;
+
 		# else
 
 		const char* const p = filename.c_str();
@@ -125,9 +127,9 @@ namespace IO
 			return Yuni::IO::errUnknown;
 		wstr.replace('/', '\\');
 
-		if (DeleteFileW(wstr.c_str()))
-			return Yuni::IO::errNone;
-		return Yuni::IO::errUnknown;
+		return (DeleteFileW(wstr.c_str()))
+			? Yuni::IO::errNone
+			: Yuni::IO::errUnknown;
 		# endif
 	}
 
@@ -135,6 +137,8 @@ namespace IO
 
 
 	# ifdef YUNI_OS_WINDOWS
+
+	/*
 	bool GetLastWriteTime(HANDLE hFile)
 	{
 		FILETIME ftCreate, ftAccess, ftWrite;
@@ -152,14 +156,16 @@ namespace IO
 
 		return true;
 	}
+	*/
 
 	# endif
 
 
 
-	sint64 LastModificationTime(const StringAdapter& filename)
+	sint64 LastModificationTime(const AnyString& filename)
 	{
 		# ifdef YUNI_OS_WINDOWS
+
 		Private::WString<> wfilenm(filename);
 		if (wfilenm.empty())
 			return 0;
@@ -190,19 +196,21 @@ namespace IO
 
 		CloseHandle(hFile);
 		return 0;
-		# else
+
+		# else // UNIX
+
 		struct stat st;
 		if (!stat(filename.c_str(), &st))
 			return st.st_mtime;
 		return 0;
+
 		# endif
 	}
 
 
 
 
-
+} // namespace File
 } // namespace IO
-} // namespace Private
 } // namespace Yuni
 

@@ -50,7 +50,7 @@ namespace IO
 			};
 
 		public:
-			LookupHelper(OutT& out, const StringAdapter& filename, const String::Vector& directories,
+			LookupHelper(OutT& out, const AnyString& filename, const String::Vector& directories,
 				const String::Vector&  extensions, const String::Vector&  prefixes) :
 				out(out),
 				filename(filename),
@@ -143,7 +143,7 @@ namespace IO
 			//! The output
 			OutT& out;
 			//! The filename
-			StringAdapter filename;
+			AnyString filename;
 			//! List of directories where to search of
 			const String::Vector&  directories;
 			//! List of extensions
@@ -179,7 +179,7 @@ namespace IO
 	}
 
 
-	bool SearchPath::find(String& out, const StringAdapter& filename) const
+	bool SearchPath::find(String& out, const AnyString& filename) const
 	{
 		if (!filename)
 			return false; 
@@ -197,7 +197,7 @@ namespace IO
 	}
 
 
-	bool SearchPath::find(String::Vector& out, const StringAdapter& filename) const
+	bool SearchPath::find(String::Vector& out, const AnyString& filename) const
 	{
 		if (!filename)
 			return false; 
@@ -215,7 +215,7 @@ namespace IO
 	}
 
 
-	bool SearchPath::find(String::List& out, const StringAdapter& filename) const
+	bool SearchPath::find(String::List& out, const AnyString& filename) const
 	{
 		if (!filename)
 			return false; 

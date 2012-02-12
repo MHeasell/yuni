@@ -42,14 +42,14 @@ namespace Markdown
 	}
 
 
-	void ReaderData::parse(const StringAdapter& text)
+	void ReaderData::parse(const AnyString& text)
 	{
 		// readline
-		StringAdapter::Size offset = 0;
+		AnyString::Size offset = 0;
 		do
 		{
-			const StringAdapter::Size p = text.find('\n', offset);
-			if (p == StringAdapter::npos)
+			const AnyString::Size p = text.find('\n', offset);
+			if (p == AnyString::npos)
 			{
 				// The EOL has not been found, keeping the piece of string for later
 				pLine.append(text, text.size() - offset, offset);
@@ -142,7 +142,7 @@ namespace Markdown
 
 		// text
 		{
-			StringAdapter text;
+			AnyString text;
 			if (x < pLine.size())
 			{
 				text.adapt(pLine.c_str() + x, pLine.size() - x);
@@ -158,7 +158,7 @@ namespace Markdown
 	}
 
 
-	void ReaderData::appendParagraphText(const StringAdapter& text)
+	void ReaderData::appendParagraphText(const AnyString& text)
 	{
 		assert(pStackSize > 1);
 

@@ -35,7 +35,7 @@ namespace File
 	** \param filename The folder/filename to test
 	** \return True if it exists, false otherwise
 	*/
-	bool Exists(const StringAdapter& filename);
+	bool Exists(const AnyString& filename);
 
 
 	/*!
@@ -45,7 +45,7 @@ namespace File
 	** \param[out] size The size (in bytes) of the file. The value is guaranteed to be set (null) is an error has occured
 	** \return True if the operation succeeded, False otherwise
 	*/
-	bool Size(const StringAdapter& filename, uint64& size);
+	bool Size(const AnyString& filename, uint64& size);
 
 	/*!
 	** \brief Get the size (in bytes) of a file
@@ -68,7 +68,7 @@ namespace File
 	** \param filename The filename
 	** \return The size (in bytes) of the file. The returned value is guaranteed to be null is an error has occured
 	*/
-	uint64 Size(const StringAdapter& filename);
+	uint64 Size(const AnyString& filename);
 
 
 	//! \name Date / Time
@@ -76,8 +76,7 @@ namespace File
 	/*!
 	** \brief Get the unix timestamp of the last modification
 	*/
-	template<class StringT>
-	sint64 LastModificationTime(const StringT& filename);
+	sint64 LastModificationTime(const AnyString& filename);
 	//@}
 
 
@@ -115,7 +114,7 @@ namespace File
 	** \param overwrite Overwrite the target file if already exists
 	** \return errNone if the operation succeeded
 	*/
-	IO::Error Copy(const StringAdapter& from, const StringAdapter& to, bool overwrite = true);
+	IO::Error Copy(const AnyString& from, const AnyString& to, bool overwrite = true);
 
 
 	/*!
@@ -123,7 +122,7 @@ namespace File
 	**
 	** \param filename The file to delete
 	*/
-	IO::Error Delete(const StringAdapter& filename);
+	IO::Error Delete(const AnyString& filename);
 
 
 	/*!

@@ -15,7 +15,7 @@ namespace File
 {
 
 
-	Error Copy(const StringAdapter& from, const StringAdapter& to, bool overwrite)
+	Error Copy(const AnyString& from, const AnyString& to, bool overwrite)
 	{
 		if (!overwrite && IO::Exists(to))
 			return errOverwriteNotAllowed;

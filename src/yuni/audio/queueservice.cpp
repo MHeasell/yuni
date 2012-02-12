@@ -177,7 +177,7 @@ namespace Audio
 	///////////////////////////////// Emitters
 
 
-	Emitter::Ptr QueueService::Emitters::get(const StringAdapter& name)
+	Emitter::Ptr QueueService::Emitters::get(const AnyString& name)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 
@@ -188,7 +188,7 @@ namespace Audio
 	}
 
 
-	bool QueueService::Emitters::add(const StringAdapter& emitterName)
+	bool QueueService::Emitters::add(const AnyString& emitterName)
 	{
 		Emitter::Ptr newEmitter(new Emitter());
 
@@ -209,8 +209,8 @@ namespace Audio
 	}
 
 
-	bool QueueService::Emitters::attach(const StringAdapter& emitterName,
-		const StringAdapter& bufferName)
+	bool QueueService::Emitters::attach(const AnyString& emitterName,
+		const AnyString& bufferName)
 	{
 		Sound::Ptr buffer = pBank->get(bufferName);
 		if (!buffer)
@@ -235,7 +235,7 @@ namespace Audio
 	}
 
 
-	bool QueueService::Emitters::attach(Emitter::Ptr emitter, const StringAdapter& bufferName)
+	bool QueueService::Emitters::attach(Emitter::Ptr emitter, const AnyString& bufferName)
 	{
 		if (!emitter || !bufferName)
 			return false;
@@ -277,7 +277,7 @@ namespace Audio
 	}
 
 
-	void QueueService::Emitters::detach(const StringAdapter& name)
+	void QueueService::Emitters::detach(const AnyString& name)
 	{
 		return detach(get(name));
 	}
@@ -296,7 +296,7 @@ namespace Audio
 
 
 
-	bool QueueService::Emitters::move(const StringAdapter& emitterName,
+	bool QueueService::Emitters::move(const AnyString& emitterName,
 		const Point3D<>& position)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
@@ -309,7 +309,7 @@ namespace Audio
 	}
 
 
-	bool QueueService::Emitters::move(const StringAdapter& emitterStr, const Point3D<>& position,
+	bool QueueService::Emitters::move(const AnyString& emitterStr, const Point3D<>& position,
 		const Vector3D<>& velocity, const Vector3D<>& direction)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
@@ -349,7 +349,7 @@ namespace Audio
 
 	////////////////////////// Bank
 
-	Sound::Ptr QueueService::Bank::get(const StringAdapter& name)
+	Sound::Ptr QueueService::Bank::get(const AnyString& name)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 
@@ -380,7 +380,7 @@ namespace Audio
 	}
 
 
-	bool QueueService::Bank::load(const StringAdapter& filePath)
+	bool QueueService::Bank::load(const AnyString& filePath)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 
@@ -397,7 +397,7 @@ namespace Audio
 	}
 
 
-	bool QueueService::Bank::unload(const StringAdapter& name)
+	bool QueueService::Bank::unload(const AnyString& name)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 
@@ -423,7 +423,7 @@ namespace Audio
 	}
 
 
-	unsigned int QueueService::Bank::duration(const StringAdapter& name)
+	unsigned int QueueService::Bank::duration(const AnyString& name)
 	{
 		Sound::Ptr buffer = get(name);
 		if (!buffer)
@@ -433,6 +433,13 @@ namespace Audio
 		if (!pQueueService->pReady)
 			return 0;
 		return buffer->duration();
+	}
+
+
+	bool QueueService::running() const
+	{
+		ThreadingPolicy::MutexLocker locker(*this);
+		return pReady && pAudioLoop.running();
 	}
 
 

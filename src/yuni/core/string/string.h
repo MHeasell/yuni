@@ -1814,7 +1814,7 @@ namespace Yuni
 		**
 		** \code
 		** String t = "a, b, c";
-		** t.words(" ,\t\r\n", [&] (const StringAdapter& word)
+		** t.words(" ,\t\r\n", [&] (const AnyString& word)
 		** {
 		**	std::cout << word << std::endl; // 3 elements
 		** });
@@ -1823,7 +1823,7 @@ namespace Yuni
 		** Dealing with empty words :
 		** \code
 		** String t = "a, b,, d";
-		** t.words(",", [&] (StringAdapter& word)
+		** t.words(",", [&] (AnyString& word)
 		** {
 		**	word.trim();
 		**	std::cout << word << std::endl; // 4 elements
@@ -1999,6 +1999,9 @@ namespace Yuni
 
 
 
+
+
+
 	/*!
 	** \brief String adapters
 	**
@@ -2009,7 +2012,7 @@ namespace Yuni
 	** some useless memory allocation.
 	**
 	** \code
-	** StringAdapter s;
+	** AnyString s;
 	** s.adapt("Here is a raw C-string");
 	** std::cout << "length     : " << s.size() << std::endl;
 	** std::cout << "find 'raw' : " << s.find("raw") << std::endl;
@@ -2018,11 +2021,11 @@ namespace Yuni
 	** Using a sub-string as it were a real string :
 	** \code
 	** String s = "abcdefghijklmnopqrst";
-	** StringAdapter adapter (s.begin() + 2, s.begin() + 9);
+	** AnyString adapter (s.begin() + 2, s.begin() + 9);
 	** std::cout << adapter << " (size: " << adapter.size() << ")" << std::endl;
 	** \endcode
 	*/
-	typedef CString<0, true, false>  StringAdapter;
+	typedef CString<0, true, false>  AnyString;
 
 
 	/*!

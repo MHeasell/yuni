@@ -23,7 +23,7 @@ namespace IO
 	** \param filename The file/directory to test
 	** \return True if it exists, false otherwise
 	*/
-	bool Exists(const StringAdapter& filename);
+	bool Exists(const AnyString& filename);
 
 	/*!
 	** \brief Get the type of a node
@@ -31,7 +31,7 @@ namespace IO
 	** \param filename The file/directory to test
 	** \return True if it exists, false otherwise
 	*/
-	NodeType TypeOf(const StringAdapter& filename);
+	NodeType TypeOf(const AnyString& filename);
 
 
 
