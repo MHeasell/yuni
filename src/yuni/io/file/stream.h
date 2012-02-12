@@ -2,12 +2,11 @@
 # define __YUNI_IO_FILE_STREAM_H__
 
 # include "../../yuni.h"
-# include <stdio.h>
 # include "../../core/static/assert.h"
-# include "../../core/traits/cstring.h"
-# include "../../core/traits/length.h"
+# include "../../core/string.h"
 # include "../../core/static/remove.h"
 # include "openmode.h"
+# include <stdio.h>
 
 
 
@@ -95,7 +94,7 @@ namespace File
 		/*!
 		** \brief Open a file
 		*/
-		template<class U> Stream(const U& filename, const int mode = OpenMode::read);
+		explicit Stream(const AnyString& filename, int mode = OpenMode::read);
 		/*!
 		** \brief Destructor
 		**
@@ -116,7 +115,7 @@ namespace File
 		** \param mode The open mode to use
 		** \return True if the operation succeeded, false otherwise
 		*/
-		template<class U> bool open(const U& filename, const int mode = OpenMode::read);
+		bool open(const AnyString& filename, const int mode = OpenMode::read);
 
 		/*!
 		** \brief Open a file for writing
@@ -275,7 +274,7 @@ namespace File
 		/*!
 		** \brief Write a chr to the stream
 		*/
-		bool put(const char c);
+		bool put(char c);
 
 		/*!
 		** \brief Write a raw buffer
@@ -284,7 +283,7 @@ namespace File
 		** \param size Size of the buffer to write
 		** \return The number of bytes that have been written
 		*/
-		size_t write(const char* buffer, const size_t size);
+		size_t write(const char* buffer, unsigned int size);
 
 		/*!
 		** \brief Write any arbitrary buffer
@@ -301,7 +300,7 @@ namespace File
 		** \param size Size of the buffer to write
 		** \return The number of bytes that have been written
 		*/
-		template<class U> size_t write(const U& buffer, const size_t size);
+		template<class U> size_t write(const U& buffer, unsigned int size);
 		//@}
 
 
@@ -356,12 +355,6 @@ namespace File
 		template<class U> Stream& operator >> (U& rhs);
 		//@}
 
-
-	private:
-		# ifdef YUNI_OS_WINDOWS
-		//! UTF8 Implementation as replacement of the routine 'fopen' on Windows
-		static HandleType OpenFileOnWindows(const char* filename, const int mode);
-		# endif
 
 	private:
 		//! A FILE pointer

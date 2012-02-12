@@ -31,8 +31,7 @@ namespace IO
 	template<class StringT>
 	inline bool IsAbsolute(const StringT& filename)
 	{
-		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CString_InvalidTypeForBuffer);
-		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  CString_InvalidTypeForBufferSize);
+		YUNI_STATIC_ASSERT(Traits::IsString<StringT>::yes, InvalidFilenameType);
 
 		const char* const p = Traits::CString<StringT>::Perform(filename);
 		if (!p)
@@ -238,8 +237,7 @@ namespace IO
 	template<class StringT1, class StringT2>
 	void Normalize(StringT1& out, const StringT2& in, unsigned int inLength, bool replaceSlashes)
 	{
-		YUNI_STATIC_ASSERT(Traits::CString<StringT2>::valid, Normalize_InvalidTypeForInput);
-		YUNI_STATIC_ASSERT(Traits::Length<StringT2>::valid,  Normalize_InvalidTypeForInputSize);
+		YUNI_STATIC_ASSERT(Traits::IsString<StringT2>::yes, InvalidInType);
 
 		// Some static checks
 		if (Traits::Length<StringT2,unsigned int>::isFixed)

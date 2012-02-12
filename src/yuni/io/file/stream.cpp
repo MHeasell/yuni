@@ -22,32 +22,62 @@ namespace IO
 namespace File
 {
 
-	Stream::Stream(const Stream&)
-		:pFd(NULL)
+
+	# ifdef YUNI_OS_WINDOWS
+
+	namespace // anonymous
+	{
+		static Stream::HandleType OpenFileOnWindows(const AnyString& filename, int mode)
+		{
+			Private::WString<> wfilenm(filename);
+			if (wfilenm.empty())
+				return NULL;
+			FILE* f;
+			# ifdef YUNI_OS_MSVC
+			if (0 != _wfopen_s(&f, wfilenm.c_str(), OpenMode::ToWCString(mode)))
+				return NULL;
+			# else
+			f = _wfopen(wfilenm.c_str(), OpenMode::ToWCString(mode));
+			# endif
+			return f;
+		}
+
+	} // anonymous namespace
+
+	# endif
+
+
+
+	Stream::Stream(const Stream&) :
+		pFd(NULL)
 	{
 		// Do nothing
 	}
 
 
-	# ifdef YUNI_OS_WINDOWS
-
-	Stream::HandleType Stream::OpenFileOnWindows(const char* filename, const int mode)
+	Stream::Stream(const AnyString& filename, const int mode)
 	{
-		Private::WString<> wfilenm(filename);
-		if (wfilenm.empty())
-			return NULL;
-		FILE* f;
-		# ifdef YUNI_OS_MSVC
-		if (0 != _wfopen_s(&f, wfilenm.c_str(), OpenMode::ToWCString(mode)))
-			return NULL;
+		# ifdef YUNI_OS_WINDOWS
+		pFd = OpenFileOnWindows(filename, mode);
 		# else
-		f = _wfopen(wfilenm.c_str(), OpenMode::ToWCString(mode));
+		pFd = ::fopen(filename.c_str(), OpenMode::ToCString(mode));
 		# endif
-		return f;
 	}
 
-	# endif
 
+
+	bool Stream::open(const AnyString& filename, const int mode)
+	{
+		// Close the file if already opened
+		if (pFd)
+			(void)::fclose(pFd);
+		# ifdef YUNI_OS_WINDOWS
+		pFd = OpenFileOnWindows(filename, mode);
+		# else
+		pFd = ::fopen(filename.c_str(), OpenMode::ToCString(mode));
+		# endif
+		return (NULL != pFd);
+	}
 
 
 
@@ -85,6 +115,7 @@ namespace File
 		return pFd ? (0 == flock(fileno(pFd), LOCK_SH)) : false;
 		# else
 		// warning The implementation is missing on Windows (#346)
+		assert("Stream::lock: the implementation is missing on Windows, see ticket #346");
 		return false;
 		# endif
 	}
@@ -96,6 +127,7 @@ namespace File
 		return pFd ? (0 == flock(fileno(pFd), LOCK_EX)) : false;
 		# else
 		// warning The implementation is missing on Windows (#346)
+		assert("Stream::lock: the implementation is missing on Windows, see ticket #346");
 		return false;
 		# endif
 	}
@@ -108,6 +140,7 @@ namespace File
 			flock(fileno(pFd), LOCK_UN);
 		# else
 		// warning The implementation is missing on Windows (#346)
+		assert("Stream::lock: the implementation is missing on Windows, see ticket #346");
 		# endif
 	}
 

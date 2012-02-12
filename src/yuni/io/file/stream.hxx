@@ -11,7 +11,6 @@ namespace IO
 namespace File
 {
 
-
 	inline Stream::Stream() :
 		pFd(NULL)
 	{
@@ -19,28 +18,9 @@ namespace File
 	}
 
 
-	template<class U>
-	inline Stream::Stream(const U& filename, const int mode)
-	{
-		if (Traits::CString<typename Static::Remove::Const<U>::Type>::valid)
-		{
-			# ifdef YUNI_OS_WINDOWS
-			pFd = OpenFileOnWindows(
-				Traits::CString<typename Static::Remove::Const<U>::Type>::Perform(filename),
-				mode);
-			# else
-			pFd = ::fopen(
-				Traits::CString<typename Static::Remove::Const<U>::Type>::Perform(filename),
-				OpenMode::ToCString(mode));
-			# endif
-		}
-		else
-			pFd = NULL;
-	}
-
-
 	inline Stream::~Stream()
 	{
+		// The check is mandatory to avoid SegV on some platform (Darwin for example)
 		if (pFd)
 			(void)::fclose(pFd);
 	}
@@ -53,32 +33,6 @@ namespace File
 		return this->open(filename, IO::OpenMode::write | IO::OpenMode::truncate);
 	}
 
-
-	template<class U>
-	inline bool Stream::open(const U& filename, const int mode)
-	{
-		// The filename must be a valid string
-		YUNI_STATIC_ASSERT(Traits::CString<U>::valid, InvalidTypeForFilename);
-
-		// Close the file if already opened
-		if (pFd)
-			(void)::fclose(pFd);
-		if (Traits::CString<typename Static::Remove::Const<U>::Type>::valid)
-		{
-			# ifdef YUNI_OS_WINDOWS
-			pFd = OpenFileOnWindows(
-				Traits::CString<typename Static::Remove::Const<U>::Type>::Perform(filename),
-				mode);
-			# else
-			pFd = ::fopen(
-				Traits::CString<typename Static::Remove::Const<U>::Type>::Perform(filename),
-				OpenMode::ToCString(mode));
-			# endif
-		}
-		else
-			pFd = NULL;
-		return (NULL != pFd);
-	}
 
 
 	inline bool Stream::opened() const
@@ -175,15 +129,15 @@ namespace File
 	}
 
 
-	inline bool Stream::put(const char c)
+	inline bool Stream::put(char c)
 	{
 		return (0 == ::fputc((int) c, pFd));
 	}
 
 
-	inline size_t Stream::write(const char* buffer, const size_t size)
+	inline size_t Stream::write(const char* buffer, unsigned int size)
 	{
-		return ::fwrite(buffer, 1, size, pFd);
+		return ::fwrite(buffer, 1, (size_t) size, pFd);
 	}
 
 
@@ -194,12 +148,9 @@ namespace File
 		template<int IsStringT, class U>
 		struct StreamTraitsWrite
 		{
-			static size_t Perform(FILE* pFd, const U& u)
+			static inline size_t Perform(FILE* pFd, const U& u)
 			{
-				// Assert, if a typename CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::Char* container can not be found at compile time
-				YUNI_STATIC_ASSERT(Traits::CString<U>::valid, Stream_InvalidTypeForBuffer);
-				// Assert, if the length of the container can not be found at compile time
-				YUNI_STATIC_ASSERT(Traits::Length<U>::valid,  Stream_InvalidTypeForBufferSize);
+				YUNI_STATIC_ASSERT(Traits::IsString<U>::yes, InvalidTypeForBuffer);
 
 				return ::fwrite(
 					Traits::CString<U>::Perform(u),  // raw data
@@ -207,17 +158,56 @@ namespace File
 					Traits::Length<U>::Value(u),     // length
 					pFd);                            // file descriptor
 			}
+			static inline size_t Perform(FILE* pFd, const U& u, unsigned int size)
+			{
+				YUNI_STATIC_ASSERT(Traits::IsString<U>::yes, InvalidTypeForBuffer);
+
+				unsigned int length = Traits::Length<U, unsigned int>::Value(u);
+				if (length > size)
+					length = size;
+				return ::fwrite(
+					Traits::CString<U>::Perform(u),  // raw data
+					1,                               // nb items
+					length,                          // size
+					pFd);                            // file descriptor
+			}
 		};
 
 		template<class U>
 		struct StreamTraitsWrite<0,U>
 		{
-			static size_t Perform(FILE* pFd, const U& u)
+			static inline size_t Perform(FILE* pFd, const U& u)
 			{
 				String translator;
 				translator << u;
 				return ::fwrite(translator.c_str(), 1, translator.size(), pFd);
 			}
+
+			static inline size_t Perform(FILE* pFd, const U& u, unsigned int size)
+			{
+				String translator;
+				translator << u;
+				return ::fwrite(translator.c_str(), 1, translator.size() > size ? size : translator.size(), pFd);
+			}
+		};
+
+
+		template<>
+		struct StreamTraitsWrite<0, bool>
+		{
+			static inline size_t Perform(FILE* pFd, bool u)
+			{
+				return u
+					? ::fwrite("true", 1, 4, pFd)
+					: ::fwrite("false", 1, 5, pFd);
+			}
+			static inline size_t Perform(FILE* pFd, bool u, unsigned int size)
+			{
+				return u
+					? ::fwrite("true", 1, 4 > size ? size : 4, pFd)
+					: ::fwrite("false", 1, 5 > size ? size : 5, pFd);
+			}
+
 		};
 
 	} // anonymous namespace
@@ -232,20 +222,9 @@ namespace File
 
 
 	template<class U>
-	inline size_t Stream::write(const U& buffer, const size_t size)
+	inline size_t Stream::write(const U& buffer, unsigned int size)
 	{
-		if (Traits::CString<typename Static::Remove::Const<U>::Type>::valid)
-		{
-			return ::fwrite(
-				(const void*) Traits::CString<typename Static::Remove::Const<U>::Type>::Perform(buffer),
-				1, size, pFd);
-		}
-		else
-		{
-			String translator;
-			translator += buffer;
-			return ::fwrite((const void*) translator.c_str(), 1, ((size < translator.size()) ? size : translator.size()), pFd);
-		}
+		return StreamTraitsWrite<Traits::CString<U>::valid, U>::Perform(pFd, buffer, size);
 	}
 
 
@@ -321,6 +300,7 @@ namespace File
 	{
 		return pFd;
 	}
+
 
 
 

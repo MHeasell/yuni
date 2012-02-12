@@ -147,8 +147,7 @@ public:
 			{}
 			template<class StringT> explicit Iterator(const StringT& directory)
 			{
-				YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, InvalidTypeForBuffer);
-				YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  InvalidTypeForBufferSize);
+				YUNI_STATIC_ASSERT(Traits::IsString<StringT>::yes, InvalidType);
 
 				// Initializing
 				pData = Private::IO::Directory::IteratorDataCreate(
@@ -159,12 +158,12 @@ public:
 				forward();
 			}
 
-			Iterator(const NullIterator&)
-				:pData(NULL)
+			Iterator(const NullIterator&) :
+				pData(NULL)
 			{}
 
-			Iterator(const Iterator& copy)
-				:pData(Private::IO::Directory::IteratorDataCopy(copy.pData))
+			Iterator(const Iterator& copy) :
+				pData(Private::IO::Directory::IteratorDataCopy(copy.pData))
 			{}
 			~Iterator()
 			{
