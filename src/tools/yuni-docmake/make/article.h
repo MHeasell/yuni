@@ -69,7 +69,7 @@
 		**
 		** \param text A list of tags, separated by spaces or special characters
 		*/
-		void insertTags(const Yuni::StringAdapter& text);
+		void insertTags(const Yuni::AnyString& text);
 
 		void reloadTagsFromDatabase();
 

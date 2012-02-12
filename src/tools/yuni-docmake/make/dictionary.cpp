@@ -55,7 +55,7 @@ namespace Dictionary
 			unsigned int y = 2;
 			for (unsigned int row = 0; row < (unsigned int) rowCount; ++row)
 			{
-				const StringAdapter sid  = result[y++];
+				const AnyString sid  = result[y++];
 				const Word term = result[y++];
 				allWords[term] = sid.to<WordID>();
 			}

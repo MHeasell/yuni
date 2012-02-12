@@ -6,6 +6,9 @@
 #	include <bits/stringfwd.h>
 # endif
 
+# ifdef None
+#	undef None // From X11/X.h
+# endif
 
 namespace Yuni
 {

@@ -50,7 +50,7 @@ namespace DocIndex
 				sqlite3_finalize(stmt);
 				return -1;
 			}
-			const StringAdapter id = (const char*) sqlite3_column_text(stmt, 0);
+			const AnyString id = (const char*) sqlite3_column_text(stmt, 0);
 			sint64 result;
 			if (!id.to(result))
 			{
@@ -142,8 +142,8 @@ namespace DocIndex
 			}
 			if (stmt && SQLITE_ROW == sqlite3_step(stmt))
 			{
-				const StringAdapter version = (const char*) sqlite3_column_text(stmt, 0);
-				const StringAdapter dirty   = (const char*) sqlite3_column_text(stmt, 1);
+				const AnyString version = (const char*) sqlite3_column_text(stmt, 0);
+				const AnyString dirty   = (const char*) sqlite3_column_text(stmt, 1);
 				if (dirty.to<bool>())
 				{
 					logs.info() << "The database index is marked as dirty. Performing a full reindex";
@@ -250,7 +250,7 @@ namespace DocIndex
 
 		if (SQLITE_ROW == sqlite3_step(stmt))
 		{
-			const StringAdapter modified = (const char*) sqlite3_column_text(stmt, 0);
+			const AnyString modified = (const char*) sqlite3_column_text(stmt, 0);
 			sint64 value;
 			if (!modified.to<sint64>(value))
 				value = -1;
@@ -443,7 +443,7 @@ namespace DocIndex
 			unsigned int y = 1;
 			for (unsigned int row = 0; row < (unsigned int) rowCount; ++row, ++y)
 			{
-				const StringAdapter relPath = result[y];
+				const AnyString relPath = result[y];
 				s.clear() << Program::input << SEP << relPath;
 				if (!IO::File::Exists(s))
 				{
@@ -478,7 +478,7 @@ namespace DocIndex
 			sqlite3_finalize(stmt);
 			return false;
 		}
-		const StringAdapter title = (const char*) sqlite3_column_text(stmt, 0);
+		const AnyString title = (const char*) sqlite3_column_text(stmt, 0);
 		if (!title)
 		{
 			sqlite3_finalize(stmt);
@@ -530,9 +530,9 @@ namespace DocIndex
 			unsigned int y = 3;
 			for (unsigned int row = 0; row < (unsigned int) rowCount; ++row)
 			{
-				const StringAdapter title = result[y++];
+				const AnyString title = result[y++];
 				const String href  = result[y++];
-				unsigned int dic = StringAdapter(result[y++]).to<unsigned int>();
+				unsigned int dic = AnyString(result[y++]).to<unsigned int>();
 				if (dic >= ArticleData::dicMax)
 					dic = ArticleData::dicAll;
 
@@ -613,8 +613,8 @@ namespace DocIndex
 				if (rowCount == 1)
 				{
 					unsigned int y = 2;
-					const StringAdapter minW = result[y++];
-					const StringAdapter maxW = result[y++];
+					const AnyString minW = result[y++];
+					const AnyString maxW = result[y++];
 
 					weightMin = minW.to<float>();
 					weightMax = maxW.to<float>();
@@ -643,7 +643,7 @@ namespace DocIndex
 				for (unsigned int row = 0; row < (unsigned int) rowCount; ++row)
 				{
 					href = result[y++];
-					const StringAdapter weightStr   = result[y++];
+					const AnyString weightStr   = result[y++];
 					const String modifiedStr = result[y++];
 
 					if (href.size() <= 1) // avoid invalid paths, such as '/'
@@ -718,7 +718,7 @@ namespace DocIndex
 			sqlite3_finalize(stmt);
 			return -1;
 		}
-		const StringAdapter idstr = (const char*) sqlite3_column_text(stmt, 0);
+		const AnyString idstr = (const char*) sqlite3_column_text(stmt, 0);
 		int result = -1;
 		if (!(!idstr))
 		{
@@ -760,7 +760,7 @@ namespace DocIndex
 			sqlite3_finalize(stmt);
 			return -1;
 		}
-		const StringAdapter idstr = (const char*) sqlite3_column_text(stmt, 0);
+		const AnyString idstr = (const char*) sqlite3_column_text(stmt, 0);
 		int result = -1;
 		if (!(!idstr))
 		{
@@ -806,7 +806,7 @@ namespace DocIndex
 			sqlite3_finalize(stmt);
 			return 0;
 		}
-		const StringAdapter rstr = (const char*) sqlite3_column_text(stmt, 0);
+		const AnyString rstr = (const char*) sqlite3_column_text(stmt, 0);
 		const uint64 r = rstr.to<uint64>();
 		sqlite3_finalize(stmt);
 		return r;
@@ -828,8 +828,8 @@ namespace DocIndex
 			unsigned int y = 1;
 			for (unsigned int row = 0; row < (unsigned int) rowCount; ++row)
 			{
-				const StringAdapter termID = result[++y];
-				const StringAdapter scount  = result[++y];
+				const AnyString termID = result[++y];
+				const AnyString scount  = result[++y];
 				if (!termID || !scount)
 					continue;
 				unsigned int count = scount.to<unsigned int>();
@@ -880,11 +880,11 @@ namespace DocIndex
 			unsigned int y = 5;
 			for (unsigned int row = 0; row < (unsigned int) rowCount; ++row)
 			{
-				const sint64 termid = StringAdapter(result[y++]).to<sint64>();
-				const StringAdapter term = result[y++];
-				const StringAdapter articleID = result[y++];
-				const StringAdapter scount   = result[y++];
-				const StringAdapter sweight  = result[y++];
+				const sint64 termid = AnyString(result[y++]).to<sint64>();
+				const AnyString term = result[y++];
+				const AnyString articleID = result[y++];
+				const AnyString scount   = result[y++];
+				const AnyString sweight  = result[y++];
 				if (termid < 0)
 					continue;
 				if (termid != oldTermID)
@@ -920,10 +920,10 @@ namespace DocIndex
 
 		while (SQLITE_ROW == sqlite3_step(stmt))
 		{
-			const StringAdapter articleID = (const char*) sqlite3_column_text(stmt, 0);
-			const StringAdapter href      = (const char*) sqlite3_column_text(stmt, 1);
-			const StringAdapter title     = (const char*) sqlite3_column_text(stmt, 2);
-			const StringAdapter sweight   = (const char*) sqlite3_column_text(stmt, 3);
+			const AnyString articleID = (const char*) sqlite3_column_text(stmt, 0);
+			const AnyString href      = (const char*) sqlite3_column_text(stmt, 1);
+			const AnyString title     = (const char*) sqlite3_column_text(stmt, 2);
+			const AnyString sweight   = (const char*) sqlite3_column_text(stmt, 3);
 			s
 				<< "f(" << articleID << ",{"
 				<< "t:\"" << title << '"'// article ID
@@ -959,8 +959,8 @@ namespace DocIndex
 				text << '\n';
 				text << "\t<ul>\n";
 			}
-			const StringAdapter title = (const char*) sqlite3_column_text(stmt, 0);
-			const StringAdapter href  = (const char*) sqlite3_column_text(stmt, 1);
+			const AnyString title = (const char*) sqlite3_column_text(stmt, 0);
+			const AnyString href  = (const char*) sqlite3_column_text(stmt, 1);
 			text << "\t<li><a ";
 			if (title.equalsInsensitive(current))
 				text << "class=\"itemselected\" ";
@@ -986,7 +986,7 @@ namespace DocIndex
 		sqlite3_bind_int64(stmt, 1, article.id);
 		while (SQLITE_ROW == sqlite3_step(stmt))
 		{
-			const StringAdapter tagname = (const char*) sqlite3_column_text(stmt, 0);
+			const AnyString tagname = (const char*) sqlite3_column_text(stmt, 0);
 			article.tags.insert(tagname);
 		}
 		sqlite3_finalize(stmt);

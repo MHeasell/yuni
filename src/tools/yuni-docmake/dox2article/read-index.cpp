@@ -119,8 +119,8 @@ namespace Dox2Article
 			{
 				pTagMemberAlreadyEncountered = false;
 
-				const StringAdapter  kind = element.Attribute("kind");
-				const StringAdapter  refid = element.Attribute("refid");
+				const AnyString  kind = element.Attribute("kind");
+				const AnyString  refid = element.Attribute("refid");
 
 				Compound::Ptr compound = new Compound();
 				compound->kind = Compound::StringToKind(kind);
