@@ -2040,6 +2040,12 @@ namespace Yuni
 } // namespace Yuni
 
 
+
+//! Convenient typedef for cross namespace lookup
+typedef Yuni::String  YString;
+
+
+
 namespace Yuni
 {
 namespace Traits
