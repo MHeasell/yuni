@@ -231,7 +231,7 @@ namespace // anonymous
 		TiXmlAttribute* attr = const_cast<TiXmlAttribute*>(element.FirstAttribute());
 		for (; attr; attr = attr->Next())
 		{
-			const StringAdapter e = attr->Value();
+			const AnyString e = attr->Value();
 			if (e.contains("%%7B") || e.contains("%%7D"))
 			{
 				String s = e;
@@ -247,7 +247,7 @@ namespace // anonymous
 				pCurrentChart->currentCurve = new Chart::Curve();
 				pCurrentChart->curves.push_back(pCurrentChart->currentCurve);
 				pCurrentChart->currentCurve->caption = element.Attribute("label");
-				const StringAdapter type = element.Attribute("type");
+				const AnyString type = element.Attribute("type");
 				if (!type || (type != "lines" && type != "bars" && type != "points"))
 				{
 					if (type.notEmpty())
@@ -257,7 +257,7 @@ namespace // anonymous
 				else
 					pCurrentChart->currentCurve->type = type;
 
-				const StringAdapter fill = element.Attribute("fill");
+				const AnyString fill = element.Attribute("fill");
 				if (fill.notEmpty())
 					pCurrentChart->currentCurve->fill = fill.to<bool>();
 
@@ -265,7 +265,7 @@ namespace // anonymous
 			}
 			if (tag == "legend")
 			{
-				const StringAdapter pos = element.Attribute("position");
+				const AnyString pos = element.Attribute("position");
 				if (pos.notEmpty())
 				{
 					if (pos != "ne" && pos != "nw" && pos != "se" && pos != "sw")
@@ -282,14 +282,14 @@ namespace // anonymous
 				return false;
 			if (tag == "x")
 			{
-				const StringAdapter value = element.GetText();
+				const AnyString value = element.GetText();
 				if (value.notEmpty())
 					value.split(pCurrentChart->currentCurve->x, " ,;\t\r\n|");
 				return true;
 			}
 			if (tag == "y")
 			{
-				const StringAdapter value = element.GetText();
+				const AnyString value = element.GetText();
 				if (value.notEmpty())
 					value.split(pCurrentChart->currentCurve->y, " ,;\t\r\n|");
 				return true;

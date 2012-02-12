@@ -58,7 +58,7 @@ namespace // anonymous
 
 		void pushCoeffFromString(const TIXML_STRING& name);
 
-		void seo(const StringAdapter& string);
+		void seo(const AnyString& string);
 
 	private:
 		//!
@@ -133,9 +133,9 @@ namespace // anonymous
 						bool value;
 						if (tag == "pragma:tag")
 						{
-							const StringAdapter string1 = element.Attribute("value");
+							const AnyString string1 = element.Attribute("value");
 							pArticle.insertTags(string1);
-							const StringAdapter string2 = element.Attribute("name");
+							const AnyString string2 = element.Attribute("name");
 							pArticle.insertTags(string2);
 						}
 						else if (tag == "pragma:toc")
@@ -148,7 +148,7 @@ namespace // anonymous
 						else if (tag == "pragma:lang")
 						{
 							// see http://www.seoconsultants.com/meta-tags/language
-							const StringAdapter string = element.Attribute("value");
+							const AnyString string = element.Attribute("value");
 							pArticle.language = string;
 							pArticle.language.trim();
 							pArticle.language.toLower();
@@ -169,7 +169,7 @@ namespace // anonymous
 						}
 						else if (tag == "pragma:directoryindex")
 						{
-							const StringAdapter string = element.Attribute("src");
+							const AnyString string = element.Attribute("src");
 							if (string.notEmpty())
 							{
 								String src = pArticle.htdocsFilename;
@@ -251,9 +251,9 @@ namespace // anonymous
 						}
 						else if (tag == "tag")
 						{
-							const StringAdapter string1 = element.Attribute("value");
+							const AnyString string1 = element.Attribute("value");
 							pArticle.insertTags(string1);
-							const StringAdapter string2 = element.Attribute("name");
+							const AnyString string2 = element.Attribute("name");
 							pArticle.insertTags(string2);
 						}
 					}
@@ -326,7 +326,7 @@ namespace // anonymous
 			default:
 				if (!text.empty())
 				{
-					StringAdapter adapter;
+					AnyString adapter;
 					adapter.adapt(text.c_str(), (unsigned int) text.size());
 					seo(adapter);
 				}
@@ -371,7 +371,7 @@ namespace // anonymous
 					if (name == "title")
 					{
 						pState = ArticleData::stNone;
-						StringAdapter s = pArticle.title;
+						AnyString s = pArticle.title;
 
 						float oldCoeff = pCoeff;
 						pCoeff = 5.f;
@@ -387,7 +387,7 @@ namespace // anonymous
 						pState = ArticleData::stNone;
 						float oldCoeff = pCoeff;
 						pCoeff = (pLastTOCLevel == 1) ? 3.f : 2.f;
-						StringAdapter s = pTOCCaption;
+						AnyString s = pTOCCaption;
 						seo(s);
 						pCoeff = oldCoeff;
 						pArticle.tocAppend(pLastTOCLevel, pTOCCaption);
@@ -491,7 +491,7 @@ namespace // anonymous
 	}
 
 
-	void XMLVisitor::seo(const StringAdapter& string)
+	void XMLVisitor::seo(const AnyString& string)
 	{
 		if (pCoeff < 0.1f)
 			return;

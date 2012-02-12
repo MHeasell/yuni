@@ -16,7 +16,7 @@ namespace Dox2Article
 {
 
 	template<class StringT>
-	static void HtmlEntities(StringT& out, const StringAdapter& string)
+	static void HtmlEntities(StringT& out, const AnyString& string)
 	{
 		out = string;
 		out.replace("&", "&amp;");

@@ -146,14 +146,14 @@ namespace Job
 				Member* member = new Member();
 				member->id = element.Attribute("id");
 				IO::ExtractFileName(member->htmlID, member->id);
-				member->kind = Compound::StringToKind(StringAdapter(element.Attribute("kind")));
+				member->kind = Compound::StringToKind(AnyString(element.Attribute("kind")));
 				if (member->kind == kdUnknown)
-					logs.warning() << "unknown type: " << StringAdapter(element.Attribute("kind"));
+					logs.warning() << "unknown type: " << AnyString(element.Attribute("kind"));
 				member->visibility = element.Attribute("prot");
-				member->isStatic = StringAdapter(element.Attribute("static")).to<bool>();
-				member->isConst = StringAdapter(element.Attribute("const")).to<bool>();
-				member->isExplicit = StringAdapter(element.Attribute("explicit")).to<bool>();
-				member->isInline = StringAdapter(element.Attribute("inline")).to<bool>();
+				member->isStatic = AnyString(element.Attribute("static")).to<bool>();
+				member->isConst = AnyString(element.Attribute("const")).to<bool>();
+				member->isExplicit = AnyString(element.Attribute("explicit")).to<bool>();
+				member->isInline = AnyString(element.Attribute("inline")).to<bool>();
 
 				section->members.push_back(member);
 				pInMemberDef = true;
@@ -259,7 +259,7 @@ namespace Job
 			{
 				if (pCurrentParagraph)
 				{
-					StringAdapter kind = element.Attribute("kind");
+					AnyString kind = element.Attribute("kind");
 					if (kind == "return")
 						(*pCurrentParagraph) += "<div><code>return</code> ";
 					else if (kind == "warning")
@@ -299,12 +299,12 @@ namespace Job
 			}
 			if (strname == "sectiondef")
 			{
-				const StringAdapter  stat = element.Attribute("static");
+				const AnyString  stat = element.Attribute("static");
 				Section* section = new Section();
-				const StringAdapter kind = element.Attribute("kind");
+				const AnyString kind = element.Attribute("kind");
 				section->kind = kind;
 				section->visibility = element.Attribute("prot");
-				section->isStatic = StringAdapter(element.Attribute("static")).to<bool>();
+				section->isStatic = AnyString(element.Attribute("static")).to<bool>();
 				pSections.push_front(section);
 				pInSectionHeader = false;
 				pInMemberDef = false;
@@ -324,7 +324,7 @@ namespace Job
 			}
 			if (strname == "compounddef")
 			{
-				const StringAdapter id = element.Attribute("id");
+				const AnyString id = element.Attribute("id");
 				if (pCompound.refid == id)
 				{
 					pInCompoundDef = true;
@@ -430,7 +430,7 @@ namespace Job
 				if (!(!section))
 				{
 					const TIXML_STRING& name = text.ValueTStr();
-					section->caption.append(name.c_str(), (unsigned int)name.size()); 
+					section->caption.append(name.c_str(), (unsigned int)name.size());
 				}
 				return true;
 			}
@@ -440,7 +440,7 @@ namespace Job
 				const TIXML_STRING& name = text.ValueTStr();
 				if ((*pCurrentParagraph).notEmpty())
 					(*pCurrentParagraph) += ' ';
-				HtmlEntities(pS, StringAdapter(name.c_str(), (unsigned int)name.size()));
+				HtmlEntities(pS, AnyString(name.c_str(), (unsigned int)name.size()));
 				(*pCurrentParagraph) += pS;
 				return true;
 			}

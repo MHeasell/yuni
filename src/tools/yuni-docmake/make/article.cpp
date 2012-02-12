@@ -142,7 +142,7 @@ void ArticleData::tocRefactoring()
 }
 
 
-void ArticleData::insertTags(const Yuni::StringAdapter& text)
+void ArticleData::insertTags(const Yuni::AnyString& text)
 {
 	if (!text)
 		return;
