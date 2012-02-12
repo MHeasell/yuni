@@ -266,7 +266,7 @@ namespace Yuni
 		** \brief Build URI Informations from a string
 		** \param raw The string
 		*/
-		void extractURIFromString(const StringAdapter& raw);
+		void extractURIFromString(const AnyString& raw);
 
 	private:
 		//! Structured Informations about the URI
@@ -280,15 +280,6 @@ namespace Yuni
 
 } // namespace Yuni
 
-
 # include "uri.hxx"
-
-
-//! \name Operator overload for stream printing
-//@{
-inline std::ostream& operator << (std::ostream& out, const Yuni::Uri& u)
-{return u.print(out);}
-//@}
-
 
 #endif // __YUNI_CORE_URI_URI_H__

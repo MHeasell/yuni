@@ -61,17 +61,17 @@ namespace IO
 		** \brief Try to find the first filename/folder in the search paths which mathes the criteria
 		** \return An absolute filename, or empty if not found
 		*/
-		bool find(String& out, const StringAdapter& filename) const;
+		bool find(String& out, const AnyString& filename) const;
 
 		/*!
 		** \brief Find all matching filenames/folders in the search paths which math the criteria
 		*/
-		bool find(String::Vector& out, const StringAdapter& filename) const;
+		bool find(String::Vector& out, const AnyString& filename) const;
 
 		/*!
 		** \brief Find all matching filenames/folders in the search paths which math the criteria
 		*/
-		bool find(String::List& out, const StringAdapter& filename) const;
+		bool find(String::List& out, const AnyString& filename) const;
 
 		/*!
 		** \brief Iterate through all files and folders

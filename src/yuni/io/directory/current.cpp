@@ -30,7 +30,7 @@ namespace Current
 	}
 
 
-	bool Set(const StringAdapter& path)
+	bool Set(const AnyString& path)
 	{
 		# ifdef YUNI_OS_WINDOWS
 		wchar_t* fsource = new wchar_t[path.size() + 4];

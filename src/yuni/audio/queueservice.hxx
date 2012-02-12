@@ -7,15 +7,7 @@ namespace Yuni
 namespace Audio
 {
 
-
-	inline bool QueueService::running() const
-	{
-		ThreadingPolicy::MutexLocker locker(*this);
-		return pReady && pAudioLoop.running();
-	}
-
-
-	inline sint64 QueueService::Emitters::elapsedTime(const StringAdapter& name)
+	inline sint64 QueueService::Emitters::elapsedTime(const AnyString& name)
 	{
 		return elapsedTime(get(name));
 	}
@@ -27,13 +19,13 @@ namespace Audio
 	}
 
 
-	inline bool QueueService::Emitters::play(const StringAdapter& name)
+	inline bool QueueService::Emitters::play(const AnyString& name)
 	{
 		return play(get(name));
 	}
 
 
-	inline bool QueueService::Emitters::stop(const StringAdapter& name)
+	inline bool QueueService::Emitters::stop(const AnyString& name)
 	{
 		return stop(get(name));
 	}

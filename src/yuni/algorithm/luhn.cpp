@@ -8,7 +8,7 @@ namespace Yuni
 namespace Algorithm
 {
 
-	int Luhn::Mod10(const StringAdapter& s)
+	int Luhn::Mod10(const AnyString& s)
 	{
 		// The string must have at least one char
 		if (s.size() > 1)
@@ -27,9 +27,9 @@ namespace Algorithm
 			int sum = 0;
 			bool alternate = true;
 
-			const StringAdapter::iterator end = s.end();
+			const AnyString::iterator end = s.end();
 			// For each char
-			for (StringAdapter::iterator i = s.begin(); end != i; ++i)
+			for (AnyString::iterator i = s.begin(); end != i; ++i)
 			{
 				// Each char in the string must be a digit
 				if (!String::IsDigit(i.value()))

@@ -9,29 +9,13 @@
 
 namespace Yuni
 {
-namespace Private
-{
-namespace IO
-{
-
-	sint64 LastModificationTime(const StringAdapter& filename);
-
-
-} // namespace IO
-} // namespace Private
-} // namespace Yuni
-
-
-
-namespace Yuni
-{
 namespace IO
 {
 namespace File
 {
 
 
-	inline uint64 Size(const StringAdapter& filename)
+	inline uint64 Size(const AnyString& filename)
 	{
 		uint64 size;
 		return (Size(filename, size)) ? size : 0;
@@ -40,7 +24,7 @@ namespace File
 
 
 
-	inline bool Exists(const StringAdapter& filename)
+	inline bool Exists(const AnyString& filename)
 	{
 		return ((Yuni::IO::typeFile & Yuni::IO::TypeOf(filename)) != 0);
 	}
@@ -134,22 +118,6 @@ namespace File
 	}
 
 
-	template<class StringT>
-	inline sint64 LastModificationTime(const StringT& filename)
-	{
-		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, InvalidTypeForBuffer);
-		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  InvalidTypeForBufferSize);
-
-		if (0 == Traits::CString<StringT>::zeroTerminated)
-		{
-			String tmp = filename;
-			return Yuni::Private::IO::LastModificationTime(tmp);
-		}
-		return Yuni::Private::IO::LastModificationTime(filename);
-	}
-
-
-
 	template<class StringT, class PredicateT>
 	bool
 	ReadLineByLine(const StringT& filename, const PredicateT& predicate)
@@ -159,9 +127,8 @@ namespace File
 		{
 			String line;
 			while (file.readline<4096u, String>(line))
-			{
 				predicate(line);
-			}
+
 			return true;
 		}
 		return false;

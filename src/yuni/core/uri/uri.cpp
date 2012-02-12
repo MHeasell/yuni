@@ -16,7 +16,7 @@ namespace Yuni
 		class BuildSession
 		{
 		public:
-			BuildSession(Private::Uri::Informations& inf, const StringAdapter& s) :
+			BuildSession(Private::Uri::Informations& inf, const AnyString& s) :
 				location(partScheme),
 				infos(inf),
 				tag(0),
@@ -665,7 +665,7 @@ namespace Yuni
 
 
 
-	void Uri::extractURIFromString(const StringAdapter& raw)
+	void Uri::extractURIFromString(const AnyString& raw)
 	{
 		// Cleanup before anything
 		clear();

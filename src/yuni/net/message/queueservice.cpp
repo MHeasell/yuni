@@ -30,7 +30,7 @@ namespace Message
 
 
 
-	Error  QueueService::listen(const StringAdapter& address, const Port& port, TransportLayer transport)
+	Error  QueueService::listen(const AnyString& address, const Port& port, TransportLayer transport)
 	{
 		using namespace Yuni::Net::Message::Transport;
 		switch (transport)
@@ -47,7 +47,7 @@ namespace Message
 
 
 
-	Error  QueueService::listen(const StringAdapter& address, const Port& port, Transport::ITransport::Ptr transport)
+	Error  QueueService::listen(const AnyString& address, const Port& port, Transport::ITransport::Ptr transport)
 	{
 		if (!port.valid())
 			return errInvalidPort;

@@ -29,7 +29,7 @@ namespace IO
 {
 
 
-	Yuni::IO::NodeType TypeOf(const StringAdapter& filename)
+	Yuni::IO::NodeType TypeOf(const AnyString& filename)
 	{
 		if (!filename)
 			return Yuni::IO::typeUnknown;

@@ -7,7 +7,7 @@ namespace Yuni
 namespace IO
 {
 
-	inline bool Exists(const StringAdapter& filename)
+	inline bool Exists(const AnyString& filename)
 	{
 		return (Yuni::IO::typeUnknown != Yuni::IO::TypeOf(filename));
 	}

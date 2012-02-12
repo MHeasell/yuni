@@ -206,4 +206,14 @@ namespace Yuni
 
 } // namespace Yuni
 
+
+
+
+//! \name Operator overload for stream printing
+//@{
+inline std::ostream& operator << (std::ostream& out, const Yuni::Uri& u)
+{ return u.print(out); }
+//@}
+
+
 #endif // __YUNI_CORE_URI_URI_H__

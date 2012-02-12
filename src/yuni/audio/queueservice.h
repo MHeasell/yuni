@@ -50,56 +50,56 @@ namespace Audio
 
 		public:
 			//! Get an emitter
-			Emitter::Ptr get(const StringAdapter& name);
+			Emitter::Ptr get(const AnyString& name);
 
 			//! Add an emitter
-			bool add(const StringAdapter& name);
+			bool add(const AnyString& name);
 
 			//! Attach an emitter to a buffer
-			bool attach(const StringAdapter& name, const StringAdapter& attachedBuffer);
+			bool attach(const AnyString& name, const AnyString& attachedBuffer);
 			//! Attach an emitter to a buffer
-			bool attach(Emitter::Ptr emitter, const StringAdapter& attachedBuffer);
+			bool attach(Emitter::Ptr emitter, const AnyString& attachedBuffer);
 			//! Attach an emitter to a buffer
 			bool attach(Emitter::Ptr emitter, Sound::Ptr attachedBuffer);
 
 			//! Detach an emitter from any buffer
-			void detach(const StringAdapter& name);
+			void detach(const AnyString& name);
 			//! Detach an emitter from any buffer
 			void detach(Emitter::Ptr name);
 
 			//! Modify an emitter's data
-			bool modify(const StringAdapter& name, bool loop);
+			bool modify(const AnyString& name, bool loop);
 			//! Modify an emitter's data
 			bool modify(Emitter::Ptr name, bool loop);
 
 			//! Move an emitter around
-			bool move(const StringAdapter& name, const Point3D<>& position);
+			bool move(const AnyString& name, const Point3D<>& position);
 			//! Move an emitter around
 			bool move(Emitter::Ptr emitter, const Point3D<>& position);
 			//! Move an emitter around
-			bool move(const StringAdapter& name, const Point3D<>& position,
+			bool move(const AnyString& name, const Point3D<>& position,
 				const Vector3D<>& velocity, const Vector3D<>& direction);
 			//! Move an emitter around
 			bool move(Emitter::Ptr emitter, const Point3D<>& position,
 				const Vector3D<>& velocity, const Vector3D<>& direction);
 
 			//! Get elapsed playback time on an emitter
-			sint64 elapsedTime(const StringAdapter& name);
+			sint64 elapsedTime(const AnyString& name);
 			//! Get elapsed playback time on an emitter
 			sint64 elapsedTime(Emitter::Ptr emitter);
 
 			//! Start playback on an emitter
-			bool play(const StringAdapter& name);
+			bool play(const AnyString& name);
 			//! Start playback on an emitter
 			bool play(Emitter::Ptr emitter);
 
 			//! Stop playback on an emitter
-			bool stop(const StringAdapter& name);
+			bool stop(const AnyString& name);
 			//! Stop playback on an emitter
 			bool stop(const Emitter::Ptr& emitter);
 
 			//! Remove an emitter
-			bool remove(const StringAdapter& name);
+			bool remove(const AnyString& name);
 			//! Remove an emitter
 			bool remove(Emitter::Ptr name);
 
@@ -146,22 +146,22 @@ namespace Audio
 			**
 			** \param name Path to file, used from now on as an identifier for the sound
 			*/
-			bool load(const StringAdapter& name);
+			bool load(const AnyString& name);
 
 			/*!
 			** \brief Load sound file from given path
 			**
 			** \param name Path to file, used from now on as an identifier for the sound
 			*/
-			bool unload(const StringAdapter& name);
+			bool unload(const AnyString& name);
 
 			//! Get the duration of a loaded sound
-			unsigned int duration(const StringAdapter& name);
+			unsigned int duration(const AnyString& name);
 
 
 		private:
 			//! Get a sound from the bank
-			Sound::Ptr get(const StringAdapter& name);
+			Sound::Ptr get(const AnyString& name);
 
 		private:
 			//! Friend declaration

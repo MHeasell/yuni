@@ -87,7 +87,7 @@ namespace Message
 		** server.start();
 		** \endcode
 		*/
-		Error  listen(const StringAdapter& address, const Port& port, TransportLayer transport = tlTCP);
+		Error  listen(const AnyString& address, const Port& port, TransportLayer transport = tlTCP);
 
 		/*!
 		** \brief Add a new address where the server should listen for incoming connections
@@ -100,7 +100,7 @@ namespace Message
 		** server.start();
 		** \endcode
 		*/
-		Error  listen(const StringAdapter& address, const Port& port, Transport::ITransport::Ptr transport);
+		Error  listen(const AnyString& address, const Port& port, Transport::ITransport::Ptr transport);
 
 		/*!
 		** \brief Clear all addresses where the server should listen for incoming connections

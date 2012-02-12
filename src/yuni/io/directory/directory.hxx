@@ -47,13 +47,13 @@ namespace Directory
 {
 
 
-	inline bool Exists(const StringAdapter& path)
+	inline bool Exists(const AnyString& path)
 	{
 		return ((IO::typeFolder & IO::TypeOf(path)) != 0);
 	}
 
 
-	inline bool Copy(const StringAdapter& source, const StringAdapter& destination, bool recursive, bool overwrite)
+	inline bool Copy(const AnyString& source, const AnyString& destination, bool recursive, bool overwrite)
 	{
 		CopyOnUpdateBind e;
 		e.bind(&Private::IO::Directory::DummyCopyUpdateEvent);

@@ -3439,7 +3439,7 @@ namespace Yuni
 		Size len  = 0;
 		Size newIndx;
 		// Temporary buffer
-		StringAdapter word;
+		AnyString word;
 
 		do
 		{
