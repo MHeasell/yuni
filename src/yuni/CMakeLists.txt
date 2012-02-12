@@ -35,11 +35,12 @@ if(YUNI_MODULE_CORE)
 	# The header yuni.h must be available
 	CONFIGURE_FILE("${CMAKE_CURRENT_SOURCE_DIR}/cmake/config.h.cmake" "${CMAKE_CURRENT_BINARY_DIR}/config.h")
 	#
-	if(EXISTS "${CMAKE_CURRENT_BINARY_DIR}/yuni.h" AND EXISTS "${CMAKE_CURRENT_BINARY_DIR}/core/customstring/customstring.h")
+	if(EXISTS "${CMAKE_CURRENT_BINARY_DIR}/yuni.h" AND EXISTS "${CMAKE_CURRENT_BINARY_DIR}/core/string.h")
 		# The file config.h is at the same place that the sources.
 		# Consequently there is no need to specify a path
 		# This is necessary to help distcc as much as possible  (see #340)
 	else()
+		message(STATUS ">>> dsfsdfsd!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!f")
 		add_definitions("-DYUNI_CONFIG_H_LOCATION=\"${CMAKE_CURRENT_BINARY_DIR}/config.h\"")
 	endif()
 	# Core
