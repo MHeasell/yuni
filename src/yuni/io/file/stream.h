@@ -129,7 +129,7 @@ namespace File
 		** \param filename Any string reprensenting an UTF8 relative or absolute filename
 		** \return True if the operation succeeded, false otherwise
 		*/
-		template<class U> bool openRW(const U& filename);
+		bool openRW(const AnyString& filename);
 
 		/*!
 		** \brief Close the file if opened

@@ -26,13 +26,11 @@ namespace File
 	}
 
 
-	template<class U>
-	inline bool Stream::openRW(const U& filename)
+	inline bool Stream::openRW(const AnyString& filename)
 	{
-		// note: added this to avoid name resolution conflicts
+		// note: 'this' added this to avoid name resolution conflicts
 		return this->open(filename, IO::OpenMode::write | IO::OpenMode::truncate);
 	}
-
 
 
 	inline bool Stream::opened() const
