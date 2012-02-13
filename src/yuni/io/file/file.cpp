@@ -29,6 +29,7 @@ namespace File
 
 	bool Size(const AnyString& filename, uint64& value)
 	{
+		unsigned int len = filename.size();
 		if (!len)
 		{
 			value = 0u;
@@ -50,7 +51,7 @@ namespace File
 		String  norm;
 		Yuni::IO::Normalize(norm, p, len);
 		// Conversion into wchar_t
-		WString<true> wstr(norm);
+		Private::WString<true> wstr(norm);
 		if (wstr.empty())
 		{
 			value = 0u;
@@ -111,6 +112,7 @@ namespace File
 		# else
 
 		const char* const p = filename.c_str();
+		unsigned int len = filename.size();
 
 		if (p[len - 1] == '\\' || p[len - 1] == '/')
 			--len;
@@ -122,7 +124,7 @@ namespace File
 		String  norm;
 		Yuni::IO::Normalize(norm, p, len);
 		// Conversion into wchar_t
-		WString<true> wstr(norm);
+		Private::WString<true> wstr(norm);
 		if (wstr.empty())
 			return Yuni::IO::errUnknown;
 		wstr.replace('/', '\\');

@@ -34,6 +34,7 @@ namespace IO
 
 		# ifdef YUNI_OS_WINDOWS
 		const char* p = filename.c_str();
+		unsigned int len = filename.size();
 		if (p[len - 1] == '\\' || p[len - 1] == '/')
 		{
 			if (!--len)
@@ -54,7 +55,7 @@ namespace IO
 		String  norm;
 		Yuni::IO::Normalize(norm, p, len);
 		// Conversion into wchar_t
-		WString<true> wstr(norm);
+		Private::WString<true> wstr(norm);
 		if (wstr.empty())
 			return Yuni::IO::typeUnknown;
 
