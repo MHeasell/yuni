@@ -26,7 +26,7 @@ namespace Logs
 				System::Console::TextColor<VerbosityType::messageColor>::Set(out);
 
 			// The message
-			out.write(s.c_str(), (size_t)s.sizeInBytes());
+			out.write(s.c_str(), (unsigned int)s.sizeInBytes());
 
 			// Resetting the color
 			if (VerbosityType::messageColor != System::Console::none && Handler::unixColorsAllowed)

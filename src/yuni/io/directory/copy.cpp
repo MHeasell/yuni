@@ -144,7 +144,7 @@ namespace Directory
 							current += numRead;
 
 							// Trying to copy the block which has just been read
-							if (numRead != toFile.write((const char*)buffer, numRead))
+							if (numRead != toFile.write((const char*)buffer, (unsigned int) numRead))
 							{
 								delete[] buffer;
 								return false;
