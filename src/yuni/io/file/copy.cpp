@@ -4,7 +4,9 @@
 # include <sys/sendfile.h>
 #endif
 #include <sys/stat.h>
-#include <unistd.h>
+#ifndef YUNI_OS_WINDOWS
+# include <unistd.h>
+#endif
 
 
 namespace Yuni
@@ -47,7 +49,7 @@ namespace File
 				size_t numRead;
 
 				while ((numRead = read(fdIN, buffer, size)) > 0)
-					(void)::write(fdOUT, buffer, numRead);
+					(void)::write(fdOUT, buffer, (unsigned int) numRead);
 
 				delete[] buffer;
 				return Yuni::IO::errNone;
