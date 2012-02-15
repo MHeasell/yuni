@@ -199,6 +199,7 @@ set(SRC_CORE_ATOMIC
 source_group(core\\atomic FILES ${SRC_CORE_ATOMIC})
 
 
+
 set(SRC_CORE_PREPROCESSOR
 		core/preprocessor/std.h
 		core/preprocessor/capabilities.h
@@ -207,6 +208,12 @@ set(SRC_CORE_PREPROCESSOR
 		core/preprocessor/enum.h
 )
 source_group(core\\preprocessor FILES ${SRC_CORE_PREPROCESSOR})
+
+set(SRC_CORE_FOREACH
+		core/foreach.h
+)
+source_group(core\\foreach FILES ${SRC_CORE_FOREACH})
+
 
 set(SRC_CORE_ITERATOR
 		core/iterator.h
@@ -781,6 +788,7 @@ add_library(yuni-static-core STATIC
 		${SRC_CORE_ITERATOR}
 		${SRC_CORE_TRAITS}
 		${SRC_CORE_PREPROCESSOR}
+		${SRC_CORE_FOREACH}
 		${SRC_CORE_BIT}
 		${SRC_CORE_EXCEPTIONS}
 		${SRC_CORE_SYSTEM}
