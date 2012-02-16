@@ -4,10 +4,14 @@
 # FFMpeg
 #
 macro(DEVPACK_IMPORT_FFMPEG)
-	if(WIN32 OR WIN64)
-		DEVPACK_SMART_IMPORT("ffmpeg" "0.6" "1" "all")
+	if(WIN32)
+		DEVPACK_IMPORT("ffmpeg" "git6cb2085" "1" "windows" "i386" "all" "all" "all")
 	else()
-		DEVPACK_IMPORT("ffmpeg" "22725" "3" "all" "all" "${DEVPACK_COMPILER}" "all")
+		if (WIN64)
+			DEVPACK_IMPORT("ffmpeg" "git6cb2085" "1" "windows" "x86_64" "all" "all" "all")
+		else()
+			DEVPACK_IMPORT("ffmpeg" "22725" "3" "all" "all" "${DEVPACK_COMPILER}" "all")
+		endif()
 	endif()
 	list(APPEND YUNI_STATIC_AUDIO "${YUNI_EXT_FFMPEG_LIB}")
 	list(APPEND YUNI_INCLUDE   "${YUNI_EXT_FFMPEG_INCLUDE}")
