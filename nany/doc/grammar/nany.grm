@@ -286,9 +286,9 @@ Comment End = '*#' | '*/'
                | 'continue'
                | 'if' <Possibly Parallel Exp> 'then' <Possibly Parallel Exp> <Else Expression>
                | 'while' <Possibly Parallel Exp> 'do' <Possibly Parallel Exp>
-               | 'for' Identifier 'in' <Expression> 'do' <Possibly Parallel Exp>
-               | 'for' Identifier 'in' <Expression> 'order' ':' <Expression> 'packedby' ':' <Expression> 'do' <Possibly Parallel Exp>
-               | 'for' Identifier 'in' <Expression> 'order' 'do' <Possibly Parallel Exp>
+               | 'for' Identifier 'in' <Expression> 'do' <Possibly Parallel Exp> <Else Expression> 
+               | 'for' Identifier 'in' <Expression> 'order' ':' <Expression> 'packedby' ':' <Expression> 'do' <Possibly Parallel Exp> <Else Expression> 
+               | 'for' Identifier 'in' <Expression> 'order' 'do' <Possibly Parallel Exp> <Else Expression> 
                | 'timeout' <Possibly Parallel Exp> 'do' <Possibly Parallel Exp>
                | 'timeout' <Possibly Parallel Exp> 'do' <Possibly Parallel Exp> 'else' <Possibly Parallel Exp>
                | '{' <Expression> '}'
