@@ -30,7 +30,7 @@ namespace Typing
 
 
 	public:
-		Type(const Yuni::StringAdapter& name, bool isCppValue, bool isConst = false):
+		Type(const AnyString& name, bool isCppValue, bool isConst = false):
 			pName(name),
 			pIsValue(isCppValue),
 			pIsArray(false),
@@ -44,7 +44,7 @@ namespace Typing
 		{}
 
 		const Yuni::String& name() const { return pName; }
-		void name(const Yuni::StringAdapter& newName) { pName = newName; }
+		void name(const AnyString& newName) { pName = newName; }
 
 		Type* toArrayType()
 		{

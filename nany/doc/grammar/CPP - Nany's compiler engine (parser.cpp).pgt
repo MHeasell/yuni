@@ -45,7 +45,12 @@ extern "C"
 
 // Forward declaration of generic routine for rule propagation
 template<class NodeT = Nany::Ast::Node>
-static NodeT* ParseChild(TokenStruct* token, unsigned int index);
+class AstParse
+{
+public:
+	static NodeT* Child(TokenStruct* parent, unsigned int index);
+};
+
 // Forward declaration of generic routine for symbol management
 static const wchar_t* GetChildSymbol(TokenStruct* token, unsigned int index);
 
@@ -129,8 +134,8 @@ Nany::Ast::Node* (*RuleJumpTable[])(TokenStruct* token) =
 ///// Rule subroutine template
 
 
-template<class NodeT = Nany::Ast::Node>
-static NodeT* ParseChild(TokenStruct* parent, unsigned int index)
+template<class NodeT>
+NodeT* AstParse<NodeT>::Child(TokenStruct* parent, unsigned int index)
 {
 	assert(parent && "ParseChild: invalid parent");
 	// Make sure the child index is not out of bounds

@@ -246,7 +246,7 @@ Nany::Ast::Node* Rule_DeclarationList_Semi(TokenStruct* token)
 
 
 // <Declaration List> ::= 
-Nany::Ast::Node* Rule_DeclarationList5(TokenStruct* /*token*/)
+Nany::Ast::Node* Rule_DeclarationList5(TokenStruct*)
 {
 	return new Nany::Ast::DeclarationListNode();
 }
@@ -362,7 +362,7 @@ Nany::Ast::Node* Rule_Literal_BuiltInType(TokenStruct* token)
 
 
 // <Literal> ::= nil
-Nany::Ast::Node* Rule_Literal_nil(TokenStruct* /*token*/)
+Nany::Ast::Node* Rule_Literal_nil(TokenStruct*)
 {
 	return new Nany::Ast::LiteralNode<void*>(nullptr);
 }
@@ -570,7 +570,7 @@ Nany::Ast::Node* Rule_ClassContent_Semi3(TokenStruct* token)
 
 
 // <Class Content> ::= 
-Nany::Ast::Node* Rule_ClassContent3(TokenStruct* /*token*/)
+Nany::Ast::Node* Rule_ClassContent3(TokenStruct*)
 {
 	return nullptr;
 }
@@ -2007,7 +2007,7 @@ Nany::Ast::Node* Rule_SimpleExp_while_do(TokenStruct* token)
 
 
 
-// <Simple Exp> ::= for Identifier in <Expression> do <Possibly Parallel Exp>
+// <Simple Exp> ::= for Identifier in <Expression> do <Possibly Parallel Exp> <Else Expression>
 Nany::Ast::Node* Rule_SimpleExp_for_Identifier_in_do(TokenStruct* token)
 {
 	// Read the identifier
@@ -2026,7 +2026,7 @@ Nany::Ast::Node* Rule_SimpleExp_for_Identifier_in_do(TokenStruct* token)
 
 
 
-// <Simple Exp> ::= for Identifier in <Expression> order ':' <Expression> packedby ':' <Expression> do <Possibly Parallel Exp>
+// <Simple Exp> ::= for Identifier in <Expression> order ':' <Expression> packedby ':' <Expression> do <Possibly Parallel Exp> <Else Expression>
 Nany::Ast::Node* Rule_SimpleExp_for_Identifier_in_order_Colon_packedby_Colon_do(TokenStruct* token)
 {
 	// Not yet implemented !
@@ -2038,7 +2038,7 @@ Nany::Ast::Node* Rule_SimpleExp_for_Identifier_in_order_Colon_packedby_Colon_do(
 
 
 
-// <Simple Exp> ::= for Identifier in <Expression> order do <Possibly Parallel Exp>
+// <Simple Exp> ::= for Identifier in <Expression> order do <Possibly Parallel Exp> <Else Expression>
 Nany::Ast::Node* Rule_SimpleExp_for_Identifier_in_order_do(TokenStruct* token)
 {
 	// Read the identifier
@@ -2488,7 +2488,7 @@ Nany::Ast::Node* Rule_NegateExp_Minus(TokenStruct* token)
 
 
 
-// <Negate Exp> ::= '--' <Value>
+// <Negate Exp> ::= -- <Value>
 Nany::Ast::Node* Rule_NegateExp_MinusMinus(TokenStruct* token)
 {
 	// Not yet implemented !
@@ -2512,7 +2512,7 @@ Nany::Ast::Node* Rule_NegateExp_PlusPlus(TokenStruct* token)
 
 
 
-// <Negate Exp> ::= <Value> '--'
+// <Negate Exp> ::= <Value> --
 Nany::Ast::Node* Rule_NegateExp_MinusMinus2(TokenStruct* token)
 {
 	// Not yet implemented !
@@ -3098,11 +3098,11 @@ Nany::Ast::Node* (*RuleJumpTable[])(TokenStruct* token) =
 	Rule_SimpleExp_if_then,
 	// 146. <Simple Exp> ::= while <Possibly Parallel Exp> do <Possibly Parallel Exp>
 	Rule_SimpleExp_while_do,
-	// 147. <Simple Exp> ::= for Identifier in <Expression> do <Possibly Parallel Exp>
+	// 147. <Simple Exp> ::= for Identifier in <Expression> do <Possibly Parallel Exp> <Else Expression>
 	Rule_SimpleExp_for_Identifier_in_do,
-	// 148. <Simple Exp> ::= for Identifier in <Expression> order ':' <Expression> packedby ':' <Expression> do <Possibly Parallel Exp>
+	// 148. <Simple Exp> ::= for Identifier in <Expression> order ':' <Expression> packedby ':' <Expression> do <Possibly Parallel Exp> <Else Expression>
 	Rule_SimpleExp_for_Identifier_in_order_Colon_packedby_Colon_do,
-	// 149. <Simple Exp> ::= for Identifier in <Expression> order do <Possibly Parallel Exp>
+	// 149. <Simple Exp> ::= for Identifier in <Expression> order do <Possibly Parallel Exp> <Else Expression>
 	Rule_SimpleExp_for_Identifier_in_order_do,
 	// 150. <Simple Exp> ::= timeout <Possibly Parallel Exp> do <Possibly Parallel Exp>
 	Rule_SimpleExp_timeout_do,
@@ -3184,11 +3184,11 @@ Nany::Ast::Node* (*RuleJumpTable[])(TokenStruct* token) =
 	Rule_TypeofExp,
 	// 189. <Negate Exp> ::= '-' <Value>
 	Rule_NegateExp_Minus,
-	// 190. <Negate Exp> ::= '--' <Value>
+	// 190. <Negate Exp> ::= -- <Value>
 	Rule_NegateExp_MinusMinus,
 	// 191. <Negate Exp> ::= '++' <Value>
 	Rule_NegateExp_PlusPlus,
-	// 192. <Negate Exp> ::= <Value> '--'
+	// 192. <Negate Exp> ::= <Value> --
 	Rule_NegateExp_MinusMinus2,
 	// 193. <Negate Exp> ::= <Value> '++'
 	Rule_NegateExp_PlusPlus2,
@@ -3235,15 +3235,13 @@ Nany::Ast::Node* (*RuleJumpTable[])(TokenStruct* token) =
 ///// Rule subroutine template
 
 
-
-
 template<class NodeT>
 NodeT* AstParse<NodeT>::Child(TokenStruct* parent, unsigned int index)
 {
 	assert(parent && "ParseChild: invalid parent");
 	// Make sure the child index is not out of bounds
 	assert(index < (unsigned int) Grammar.RuleArray[parent->ReductionRule].SymbolsCount
-		   && "ParseChild: index out of bounds !");
+		&& "ParseChild: index out of bounds !");
 
 	TokenStruct* child = parent->Tokens[index];
 	assert(child && "ParseChild: Invalid child");

@@ -37,9 +37,9 @@ namespace Typing
 			String::Size finalBracket = id.find(']', bracket + 1);
 			if (finalBracket < id.size())
 			{
-				StringAdapter realType(id, 0, bracket);
+				AnyString realType(id, 0, bracket);
 				realType.trim();
-				StringAdapter cardinality(id, bracket + 1, finalBracket - bracket - 1);
+				AnyString cardinality(id, bracket + 1, finalBracket - bracket - 1);
 				cardinality.trim();
 				std::cout << realType << ", cardinality: " << cardinality << std::endl;
 				String s;
