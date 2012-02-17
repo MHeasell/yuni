@@ -17,7 +17,12 @@
 # include "core/system/capabilities.h"
 /* Standard Types */
 # include "core/system/stdint.h"
-
+/* ISO 646 - part of C90 standard but not by default on all compilers */
+# ifdef __cplusplus
+#	include <ciso646>
+# else
+#	include <iso646.h>
+# endif
 
 
 # ifdef __cplusplus /* Only with a C++ Compiler */
