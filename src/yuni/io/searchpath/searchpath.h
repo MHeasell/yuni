@@ -87,10 +87,10 @@ namespace IO
 		**	IO::SearchPath searchpath;
 		**	searchpath.directories.push_back("/lib");
 		**	searchpath.extensions.push_back(".so");
-		**	searchpath.foreach(&print);
+		**	searchpath.each(&print);
 		** \endcode
 		*/
-		void foreach(const Bind<void (const String&, const String&)>& callback,
+		void each(const Bind<void (const String&, const String&)>& callback,
 			bool recursive = false, bool catchfolder = false) const;
 		//@}
 
@@ -116,7 +116,6 @@ namespace IO
 		String::Vector  extensions;
 		//! List of prefixes
 		String::Vector  prefixes;
-		
 
 
 	private:
