@@ -39,7 +39,7 @@ namespace IO
 
 
 
-	
+
 		template<class OutT>
 		class LookupHelper
 		{
@@ -161,7 +161,6 @@ namespace IO
 		}; // class LookupHelpder
 
 
-	
 
 	} // anonymous namespace
 
@@ -182,7 +181,7 @@ namespace IO
 	bool SearchPath::find(String& out, const AnyString& filename) const
 	{
 		if (!filename)
-			return false; 
+			return false;
 		if (pCacheLookup)
 		{
 			CacheStore::const_iterator i = pCache.find((pCacheQuery = filename));
@@ -200,7 +199,7 @@ namespace IO
 	bool SearchPath::find(String::Vector& out, const AnyString& filename) const
 	{
 		if (!filename)
-			return false; 
+			return false;
 		if (pCacheLookup)
 		{
 			CacheStore::const_iterator i = pCache.find((pCacheQuery = filename));
@@ -218,7 +217,7 @@ namespace IO
 	bool SearchPath::find(String::List& out, const AnyString& filename) const
 	{
 		if (!filename)
-			return false; 
+			return false;
 		if (pCacheLookup)
 		{
 			CacheStore::const_iterator i = pCache.find((pCacheQuery = filename));
@@ -234,7 +233,7 @@ namespace IO
 
 
 
-	void SearchPath::foreach(const Bind<void (const String&, const String&)>& callback,
+	void SearchPath::each(const Bind<void (const String&, const String&)>& callback,
 		bool recursive, bool catchfolder) const
 	{
 		if (directories.empty())
