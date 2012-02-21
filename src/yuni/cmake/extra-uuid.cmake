@@ -5,14 +5,14 @@ LIBYUNI_CONFIG_DEPENDENCY("uuid" "core") # core is required
 
 if(NOT APPLE AND UNIX)
 	# -luuid
-	LIBYUNI_CONFIG_LIB("both", "uuid", "uuid")
+	LIBYUNI_CONFIG_LIB("both" "uuid" "uuid")
 endif()
 
 if (WIN32 OR WIN64)
 	# -lole32
-	LIBYUNI_CONFIG_LIB("both", "uuid" "ole32")
+	LIBYUNI_CONFIG_LIB("both" "uuid" "ole32")
 	# -lrpcrt4
-	LIBYUNI_CONFIG_LIB("both", "uuid" "rpcrt4")
+	LIBYUNI_CONFIG_LIB("both" "uuid" "rpcrt4")
 endif()
 
 if (UNIX)
