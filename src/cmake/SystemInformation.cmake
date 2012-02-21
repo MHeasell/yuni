@@ -4,11 +4,19 @@
 #
 YMESSAGE_TITLE("Generator : "  "${CMAKE_GENERATOR}")
 if(MSVC)
-	YMESSAGE("Compiler: Visual Studio")
+	if (WIN64)
+		YMESSAGE("Compiler: Visual Studio (64bits)")
+	else()
+		YMESSAGE("Compiler: Visual Studio (32bits)")
+	endif()
 endif()
 
 if(MINGW)
-	YMESSAGE("Compiler: MinGW")
+	if (WIN64)
+		YMESSAGE("Compiler: MinGW (64bits)")
+	else()
+		YMESSAGE("Compiler: MinGW (32bits)")
+	endif()
 endif()
 
 if(XCODE)
