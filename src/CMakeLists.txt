@@ -37,6 +37,24 @@ set(VERSION                      "${YUNI_VERSION}")
 set(VS_SCC_PROJECTNAME           "Yuni Framework")
 set(PROJECT_LABEL                "Yuni Framework")
 
+if (WIN32 AND NOT WIN64)
+	# We have to determine the platform architecture
+	if (MINGW OR MSYS OR CYGWIN)
+		execute_process(COMMAND "${CMAKE_CXX_COMPILER}" "--version"
+			OUTPUT_VARIABLE compiler_version ERROR_QUIET
+			OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_STRIP_TRAILING_WHITESPACE)
+		string(FIND "${compiler_version}" "64" platform_64)
+		if ("${platform_64}" GREATER 0)
+			set(WIN64 true)
+		endif()
+	else()
+		string(FIND "${CMAKE_GENERATOR}" "64" platform_64)
+		if ("${platform_64}" GREATER 0)
+			set(WIN64 true)
+		endif()
+	endif()
+endif()
+
 
 #
 # CMake policies
