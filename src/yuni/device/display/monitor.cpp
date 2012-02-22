@@ -35,9 +35,13 @@ namespace Display
 		pPrimary(p), pHardwareAcceleration(a), pBuiltin(b)
 	{
 		#ifdef YUNI_OS_WINDOWS
-		assert(NULL != hwn && "Invalid Monitor handle in Monitor::Monitor !");
-		memcpy(pDeviceID, hwn, sizeof(wchar_t) * 128);
-		pHandle = pDeviceID;
+		if (NULL != hwn)
+		{
+			memcpy(pDeviceID, hwn, sizeof(wchar_t) * 128);
+			pHandle = pDeviceID;
+		}
+		else
+			memset(pDeviceID, 0, sizeof(wchar_t) * 128);
 		#endif
 		addSafeResolutions();
 	}
