@@ -2,7 +2,6 @@
 # define __YUNI_DEVICE_DISPLAY_RESOLUTION_HXX__
 
 
-
 namespace Yuni
 {
 namespace Device
@@ -10,21 +9,24 @@ namespace Device
 namespace Display
 {
 
-	inline Resolution::Resolution(const Resolution& c)
-		:pWidth(c.pWidth), pHeight(c.pHeight), pBitsPerPixel(c.pBitsPerPixel)
+	inline Resolution::Resolution(const Resolution& c) :
+		pWidth(c.pWidth),
+		pHeight(c.pHeight),
+		pBitsPerPixel(c.pBitsPerPixel)
 	{}
 
 
-	inline uint32 Resolution::width() const
+	inline unsigned int Resolution::width() const
 	{
 		return pWidth;
 	}
 
 
-	inline uint32 Resolution::height() const
+	inline unsigned int Resolution::height() const
 	{
 		return pHeight;
 	}
+
 
 	inline uint8 Resolution::bitPerPixel() const
 	{

@@ -25,67 +25,65 @@ namespace Display
 {
 
 
-	/*!
-	** \brief Get a boolean from the dictionary
-	**
-	** \param theDict The dictionary
-	** \param key The key to read its value
-	*/
-	static Boolean GetDictionaryBoolean(CFDictionaryRef theDict, const void* key)
+	static unsigned int bitDepthFromDisplayMode(CGDisplayModeRef mode)
 	{
-		Boolean value(false);
-		CFBooleanRef boolRef = (CFBooleanRef) CFDictionaryGetValue(theDict, key);
-		if (NULL != boolRef)
-			value = CFBooleanGetValue(boolRef);
-		return value;
+		CFStringRef pixEnc = CGDisplayModeCopyPixelEncoding(mode);
+
+		if (CFStringCompare(pixEnc, CFSTR(IO32BitDirectPixels), kCFCompareCaseInsensitive) == kCFCompareEqualTo)
+			return 32;
+		if (CFStringCompare(pixEnc, CFSTR(IO16BitDirectPixels), kCFCompareCaseInsensitive) == kCFCompareEqualTo)
+			return 16;
+		if (CFStringCompare(pixEnc, CFSTR(IO8BitIndexedPixels), kCFCompareCaseInsensitive) == kCFCompareEqualTo)
+			return 8;
+		
+		return 0; // default and invalid value
 	}
 
-
-
-	/*!
-	** \brief Get a long from the dictionary
-	**
-	** \param theDict The dictionary
-	** \param key The key to read its value
-	*/
-	static long GetDictionaryLong(CFDictionaryRef theDict, const void* key)
-	{
-		// get a long from the dictionary
-		long value(0);
-		const CFNumberRef numRef = (CFNumberRef) CFDictionaryGetValue(theDict, key);
-		if (NULL != numRef)
-			CFNumberGetValue(numRef, kCFNumberLongType, &value);
-		return value;
-	}
 
 
 	static void cocoaGetAllAvailableModesUseful(CGDirectDisplayID display, SmartPtr<OrderedResolutions>& res)
 	{
 		// get a list of all possible display modes for this system.
-		CFArrayRef availableModes = CGDisplayAvailableModes(display);
-		const unsigned int numberOfAvailableModes = CFArrayGetCount(availableModes);
-		if (!numberOfAvailableModes)
+		// >= 10.6 is required for CGDisplayCopyAllDisplayModes
+
+		CFArrayRef availableModes = CGDisplayCopyAllDisplayModes(display, NULL);
+		if (!availableModes)
 			return;
 
-		// get the current bits per pixel.
-		const long currentModeBitsPerPixel = GET_MODE_BITS_PER_PIXEL(CGDisplayCurrentMode(display));
-
-		for (unsigned int i = 0; i < numberOfAvailableModes; ++i)
+		// Getting the current bits per pixels value
+		unsigned int currentModeBitsPerPixel;
 		{
-			// look at each mode in the available list
-			CFDictionaryRef mode = (CFDictionaryRef)CFArrayGetValueAtIndex(availableModes, i);
+			CGDisplayModeRef mode = CGDisplayCopyDisplayMode(display);
+			if (!mode)
+			{
+				CFRelease(availableModes);
+				return;
+			}
+			currentModeBitsPerPixel = bitDepthFromDisplayMode(mode);
+			CGDisplayModeRelease(mode);
+		}
+
+		unsigned int numberOfAvailableModes = CFArrayGetCount(availableModes);
+		for (unsigned int i = 0; i != numberOfAvailableModes; ++i)
+		{
+			CGDisplayModeRef mode = (CGDisplayModeRef) CFArrayGetValueAtIndex(availableModes, i);
+			if (!mode)
+				continue;
 
 			// we are only interested in modes with the same bits per pixel as current.
 			// to allow for switching from fullscreen to windowed modes.
 			// that are safe for this hardward
 			// that are not stretched.
-			Boolean safeForHardware = GET_MODE_SAFE_FOR_HARDWARE(mode);
-			Boolean stretched = GET_MODE_STRETCHED(mode);
-			int bitsPerPixel = GET_MODE_BITS_PER_PIXEL(mode);
+			unsigned int bitsPerPixel = bitDepthFromDisplayMode(mode);
+			if (bitsPerPixel != currentModeBitsPerPixel)
+				continue;
 
-			if ((bitsPerPixel == currentModeBitsPerPixel) && safeForHardware && !stretched)
-				(*res)[GET_MODE_WIDTH(mode)][GET_MODE_HEIGHT(mode)][(uint8) bitsPerPixel] = true;
+			unsigned int width  = CGDisplayModeGetWidth(mode);
+			unsigned int height = CGDisplayModeGetHeight(mode);
+			(*res) [width][height][(uint8) bitsPerPixel] = true;
 		}
+
+		CFRelease(availableModes);
 	}
 
 
@@ -173,9 +171,9 @@ namespace Display
 			// int width  = CGDisplayPixelsWide(display);
 			// int height = CGDisplayPixelsHigh(display);
 			// int bpp    = CGDisplayBitsPerPixel(display);
-			const bool mainDisplay = CGDisplayIsMain(display);
-			const bool builtin     = CGDisplayIsBuiltin(display);
-			const bool ha          = CGDisplayUsesOpenGLAcceleration(display);
+			bool mainDisplay = CGDisplayIsMain(display);
+			bool builtin     = CGDisplayIsBuiltin(display);
+			bool ha          = CGDisplayUsesOpenGLAcceleration(display);
 			// uint32_t modelNumber = CGDisplayModelNumber(display);
 			// uint32_t serialNumer = CGDisplaySerialNumber(display);
 

@@ -9,7 +9,6 @@ namespace Device
 namespace Display
 {
 
-
 	inline Monitor::Handle Monitor::handle() const
 	{
 		return pHandle;
@@ -50,6 +49,7 @@ namespace Display
 	{
 		return pBuiltin;
 	}
+
 
 
 

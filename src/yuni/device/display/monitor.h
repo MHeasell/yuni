@@ -80,7 +80,7 @@ namespace Display
 				const bool a = false, const bool b = false);
 
 		//! Constructor by copy
-		Monitor(const Monitor& c);
+		Monitor(const Monitor& copy);
 
 		//! Destructor
 		~Monitor();
@@ -101,7 +101,7 @@ namespace Display
 		//@}
 
 
-		//! \name Identifiers
+		//! \name Informations about the monitor
 		//@{
 		/*!
 		** \brief Get the human readable name of the monitor, if any
@@ -119,38 +119,6 @@ namespace Display
 		** \return A md5 string
 		*/
 		const String& guid();
-		//@}
-
-		//! \name Informations about the monitor
-		//@{
-		/*!
-		** \brief Get all available resolutions for this screen
-		**
-		** The returned value is guaranteed to not be empty and to be
-		** a sorted descendant list.
-		*/
-		const Resolution::Vector& resolutions() const;
-
-		/*!
-		** \brief Get the recommended resolution for this device
-		**
-		** It is merely the highest available resolution
-		** \return A valid and not null resolution
-		*/
-		Resolution::Ptr recommendedResolution() const;
-
-		/*!
-		** \brief Remove all resolutions
-		*/
-		void clear();
-
-		/*!
-		** \brief Get if a resolution is valid for this monitor
-		**
-		** \param rhs The resolution to check
-		** \return True if the resolution is valid, merely if this resolution is in the list
-		*/
-		bool resolutionIsValid(const Resolution::Ptr& rhs) const;
 
 		/*!
 		** \brief Get if this monitor is the primary display
@@ -170,18 +138,55 @@ namespace Display
 		bool builtin() const;
 		//@}
 
+
+		//! \name Monitor Resolutions
+		//@{
+		/*!
+		** \brief Get all available resolutions for this screen
+		**
+		** The returned value is guaranteed to not be empty and to be
+		** a sorted descendant list.
+		*/
+		const Resolution::Vector& resolutions() const;
+
+		/*!
+		** \brief Get the recommended resolution for this device
+		**
+		** It is merely the highest available resolution
+		** \return A valid and not null resolution
+		*/
+		Resolution::Ptr recommendedResolution() const;
+
+		/*!
+		** \brief Get if a resolution is valid for this monitor
+		**
+		** \param rhs The resolution to check
+		** \return True if the resolution is valid, merely if this resolution is in the list
+		*/
+		bool resolutionIsValid(const Resolution::Ptr& rhs) const;
+
+		/*!
+		** \brief Remove all resolutions
+		*/
+		void clear();
+
 		/*!
 		** \brief Add a new resolution in the list
 		**
 		** \param[in] r The resolution to add
 		** \internal It is a sorted descendant list. The first value must be the highest available value
 		*/
-		void add(const Resolution::Ptr& r);
+		void add(const Resolution::Ptr& resolution);
 
 		/*!
 		** \brief Add some safe resolutions
+		**
+		** Add the standard (and assumed safe) resolution 1024x768 since it should be supported by any
+		** recent monitor and video card.
 		*/
 		void addSafeResolutions();
+		//@}
+
 
 		//! \name Operators
 		//@{
@@ -195,8 +200,6 @@ namespace Display
 		Monitor& operator << (const Resolution::Ptr& rhs);
 		//@}
 
-	private:
-		void internalAppendSafeResolutions();
 
 	protected:
 		//! The index of the monitor

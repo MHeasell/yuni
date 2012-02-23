@@ -16,7 +16,6 @@ namespace Device
 namespace Display
 {
 
-
 	/*!
 	** \brief Screen/Monitor resolution
 	*/
@@ -34,9 +33,9 @@ namespace Display
 			minimumHeight = 200u,
 
 			//! The highest allowed for the width of the screen
-			maximumWidth  = 2560u,
+			maximumWidth  = 8192u, // 8K Video Format
 			//! The highest allowed value for the height of the screen
-			maximumHeight = 2048u,
+			maximumHeight = 4320u,
 		};
 
 		//! Vector of resolutions
@@ -52,7 +51,7 @@ namespace Display
 		** \param h Height of the monitor/screen
 		** \param b Bit per Pixel
 		*/
-		Resolution(const uint32 w, const uint32 h, const uint8 b = 32);
+		Resolution(unsigned int width, unsigned int height, uint8 bits = 32);
 
 		/*!
 		** \brief Constructor by copy
@@ -70,9 +69,9 @@ namespace Display
 		//! \name Information about the current mode
 		//@{
 		//! The width of the monitor/screen
-		uint32 width() const;
+		unsigned int width() const;
 		//! The height of the monitor/screen
-		uint32 height() const;
+		unsigned int height() const;
 		//! Bit per pixel
 		uint8 bitPerPixel() const;
 		//@}
@@ -151,9 +150,9 @@ namespace Display
 
 	private:
 		//! Height of the screen
-		uint32 pWidth;
+		unsigned int pWidth;
 		//! Width of the screen
-		uint32 pHeight;
+		unsigned int pHeight;
 		//! Bits per pixel
 		uint8 pBitsPerPixel;
 
