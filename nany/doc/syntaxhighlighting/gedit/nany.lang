@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language id="nany" _name="Nany" version="2.0" _section="Sources">
   <metadata>
-    <property name="mimetypes">text/plain</property>
+    <property name="mimetypes">text/x-nany</property>
     <property name="globs">*.ny;*.pny</property>
   </metadata>
 
