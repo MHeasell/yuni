@@ -60,7 +60,7 @@ namespace File
 				char* buffer = new char[size];
 				size_t numRead;
 				while ((numRead = fromFile.read(buffer, size)) != 0)
-					toFile.write(buffer, numRead);
+					toFile.write(buffer, (unsigned int) numRead);
 				delete[] buffer;
 				return Yuni::IO::errNone;
 
