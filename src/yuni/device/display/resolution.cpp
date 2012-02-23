@@ -2,6 +2,7 @@
 #include "resolution.h"
 #include "../../core/hash/checksum/md5.h"
 #include "../../core/math.h"
+#include <cassert>
 
 
 namespace Yuni
@@ -12,11 +13,15 @@ namespace Display
 {
 
 
-	Resolution::Resolution(const uint32 w, const uint32 h, const uint8 b)
+	Resolution::Resolution(unsigned int width, unsigned int height, uint8 bits)
 	{
-		pBitsPerPixel = (32 == b ||  24 == b || 16 == b || 8 == b) ? (uint8)b : (uint8)32;
-		pWidth  = Math::MinMax<uint32>(w, minimumWidth,  maximumWidth);
-		pHeight = Math::MinMax<uint32>(h, minimumHeight, maximumHeight);
+		assert(width  <= (unsigned) maximumWidth && "display resolution: width greater than Device::Display::Resolution::maximumWidth");
+		assert(height <= (unsigned) maximumHeight && "display resolution: height greater than Device::Display::Resolution::maximumHeight");
+
+		pBitsPerPixel = (32 == bits ||  24 == bits || 16 == bits || 8 == bits)
+			? (uint8) bits : (uint8)32;
+		pWidth  = Math::MinMax<unsigned int>(width,  minimumWidth,  maximumWidth);
+		pHeight = Math::MinMax<unsigned int>(height, minimumHeight, maximumHeight);
 	}
 
 

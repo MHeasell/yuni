@@ -17,21 +17,24 @@ namespace Display
 	void Monitor::addSafeResolutions()
 	{
 		// Default (and assumed safe) resolutions
+		pResolutions.push_back(new Resolution(1024, 768, 32));
 		pResolutions.push_back(new Resolution(800, 600, 32));
 		pResolutions.push_back(new Resolution(640, 480, 32));
 	}
 
 
-	Monitor::Monitor()
-		:pHandle(Monitor::InvalidHandle),
-		pPrimary(false), pHardwareAcceleration(false), pBuiltin(false)
+	Monitor::Monitor() :
+		pHandle(Monitor::InvalidHandle),
+		pPrimary(false),
+		pHardwareAcceleration(false),
+		pBuiltin(false)
 	{
 		addSafeResolutions();
 	}
 
 
-	Monitor::Monitor(const String& nm, const Monitor::Handle hwn, const bool p, const bool a, const bool b)
-		:pHandle(hwn), pProductName(nm), pResolutions(),
+	Monitor::Monitor(const String& nm, const Monitor::Handle hwn, const bool p, const bool a, const bool b) :
+		pHandle(hwn), pProductName(nm), pResolutions(),
 		pPrimary(p), pHardwareAcceleration(a), pBuiltin(b)
 	{
 		#ifdef YUNI_OS_WINDOWS
@@ -47,9 +50,13 @@ namespace Display
 	}
 
 
-	Monitor::Monitor(const Monitor& c)
-		:pHandle(c.pHandle), pProductName(c.pProductName), pResolutions(c.pResolutions), pPrimary(c.pPrimary),
-		pHardwareAcceleration(c.pHardwareAcceleration), pBuiltin(c.pBuiltin)
+	Monitor::Monitor(const Monitor& copy) :
+		pHandle(copy.pHandle),
+		pProductName(copy.pProductName),
+		pResolutions(copy.pResolutions),
+		pPrimary(copy.pPrimary),
+		pHardwareAcceleration(copy.pHardwareAcceleration),
+		pBuiltin(copy.pBuiltin)
 	{}
 
 
@@ -61,6 +68,7 @@ namespace Display
 
 	Resolution::Ptr Monitor::recommendedResolution() const
 	{
+		// we assume that the first resolution is the highest available
 		return (!pResolutions.empty())
 			? *(pResolutions.begin())
 			: new Resolution(640, 480);
@@ -91,21 +99,22 @@ namespace Display
 	}
 
 
-	void Monitor::add(const Resolution::Ptr& r)
+	void Monitor::add(const Resolution::Ptr& resolution)
 	{
-		pResolutions.push_back(r);
+		pResolutions.push_back(resolution);
 	}
 
 
 	bool Monitor::resolutionIsValid(const Resolution::Ptr& rhs) const
 	{
-		if (NULL != rhs) // The pointer must be valid
+		if (!(!rhs)) // The pointer must be valid
 		{
 			// Browse all available resolutions
 			// The lookup should be done in the usual way since it is a sorted descendant list
-			for (Resolution::Vector::const_iterator it = pResolutions.begin(); it != pResolutions.end(); ++it)
+			Resolution::Vector::const_iterator end = pResolutions.end();
+			for (Resolution::Vector::const_iterator it = pResolutions.begin(); it != end; ++it)
 			{
-				if (NULL != (*it) && *(*it) == *rhs)
+				if (*(*it) == *rhs)
 					return true;
 			}
 		}
@@ -119,17 +128,20 @@ namespace Display
 		return *this;
 	}
 
+
 	Monitor& Monitor::operator += (const Resolution::Ptr& rhs)
 	{
 		pResolutions.push_back(rhs);
 		return *this;
 	}
 
+
 	Monitor& Monitor::operator << (Resolution* rhs)
 	{
 		pResolutions.push_back(rhs);
 		return *this;
 	}
+
 
 	Monitor& Monitor::operator << (const Resolution::Ptr& rhs)
 	{
@@ -140,8 +152,8 @@ namespace Display
 
 
 
+
 } // namespace Display
 } // namespace Device
 } // namespace Yuni
-
 
