@@ -101,8 +101,8 @@ namespace Yuni
 
 		// Friends
 		template<class P> friend class Event;
-		template<class BindT> friend class Private::EventImpl::PredicateRemoveObject;
-		template<class BindT> friend class Private::EventImpl::PredicateRemoveObserverBase;
+		template<class BindT> friend class Yuni::Private::EventImpl::PredicateRemoveObject;
+		template<class BindT> friend class Yuni::Private::EventImpl::PredicateRemoveObserverBase;
 
 	}; // class IEventObserverBase
 

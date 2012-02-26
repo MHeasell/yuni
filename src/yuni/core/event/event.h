@@ -18,7 +18,7 @@ namespace Yuni
 	template<class P = void ()>
 	class YUNI_DECL Event :
 		public IEvent,                                  // base class IEvent
-		public Private::EventImpl::WithNArguments<Bind<P>::argumentCount, Bind<P> >
+		public Yuni::Private::EventImpl::WithNArguments<Bind<P>::argumentCount, Bind<P> >
 	{
 	public:
 		//! Event
@@ -26,7 +26,7 @@ namespace Yuni
 		//! The Bind Type
 		typedef Bind<P> BindType;
 		//! Type of the Ancestor
-		typedef typename Private::EventImpl::template WithNArguments<BindType::argumentCount, BindType> AncestorType;
+		typedef typename Yuni::Private::EventImpl::template WithNArguments<BindType::argumentCount, BindType> AncestorType;
 
 		//! The Threading Policy
 		typedef typename AncestorType::ThreadingPolicy ThreadingPolicy;
