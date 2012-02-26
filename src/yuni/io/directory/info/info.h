@@ -59,7 +59,7 @@ namespace Directory
 		};
 
 		// implementation
-		# include "iterator.h"
+		# include "iterator.inc.hpp"
 
 		// \internal We must specify the full namespace (`Yuni::...`) to avoid conflict
 		//   with  Yuni::IO::Directory::IIterator.

@@ -643,7 +643,7 @@ RECURSIVE              = YES
 
 EXCLUDE                = private \
                          core/system/windows/msinttypes/inttypes.h \
-						 net/rest/mongoose/*
+						 net/rest/mongoose
 
 # The EXCLUDE_SYMLINKS tag can be used select whether or not files or
 # directories that are symbolic links (a Unix file system feature) are excluded
