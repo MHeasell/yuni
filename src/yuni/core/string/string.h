@@ -229,7 +229,7 @@ namespace Yuni
 
 	private:
 		// Implements the following iterator models for String
-		# include "iterator.h"
+		# include "iterator.inc.hpp"
 
 	public:
 		//! \name Iterators
