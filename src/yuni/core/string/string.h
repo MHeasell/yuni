@@ -262,7 +262,7 @@ namespace Yuni
 		/*!
 		** \brief Constructor from a mere CString
 		*/
-		CString(const char* const block, const Size blockSize);
+		CString(const char* const block, Size blockSize);
 
 		/*!
 		** \brief Constructor from a copy of a substring of 's'
@@ -383,7 +383,7 @@ namespace Yuni
 		** \param size Size of the given string
 		*/
 		template<class StringT>
-		void assign(const StringT& str, const Size size);
+		void assign(const StringT& str, Size size);
 
 		/*!
 		** \brief Copy a raw C-String
@@ -393,7 +393,7 @@ namespace Yuni
 		** \param offset Offset of the first character to copy
 		*/
 		template<class StringT>
-		void assign(const StringT& str, const Size size, const Size offset);
+		void assign(const StringT& str, Size size, Size offset);
 
 		/*!
 		** \brief Assign to the string all items within
@@ -550,8 +550,7 @@ namespace Yuni
 		** \param rhs  Any supported value
 		** \param size Size of the container
 		*/
-		template<class StringT>
-		void append(const StringT& s, const Size size);
+		template<class StringT> void append(const StringT& s, Size size);
 
 		/*!
 		** \brief Append to the end of the string a new value
@@ -561,7 +560,7 @@ namespace Yuni
 		** \param offset Offset of the first character to append
 		*/
 		template<class StringT>
-		void append(const StringT& s, const Size size, const Size offset);
+		void append(const StringT& s, Size size, Size offset);
 
 
 
@@ -570,12 +569,12 @@ namespace Yuni
 		//! \see template<class U> append(const U&, const Size)
 		template<class U> void write(const U& cstr);
 		//! \see template<class U> append(const U&, const Size)
-		template<class U> void write(const U& cstr, const Size size);
+		template<class U> void write(const U& cstr, Size size);
 
 		/*!
 		** \brief Append a single signed char
 		*/
-		void put(const char c);
+		void put(char c);
 		/*!
 		** \brief Append a single unsigned char
 		*/
@@ -594,7 +593,7 @@ namespace Yuni
 		** \return True if the given string has been inserted, false otherwise
 		**   (size == 0 or offset out of bounds)
 		*/
-		bool insert(const Size offset, const char* const cstr, const Size size);
+		bool insert(Size offset, const char* const cstr, Size size);
 
 		/*!
 		** \brief Insert a single item at a given position in the string
@@ -606,7 +605,7 @@ namespace Yuni
 		** \return True if the string has been inserted, false otherwise
 		**   (size == 0 or offset out of bounds)
 		*/
-		bool insert(const Size offset, const char c);
+		bool insert(Size offset, char c);
 
 		/*!
 		** \brief Insert an arbitrary C-String at a given position in the string
@@ -618,7 +617,7 @@ namespace Yuni
 		** \return True if the string has been inserted, false otherwise
 		**   (size == 0 or offset out of bounds)
 		*/
-		template<class StringT> bool insert(const Size offset, const StringT& s);
+		template<class StringT> bool insert(Size offset, const StringT& s);
 
 		/*!
 		** \brief Insert an arbitrary C-String at a given position in the string
@@ -631,7 +630,7 @@ namespace Yuni
 		** \return True if the string has been inserted, false otherwise
 		**   (size == 0 or offset out of bounds)
 		*/
-		template<class StringT> bool insert(const Size offset, const StringT& u, const Size size);
+		template<class StringT> bool insert(Size offset, const StringT& u, Size size);
 
 		/*!
 		** \brief Insert any arbitrary string at a given offset provided by an iterator
@@ -650,7 +649,7 @@ namespace Yuni
 		** \return True if the given string has been inserted, false otherwise
 		**   (size == 0 or offset out of bounds)
 		*/
-		bool prepend(const char* const cstr, const Size size);
+		bool prepend(const char* const cstr, Size size);
 
 		/*!
 		** \brief Insert a single item at the beginning of the string
@@ -659,7 +658,7 @@ namespace Yuni
 		** \return True if the string has been inserted, false otherwise
 		**   (size == 0 or offset out of bounds)
 		*/
-		bool prepend(const char c);
+		bool prepend(char c);
 
 		/*!
 		** \brief Insert an arbitrary C-String at the beginning of the string
@@ -678,7 +677,7 @@ namespace Yuni
 		** \return True if the string has been inserted, false otherwise
 		**   (size == 0 or offset out of bounds)
 		*/
-		template<class StringT> bool prepend(const StringT& u, const Size size);
+		template<class StringT> bool prepend(const StringT& u, Size size);
 
 		/*!
 		** \brief Overwrite a region of the string
@@ -688,7 +687,7 @@ namespace Yuni
 		** \param offset Position of the first character of the region in the string
 		** \param s A CString
 		*/
-		template<class StringT> void overwrite(const Size offset, const StringT& s);
+		template<class StringT> void overwrite(Size offset, const StringT& s);
 
 		/*!
 		** \brief Overwrite a region of the string
@@ -708,7 +707,7 @@ namespace Yuni
 		** \param cstr A C-String
 		** \param size Size of 'cstr'
 		*/
-		void overwrite(const Size offset, const char* const cstr, const Size size);
+		void overwrite(Size offset, const char* const cstr, Size size);
 
 		/*!
 		** \brief Overwrite a region of the string from the right of the string
@@ -728,7 +727,7 @@ namespace Yuni
 		**   in the string
 		** \param region A CString container
 		*/
-		template<class StringT> void overwriteRight(const Size offset, const StringT& s);
+		template<class StringT> void overwriteRight(Size offset, const StringT& s);
 
 
 		/*!
@@ -807,7 +806,7 @@ namespace Yuni
 		** \param len Size of the given cstr
 		** \return True if sub-string is found, false otherwise
 		*/
-		bool contains(const char* const cstr, const Size len) const;
+		bool contains(const char* const cstr, Size len) const;
 
 		/*!
 		** \brief Find the offset of a raw sub-string with a given length (in bytes) (ignoring the case)
@@ -816,7 +815,7 @@ namespace Yuni
 		** \param len Size of the given cstr
 		** \return True if sub-string is found, false otherwise
 		*/
-		bool icontains(const char* const cstr, const Size len) const;
+		bool icontains(const char* const cstr, Size len) const;
 
 		/*!
 		** \brief Find the offset of any supported CString
@@ -1001,7 +1000,7 @@ namespace Yuni
 		** \param cstr An arbitrary string character
 		** \return The position of the first occurence found, `npos` if not found
 		*/
-		unsigned int indexOf(Size offset, const char cstr) const;
+		unsigned int indexOf(Size offset, char cstr) const;
 
 		/*!
 		** \brief Find the offset of a raw sub-string with a given length (in bytes) from the left
@@ -1013,7 +1012,7 @@ namespace Yuni
 		** \param len Size of the given string
 		** \return The position of the first occurence found, `npos` if not found
 		*/
-		unsigned int indexOf(Size offset, const char* const cstr, const Size len) const;
+		unsigned int indexOf(Size offset, const char* const cstr, Size len) const;
 
 		/*!
 		** \brief Find the offset of any supported CString from the left
@@ -1178,7 +1177,7 @@ namespace Yuni
 		/*!
 		** \brief Get if a given string can be found at the beginning
 		*/
-		bool startsWith(const char* const cstr, const Size len) const;
+		bool startsWith(const char* const cstr, Size len) const;
 
 		/*!
 		** \brief Get if a given string can be found at the beginning
@@ -1193,7 +1192,7 @@ namespace Yuni
 		/*!
 		** \brief Get if a given string can be found at the beginning (case insensitive)
 		*/
-		bool istartsWith(const char* const cstr, const Size len) const;
+		bool istartsWith(const char* const cstr, Size len) const;
 
 		/*!
 		** \brief Get if a given string can be found at the beginning (case insensitive)
@@ -1208,7 +1207,7 @@ namespace Yuni
 		/*!
 		** \brief Get if a given string can be found at the end
 		*/
-		bool endsWith(const char* const cstr, const Size len) const;
+		bool endsWith(const char* const cstr, Size len) const;
 
 		/*!
 		** \brief Get if a given string can be found at the end
@@ -1225,7 +1224,7 @@ namespace Yuni
 		/*!
 		** \brief Get if a given string can be found at the end (case insensitive)
 		*/
-		bool iendsWith(const char* const cstr, const Size len) const;
+		bool iendsWith(const char* const cstr, Size len) const;
 
 		/*!
 		** \brief Get if a given string can be found at the end (case insensitive)
@@ -1278,7 +1277,7 @@ namespace Yuni
 		/*!
 		** \brief Remove all white-spaces from the beginning and the end of the string
 		*/
-		void trim(const char c);
+		void trim(char c);
 		/*!
 		** \brief Removes all items equal to one of those in 'whitespaces' from the
 		**   end of the string
@@ -1293,7 +1292,7 @@ namespace Yuni
 		/*!
 		** \brief Remove all items equal to 'c' from the end of the string
 		*/
-		void trimRight(const char c);
+		void trimRight(char c);
 
 		/*!
 		** \brief Removes all items equal to one of those in 'u' from the beginning
@@ -1303,7 +1302,7 @@ namespace Yuni
 		/*!
 		** \brief Remove all items equal to 'c' from the beginning of the string
 		*/
-		void trimLeft(const char c);
+		void trimLeft(char c);
 		//@}
 
 
@@ -1327,7 +1326,7 @@ namespace Yuni
 		** \param offset The offset (zero-based) of the first item to erase
 		** \param len The length (in number of items) to erase
 		*/
-		void erase(const Size offset, const Size len);
+		void erase(Size offset, Size len);
 
 		/*!
 		** \brief Erase a part of the string
@@ -1336,7 +1335,7 @@ namespace Yuni
 		** \param len The length (in number of items) to erase
 		*/
 		template<class ModelT, bool ConstT>
-		void erase(const IIterator<ModelT,ConstT>& offset, const Size len);
+		void erase(const IIterator<ModelT,ConstT>& offset, Size len);
 
 		/*!
 		** \brief Replace all occurrences of a string by another one
@@ -1542,7 +1541,7 @@ namespace Yuni
 		** Contrary to the operator [], it is safe to use an invalid offset
 		** \return The item at position \p offset, a default value if the offset is out of bound
 		*/
-		int at(const Size offset) const;
+		int at(Size offset) const;
 
 		/*!
 		** \brief Truncate the string to the given length
@@ -1550,7 +1549,7 @@ namespace Yuni
 		** Nothing will be done if the new size if greater than the current one.
 		** \param newSize The new size (in bytes)
 		*/
-		void truncate(const Size newSize);
+		void truncate(Size newSize);
 
 		/*!
 		** \brief Ensure that there is enough allocated space for X characters
@@ -1566,7 +1565,7 @@ namespace Yuni
 		** The content will remain untouched.
 		** \param len The new length (in bytes) of the string
 		*/
-		void resize(const Size len);
+		void resize(Size len);
 
 		/*!
 		** \brief Resize the string to 'len' bytes and fill the new content (if any)
@@ -1592,7 +1591,7 @@ namespace Yuni
 		** \param pattern The pattern to use to fill the new content
 		** \see fill()
 		*/
-		template<class StringT> void resize(const Size len, const StringT& pattern);
+		template<class StringT> void resize(Size len, const StringT& pattern);
 
 		/*!
 		** \brief Releases any memory not required to store the character data
@@ -1916,9 +1915,9 @@ namespace Yuni
 		//! \name Operators
 		//@{
 		//! The operator `[]`, for accessing to a single char (the offset must be valid)
-		const char& operator [] (const Size offset) const;
+		const char& operator [] (Size offset) const;
 		//! The operator `[]`, for accessing to a single char (the offset must be valid)
-		char& operator [] (const Size offset);
+		char& operator [] (Size offset);
 
 		//! The operator `+=` (append)
 		template<class U> CString& operator += (const U& rhs);
@@ -1958,13 +1957,13 @@ namespace Yuni
 
 	protected:
 		//! Assign without checking for pointer validity
-		Size assignWithoutChecking(const char* const block, const Size blockSize);
+		Size assignWithoutChecking(const char* const block, Size blockSize);
 		//! Append without checking for pointer validity
-		Size appendWithoutChecking(const char* const block, const Size blockSize);
+		Size appendWithoutChecking(const char* const block, Size blockSize);
 		//! Append without checking for pointer validity
-		Size appendWithoutChecking(const char c);
+		Size appendWithoutChecking(char c);
 		//! Assign without checking for pointer validity
-		Size assignWithoutChecking(const char c);
+		Size assignWithoutChecking(char c);
 		//! Adapt without any check
 		void adaptWithoutChecking(const char* const cstring, Size size);
 		//! Decal the inner data pointer (must only be used when the class is an adapter)
@@ -1979,7 +1978,7 @@ namespace Yuni
 		** \param maxLen The maximum length allowed
 		** \param offset The offset where to start from
 		*/
-		void assignFromEscapedCharacters(const char* const str, Size maxLen, const Size offset);
+		void assignFromEscapedCharacters(const char* const str, Size maxLen, Size offset);
 
 
 	private:
