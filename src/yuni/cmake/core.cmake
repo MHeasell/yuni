@@ -270,7 +270,7 @@ set(SRC_CORE_VALIDATOR
 source_group(core\\validator FILES ${SRC_CORE_VALIDATOR})
 
 set(SRC_CORE_SLIST
-		core/slist/iterator.h
+		core/slist/iterator.inc.hpp
 		core/slist/slist.h
 		core/slist/slist.hxx
 		core/slist.h
@@ -627,7 +627,7 @@ source_group(io\\directory\\iterator FILES ${SRC_IO_DIRECTORY_ITERATOR})
 
 
 set(SRC_IO_DIRECTORY_INFO
-		io/directory/info/iterator.h
+		io/directory/info/iterator.inc.hpp
 		io/directory/info/info.h
 		io/directory/info/info.hxx
 		io/directory/info/info.cpp

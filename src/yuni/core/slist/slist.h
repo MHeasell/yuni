@@ -60,7 +60,7 @@ namespace Yuni
 		};
 
 	public:
-		# include "iterator.h"
+		# include "iterator.inc.hpp"
 
 	public:
 		//! \name Constructors & Destructor
