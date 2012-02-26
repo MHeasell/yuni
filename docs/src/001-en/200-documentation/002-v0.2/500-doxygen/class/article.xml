@@ -451,15 +451,6 @@
 <a href="../class/yuni/logs/verbositylevel/@{INDEX}">Yuni::Logs::VerbosityLevel</a>
 </td><td></td></tr>
 <tr><td>
-<a href="../class/yuni/markdown/node/@{INDEX}">Yuni::Markdown::Node</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../class/yuni/markdown/reader/@{INDEX}">Yuni::Markdown::Reader</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../class/yuni/markdown/renderer/html/@{INDEX}">Yuni::Markdown::Renderer::Html</a>
-</td><td></td></tr>
-<tr><td>
 <a href="../class/yuni/math/base/hexalowercase/@{INDEX}">Yuni::Math::Base::HexaLowercase</a>
 </td><td></td></tr>
 <tr><td>
@@ -973,4 +964,4 @@
 <a href="../class/mg_request_info/mg_header/@{INDEX}">mg_request_info::mg_header</a>
 </td><td></td></tr>
 </table>
-<p><i>(total: 323 classes)</i></p>
+<p><i>(total: 320 classes)</i></p>

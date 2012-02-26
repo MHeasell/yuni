@@ -115,12 +115,6 @@
 <a href="../namespace/yuni/logs/verbosity/@{INDEX}">Yuni::Logs::Verbosity</a>
 </td><td></td></tr>
 <tr><td>
-<a href="../namespace/yuni/markdown/@{INDEX}">Yuni::Markdown</a>
-</td><td></td></tr>
-<tr><td>
-<a href="../namespace/yuni/markdown/renderer/@{INDEX}">Yuni::Markdown::Renderer</a>
-</td><td></td></tr>
-<tr><td>
 <a href="../namespace/yuni/math/@{INDEX}">Yuni::Math</a>
 </td><td></td></tr>
 <tr><td>
@@ -271,4 +265,4 @@
 <a href="../namespace/std/@{INDEX}">std</a>
 </td><td></td></tr>
 </table>
-<p><i>(total: 89 namespaces)</i></p>
+<p><i>(total: 87 namespaces)</i></p>

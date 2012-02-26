@@ -15,11 +15,11 @@
 <h3>Public function</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructor &amp; DEstructor</h4></td></tr>
 <tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1DynamicLibrary_1_1File_1a478a99938b4f702d4419d7b9852c64de">File</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1DynamicLibrary_1_1File_1a51748705a144c028fad855c31ebbaba9">File</a></span>(const StringAdapter&amp; filename, const Relocation r, const Visibility v)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1DynamicLibrary_1_1File_1a48474d0c4bc78996809f1460cb9245df">File</a></span>(const AnyString&amp; filename, const Relocation r, const Visibility v)</code></td></tr>
 <tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1DynamicLibrary_1_1File_1a0d6f478b7e65de75db560c206971a872"><b> ~ </b>File</a></span>()</code></td></tr>
 <tr><td></td><td><br /><h4>Loading / Unloading</h4></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1DynamicLibrary_1_1File_1a736753e3f7b6be686539a79cd56adac0">loadFromFile</a></span>(const StringAdapter&amp; filename, const Relocation r, const Visibility v)</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1DynamicLibrary_1_1File_1a253b6960a2cf016a06658aa95e36ec58">loadFromRawFilename</a></span>(const StringAdapter&amp; filename, const Relocation r, const Visibility v)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1DynamicLibrary_1_1File_1ae170f9f789788f6cc459bd8122c1465e">loadFromFile</a></span>(const AnyString&amp; filename, const Relocation r, const Visibility v)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1DynamicLibrary_1_1File_1ac3b46f168585d13f144875ed191e0b7b">loadFromRawFilename</a></span>(const AnyString&amp; filename, const Relocation r, const Visibility v)</code></td></tr>
 <tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1DynamicLibrary_1_1File_1a0ec329ddefdd2163ff6458ab39f27f96">unload</a></span>()</code></td></tr>
 <tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1DynamicLibrary_1_1File_1a7a5b6454103a9544a8a4f8dc0cd6b48c">loaded</a></span>() <span class="keyword">const</span></code></td></tr>
 <tr><td class="doxygen_index"><code>const String&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1DynamicLibrary_1_1File_1a7e39d6edacb8bea0aaf5c4b4c7746419">filename</a></span>() <span class="keyword">const</span></code></td></tr>
@@ -119,7 +119,7 @@
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Constructor - Load an dynamic library.<br /></b><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a name="classYuni_1_1DynamicLibrary_1_1File_1a51748705a144c028fad855c31ebbaba9" href="#">+ File</a></span>:  (const StringAdapter&amp; filename, const Relocation r, const Visibility v);
+<code> <span class="method"><a name="classYuni_1_1DynamicLibrary_1_1File_1a48474d0c4bc78996809f1460cb9245df" href="#">+ File</a></span>:  (const AnyString&amp; filename, const Relocation r, const Visibility v);
 </code>
 </div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
@@ -137,7 +137,7 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Loading / Unloading <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Load a dynamic library from its filename.<br /></b><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a name="classYuni_1_1DynamicLibrary_1_1File_1a736753e3f7b6be686539a79cd56adac0" href="#">+ loadFromFile</a></span>: bool (const StringAdapter&amp; filename, const Relocation r, const Visibility v);
+<code> <span class="method"><a name="classYuni_1_1DynamicLibrary_1_1File_1ae170f9f789788f6cc459bd8122c1465e" href="#">+ loadFromFile</a></span>: bool (const AnyString&amp; filename, const Relocation r, const Visibility v);
 </code>
 </div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
@@ -145,7 +145,7 @@
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Load a dynamic library from its filename.<br /></b><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a name="classYuni_1_1DynamicLibrary_1_1File_1a253b6960a2cf016a06658aa95e36ec58" href="#">+ loadFromRawFilename</a></span>: bool (const StringAdapter&amp; filename, const Relocation r, const Visibility v);
+<code> <span class="method"><a name="classYuni_1_1DynamicLibrary_1_1File_1ac3b46f168585d13f144875ed191e0b7b" href="#">+ loadFromRawFilename</a></span>: bool (const AnyString&amp; filename, const Relocation r, const Visibility v);
 </code>
 </div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>

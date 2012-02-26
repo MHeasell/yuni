@@ -23,6 +23,7 @@
 <tr><td class="doxygen_index"><code>Size </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1CString_1_1Model_1_1UTF8Iterator_1abfaf63dbac8fe2a41495f7506e86b7ef">rawOffset</a></span>() <span class="keyword">const</span></code></td></tr>
 <tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1CString_1_1Model_1_1UTF8Iterator_1a5e13815dd380ece59835ae58206e40b4">findFirstNonSpace</a></span>(const Size end)</code></td></tr>
 <tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1CString_1_1Model_1_1UTF8Iterator_1a2cae94eba020129c3a280157659a4632">find</a></span>(const char c, const Size endOffset)</code></td></tr>
+<tr><td class="doxygen_index"><code>UTF8::Char </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1CString_1_1Model_1_1UTF8Iterator_1ac4a7af2e8ee0a9d78317b1f4dcbba503">value</a></span>() <span class="keyword">const</span></code></td></tr>
 </table></div>
 
 <h2>Detailed Description</h2><table class="doxygen_table">
@@ -107,6 +108,14 @@
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1CString_1_1Model_1_1UTF8Iterator_1a2cae94eba020129c3a280157659a4632" href="#">+ find</a></span>: bool (const char c, const Size endOffset);
+</code>
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
+</div>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get the current value of the iterator.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1CString_1_1Model_1_1UTF8Iterator_1ac4a7af2e8ee0a9d78317b1f4dcbba503" href="#">+ value</a></span>: UTF8::Char () <span class="keyword">const</span>;
 </code>
 </div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>

@@ -16,11 +16,11 @@
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructor &amp; Destructor</h4></td></tr>
 <tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1File_1_1Stream_1af5ee59d9cbf46843d8d1d2d3f8d10382">Stream</a></span>()</code></td></tr>
 <tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1File_1_1Stream_1a2d8278515a6076d327cec61d5a224629">Stream</a></span>(const Stream&amp; rhs)</code></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1File_1_1Stream_1af95afae7b99a39aba2f743ee97346704">Stream</a></span>(const U&amp; filename, const int mode)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1File_1_1Stream_1a0c01244a13328adbc3f1f0e8516aae65">Stream</a></span>(const AnyString&amp; filename, int mode)</code></td></tr>
 <tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1File_1_1Stream_1ac70f38f8a6a5dcf5534e2aefbbb35746"><b> ~ </b>Stream</a></span>()</code></td></tr>
 <tr><td></td><td><br /><h4>Open / Close a file</h4></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1File_1_1Stream_1a2363f09194fbe88a564467c86f2c7f33">open</a></span>(const U&amp; filename, const int mode)</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1File_1_1Stream_1a4d86a95958009e58892ee97e3895b2ef">openRW</a></span>(const U&amp; filename)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1File_1_1Stream_1af6bf8d139e96d0090e2f74b5447e2dc7">open</a></span>(const AnyString&amp; filename, const int mode)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1File_1_1Stream_1af0d32909dba33c38f6ebba676fea164e">openRW</a></span>(const AnyString&amp; filename)</code></td></tr>
 <tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1File_1_1Stream_1a9b745134e7e36bdd47a48ddf985819b0">close</a></span>()</code></td></tr>
 <tr><td></td><td><br /><h4>Stream</h4></td></tr>
 <tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1File_1_1Stream_1a6d54d32559a51fe89af89c07bbbf825d">opened</a></span>() <span class="keyword">const</span></code></td></tr>
@@ -39,10 +39,10 @@
 <tr><td class="doxygen_index"><code>size_t </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1File_1_1Stream_1a9a5e0d9d9c7c8609a5decd670890eb70">read</a></span>(char* buffer, const size_t size)</code></td></tr>
 <tr><td class="doxygen_index"><code>size_t </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1File_1_1Stream_1a7c373bb42f8c87803535070692db7d53">read</a></span>(CString&lt;CSizeT, ExpT, ZeroT&gt;&amp; buffer)</code></td></tr>
 <tr><td></td><td><br /><h4>Write</h4></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1File_1_1Stream_1afb045d87c5cc44e5cc49ba8d3463cc54">put</a></span>(const char c)</code></td></tr>
-<tr><td class="doxygen_index"><code>size_t </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1File_1_1Stream_1a5c826e26e24e32e2d6633a94487fd4a4">write</a></span>(const char* buffer, const size_t size)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1File_1_1Stream_1a9a4aedd106699046d6cb0bd63f9fde2e">put</a></span>(char c)</code></td></tr>
+<tr><td class="doxygen_index"><code>size_t </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1File_1_1Stream_1a6980dff0b9a07392b5d5383e6fc7946f">write</a></span>(const char* buffer, unsigned int size)</code></td></tr>
 <tr><td class="doxygen_index"><code>size_t </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1File_1_1Stream_1ad2adc3a15c6c688676795ba7e2eb156d">write</a></span>(const U&amp; buffer)</code></td></tr>
-<tr><td class="doxygen_index"><code>size_t </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1File_1_1Stream_1a25fd856b1b561789478c80bb1f0668e8">write</a></span>(const U&amp; buffer, const size_t size)</code></td></tr>
+<tr><td class="doxygen_index"><code>size_t </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1File_1_1Stream_1ac197ca395a70edc2b5bde7fba411d5b4">write</a></span>(const U&amp; buffer, unsigned int size)</code></td></tr>
 <tr><td></td><td><br /><h4>Locking</h4></td></tr>
 <tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1File_1_1Stream_1a09aeb6fe4ec4d928d05849ddba044707">lockShared</a></span>()</code></td></tr>
 <tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1IO_1_1File_1_1Stream_1a3c450c2751f421f07f2d50a80b83255b">lockExclusive</a></span>()</code></td></tr>
@@ -111,8 +111,7 @@
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Open a file.<br /></b><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a name="classYuni_1_1IO_1_1File_1_1Stream_1af95afae7b99a39aba2f743ee97346704" href="#">+ Stream</a></span>:  (const U&amp; filename, const int mode);
+<code> <span class="method"><a name="classYuni_1_1IO_1_1File_1_1Stream_1a0c01244a13328adbc3f1f0e8516aae65" href="#">+ Stream</a></span>:  (const AnyString&amp; filename, int mode);
 </code>
 </div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
@@ -130,8 +129,7 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Open / Close a file <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Open a file.<br /></b><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a name="classYuni_1_1IO_1_1File_1_1Stream_1a2363f09194fbe88a564467c86f2c7f33" href="#">+ open</a></span>: bool (const U&amp; filename, const int mode);
+<code> <span class="method"><a name="classYuni_1_1IO_1_1File_1_1Stream_1af6bf8d139e96d0090e2f74b5447e2dc7" href="#">+ open</a></span>: bool (const AnyString&amp; filename, const int mode);
 </code>
 </div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
@@ -139,8 +137,7 @@
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Open a file for writing.<br /></b><div class="doxygen_name_spacer"></div>
-<code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a name="classYuni_1_1IO_1_1File_1_1Stream_1a4d86a95958009e58892ee97e3895b2ef" href="#">+ openRW</a></span>: bool (const U&amp; filename);
+<code> <span class="method"><a name="classYuni_1_1IO_1_1File_1_1Stream_1af0d32909dba33c38f6ebba676fea164e" href="#">+ openRW</a></span>: bool (const AnyString&amp; filename);
 </code>
 </div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
@@ -279,7 +276,7 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Write <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Write a chr to the stream.<br /></b><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a name="classYuni_1_1IO_1_1File_1_1Stream_1afb045d87c5cc44e5cc49ba8d3463cc54" href="#">+ put</a></span>: bool (const char c);
+<code> <span class="method"><a name="classYuni_1_1IO_1_1File_1_1Stream_1a9a4aedd106699046d6cb0bd63f9fde2e" href="#">+ put</a></span>: bool (char c);
 </code>
 </div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
@@ -287,7 +284,7 @@
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Write a raw buffer.<br /></b><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a name="classYuni_1_1IO_1_1File_1_1Stream_1a5c826e26e24e32e2d6633a94487fd4a4" href="#">+ write</a></span>: size_t (const char* buffer, const size_t size);
+<code> <span class="method"><a name="classYuni_1_1IO_1_1File_1_1Stream_1a6980dff0b9a07392b5d5383e6fc7946f" href="#">+ write</a></span>: size_t (const char* buffer, unsigned int size);
 </code>
 </div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
@@ -305,7 +302,7 @@
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Write any arbitrary buffer.<br /></b><div class="doxygen_name_spacer"></div>
 <code><div class="doxygen_tmpllist"><span class="keyword">template</span>&lt;class U &gt;</div>
- <span class="method"><a name="classYuni_1_1IO_1_1File_1_1Stream_1a25fd856b1b561789478c80bb1f0668e8" href="#">+ write</a></span>: size_t (const U&amp; buffer, const size_t size);
+ <span class="method"><a name="classYuni_1_1IO_1_1File_1_1Stream_1ac197ca395a70edc2b5bde7fba411d5b4" href="#">+ write</a></span>: size_t (const U&amp; buffer, unsigned int size);
 </code>
 </div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
