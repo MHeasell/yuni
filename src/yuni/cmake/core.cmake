@@ -284,7 +284,7 @@ set(SRC_CORE_STRING
 		core/string/string.cpp
 		core/string/string.hxx
 		core/string/operators.hxx
-		core/string/iterator.h
+		core/string/iterator.inc.hpp
 		core/string/iterator.hxx
 		core/string/utf8char.h
 		core/string/utf8char.hxx

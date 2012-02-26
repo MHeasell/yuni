@@ -21,38 +21,46 @@ inline std::ostream& operator << (std::ostream& out, const Yuni::UTF8::Char& rhs
 }
 
 
-template<class ContainerT>
-class OStreamYuniHelper
+namespace Yuni
 {
-public:
-	static void Print(std::ostream& out, const ContainerT& rhs)
-	{
-		switch (rhs.size())
-		{
-			case 0:
-				break;
-			case 1:
-				{
-					out << rhs[0];
-					break;
-				}
-			default:
-				{
-					const Yuni::String::Vector::const_iterator end = rhs.end();
-					Yuni::String::Vector::const_iterator i = rhs.begin();
-					out << *i;
-					++i;
-					for (; i != end; ++i)
-					{
-						out.write(", ", 2);
-						out << *i;
-					}
-					break;
-				}
-		}
-	}
+namespace Private
+{
 
-}; // class OStreamYuniHelper
+	template<class ContainerT>
+	class OStreamYuniHelper
+	{
+	public:
+		static void Print(std::ostream& out, const ContainerT& rhs)
+		{
+			switch (rhs.size())
+			{
+				case 0:
+					break;
+				case 1:
+					{
+						out << rhs[0];
+						break;
+					}
+				default:
+					{
+						const Yuni::String::Vector::const_iterator end = rhs.end();
+						Yuni::String::Vector::const_iterator i = rhs.begin();
+						out << *i;
+						++i;
+						for (; i != end; ++i)
+						{
+							out.write(", ", 2);
+							out << *i;
+						}
+						break;
+					}
+			}
+		}
+
+	}; // class OStreamYuniHelper
+
+} // namespace Private
+} // namespace Yuni
 
 
 
@@ -60,7 +68,7 @@ template<class T, class AllocatorT>
 std::ostream& operator << (std::ostream& out, const std::vector<T, AllocatorT>& rhs)
 {
 	typedef std::vector<T, AllocatorT>  SourceType;
-	OStreamYuniHelper<SourceType>::Print(out, rhs);
+	Yuni::Private::OStreamYuniHelper<SourceType>::Print(out, rhs);
 	return out;
 }
 
@@ -69,7 +77,7 @@ template<class T, class AllocatorT>
 std::ostream& operator << (std::ostream& out, const std::list<T, AllocatorT>& rhs)
 {
 	typedef std::list<T, AllocatorT>  SourceType;
-	OStreamYuniHelper<SourceType>::Print(out, rhs);
+	Yuni::Private::OStreamYuniHelper<SourceType>::Print(out, rhs);
 	return out;
 }
 
