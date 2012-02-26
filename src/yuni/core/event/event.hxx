@@ -159,7 +159,7 @@ namespace Yuni
 				typename ThreadingPolicy::MutexLocker locker(*this);
 				if (!AncestorType::pBindList.empty())
 				{
-					typedef Private::EventImpl::template
+					typedef Yuni::Private::EventImpl::template
 						PredicateRemoveObserverBase<typename AncestorType::BindType> RemoveType;
 					AncestorType::pBindList.remove(RemoveType(dynamic_cast<IEvent*>(this), base));
 					AncestorType::pEmpty = AncestorType::pBindList.empty();
@@ -171,7 +171,7 @@ namespace Yuni
 				typename ThreadingPolicy::MutexLocker locker(*this);
 				if (!AncestorType::pBindList.empty())
 				{
-					typedef Private::EventImpl::template
+					typedef Yuni::Private::EventImpl::template
 						PredicateRemoveObject<typename AncestorType::BindType> RemoveType;
 					AncestorType::pBindList.remove(RemoveType(object));
 					AncestorType::pEmpty = AncestorType::pBindList.empty();
@@ -189,7 +189,7 @@ namespace Yuni
 		// When unregistering an observer, we have to remove it without any more checks
 		if (!AncestorType::pBindList.empty())
 		{
-			typedef Private::EventImpl::template
+			typedef Yuni::Private::EventImpl::template
 				PredicateRemoveWithoutChecks<typename AncestorType::BindType> RemoveType;
 			AncestorType::pBindList.remove(RemoveType(pointer));
 		}
