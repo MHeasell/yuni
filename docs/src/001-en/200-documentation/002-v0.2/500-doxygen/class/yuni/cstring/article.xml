@@ -2173,15 +2173,15 @@
 </div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc"><source type="cpp">  String  t  =  "a,  b,  c" ;
-  t.words( "  ,\t\r\n" ,  [&amp;]  ( const  StringAdapter &amp;  word)
+  t.words( "  ,\t\r\n" ,  [&amp;]  ( const  AnyString &amp;  word)
   {
      std::cout  &lt;&lt;  word  &lt;&lt;  std::endl;  //  3  elements
   });
 </source>
 <br /> Dealing with empty words :<source type="cpp">  String  t  =  "a,  b,,  d" ;
-  t.words( "," ,  [&amp;]  ( StringAdapter &amp;  word)
+  t.words( "," ,  [&amp;]  ( AnyString &amp;  word)
   {
-     word.trim();
+     word. trim ();
      std::cout  &lt;&lt;  word  &lt;&lt;  std::endl;  //  4  elements
   });
 </source>

@@ -19,7 +19,7 @@
 <tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1Sound_1a6b0457fe10865463a98640d02361fc05">Sound</a></span>(Private::Audio::AudioStream* stream)</code></td></tr>
 <tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1Sound_1a56d6e855051b3d4bd7c0807af573b452"><b> ~ </b>Sound</a></span>()</code></td></tr>
 <tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1Sound_1a66a8a7f40b55258ab86b6f21d0b601dd">prepareDispatched</a></span>(unsigned int source)</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1Sound_1ad34879161e9201c179ed6079f7e676ef">destroyDispatched</a></span>()</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1Sound_1ae072bac80b13300f6323688afc6d5fe7">destroyDispatched</a></span>(Thread::Signal&amp; signal)</code></td></tr>
 <tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1Sound_1aaa94c5a20394dbab16d9344aaca04e39">updateDispatched</a></span>(unsigned int source)</code></td></tr>
 <tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1Sound_1a18743442bc48c0c7fbb979fe174745a0">stream</a></span>(Private::Audio::AudioStream* stream)</code></td></tr>
 <tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1Sound_1a5381acff18de590792661e8a8b9d3348">valid</a></span>()</code></td></tr>
@@ -90,7 +90,7 @@
 <div class="doxygen_desc">
 </div>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1Audio_1_1Sound_1ad34879161e9201c179ed6079f7e676ef" href="#">+ destroyDispatched</a></span>: bool ();
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1Audio_1_1Sound_1ae072bac80b13300f6323688afc6d5fe7" href="#">+ destroyDispatched</a></span>: bool (Thread::Signal&amp; signal);
 </code>
 </div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>

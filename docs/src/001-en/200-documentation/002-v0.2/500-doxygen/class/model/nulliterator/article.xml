@@ -23,6 +23,7 @@
 <tr><td class="doxygen_index"><code>Size </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classModel_1_1NullIterator_1ac9d09ba2bc0eb74ba1678713f5b814d2">offset</a></span>() <span class="keyword">const</span></code></td></tr>
 <tr><td class="doxygen_index"><code>const StringType&amp; </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classModel_1_1NullIterator_1ae738c51962eff6e379d4c01592a0ef9b">string</a></span>() <span class="keyword">const</span></code></td></tr>
 <tr><td class="doxygen_index"><code>Size </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classModel_1_1NullIterator_1aeffe7d2e8b54e5cf406451b53d664115">rawOffset</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>char </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classModel_1_1NullIterator_1af86b4b4b1a2995e75ce5796e584db63d">value</a></span>() <span class="keyword">const</span></code></td></tr>
 </table></div>
 
 <h2>Detailed Description</h2><table class="doxygen_table">
@@ -120,6 +121,14 @@
 </div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
 <div class="doxygen_desc">This method should not be directly used and is only useful for other external iterators<br />
+</div>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get the current value of the iterator.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classModel_1_1NullIterator_1af86b4b4b1a2995e75ce5796e584db63d" href="#">+ value</a></span>: char () <span class="keyword">const</span>;
+</code>
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc">
 </div>
 </td></tr>
 </table>

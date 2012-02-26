@@ -18,8 +18,9 @@
 <tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1QueueService_1_1Bank_1abc1e8e7a555def2359597e3ad3f5881e">Bank</a></span>(const Bank&amp; )</code></td></tr>
 <tr><td></td><td><br /><h4></h4></td></tr>
 <tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1QueueService_1_1Bank_1a370a227bdbc369902a2358db2158bf86">clear</a></span>()</code></td></tr>
-<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1QueueService_1_1Bank_1a34133aecbe3885bce06bf43222413ead">load</a></span>(const StringAdapter&amp; name)</code></td></tr>
-<tr><td class="doxygen_index"><code>unsigned int </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1QueueService_1_1Bank_1ac59dce71a473b047dd3c7d5799512ede">duration</a></span>(const StringAdapter&amp; name)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1QueueService_1_1Bank_1a446a49f97bb36488885ce4b39a87cc54">load</a></span>(const AnyString&amp; name)</code></td></tr>
+<tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1QueueService_1_1Bank_1a804d2c61b3c4f018d96bb1d0493e869f">unload</a></span>(const AnyString&amp; name)</code></td></tr>
+<tr><td class="doxygen_index"><code>unsigned int </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Audio_1_1QueueService_1_1Bank_1a79fb74be63db91c857bbaafca4ae6179">duration</a></span>(const AnyString&amp; name)</code></td></tr>
 </table></div>
 
 <h2>Detailed Description</h2><div>It can be accessed through: queueService.bank<br /></div><div style="margin-top:3em;border:1px solid #aaa;border-bottom-style:none;border-left-style:none;border-right-style:none"></div>
@@ -69,7 +70,15 @@
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Load sound file from given path.<br /></b><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a name="classYuni_1_1Audio_1_1QueueService_1_1Bank_1a34133aecbe3885bce06bf43222413ead" href="#">+ load</a></span>: bool (const StringAdapter&amp; name);
+<code> <span class="method"><a name="classYuni_1_1Audio_1_1QueueService_1_1Bank_1a446a49f97bb36488885ce4b39a87cc54" href="#">+ load</a></span>: bool (const AnyString&amp; name);
+</code>
+</div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
+<div class="doxygen_name_spacer"></div>
+<div class="doxygen_desc"><div class="doxygen_params">Parameters :</div><ul><li><code> name</code> Path to file, used from now on as an identifier for the sound<br /></li></ul><br />
+</div>
+</td></tr>
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Load sound file from given path.<br /></b><div class="doxygen_name_spacer"></div>
+<code> <span class="method"><a name="classYuni_1_1Audio_1_1QueueService_1_1Bank_1a804d2c61b3c4f018d96bb1d0493e869f" href="#">+ unload</a></span>: bool (const AnyString&amp; name);
 </code>
 </div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
@@ -77,7 +86,7 @@
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Get the duration of a loaded sound.<br /></b><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a name="classYuni_1_1Audio_1_1QueueService_1_1Bank_1ac59dce71a473b047dd3c7d5799512ede" href="#">+ duration</a></span>: unsigned int (const StringAdapter&amp; name);
+<code> <span class="method"><a name="classYuni_1_1Audio_1_1QueueService_1_1Bank_1a79fb74be63db91c857bbaafca4ae6179" href="#">+ duration</a></span>: unsigned int (const AnyString&amp; name);
 </code>
 </div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>

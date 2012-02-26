@@ -25,8 +25,8 @@
 <tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Net_1_1Message_1_1QueueService_1a15f7b27fbac60e9b4eb0cb3e021210db">QueueService</a></span>()</code></td></tr>
 <tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Net_1_1Message_1_1QueueService_1a104d0704a1faa893c24921beecf8b47b"><b> ~ </b>QueueService</a></span>()</code></td></tr>
 <tr><td></td><td><br /><h4>Addresses management</h4></td></tr>
-<tr><td class="doxygen_index"><code>Error </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Net_1_1Message_1_1QueueService_1a2f248e6fdae847ebf20f6a3e24e39b18">listen</a></span>(const StringAdapter&amp; address, const Port&amp; port, TransportLayer transport)</code></td></tr>
-<tr><td class="doxygen_index"><code>Error </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Net_1_1Message_1_1QueueService_1abcf3edd1b9518c1800dcfc2025fb969f">listen</a></span>(const StringAdapter&amp; address, const Port&amp; port, Transport::ITransport::Ptr transport)</code></td></tr>
+<tr><td class="doxygen_index"><code>Error </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Net_1_1Message_1_1QueueService_1a4d8333f1e22637b07fd9432f13b4c83d">listen</a></span>(const AnyString&amp; address, const Port&amp; port, TransportLayer transport)</code></td></tr>
+<tr><td class="doxygen_index"><code>Error </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Net_1_1Message_1_1QueueService_1a3d1da86b899cdefb1abde1846b9eff45">listen</a></span>(const AnyString&amp; address, const Port&amp; port, Transport::ITransport::Ptr transport)</code></td></tr>
 <tr><td class="doxygen_index"><code>void </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Net_1_1Message_1_1QueueService_1a14ada01e6d385e3b443c428f1f7e6511">clear</a></span>()</code></td></tr>
 <tr><td></td><td><br /><h4>Service management</h4></td></tr>
 <tr><td class="doxygen_index"><code>Error </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Net_1_1Message_1_1QueueService_1a34e794ebb82208a7efdfb980f7ec5704">start</a></span>()</code></td></tr>
@@ -149,7 +149,7 @@
 </td></tr>
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Addresses management <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
-<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1Net_1_1Message_1_1QueueService_1a2f248e6fdae847ebf20f6a3e24e39b18" href="#">+ listen</a></span>: Error (const StringAdapter&amp; address, const Port&amp; port, TransportLayer transport);
+<tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><code> <span class="method"><a name="classYuni_1_1Net_1_1Message_1_1QueueService_1a4d8333f1e22637b07fd9432f13b4c83d" href="#">+ listen</a></span>: Error (const AnyString&amp; address, const Port&amp; port, TransportLayer transport);
 </code>
 </div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
@@ -162,7 +162,7 @@
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Add a new address where the server should listen for incoming connections.<br /></b><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a name="classYuni_1_1Net_1_1Message_1_1QueueService_1abcf3edd1b9518c1800dcfc2025fb969f" href="#">+ listen</a></span>: Error (const StringAdapter&amp; address, const Port&amp; port, Transport::ITransport::Ptr transport);
+<code> <span class="method"><a name="classYuni_1_1Net_1_1Message_1_1QueueService_1a3d1da86b899cdefb1abde1846b9eff45" href="#">+ listen</a></span>: Error (const AnyString&amp; address, const Port&amp; port, Transport::ITransport::Ptr transport);
 </code>
 </div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>

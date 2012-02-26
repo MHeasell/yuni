@@ -15,11 +15,11 @@
 
 <h3>Public function</h3>
 <div class="doxygen_brief"><table class="nostyle"><tr><td></td><td><h4>Constructors</h4></td></tr>
-<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Resolution_1aec197c8a7e77e3a0ad0890fc6928263e">Resolution</a></span>(const uint32 w, const uint32 h, const uint8 b)</code></td></tr>
+<tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Resolution_1aa8a62b8adf16bea6c799c37f4fe826b1">Resolution</a></span>(unsigned int width, unsigned int height, uint8 bits)</code></td></tr>
 <tr><td class="doxygen_index"><code> </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Resolution_1a326834f9146c735356b3a0a9ebdc7c30">Resolution</a></span>(const Resolution&amp; c)</code></td></tr>
 <tr><td></td><td><br /><h4>Information about the current mode</h4></td></tr>
-<tr><td class="doxygen_index"><code>uint32 </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Resolution_1a104dd6fe7dc6e2b70c273358d355fa87">width</a></span>() <span class="keyword">const</span></code></td></tr>
-<tr><td class="doxygen_index"><code>uint32 </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Resolution_1a04864a9f391faac3d36b1f9ab60f80d4">height</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>unsigned int </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Resolution_1aea0ecf9c07e20f0839d84cbd8e6c2b56">width</a></span>() <span class="keyword">const</span></code></td></tr>
+<tr><td class="doxygen_index"><code>unsigned int </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Resolution_1a67fa829a413b0014cc7fa0011e99d9cb">height</a></span>() <span class="keyword">const</span></code></td></tr>
 <tr><td class="doxygen_index"><code>uint8 </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Resolution_1ae0be8ae84ebdddae67496e96f28f7bfe">bitPerPixel</a></span>() <span class="keyword">const</span></code></td></tr>
 <tr><td></td><td><br /><h4>Operators</h4></td></tr>
 <tr><td class="doxygen_index"><code>bool </code></td><td class="doxygen_index_def"><code> <span class="method"><a href="#classYuni_1_1Device_1_1Display_1_1Resolution_1a7d6cf54dee03f70eb1a446670774dea5">operator==</a></span>(const Resolution&amp; rhs) <span class="keyword">const</span></code></td></tr>
@@ -63,7 +63,7 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Constructors <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>Constructor.<br /></b><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Resolution_1aec197c8a7e77e3a0ad0890fc6928263e" href="#">+ Resolution</a></span>:  (const uint32 w, const uint32 h, const uint8 b);
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Resolution_1aa8a62b8adf16bea6c799c37f4fe826b1" href="#">+ Resolution</a></span>:  (unsigned int width, unsigned int height, uint8 bits);
 </code>
 </div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
@@ -81,7 +81,7 @@
 <tr><td class="doxnone"></td><td class="doxnone"><h3 class="doxygen_section">Information about the current mode <code class="doxygen_visibility">Public</code></h3>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>The width of the monitor/screen.<br /></b><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Resolution_1a104dd6fe7dc6e2b70c273358d355fa87" href="#">+ width</a></span>: uint32 () <span class="keyword">const</span>;
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Resolution_1aea0ecf9c07e20f0839d84cbd8e6c2b56" href="#">+ width</a></span>: unsigned int () <span class="keyword">const</span>;
 </code>
 </div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
@@ -89,7 +89,7 @@
 </div>
 </td></tr>
 <tr><td class="doxygen_fun"></td><td class="doxnone"><div class="doxygen_brief"><b>The height of the monitor/screen.<br /></b><div class="doxygen_name_spacer"></div>
-<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Resolution_1a04864a9f391faac3d36b1f9ab60f80d4" href="#">+ height</a></span>: uint32 () <span class="keyword">const</span>;
+<code> <span class="method"><a name="classYuni_1_1Device_1_1Display_1_1Resolution_1a67fa829a413b0014cc7fa0011e99d9cb" href="#">+ height</a></span>: unsigned int () <span class="keyword">const</span>;
 </code>
 </div></td></tr><tr><td class="doxnone doxreturn"></td><td class="doxnone">
 <div class="doxygen_name_spacer"></div>
