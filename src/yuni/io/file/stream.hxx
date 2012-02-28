@@ -160,13 +160,10 @@ namespace File
 			{
 				YUNI_STATIC_ASSERT(Traits::IsString<U>::yes, InvalidTypeForBuffer);
 
-				unsigned int length = Traits::Length<U, unsigned int>::Value(u);
-				if (length > size)
-					length = size;
 				return ::fwrite(
 					Traits::CString<U>::Perform(u),  // raw data
 					1,                               // nb items
-					length,                          // size
+					size,                            // size
 					pFd);                            // file descriptor
 			}
 		};
