@@ -40,13 +40,13 @@ namespace LogImpl
 	public:
 		//! \name Constructos & Destructor
 		//@{
-		inline Buffer(LoggerType& l)
-			:pLogger(l)
+		inline Buffer(LoggerType& l) :
+			pLogger(l)
 		{}
 
 		template<typename U>
-		inline Buffer(LoggerType& l, U u)
-			:pLogger(l)
+		inline Buffer(LoggerType& l, U u) :
+			pLogger(l)
 		{
 			pBuffer.append(u);
 		}
@@ -90,7 +90,7 @@ namespace LogImpl
 		** The chunk size can not be merely the default one; Log entries often
 		** contain path of filename for example.
 		*/
-		Yuni::CString<FILENAME_MAX, false, true> pBuffer;
+		Yuni::CString<1024> pBuffer;
 
 	}; // class Buffer
 
