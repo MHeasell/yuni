@@ -22,8 +22,19 @@ if (NOT WIN32 AND NOT WIN64)
 else()
 	LIBYUNI_CONFIG_DEFINITION("both" "core" "UNICODE")
 	LIBYUNI_CONFIG_DEFINITION("both" "core" "_UNICODE")
+	if (YUNI_TARGET MATCHES "debug")
+      LIBYUNI_CONFIG_CFLAG("both" "core" "-ggdb3")
+   endif()
 endif()
 LIBYUNI_CONFIG_DEFINITION("both" "core" "_REENTRANT")
+
+if (MINGW)
+   LIBYUNI_CONFIG_CFLAG("both" "core" "-mthreads")
+   if (YUNI_TARGET MATCHES "debug")
+      LIBYUNI_CONFIG_CFLAG("both" "core" "-ggdb3")
+   endif()
+endif()
+
 
 
 include(CheckCXXSourceCompiles)
