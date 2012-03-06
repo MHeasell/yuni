@@ -23,6 +23,7 @@ features to help you write programs :
 * Contracts through dynamic constraints
 * Generics
 * Predicates
+* Heterogeneous containers through implicit inheritance
 * Support for Doxygen comments
 This list is non-exhaustive.
 
@@ -35,7 +36,7 @@ the overall syntax flavour of the language. Here it is in Nany :
     
     function main
     {
-        system.io.println("Hello, World !");
+        io.out << "Hello, World !" << io.endl;
     }
 
 As you can see, it is very concise, and does not require a class to
@@ -113,11 +114,11 @@ Some examples of variable declaration :
     
     function main
     {
-        i := 0;           // integer
-        j := 42u;         // unsigned integer
-        s : string;       // string, will be initialized to ""
-        a: A := A.create; // class A
-        aa: A;            // class A, will be initialized to nil
+        var i := 0;           // integer
+        var j := 42u;         // unsigned integer
+        var s : string;       // string, will be initialized to ""
+        var a: A := A.create; // class A
+        var aa: A;            // class A, will be initialized to nil
         b                 // ERROR : unknown identifier
     }
 
@@ -322,7 +323,7 @@ also cater to many meta-programming needs (see related chapters).
 
 The syntax is a lot like C# generics :
 
-    class Pair<K, V>
+    class Pair<:K, V:>
     {
     public
         method create(k, v)
@@ -332,8 +333,8 @@ The syntax is a lot like C# generics :
         }
     
     private
-        key: K;
-        value: V;
+        var key: K;
+        var value: V;
     }
 
 To apply explicit constraints on generic types, see the specific
@@ -347,7 +348,7 @@ This sample class illustrates what a class would look like in Nany :
     /*!
     ** \brief Naive vector implementation
     */
-    class Vector<T>
+    class Vector<:T:>
     {
     public
         const method get(i)
@@ -381,9 +382,9 @@ This sample class illustrates what a class would look like in Nany :
         }
         
     private
-        const MaxSize := 65535u;
-        pData := T[MaxSize].create;
-        pSize := 0u;
+        var MaxSize : const := 65535u;
+        var pData := new T[MaxSize];
+        var pSize := 0u;
     }
 
 
@@ -508,6 +509,7 @@ Nany offers several built-in types :
 * double128
 * bool
 * any
+* uuid
 * Type
 
 `any` represents any one type. Depending on circumstances, the
@@ -545,10 +547,11 @@ it returns `nil`;
 
     function foo(s, t)
     {
-        s := getValue;
-        t := getOtherValue;
+        var s := getValue;
+        var t := getOtherValue;
         if s is typeof(t) then
-	    return s as typeof(t);
+	       return s as typeof(t);
+		return nil
     }
 
 
@@ -559,7 +562,7 @@ function parameters, and function return types is optional. Type
 inference forbids overload with the same number of parameters. For
 example :
 
-    public function foo(i) { system.io.println("" << i); }
+    public function foo(i) { io.out << "i: " << i; }
     
     public function foo(s: string) { system.io.println(s); }
 
@@ -569,15 +572,15 @@ string argument would be ambiguous.
 If the number of arguments is different, the call is not ambiguous
 and the program is valid :
 
-    public function foo(i) { system.io.println("" << i); i }
+    public function foo(i) { io.out << i; i }
     
-    public function foo(i, j) { system.io.println("" << i); j }
+    public function foo(i, j) { io.out << i << ' ' << j; j }
 
 Considering the following :
 
-    public function foo(i: int) { system.io.println("" << i); }
+    public function foo(i: int) { io.out << i }
     
-    public function foo(s: string) { system.io.println(s); }
+    public function foo(s: string) { io.out << s; }
 
 it would seem that the call is not ambiguous, since both types were
 explicitly given. However, Nany does not allow this, and offers a
@@ -645,10 +648,10 @@ However, languages with type inference often do not provide
 overloading in order to avoid problems such as the following :
 
     // `param1`'s type is inferred. There is a constraint regarding `operator <<`
-    function foo(param1) { System.cout << param1; }
+    function foo(param1) { io.out << param1; }
     
     // `param2`'s type is integer.
-    function foo(param2: int) { System.cout << "Integer : " << param1; }
+    function foo(param2: int) { io.out << "Integer : " << param1; }
     
     function main
     {
