@@ -88,7 +88,7 @@ namespace Math
 	** \param b The second expression
 	** \return The expression considered as the grater
 	*/
-	template<class U, class V> inline U Max(U a, V b);
+	template<class U, class V> U Max(U a, V b);
 
 	/*!
 	** \brief Maximum of three values
@@ -98,7 +98,7 @@ namespace Math
 	** \param c The third expression
 	** \return The expression considered as the grater
 	*/
-	template<class U, class V, class W> inline U Max(U a, V b, W c);
+	template<class U, class V, class W> U Max(U a, V b, W c);
 
 	/*!
 	** \brief Get the smallest expression
@@ -107,7 +107,7 @@ namespace Math
 	** \param b The second expression
 	** \return The expression considered as the smaller
 	*/
-	template<class U, class V> inline U Min(U a, V b);
+	template<class U, class V> U Min(U a, V b);
 
 	/*!
 	** \brief Minimum of three values
@@ -117,7 +117,7 @@ namespace Math
 	** \param c The third expression
 	** \return The expression considered as the smaller
 	*/
-	template<class U, class V, class W> inline U Min(U a, V b, W c);
+	template<class U, class V, class W> U Min(U a, V b, W c);
 
 
 	/*!
@@ -128,7 +128,7 @@ namespace Math
 	** \param max The upper bound limit allowed for the expression `v`
 	** \return The expression itself, or a bound limit
 	*/
-	template<class T> inline const T& MinMax(const T& expr, const T& min, const T& max);
+	template<class T> const T& MinMax(const T& expr, const T& min, const T& max);
 
 
 	/*!
@@ -155,7 +155,7 @@ namespace Math
 	** \return The expression itself, or a bound limit
 	*/
 	template<class T, class Expr, class MinT, class MaxT>
-	inline T MinMaxEx(const Expr& expr, const MinT& min, const MaxT& max);
+	T MinMaxEx(const Expr& expr, const MinT& min, const MaxT& max);
 
 	/*!
 	** \brief Swap two values
@@ -163,7 +163,7 @@ namespace Math
 	** \param a The first value
 	** \param b the second value
 	*/
-	template<class T> inline void Swap(T& a, T&b);
+	template<class T> void Swap(T& a, T&b);
 
 
 
@@ -192,8 +192,8 @@ namespace Math
 	** \param y The power y
 	** \return x**y
 	*/
-	inline float Power(const float x, const float y);
-	inline double Power(const double x, const double y);
+	float Power(float x, float y);
+	double Power(double x, double y);
 
 	/*!
 	** \brief The power function for Integer values
@@ -224,14 +224,14 @@ namespace Math
 	**
 	** This routine is safe for zero or negative values
 	*/
-	template<class U> U SquareRoot(const U x);
+	template<class U> U SquareRoot(U x);
 
 	/*!
 	** \brief Get the square root value
 	**
 	** The standard dquare root function, without any check on the input
 	*/
-	template<class U> U SquareRootNoCheck(const U x);
+	template<class U> U SquareRootNoCheck(U x);
 
 
 	/*!
@@ -259,7 +259,7 @@ namespace Math
 	** \brief Get if a value is a power of 2
 	**
 	*/
-	inline bool PowerOfTwo(const int x);
+	bool PowerOfTwo(int x);
 
 
 
@@ -269,7 +269,7 @@ namespace Math
 	** \note This method is provided for convenience only. You should
 	**       see Yuni::Unit for more functionalities.
 	*/
-	template<class T> inline T DegreeToRadian(const T x);
+	template<class T> T DegreeToRadian(T x);
 
 
 	/*!
@@ -278,38 +278,38 @@ namespace Math
 	** \note This method is provided for convenience only. You should
 	**       see Yuni::Unit for more functionalities.
 	*/
-	template<class T> inline T RadianToDegree(const T x);
+	template<class T> T RadianToDegree(T x);
 
 
 
 	/*!
 	** \brief Determine whether the argument value is a NaN
 	*/
-	template<class T> inline bool NaN(const T& x);
+	template<class T> bool NaN(const T& x);
 
 	/*!
 	** \brief Determine whether the argument value is an infinite value
 	**
 	** \return  1 if x is positive infinity, and -1 if x is negative infinity, 0 otherwise
 	*/
-	template<class T> inline int Infinite(const volatile T& x);
+	template<class T> int Infinite(const volatile T& x);
 
 
 	/*!
 	** \brief Floor function
 	*/
-	template<class T> inline T Floor(T x);
+	template<class T> T Floor(T x);
 
 	/*!
 	** \brief Ceil function
 	*/
-	template<class T> inline T Ceil(T x);
+	template<class T> T Ceil(T x);
 
 
 	/*!
 	** \brief The fractional part function
 	*/
-	template<class T> inline T Fract(T x);
+	template<class T> T Fract(T x);
 
 
 	/*!
@@ -322,7 +322,7 @@ namespace Math
 	** \param x A number
 	** \param place The place of the decimal number to round
 	*/
-	template<class T> inline T Round(T x, unsigned int place = 0);
+	template<class T> T Round(T x, unsigned int place = 0);
 
 
 	/*!
@@ -333,13 +333,13 @@ namespace Math
 	** \param x A number
 	** \param place The place of the decimal number to round
 	*/
-	template<class T> inline T Trunc(T x, unsigned int place = 0);
+	template<class T> T Trunc(T x, unsigned int place = 0);
 
 
 	/*!
 	** \brief Trunc decimal places
 	*/
-	inline double Trunc(double x, unsigned int places);
+	double Trunc(double x, unsigned int places);
 
 	/*!
 	** \brief Integral value nearest to x
@@ -362,7 +362,7 @@ namespace Math
 	** IsInteger(2.000001); // false
 	** \endcode
 	*/
-	template<class T> inline bool IsInteger(T x);
+	template<class T> bool IsInteger(T x);
 
 
 	/*!
