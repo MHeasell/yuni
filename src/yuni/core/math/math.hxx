@@ -153,34 +153,34 @@ namespace Math
 
 
 	template<class U>
-	inline U SquareRoot(const U x)
+	inline U SquareRoot(U x)
 	{
 		return (x < YUNI_EPSILON) ? U() : (U)::sqrt((double)x);
 	}
 
-	template<> inline double SquareRoot(const double x)
+	template<> inline double SquareRoot(double x)
 	{
 		return (x < YUNI_EPSILON) ? 0. : ::sqrt(x);
 	}
 
-	template<> inline float SquareRoot(const float x)
+	template<> inline float SquareRoot(float x)
 	{
 		return (x < YUNI_EPSILON) ? 0.f : ::sqrtf(x);
 	}
 
-	
+
 	template<class U>
-	inline U SquareRootNoCheck(const U x)
+	inline U SquareRootNoCheck(U x)
 	{
 		return (U)::sqrt((double)x);
 	}
 
-	template<> inline double SquareRootNoCheck(const double x)
+	template<> inline double SquareRootNoCheck(double x)
 	{
 		return ::sqrt(x);
 	}
 
-	template<> inline float SquareRootNoCheck(const float x)
+	template<> inline float SquareRootNoCheck(float x)
 	{
 		return ::sqrtf(x);
 	}
@@ -189,21 +189,21 @@ namespace Math
 
 
 
-	inline bool PowerOfTwo(const int x)
+	inline bool PowerOfTwo(int x)
 	{
 		return !(x & (x - 1)) && x;
 	}
 
 
-	template<class T> inline T DegreeToRadian(const T x)
+	template<class T> inline T DegreeToRadian(T x)
 	{
-		return (x * 0.017453292);
+		return (x * (T)0.017453292);
 	}
 
 
-	template<class T> inline T RadianToDegree(const T x)
+	template<class T> inline T RadianToDegree(T x)
 	{
-		return (x * 57.29578122);
+		return (x * (T)57.29578122);
 	}
 
 
@@ -271,12 +271,12 @@ namespace Math
 	}
 
 
-	inline float Power(const float x, const float y)
+	inline float Power(float x, float y)
 	{
 		return ::powf(x, y);
 	}
 
-	inline double Power(const double x, const double y)
+	inline double Power(double x, double y)
 	{
 		return ::pow(x, y);
 	}
