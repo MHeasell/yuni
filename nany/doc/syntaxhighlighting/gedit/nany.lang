@@ -4,8 +4,8 @@
 		<property name="mimetypes">text/x-nany</property>
 		<property name="globs">*.ny;*.pny</property>
 		<property name="line-comment-start">//</property>
-    	<property name="block-comment-start">/*</property>
-    	<property name="block-comment-end">*/</property>
+		<property name="block-comment-start">/*</property>
+		<property name="block-comment-end">*/</property>
 	</metadata>
 
 	<styles>
@@ -19,15 +19,15 @@
 		<style id="included-file" _name="Included File" map-to="def:string" />
 		<style id="char" _name="Character" map-to="def:character" />
 		<style id="type" _name="Data Type" map-to="def:type" />
-        <style id="storage-class"     _name="Storage Class"       map-to="def:type"/>
+		<style id="storage-class"	 _name="Storage Class"	   map-to="def:type"/>
 		<style id="constant" _name="Constant" map-to="def:constant" />
 		<style id="special-constant" _name="Constant" map-to="def:special-constant" />
 		<style id="operator" _name="Constant" map-to="def:statement" />
 		<style id="boolean" _name="Boolean value" map-to="def:boolean" />
-        <style id="floating-point"    _name="Floating point number" map-to="def:floating-point"/>
-		<style id="decimal"           _name="Decimal number"      map-to="def:decimal"/>
-        <style id="octal"             _name="Octal number"        map-to="def:base-n-integer"/>
-        <style id="hexadecimal"       _name="Hexadecimal number"  map-to="def:base-n-integer"/>
+		<style id="floating-point"	_name="Floating point number" map-to="def:floating-point"/>
+		<style id="decimal"		   _name="Decimal number"	  map-to="def:decimal"/>
+		<style id="octal"			 _name="Octal number"		map-to="def:base-n-integer"/>
+		<style id="hexadecimal"	   _name="Hexadecimal number"  map-to="def:base-n-integer"/>
 	</styles>
 
 	<definitions>
@@ -72,7 +72,7 @@
 			<match>\*/(?!\*)</match>
 		</context>
 
-		
+
 		<!-- Keywords -->
 		<context id="preprocessor-keywords" style-ref="preprocessor">
 			<keyword>unit</keyword>
@@ -181,11 +181,11 @@
 
 		<context id="float" style-ref="floating-point">
 			<match extended="true">
-                       	(?&lt;![\w\.])
-                        ((\.[0-9]+ | [0-9]+\.[0-9]*) ([Ee][+-]?[0-9]*)? |
-                         ([0-9]+[Ee][+-]?[0-9]*))
-                        [fFlL]?
-                        (?![\w\.])
+					(?&lt;![\w\.])
+						((\.[0-9]+ | [0-9]+\.[0-9]*) ([Ee][+-]?[0-9]*)? |
+						([0-9]+[Ee][+-]?[0-9]*))
+						[fFlL]?
+						(?![\w\.])
 			</match>
 		</context>
 
