@@ -4,11 +4,14 @@ class Typedef
 {
 public
 	type A := Typedef;
+
+	var k := 0;
 }
 
 type B := Typedef.A;
 
 function main
 {
-	0
+	var b : B;
+	b.k
 }

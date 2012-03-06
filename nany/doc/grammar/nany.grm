@@ -268,7 +268,7 @@ Comment End = '*#' | '*/'
 <Assignment Exp> ::= <Assignment Exp> ':=' <Is Exp>
                | <Local Declaration Exp>
 
-<Local Declaration Exp> ::= <Value> <Typing>
+<Local Declaration Exp> ::= 'var' <Value> <Typing>
                | <Is Exp>
 
 <Is Exp>    ::= <Is Exp> 'is' <Anonymous Decl Exp>

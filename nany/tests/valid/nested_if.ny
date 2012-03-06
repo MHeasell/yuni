@@ -2,7 +2,7 @@
 
 function main : int
 {
-	n: int;
+	var n: int;
 	if true then
 		if 4 > 0 then
 		{

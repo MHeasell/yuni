@@ -2,8 +2,8 @@
 
 function main
 {
-	w: int := 0;
-	x: uint := 42;
+	var w: int := 0;
+	var x: uint := 42;
 	while x > w do
 	{
 		x := x - 1

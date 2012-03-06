@@ -68,7 +68,7 @@ public
 
 function main
 {
-	l := [
+	var l := [
 		new Rectangle(10, 200),
 		new class
 		{
@@ -77,5 +77,5 @@ function main
 		new Circle ];
 
 	for i in l do
-		system.writeln << i.classname << ": " << i.surface;
+		io.out << i.classname << ": " << i.surface;
 }

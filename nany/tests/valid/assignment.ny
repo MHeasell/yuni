@@ -1,6 +1,6 @@
 
 function main : int
 {
-	a: int := 0;
+	var a: int := 0;
 	return 0
 }

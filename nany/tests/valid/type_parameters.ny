@@ -58,7 +58,7 @@ function printList<:ListType:>(list: ListType)
 
 function main
 {
-    l := new List<:int:>;
+    var l := new List<:int:>;
     l.prepend(24);
     l.prepend(12);
     l.addToEach(2);

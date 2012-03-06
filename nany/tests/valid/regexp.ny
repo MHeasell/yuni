@@ -2,7 +2,7 @@
 
 function name
 {
-	s := "MyName";
+	var s := "MyName";
 	s
 }
 
