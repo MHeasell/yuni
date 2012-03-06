@@ -2,7 +2,7 @@
 
 function foo(a: int, b: int, c: char)
 {
-	c: int := a + b;
+	var c: int := a + b;
 }
 
 function bar(k: uint): bool
@@ -12,7 +12,7 @@ function bar(k: uint): bool
 
 function foobar()
 {
-	k: string := "test"
+	var k: string := "test"
 }
 
 function mini
@@ -21,7 +21,7 @@ function mini
 
 function main: int
 {
-	a: int := 22;
+	var a: int := 22;
 	foo(a, 44, '@');
 	bar(1u);
 	foobar();

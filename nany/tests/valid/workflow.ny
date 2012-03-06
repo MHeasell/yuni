@@ -50,7 +50,7 @@ protected
 
 function main
 {
-    x := & Fibonacci(50) ^ Fibonacci(10);
+    var x := & Fibonacci(50) ^ Fibonacci(10);
     countdown := 5;
     timeout 1s do
     {
@@ -61,14 +61,14 @@ function main
     {
         if --countdown then
         {
-            system.cout << countdown << '\n';
+            io.out << countdown << '\n';
             // continue the execution of the expression and wait for 1s again
             continue
         }
         else
         {
             abort(x);
-            system.cout << "Operation timeout\n";
+            io.out << "Operation timeout\n";
             return -1
         }
     };

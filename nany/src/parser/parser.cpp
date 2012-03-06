@@ -246,7 +246,7 @@ Nany::Ast::Node* Rule_DeclarationList_Semi(TokenStruct* token)
 
 
 // <Declaration List> ::= 
-Nany::Ast::Node* Rule_DeclarationList5(TokenStruct*)
+Nany::Ast::Node* Rule_DeclarationList5(TokenStruct* token)
 {
 	return new Nany::Ast::DeclarationListNode();
 }
@@ -362,7 +362,7 @@ Nany::Ast::Node* Rule_Literal_BuiltInType(TokenStruct* token)
 
 
 // <Literal> ::= nil
-Nany::Ast::Node* Rule_Literal_nil(TokenStruct*)
+Nany::Ast::Node* Rule_Literal_nil(TokenStruct* token)
 {
 	return new Nany::Ast::LiteralNode<void*>(nullptr);
 }
@@ -570,7 +570,7 @@ Nany::Ast::Node* Rule_ClassContent_Semi3(TokenStruct* token)
 
 
 // <Class Content> ::= 
-Nany::Ast::Node* Rule_ClassContent3(TokenStruct*)
+Nany::Ast::Node* Rule_ClassContent3(TokenStruct* token)
 {
 	return nullptr;
 }
@@ -1853,22 +1853,23 @@ Nany::Ast::Node* Rule_AssignmentExp(TokenStruct* token)
 
 
 
-// <Local Declaration Exp> ::= <Value> <Typing>
-Nany::Ast::Node* Rule_LocalDeclarationExp(TokenStruct* token)
+// <Local Declaration Exp> ::= var <Value> <Typing>
+Nany::Ast::Node* Rule_LocalDeclarationExp_var(TokenStruct* token)
 {
-	Nany::Ast::Node* left = AstParse<>::Child(token, 0);
-	Nany::Ast::TypeExpressionNode* type = AstParse<Nany::Ast::TypeExpressionNode>::Child(token, 1);
-
-	return new Nany::Ast::VarDeclarationNode(left, type);
+	// Not yet implemented !
+	assert(false && "Rule_LocalDeclarationExp_var: Not yet implemented !");
 }
 
 
 
 
 // <Local Declaration Exp> ::= <Is Exp>
-Nany::Ast::Node* Rule_LocalDeclarationExp2(TokenStruct* token)
+Nany::Ast::Node* Rule_LocalDeclarationExp(TokenStruct* token)
 {
-	return AstParse<>::Child(token, 0);
+	Nany::Ast::Node* left = AstParse<>::Child(token, 0);
+	Nany::Ast::TypeExpressionNode* type = AstParse<Nany::Ast::TypeExpressionNode>::Child(token, 1);
+
+	return new Nany::Ast::VarDeclarationNode(left, type);
 }
 
 
@@ -3068,10 +3069,10 @@ Nany::Ast::Node* (*RuleJumpTable[])(TokenStruct* token) =
 	Rule_AssignmentExp_ColonEq,
 	// 131. <Assignment Exp> ::= <Local Declaration Exp>
 	Rule_AssignmentExp,
-	// 132. <Local Declaration Exp> ::= <Value> <Typing>
-	Rule_LocalDeclarationExp,
+	// 132. <Local Declaration Exp> ::= var <Value> <Typing>
+	Rule_LocalDeclarationExp_var,
 	// 133. <Local Declaration Exp> ::= <Is Exp>
-	Rule_LocalDeclarationExp2,
+	Rule_LocalDeclarationExp,
 	// 134. <Is Exp> ::= <Is Exp> is <Anonymous Decl Exp>
 	Rule_IsExp_is,
 	// 135. <Is Exp> ::= <Anonymous Decl Exp>

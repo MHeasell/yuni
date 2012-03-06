@@ -2,9 +2,9 @@
 
 function main : int
 {
-	a: int;
+	var a: int;
 
-	b: int := a as int;
-	c: bool := b is typeof b;
+	var b: int := a as int;
+	var c: bool := b is typeof b;
 	return 0
 }

@@ -6,14 +6,14 @@ uses Dummy.Clever;
 
 function main: int
 {
-    err: int := 1;
+    var err: int := 1;
     if false then
         return err;
-    a: uint16 := 42;
+    var a: uint16 := 42;
     {
         err := 1;
         if false then
-            return if err < 1 then 10 else ++a.beta.foo
+            return if err < 1 then 10 else ++a
     };
     while a > 0 do
     {

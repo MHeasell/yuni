@@ -11,8 +11,8 @@ immutable function Fibonacci(n) : typeof n
 
 function main
 {
-    x := & Fibonacci(50) ^ Fibonacci(10);
-    countdown := 5;
+    var x := & Fibonacci(50) ^ Fibonacci(10);
+    var countdown := 5;
     timeout 1.seconds do
     {
         // we wait here for the asynchronous result of x
