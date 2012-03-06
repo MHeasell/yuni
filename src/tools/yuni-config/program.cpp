@@ -450,13 +450,13 @@ namespace Yuni
 			}
 			if (!args.empty())
 			{
-				# if !defined(YUNI_OS_WINDOWS) && !defined(YUNI_OS_MAC)
+				# if !defined(YUNI_OS_MSVC) && !defined(YUNI_OS_MAC)
 				if (hasCxxFlags)
 					std::cout << ' ';
 				std::cout << "-Wl,--start-group ";
 				# endif
 				PrintArgs(args);
-				# if !defined(YUNI_OS_WINDOWS) && !defined(YUNI_OS_MAC)
+				# if !defined(YUNI_OS_MSVC) && !defined(YUNI_OS_MAC)
 				std::cout << " -Wl,--end-group";
 				# endif
 			}
