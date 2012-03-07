@@ -56,16 +56,6 @@ namespace Yuni
 	typedef char           sint8;
 
 
-	# if defined(YUNI_OS_WINDOWS) && defined(YUNI_OS_MSVC)
-	typedef sint64 ssize_t;
-	# endif
-
-	# ifndef YUNI_HAS_SYS_TYPES_H /* uint is already defined by sys/types.h */
-	/*! Convenient typedef around unsigned int */
-	typedef unsigned int uint;
-	# endif
-
-
 	/*!
 	** \brief Constant int64 value to indicate that the size must be autodetected by the location
 	** of the terminating null character
@@ -73,8 +63,26 @@ namespace Yuni
 	static const uint64 AutoDetectNullChar = (uint64)(-1);
 
 
-
 } /* namespace Yuni */
+
+
+
+
+
+/* Those types are actually in the global namespace under UNIX */
+
+# if defined(YUNI_OS_WINDOWS) && defined(YUNI_OS_MSVC)
+typedef sint64 ssize_t;
+# endif
+
+# ifndef YUNI_HAS_SYS_TYPES_H /* uint is already defined by sys/types.h */
+/*! Convenient typedef around unsigned int */
+typedef unsigned int uint;
+# endif
+
+
+
+
 
 # else /* Actually we have a C Compiler */
 
