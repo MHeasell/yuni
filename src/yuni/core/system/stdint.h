@@ -43,26 +43,27 @@ namespace Yuni
 	# endif
 
 	/* 64-bit ints, guaranteed to be 8 bytes in size */
-	typedef uint64_t  uint64;
-	typedef int64_t   sint64;
+	typedef uint64_t       uint64;
+	typedef int64_t        sint64;
 	/* 32-bit ints, guaranteed to be 4 bytes in size */
-	typedef uint32_t  uint32;
-	typedef int32_t   sint32;
+	typedef uint32_t       uint32;
+	typedef int32_t        sint32;
 	/* 16-bit ints, guaranteed to be 2 bytes in size */
-	typedef uint16_t  uint16;
-	typedef int16_t   sint16;
+	typedef uint16_t       uint16;
+	typedef int16_t        sint16;
 	/* 8-bit ints, guaranteed to be 1 byte in size */
 	typedef unsigned char  uint8;
 	typedef char           sint8;
 
 
-# if defined(YUNI_OS_WINDOWS) && defined(YUNI_OS_MSVC)
+	# if defined(YUNI_OS_WINDOWS) && defined(YUNI_OS_MSVC)
 	typedef sint64 ssize_t;
-# endif
+	# endif
 
-
+	# ifndef YUNI_HAS_SYS_TYPES_H /* uint is already defined by sys/types.h */
 	/*! Convenient typedef around unsigned int */
 	typedef unsigned int uint;
+	# endif
 
 
 	/*!
