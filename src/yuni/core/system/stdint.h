@@ -72,7 +72,7 @@ namespace Yuni
 /* Those types are actually in the global namespace under UNIX */
 
 # if defined(YUNI_OS_WINDOWS) && defined(YUNI_OS_MSVC)
-typedef sint64 ssize_t;
+typedef Yuni::sint64 ssize_t;
 # endif
 
 # ifndef YUNI_HAS_SYS_TYPES_H /* uint is already defined by sys/types.h */
