@@ -75,7 +75,8 @@ namespace Yuni
 typedef Yuni::sint64 ssize_t;
 # endif
 
-# ifndef YUNI_HAS_SYS_TYPES_H /* uint is already defined by sys/types.h */
+/* uint is defined by sys/types.h under Unix */
+# if !defined(YUNI_HAS_SYS_TYPES_H) || defined(YUNI_OS_MINGW)
 /*! Convenient typedef around unsigned int */
 typedef unsigned int uint;
 # endif
