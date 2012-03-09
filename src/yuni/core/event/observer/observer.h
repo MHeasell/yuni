@@ -2,12 +2,10 @@
 # define __YUNI_CORE_EVENT_OBSERVER_H__
 
 
-
 namespace Yuni
 {
 namespace Event
 {
-
 
 	/*!
 	** \brief Observer (Interface)

@@ -10,7 +10,6 @@ namespace Yuni
 namespace Logs
 {
 
-
 	/*!
 	** \brief Log Handler: The Null device
 	**
@@ -22,7 +21,7 @@ namespace Logs
 		template<class LoggerT, class VerbosityType, class StringT>
 		static void internalDecoratorWriteWL(LoggerT&, const StringT&)
 		{
-			/* Do nothing */
+			// Do nothing
 		}
 	};
 
@@ -38,7 +37,7 @@ namespace Logs
 		template<class Handler, class VerbosityType, class O, class StringT>
 		static void internalDecoratorAddPrefix(O&, const StringT&)
 		{
-			/* Do nothing */
+			// Do nothing
 		}
 
 	};
@@ -46,9 +45,7 @@ namespace Logs
 
 
 
-
 } // namespace Logs
 } // namespace Yuni
-
 
 #endif // __YUNI_CORE_LOGS_NULL_H__

@@ -2,15 +2,6 @@
 # define __YUNI_CORE_NULLABLE_EXTENSION_HXX__
 
 
-template<typename T, class Alloc>
-inline std::ostream& operator << (std::ostream& out, const Yuni::Nullable<T,Alloc>& rhs)
-{
-	rhs.print(out, "(null)");
-	return out;
-}
-
-
-
 namespace Yuni
 {
 namespace Extension
@@ -62,5 +53,15 @@ namespace CString
 } // namespace CString
 } // namespace Extension
 } // namespace Yuni
+
+
+
+template<typename T, class Alloc>
+inline std::ostream& operator << (std::ostream& out, const Yuni::Nullable<T,Alloc>& rhs)
+{
+	rhs.print(out, "(null)");
+	return out;
+}
+
 
 #endif // __YUNI_CORE_NULLABLE_EXTENSION_HXX__

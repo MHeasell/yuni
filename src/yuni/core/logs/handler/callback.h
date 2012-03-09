@@ -5,13 +5,10 @@
 # include "../../event/event.h"
 
 
-
 namespace Yuni
 {
 namespace Logs
 {
-
-
 
 	/*!
 	** \brief Log Handler: The standard output (cout & cerr)

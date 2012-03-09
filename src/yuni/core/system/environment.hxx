@@ -2,8 +2,10 @@
 # define __YUNI_CORE_SYSTEM_ENVIRONMENT_HXX__
 
 # include "windows.hdr.h"
-# include <stdlib.h>
 # include "../traits/cstring.h"
+# ifdef YUNI_HAS_STDLIB_H
+#	include <stdlib.h>
+# endif
 
 
 namespace Yuni
@@ -13,33 +15,37 @@ namespace System
 namespace Environment
 {
 
-	template<class StringT>
-	inline String Read(const StringT& name)
+	inline String Read(const AnyString& name)
 	{
-		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, SystemEnvironment_InvalidTypeForString);
-
-		return ::getenv(Traits::CString<StringT>::Perform(name));
+		# ifdef YUNI_HAS_STDLIB_H
+		return ::getenv(name.c_str());
+		# else
+		return nullptr;
+		# endif
 	}
 
 
-	template<class StringT, class StringT2>
-	inline bool Read(const StringT& name, StringT2& out, const bool emptyBefore)
+	template<class StringT>
+	inline bool Read(const AnyString& name, StringT& out, bool emptyBefore)
 	{
 		// Assert, if a C* container can not be found at compile time
 		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, SystemEnvironment_InvalidTypeForString);
-		// Assert, if a C* container can not be found at compile time
-		YUNI_STATIC_ASSERT(Traits::CString<StringT2>::valid, SystemEnvironment_InvalidTypeForOutString);
 
 		if (emptyBefore)
 			out.clear();
-		const char* e = ::getenv(Traits::CString<StringT>::Perform(name));
+
+		# ifdef YUNI_HAS_STDLIB_H
+		const char* e = ::getenv(name.c_str());
 		if (e && '\0' != *e)
 		{
 			out += e;
 			return true;
 		}
 		return false;
+
+		# else
+		return false;
+		# endif
 	}
 
 

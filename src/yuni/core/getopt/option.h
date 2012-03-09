@@ -4,10 +4,7 @@
 # include "../string.h"
 # include <cassert>
 
-
-/*!
-** \brief The maximum length for a long name of an option
-*/
+//! The maximum length for a long name of an option
 # define YUNI_GETOPT_LONGNAME_MAX_LENGTH  42
 
 
@@ -265,29 +262,29 @@ namespace GetOptImpl
 	class IOption
 	{
 	public:
-		IOption()
-			:pShortName('\0')
+		IOption() :
+			pShortName('\0')
 		{}
-		IOption(const IOption& rhs)
-			:pShortName(rhs.pShortName), pLongName(rhs.pLongName),
+		IOption(const IOption& rhs) :
+			pShortName(rhs.pShortName), pLongName(rhs.pLongName),
 			pDescription(rhs.pDescription)
 		{}
 
-		explicit IOption(const char s)
-			:pShortName(s)
+		explicit IOption(char s) :
+			pShortName(s)
 		{}
 
 		template<class StringT>
-		IOption(const char s, const StringT& name)
-			:pShortName(s), pLongName(name)
+		IOption(char s, const StringT& name) :
+			pShortName(s), pLongName(name)
 		{
 			assert("A long name of an option must not exceed `YUNI_GETOPT_LONGNAME_MAX_LENGTH` characters"
 				&& pLongName.size() <= YUNI_GETOPT_LONGNAME_MAX_LENGTH);
 		}
 
 		template<class StringT1, class StringT2>
-		IOption(const char s, const StringT1& name, const StringT2& description)
-			:pShortName(s), pLongName(name), pDescription(description)
+		IOption(char s, const StringT1& name, const StringT2& description) :
+			pShortName(s), pLongName(name), pDescription(description)
 		{
 			assert("A long name of an option must not exceed `YUNI_GETOPT_LONGNAME_MAX_LENGTH` characters"
 				&& pLongName.size() <= YUNI_GETOPT_LONGNAME_MAX_LENGTH);
@@ -352,27 +349,27 @@ namespace GetOptImpl
 	public:
 		//! \name Constructors & Destructor
 		//@{
-		Option(const Option& rhs)
-			:IOption(rhs), pVariable(rhs.pVariable)
+		Option(const Option& rhs) :
+			IOption(rhs), pVariable(rhs.pVariable)
 		{}
 
-		Option(T& var, const char c)
-			:IOption(c), pVariable(var)
-		{}
-
-		template<class StringT>
-		Option(T& var, const StringT& name)
-			:IOption(name), pVariable(var)
+		Option(T& var, char c) :
+			IOption(c), pVariable(var)
 		{}
 
 		template<class StringT>
-		Option(T& var, const char c, const StringT& name)
-			:IOption(c, name), pVariable(var)
+		Option(T& var, const StringT& name) :
+			IOption(name), pVariable(var)
+		{}
+
+		template<class StringT>
+		Option(T& var, char c, const StringT& name) :
+			IOption(c, name), pVariable(var)
 		{}
 
 		template<class S1, class S2>
-		Option(T& var, const char s, const S1& name, const S2& description)
-			:IOption(s, name, description), pVariable(var)
+		Option(T& var, char s, const S1& name, const S2& description) :
+			IOption(s, name, description), pVariable(var)
 		{}
 
 		//! Destructor
@@ -387,7 +384,7 @@ namespace GetOptImpl
 		** \param len Length of the string (can be zero)
 		** \return True if the operation succeded, false otherwise
 		*/
-		virtual bool addValue(const char* c_str, const String::size_type len)
+		virtual bool addValue(const char* c_str, String::size_type len)
 		{
 			return Private::GetOptImpl::Value<T>::Add(pVariable, c_str, len);
 		}
@@ -421,13 +418,13 @@ namespace GetOptImpl
 	public:
 		//! \name Constructors & Destructor
 		//@{
-		Paragraph(const Paragraph& rhs)
-			:IOption(rhs)
+		Paragraph(const Paragraph& rhs) :
+			IOption(rhs)
 		{}
 
 		template<class S>
-		Paragraph(const S& description)
-			:IOption(' ', nullptr, description)
+		Paragraph(const S& description) :
+			IOption(' ', nullptr, description)
 		{}
 
 		//! Destructor
@@ -466,6 +463,8 @@ namespace GetOptImpl
 
 	// Forward declaration
 	class Context;
+
+
 
 
 } // namespace GetOptImpl

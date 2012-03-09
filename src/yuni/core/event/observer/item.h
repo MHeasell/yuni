@@ -7,7 +7,6 @@ namespace Yuni
 namespace Event
 {
 
-
 	/*!
 	** \brief Item for a list of observer(Interface)
 	**

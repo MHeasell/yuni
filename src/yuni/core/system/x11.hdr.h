@@ -1,7 +1,6 @@
 #ifndef __YUNI_SYSTEM_X11_HEADERS_H__
 # define __YUNI_SYSTEM_X11_HEADERS_H__
 
-
 # include "../../yuni.h"
 # include <cstring>
 # include <GL/glx.h>
@@ -18,7 +17,8 @@
 # define _NET_WM_STATE_ADD		1 // Set a state
 # define _NET_WM_STATE_TOGGLE	2 // Toggle a state
 
-namespace
+
+namespace // anonymous
 {
 
 	/*!
@@ -29,7 +29,7 @@ namespace
 	** \param operation Can be _NET_WM_STATE_ADD, _NET_WM_STATE_REMOVE or _NET_WM_STATE_TOGGLE
 	** \param state State to modify
 	*/
-	void netwm_set_state(Display *display, Window window, int operation, Atom state)
+	static void netwm_set_state(Display *display, Window window, int operation, Atom state)
 	{
 		XEvent e;
 
@@ -45,6 +45,7 @@ namespace
 		e.xclient.data.l[1] = state;
 		XSendEvent(display, DefaultRootWindow(display), false, SubstructureRedirectMask, &e);
 	}
+
 
 } // namespace anonymous
 

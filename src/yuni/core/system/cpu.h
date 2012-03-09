@@ -19,6 +19,7 @@ namespace CPU
 	unsigned int Count();
 
 
+
 } // namespace CPU
 } // namespace System
 } // namespace Yuni

@@ -28,6 +28,7 @@ namespace Statistics
 		None() {}
 		//@}
 
+
 	protected:
 		//! \name Events triggered by the public interface of the event loop (from any thread)
 		//@{
@@ -86,7 +87,6 @@ namespace Statistics
 		//@}
 
 	}; // class None<>
-
 
 
 

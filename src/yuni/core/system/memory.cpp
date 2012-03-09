@@ -50,6 +50,7 @@ namespace Memory
 			: (uint64)defaultTotal;
 	}
 
+
 	uint64 Available()
 	{
 		// see http://msdn.microsoft.com/en-us/library/aa366589(VS.85).aspx
@@ -58,6 +59,7 @@ namespace Memory
 		return (GlobalMemoryStatusEx(&statex)) ? (uint64)statex.ullAvailPhys
 			: (uint64)defaultAvailable;
 	}
+
 
 	bool Usage::update()
 	{
@@ -112,7 +114,7 @@ namespace Memory
 	}
 
 
-	static size_t readvalue(char* line)
+	static uint64 readvalue(char* line)
 	{
 		// Here is a sample for /proc/meminfo :
 		//
@@ -159,9 +161,9 @@ namespace Memory
 		*line = '\0';
 
 		# ifdef YUNI_OS_32
-		return (size_t) atol(first) * 1024u;
+		return (uint64) atol(first) * 1024u;
 		# else
-		return (size_t) atoll(first) * 1024u;
+		return (uint64) atoll(first) * 1024u;
 		# endif
 	}
 
@@ -234,10 +236,12 @@ namespace Memory
 		return false;
 	}
 
+
 	uint64 Available()
 	{
 		return Usage().available;
 	}
+
 
 	uint64 Total()
 	{

@@ -7,7 +7,6 @@
 ** \brief Standard types used by the Yuni Library
 */
 
-
 # ifdef YUNI_OS_MSVC
 #	include "windows/msinttypes/stdint.h"
 #	include "windows/msinttypes/inttypes.h"
@@ -19,6 +18,10 @@
 #	define YUNI_MSVC_SECURE_VSPRINTF
 # endif
 
+# ifdef YUNI_HAS_SYS_TYPES_H
+#   include <sys/types.h>
+# endif
+
 
 
 
@@ -26,10 +29,6 @@
 
 # ifndef YUNI_OS_CLANG
 #	include <cstddef>
-# endif
-
-# ifdef YUNI_HAS_SYS_TYPES_H
-#   include <sys/types.h>
 # endif
 
 namespace Yuni
@@ -69,27 +68,30 @@ namespace Yuni
 
 
 
-/* Those types are actually in the global namespace under UNIX */
-
-# if defined(YUNI_OS_WINDOWS) && defined(YUNI_OS_MSVC)
-typedef Yuni::sint64 ssize_t;
-# endif
-
-/* uint is defined by sys/types.h under Unix */
-# if !defined(YUNI_HAS_SYS_TYPES_H) || defined(YUNI_OS_MINGW)
-/*! Convenient typedef around unsigned int */
-typedef unsigned int uint;
-# endif
-
-
-
-
-
 # else /* Actually we have a C Compiler */
 
 # include "stddef.h"
 
 # endif /* C++ Compiler */
+
+
+
+
+
+
+
+/* Both C / C++ compiler */
+
+# ifndef YUNI_HAS_SSIZE_T
+/*! ssize_t */
+typedef Yuni::sint64 ssize_t;
+# endif
+
+# ifndef YUNI_HAS_UINT
+/*! Convenient typedef around unsigned int */
+typedef unsigned int uint;
+# endif
+
 
 
 #endif /* __YUNI_SYSTEM_STANDARD_INTERFACE_INT_DATA_H__ */

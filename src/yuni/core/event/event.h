@@ -10,8 +10,6 @@
 namespace Yuni
 {
 
-
-
 	/*!
 	** \brief Event
 	*/
@@ -177,6 +175,7 @@ namespace Yuni
 		//! Get if the event is empty
 		bool operator ! () const;
 		//@}
+
 
 	protected:
 		/*!

@@ -1,14 +1,13 @@
 #ifndef __YUNI_CORE_DYNAMICLIBRARY_FILE_H__
 # define __YUNI_CORE_DYNAMICLIBRARY_FILE_H__
-/*!
-** 'brief Header for Yuni::DynamicLibrary::File, a class for manipulating Executable Object Files
-*/
 
+/*!
+** \brief Header for Yuni::DynamicLibrary::File, a class for manipulating Executable Object Files
+*/
 # include "../../yuni.h"
 # include <stdlib.h>
 # include "../string.h"
 # include "symbol.h"
-
 
 // Determining the handle type for the current Operating system
 # ifdef YUNI_OS_WINDOWS
@@ -85,6 +84,8 @@ namespace DynamicLibrary
 	** 		Bind<const char* ()> libname = lib["myname"];
 	**		const char* s = libname();
 	**		std::cout << "Library name: " << (s ? s : "(null)") << std::endl;
+	**
+	**		return 0;
 	** }
 	** \endcode
 	*/
@@ -141,6 +142,7 @@ namespace DynamicLibrary
 			visibilityLocal,
 		};
 
+
 	public:
 		//! \name Constructor & DEstructor
 		//@{
@@ -156,7 +158,17 @@ namespace DynamicLibrary
 		** \param r The relocation mode (no effect on Windows)
 		** \param v The visibility mode (no effect on Windows)
 		*/
-		explicit File(const AnyString& filename, const Relocation r = relocationLazy, const Visibility v = visibilityDefault);
+		explicit File(const AnyString& filename);
+
+		/*!
+		** \brief Constructor - Load an dynamic library
+		**
+		** \param filename Filename of the library to load
+		** \param r The relocation mode (no effect on Windows)
+		** \param v The visibility mode (no effect on Windows)
+		*/
+		File(const AnyString& filename, Relocation relocation /* = relocationLazy */,
+			Visibility visibility = visibilityDefault);
 
 		/*!
 		** \brief Destructor
@@ -194,8 +206,8 @@ namespace DynamicLibrary
 		** \param v The visibility mode (no effect on Windows)
 		** \return True if the library has been loaded
 		*/
-		bool loadFromFile(const AnyString& filename, const Relocation r = relocationLazy,
-			const Visibility v = visibilityDefault);
+		bool loadFromFile(const AnyString& filename, Relocation r = relocationLazy,
+			Visibility v = visibilityDefault);
 
 		/*!
 		** \brief Load a dynamic library from its filename
@@ -210,8 +222,8 @@ namespace DynamicLibrary
 		** \param v The visibility mode (no effect on Windows)
 		** \return True if the library has been loaded
 		*/
-		bool loadFromRawFilename(const AnyString& filename, const Relocation r = relocationLazy,
-			const Visibility v = visibilityDefault);
+		bool loadFromRawFilename(const AnyString& filename, Relocation r = relocationLazy,
+			Visibility v = visibilityDefault);
 
 		/*!
 		** \brief Unload the dynamic library
@@ -241,7 +253,7 @@ namespace DynamicLibrary
 		** \param name Name of the exported symbol
 		** \return True if the library is loaded and the symbol exists, False otherwise
 		*/
-		template<class StringT> bool hasSymbol(const StringT& name) const;
+		bool hasSymbol(const AnyString& name) const;
 
 		/*!
 		** \brief Try to resolve the address of an exported symbol by the library
@@ -269,8 +281,9 @@ namespace DynamicLibrary
 		** \return The Symbol. Use Symbol::valid() or Symbol::null() to know if
 		** the result is valid
 		*/
-		template<class StringT> Symbol resolve(const StringT& name) const;
+		Symbol resolve(const AnyString& name) const;
 		//@}
+
 
 		//! \name Handle
 		//@{
@@ -288,13 +301,6 @@ namespace DynamicLibrary
 		*/
 		template<class StringT> Symbol operator [] (const StringT& name) const;
 		//@}
-
-
-	private:
-		//! Wrapper on dlclose()
-		static void wrapperDlClose(const Handle h);
-		//! Wrapper on dlsym()
-		static Symbol::Handle wrapperDlSym(const Handle h, const char* name);
 
 
 	private:

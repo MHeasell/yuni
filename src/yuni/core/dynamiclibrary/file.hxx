@@ -6,25 +6,6 @@ namespace Yuni
 namespace DynamicLibrary
 {
 
-
-
-
-	template<class StringT>
-	inline bool File::hasSymbol(const StringT& name) const
-	{
-		const char* const query = Traits::CString<StringT>::Perform(name);
-		return NullHandle != pHandle && NULL != wrapperDlSym(pHandle, query);
-	}
-
-
-	template<class StringT>
-	inline Symbol File::resolve(const StringT& name) const
-	{
-		const char* const query = Traits::CString<StringT>::Perform(name);
-		return NullHandle != pHandle ? wrapperDlSym(pHandle, query) : NULL;
-	}
-
-
 	inline bool File::loaded() const
 	{
 		return (pHandle != NullHandle);
@@ -48,7 +29,6 @@ namespace DynamicLibrary
 	{
 		return resolve(name);
 	}
-
 
 
 

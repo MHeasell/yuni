@@ -265,15 +265,4 @@ namespace Bit
 
 # include "array.hxx"
 
-
-
-//! \name Operator overload for stream printing
-//@{
-inline std::ostream& operator << (std::ostream& out, const Yuni::Bit::Array& rhs)
-{
-	rhs.print(out);
-	return out;
-}
-//@}
-
 #endif // __YUNI_CORE_BIT_BIT_ARRAY_H__

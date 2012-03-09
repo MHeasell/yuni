@@ -84,14 +84,20 @@
 /* C++0x support by gcc (-std=c++0x) */
 #cmakedefine YUNI_HAS_GCC_CPP0X_SUPPORT
 
-/* Have long types - different from int */
+/* long types - different from int */
 #cmakedefine YUNI_HAS_LONG
 
-/* Have int64_t, from stdint.h */
+/* int64_t, from stdint.h */
 #cmakedefine YUNI_HAS_INT64_T
 
-/* Have int128_t, from stdint.h */
+/* int128_t, from stdint.h */
 #cmakedefine YUNI_HAS_INT128_T
+
+/* uint */
+#cmakedefine YUNI_HAS_UINT
+
+/* ssize_t */
+#cmakedefine YUNI_HAS_SSIZE_T
 
 /* C++0x support: nullptr (GCC: only >= 4.6 with -std=gnu++0x, VS: only >= 10) */
 #cmakedefine YUNI_HAS_NULLPTR

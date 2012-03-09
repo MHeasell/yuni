@@ -14,8 +14,8 @@ namespace Logs
 	class ApplicationName : public LeftType
 	{
 	public:
-		ApplicationName()
-			:pAppName("noname")
+		ApplicationName() :
+			pAppName("noname")
 		{}
 
 

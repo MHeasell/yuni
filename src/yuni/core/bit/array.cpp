@@ -12,7 +12,7 @@ namespace Bit
 	{
 
 		template<bool ValueT>
-		inline unsigned int Find(const Bit::Array::BufferType& pBuffer, unsigned int pCount, unsigned int offset)
+		static unsigned int Find(const Bit::Array::BufferType& pBuffer, unsigned int pCount, unsigned int offset)
 		{
 			// bitmask
 			static const unsigned char mask[] = { 128, 64, 32, 16, 8, 4, 2, 1 };
@@ -79,6 +79,7 @@ namespace Bit
 
 
 
+
 	unsigned int Array::findFirstSet(unsigned int offset) const
 	{
 		return Find<true>(pBuffer, pCount, offset);
@@ -88,7 +89,6 @@ namespace Bit
 	{
 		return Find<false>(pBuffer, pCount, offset);
 	}
-
 
 
 	bool Array::any() const

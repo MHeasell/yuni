@@ -9,10 +9,9 @@
 namespace Yuni
 {
 
-
 	template<class Derived, template<class> class TP>
-	inline IEventObserver<Derived,TP>::IEventObserver()
-		:pBoundEventTable(new IEvent::Map())
+	inline IEventObserver<Derived,TP>::IEventObserver() :
+		pBoundEventTable(new IEvent::Map())
 	{}
 
 
@@ -99,11 +98,9 @@ namespace Yuni
 			if (!pBoundEventTable->empty())
 			{
 				// Unlinking this observer to all events
-				const IEvent::Map::iterator end = pBoundEventTable->end();
+				IEvent::Map::iterator end = pBoundEventTable->end();
 				for (IEvent::Map::iterator i = pBoundEventTable->begin(); i != end; ++i)
-				{
 					(i->first)->unregisterObserver(this);
-				}
 			}
 
 			// We can now delete the table

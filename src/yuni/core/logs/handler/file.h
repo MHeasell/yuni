@@ -61,7 +61,8 @@ namespace Logs
 		/*!
 		** \brief Get if a log file is opened
 		*/
-		bool logFileIsOpened();
+		bool logfileIsOpened() const;
+
 
 	public:
 		template<class LoggerT, class VerbosityType, class StringT>

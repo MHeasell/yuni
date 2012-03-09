@@ -7,15 +7,17 @@ namespace Yuni
 namespace Bit
 {
 
-	inline Array::Array()
-		:pCount(0)
+	inline Array::Array() :
+		pCount(0)
 	{}
+
 
 	inline Array::Array(unsigned int n)
 	{
 		resize(n);
 		unset();
 	}
+
 
 	inline Array::Array(unsigned int n, bool value)
 	{
@@ -184,7 +186,7 @@ namespace Bit
 	inline Array& Array::operator = (const Array& rhs)
 	{
 		pBuffer = rhs.pBuffer;
-		pCount = rhs.pCount;
+		pCount  = rhs.pCount;
 		return *this;
 	}
 
@@ -243,5 +245,17 @@ namespace Bit
 
 } // namespace Bit
 } // namespace Yuni
+
+
+
+//! \name Operator overload for stream printing
+//@{
+inline std::ostream& operator << (std::ostream& out, const Yuni::Bit::Array& rhs)
+{
+	rhs.print(out);
+	return out;
+}
+//@}
+
 
 #endif // __YUNI_CORE_BIT_BIT_ARRAY_HXX__

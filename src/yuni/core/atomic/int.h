@@ -75,6 +75,7 @@ namespace Atomic
 		*/
 		typedef typename Private::AtomicImpl::Volatile<threadSafe,Type>::Type InnerType;
 
+
 	public:
 		//! \name Constructors
 		//@{
@@ -102,7 +103,8 @@ namespace Atomic
 		/*!
 		** \brief Copy constructor from another type and another threading policy
 		*/
-		template<int Size2, template<class> class TP2> Int(const Int<Size2,TP2>& v);
+		template<int Size2, template<class> class TP2>
+		Int(const Int<Size2,TP2>& v);
 		//@}
 
 
@@ -130,6 +132,7 @@ namespace Atomic
 		//! not
 		bool operator ! () const;
 		//@}
+
 
 	private:
 		//! The real variable

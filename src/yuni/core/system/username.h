@@ -9,7 +9,6 @@ namespace Yuni
 namespace System
 {
 
-
 	/*!
 	** \brief Retrieves the calling user's name
 	**
@@ -26,7 +25,6 @@ namespace System
 	** \return True if the operation succeeded (a valid username has been found), false otherwise
 	*/
 	template<class StringT> bool Username(StringT& out, bool emptyBefore = true);
-
 
 
 
