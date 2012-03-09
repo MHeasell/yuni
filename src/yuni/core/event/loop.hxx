@@ -19,8 +19,8 @@ namespace EventLoop
 		typedef EventLoopT EventLoopType;
 
 	public:
-		Thread(EventLoopType& loop)
-			:pEventLoop(loop)
+		Thread(EventLoopType& loop) :
+			pEventLoop(loop)
 		{
 		}
 
@@ -89,8 +89,11 @@ namespace EventLoop
 
 	template<class ParentT, template<class> class FlowT, template<class> class StatsT,
 		bool DetachedT>
-	inline IEventLoop<ParentT,FlowT,StatsT,DetachedT>::IEventLoop()
-		:pHasRequests(0), pRequests(NULL), pIsRunning(false), pThread(NULL)
+	inline IEventLoop<ParentT,FlowT,StatsT,DetachedT>::IEventLoop() :
+		pHasRequests(0),
+		pRequests(NULL),
+		pIsRunning(false),
+		pThread(NULL)
 	{
 		// Note: Visual Studio does not like `this` in the initialization section
 		// Broadcast the pointer of the event loop to the policies
@@ -112,11 +115,10 @@ namespace EventLoop
 		typename ThreadingPolicy::MutexLocker locker(*this);
 		{
 			// Destroying the thread
-			if (DetachedT)
+			if (detached)
 				delete pThread;
 			// Destroying the request list
-			if (pRequests)
-				delete pRequests;
+			delete pRequests;
 		}
 	}
 
@@ -347,7 +349,7 @@ namespace EventLoop
 		assert(requests != NULL && "IEventLoop: the request list is NULL");
 
 		// Executing all requests
-		const typename RequestListType::const_iterator end = requests->end();
+		typename RequestListType::const_iterator end = requests->end();
 		for (typename RequestListType::const_iterator i = requests->begin(); i != end; ++i)
 		{
 			// Statistics

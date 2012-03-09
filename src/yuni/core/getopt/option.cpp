@@ -1,10 +1,7 @@
 
 #include "option.h"
 
-
-
-
-# define YUNI_GETOPT_HELPUSAGE_30CHAR  "                             "
+#define YUNI_GETOPT_HELPUSAGE_30CHAR  "                             "
 
 
 
@@ -16,11 +13,11 @@ namespace GetOptImpl
 {
 
 
-	namespace
+	namespace // anonymous
 	{
 
 		template<bool Decal, int LengthLimit>
-		void PrintLongDescription(std::ostream& out, const String& description)
+		static void PrintLongDescription(std::ostream& out, const String& description)
 		{
 			String::Size start = 0;
 			String::Size end = 0;

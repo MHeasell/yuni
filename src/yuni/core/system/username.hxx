@@ -34,9 +34,6 @@ namespace System
 
 
 	template<class StringT>
-	# ifndef YUNI_OS_WINDOWS
-	inline
-	# endif
 	bool Username(StringT& out, bool emptyBefore)
 	{
 		// Assert, if a C* container can not be found at compile time
@@ -53,12 +50,12 @@ namespace System
 		// The target buffer
 		char* target = const_cast<char*>(out.c_str()) + out.size();
 		// Since it may be any string (like a static one), we may have less than 256 chars
-		const unsigned int size = out.capacity() - out.size();
+		unsigned int size = out.capacity() - out.size();
 		if (!size)
 			return false; // not enough rooms
 		// Appending the username to our buffer and retrieving the size of
 		// the username
-		const unsigned int written = Yuni::Private::System::WindowsUsername(target, size);
+		unsigned int written = Yuni::Private::System::WindowsUsername(target, size);
 		if (written)
 		{
 			// The username has been written, we have to properly resize the string

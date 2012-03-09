@@ -8,12 +8,10 @@
 # include "../validator/text/default.h"
 
 
-
 namespace Yuni
 {
 namespace GetOpt
 {
-
 
 	/*!
 	** \brief A command line options parser
@@ -33,85 +31,81 @@ namespace GetOpt
 		~Parser();
 		//@}
 
-		/*!
-		** \brief Remove all options
-		*/
-		void clear();
-
-
-		//! \name Adding an option
+		
+		//! \name Option management
 		//@{
 		/*!
 		** \brief Add an option
 		**
 		** \param[in] var The variable where the value(s) will be written
-		** \param shortName The short name of the option (a single char)
+		** \param shortname The short name of the option (a single char)
 		** \param visible True if the option is visible from the help usage
 		*/
 		template<class U>
-		void add(U& var, const char shortName, bool visible = true);
-
+		void add(U& var, char shortname, bool visible = true);
 
 		/*!
 		** \brief Add an option
 		**
 		** \param[in] var The variable where the value(s) will be written
-		** \param shortName The short name of the option (a single char)
-		** \param longName The long name of the option
+		** \param shortname The short name of the option (a single char)
+		** \param longname The long name of the option
 		** \param visible True if the option is visible from the help usage
 		*/
 		template<class U, class S>
-		void add(U& var, const char shortName, const S& longName, bool visible = true);
-
+		void add(U& var, char shortname, const S& longname, bool visible = true);
 
 		/*!
 		** \brief Add an option
 		**
 		** \param[in] var The variable where the value(s) will be written
-		** \param shortName The short name of the option (a single char)
-		** \param longName The long name of the option
+		** \param shortname The short name of the option (a single char)
+		** \param longname The long name of the option
 		** \param description The description of the option (used in the help usage)
 		** \param visible True if the option is visible from the help usage
 		*/
 		template<class U, class S, class D>
-		void add(U& var, const char shortName, const S& longName, const D& description, bool visible = true);
-
+		void add(U& var, char shortname, const S& longname, const D& description, bool visible = true);
 
 		/*!
 		** \brief Add an option that does not require an additional parameter
 		**
 		** \param[in] var The variable where the value(s) will be written
-		** \param shortName The short name of the option (a single char)
+		** \param shortname The short name of the option (a single char)
 		** \param visible True if the option is visible from the help usage
 		*/
 		template<class U>
-		void addFlag(U& var, const char shortName, bool visible = true);
-
+		void addFlag(U& var, char shortname, bool visible = true);
 
 		/*!
 		** \brief Add an option that does not require an additional parameter
 		**
 		** \param[in] var The variable where the value(s) will be written
-		** \param shortName The short name of the option (a single char)
-		** \param longName The long name of the option
+		** \param shortname The short name of the option (a single char)
+		** \param longname The long name of the option
 		** \param visible True if the option is visible from the help usage
 		*/
 		template<class U, class S>
-		void addFlag(U& var, const char shortName, const S& longName, bool visible = true);
-
+		void addFlag(U& var, char shortname, const S& longname, bool visible = true);
 
 		/*!
 		** \brief Add an option that does not require an additional parameter
 		**
 		** \param[in] var The variable where the value(s) will be written
-		** \param shortName The short name of the option (a single char)
-		** \param longName The long name of the option
+		** \param shortname The short name of the option (a single char)
+		** \param longname The long name of the option
 		** \param description The description of the option (used in the help usage)
 		** \param visible True if the option is visible from the help usage
 		*/
 		template<class U, class S, class D>
-		void addFlag(U& var, const char shortName, const S& longName, const D& description, bool visible = true);
+		void addFlag(U& var, char shortname, const S& longname, const D& description, bool visible = true);
+
+		/*!
+		** \brief Remove all options
+		*/
+		void clear();
 		//@}
+
 
 		//! \name Remaining arguments
 		//@{
@@ -182,13 +176,18 @@ namespace GetOpt
 		typedef std::map<const char*, IOption*, CStringComparison> OptionsOrderedByLongName;
 
 	private:
+		//! Append a new option
+		void appendOption(IOption* option, char shortname);
+		//! Append a new short option
+		void appendShortOption(IOption* option, char shortname);
+
+	private:
 		//! All existing options
 		OptionList pAllOptions;
 		//! All options ordered by their short name
 		OptionsOrderedByShortName pShortNames;
 		//! All options ordered by their long name
 		OptionsOrderedByLongName pLongNames;
-
 		//! Options for remaining arguments
 		IOption* pRemains;
 

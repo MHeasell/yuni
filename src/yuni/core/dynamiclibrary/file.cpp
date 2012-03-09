@@ -11,7 +11,6 @@
 #include "../../io/directory.h"
 
 
-
 #ifdef YUNI_OS_WINDOWS
 # define YUNI_DYNLIB_DLOPEN(X)      ::LoadLibraryW(X)
 #else
@@ -31,6 +30,7 @@
 #endif
 
 
+
 namespace Yuni
 {
 namespace DynamicLibrary
@@ -39,19 +39,6 @@ namespace DynamicLibrary
 
 	// Implementation of the static variable
 	const File::Handle File::NullHandle = NULL;
-
-
-
-	void File::wrapperDlClose(const File::Handle h)
-	{
-		YUNI_DYNLIB_DLCLOSE(h);
-	}
-
-
-	Symbol::Handle File::wrapperDlSym(const File::Handle h, const char* name)
-	{
-		return (Symbol::Handle)(YUNI_DYNLIB_DLSYM(h, name));
-	}
 
 
 
@@ -66,7 +53,7 @@ namespace DynamicLibrary
 		** \return True if the filename in `s` exists and should be loaded, False otherwise
 		**/
 		template<class StringT>
-		inline bool FindLibraryFile(StringT& out, /*const StringT2& path,*/ const AnyString& filename, const char* prefix)
+		static bool FindLibraryFile(StringT& out, /*const StringT2& path,*/ const AnyString& filename, const char* prefix)
 		{
 			# define TEST_THEN_LOAD(EXT) \
 				out.clear(); \
@@ -106,18 +93,29 @@ namespace DynamicLibrary
 		** \param prefix The prefix to use for the filename
 		** \return True if the filename in `s` exists and should be loaded, False otherwise
 		**/
-		inline bool FindLibrary(String& out, const AnyString& filename)
+		inline static bool FindLibrary(String& out, const AnyString& filename)
 		{
 			return (FindLibraryFile(out, filename, "lib") || FindLibraryFile(out, filename, ""));
 		}
 
+
 	} // Anonymous namespace
 
 
-	File::File(const AnyString& filename, const Relocation r, const Visibility v) :
+
+
+
+	File::File(const AnyString& filename, Relocation relocation, Visibility visibility) :
 		pHandle(NullHandle)
 	{
-		(void)loadFromFile(filename, r, v);
+		(void) loadFromFile(filename, relocation, visibility);
+	}
+
+
+	File::File(const AnyString& filename) :
+		pHandle(NullHandle)
+	{
+		(void) loadFromFile(filename, relocationLazy, visibilityDefault);
 	}
 
 
@@ -129,13 +127,11 @@ namespace DynamicLibrary
 	File::~File()
 	{
 		if (NullHandle != pHandle)
-			wrapperDlClose(pHandle);
+			YUNI_DYNLIB_DLCLOSE(pHandle);
 	}
 
 
-
-
-	bool File::loadFromFile(const AnyString& filename, const File::Relocation r, const File::Visibility v)
+	bool File::loadFromFile(const AnyString& filename, File::Relocation r, File::Visibility v)
 	{
 		// No filename
 		if (!filename.empty())
@@ -153,13 +149,13 @@ namespace DynamicLibrary
 			if (FindLibrary(s, filename))
 				return loadFromRawFilename(s, r, v);
 		}
+
 		// Make sure the library has been unloaded
 		// This unloading would have been done by `loadFromRawFilename()` if
 		// something was found
 		unload();
 		// We have found nothing :(
 		return false;
-
 	}
 
 
@@ -170,6 +166,7 @@ namespace DynamicLibrary
 			YUNI_DYNLIB_DLCLOSE(pHandle);
 			pHandle = NullHandle;
 			pFilename.clear();
+			pFilename.shrink();
 		}
 	}
 
@@ -181,12 +178,12 @@ namespace DynamicLibrary
 	# ifdef YUNI_OS_WINDOWS
 
 	// Specific implementation for the Windows platform
-	bool File::loadFromRawFilename(const AnyString& filename, const File::Relocation, const File::Visibility)
+	bool File::loadFromRawFilename(const AnyString& filename, File::Relocation, File::Visibility)
 	{
 		// Unload the library if already loaded
 		unload();
 
-		if (filename.notEmpty())
+		if (!filename.empty())
 		{
 			// Loading
 			Private::WString<true> buffer(filename);
@@ -206,17 +203,18 @@ namespace DynamicLibrary
 	# else
 
 	// Specific implementation for the Unix platforms
-	bool File::loadFromRawFilename(const AnyString& filename, const File::Relocation r, const File::Visibility v)
+	bool File::loadFromRawFilename(const AnyString& filename, File::Relocation r, File::Visibility v)
 	{
 		// Unload the library if already loaded
 		unload();
 
-		if (filename.notEmpty())
+		if (!filename.empty())
 		{
 			// The mode
 			int mode = ((relocationLazy == r) ? RTLD_LAZY : RTLD_NOW);
 			if (visibilityDefault != v)
 				mode |= ((visibilityGlobal == v) ? RTLD_GLOBAL : RTLD_LOCAL);
+
 			// Loading
 			pHandle = YUNI_DYNLIB_DLOPEN(filename.c_str(), mode);
 			if (NullHandle != pHandle)
@@ -228,8 +226,23 @@ namespace DynamicLibrary
 		return false;
 	}
 
-# endif
+	# endif
 
+
+
+	bool File::hasSymbol(const AnyString& name) const
+	{
+		return NullHandle != pHandle
+			&& NULL != (Symbol::Handle) (YUNI_DYNLIB_DLSYM(pHandle, name.c_str()));
+	}
+
+
+	Symbol File::resolve(const AnyString& name) const
+	{
+		return NullHandle != pHandle
+			? (Symbol::Handle) (YUNI_DYNLIB_DLSYM(pHandle, name.c_str()))
+			: NULL;
+	}
 
 
 

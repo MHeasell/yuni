@@ -21,11 +21,9 @@ namespace Logs
 	}
 
 
-
 	template<class Handlers, class Decorators, template<class> class TP>
 	inline Logger<Handlers,Decorators,TP>::~Logger()
 	{}
-
 
 
 	template<class Handlers, class Decorators, template<class> class TP>
@@ -134,7 +132,6 @@ namespace Logs
 	}
 
 
-
 	template<class Handlers, class Decorators, template<class> class TP>
 	template<typename U>
 	inline typename Logger<Handlers,Decorators,TP>::CheckpointBuffer
@@ -221,6 +218,5 @@ namespace Logs
 
 } // namespace Logs
 } // namespace Yuni
-
 
 #endif // __YUNI_CORE_LOGS_LOGS_HXX__

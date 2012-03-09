@@ -1,7 +1,7 @@
 
 #include "parser.h"
 #include <iostream>
-
+#include <cassert>
 
 // The standard error output is not displayed on Windows
 # ifndef YUNI_OS_WINDOWS
@@ -9,8 +9,6 @@
 # else
 #	define STD_CERR  std::cout
 # endif
-
-
 
 
 
@@ -323,6 +321,12 @@ namespace Yuni
 namespace GetOpt
 {
 
+	Parser::Parser() :
+		pRemains(NULL),
+		pErrors(0)
+	{}
+
+
 
 	Parser::~Parser()
 	{
@@ -335,7 +339,7 @@ namespace GetOpt
             pShortNames.clear();
             pLongNames.clear();
 
-			const OptionList::iterator end = pAllOptions.end();
+			OptionList::iterator end = pAllOptions.end();
 			for (OptionList::iterator i = pAllOptions.begin(); i != end; ++i)
 				delete *i;
 		}
@@ -347,7 +351,8 @@ namespace GetOpt
 		{
 			pShortNames.clear();
 			pLongNames.clear();
-			const OptionList::iterator end = pAllOptions.end();
+
+			OptionList::iterator end = pAllOptions.end();
 			for (OptionList::iterator i = pAllOptions.begin(); i != end; ++i)
 				delete *i;
 			pAllOptions.clear();
@@ -374,7 +379,7 @@ namespace GetOpt
 
 		if (!pAllOptions.empty())
 		{
-			const OptionList::const_iterator end = pAllOptions.end();
+			OptionList::const_iterator end = pAllOptions.end();
 			OptionList::const_iterator i = pAllOptions.begin();
 
 			// Add a space if the first option is not a paragraph
@@ -398,6 +403,42 @@ namespace GetOpt
 		std::cout << "\n";
 	}
 
+
+
+	void Parser::appendShortOption(IOption* option, char shortname)
+	{
+		// In the list with all other options
+		pAllOptions.push_back(option);
+		// The short name
+		if (shortname != ' ' && shortname != '\0')
+			pShortNames[shortname] = option;
+	}
+
+
+	void Parser::appendOption(IOption* option, char shortname)
+	{
+		const String& longname = option->longName();
+		if (!longname.empty())
+		{
+			// The long name of an option must not be equal to 1
+			// There is an ambiguity on Windows : /s : a long or short name ?
+			# ifndef NDEBUG
+			assert(longname.size() != 1 && "The long name of an option must be igreater than 1 (ambigous on Windows)");
+			# else
+			if (longname.size() == 1) // ambigous on Windows, must not continue
+				return;
+			# endif
+
+			pLongNames[longname.c_str()] = option;
+		}
+
+		// In the list with all other options
+		pAllOptions.push_back(option);
+
+		// The short name
+		if (shortname != ' ' && shortname != '\0')
+			pShortNames[shortname] = option;
+	}
 
 
 

@@ -7,7 +7,6 @@ namespace Yuni
 namespace Bit
 {
 
-
 	template<class T>
 	unsigned int Count(T data)
 	{

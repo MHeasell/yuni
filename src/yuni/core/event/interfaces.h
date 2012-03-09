@@ -19,9 +19,12 @@ namespace EventImpl
 	template<class BindT> class PredicateRemoveObserverBase;
 	template<class BindT> class PredicateRemoveWithoutChecks;
 
+
 } // namespace EventImpl
 } // namespace Private
 } // namespace Yuni
+
+
 
 
 namespace Yuni

@@ -4,7 +4,6 @@
 ** Header for Yuni::DynamicLibrary::Symbol, a class for representing an exported
 ** symbol by a (shared) library
 */
-
 # include "../../yuni.h"
 
 
@@ -12,7 +11,6 @@ namespace Yuni
 {
 namespace DynamicLibrary
 {
-
 
 	/*!
 	** \brief Exported Symbol from a dynamic library
@@ -24,37 +22,48 @@ namespace DynamicLibrary
 		typedef void* Handle;
 
 	public:
+		//! \name Constructor & Destructor
+		//@{
 		/*!
 		** \brief Default constructor
 		*/
 		Symbol();
-
 		/*!
 		** \brief Constructor with a given handle
 		*/
 		Symbol(Handle p);
-
 		/*!
 		** \brief Copy constructor
 		*/
 		Symbol(const Symbol& rhs);
+		//@}
 
+
+		//! \name Validity
+		//@{
 		//! Get if the symbol is invalid
 		bool null() const;
-
 		//! Get if the symbol is valid
 		bool valid() const;
+		//@}
 
+
+		//! \name Operator
+		//@{
 		//! Copy operator
 		Symbol& operator = (const Symbol& rhs);
-
 		//! Copy operator
 		Symbol& operator = (Symbol::Handle hndl);
+		//@}
 
+
+		//! \name Handle
+		//@{
 		/*!
 		** \brief Get the handle of the symbol
 		*/
 		Handle ptr() const;
+		//@}
 
 
 	private:

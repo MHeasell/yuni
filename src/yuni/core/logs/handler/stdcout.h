@@ -4,7 +4,6 @@
 # include "../null.h"
 # include <iostream>
 
-
 # if defined(YUNI_OS_WINDOWS)
 #	define YUNI_LOGS_UNIX_COLORS_ALLOWED  0
 # else
@@ -16,8 +15,6 @@ namespace Yuni
 {
 namespace Logs
 {
-
-
 
 	/*!
 	** \brief Log Handler: The standard output (cout & cerr)
@@ -62,5 +59,7 @@ namespace Logs
 
 } // namespace Logs
 } // namespace Yuni
+
+# undef YUNI_LOGS_UNIX_COLORS_ALLOWED
 
 #endif // __YUNI_CORE_LOGS_HANDLERS_STD_COUT_H__

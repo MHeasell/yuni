@@ -10,7 +10,6 @@ namespace Yuni
 namespace Logs
 {
 
-
 	template<class LeftType = NullDecorator>
 	class VerbosityLevel : public LeftType
 	{

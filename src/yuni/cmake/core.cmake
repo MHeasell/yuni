@@ -37,6 +37,7 @@ endif()
 
 
 
+include(CheckCSourceCompiles)
 include(CheckCXXSourceCompiles)
 include(CheckIncludeFiles)
 include(CheckIncludeFileCXX)
@@ -45,17 +46,17 @@ include(CheckCXXCompilerFlag)
 
 
 # stdio.h
-check_include_file_cxx(stdio.h YUNI_HAS_STDIO_H)
+check_include_file(stdio.h YUNI_HAS_STDIO_H)
 # String.h
-check_include_file_cxx(string.h YUNI_HAS_STRING_H)
+check_include_file(string.h YUNI_HAS_STRING_H)
 # time.h
-check_include_file_cxx(time.h YUNI_HAS_TIME_H)
+check_include_file(time.h YUNI_HAS_TIME_H)
 # assert.h
-check_include_file_cxx(assert.h YUNI_HAS_ASSERT_H)
+check_include_file(assert.h YUNI_HAS_ASSERT_H)
 # cassert
 check_include_file_cxx(cassert YUNI_HAS_CASSERT)
 # errno.h
-check_include_file_cxx(errno.h YUNI_HAS_ERRNO_H)
+check_include_file(errno.h YUNI_HAS_ERRNO_H)
 # cstddef
 check_include_file_cxx(cstddef YUNI_HAS_CSTDDEF)
 
@@ -74,17 +75,17 @@ check_include_file_cxx(iostream YUNI_HAS_IOSTREAM)
 # cassert
 check_include_file_cxx(cassert YUNI_HAS_CASSERT)
 # dirent.h
-check_include_file_cxx(dirent.h YUNI_HAS_DIRENT_H)
+check_include_file(dirent.h YUNI_HAS_DIRENT_H)
 # stdlib.h
-check_include_file_cxx(stdlib.h YUNI_HAS_STDLIB_H)
+check_include_file(stdlib.h YUNI_HAS_STDLIB_H)
 # unistd.h
-check_include_file_cxx(unistd.h YUNI_HAS_UNISTD_H)
+check_include_file(unistd.h YUNI_HAS_UNISTD_H)
 # fcntl.h
-check_include_file_cxx(fcntl.h YUNI_HAS_FCNTL_H)
+check_include_file(fcntl.h YUNI_HAS_FCNTL_H)
 # cstdlib
-check_include_file_cxx(cstdlib YUNI_HAS_CSTDLIB)
+check_include_file(cstdlib YUNI_HAS_CSTDLIB)
 # stdarg
-check_include_file_cxx(stdarg.h YUNI_HAS_STDARG_H)
+check_include_file(stdarg.h YUNI_HAS_STDARG_H)
 if(NOT APPLE AND NOT WIN32 AND NOT WIN64)
 	# sys/sendfile.h
 	check_include_file_cxx("sys/sendfile.h" YUNI_HAS_SYS_SENDFILE_H)
@@ -98,7 +99,7 @@ check_cxx_source_compiles("#include <stdarg.h>
 
 if(NOT MSVC)
 	# sys/types.h
-	check_include_file_cxx("sys/types.h" YUNI_HAS_SYS_TYPES_H)
+	check_include_file("sys/types.h" YUNI_HAS_SYS_TYPES_H)
 endif(NOT MSVC)
 if(WIN32 OR WIN64)
 	# cstddef
@@ -150,8 +151,8 @@ endif()
 
 # long
 if(MSVC)
-	check_cxx_source_compiles(
-		"#include <iostream>
+	check_cxx_source_compiles("
+		#include <iostream>
 		#include <stdio.h>
 		void foo(unsigned int a) {std::cout << a;}
 		void foo(int a) {std::cout << a;}
@@ -162,8 +163,8 @@ if(MSVC)
 		YUNI_HAS_LONG)
 else(MSVC)
 	if(YUNI_HAS_SYS_TYPES_H)
-		check_cxx_source_compiles(
-			"#include <iostream>
+		check_cxx_source_compiles("
+			#include <iostream>
 			#include <sys/types.h>
 			#include <stdio.h>
 			void foo(unsigned int a) {std::cout << a;}
@@ -174,8 +175,8 @@ else(MSVC)
 			int main() {return 0;}"
 			YUNI_HAS_LONG)
 	else(YUNI_HAS_SYS_TYPES_H)
-		check_cxx_source_compiles(
-			"#include <iostream>
+		check_cxx_source_compiles("
+			#include <iostream>
 			#include <stdio.h>
 			void foo(unsigned int a) {std::cout << a;}
 			void foo(int a) {std::cout << a;}
@@ -186,6 +187,25 @@ else(MSVC)
 			YUNI_HAS_LONG)
 	endif(YUNI_HAS_SYS_TYPES_H)
 endif(MSVC)
+
+
+if (YUNI_HAS_SYS_TYPES_H)
+	check_c_source_compiles(
+		"#include <sys/types.h>
+		int main() {uint r = 0; return (int) r;}"
+		YUNI_HAS_UINT)
+	check_c_source_compiles(
+		"#include <sys/types.h>
+		int main() {ssize_t r = 0; return (int) r;}"
+		YUNI_HAS_SSIZE_T)
+else()
+	check_c_source_compiles(
+		"int main() {uint r = 0; return (int) r;}"
+		YUNI_HAS_UINT)
+	check_c_source_compiles(
+		"int main() {ssize_t r = 0; return (int) r;}"
+		YUNI_HAS_SSIZE_T)
+endif()
 
 
 if (NOT WIN32)

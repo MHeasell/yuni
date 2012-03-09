@@ -69,22 +69,18 @@ namespace Yuni
 		** \brief Default Constructor
 		*/
 		LinkedList();
-
 		/*!
 		** \brief Copy constructor
 		*/
 		LinkedList(const LinkedList& rhs);
-
 		/*!
 		** \brief Copy constructor from another linked list
 		*/
 		template<class U, class A> LinkedList(const LinkedList<U,A>& rhs);
-
 		/*!
 		** \brief Copy constructor from a standard std::list
 		*/
 		template<class U, class A> explicit LinkedList(const std::list<U,A>& rhs);
-
 		/*!
 		** \brief Copy constructor from a standard std::vector
 		*/

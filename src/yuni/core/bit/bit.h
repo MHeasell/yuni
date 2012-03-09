@@ -29,7 +29,6 @@ namespace Yuni
 namespace Bit
 {
 
-
 	/*!
 	** \brief Get the number of bits that are set
 	*/

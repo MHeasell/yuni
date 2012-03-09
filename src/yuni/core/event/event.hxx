@@ -5,7 +5,6 @@
 namespace Yuni
 {
 
-
 	template<typename P>
 	inline Event<P>::Event()
 	{}
@@ -29,6 +28,7 @@ namespace Yuni
 		return AncestorType::pBindList.size();
 	}
 
+
 	template<typename P>
 	inline unsigned int Event<P>::size() const
 	{
@@ -43,14 +43,13 @@ namespace Yuni
 		{
 			// We will inform all bound objects that we are no longer linked.
 			IEvent* baseThis = dynamic_cast<IEvent*>(this);
-			const IEventObserverBase* base;
-			const typename AncestorType::BindList::iterator end = AncestorType::pBindList.end();
+			typename AncestorType::BindList::iterator end = AncestorType::pBindList.end();
 			for (typename AncestorType::BindList::iterator i = AncestorType::pBindList.begin(); i != end; ++i)
 			{
 				if ((*i).isDescendantOfIEventObserverBase())
 				{
 					// Getting the object pointer, if any, then decrementing the ref counter
-					base = ((*i).observerBaseObject());
+					const IEventObserverBase* base = ((*i).observerBaseObject());
 					if (base)
 						base->boundEventRemoveFromTable(baseThis);
 				}

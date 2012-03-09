@@ -3,7 +3,6 @@
 
 # include "../../yuni.h"
 # include "../../thread/policy.h"
-
 # include "null.h"
 # include "verbosity.h"
 
@@ -197,6 +196,7 @@ namespace Logs
 		//! Start a message with no verbosity level (always displayed)
 		template<typename U> UnknownBuffer operator << (const U& u);
 		//@}
+
 
 	public:
 		/*!

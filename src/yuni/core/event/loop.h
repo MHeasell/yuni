@@ -97,6 +97,7 @@ namespace EventLoop
 			detached = DetachedT,
 		};
 
+
 	public:
 		//! \name Constructor & Destructor
 		//@{
@@ -108,6 +109,9 @@ namespace EventLoop
 		~IEventLoop();
 		//@}
 
+
+		//! \name Loop management
+		//@{
 		/*!
 		** \brief Start the event loop
 		**
@@ -130,18 +134,24 @@ namespace EventLoop
 		** \param timeout The number of milliseconds to wait before killing the event loop
 		*/
 		void stop(unsigned int timeout = 5000 /* 5 seconds */);
+		
+		/*!
+		** \brief Is the event loop running ?
+		*/
+		bool running() const;
+		//@}
 
+
+		//! \name Event dispatching
+		//@{
 		/*!
 		** \brief Post a new request into the queue
 		**
 		** \param request A request, which is merely a delegate via the class Bind<>)
 		*/
 		void dispatch(const RequestType& request);
+		//@}
 
-		/*!
-		** \brief Is the event loop running ?
-		*/
-		bool running() const;
 
 		//! \name Operators
 		//@{
@@ -159,6 +169,7 @@ namespace EventLoop
 		** \return False to stop the loop
 		*/
 		static bool onLoop();
+
 
 	protected:
 		//! Suspend the thread

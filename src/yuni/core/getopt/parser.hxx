@@ -1,153 +1,81 @@
 #ifndef __YUNI_CORE_GETOPT_PARSER_HXX__
 # define __YUNI_CORE_GETOPT_PARSER_HXX__
 
-# include <cassert>
-
 
 namespace Yuni
 {
 namespace GetOpt
 {
 
-
-	inline Parser::Parser()
-		:pRemains(NULL), pErrors(0)
-	{}
+	template<class U>
+	inline void Parser::add(U& var, char shortname, bool visible)
+	{
+		// The new option
+		IOption* option = (visible)
+			? (IOption*) new Private::GetOptImpl::Option<U, true>(var, shortname)
+			: (IOption*) new Private::GetOptImpl::Option<U, false>(var, shortname);
+		// append the new option
+		appendShortOption(option, shortname);
+	}
 
 
 	template<class U>
-	void Parser::add(U& var, const char shortName, bool visible)
+	inline void Parser::addFlag(U& var, char shortname, bool visible)
 	{
 		// The new option
-		IOption* o = (visible)
-			? (IOption*) new Private::GetOptImpl::Option<U, true>(var, shortName)
-			: (IOption*) new Private::GetOptImpl::Option<U, false>(var, shortName);
+		IOption* option = (visible)
+			? (IOption*) new Private::GetOptImpl::Option<U, true, false>(var, shortname)
+			: (IOption*) new Private::GetOptImpl::Option<U, false, false>(var, shortname);
+		// append the new option
+		appendShortOption(option, shortname);
+	}
 
-		// In the list with all other options
-		pAllOptions.push_back(o);
-		// The short name
-		if (shortName != '\0' && shortName != ' ')
-			pShortNames[shortName] = o;
 
-		// The long name of an option must not be equal to 1
-		// There is an ambiguity on Windows : /s : a long or short name ?
-		assert(o->longName().size() != 1 && "The long name of an option must not be equal to 1 (ambigous on Windows)");
+	template<class U, class S>
+	inline void Parser::add(U& var, char shortname, const S& longname, bool visible)
+	{
+		IOption* option = (visible)
+			? (IOption*) new Private::GetOptImpl::Option<U, true>(var, shortname, longname)
+			: (IOption*) new Private::GetOptImpl::Option<U, false>(var, shortname, longname);
+		// append the new option
+		appendOption(option, shortname);
+	}
+
+
+	template<class U, class S, class D>
+	inline void Parser::add(U& var, char shortname, const S& longname, const D& description, bool visible)
+	{
+		IOption* option = (visible)
+			? (IOption*) new Private::GetOptImpl::Option<U, true>(var, shortname, longname, description)
+			: (IOption*) new Private::GetOptImpl::Option<U, false>(var, shortname, longname, description);
+		// append the new option
+		appendOption(option, shortname);
 	}
 
 
 
 	template<class U, class S>
-	void Parser::add(U& var, const char shortName, const S& longName, bool visible)
+	inline void Parser::addFlag(U& var, char shortname, const S& longname, bool visible)
 	{
 		// The new option
-		IOption* o = (visible)
-			? (IOption*) new Private::GetOptImpl::Option<U, true>(var, shortName, longName)
-			: (IOption*) new Private::GetOptImpl::Option<U, false>(var, shortName, longName);
-
-		// In the list with all other options
-		pAllOptions.push_back(o);
-		// The short name
-		if (shortName != '\0' && shortName != ' ')
-			pShortNames[shortName] = o;
-		// The long name
-		if (!o->longName().empty())
-			pLongNames[o->longName().c_str()] = o;
-
-		// The long name of an option must not be equal to 1
-		// There is an ambiguity on Windows : /s : a long or short name ?
-		assert(o->longName().size() != 1 && "The long name of an option must not be equal to 1 (ambigous on Windows)");
+		IOption* option = (visible)
+			? (IOption*) new Private::GetOptImpl::Option<U, true, false>(var, shortname, longname)
+			: (IOption*) new Private::GetOptImpl::Option<U, false, false>(var, shortname, longname);
+		// append the new option
+		appendOption(option, shortname);
 	}
 
 
 	template<class U, class S, class D>
-	void Parser::add(U& var, const char shortName, const S& longName, const D& description, bool visible)
+	void Parser::addFlag(U& var, char shortname, const S& longname, const D& description, bool visible)
 	{
 		// The new option
-		IOption* o = (visible)
-			? (IOption*) new Private::GetOptImpl::Option<U, true>(var, shortName, longName, description)
-			: (IOption*) new Private::GetOptImpl::Option<U, false>(var, shortName, longName, description);
-
-		// In the list with all other options
-		pAllOptions.push_back(o);
-		// The short name
-		if (shortName != '\0' && shortName != ' ')
-			pShortNames[shortName] = o;
-		// The long name
-		if (!o->longName().empty())
-			pLongNames[o->longName().c_str()] = o;
-
-		// The long name of an option must not be equal to 1
-		// There is an ambiguity on Windows : /s : a long or short name ?
-		assert(o->longName().size() != 1 && "The long name of an option must not be equal to 1 (ambigous on Windows)");
+		IOption* option = (visible)
+			? (IOption*) new Private::GetOptImpl::Option<U, true, false>(var, shortname, longname, description)
+			: (IOption*) new Private::GetOptImpl::Option<U, false, false>(var, shortname, longname, description);
+		// append the new option
+		appendOption(option, shortname);
 	}
-
-
-	template<class U>
-	void Parser::addFlag(U& var, const char shortName, bool visible)
-	{
-		// The new option
-		IOption* o = (visible)
-			? (IOption*) new Private::GetOptImpl::Option<U, true, false>(var, shortName)
-			: (IOption*) new Private::GetOptImpl::Option<U, false, false>(var, shortName);
-
-		// In the list with all other options
-		pAllOptions.push_back(o);
-		// The short name
-		if (shortName != '\0' && shortName != ' ')
-			pShortNames[shortName] = o;
-
-		// The long name of an option must not be equal to 1
-		// There is an ambiguity on Windows : /s : a long or short name ?
-		assert(o->longName().size() != 1 && "The long name of an option must not be equal to 1 (ambigous on Windows)");
-	}
-
-
-
-	template<class U, class S>
-	void Parser::addFlag(U& var, const char shortName, const S& longName, bool visible)
-	{
-		// The new option
-		IOption* o = (visible)
-			? (IOption*) new Private::GetOptImpl::Option<U, true, false>(var, shortName, longName)
-			: (IOption*) new Private::GetOptImpl::Option<U, false, false>(var, shortName, longName);
-
-		// In the list with all other options
-		pAllOptions.push_back(o);
-		// The short name
-		if (shortName != '\0' && shortName != ' ')
-			pShortNames[shortName] = o;
-		// The long name
-		if (!o->longName().empty())
-			pLongNames[o->longName().c_str()] = o;
-
-		// The long name of an option must not be equal to 1
-		// There is an ambiguity on Windows : /s : a long or short name ?
-		assert(o->longName().size() != 1 && "The long name of an option must not be equal to 1 (ambigous on Windows)");
-	}
-
-
-	template<class U, class S, class D>
-	void Parser::addFlag(U& var, const char shortName, const S& longName, const D& description, bool visible)
-	{
-		// The new option
-		IOption* o = (visible)
-			? (IOption*) new Private::GetOptImpl::Option<U, true, false>(var, shortName, longName, description)
-			: (IOption*) new Private::GetOptImpl::Option<U, false, false>(var, shortName, longName, description);
-
-		// In the list with all other options
-		pAllOptions.push_back(o);
-		// The short name
-		if (shortName != '\0' && shortName != ' ')
-			pShortNames[shortName] = o;
-		// The long name
-		if (!o->longName().empty())
-			pLongNames[o->longName().c_str()] = o;
-
-		// The long name of an option must not be equal to 1
-		// There is an ambiguity on Windows : /s : a long or short name ?
-		assert(o->longName().size() != 1 && "The long name of an option must not be equal to 1 (ambigous on Windows)");
-	}
-
 
 
 	template<class U>
@@ -164,6 +92,7 @@ namespace GetOpt
 	{
 		pAllOptions.push_back(new Private::GetOptImpl::Paragraph(text));
 	}
+
 
 
 

@@ -9,10 +9,9 @@ namespace Yuni
 namespace Event
 {
 
-
 	template<class D, template<class> class TP>
-	inline Observer<D,TP>::Observer()
-		:pCanObserve(true)
+	inline Observer<D,TP>::Observer() :
+		pCanObserve(true)
 	{}
 
 
@@ -37,7 +36,7 @@ namespace Event
 		// Disconnecting from all events
 		if (!pEvents.empty())
 		{
-			const IEvent::List::iterator end = pEvents.end();
+			IEvent::List::iterator end = pEvents.end();
 			for (IEvent::List::iterator i = pEvents.begin(); i != end; ++i)
 				(*i)->internalDetachObserver(this);
 			pEvents.clear();
@@ -53,7 +52,7 @@ namespace Event
 		typename ThreadingPolicy::MutexLocker locker(*this);
 		if (!pEvents.empty())
 		{
-			const IEvent::List::iterator end = pEvents.end();
+			IEvent::List::iterator end = pEvents.end();
 			for (IEvent::List::iterator i = pEvents.begin(); i != end; ++i)
 				(*i)->internalDetachObserver(this);
 			pEvents.clear();

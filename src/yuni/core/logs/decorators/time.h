@@ -23,11 +23,11 @@ namespace LogsDecorator
 } // namespace Yuni
 
 
+
 namespace Yuni
 {
 namespace Logs
 {
-
 
 	template<class LeftType = NullDecorator>
 	class Time : public LeftType

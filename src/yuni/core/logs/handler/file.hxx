@@ -2,7 +2,6 @@
 # define __YUNI_CORE_LOGS_HANDLERS_FILE_HXX__
 
 
-
 namespace Yuni
 {
 namespace Logs
@@ -49,7 +48,7 @@ namespace Logs
 
 
 	template<class NextHandler>
-	inline bool File<NextHandler>::logFileIsOpened()
+	inline bool File<NextHandler>::logfileIsOpened() const
 	{
 		return (pFile.opened());
 	}
