@@ -61,6 +61,10 @@ namespace Yuni
 	*/
 	static const uint64 AutoDetectNullChar = (uint64)(-1);
 
+	# ifndef YUNI_HAS_SSIZE_T
+	/*! ssize_t */
+	typedef Yuni::sint64 ssize_t;
+	# endif
 
 } /* namespace Yuni */
 
@@ -81,11 +85,6 @@ namespace Yuni
 
 
 /* Both C / C++ compiler */
-
-# ifndef YUNI_HAS_SSIZE_T
-/*! ssize_t */
-typedef Yuni::sint64 ssize_t;
-# endif
 
 # ifndef YUNI_HAS_UINT
 /*! Convenient typedef around unsigned int */
