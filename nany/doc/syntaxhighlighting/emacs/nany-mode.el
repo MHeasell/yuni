@@ -118,15 +118,15 @@
 	(,nany-operators-regexp . font-lock-reference-face)
 	(,nany-special-operators-regexp . font-lock-warning-face)
 	;; Variables and attributes
-	("var[ \t]+\\([A-Za-z][A-Za-z0-9_]*\\)" 1 font-lock-variable-name-face)
+	("\\(var\\|property\\)[ \t]+\\([A-Za-z][A-Za-z0-9_]*\\)" 2 font-lock-variable-name-face)
 	("\\([A-Za-z][A-Za-z0-9_]*\\)[ \t]*:=" 1 font-lock-variable-name-face)
 	;; Method prototype
 	("\\(method\\|function\\)[ \t]+\\([A-Za-z][A-Za-z0-9_]*\\)" (2 font-lock-function-name-face))
-	;; Function calls
-	("\\.?\\([A-Za-z][A-Za-z0-9_]*\\)[ \t]*(" (1 font-lock-function-name-face))
 	;; Type names
 	(":[ \t]*\\([A-Za-z][A-Za-z0-9_]*\\)" 1 font-lock-type-face)
 	("\\(new\\|class\\|enum\\|workflow\\|predicate\\)[ \t]+\\([A-Za-z][A-Za-z0-9_]*\\)" 2 font-lock-type-face)
+	;; Function calls
+	("\\.?\\([A-Za-z][A-Za-z0-9_]*\\)[ \t]*(" (1 font-lock-function-name-face))
   )
   "Syntax highlighting in Nany mode"
 )
