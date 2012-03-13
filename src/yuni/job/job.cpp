@@ -9,6 +9,21 @@ namespace Yuni
 namespace Job
 {
 
+	IJob::IJob() :
+		pState(stateIdle),
+		pProgression(0),
+		pCanceling(),
+		pThread(NULL)
+	{}
+
+
+	IJob::~IJob()
+	{
+		assert(this != NULL && "IJob: Destructor: Oo `this' is null !?");
+		assert(pThread == NULL && "A job can not be attached to a thread when destroyed");
+	}
+
+
 
 	bool IJob::suspend(unsigned int delay) const
 	{
@@ -54,6 +69,12 @@ namespace Job
 		pProgression = 100;
 	}
 
+
+	void IJob::name(const AnyString& newname)
+	{
+		ThreadingPolicy::MutexLocker locker(*this);
+		pName = newname;
+	}
 
 
 

@@ -80,7 +80,7 @@ namespace Job
 		//! Get the full human-readable name of this job
 		String name() const;
 		//! Set the name of the job
-		template<class StringT> void name(const StringT& s);
+		void name(const AnyString& newname);
 		//@}
 
 
