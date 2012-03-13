@@ -7,19 +7,6 @@ namespace Yuni
 namespace Job
 {
 
-	inline IJob::IJob()
-		:pState(stateIdle), pProgression(0), pCanceling(), pThread(NULL)
-	{}
-
-
-	inline IJob::~IJob()
-	{
-		assert(this != NULL && "IJob: Destructor: Oo `this' is null !?");
-		assert(pThread == NULL && "A job can not be attached to a thread when destroyed");
-	}
-
-
-
 	inline enum Job::State IJob::state() const
 	{
 		return (enum Job::State) ((sint32) pState);
@@ -31,10 +18,12 @@ namespace Job
 		return ((pState & stateIdle) ? true : false);
 	}
 
+
 	inline bool IJob::waiting() const
 	{
 		return ((pState & stateWaiting) ? true : false);
 	}
+
 
 	inline bool IJob::running() const
 	{
@@ -48,17 +37,16 @@ namespace Job
 	}
 
 
+	inline bool IJob::canceling() const
+	{
+		return (0 != pCanceling);
+	}
+
+
 	inline String IJob::name() const
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 		return pName;
-	}
-
-
-	template<class StringT> inline void IJob::name(const StringT& s)
-	{
-		ThreadingPolicy::MutexLocker locker(*this);
-		pName = s;
 	}
 
 
@@ -95,7 +83,6 @@ namespace Job
 		ThreadingPolicy::MutexLocker locker(*this);
 		info.name = pName;
 	}
-
 
 
 	template<class StringT>
