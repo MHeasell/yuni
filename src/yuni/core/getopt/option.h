@@ -291,8 +291,8 @@ namespace GetOptImpl
 		}
 
 		virtual ~IOption()
-        {
-        }
+		{
+		}
 
 		/*!
 		** \brief Add a value
@@ -301,7 +301,7 @@ namespace GetOptImpl
 		** \param len Length of the string (can be zero)
 		** \return True if the operation succeded, false otherwise
 		*/
-		virtual bool addValue(const char* c_str, const String::size_type len) = 0;
+		virtual bool addValue(const char* c_str, String::size_type len) = 0;
 
 		virtual void enableFlag() = 0;
 
@@ -439,7 +439,7 @@ namespace GetOptImpl
 		** \param len Length of the string (can be zero)
 		** \return True if the operation succeded, false otherwise
 		*/
-		virtual bool addValue(const char*, const String::size_type)
+		virtual bool addValue(const char*, String::size_type)
 		{
 			/* Do nothing - This is not an option */
 			return false;
