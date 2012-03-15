@@ -24,6 +24,16 @@
 	<tr><td>svn repos.</td><td><a href="https://svn.iwi.me/yuni/trunk">https://svn.iwi.me/yuni/trunk</a></td></tr>
 	</table>
 
+
+	<br />
+
+	<p>
+	<b>Anonymous (guest) access to the repository</b>
+	<br />
+	To connect to the Yuni SVN Respository for anonymous checkout use your SVN client command line tool :
+	<pre>$ svn co https://guest@svn.iwi.me/yuni/trunk yuni</pre>
+	</p>
+
 	<!--
 	<h3>Daily snapshot</h3>
 	<table class="nostyle">
