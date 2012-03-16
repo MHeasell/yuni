@@ -1080,13 +1080,13 @@ Nany::Ast::Node* Rule_FunctionDeclaration_function_Identifier(TokenStruct* token
 Nany::Ast::Node* Rule_AnonymousFunctionDeclaration_function(TokenStruct* token)
 {
 	// Read the parameters
-	Nany::Ast::ParameterListNode* params = AstParse<Nany::Ast::ParameterListNode>::Child(token, 4);
+	Nany::Ast::ParameterListNode* params = AstParse<Nany::Ast::ParameterListNode>::Child(token, 2);
 
 	// TODO : type parameters, in and out blocks
 
-	Nany::Ast::TypeExpressionNode* returnType = AstParse<Nany::Ast::TypeExpressionNode>::Child(token, 5);
+	Nany::Ast::TypeExpressionNode* returnType = AstParse<Nany::Ast::TypeExpressionNode>::Child(token, 3);
 
-	Nany::Ast::ScopeNode* body = AstParse<Nany::Ast::ScopeNode>::Child(token, 7);
+	Nany::Ast::ScopeNode* body = AstParse<Nany::Ast::ScopeNode>::Child(token, 6);
 
 	// Generate a unique function name
 	Yuni::String uniqueName("_anonymous_");
@@ -1104,11 +1104,11 @@ Nany::Ast::Node* Rule_AnonymousFunctionDeclaration_function(TokenStruct* token)
 Nany::Ast::Node* Rule_AnonymousFunctionDeclaration_OptimQualifier_function(TokenStruct* token)
 {
 	// Read the parameters
-	Nany::Ast::ParameterListNode* params = AstParse<Nany::Ast::ParameterListNode>::Child(token, 4);
+	Nany::Ast::ParameterListNode* params = AstParse<Nany::Ast::ParameterListNode>::Child(token, 3);
 
 	// TODO : optims, type parameters, in and out blocks
 
-	Nany::Ast::TypeExpressionNode* returnType = AstParse<Nany::Ast::TypeExpressionNode>::Child(token, 5);
+	Nany::Ast::TypeExpressionNode* returnType = AstParse<Nany::Ast::TypeExpressionNode>::Child(token, 4);
 
 	Nany::Ast::ScopeNode* body = AstParse<Nany::Ast::ScopeNode>::Child(token, 7);
 
@@ -1856,8 +1856,10 @@ Nany::Ast::Node* Rule_AssignmentExp(TokenStruct* token)
 // <Local Declaration Exp> ::= var <Value> <Typing>
 Nany::Ast::Node* Rule_LocalDeclarationExp_var(TokenStruct* token)
 {
-	// Not yet implemented !
-	assert(false && "Rule_LocalDeclarationExp_var: Not yet implemented !");
+	Nany::Ast::Node* left = AstParse<>::Child(token, 0);
+	Nany::Ast::TypeExpressionNode* type = AstParse<Nany::Ast::TypeExpressionNode>::Child(token, 1);
+
+	return new Nany::Ast::VarDeclarationNode(left, type);
 }
 
 
@@ -1866,10 +1868,7 @@ Nany::Ast::Node* Rule_LocalDeclarationExp_var(TokenStruct* token)
 // <Local Declaration Exp> ::= <Is Exp>
 Nany::Ast::Node* Rule_LocalDeclarationExp(TokenStruct* token)
 {
-	Nany::Ast::Node* left = AstParse<>::Child(token, 0);
-	Nany::Ast::TypeExpressionNode* type = AstParse<Nany::Ast::TypeExpressionNode>::Child(token, 1);
-
-	return new Nany::Ast::VarDeclarationNode(left, type);
+	return AstParse<>::Child(token, 0);
 }
 
 
@@ -3239,6 +3238,8 @@ Nany::Ast::Node* (*RuleJumpTable[])(TokenStruct* token) =
 template<class NodeT>
 NodeT* AstParse<NodeT>::Child(TokenStruct* parent, unsigned int index)
 {
+	std::cout << "Parsing " << parent->Data << " on child " << index << std::endl;
+
 	assert(parent && "ParseChild: invalid parent");
 	// Make sure the child index is not out of bounds
 	assert(index < (unsigned int) Grammar.RuleArray[parent->ReductionRule].SymbolsCount
