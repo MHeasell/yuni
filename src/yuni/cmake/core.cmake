@@ -41,14 +41,17 @@ include(CheckCSourceCompiles)
 include(CheckCXXSourceCompiles)
 include(CheckIncludeFiles)
 include(CheckIncludeFileCXX)
-include(CheckCXXCompilerFlag)
 
+
+set(CMAKE_REQUIRED_FLAGS_PREVIOUS ${CMAKE_REQUIRED_FLAGS})
+set(CMAKE_REQUIRED_FLAGS "")
 
 include(cmake/core/check-includes.cmake)
 include(cmake/core/check-c++11.cmake)
 include(cmake/core/check-stdint.cmake)
 include(cmake/core/check-extras.cmake)
 
+set(CMAKE_REQUIRED_FLAGS ${CMAKE_REQUIRED_FLAGS_PREVIOUS})
 
 
 

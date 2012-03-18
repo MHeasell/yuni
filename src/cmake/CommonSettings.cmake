@@ -99,12 +99,21 @@ endif()
 #
 if(APPLE)
 	set(MACOSX_BUNDLE_COPYRIGHT "Yuni Framework - 2011")
-	if(YUNI_MACOX_UNIVERSAL_BINARIES)
-		YMESSAGE("Enabled universal binaries (custom : ${YUNI_MACOX_UNIVERSAL_BINARIES})")
-		set(CMAKE_OSX_ARCHITECTURES "${YUNI_MACOX_UNIVERSAL_BINARIES}") # ppc;i386;ppc64;x86_64
+
+	# The compiler flag -arch must be checked. The compiler might not have apple extensions
+	include(CheckCXXCompilerFlag)
+	check_cxx_compiler_flag("arch" YUNI_GCC_HAS_ARCH_FLAG)
+
+	if (YUNI_GCC_HAS_ARCH_FLAG)
+		if(YUNI_MACOX_UNIVERSAL_BINARIES)
+			YMESSAGE("Enabled universal binaries (custom : ${YUNI_MACOX_UNIVERSAL_BINARIES})")
+			set(CMAKE_OSX_ARCHITECTURES "${YUNI_MACOX_UNIVERSAL_BINARIES}") # ppc;i386;ppc64;x86_64
+		else()
+			YMESSAGE("Enabled universal binaries (i386, x86_64)")
+			set(CMAKE_OSX_ARCHITECTURES "i686;x86_64") # ppc;i386;ppc64;x86_64
+		endif()
 	else()
-		YMESSAGE("Enabled universal binaries (i386, x86_64)")
-		set(CMAKE_OSX_ARCHITECTURES "i686;x86_64") # ppc;i386;ppc64;x86_64
+		YWARNING("Universal binaries disabled. The compiler does not seems to support multiple platform architectures in a single binary)")
 	endif()
 endif()
 
