@@ -68,18 +68,18 @@ namespace Math
 	/*!
 	** \brief Get if two values are equal
 	*/
-	template<class U> constexpr bool Equals(U a, U b);
+	template<class U> bool Equals(U a, U b);
 
 	/*!
 	** \brief Get if a value is equals to zero
 	*/
-	template<class U> constexpr bool Zero(U a);
+	template<class U> bool Zero(U a);
 
 
 	/*!
 	** \brief Get the integer absolute value
 	*/
-	template<class T> constexpr T Abs(const T a);
+	template<class T> T Abs(const T a);
 
 	/*!
 	** \brief Get the greater expression
@@ -88,7 +88,7 @@ namespace Math
 	** \param b The second expression
 	** \return The expression considered as the grater
 	*/
-	template<class U, class V> constexpr U Max(U a, V b);
+	template<class U, class V> U Max(U a, V b);
 
 	/*!
 	** \brief Maximum of three values
@@ -98,7 +98,7 @@ namespace Math
 	** \param c The third expression
 	** \return The expression considered as the grater
 	*/
-	template<class U, class V, class W> constexpr U Max(U a, V b, W c);
+	template<class U, class V, class W> U Max(U a, V b, W c);
 
 	/*!
 	** \brief Get the smallest expression
@@ -107,7 +107,7 @@ namespace Math
 	** \param b The second expression
 	** \return The expression considered as the smaller
 	*/
-	template<class U, class V> constexpr U Min(U a, V b);
+	template<class U, class V> U Min(U a, V b);
 
 	/*!
 	** \brief Minimum of three values
@@ -117,7 +117,7 @@ namespace Math
 	** \param c The third expression
 	** \return The expression considered as the smaller
 	*/
-	template<class U, class V, class W> constexpr U Min(U a, V b, W c);
+	template<class U, class V, class W> U Min(U a, V b, W c);
 
 
 	/*!
@@ -128,7 +128,7 @@ namespace Math
 	** \param max The upper bound limit allowed for the expression `v`
 	** \return The expression itself, or a bound limit
 	*/
-	template<class T> constexpr const T& MinMax(const T& expr, const T& min, const T& max);
+	template<class T> const T& MinMax(const T& expr, const T& min, const T& max);
 
 
 	/*!
@@ -155,7 +155,7 @@ namespace Math
 	** \return The expression itself, or a bound limit
 	*/
 	template<class T, class Expr, class MinT, class MaxT>
-	constexpr T MinMaxEx(const Expr& expr, const MinT& min, const MaxT& max);
+	T MinMaxEx(const Expr& expr, const MinT& min, const MaxT& max);
 
 	/*!
 	** \brief Swap two values
