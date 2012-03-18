@@ -472,6 +472,8 @@ set(SRC_CORE_PROCESS
 		core/process/process.h
 		core/process/process.hxx
 		core/process/process.cpp
+		core/process/rename.h
+		core/process/rename.cpp
 )
 source_group(core\\process FILES ${SRC_CORE_PROCESS})
 
