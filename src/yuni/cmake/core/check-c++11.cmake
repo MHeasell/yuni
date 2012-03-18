@@ -29,8 +29,8 @@ check_cxx_source_compiles("
 
 # constexpr
 if(YUNI_HAS_GCC_CPP0X_SUPPORT)
-	set(CMAKE_REQUIRED_FLAGS_SAVE ${CMAKE_REQUIRED_FLAGS} )
-	set(CMAKE_REQUIRED_FLAGS "${YUNI_GCC_CPP0X_FLAG}" )
+	set(CMAKE_REQUIRED_FLAGS_SAVE ${CMAKE_REQUIRED_FLAGS})
+	set(CMAKE_REQUIRED_FLAGS "${YUNI_GCC_CPP0X_FLAG}")
 	check_cxx_source_compiles("
 		class Foo
 		{
