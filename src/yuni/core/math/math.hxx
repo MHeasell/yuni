@@ -38,21 +38,21 @@ namespace Math
 
 
 	template<class U, class V>
-	inline U Max(U a, V b)
+	inline constexpr U Max(U a, V b)
 	{
 		return (a < b) ? b : a;
 	}
 
 
 	template<class U, class V, class W>
-	inline U Max(U a, V b, W c)
+	inline constexpr U Max(U a, V b, W c)
 	{
 		return Max<U,W>(Max<U,V>(a, b), c);
 	}
 
 
 	template<class U, class V>
-	inline U Min(U a, V b)
+	inline constexpr U Min(U a, V b)
 	{
 		return (a < b) ? a : b;
 	}
@@ -60,7 +60,7 @@ namespace Math
 
 
 	template<class U, class V, class W>
-	inline U Min(U a, V b, W c)
+	inline constexpr U Min(U a, V b, W c)
 	{
 		return Min<U, W>(Min<U,V>(a, b), c);
 	}
@@ -74,7 +74,7 @@ namespace Math
 
 
 	template<class T>
-	inline const T& MinMax(const T& expr, const T& min, const T& max)
+	inline constexpr const T& MinMax(const T& expr, const T& min, const T& max)
 	{
 		return ((expr < min)
 			? min
@@ -83,7 +83,7 @@ namespace Math
 
 
 	template<class T, class Expr, class MinT, class MaxT>
-	inline T MinMaxEx(const Expr& expr, const MinT& min, const MaxT& max)
+	inline constexpr T MinMaxEx(const Expr& expr, const MinT& min, const MaxT& max)
 	{
 		return ((expr < min)
 			? static_cast<T>(min)
@@ -105,31 +105,31 @@ namespace Math
 	template<int N> struct SquareRootInt<N,N> { enum { value = N }; };
 
 
-	template <class U> inline bool Equals(U a, U b)
+	template <class U> inline constexpr bool Equals(U a, U b)
 	{
 		return (a == b);
 	}
 
 
-	template<> inline bool Equals<float>(float a, float b)
+	template<> inline constexpr bool Equals<float>(float a, float b)
 	{
 		return ::fabsf(a - b) < YUNI_EPSILON;
 	}
 
-	template<> inline bool Equals<double>(double a, double b)
+	template<> inline constexpr bool Equals<double>(double a, double b)
 	{
 		return ::fabs(a - b) < YUNI_EPSILON;
 	}
 
 	# ifdef YUNI_HAS_LONG_DOUBLE
-	template<> inline bool Equals<long double>(long double a, long double b)
+	template<> inline constexpr bool Equals<long double>(long double a, long double b)
 	{
 		return ::fabsl(a - b) < YUNI_EPSILON;
 	}
 	# endif
 
 
-	template <class U> inline bool Zero(U a)
+	template <class U> inline constexpr bool Zero(U a)
 	{
 		return (0 == a);
 	}
@@ -522,17 +522,17 @@ namespace Math
 	};
 	# endif
 
-	template<class T> inline T Abs(const T x)
+	template<class T> inline constexpr T Abs(const T x)
 	{
 		return ::abs(x);
 	}
 
-	template<> inline long Abs<long>(const long x)
+	template<> inline constexpr long Abs<long>(const long x)
 	{
 		return ::labs(x);
 	}
 
-	template<> inline long long Abs<long long>(const long long x)
+	template<> inline constexpr long long Abs<long long>(const long long x)
 	{
 	# ifdef YUNI_OS_MSVC
 		return ::_abs64(x);
@@ -541,18 +541,18 @@ namespace Math
 	# endif
 	}
 
-	template<> inline double Abs<double>(const double x)
+	template<> inline constexpr double Abs<double>(const double x)
 	{
 		return ::fabs(x);
 	}
 
-	template<> inline float Abs<float>(const float x)
+	template<> inline constexpr float Abs<float>(const float x)
 	{
 		return ::fabsf(x);
 	}
 
 	# ifdef YUNI_HAS_LONG_DOUBLE
-	template<> inline long double Abs<long double>(const long double x)
+	template<> inline constexpr long double Abs<long double>(const long double x)
 	{
 		return ::fabsl(x);
 	}
