@@ -14,8 +14,8 @@ include(CheckIncludeFile)
 # Getting the folder where this file is located
 #
 set(CurrentFolder "${CMAKE_CURRENT_LIST_FILE}")
-string(REPLACE "\\CommonSettings.cmake" "" CurrentFolder "${CurrentFolder}")
-string(REPLACE "/CommonSettings.cmake" "" CurrentFolder "${CurrentFolder}")
+string(REPLACE "\\common-settings.cmake" "" CurrentFolder "${CurrentFolder}")
+string(REPLACE "/common-settings.cmake" "" CurrentFolder "${CurrentFolder}")
 # Current Folder : ${CurrentFolder}
 
 #
