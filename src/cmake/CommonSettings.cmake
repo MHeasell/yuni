@@ -113,7 +113,7 @@ if(APPLE)
 			set(CMAKE_OSX_ARCHITECTURES "i686;x86_64") # ppc;i386;ppc64;x86_64
 		endif()
 	else()
-		YWARNING("Universal binaries disabled. The compiler does not seems to support multiple platform architectures in a single binary)")
+		YWARNING("Universal binaries disabled. The compiler does not seem to support multiple platform architectures in a single binary)")
 	endif()
 endif()
 
