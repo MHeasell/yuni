@@ -100,7 +100,7 @@ namespace Yuni
 
 	# else
 
-	char** RenameProcess(int argc, char** argv, const AnyString& newprocessname)
+	char** RenameProcess(int /*argc*/, char** argv, const AnyString& /*newprocessname*/)
 	{
 		// does nothing
 		return argv;
