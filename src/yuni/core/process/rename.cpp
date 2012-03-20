@@ -37,10 +37,6 @@ namespace Yuni
 			__environ[i] = strdup(envp[i]);
 		__environ[i] = NULL;
 
-		/*
-		 *	**  Save start and extent of argv for LinuxRenameProcess.
-		 *		*/
-
 		Argv = argv;
 		LastArgv = (i > 0)
 			? envp[i - 1] + strlen(envp[i - 1])
