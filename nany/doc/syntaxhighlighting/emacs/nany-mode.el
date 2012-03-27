@@ -4,7 +4,7 @@
 ;;
 ;; You may add the following to your init.el :
 ;; (autoload 'nany-mode "/path/to/nany-mode.el" "Major mode for editing Nany source code." t)
-;; (setq auto-mode-alist (append '(("\\.nany$" . nany-mode)) auto-mode-alist))
+;; (setq auto-mode-alist (append '(("\\.ny$" . nany-mode)) auto-mode-alist))
 
 
 (defgroup nany nil
