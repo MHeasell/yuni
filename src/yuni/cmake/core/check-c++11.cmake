@@ -22,7 +22,7 @@ if(YUNI_HAS_GCC_CPP0X_SUPPORT)
 endif()
 check_cxx_source_compiles("
     #include <cstddef>
-	typedef std::nullptr_t NullPtr;
+	typedef decltype(nullptr) NullPtr;
 	class A {}; int main() {A* a = nullptr;return 0;}" YUNI_HAS_NULLPTR)
 
 
