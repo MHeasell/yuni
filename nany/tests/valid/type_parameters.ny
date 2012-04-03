@@ -1,20 +1,25 @@
 # Test for type parameters on both classes and methods
 
-class ListItem<:T:>
+class SListItem
 {
 public
     #! Constructor with item value
-    method create(value) { item := value; }
+    method new(Type, value: Type)
+	{
+		item := value;
+	}
 
-    var next: ListItem<:T:> := nil;
+    var next: ref SListItem := nil;
     var item: T;
 }
 
-class List<:T:>
+class List
 {
 public
     #! Empty constructor
-    method create {}
+    method new(Type)
+	{
+	}
 
     #! Get the nth item or nil if there are not enough items
     method get(n)
@@ -34,35 +39,58 @@ public
     method prepend(item)
     {
         queue := if head = nil then nil else head.next;
-        head := new ListItem<:T:>(item);
+        head := new ListItem(T, item);
         head.next := queue
     }
 
-    #! Test method type parameters
-    method addToEach<:ValType:>(value)
+    method addToEach(value)
     {
+		for item in self do
+			item += value;
     }
 
+	method print
+	{
+		for item in self do
+			io.out << "\t" << item << io.endl;
+	}
+
+	#! Default enumerator
+	method default
+	{
+		return new class: IEnumerable
+		{
+			var i := first;
+
+			method next
+			{
+				i := i.next;
+			}
+			method valid
+			{
+				i != nil
+			}
+		}
+	}
+
+
 private
-	var head: ref ListItem<:T:> := nil;
-}
+	type T : Type;
+	var head : ref SListItem := nil;
+
+} // class SList
 
 
 # Test function type parameters
-function printList<:ListType:>(list: ListType)
-{
-    for item in list do
-        println("\t" << item)
-}
 
 
 function main
 {
-    var l := new List<:int:>;
+    var l := new SList(int);
     l.prepend(24);
     l.prepend(12);
     l.addToEach(2);
-    printList(l);
+    l.print(l);
     l.get(1);
 	0
 }
