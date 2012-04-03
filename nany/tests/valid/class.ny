@@ -1,15 +1,15 @@
 # This test checks a simple class
-published unit SimpleClass;
 
-uses Dummy.Package;
+uses ui.control;
 
-class MyClass
+
+public class MyClass
 {
 public
 	#! A method declaration
 	method name: string { "Baka!" }
 
-	#! A complete method declaration
+	//! A complete method declaration
 	threadunsafe method boom(t, s: string, k := 0) { 0 }
 
 private
@@ -19,3 +19,4 @@ private
 	#! An attribute
 	var name: string;
 }
+

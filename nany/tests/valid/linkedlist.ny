@@ -1,13 +1,13 @@
 #! Sample implementation for a generic singly linked list
 public unit LinkedList;
 
-class SList
+class SList<:T := any:>
 {
 public
 	property next : read write pNext;
 	property data : read write pData;
 
-	method new(T)
+	method new
 	{
 		// pData takes default value of T
 		// pNext takes nil
@@ -15,8 +15,8 @@ public
 
 	method prepend(n)
 	{
-		oldData := pData;
-		oldNext := pNext;
+		var oldData := pData;
+		var oldNext := pNext;
 		pData := n;
 		pNext := new SList;
 		pNext.next := oldNext;
@@ -47,13 +47,13 @@ public
 
 private
 	var pData : T;
-	var pNext : SList<:T:>;
+	var pNext : SList;
 }
 
 
 function testList
 {
-	var l := new SList(int); // Here, the type parameter is not yet known
+	var l := new SList; // Here, the type parameter is not yet known
 	l.append(42); // Here, we understand that the type is `int`
 	l.prepend("Coucou"); // OK, the inferred type for T is a subtype of `int` and `string`
 	io.cout << "List contains " << l.count << " elements." << io.endl;
