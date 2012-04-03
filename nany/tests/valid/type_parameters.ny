@@ -1,46 +1,47 @@
 # Test for type parameters on both classes and methods
 
-class SListItem
+private class SListItem<:T:>
 {
 public
     #! Constructor with item value
-    method new(Type, value: Type)
+    method new(value)
 	{
 		item := value;
 	}
 
-    var next: ref SListItem := nil;
+	var next: ref SListItem;
     var item: T;
 }
 
-class List
-{
-public
-    #! Empty constructor
-    method new(Type)
-	{
-	}
 
+class SList<:T := any:>
+{
+published
+	typedef Type: typeof(T);
+	property head: ref read write pHead;
+
+public
     #! Get the nth item or nil if there are not enough items
     method get(n)
     {
-        if head = nil then return nil;
+        if pHead = nil or n < 0 then
+			return nil;
 
-        current := head;
+        var current := pHead;
         while n > 0 and current != nil do
         {
             current := current.next;
-            n--
-        };
-        current
+            n--;
+        }
+        current;
     }
 
     #! Add an item to the beginning of the list
     method prepend(item)
     {
-        queue := if head = nil then nil else head.next;
-        head := new ListItem(T, item);
-        head.next := queue
+        var queue := if pHead = nil then nil else pHead.next;
+        pHead := new SListItem<:T:>(item);
+        pHead.next := queue;
     }
 
     method addToEach(value)
@@ -55,12 +56,33 @@ public
 			io.out << "\t" << item << io.endl;
 	}
 
+	operator += (item)
+	{
+		append(item);
+	}
+
+	operator [] (index)
+	{
+		get(index);
+	}
+
+	operator + (list)
+	{
+		var tmp := self;
+		for i in list do
+			tmp += i;
+		tmp;
+	}
+
 	#! Default enumerator
 	method default
 	{
 		return new class: IEnumerable
 		{
-			var i := first;
+			method value: ref
+			{
+				i;
+			}
 
 			method next
 			{
@@ -70,27 +92,32 @@ public
 			{
 				i != nil
 			}
-		}
+
+		private
+			var i: ref := pHead;
+		};
 	}
 
 
 private
-	type T : Type;
-	var head : ref SListItem := nil;
+	var pHead: ref;
 
 } // class SList
 
 
-# Test function type parameters
-
 
 function main
 {
-    var l := new SList(int);
+    var l := new SList<:any:>;
     l.prepend(24);
     l.prepend(12);
     l.addToEach(2);
-    l.print(l);
+    io.cout << l << io.endl;
     l.get(1);
+
+	var k := new SList;
+	k.prepend("foo");
+
+	var m := k + l;
 	0
 }
