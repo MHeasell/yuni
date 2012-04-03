@@ -111,8 +111,8 @@ Comment End = '*#' | '*/'
                | ! Empty
 
 <Attribute Declaration> ::= 'var' Identifier <Typing> <Assignment>
-               | 'attribute' Identifier <Assignment>
-               | 'attribute' Identifier <Typing>
+               | 'var' Identifier <Assignment>
+               | 'var' Identifier <Typing>
 
 <Assignment> ::= ':=' <SingleThread Exp>
 
@@ -175,6 +175,7 @@ Comment End = '*#' | '*/'
                | OptimQualifier 'function' <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> <Function Body>
 
 <Method Declaration> ::= <Optional Optim Qualifier> 'method' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> <Function Body>
+               | <Optional Optim Qualifier> 'method' 'new' <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> <Function Body>
                | <Optional Optim Qualifier> 'method' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> ';' ! Abstract method declaration
 
 <Function Body> ::= '{' <Expression> '}'

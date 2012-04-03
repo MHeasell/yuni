@@ -662,38 +662,21 @@ Nany::Ast::Node* Rule_AttributeDeclaration_var_Identifier(TokenStruct* token)
 
 
 
-// <Attribute Declaration> ::= attribute Identifier <Assignment>
-Nany::Ast::Node* Rule_AttributeDeclaration_attribute_Identifier(TokenStruct* token)
+// <Attribute Declaration> ::= var Identifier <Assignment>
+Nany::Ast::Node* Rule_AttributeDeclaration_var_Identifier2(TokenStruct* token)
 {
-	// Read the identifier
-	const wchar_t* symbol = GetChildSymbol(token, 1);
-	size_t len = wcslen(symbol);
-	char* buffer = new char[len + 1];
-	wcstombs(buffer, symbol, len);
-	buffer[len] = 0;
-
-	Nany::Ast::TypeExpressionNode* type = AstParse<Nany::Ast::TypeExpressionNode>::Child(token, 2);
-	Nany::Ast::Node* value = AstParse<>::Child(token, 3);
-
-	return new Nany::Ast::AttributeDeclarationNode(buffer, type, value);
+	// Not yet implemented !
+	assert(false && "Rule_AttributeDeclaration_var_Identifier2: Not yet implemented !");
 }
 
 
 
 
-// <Attribute Declaration> ::= attribute Identifier <Typing>
-Nany::Ast::Node* Rule_AttributeDeclaration_attribute_Identifier2(TokenStruct* token)
+// <Attribute Declaration> ::= var Identifier <Typing>
+Nany::Ast::Node* Rule_AttributeDeclaration_var_Identifier3(TokenStruct* token)
 {
-	// Read the identifier
-	const wchar_t* symbol = GetChildSymbol(token, 1);
-	size_t len = wcslen(symbol);
-	char* buffer = new char[len + 1];
-	wcstombs(buffer, symbol, len);
-	buffer[len] = 0;
-
-	Nany::Ast::Node* value = AstParse<>::Child(token, 2);
-
-	return new Nany::Ast::AttributeDeclarationNode(buffer, nullptr, value);
+	// Not yet implemented !
+	assert(false && "Rule_AttributeDeclaration_var_Identifier3: Not yet implemented !");
 }
 
 
@@ -1144,6 +1127,16 @@ Nany::Ast::Node* Rule_MethodDeclaration_method_Identifier(TokenStruct* token)
 	buffer[len] = 0;
 
 	return new Nany::Ast::MethodDeclarationNode(buffer, params, body, returnType, false);
+}
+
+
+
+
+// <Method Declaration> ::= <Optional Optim Qualifier> method new <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> <Function Body>
+Nany::Ast::Node* Rule_MethodDeclaration_method_new(TokenStruct* token)
+{
+	// Not yet implemented !
+	assert(false && "Rule_MethodDeclaration_method_new: Not yet implemented !");
 }
 
 
@@ -2890,10 +2883,10 @@ Nany::Ast::Node* (*RuleJumpTable[])(TokenStruct* token) =
 	Rule_PropertyCallbacks,
 	// 42. <Attribute Declaration> ::= var Identifier <Typing> <Assignment>
 	Rule_AttributeDeclaration_var_Identifier,
-	// 43. <Attribute Declaration> ::= attribute Identifier <Assignment>
-	Rule_AttributeDeclaration_attribute_Identifier,
-	// 44. <Attribute Declaration> ::= attribute Identifier <Typing>
-	Rule_AttributeDeclaration_attribute_Identifier2,
+	// 43. <Attribute Declaration> ::= var Identifier <Assignment>
+	Rule_AttributeDeclaration_var_Identifier2,
+	// 44. <Attribute Declaration> ::= var Identifier <Typing>
+	Rule_AttributeDeclaration_var_Identifier3,
 	// 45. <Assignment> ::= ':=' <SingleThread Exp>
 	Rule_Assignment_ColonEq,
 	// 46. <Typing> ::= ':' <Simple Exp>
@@ -2960,275 +2953,277 @@ Nany::Ast::Node* (*RuleJumpTable[])(TokenStruct* token) =
 	Rule_AnonymousFunctionDeclaration_OptimQualifier_function,
 	// 77. <Method Declaration> ::= <Optional Optim Qualifier> method Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> <Function Body>
 	Rule_MethodDeclaration_method_Identifier,
-	// 78. <Method Declaration> ::= <Optional Optim Qualifier> method Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> ';'
+	// 78. <Method Declaration> ::= <Optional Optim Qualifier> method new <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> <Function Body>
+	Rule_MethodDeclaration_method_new,
+	// 79. <Method Declaration> ::= <Optional Optim Qualifier> method Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> ';'
 	Rule_MethodDeclaration_method_Identifier_Semi,
-	// 79. <Function Body> ::= '{' <Expression> '}'
+	// 80. <Function Body> ::= '{' <Expression> '}'
 	Rule_FunctionBody_LBrace_RBrace,
-	// 80. <Function Body> ::= '{' '}'
+	// 81. <Function Body> ::= '{' '}'
 	Rule_FunctionBody_LBrace_RBrace2,
-	// 81. <Return Type Declaration> ::= ':' <Optional Type Qualifiers> <SingleThread Exp>
+	// 82. <Return Type Declaration> ::= ':' <Optional Type Qualifiers> <SingleThread Exp>
 	Rule_ReturnTypeDeclaration_Colon,
-	// 82. <Return Type Declaration> ::= 
+	// 83. <Return Type Declaration> ::= 
 	Rule_ReturnTypeDeclaration,
-	// 83. <Optional Parameters> ::= '(' <Parameter List> ')'
+	// 84. <Optional Parameters> ::= '(' <Parameter List> ')'
 	Rule_OptionalParameters_LParan_RParan,
-	// 84. <Optional Parameters> ::= 
+	// 85. <Optional Parameters> ::= 
 	Rule_OptionalParameters,
-	// 85. <Parameter List> ::= Identifier <Typing> <Assignment> <Parameter List Continued>
+	// 86. <Parameter List> ::= Identifier <Typing> <Assignment> <Parameter List Continued>
 	Rule_ParameterList_Identifier,
-	// 86. <Parameter List> ::= Identifier <Assignment> <Parameter List Continued>
+	// 87. <Parameter List> ::= Identifier <Assignment> <Parameter List Continued>
 	Rule_ParameterList_Identifier2,
-	// 87. <Parameter List> ::= Identifier <Typing> <Parameter List Continued>
+	// 88. <Parameter List> ::= Identifier <Typing> <Parameter List Continued>
 	Rule_ParameterList_Identifier3,
-	// 88. <Parameter List> ::= Identifier <Parameter List Continued>
+	// 89. <Parameter List> ::= Identifier <Parameter List Continued>
 	Rule_ParameterList_Identifier4,
-	// 89. <Parameter List> ::= 
+	// 90. <Parameter List> ::= 
 	Rule_ParameterList,
-	// 90. <Parameter List Continued> ::= ',' <Parameter List>
+	// 91. <Parameter List Continued> ::= ',' <Parameter List>
 	Rule_ParameterListContinued_Comma,
-	// 91. <Parameter List Continued> ::= 
+	// 92. <Parameter List Continued> ::= 
 	Rule_ParameterListContinued,
-	// 92. <Optional Type Qualifiers> ::= <Type Qualifiers>
+	// 93. <Optional Type Qualifiers> ::= <Type Qualifiers>
 	Rule_OptionalTypeQualifiers,
-	// 93. <Optional Type Qualifiers> ::= 
+	// 94. <Optional Type Qualifiers> ::= 
 	Rule_OptionalTypeQualifiers2,
-	// 94. <Type Qualifiers> ::= TypeQualifier <Type Qualifiers Continued>
+	// 95. <Type Qualifiers> ::= TypeQualifier <Type Qualifiers Continued>
 	Rule_TypeQualifiers_TypeQualifier,
-	// 95. <Type Qualifiers Continued> ::= TypeQualifier <Type Qualifiers Continued>
+	// 96. <Type Qualifiers Continued> ::= TypeQualifier <Type Qualifiers Continued>
 	Rule_TypeQualifiersContinued_TypeQualifier,
-	// 96. <Type Qualifiers Continued> ::= 
+	// 97. <Type Qualifiers Continued> ::= 
 	Rule_TypeQualifiersContinued,
-	// 97. <Optional Optim Qualifier> ::= OptimQualifier
+	// 98. <Optional Optim Qualifier> ::= OptimQualifier
 	Rule_OptionalOptimQualifier_OptimQualifier,
-	// 98. <Optional Optim Qualifier> ::= 
+	// 99. <Optional Optim Qualifier> ::= 
 	Rule_OptionalOptimQualifier,
-	// 99. <Optional Visibility Qualifier> ::= VisibilityQualifier
+	// 100. <Optional Visibility Qualifier> ::= VisibilityQualifier
 	Rule_OptionalVisibilityQualifier_VisibilityQualifier,
-	// 100. <Optional Visibility Qualifier> ::= 
+	// 101. <Optional Visibility Qualifier> ::= 
 	Rule_OptionalVisibilityQualifier,
-	// 101. <Argument List> ::= <Possibly Parallel Exp> <Argument List Continued>
+	// 102. <Argument List> ::= <Possibly Parallel Exp> <Argument List Continued>
 	Rule_ArgumentList,
-	// 102. <Argument List> ::= 
+	// 103. <Argument List> ::= 
 	Rule_ArgumentList2,
-	// 103. <Argument List Continued> ::= ',' <Possibly Parallel Exp> <Argument List Continued>
+	// 104. <Argument List Continued> ::= ',' <Possibly Parallel Exp> <Argument List Continued>
 	Rule_ArgumentListContinued_Comma,
-	// 104. <Argument List Continued> ::= 
+	// 105. <Argument List Continued> ::= 
 	Rule_ArgumentListContinued,
-	// 105. <Typedef> ::= type Identifier ':=' <Possibly Parallel Exp>
+	// 106. <Typedef> ::= type Identifier ':=' <Possibly Parallel Exp>
 	Rule_Typedef_type_Identifier_ColonEq,
-	// 106. <In Block> ::= in <Expression>
+	// 107. <In Block> ::= in <Expression>
 	Rule_InBlock_in,
-	// 107. <In Block> ::= 
+	// 108. <In Block> ::= 
 	Rule_InBlock,
-	// 108. <Out Block> ::= out <Expression>
+	// 109. <Out Block> ::= out <Expression>
 	Rule_OutBlock_out,
-	// 109. <Out Block> ::= 
+	// 110. <Out Block> ::= 
 	Rule_OutBlock,
-	// 110. <Optional Type Parameters> ::= <Type Parameters>
+	// 111. <Optional Type Parameters> ::= <Type Parameters>
 	Rule_OptionalTypeParameters,
-	// 111. <Optional Type Parameters> ::= 
+	// 112. <Optional Type Parameters> ::= 
 	Rule_OptionalTypeParameters2,
-	// 112. <Type Parameters> ::= '<:' Identifier <Type Parameters Continued> ':>'
+	// 113. <Type Parameters> ::= '<:' Identifier <Type Parameters Continued> ':>'
 	Rule_TypeParameters_LtColon_Identifier_ColonGt,
-	// 113. <Type Parameters> ::= '<:' Identifier ':=' <SingleThread Exp> <Type Parameters Continued> ':>'
+	// 114. <Type Parameters> ::= '<:' Identifier ':=' <SingleThread Exp> <Type Parameters Continued> ':>'
 	Rule_TypeParameters_LtColon_Identifier_ColonEq_ColonGt,
-	// 114. <Type Parameters Continued> ::= ',' Identifier <Type Parameters Continued>
+	// 115. <Type Parameters Continued> ::= ',' Identifier <Type Parameters Continued>
 	Rule_TypeParametersContinued_Comma_Identifier,
-	// 115. <Type Parameters Continued> ::= ',' Identifier ':=' <SingleThread Exp> <Type Parameters Continued>
+	// 116. <Type Parameters Continued> ::= ',' Identifier ':=' <SingleThread Exp> <Type Parameters Continued>
 	Rule_TypeParametersContinued_Comma_Identifier_ColonEq,
-	// 116. <Type Parameters Continued> ::= 
+	// 117. <Type Parameters Continued> ::= 
 	Rule_TypeParametersContinued,
-	// 117. <Type Arguments> ::= <SingleThread Exp> <Type Arguments Continued>
+	// 118. <Type Arguments> ::= <SingleThread Exp> <Type Arguments Continued>
 	Rule_TypeArguments,
-	// 118. <Type Arguments> ::= 
+	// 119. <Type Arguments> ::= 
 	Rule_TypeArguments2,
-	// 119. <Type Arguments Continued> ::= ',' <SingleThread Exp> <Type Parameters Continued>
+	// 120. <Type Arguments Continued> ::= ',' <SingleThread Exp> <Type Parameters Continued>
 	Rule_TypeArgumentsContinued_Comma,
-	// 120. <Type Arguments Continued> ::= 
+	// 121. <Type Arguments Continued> ::= 
 	Rule_TypeArgumentsContinued,
-	// 121. <Expression> ::= <Possibly Parallel Exp> <Expression List>
+	// 122. <Expression> ::= <Possibly Parallel Exp> <Expression List>
 	Rule_Expression,
-	// 122. <Expression List> ::= ';' <Expression>
+	// 123. <Expression List> ::= ';' <Expression>
 	Rule_ExpressionList_Semi,
-	// 123. <Expression List> ::= ';'
+	// 124. <Expression List> ::= ';'
 	Rule_ExpressionList_Semi2,
-	// 124. <Expression List> ::= 
+	// 125. <Expression List> ::= 
 	Rule_ExpressionList,
-	// 125. <Possibly Parallel Exp> ::= <SingleThread Exp>
+	// 126. <Possibly Parallel Exp> ::= <SingleThread Exp>
 	Rule_PossiblyParallelExp,
-	// 126. <Possibly Parallel Exp> ::= '&' <SingleThread Exp>
+	// 127. <Possibly Parallel Exp> ::= '&' <SingleThread Exp>
 	Rule_PossiblyParallelExp_Amp,
-	// 127. <Possibly Parallel Exp> ::= async <SingleThread Exp>
+	// 128. <Possibly Parallel Exp> ::= async <SingleThread Exp>
 	Rule_PossiblyParallelExp_async,
-	// 128. <Possibly Parallel Exp> ::= sync <SingleThread Exp>
+	// 129. <Possibly Parallel Exp> ::= sync <SingleThread Exp>
 	Rule_PossiblyParallelExp_sync,
-	// 129. <SingleThread Exp> ::= <Assignment Exp>
+	// 130. <SingleThread Exp> ::= <Assignment Exp>
 	Rule_SingleThreadExp,
-	// 130. <Assignment Exp> ::= <Assignment Exp> ':=' <Is Exp>
+	// 131. <Assignment Exp> ::= <Assignment Exp> ':=' <Is Exp>
 	Rule_AssignmentExp_ColonEq,
-	// 131. <Assignment Exp> ::= <Local Declaration Exp>
+	// 132. <Assignment Exp> ::= <Local Declaration Exp>
 	Rule_AssignmentExp,
-	// 132. <Local Declaration Exp> ::= var <Value> <Typing>
+	// 133. <Local Declaration Exp> ::= var <Value> <Typing>
 	Rule_LocalDeclarationExp_var,
-	// 133. <Local Declaration Exp> ::= <Is Exp>
+	// 134. <Local Declaration Exp> ::= <Is Exp>
 	Rule_LocalDeclarationExp,
-	// 134. <Is Exp> ::= <Is Exp> is <Anonymous Decl Exp>
+	// 135. <Is Exp> ::= <Is Exp> is <Anonymous Decl Exp>
 	Rule_IsExp_is,
-	// 135. <Is Exp> ::= <Anonymous Decl Exp>
+	// 136. <Is Exp> ::= <Anonymous Decl Exp>
 	Rule_IsExp,
-	// 136. <Anonymous Decl Exp> ::= <Simple Exp>
+	// 137. <Anonymous Decl Exp> ::= <Simple Exp>
 	Rule_AnonymousDeclExp,
-	// 137. <Anonymous Decl Exp> ::= <Anonymous Function Declaration>
+	// 138. <Anonymous Decl Exp> ::= <Anonymous Function Declaration>
 	Rule_AnonymousDeclExp2,
-	// 138. <Anonymous Decl Exp> ::= <Anonymous Class Declaration>
+	// 139. <Anonymous Decl Exp> ::= <Anonymous Class Declaration>
 	Rule_AnonymousDeclExp3,
-	// 139. <Simple Exp> ::= <Binary Exp>
+	// 140. <Simple Exp> ::= <Binary Exp>
 	Rule_SimpleExp,
-	// 140. <Simple Exp> ::= new <Simple Exp>
+	// 141. <Simple Exp> ::= new <Simple Exp>
 	Rule_SimpleExp_new,
-	// 141. <Simple Exp> ::= <Typedef>
+	// 142. <Simple Exp> ::= <Typedef>
 	Rule_SimpleExp2,
-	// 142. <Simple Exp> ::= return <SingleThread Exp>
+	// 143. <Simple Exp> ::= return <SingleThread Exp>
 	Rule_SimpleExp_return,
-	// 143. <Simple Exp> ::= break
+	// 144. <Simple Exp> ::= break
 	Rule_SimpleExp_break,
-	// 144. <Simple Exp> ::= continue
+	// 145. <Simple Exp> ::= continue
 	Rule_SimpleExp_continue,
-	// 145. <Simple Exp> ::= if <Possibly Parallel Exp> then <Possibly Parallel Exp> <Else Expression>
+	// 146. <Simple Exp> ::= if <Possibly Parallel Exp> then <Possibly Parallel Exp> <Else Expression>
 	Rule_SimpleExp_if_then,
-	// 146. <Simple Exp> ::= while <Possibly Parallel Exp> do <Possibly Parallel Exp>
+	// 147. <Simple Exp> ::= while <Possibly Parallel Exp> do <Possibly Parallel Exp>
 	Rule_SimpleExp_while_do,
-	// 147. <Simple Exp> ::= for Identifier in <Expression> do <Possibly Parallel Exp> <Else Expression>
+	// 148. <Simple Exp> ::= for Identifier in <Expression> do <Possibly Parallel Exp> <Else Expression>
 	Rule_SimpleExp_for_Identifier_in_do,
-	// 148. <Simple Exp> ::= for Identifier in <Expression> order ':' <Expression> packedby ':' <Expression> do <Possibly Parallel Exp> <Else Expression>
+	// 149. <Simple Exp> ::= for Identifier in <Expression> order ':' <Expression> packedby ':' <Expression> do <Possibly Parallel Exp> <Else Expression>
 	Rule_SimpleExp_for_Identifier_in_order_Colon_packedby_Colon_do,
-	// 149. <Simple Exp> ::= for Identifier in <Expression> order do <Possibly Parallel Exp> <Else Expression>
+	// 150. <Simple Exp> ::= for Identifier in <Expression> order do <Possibly Parallel Exp> <Else Expression>
 	Rule_SimpleExp_for_Identifier_in_order_do,
-	// 150. <Simple Exp> ::= timeout <Possibly Parallel Exp> do <Possibly Parallel Exp>
+	// 151. <Simple Exp> ::= timeout <Possibly Parallel Exp> do <Possibly Parallel Exp>
 	Rule_SimpleExp_timeout_do,
-	// 151. <Simple Exp> ::= timeout <Possibly Parallel Exp> do <Possibly Parallel Exp> else <Possibly Parallel Exp>
+	// 152. <Simple Exp> ::= timeout <Possibly Parallel Exp> do <Possibly Parallel Exp> else <Possibly Parallel Exp>
 	Rule_SimpleExp_timeout_do_else,
-	// 152. <Simple Exp> ::= '{' <Expression> '}'
+	// 153. <Simple Exp> ::= '{' <Expression> '}'
 	Rule_SimpleExp_LBrace_RBrace,
-	// 153. <Else Expression> ::= else <Possibly Parallel Exp>
+	// 154. <Else Expression> ::= else <Possibly Parallel Exp>
 	Rule_ElseExpression_else,
-	// 154. <Else Expression> ::= 
+	// 155. <Else Expression> ::= 
 	Rule_ElseExpression,
-	// 155. <Binary Exp> ::= <Binary Exp> '|' <Xor Exp>
+	// 156. <Binary Exp> ::= <Binary Exp> '|' <Xor Exp>
 	Rule_BinaryExp_Pipe,
-	// 156. <Binary Exp> ::= <Xor Exp>
+	// 157. <Binary Exp> ::= <Xor Exp>
 	Rule_BinaryExp,
-	// 157. <Xor Exp> ::= <Xor Exp> xor <Or Exp>
+	// 158. <Xor Exp> ::= <Xor Exp> xor <Or Exp>
 	Rule_XorExp_xor,
-	// 158. <Xor Exp> ::= <Or Exp>
+	// 159. <Xor Exp> ::= <Or Exp>
 	Rule_XorExp,
-	// 159. <Or Exp> ::= <Or Exp> or <And Exp>
+	// 160. <Or Exp> ::= <Or Exp> or <And Exp>
 	Rule_OrExp_or,
-	// 160. <Or Exp> ::= <And Exp>
+	// 161. <Or Exp> ::= <And Exp>
 	Rule_OrExp,
-	// 161. <And Exp> ::= <And Exp> and <Equal Exp>
+	// 162. <And Exp> ::= <And Exp> and <Equal Exp>
 	Rule_AndExp_and,
-	// 162. <And Exp> ::= <Equal Exp>
+	// 163. <And Exp> ::= <Equal Exp>
 	Rule_AndExp,
-	// 163. <Equal Exp> ::= <Equal Exp> '=' <Compare Exp>
+	// 164. <Equal Exp> ::= <Equal Exp> '=' <Compare Exp>
 	Rule_EqualExp_Eq,
-	// 164. <Equal Exp> ::= <Equal Exp> '!=' <Compare Exp>
+	// 165. <Equal Exp> ::= <Equal Exp> '!=' <Compare Exp>
 	Rule_EqualExp_ExclamEq,
-	// 165. <Equal Exp> ::= <Compare Exp>
+	// 166. <Equal Exp> ::= <Compare Exp>
 	Rule_EqualExp,
-	// 166. <Compare Exp> ::= <Compare Exp> '<' <Regexp Exp>
+	// 167. <Compare Exp> ::= <Compare Exp> '<' <Regexp Exp>
 	Rule_CompareExp_Lt,
-	// 167. <Compare Exp> ::= <Compare Exp> '>' <Regexp Exp>
+	// 168. <Compare Exp> ::= <Compare Exp> '>' <Regexp Exp>
 	Rule_CompareExp_Gt,
-	// 168. <Compare Exp> ::= <Compare Exp> '<=' <Regexp Exp>
+	// 169. <Compare Exp> ::= <Compare Exp> '<=' <Regexp Exp>
 	Rule_CompareExp_LtEq,
-	// 169. <Compare Exp> ::= <Compare Exp> '>=' <Regexp Exp>
+	// 170. <Compare Exp> ::= <Compare Exp> '>=' <Regexp Exp>
 	Rule_CompareExp_GtEq,
-	// 170. <Compare Exp> ::= <Regexp Exp>
+	// 171. <Compare Exp> ::= <Regexp Exp>
 	Rule_CompareExp,
-	// 171. <Regexp Exp> ::= <Regexp Exp> '~' <Shift Exp>
+	// 172. <Regexp Exp> ::= <Regexp Exp> '~' <Shift Exp>
 	Rule_RegexpExp_Tilde,
-	// 172. <Regexp Exp> ::= <Shift Exp>
+	// 173. <Regexp Exp> ::= <Shift Exp>
 	Rule_RegexpExp,
-	// 173. <Shift Exp> ::= <Shift Exp> '<<' <Add Exp>
+	// 174. <Shift Exp> ::= <Shift Exp> '<<' <Add Exp>
 	Rule_ShiftExp_LtLt,
-	// 174. <Shift Exp> ::= <Shift Exp> '>>' <Add Exp>
+	// 175. <Shift Exp> ::= <Shift Exp> '>>' <Add Exp>
 	Rule_ShiftExp_GtGt,
-	// 175. <Shift Exp> ::= <Add Exp>
+	// 176. <Shift Exp> ::= <Add Exp>
 	Rule_ShiftExp,
-	// 176. <Add Exp> ::= <Add Exp> '+' <Mult Exp>
+	// 177. <Add Exp> ::= <Add Exp> '+' <Mult Exp>
 	Rule_AddExp_Plus,
-	// 177. <Add Exp> ::= <Add Exp> '-' <Mult Exp>
+	// 178. <Add Exp> ::= <Add Exp> '-' <Mult Exp>
 	Rule_AddExp_Minus,
-	// 178. <Add Exp> ::= <Mult Exp>
+	// 179. <Add Exp> ::= <Mult Exp>
 	Rule_AddExp,
-	// 179. <Mult Exp> ::= <Mult Exp> '*' <Power Exp>
+	// 180. <Mult Exp> ::= <Mult Exp> '*' <Power Exp>
 	Rule_MultExp_Times,
-	// 180. <Mult Exp> ::= <Mult Exp> '/' <Power Exp>
+	// 181. <Mult Exp> ::= <Mult Exp> '/' <Power Exp>
 	Rule_MultExp_Div,
-	// 181. <Mult Exp> ::= <Mult Exp> '%' <Power Exp>
+	// 182. <Mult Exp> ::= <Mult Exp> '%' <Power Exp>
 	Rule_MultExp_Percent,
-	// 182. <Mult Exp> ::= <Power Exp>
+	// 183. <Mult Exp> ::= <Power Exp>
 	Rule_MultExp,
-	// 183. <Power Exp> ::= <Power Exp> '^' <As Exp>
+	// 184. <Power Exp> ::= <Power Exp> '^' <As Exp>
 	Rule_PowerExp_Caret,
-	// 184. <Power Exp> ::= <As Exp>
+	// 185. <Power Exp> ::= <As Exp>
 	Rule_PowerExp,
-	// 185. <As Exp> ::= <As Exp> as <Typeof Exp>
+	// 186. <As Exp> ::= <As Exp> as <Typeof Exp>
 	Rule_AsExp_as,
-	// 186. <As Exp> ::= <Typeof Exp>
+	// 187. <As Exp> ::= <Typeof Exp>
 	Rule_AsExp,
-	// 187. <Typeof Exp> ::= typeof <Negate Exp>
+	// 188. <Typeof Exp> ::= typeof <Negate Exp>
 	Rule_TypeofExp_typeof,
-	// 188. <Typeof Exp> ::= <Negate Exp>
+	// 189. <Typeof Exp> ::= <Negate Exp>
 	Rule_TypeofExp,
-	// 189. <Negate Exp> ::= '-' <Value>
+	// 190. <Negate Exp> ::= '-' <Value>
 	Rule_NegateExp_Minus,
-	// 190. <Negate Exp> ::= -- <Value>
+	// 191. <Negate Exp> ::= -- <Value>
 	Rule_NegateExp_MinusMinus,
-	// 191. <Negate Exp> ::= '++' <Value>
+	// 192. <Negate Exp> ::= '++' <Value>
 	Rule_NegateExp_PlusPlus,
-	// 192. <Negate Exp> ::= <Value> --
+	// 193. <Negate Exp> ::= <Value> --
 	Rule_NegateExp_MinusMinus2,
-	// 193. <Negate Exp> ::= <Value> '++'
+	// 194. <Negate Exp> ::= <Value> '++'
 	Rule_NegateExp_PlusPlus2,
-	// 194. <Negate Exp> ::= <Value>
+	// 195. <Negate Exp> ::= <Value>
 	Rule_NegateExp,
-	// 195. <Value> ::= <Literal>
+	// 196. <Value> ::= <Literal>
 	Rule_Value,
-	// 196. <Value> ::= <Value> '.' Identifier
+	// 197. <Value> ::= <Value> '.' Identifier
 	Rule_Value_Dot_Identifier,
-	// 197. <Value> ::= <Value> '(' <Argument List> ')'
+	// 198. <Value> ::= <Value> '(' <Argument List> ')'
 	Rule_Value_LParan_RParan,
-	// 198. <Value> ::= '(' <SingleThread Exp> ')'
+	// 199. <Value> ::= '(' <SingleThread Exp> ')'
 	Rule_Value_LParan_RParan2,
-	// 199. <Value> ::= Identifier
+	// 200. <Value> ::= Identifier
 	Rule_Value_Identifier,
-	// 200. <Value> ::= <Value> '[' ']'
+	// 201. <Value> ::= <Value> '[' ']'
 	Rule_Value_LBracket_RBracket,
-	// 201. <Value> ::= <Value> '[' <SingleThread Exp> ']'
+	// 202. <Value> ::= <Value> '[' <SingleThread Exp> ']'
 	Rule_Value_LBracket_RBracket2,
-	// 202. <Value> ::= <Value> '<:' <Type Arguments> ':>'
+	// 203. <Value> ::= <Value> '<:' <Type Arguments> ':>'
 	Rule_Value_LtColon_ColonGt,
-	// 203. <Value> ::= '[' <Array Arguments> ']'
+	// 204. <Value> ::= '[' <Array Arguments> ']'
 	Rule_Value_LBracket_RBracket3,
-	// 204. <Value> ::= '[:' <Array Arguments> ':]'
+	// 205. <Value> ::= '[:' <Array Arguments> ':]'
 	Rule_Value_LBracketColon_ColonRBracket,
-	// 205. <Value> ::= '[:' <Array Arguments> ':['
+	// 206. <Value> ::= '[:' <Array Arguments> ':['
 	Rule_Value_LBracketColon_ColonLBracket,
-	// 206. <Value> ::= ']:' <Array Arguments> ':]'
+	// 207. <Value> ::= ']:' <Array Arguments> ':]'
 	Rule_Value_RBracketColon_ColonRBracket,
-	// 207. <Value> ::= ']:' <Array Arguments> ':['
+	// 208. <Value> ::= ']:' <Array Arguments> ':['
 	Rule_Value_RBracketColon_ColonLBracket,
-	// 208. <Array Arguments> ::= <SingleThread Exp> <Array Arguments Continued>
+	// 209. <Array Arguments> ::= <SingleThread Exp> <Array Arguments Continued>
 	Rule_ArrayArguments,
-	// 209. <Array Arguments> ::= <SingleThread Exp> '..' <SingleThread Exp> <Array Arguments Continued>
+	// 210. <Array Arguments> ::= <SingleThread Exp> '..' <SingleThread Exp> <Array Arguments Continued>
 	Rule_ArrayArguments_DotDot,
-	// 210. <Array Arguments Continued> ::= 
+	// 211. <Array Arguments Continued> ::= 
 	Rule_ArrayArgumentsContinued,
-	// 211. <Array Arguments Continued> ::= <SingleThread Exp> ',' <Array Arguments Continued>
+	// 212. <Array Arguments Continued> ::= <SingleThread Exp> ',' <Array Arguments Continued>
 	Rule_ArrayArgumentsContinued_Comma,
-	// 212. <Array Arguments Continued> ::= <SingleThread Exp> '..' <SingleThread Exp> ',' <Array Arguments Continued>
+	// 213. <Array Arguments Continued> ::= <SingleThread Exp> '..' <SingleThread Exp> ',' <Array Arguments Continued>
 	Rule_ArrayArgumentsContinued_DotDot_Comma 
 };
 
@@ -3238,8 +3233,6 @@ Nany::Ast::Node* (*RuleJumpTable[])(TokenStruct* token) =
 template<class NodeT>
 NodeT* AstParse<NodeT>::Child(TokenStruct* parent, unsigned int index)
 {
-	std::cout << "Parsing " << parent->Data << " on child " << index << std::endl;
-
 	assert(parent && "ParseChild: invalid parent");
 	// Make sure the child index is not out of bounds
 	assert(index < (unsigned int) Grammar.RuleArray[parent->ReductionRule].SymbolsCount
