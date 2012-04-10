@@ -1,14 +1,13 @@
 
 
-class DoublyLinkedList
+private class DoublyLinkedList
 {
-public
 	var first: Node;
 	var last: Node;
 
-	method default
+	view default
 	{
-		return new class: IEnumerable
+		return new class
 		{
 			var i := first;
 
@@ -22,7 +21,7 @@ public
 			}
 			method valid
 			{
-				i != nil
+				return i != nil;
 			}
 		}
 	}
@@ -33,5 +32,5 @@ function main
 	var l := new DoublyLinkedList;
 	for i in l do
 		io.out << i << io.endl;
-	0
+	return 0;
 }

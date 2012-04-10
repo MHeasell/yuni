@@ -7,10 +7,10 @@ public class MyClass
 {
 public
 	#! A method declaration
-	method name: string { "Baka!" }
+	method name: string { return "Baka!"; }
 
 	//! A complete method declaration
-	threadunsafe method boom(t, s: string, k := 0) { 0 }
+	threadunsafe method boom(t, s: string, k := 0) { return 0; }
 
 private
 	#! A constant with inferred type

@@ -8,7 +8,7 @@
 function main: int
 {
     # Comment in function
-    return 0   // Another line comment
+    return 0;   // Another line comment
 
     #* Spreading comment
     More commented stuff

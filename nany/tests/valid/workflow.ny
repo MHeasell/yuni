@@ -1,41 +1,42 @@
 # Test containing a workflow
 
-workflow DocumentWorkflow
+public workflow DocumentWorkflow
 {
 states
-    default intro;
-    #! Introduction
-    state approved;
-    state archived;
-    state created;
-    state deleted;
-    state updated;
-    state waitingForApproval;
-    state rejected;
+	default intro;
+	#! Introduction
+	state approved;
+	state archived;
+	state created;
+	state deleted;
+	state updated;
+	state waitingForApproval;
+	state rejected;
 
 transitions
-    default forbid;
-    allow waitingForApproval => approved;
-    allow created => updated;
-    allow approved, updated, rejected, deleted => updated;
-    allow updated => waitingForApproval;
-    allow approved => archived;
-    allow *, -archived => rejected, deleted;
+	default forbid;
+	allow waitingForApproval => approved;
+	allow created => updated;
+	allow approved, updated, rejected, deleted => updated;
+	allow updated => waitingForApproval;
+	allow approved => archived;
+	allow *, -archived => rejected, deleted;
 }
 
-class Document
+
+public class Document
 {
 published
    #! A read/write property, which is a workflow
-   property status: DocumentWorkflow;
+   abstract property status: DocumentWorkflow;
    #! Title of the document
-   property title;
+   abstract property title;
    #! Author of the document
-   property author;
+   abstract property author;
    #! Summary
-   property summary;
+   abstract property summary;
    #! Content
-   property content;
+   abstract property content;
    #! Date of creation
    property creationDate read pCreationDate;
    #! Timestamp of the last update
@@ -48,29 +49,3 @@ protected
    var pCreationDate: timestamp;
 }
 
-function main
-{
-    var x := & Fibonacci(50) ^ Fibonacci(10);
-    countdown := 5;
-    timeout 1s do
-    {
-        // we wait here for the asynchronous result of x
-        println("Fibonacci(50) ^ Fibonacci(10) = ", x)
-    }
-    else
-    {
-        if --countdown then
-        {
-            io.out << countdown << '\n';
-            // continue the execution of the expression and wait for 1s again
-            continue
-        }
-        else
-        {
-            abort(x);
-            io.out << "Operation timeout\n";
-            return -1
-        }
-    };
-    return 0
-}

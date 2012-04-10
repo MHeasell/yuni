@@ -4,9 +4,9 @@
 immutable function Fibonacci(n) : typeof n
 {
 	if n < 2 then
-		n
+		return n;
 	else
-		Fibonacci(n - 1) + Fibonacci(n - 2)
+		return Fibonacci(n - 1) + Fibonacci(n - 2);
 }
 
 function main: int
@@ -19,5 +19,5 @@ function main: int
 	var c := a + b;
 	// Print the result
 	println("a + b = ", c);
-	0
+	return 0;
 }

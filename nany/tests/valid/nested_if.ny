@@ -9,14 +9,14 @@ function main : int
 			n := 0;
 			if 32 != 21 then
 			{
-				n := 21
+				n := 21;
 			}
 		}
 		else if false then
-			n := 1
+			n := 1;
 		else
-			n:= 3
+			n:= 3;
 	else
 		n := 2;
-	return 0
+	return 0;
 }

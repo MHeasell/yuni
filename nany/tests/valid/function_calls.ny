@@ -12,7 +12,7 @@ function bar(k: uint): bool
 
 function foobar()
 {
-	var k: string := "test"
+	var k: string := "test";
 }
 
 function mini
@@ -26,5 +26,5 @@ function main: int
 	bar(1u);
 	foobar();
 	mini;
-	return 0
+	return 0;
 }

@@ -2,21 +2,20 @@
 
 class Shape
 {
-public
 	//! Surface area
-	method surface;
+	abstract method surface;
 }
 
 class Rectangle : Shape
 {
 public
-	method create
+	method new
 	{
 		width  := 50u;
 		height := 50u;
 	}
 
-	method create(w, h)
+	method new(w, h)
 	{
 		width  := w;
 		height := h;
@@ -24,42 +23,42 @@ public
 
 	method surface
 	{
-		width * height
+		return width * height;
 	}
 
-	method := (copy)
+	operator := (copy)
 	{
 		width  := copy.width;
 		height := copy.height;
 	}
 
 	//! Width of the rectangle
-	property width;
+	var width;
 	//! Height of the rectangle
-	property height;
+	var height;
 }
 
 
 class Circle : Shape
 {
 public
-	method create
+	method new
 	{
 		radius := 1.0;
 	}
 
-	method create(r)
+	method new(r)
 	{
 		radius := r;
 	}
 
 	method surface
 	{
-		Math.pi * radius^2
+		return Math.pi * radius ^ 2;
 	}
 
 	//! Circle radius
-	property radius;
+	var radius;
 }
 
 
@@ -72,10 +71,10 @@ function main
 		new Rectangle(10, 200),
 		new class
 		{
-			method surface { "some strange text here" }
+			method surface { return "some strange text here"; }
 		},
 		new Circle ];
 
 	for i in l do
-		io.out << i.classname << ": " << i.surface;
+		io.out << i.classname << ": " << i.surface << io.endl;
 }

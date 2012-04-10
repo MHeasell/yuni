@@ -13,15 +13,15 @@ function main
 	{
 		err := 1;
 		if false then
-			return if err < 1 then 10 else ++a
-	};
+			return if err < 1 then 10 else ++a;
+	}
 	while a > 0 do
 	{
 		--a;
 		if a = 0 then
-			break
+			break;
 		else
-			continue
-	};
-	return 0
+			continue;
+	}
+	return 0;
 }
