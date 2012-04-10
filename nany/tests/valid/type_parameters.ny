@@ -75,9 +75,9 @@ public
 	}
 
 	#! Default enumerator
-	method default
+	view default
 	{
-		return new class: IEnumerable
+		return new class
 		{
 			method value: ref
 			{
@@ -119,5 +119,5 @@ function main
 	k.prepend("foo");
 
 	var m := k + l;
-	0
+	return 0;
 }

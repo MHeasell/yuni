@@ -3,10 +3,10 @@
 function name
 {
 	var s := "MyName";
-	s
+	return s;
 }
 
 function main
 {
-	if name ~ "" then 0 else 1
+	return if name ~ "[a-zA-Z]+/i" then 0 else 1;
 }

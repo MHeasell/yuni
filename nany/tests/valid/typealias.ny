@@ -3,15 +3,22 @@
 class Typedef
 {
 public
-	type A := Typedef;
+	typedef A : Typedef;
 
 	var k := 0;
 }
 
-type B := Typedef.A;
+typedef B : Typedef.A;
+
+
+typedef F: function(a, b);
 
 function main
 {
+	var f: F := function (a, b) {
+		return a + b;
+	};
 	var b : B;
-	b.k
+	b.k := f(1, 2);
+	return b.k;
 }

@@ -8,5 +8,5 @@ function main: int
 	ok := 33 != 2;
 	ok := 69 >= 69;
 	ok := 4 <= 33;
-	return 0
+	return 0;
 }

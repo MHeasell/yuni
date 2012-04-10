@@ -6,7 +6,7 @@ function main
 	var x: uint := 42;
 	while x > w do
 	{
-		x := x - 1
-	};
-    return 0
+		x := x - 1;
+	}
+    return 0;
 }

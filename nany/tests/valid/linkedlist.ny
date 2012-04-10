@@ -1,11 +1,10 @@
 #! Sample implementation for a generic singly linked list
-public unit LinkedList;
 
-class SList<:T := any:>
+private class SList<:T := any:>
 {
 public
-	property next : read write pNext;
-	property data : read write pData;
+	property next  read write pNext;
+	property data  read write pData;
 
 	method new
 	{
@@ -36,7 +35,7 @@ public
 
 	method count
 	{
-		if not pNext then 0 else 1 + pNext.count;
+		return if not pNext then 0 else 1 + pNext.count;
 	}
 
 	method print

@@ -3,27 +3,27 @@
 private class OptionalPunctuation
 {
 public
-#*    enum e
-    {
-        Value1,
-        Value2, # Optional comma
-    }
-*#
+	enum e
+	{
+		Value1,
+		Value2 # not Optional comma
+	}
 
-    method foo(a): int
-    {
-        if a > 1 then
-            if a < 4 then
-                a;
-            else
-                foo(a - 1);
-        else
-            foo(a + 1);
-    }
-}; # Optional semi-colon
+	method foo(a): int
+	{
+		if a > 1 then
+			if a < 4 then
+				return a;
+			else
+				return foo(a - 1);
+		else
+			return foo(a + 1);
+	}
+}
+
 
 function main()
 {
-  0; # Optional return
+	return 0;
 }
 
