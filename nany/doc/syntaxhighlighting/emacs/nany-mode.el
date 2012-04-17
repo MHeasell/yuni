@@ -19,7 +19,7 @@
 ;;;###autoload
 (add-to-list 'auto-mode-alist '("\\.ny\\'" . nany-mode))
 ;;;###autoload
-(add-to-list 'auto-mode-alist '("\\.nany\\'" . nany-mode))
+(add-to-list 'auto-mode-alist '("\\.pny\\'" . nany-mode))
 
 (defvar nany-mode-abbrev-table nil
   "Abbrev table in use in nany-mode buffers.")
@@ -44,7 +44,7 @@
 
 ;; Keywords
 (defconst nany-keywords
-  '("abstract" "allow" "and" "as" "break" "catch" "check" "class" "clone" "const" "continue" "default" "do" "else" "every" "for" "forbid" "function" "if" "immutable" "in" "is" "method" "new" "not" "notify" "on" "operator" "or" "persistent" "predicate" "private" "property" "protected" "public" "published" "read" "ref" "return" "self" "shared" "stable" "state" "states" "then" "threadunsafe" "timeout" "transitions" "type" "typeof" "var" "variadic" "when" "while" "workflow" "write" "xor" "yield")
+  '("abstract" "allow" "and" "as" "break" "class" "const" "continue" "default" "do" "each" "else" "final" "for" "forbid" "function" "if" "immutable" "in" "is" "method" "mod" "new" "not" "operator" "or" "private" "property" "protected" "public" "published" "read" "ref" "return" "self" "stable" "state" "states" "then" "threadunsafe" "transitions" "typedef" "typeof" "var" "where" "while" "workflow" "write" "xor")
   "Nany keywords"
 )
 ;; Regexped version
@@ -52,7 +52,7 @@
 
 ;; File-level keywords
 (defconst nany-file-keywords
-  '("unit" "library" "uses")
+  '("uses")
   "Nany file-level keywords"
 )
 ;; Regexped version
