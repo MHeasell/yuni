@@ -83,9 +83,9 @@ Comment End = '*#' | '*/'
 ! Classes
 ! -------------------------------------------------
 
-<Class Declaration> ::= 'class' Identifier <Optional Type Parameters> <Optional Base Classes> <In Block> <Out Block> '{' <Class Content> '}'
+<Class Declaration> ::= 'class' Identifier <Optional Type Parameters> <Optional Base Classes> '{' <Class Content> '}'
 
-<Anonymous Class Declaration> ::= 'class' <Optional Type Parameters> <Optional Base Classes> <In Block> <Out Block> '{' <Class Content> '}'
+<Anonymous Class Declaration> ::= 'class' <Optional Type Parameters> <Optional Base Classes> '{' <Class Content> '}'
 
 <Optional Base Classes> ::= ':' <SingleThread Exp> <Optional Base Classes Continued>
                | ! Empty
@@ -102,12 +102,17 @@ Comment End = '*#' | '*/'
                | <Typedef> ';' <Class Content>
                | ! Empty
 
-<Property Declaration> ::= 'property' Identifier <Typing> <Assignment> <Property Callbacks>
-               | 'property' Identifier <Assignment> <Property Callbacks>
-               | 'property' Identifier <Typing> <Property Callbacks>
+<Property Declaration> ::= <Optional Abstract> 'property' Identifier <Typing> <Assignment> <Property Callbacks>
+               | <Optional Abstract> 'property' Identifier <Assignment> <Property Callbacks>
+               | <Optional Abstract> 'property' Identifier <Typing> <Property Callbacks>
+
+<Optional Abstract> ::= 'abstract'
+               | ! Empty
 
 <Property Callbacks> ::= 'read' <SingleThread Exp> <Property Callbacks>
                | 'write' <SingleThread Exp> <Property Callbacks>
+               | 'read' <Property Callbacks>
+               | 'write' <Property Callbacks>
                | ! Empty
 
 <Attribute Declaration> ::= 'var' Identifier <Typing> <Assignment>
@@ -169,14 +174,14 @@ Comment End = '*#' | '*/'
 ! Functions and methods
 ! -------------------------------------------------
 
-<Function Declaration> ::= <Optional Optim Qualifier> 'function' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> <Function Body>
+<Function Declaration> ::= <Optional Optim Qualifier> 'function' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <Function Body>
 
-<Anonymous Function Declaration> ::= 'function' <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> <Function Body>
-               | OptimQualifier 'function' <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> <Function Body>
+<Anonymous Function Declaration> ::= 'function' <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <Function Body>
+               | OptimQualifier 'function' <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <Function Body>
 
-<Method Declaration> ::= <Optional Optim Qualifier> 'method' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> <Function Body>
-               | <Optional Optim Qualifier> 'method' 'new' <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> <Function Body>
-               | <Optional Optim Qualifier> 'method' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <In Block> <Out Block> ';' ! Abstract method declaration
+<Method Declaration> ::= <Optional Optim Qualifier> 'method' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <Function Body>
+               | <Optional Optim Qualifier> 'method' 'new' <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> <Function Body>
+               | <Optional Optim Qualifier> 'method' Identifier <Optional Type Parameters> <Optional Parameters> <Return Type Declaration> ';' ! Abstract method declaration
 
 <Function Body> ::= '{' <Expression> '}'
                | '{' '}' ! Empty body
@@ -218,15 +223,6 @@ Comment End = '*#' | '*/'
 
 <Typedef> ::= 'type' Identifier ':=' <Possibly Parallel Exp>
 
-! -------------------------------------------------
-! Constraint blocks
-! -------------------------------------------------
-
-<In Block> ::= 'in' <Expression>
-               | ! Empty
-
-<Out Block> ::= 'out' <Expression>
-               | ! Empty
 
 ! -------------------------------------------------
 ! Types
@@ -257,12 +253,9 @@ Comment End = '*#' | '*/'
 
 <Expression List> ::= ';' <Expression>
                | ';'
-               | ! Empty
 
 <Possibly Parallel Exp> ::= <SingleThread Exp>
                | '&' <SingleThread Exp>
-               | 'async' <SingleThread Exp>
-               | 'sync' <SingleThread Exp>
 
 <SingleThread Exp> ::= <Assignment Exp>
 
@@ -293,6 +286,7 @@ Comment End = '*#' | '*/'
                | 'timeout' <Possibly Parallel Exp> 'do' <Possibly Parallel Exp>
                | 'timeout' <Possibly Parallel Exp> 'do' <Possibly Parallel Exp> 'else' <Possibly Parallel Exp>
                | '{' <Expression> '}'
+               | '{' '}'
 
 <Else Expression> ::= 'else' <Possibly Parallel Exp>
                | ! Empty
