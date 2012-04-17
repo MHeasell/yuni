@@ -75,8 +75,7 @@
 
 		<!-- Keywords -->
 		<context id="preprocessor-keywords" style-ref="preprocessor">
-			<keyword>unit</keyword>
-			<keyword>using</keyword>
+			<keyword>uses</keyword>
 		</context>
 
 		<context id="storage-class" style-ref="storage-class">
@@ -98,25 +97,22 @@
 			<keyword>and</keyword>
 			<keyword>as</keyword>
 			<keyword>break</keyword>
-			<keyword>catch</keyword>
-			<keyword>check</keyword>
 			<keyword>class</keyword>
-			<keyword>clone</keyword>
 			<keyword>continue</keyword>
 			<keyword>default</keyword>
 			<keyword>do</keyword>
+			<keyword>each</keyword>
 			<keyword>else</keyword>
-			<keyword>every</keyword>
+			<keyword>final</keyword>
 			<keyword>for(bid)?</keyword>
 			<keyword>function</keyword>
 			<keyword>i[fns]</keyword>
 			<keyword>method</keyword>
+			<keyword>mod</keyword>
 			<keyword>new</keyword>
-			<keyword>notify</keyword>
 			<keyword>not</keyword>
-			<keyword>o[nr]</keyword>
+			<keyword>or</keyword>
 			<keyword>operator</keyword>
-			<keyword>predicate</keyword>
 			<keyword>private</keyword>
 			<keyword>property</keyword>
 			<keyword>protected</keyword>
@@ -124,19 +120,16 @@
 			<keyword>published</keyword>
 			<keyword>return</keyword>
 			<keyword>self</keyword>
-			<keyword>shared</keyword>
 			<keyword>stable</keyword>
 			<keyword>state[s]?</keyword>
 			<keyword>then</keyword>
-			<keyword>timeout</keyword>
 			<keyword>transitions</keyword>
-			<keyword>type</keyword>
+			<keyword>typedef</keyword>
 			<keyword>var</keyword>
-			<keyword>when</keyword>
+			<keyword>where</keyword>
 			<keyword>while</keyword>
 			<keyword>workflow</keyword>
 			<keyword>xor</keyword>
-			<keyword>yield</keyword>
 		</context>
 
 		<!-- Built-in types -->
@@ -156,7 +149,6 @@
 			<keyword>char</keyword>
 			<keyword>string</keyword>
 			<keyword>bool</keyword>
-			<keyword>uuid</keyword>
 			<keyword>any</keyword>
 		</context>
 
