@@ -11,6 +11,8 @@ private class DoublyLinkedList
 		{
 			var i := first;
 
+			property value read i write i;
+
 			method next
 			{
 				i := i.next;
