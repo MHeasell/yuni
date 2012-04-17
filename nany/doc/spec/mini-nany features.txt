@@ -19,42 +19,11 @@ understanding.
 <h2>Typing</h2>
 
 <p>
-Mini-Nany is not type-inferred, therefore types may not be omitted. All
-typing must be provided when declaring functions, methods, attributes and
-variables. A compliant implementation _should_ detect type errors but it
-is not a requirement, the most important point being the ability to generate
+Mini-Nany typing is similar to the full Nany spec.
+A compliant implementation _should_ detect type errors but it is not a
+requirement, the most important point being the ability to generate
 a valid binary from valid Mini-Nany code.
-</p>
-
-
-<h2>Workflows</h2>
-
-<p>
-Mini-Nany does not support Workflows. As a rather high-level feature that
-impacts overall code flow and generates a lot of instructinos from very few
-lines of Nany, it was deemed too bulky for Mini-Nany.
-</p>
-
-
-<h2>`where` overloads</h2>
-
-<p>
-Mini-Nany does not support `where` overloads.
-A compliant Nany compiler should be able to discriminate,
-depending on the way functions are invoked, whether the result is constant and
-should be calculated statically, or whether the calculation is to be made
-at run time. This is a complicated feature, that requires deep static analysis.
-Also, `where` clauses imply to manipulate overloads, to check for sanity between
-conditions and sometimes to inject code directly in the function.
-</p>
-
-
-<h2>`in` and `out` blocks</h2>
-
-<p>
-Mini-Nany does not support `in` and `out` blocks, mostly for the same reasons
-as the `where` overloads : complicated static analysis and a lot of code to
-inject in the functions.
+However, reflection is not available (through the <code>reflect</code> function).
 </p>
 
 
@@ -62,7 +31,7 @@ inject in the functions.
 
 <p>
 Nany offers lists by comprehension, which are defined using constraints on a
-set, and the `|` operator. This is another very complicated feature that
+set, and the <code>|</code> operator. This is another very complicated feature that
 Mini-Nany does not support.
 </p>
 
@@ -70,7 +39,7 @@ Mini-Nany does not support.
 <h2>Threading</h2>
 
 <p>
-Mini-Nany offers no multi-threading support.
+Mini-Nany offers no multi-threading support (<code>&amp;</code> operator, <code>timeout</code>)
 </p>
 
 
