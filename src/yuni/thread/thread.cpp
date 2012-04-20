@@ -133,8 +133,9 @@ namespace Thread
 
 
 
-	IThread::IThread()
-		:pStarted(false), pShouldStop(true)
+	IThread::IThread() :
+		pStarted(false),
+		pShouldStop(true)
 	{
 		# ifndef YUNI_NO_THREAD_SAFE
 		# ifdef YUNI_OS_WINDOWS
@@ -160,9 +161,9 @@ namespace Thread
 	}
 
 
+	# ifndef YUNI_NO_THREAD_SAFE
 	Error IThread::start()
 	{
-		# ifndef YUNI_NO_THREAD_SAFE
 		ThreadingPolicy::MutexLocker locker(*this);
 		{
 			Yuni::MutexLocker flagLocker(pInnerFlagMutex);
@@ -195,7 +196,10 @@ namespace Thread
 		// Then we can check the isRunning status and determine if the startup
 		// was a success or not.
 		if (::pthread_create(&pThreadID, NULL, Yuni::Private::Thread::threadCallbackExecute, this))
+		{
+			pThreadID = NULL;
 			return errThreadCreation;
+		}
 		# endif
 
 		// Unlock and wait to be signalled by the new thread.
@@ -203,32 +207,39 @@ namespace Thread
 		pSignalStartup.wait();
 
 		// Checking if the thread has really started
-		{
-			Yuni::MutexLocker flagLocker(pInnerFlagMutex);
-			// The thread may have been aborted by the startup handler.
-			if (!pStarted)
-				return errAborted;
-		}
-		return errNone;
+		// The thread may have been aborted by the startup handler.
+		Yuni::MutexLocker flagLocker(pInnerFlagMutex);
+		return (!pStarted) ? errAborted : errNone;
+	}
+	# endif
 
-		# else // YUNI_NO_THREAD_SAFE
+
+	# ifdef YUNI_NO_THREAD_SAFE
+	Error IThread::start()
+	{
 		if (onStarting())
 		{
 			onExecute();
 			onStop();
 		}
 		return errNone;
-		# endif
 	}
 
 
 	Error IThread::stop(unsigned int timeout)
 	{
-		# ifdef YUNI_NO_THREAD_SAFE
+		// nothing to stop
 		(void) timeout;
-		# endif
+		return errNone;
+	}
+	# endif
 
-		# ifndef YUNI_NO_THREAD_SAFE
+
+
+
+	# ifndef YUNI_NO_THREAD_SAFE
+	Error IThread::stop(unsigned int timeout)
+	{
 		assert(timeout < 2147483648u && "Invalid range for timeout (IThread::stop(timeout))");
 		ThreadingPolicy::MutexLocker locker(*this);
 
@@ -267,6 +278,7 @@ namespace Thread
 		pThreadHandle = NULL;
 		# else
 		::pthread_join(pThreadID, NULL);
+		pThreadID = NULL;
 		# endif
 
 		// The thread is no longer running, force status to stopped (ie, if we killed it)
@@ -276,11 +288,8 @@ namespace Thread
 		pInnerFlagMutex.unlock();
 
 		return status;
-
-		# else // YUNI_NO_THREAD_SAFE
-		return errNone;
-		# endif
 	}
+	# endif
 
 
 
@@ -335,7 +344,7 @@ namespace Thread
 	}
 
 
-	bool IThread::suspend(const unsigned int delay)
+	bool IThread::suspend(unsigned int delay)
 	{
 		# ifndef YUNI_NO_THREAD_SAFE
 		// The thread may have to stop
@@ -367,11 +376,14 @@ namespace Thread
 	{
 		# ifndef YUNI_NO_THREAD_SAFE
 		pMutex.lock();
-		pInnerFlagMutex.lock();
-		pShouldStop = true;
-		pInnerFlagMutex.unlock();
-		pSignalWakeUp.notify();
-		pSignalMustStop.notify();
+		{
+			pInnerFlagMutex.lock();
+			pShouldStop = true;
+			pInnerFlagMutex.unlock();
+
+			pSignalWakeUp.notify();
+			pSignalMustStop.notify();
+		}
 		pMutex.unlock();
 		# else // YUNI_NO_THREAD_SAFE
 		# endif
@@ -381,9 +393,10 @@ namespace Thread
 	Error IThread::restart(unsigned int timeout)
 	{
 		assert(timeout < 2147483648u && "Invalid range for timeout (IThread::restart(timeout))");
-		const Error status = stop(timeout);
+		Error status = stop(timeout);
 		return (status != errNone) ? status : start();
 	}
+
 
 
 

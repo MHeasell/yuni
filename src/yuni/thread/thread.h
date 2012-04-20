@@ -133,6 +133,7 @@ namespace Thread
 		bool operator ! () const;
 		//@}
 
+
 	protected:
 		/*!
 		** \brief Suspend the execution of the thread of X miliseconds
@@ -146,7 +147,7 @@ namespace Thread
 		** \param delay The delay in miliseconds. O will only return if the thread should exit
 		** \return True indicates that the thread should stop immediately
 		*/
-		bool suspend(const unsigned int delay = 0);
+		bool suspend(unsigned int delay = 0);
 
 		/*!
 		** \brief Get if the thread should abort as soon as possible
