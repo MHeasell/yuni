@@ -9,18 +9,6 @@
 # include "fwd.h"
 
 
-namespace Yuni
-{
-namespace Job
-{
-
-	// forward declaration
-	class YUNI_DECL IJob;
-
-} // namespace Job
-} // namespace Yuni
-
-
 
 namespace Yuni
 {
@@ -30,9 +18,44 @@ namespace Thread
 	/*!
 	** \brief Base class interface for Threads (abstract)
 	**
+	** Example for implementing your own thread :
+	** \code
+	** #include <yuni/yuni.h>
+	** #include <yuni/thread/thread.h>
+	**
+	**
+	** class MyThread : public Yuni::Thread::IThread
+	** {
+	** public:
+	**	MyThread() {}
+	**	virtual ~MyThread() {}
+	**
+	** protected:
+	**	virtual bool onExecute()
+	**	{
+	**		// do some time-consumming work here
+	**		// ...
+	**		// from time to time, you should check if the work should not be stopped
+	**		if (shouldAbort())
+	**			return false;
+	**
+	**		// continuing our long task
+	**		// ...
+	**
+	**		// the work is done
+	**		return true;
+	**	}
+	** };
+	** \endcode
+	**
+	**
+	**
 	** \internal The thread is really created when started (with the method start()), and
-	** destroyed when stopped by the method stop() (or when the object is
-	** destroyed too).
+	**   destroyed when stopped by the method stop() (or when the object is
+	**   destroyed too).
+	**
+	** \warning : Windows Server 2003 and Windows XP:  The target thread's initial
+	**   stack is not freed when stopping the native thread, causing a resource leak
 	*/
 	class YUNI_DECL IThread : public Policy::ObjectLevelLockable<IThread>
 	{
@@ -218,9 +241,10 @@ namespace Thread
 		/*!
 		** \brief Event: The thread has been killed
 		**
-		** This method may be called from any thread
+		** This method might be called from any thread
 		*/
 		virtual void onKill() {}
+
 
 	private:
 		//! Private copy constructor
@@ -228,6 +252,10 @@ namespace Thread
 		//! Operator =
 		IThread& operator = (const IThread&) {return *this;}
 
+		# ifndef YUNI_NO_THREAD_SAFE
+		//! Stop the native thread
+		Error stopWL(unsigned int timeout);
+		# endif
 
 	private:
 		# ifndef YUNI_NO_THREAD_SAFE
@@ -247,6 +275,10 @@ namespace Thread
 		# else
 		//! ID of the thread, for pthread
 		pthread_t pThreadID;
+		//! Flag to determine whether pThreadID is valid or not
+		// There is no portable value to determine if pThreadID is valid or not
+		// We have to use a separate flag
+		bool pThreadIDValid;
 		# endif // YUNI_OS_WINDOWS
 		# endif // YUNI_NO_THREAD_SAFE
 
