@@ -21,7 +21,7 @@ namespace Logs
 		enum Settings
 		{
 			// Colors are not allowed in a file
-			unixColorsAllowed = 0,
+			colorsAllowed = 0,
 		};
 
 	public:
