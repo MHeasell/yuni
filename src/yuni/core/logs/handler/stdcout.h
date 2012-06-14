@@ -30,7 +30,7 @@ namespace Logs
 
 	public:
 		template<class LoggerT, class VerbosityType, class StringT>
-		void internalDecoratorWriteWL(LoggerT& logger, const StringT& s)
+		void internalDecoratorWriteWL(LoggerT& logger, const StringT& s) const
 		{
 			typedef typename LoggerT::DecoratorsType DecoratorsType;
 
