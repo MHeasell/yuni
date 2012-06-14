@@ -66,13 +66,13 @@ namespace Logs
 
 	public:
 		template<class LoggerT, class VerbosityType, class StringT>
-		void internalDecoratorWriteWL(LoggerT& logger, const StringT& s);
+		void internalDecoratorWriteWL(LoggerT& logger, const StringT& s) const;
 
 	private:
 		//! The originale filename
 		String pOutputFilename;
 		//! File
-		IO::File::Stream pFile;
+		mutable IO::File::Stream pFile;
 
 	}; // class File
 
