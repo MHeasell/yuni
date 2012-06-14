@@ -3368,9 +3368,12 @@ namespace Yuni
 						break;
 					}
 				case '/':
-					// Empty value if we have a comment otherwise '/' is a valid entry
-					if (rv + 1 >= AncestorType::size || AncestorType::data[rv + 1] == '/')
-						break;
+					{
+						// Empty value if we have a comment otherwise '/' is a valid entry
+						if (rv + 1 >= AncestorType::size || AncestorType::data[rv + 1] == '/')
+							break;
+						// no break
+					}
 				default:
 					{
 						// Standard value
