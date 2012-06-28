@@ -349,9 +349,9 @@ namespace Yuni
 		//! \name Iterators
 		//@{
 		//! Get an iterator on UTF8 characters pointing to the beginning of the string
-		utf8iterator utf8begin();
+		utf8iterator utf8begin(uint offset = 0);
 		//! Get an iterator on UTF8 characters pointing to the beginning of the string
-		const_utf8iterator utf8begin() const;
+		const_utf8iterator utf8begin(uint offset = 0) const;
 
 		//! Get an iterator on UTF8 characters pointing to the end of the string
 		null_iterator utf8end();
