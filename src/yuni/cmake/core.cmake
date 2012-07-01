@@ -235,14 +235,6 @@ set(SRC_CORE_SMARTPTR
 source_group(core\\smartptr FILES ${SRC_CORE_SMARTPTR})
 
 
-set(SRC_CORE_COW
-		core/cow.h
-		core/cow/cow.h
-		core/cow/cow.hxx
-)
-source_group(core\\cow FILES ${SRC_CORE_COW})
-
-
 set(SRC_CORE_ANY
 		core/any.h
 		core/any/any.h
@@ -257,8 +249,10 @@ set(SRC_CORE_VARIANT
 		core/variant/variant.h
 		core/variant/variant.hxx
 		core/variant/variant.cpp
-		core/variant/variant.private.h
-		core/variant/variant.private.hxx
+		core/variant/dataholder/dataholder.cpp
+		core/variant/dataholder/dataholder.h
+		core/variant/dataholder/dataholder.hxx
+		core/variant/dataholder/string.h
 )
 source_group(core\\variant FILES ${SRC_CORE_VARIANT})
 
@@ -698,7 +692,6 @@ add_library(yuni-static-core STATIC
 		${SRC_CORE_LOGS}
 		${SRC_CORE_ATOMIC}
 		${SRC_CORE_SMARTPTR}
-		${SRC_CORE_COW}
 		${SRC_CORE_ANY}
 		${SRC_CORE_COLOR}
 		${SRC_CORE_SLIST}
