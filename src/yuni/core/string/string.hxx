@@ -2452,7 +2452,7 @@ namespace Yuni
 	inline char*
 	CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::data()
 	{
-		return AncestorType::size ? AncestorData::data : "";
+		return AncestorType::size ? AncestorType::data : "";
 	}
 
 
@@ -2460,7 +2460,7 @@ namespace Yuni
 	inline const char*
 	CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::c_str() const
 	{
-		return AncestorType::size ? AncestorData::data : "";
+		return AncestorType::size ? AncestorType::data : "";
 	}
 
 
