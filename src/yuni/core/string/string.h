@@ -230,6 +230,7 @@ namespace Yuni
 		//@}
 
 
+
 	private:
 		// Implements the following iterator models for String
 		# include "iterator.inc.hpp"
@@ -1731,17 +1732,23 @@ namespace Yuni
 		size_t capacityInBytes() const;
 
 		/*!
-		** \brief A pointer to the original cstr (might be NULL)
-		** \see null()
+		** \brief Returns a pointer to a null-terminated character array with data equivalent to those stored in the string
 		*/
 		const char* c_str() const;
 
 		/*!
 		** \brief A pointer to the original cstr (might be NULL)
 		** \see null()
+		** \warning Not STL compatible
+		*/
+		char* data();
+		/*!
+		** \brief A pointer to the original cstr (might be NULL)
+		** \see null()
+		** \warning Not STL compatible
 		*/
 		const char* data() const;
-		char* data();
+
 		//@}
 
 

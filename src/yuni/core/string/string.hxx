@@ -13,6 +13,10 @@
 namespace Yuni
 {
 
+	//! Returns a non-null terminated C-String
+	char* NullTerminatedCString();
+
+
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline int CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::ToLower(int c)
 	{
@@ -2452,7 +2456,7 @@ namespace Yuni
 	inline char*
 	CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::data()
 	{
-		return AncestorType::size ? AncestorType::data : "";
+		return AncestorType::data;
 	}
 
 
@@ -2460,7 +2464,7 @@ namespace Yuni
 	inline const char*
 	CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::c_str() const
 	{
-		return AncestorType::size ? AncestorType::data : "";
+		return (NULL != AncestorType::data) ? AncestorType::data : "";
 	}
 
 
