@@ -1897,11 +1897,14 @@ namespace Yuni
 		** \param[out] key The key that has been found
 		** \param[out] value The associated value
 		** \param ignoreCase True to be case insensitive
+		** \param separator The separator used to make the distinction between the key
+		**   and the value
 		**
 		** \see ExtractKeyvalue()
 		*/
 		template<class StringT1, class StringT2>
-		void extractKeyValue(StringT1& key, StringT2& value, bool ignoreCase = false) const;
+		void extractKeyValue(StringT1& key, StringT2& value, bool ignoreCase = false,
+			char separator = '=') const;
 		//@}
 
 
