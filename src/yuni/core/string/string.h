@@ -185,7 +185,9 @@ namespace Yuni
 			CString<>, CStringType>::RetTrue  WritableType;
 
 		//! Operator [] return type
-		typedef typename Static::If<!adapter, char&, char>::RetTrue OperatorBracketReturnType;
+		typedef typename Static::If<!adapter, char&, char>::Type OperatorBracketReturnType;
+		//! Operator [] return type (const)
+		typedef typename Static::If<!adapter, const char&, char>::Type ConstOperatorBracketReturnType;
 
 		// Checking for a minimal chunk size
 		YUNI_STATIC_ASSERT(adapter || chunkSize > 3, CString_MinimalChunkSizeRequired);
@@ -1932,7 +1934,7 @@ namespace Yuni
 		//! \name Operators
 		//@{
 		//! The operator `[]`, for accessing to a single char (the offset must be valid)
-		const OperatorBracketReturnType /*char&*/ operator [] (Size offset) const;
+		ConstOperatorBracketReturnType /*char&*/ operator [] (Size offset) const;
 		//! The operator `[]`, for accessing to a single char (the offset must be valid)
 		OperatorBracketReturnType /*char&*/ operator [] (Size offset);
 
