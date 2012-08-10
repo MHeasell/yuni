@@ -20,18 +20,18 @@ namespace Yuni
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline int CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::ToLower(int c)
 	{
-		if (static_cast<unsigned int>(c) - 'A' < 26)
-			return c | 32;
-		return c;
+		return (static_cast<unsigned int>(c) - 'A' < 26)
+			? c | 32
+			: c;
 	}
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline int CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::ToUpper(int c)
 	{
-		if (static_cast<unsigned int>(c) - 'a' < 26)
-			return c & 0x5f;
-		return c;
+		return (static_cast<unsigned int>(c) - 'a' < 26)
+			? c & 0x5f
+			: c;
 	}
 
 
@@ -3276,7 +3276,8 @@ namespace Yuni
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class StringT1, class StringT2>
 	inline void
-	CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::extractKeyValue(StringT1& key, StringT2& value, bool ignoreCase) const
+	CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::extractKeyValue(StringT1& key, StringT2& value,
+		bool ignoreCase, char separator) const
 	{
 		// ReInitializing
 		key.clear();
@@ -3313,12 +3314,15 @@ namespace Yuni
 			return;
 		}
 
+		// all separators
+		CString<8, false> seplist = "=/;";
+		seplist[0] = separator;
 		// If not a section, it should be a key/value
 		// Looking for the symbol `=`
 		Size equal = left;
 		do
 		{
-			equal = find_first_of("=/;", equal);
+			equal = find_first_of(seplist, equal);
 			if (equal < AncestorType::size)
 			{
 				if ('/' == AncestorType::data[equal])
@@ -3331,7 +3335,7 @@ namespace Yuni
 				}
 				if (equal == left)
 					return;
-				if ('=' == AncestorType::data[equal])
+				if (separator == AncestorType::data[equal])
 					break;
 			}
 			return;
