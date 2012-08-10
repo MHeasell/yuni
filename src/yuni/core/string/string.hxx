@@ -3082,7 +3082,7 @@ namespace Yuni
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
-	inline const typename CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::OperatorBracketReturnType // char&
+	inline typename CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::ConstOperatorBracketReturnType // char&
 	CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::operator [] (Size offset) const
 	{
 		assert(offset < AncestorType::size && "string, operator[] : index out of bounds");
