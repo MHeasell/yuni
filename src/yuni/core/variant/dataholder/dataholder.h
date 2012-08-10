@@ -86,10 +86,10 @@ namespace Variant
 		{ return Converter<uint32, TargetType>::Value(v, result); }
 
 		virtual bool convertFrom(sint64 v)
-		{ return Converter<sint32,TargetType>::Value(v, result); }
+		{ return Converter<sint64,TargetType>::Value(v, result); }
 
 		virtual bool convertFrom(uint64 v)
-		{ return Converter<uint32, TargetType>::Value(v, result); }
+		{ return Converter<uint64, TargetType>::Value(v, result); }
 
 		virtual bool convertFrom(double v)
 		{ return Converter<double,TargetType>::Value(v, result); }
