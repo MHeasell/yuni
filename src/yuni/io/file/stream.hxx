@@ -212,14 +212,14 @@ namespace File
 	template<class U>
 	inline uint Stream::write(const U& buffer)
 	{
-		return StreamTraitsWrite<Traits::CString<U>::valid, U>::Perform(pFd, buffer);
+		return (uint) StreamTraitsWrite<Traits::CString<U>::valid, U>::Perform(pFd, buffer);
 	}
 
 
 	template<class U>
 	inline uint Stream::write(const U& buffer, uint size)
 	{
-		return StreamTraitsWrite<Traits::CString<U>::valid, U>::Perform(pFd, buffer, size);
+		return (uint) StreamTraitsWrite<Traits::CString<U>::valid, U>::Perform(pFd, buffer, size);
 	}
 
 

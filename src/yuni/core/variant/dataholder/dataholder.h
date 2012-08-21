@@ -482,14 +482,14 @@ namespace Variant
 
 		virtual void clear() { pValue = false; }
 
-		virtual void assign(sint32 n) { pValue = (n); }
-		virtual void assign(uint32 n) { pValue = (n); }
-		virtual void assign(sint64 n) { pValue = (n); }
-		virtual void assign(uint64 n) { pValue = (n); }
+		virtual void assign(sint32 n) { pValue = (n != 0); }
+		virtual void assign(uint32 n) { pValue = (n != 0); }
+		virtual void assign(sint64 n) { pValue = (n != 0); }
+		virtual void assign(uint64 n) { pValue = (n != 0); }
 		virtual void assign(double n) { pValue = not Math::Zero(n); }
 		virtual void assign(const String& n) { pValue = n.to<T>(); }
 		virtual void assign(bool n) { pValue = n; }
-		virtual void assign(char n) { pValue = n; }
+		virtual void assign(char n) { pValue = (n != 0); }
 
 		virtual void add(sint32 n) { if (n) pValue = true; }
 		virtual void add(uint32 n) { if (n) pValue = true; }
@@ -509,23 +509,23 @@ namespace Variant
 		virtual void sub(bool n) { if (n) pValue = false; }
 		virtual void sub(char n) { if (n) pValue = false; }
 
-		virtual void mult(uint32 n) { pValue *= (T) n; }
-		virtual void mult(sint32 n) { pValue *= (T) n; }
-		virtual void mult(uint64 n) { pValue *= (T) n; }
-		virtual void mult(sint64 n) { pValue *= (T) n; }
-		virtual void mult(double n) { pValue *= (int) n; }
+		virtual void mult(uint32 n) { if (!n) pValue = false; }
+		virtual void mult(sint32 n) { if (!n) pValue = false; }
+		virtual void mult(uint64 n) { if (!n) pValue = false; }
+		virtual void mult(sint64 n) { if (!n) pValue = false; }
+		virtual void mult(double n) { if (!n) pValue = false; }
 		virtual void mult(bool) { /* do nothing*/ }
-		virtual void mult(char n) { pValue *= (int)n; }
+		virtual void mult(char n) { if (!n) pValue = false; }
 		virtual void mult(const String& n) { pValue *= n.to<T>(); }
 
-		virtual void div(uint32 n) { pValue /= (T) n; }
-		virtual void div(sint32 n) { pValue /= (T) n; }
-		virtual void div(uint64 n) { pValue /= (T) n; }
-		virtual void div(sint64 n) { pValue /= (T) n; }
-		virtual void div(double n) { pValue /= (int) n; }
+		virtual void div(uint32) { }
+		virtual void div(sint32) { }
+		virtual void div(uint64) { }
+		virtual void div(sint64) { }
+		virtual void div(double) { }
 		virtual void div(bool) { /* do nothing*/ }
-		virtual void div(char n) { pValue /= (int)n; }
-		virtual void div(const String& n) { pValue /= n.to<T>(); }
+		virtual void div(char) { }
+		virtual void div(const String&) { }
 
 		virtual void loopbackAssign(IDataHolder& dataholder) const {dataholder.assign(pValue);}
 		virtual void loopbackAdd(IDataHolder& dataholder) const {dataholder.add(pValue);}
