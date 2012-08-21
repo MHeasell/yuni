@@ -516,7 +516,7 @@ namespace Variant
 		virtual void mult(double n) { if (!n) pValue = false; }
 		virtual void mult(bool) { /* do nothing*/ }
 		virtual void mult(char n) { if (!n) pValue = false; }
-		virtual void mult(const String& n) { pValue *= n.to<T>(); }
+		virtual void mult(const String& n) { if (!n.to<bool>()) pValue = false; }
 
 		virtual void div(uint32) { }
 		virtual void div(sint32) { }
