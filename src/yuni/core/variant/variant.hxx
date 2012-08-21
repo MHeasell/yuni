@@ -12,29 +12,42 @@ namespace Yuni
 		return Variant();
 	}
 
-	
-	template<> inline Variant Variant::New<char*>::Instance() { return Variant(String()); }
+
+	template<> inline Variant Variant::New<char*>::Instance()       { return Variant(String()); }
 	template<> inline Variant Variant::New<const char*>::Instance() { return Variant(String()); }
-	template<> inline Variant Variant::New<String>::Instance() { return Variant(String()); }
+	template<> inline Variant Variant::New<String>::Instance()      { return Variant(String()); }
 
-	template<> inline Variant Variant::New<float>::Instance() { return Variant(double()); }
-	template<> inline Variant Variant::New<double>::Instance() { return Variant(double()); }
+	template<> inline Variant Variant::New<float>::Instance()       { return Variant(double()); }
+	template<> inline Variant Variant::New<double>::Instance()      { return Variant(double()); }
 
-	template<> inline Variant Variant::New<uint32>::Instance() { return Variant(uint32()); }
-	template<> inline Variant Variant::New<uint64>::Instance() { return Variant(uint64()); }
-	template<> inline Variant Variant::New<sint32>::Instance() { return Variant(sint32()); }
-	template<> inline Variant Variant::New<sint64>::Instance() { return Variant(sint64()); }
+	template<> inline Variant Variant::New<uint32>::Instance()      { return Variant(uint32()); }
+	template<> inline Variant Variant::New<uint64>::Instance()      { return Variant(uint64()); }
+	template<> inline Variant Variant::New<sint32>::Instance()      { return Variant(sint32()); }
+	template<> inline Variant Variant::New<sint64>::Instance()      { return Variant(sint64()); }
 
-	template<> inline Variant Variant::New<bool>::Instance() { return Variant(bool()); }
-	template<> inline Variant Variant::New<char>::Instance() { return Variant(char()); }
+	template<> inline Variant Variant::New<bool>::Instance()        { return Variant(bool()); }
+	template<> inline Variant Variant::New<char>::Instance()        { return Variant(char()); }
+
+
+	template<class T>
+	inline Variant Variant::New<T>::Array()
+	{
+		// We must specify the type to avoid invalid cast
+		Private::Variant::IDataHolder* holder =
+			new Private::Variant::ArrayData<typename Static::Remove::Const<T>::Type>();
+		return holder;
+	}
+
+
+
 
 
 
 	template<class T>
 	inline Variant::Variant(const T& rhs) :
-		pData(new Private::Variant::Data<typename Static::Remove::All<T>::Type>(rhs)),
 		pShareContent(false)
 	{
+		assign(rhs);
 	}
 
 
@@ -198,7 +211,7 @@ namespace Yuni
 	inline void Variant::deepCopyIfNonUnique()
 	{
 		// pValue must not null
-		if (/*!(!pValue) &&*/ !pData->unique())
+		if (/*!(!pValue) &&*/ !pShareContent && !pData->unique())
 		{
 			Private::Variant::IDataHolder* pointer = Private::Variant::IDataHolder::Ptr::WeakPointer(pData);
 			pData = pointer->clone();

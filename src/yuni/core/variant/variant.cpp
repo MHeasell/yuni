@@ -14,16 +14,16 @@ namespace Yuni
 	{}
 
 
-	Variant::Variant(const char* rhs) :
-		pData(new Private::Variant::Data<String>(rhs)),
-		pShareContent(false)
+	Variant::Variant(const Private::Variant::IDataHolder* rhs, bool ref) :
+		pData(const_cast<Private::Variant::IDataHolder*>(rhs)),
+		pShareContent(ref)
 	{
 	}
 
 
-	Variant::Variant(const Private::Variant::IDataHolder* rhs) :
-		pData(const_cast<Private::Variant::IDataHolder*>(rhs)),
-		pShareContent(false)
+	Variant::Variant(Private::Variant::IDataHolder* rhs, bool ref) :
+		pData(rhs),
+		pShareContent(ref)
 	{
 	}
 
@@ -34,12 +34,6 @@ namespace Yuni
 		assign(rhs);
 	}
 
-
-	Variant::Variant(Private::Variant::IDataHolder* rhs) :
-		pData(rhs),
-		pShareContent(false)
-	{
-	}
 
 
 	void Variant::assign(uint32 rhs)
@@ -94,10 +88,7 @@ namespace Yuni
 	void Variant::assign(const String& rhs)
 	{
 		if (pShareContent && !(!pData))
-		{
 			pData->assign(rhs);
-			std::cout << "assign -> " << std::endl;
-		}
 		else
 			pData = new Private::Variant::Data<String>(rhs);
 	}
@@ -204,14 +195,14 @@ namespace Yuni
 		else
 		{
 			deepCopyIfNonUnique();
-			return pData->at(index);
+			return Variant(pData->at(index), true);
 		}
 	}
 
 
 	const Variant Variant::operator [] (uint index) const
 	{
-		return !pData ? nullptr : pData->at(index);
+		return !pData ? nullptr : Variant(pData->at(index), true);
 	}
 
 
@@ -236,6 +227,45 @@ namespace Yuni
 		}
 	}
 
+
+	Variant Variant::operator () (const String& method)
+	{
+		return (!pData) ? nullptr : pData->invoke(method);
+	}
+
+
+	Variant Variant::operator () (const String& method, const Variant& a1)
+	{
+		IDataHolder* p1 = IDataHolder::Ptr::WeakPointer(a1.pData);
+		return (!pData) ? nullptr : pData->invoke(method, p1);
+	}
+
+
+	Variant Variant::operator () (const String& method, const Variant& a1, const Variant& a2)
+	{
+		IDataHolder* p1 = IDataHolder::Ptr::WeakPointer(a1.pData);
+		IDataHolder* p2 = IDataHolder::Ptr::WeakPointer(a2.pData);
+		return (!pData) ? nullptr : pData->invoke(method, p1, p2);
+	}
+
+
+	Variant Variant::operator () (const String& method, const Variant& a1, const Variant& a2, const Variant& a3)
+	{
+		IDataHolder* p1 = IDataHolder::Ptr::WeakPointer(a1.pData);
+		IDataHolder* p2 = IDataHolder::Ptr::WeakPointer(a2.pData);
+		IDataHolder* p3 = IDataHolder::Ptr::WeakPointer(a3.pData);
+		return (!pData) ? nullptr : pData->invoke(method, p1, p2, p3);
+	}
+
+
+	Variant Variant::operator () (const String& method, const Variant& a1, const Variant& a2, const Variant& a3, const Variant& a4)
+	{
+		IDataHolder* p1 = IDataHolder::Ptr::WeakPointer(a1.pData);
+		IDataHolder* p2 = IDataHolder::Ptr::WeakPointer(a2.pData);
+		IDataHolder* p3 = IDataHolder::Ptr::WeakPointer(a3.pData);
+		IDataHolder* p4 = IDataHolder::Ptr::WeakPointer(a4.pData);
+		return (!pData) ? nullptr : pData->invoke(method, p1, p2, p3, p4);
+	}
 
 
 

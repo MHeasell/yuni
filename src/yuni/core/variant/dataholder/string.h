@@ -36,6 +36,7 @@ namespace Variant
 		virtual IDataHolder* at(uint index) {return index < pValue.size() ? new Data<char>(pValue[index]) : NULL;}
 		virtual const IDataHolder* at(uint index) const {return index < pValue.size() ? new Data<char>(pValue[index]) : NULL;}
 
+		virtual void assignList(const IDataHolder::Vector&) {}
 		virtual void assign(uint32 n) { pValue = n; }
 		virtual void assign(sint32 n) { pValue = n; }
 		virtual void assign(uint64 n) { pValue = n; }
@@ -45,12 +46,13 @@ namespace Variant
 		virtual void assign(bool n) { pValue = n; }
 		virtual void assign(char n) { pValue = n; }
 
+		virtual void addList(const IDataHolder::Vector&) {}
 		virtual void add(uint32 n) { pValue += n; }
 		virtual void add(sint32 n) { pValue += n; }
 		virtual void add(uint64 n) { pValue += n; }
 		virtual void add(sint64 n) { pValue += n; }
 		virtual void add(double n) { pValue += n; }
-		virtual void add(const String& n) { pValue += n; }
+		virtual void add(const String& n) { pValue += n;}
 		virtual void add(bool n) { pValue += n; }
 		virtual void add(char n) { pValue += n; }
 

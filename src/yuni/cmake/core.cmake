@@ -253,6 +253,7 @@ set(SRC_CORE_VARIANT
 		core/variant/dataholder/dataholder.h
 		core/variant/dataholder/dataholder.hxx
 		core/variant/dataholder/string.h
+		core/variant/dataholder/array.h
 )
 source_group(core\\variant FILES ${SRC_CORE_VARIANT})
 

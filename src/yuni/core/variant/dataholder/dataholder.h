@@ -8,101 +8,13 @@
 
 namespace Yuni
 {
+	class Variant;
+
 namespace Private
 {
 namespace Variant
 {
-
-	/*!
-	** \brief Data Converter interface (Interface)
-	*/
-	struct IDataConverter
-	{
-		//! Destructor
-		virtual ~IDataConverter()
-		{}
-
-		//! \name From- converters for base types
-		//@{
-		virtual bool convertFrom(char v) = 0;
-		virtual bool convertFrom(bool v) = 0;
-		virtual bool convertFrom(sint32 v) = 0;
-		virtual bool convertFrom(uint32 v) = 0;
-		virtual bool convertFrom(sint64 v) = 0;
-		virtual bool convertFrom(uint64 v) = 0;
-		virtual bool convertFrom(double v) = 0;
-		virtual bool convertFrom(const String& v) = 0;
-		//@}
-
-	}; // class IDataConverter
-
-
-
-	/*!
-	** \brief The real convertor structure.
-	*/
-	template<class From, class To>
-	struct Converter
-	{
-		static bool Value(const From& from, To& to)
-		{
-			to = static_cast<To>(from);
-			return true;
-		}
-	};
-
-	// Specialization to avoid warning from Visual Studio (C4800)
-	template<class From>
-	struct Converter<From, bool>
-	{
-		static bool Value(const From& from, bool& to)
-		{
-			to = Math::Equals(From(), from);
-			return true;
-		}
-	};
-
-
-	/*!
-	** \brief Concrete DataConverter implementation
-	*/
-	template<class TargetType>
-	struct DataConverter : public IDataConverter
-	{
-	public:
-		DataConverter() : result()
-		{}
-
-		virtual bool convertFrom(bool v)
-		{ return Converter<bool,TargetType>::Value(v, result); }
-
-		virtual bool convertFrom(char v)
-		{ return Converter<char,TargetType>::Value(v, result); }
-
-		virtual bool convertFrom(sint32 v)
-		{ return Converter<sint32,TargetType>::Value(v, result); }
-
-		virtual bool convertFrom(uint32 v)
-		{ return Converter<uint32, TargetType>::Value(v, result); }
-
-		virtual bool convertFrom(sint64 v)
-		{ return Converter<sint64,TargetType>::Value(v, result); }
-
-		virtual bool convertFrom(uint64 v)
-		{ return Converter<uint64, TargetType>::Value(v, result); }
-
-		virtual bool convertFrom(double v)
-		{ return Converter<double,TargetType>::Value(v, result); }
-
-		virtual bool convertFrom(const String& v)
-		{ result = v.to<TargetType>(); return true; }
-
-	public:
-		//! The conversion Result
-		TargetType result;
-
-	}; // class DataConverter
-
+	class IDataConverter;
 
 
 	/*!
@@ -115,6 +27,8 @@ namespace Variant
 		typedef Yuni::Policy::SingleThreaded<IDataHolder>  ThreadingPolicy;
 		//! The most suitable smart pointer to this object
 		typedef Yuni::SmartPtr<IDataHolder, Yuni::Policy::Ownership::COMReferenceCounted>  Ptr;
+		//! Vector
+		typedef std::vector<Ptr>  Vector;
 
 	public:
 		//! Constructor
@@ -146,6 +60,8 @@ namespace Variant
 		virtual const IDataHolder* at(uint /*index*/) const {return nullptr;}
 
 		//! assign uint32
+		virtual void assignList(const IDataHolder::Vector&) = 0;
+		//! assign uint32
 		virtual void assign(uint32 n) = 0;
 		//! assign sint32
 		virtual void assign(sint32 n) = 0;
@@ -162,6 +78,8 @@ namespace Variant
 		//! assign char
 		virtual void assign(char n) = 0;
 
+		//! add uint32
+		virtual void addList(const IDataHolder::Vector&) = 0;
 		//! add uint32
 		virtual void add(uint32 n) = 0;
 		//! add sint32
@@ -246,15 +164,15 @@ namespace Variant
 		//! \name Method invocation
 		//@{
 		//! Method invokation, with no parameter
-		virtual IDataHolder* invoke(const String& /*name*/);
+		virtual IDataHolder* invoke(const String& name);
 		//! Method invokation, with 1 parameter
-		virtual IDataHolder* invoke(const String& /*name*/, IDataHolder* /*a1*/);
+		virtual IDataHolder* invoke(const String& name, IDataHolder* a1);
 		//! Method invokation, with 2 parameters
-		virtual IDataHolder* invoke(const String& /*name*/, IDataHolder* /*a1*/, IDataHolder* /*a2*/);
+		virtual IDataHolder* invoke(const String& name, IDataHolder* a1, IDataHolder* a2);
 		//! Method invokation, with 3 parameters
-		virtual IDataHolder* invoke(const String& /*name*/, IDataHolder* /*a1*/, IDataHolder* /*a2*/, IDataHolder* /*a3*/);
+		virtual IDataHolder* invoke(const String& name, IDataHolder* a1, IDataHolder* a2, IDataHolder* a3);
 		//! Method invokation, with 4 parameters
-		virtual IDataHolder* invoke(const String& /*name*/, IDataHolder* /*a1*/, IDataHolder* /*a2*/, IDataHolder* /*a3*/, IDataHolder* /*a4*/);
+		virtual IDataHolder* invoke(const String& name, IDataHolder* a1, IDataHolder* a2, IDataHolder* a3, IDataHolder* a4);
 		//@}
 
 
@@ -281,6 +199,162 @@ namespace Variant
 		mutable Yuni::Atomic::Int<> pRefCount;
 
 	}; // class IDataHolder
+
+
+
+	/*!
+	** \brief Data Converter interface (Interface)
+	*/
+	struct IDataConverter
+	{
+		//! Destructor
+		virtual ~IDataConverter()
+		{}
+
+		//! \name From- converters for base types
+		//@{
+		virtual bool convertFrom(char v) = 0;
+		virtual bool convertFrom(bool v) = 0;
+		virtual bool convertFrom(sint32 v) = 0;
+		virtual bool convertFrom(uint32 v) = 0;
+		virtual bool convertFrom(sint64 v) = 0;
+		virtual bool convertFrom(uint64 v) = 0;
+		virtual bool convertFrom(double v) = 0;
+		virtual bool convertFrom(const String& v) = 0;
+		virtual bool convertFrom(const IDataHolder::Vector& v) = 0;
+		//@}
+
+	}; // class IDataConverter
+
+
+
+	/*!
+	** \brief The real convertor structure.
+	*/
+	template<class From, class To>
+	struct Converter
+	{
+		static bool Value(const From& from, To& to)
+		{
+			to = static_cast<To>(from);
+			return true;
+		}
+	};
+
+	// Specialization to avoid warning from Visual Studio (C4800)
+	template<class From>
+	struct Converter<From, bool>
+	{
+		static bool Value(const From& from, bool& to)
+		{
+			to = Math::Equals(From(), from);
+			return true;
+		}
+	};
+
+	template<class T>
+	struct Converter<IDataHolder::Ptr, T>
+	{
+		static bool Value(const IDataHolder::Ptr& from, T& to)
+		{
+			return false;
+		}
+	};
+
+	template<>
+	struct Converter<IDataHolder::Ptr, String>
+	{
+		static bool Value(const IDataHolder::Ptr& from, String& to)
+		{
+			if (!from)
+				to += "(nil)";
+			else
+				to += from->to<String>();
+			return true;
+		}
+	};
+
+
+	template<class TargetType>
+	struct DataConverterEvent
+	{
+		static void ListBegin(TargetType&) {}
+		static void ListSeparator(TargetType&) {}
+		static void ListEnd(TargetType&) {}
+	};
+
+	template<>
+	struct DataConverterEvent<String>
+	{
+		static void ListBegin(String& out) { out += '[';}
+		static void ListSeparator(String& out) { out += ", ";}
+		static void ListEnd(String& out) {out += ']';}
+	};
+
+
+	/*!
+	** \brief Concrete DataConverter implementation
+	*/
+	template<class TargetType>
+	struct DataConverter : public IDataConverter
+	{
+	public:
+		DataConverter() : result()
+		{}
+
+		virtual bool convertFrom(bool v)
+		{ return Converter<bool,TargetType>::Value(v, result); }
+
+		virtual bool convertFrom(char v)
+		{ return Converter<char,TargetType>::Value(v, result); }
+
+		virtual bool convertFrom(sint32 v)
+		{ return Converter<sint32,TargetType>::Value(v, result); }
+
+		virtual bool convertFrom(uint32 v)
+		{ return Converter<uint32, TargetType>::Value(v, result); }
+
+		virtual bool convertFrom(sint64 v)
+		{ return Converter<sint64,TargetType>::Value(v, result); }
+
+		virtual bool convertFrom(uint64 v)
+		{ return Converter<uint64, TargetType>::Value(v, result); }
+
+		virtual bool convertFrom(double v)
+		{ return Converter<double,TargetType>::Value(v, result); }
+
+		virtual bool convertFrom(const String& v)
+		{ result = v.to<TargetType>(); return true; }
+
+		virtual bool convertFrom(const IDataHolder::Vector& v)
+		{
+			DataConverterEvent<TargetType>::ListBegin(result);
+			switch (v.size())
+			{
+				case 0:
+					break;
+				case 1:
+					Converter<IDataHolder::Ptr,TargetType>::Value(v[0], result);
+					break;
+				default:
+					Converter<IDataHolder::Ptr,TargetType>::Value(v[0], result);
+					for (uint i = 1; i != v.size(); ++i)
+					{
+						DataConverterEvent<TargetType>::ListSeparator(result);
+						Converter<IDataHolder::Ptr,TargetType>::Value(v[i], result);
+					}
+					break;
+			}
+			DataConverterEvent<TargetType>::ListEnd(result);
+			return true;
+		}
+
+	public:
+		//! The conversion Result
+		TargetType result;
+
+	}; // class DataConverter
+
 
 
 
@@ -311,6 +385,7 @@ namespace Variant
 
 		virtual void clear() { pValue = T(); }
 
+		virtual void assignList(const IDataHolder::Vector&) {}
 		virtual void assign(uint32 n) { pValue = (T) n; }
 		virtual void assign(sint32 n) { pValue = (T) n; }
 		virtual void assign(uint64 n) { pValue = (T) n; }
@@ -320,6 +395,7 @@ namespace Variant
 		virtual void assign(bool n) { pValue = (T) n; }
 		virtual void assign(char n) { pValue = (T) n; }
 
+		virtual void addList(const IDataHolder::Vector&) {}
 		virtual void add(uint32 n) { pValue += (T) n; }
 		virtual void add(sint32 n) { pValue += (T) n; }
 		virtual void add(uint64 n) { pValue += (T) n; }
@@ -370,6 +446,7 @@ namespace Variant
 
 
 
+
 	/*!
 	** \brief Concrete variant data container (char)
 	*/
@@ -397,6 +474,7 @@ namespace Variant
 
 		virtual void clear() { pValue = '\0'; }
 
+		virtual void assignList(const IDataHolder::Vector&) {}
 		virtual void assign(uint32 n) { pValue = (T) n; }
 		virtual void assign(sint32 n) { pValue = (T) n; }
 		virtual void assign(uint64 n) { pValue = (T) n; }
@@ -406,6 +484,7 @@ namespace Variant
 		virtual void assign(bool n) { pValue = (T) n; }
 		virtual void assign(char n) { pValue = (T) n; }
 
+		virtual void addList(const IDataHolder::Vector&) {}
 		virtual void add(uint32 n) { pValue += (T) n; }
 		virtual void add(sint32 n) { pValue += (T) n; }
 		virtual void add(uint64 n) { pValue += (T) n; }
@@ -482,6 +561,7 @@ namespace Variant
 
 		virtual void clear() { pValue = false; }
 
+		virtual void assignList(const IDataHolder::Vector&) {}
 		virtual void assign(sint32 n) { pValue = (n != 0); }
 		virtual void assign(uint32 n) { pValue = (n != 0); }
 		virtual void assign(sint64 n) { pValue = (n != 0); }
@@ -491,6 +571,7 @@ namespace Variant
 		virtual void assign(bool n) { pValue = n; }
 		virtual void assign(char n) { pValue = (n != 0); }
 
+		virtual void addList(const IDataHolder::Vector&) {}
 		virtual void add(sint32 n) { if (n) pValue = true; }
 		virtual void add(uint32 n) { if (n) pValue = true; }
 		virtual void add(sint64 n) { if (n) pValue = true; }
@@ -513,7 +594,7 @@ namespace Variant
 		virtual void mult(sint32 n) { if (!n) pValue = false; }
 		virtual void mult(uint64 n) { if (!n) pValue = false; }
 		virtual void mult(sint64 n) { if (!n) pValue = false; }
-		virtual void mult(double n) { if (!n) pValue = false; }
+		virtual void mult(double n) { if (Math::Zero(n)) pValue = false; }
 		virtual void mult(bool) { /* do nothing*/ }
 		virtual void mult(char n) { if (!n) pValue = false; }
 		virtual void mult(const String& n) { if (!n.to<bool>()) pValue = false; }

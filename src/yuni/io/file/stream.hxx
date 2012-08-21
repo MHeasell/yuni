@@ -287,7 +287,7 @@ namespace File
 		// Making sure that the buffer is zero-terminated if required
 		if (buffer.zeroTerminated)
 			*((C*)(buffer.data() + buffer.size())) = C();
-		return result;
+		return (uint) result;
 	}
 
 
@@ -310,7 +310,7 @@ namespace File
 		// Making sure that the buffer is zero-terminated if required
 		if (buffer.zeroTerminated)
 			*((C*)(buffer.data() + buffer.size())) = C();
-		return result;
+		return (uint) result;
 	}
 
 
