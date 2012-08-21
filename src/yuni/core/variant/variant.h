@@ -6,6 +6,7 @@
 # include "../static/remove.h"
 # include "dataholder/dataholder.h"
 # include "dataholder/string.h"
+# include "dataholder/array.h"
 
 
 
@@ -46,6 +47,9 @@ namespace Yuni
 			static Variant Array();
 		};
 
+		//! Data holder
+		typedef Private::Variant::IDataHolder  IDataHolder;
+
 	public:
 		//! \name Constructors
 		//@{
@@ -53,14 +57,12 @@ namespace Yuni
 		Variant();
 		//! Constructs a copy of an existing Variant.
 		Variant(const Variant& rhs);
-		//! Constructs from a string
-		Variant(const char* rhs);
 		//! Constructs a Variant based on an existing variable of simple type.
 		template<class T> Variant(const T& rhs);
 		//! Constructs from a dataholder
-		Variant(const Private::Variant::IDataHolder* rhs);
+		Variant(const IDataHolder* rhs, bool ref = false);
 		//! Constructs from a dataholder
-		Variant(Private::Variant::IDataHolder* rhs);
+		Variant(IDataHolder* rhs, bool ref = false);
 		//! Constructor from nullptr
 		Variant(const NullPtr&);
 
@@ -134,15 +136,6 @@ namespace Yuni
 		//@}
 
 
-		//! \name Method invocation
-		//@{
-		/*!
-		** \brief Invoke method
-		*/
-		Variant invoke(const String& methodname);
-		//@}
-
-
 		//! \name Information methods
 		//@{
 		//! Returns true if the Variant is empty.
@@ -159,9 +152,9 @@ namespace Yuni
 		//! operator =
 		template<class T> Variant&  operator = (const T& rhs);
 		//! operator =
-		Variant&  operator = (const Private::Variant::IDataHolder* rhs);
+		Variant&  operator = (const IDataHolder* rhs);
 		//! operator =
-		Variant&  operator = (Private::Variant::IDataHolder* rhs);
+		Variant&  operator = (IDataHolder* rhs);
 		//! operator nullptr
 		Variant&  operator = (const NullPtr&);
 		//! operator +=
@@ -175,6 +168,17 @@ namespace Yuni
 		//! operator []
 		Variant operator [] (uint index);
 		const Variant operator [] (uint index) const;
+
+		//! Invoke method with no parameter
+		Variant operator () (const String& method);
+		//! Invoke method with 1 parameter
+		Variant operator () (const String& method, const Variant& a1);
+		//! Invoke method with 2 parameters
+		Variant operator () (const String& method, const Variant& a1, const Variant& a2);
+		//! Invoke method with 3 parameters
+		Variant operator () (const String& method, const Variant& a1, const Variant& a2, const Variant& a3);
+		//! Invoke method with 4 parameters
+		Variant operator () (const String& method, const Variant& a1, const Variant& a2, const Variant& a3, const Variant& a4);
 		//@}
 
 
@@ -190,7 +194,7 @@ namespace Yuni
 
 	private:
 		//! Pointer to storage object
-		Private::Variant::IDataHolder::Ptr pData;
+		IDataHolder::Ptr pData;
 		//! Flag to know if the content is currently shared
 		bool pShareContent;
 
