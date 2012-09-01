@@ -5,34 +5,16 @@
 namespace Yuni
 {
 
-	inline Semaphore::Semaphore(uint readers)
-	{
-		# ifndef YUNI_NO_THREAD_SAFE
-		# ifdef YUNI_OS_WINDOWS
-		# else
-		sem_init(& pSemaphore, 0, readers);
-		# endif
-		# endif
-	}
-
-
-	inline Semaphore::~Semaphore()
-	{
-		# ifndef YUNI_NO_THREAD_SAFE
-		# ifdef YUNI_OS_WINDOWS
-		# else
-		sem_destroy(& pSemaphore);
-		# endif
-		# endif
-	}
-
-
 	inline void Semaphore::acquire()
 	{
 		# ifndef YUNI_NO_THREAD_SAFE
 		# ifdef YUNI_OS_WINDOWS
 		# else
+		#	ifdef YUNI_OS_MAC
+		sem_wait(pSemaphore);
+		#	else
 		sem_wait(& pSemaphore);
+		#	endif
 		# endif
 		# endif
 	}
@@ -43,8 +25,13 @@ namespace Yuni
 		# ifndef YUNI_NO_THREAD_SAFE
 		# ifdef YUNI_OS_WINDOWS
 		# else
+		#	ifdef YUNI_OS_MAC
+		for (uint i = 0; i != n; ++i)
+			sem_wait(pSemaphore);
+		#	else
 		for (uint i = 0; i != n; ++i)
 			sem_wait(& pSemaphore);
+		#	endif
 		# endif
 		# endif
 	}
@@ -55,7 +42,11 @@ namespace Yuni
 		# ifndef YUNI_NO_THREAD_SAFE
 		# ifdef YUNI_OS_WINDOWS
 		# else
+		#	ifdef YUNI_OS_MAC
+		sem_post(pSemaphore);
+		#	else
 		sem_post(& pSemaphore);
+		#	endif
 		# endif
 		# endif
 	}
@@ -66,8 +57,13 @@ namespace Yuni
 		# ifndef YUNI_NO_THREAD_SAFE
 		# ifdef YUNI_OS_WINDOWS
 		# else
+		#	ifdef YUNI_OS_MAC
+		for (uint i = 0; i != n; ++i)
+			sem_post(pSemaphore);
+		#	else
 		for (uint i = 0; i != n; ++i)
 			sem_post(& pSemaphore);
+		#	endif
 		# endif
 		# endif
 	}
