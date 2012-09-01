@@ -586,6 +586,11 @@ set(SRC_THREADS
 		thread/mutex.hxx
 		thread/thread.h
 		thread/thread.hxx
+		thread/semaphore.h
+		thread/semaphore.hxx
+		thread/rwmutex.h
+		thread/rwmutex.hxx
+		thread/rwmutex.cpp
 		thread/id.h
 		thread/id.cpp
 		thread/thread.cpp
