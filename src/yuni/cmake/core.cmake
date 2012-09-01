@@ -588,6 +588,7 @@ set(SRC_THREADS
 		thread/thread.hxx
 		thread/semaphore.h
 		thread/semaphore.hxx
+		thread/semaphore.cpp
 		thread/rwmutex.h
 		thread/rwmutex.hxx
 		thread/rwmutex.cpp

@@ -72,7 +72,11 @@ namespace Yuni
 		# ifdef YUNI_OS_WINDOWS
 		# else
 		//! Pthread semaphore
+		#	ifdef YUNI_OS_MAC
+		::sem_t* pSemaphore;
+		#	else
 		::sem_t pSemaphore;
+		#	endif
 		# endif
 		# endif
 
