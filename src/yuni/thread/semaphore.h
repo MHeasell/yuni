@@ -3,7 +3,7 @@
 
 # include "../yuni.h"
 # ifndef YUNI_NO_THREAD_SAFE
-#	include "../include/semaphore.h" // unix
+#	include <semaphore.h> // unix
 #	ifdef YUNI_OS_WINDOWS
 #		include "../core/system/windows.hdr.h"
 # 	endif
