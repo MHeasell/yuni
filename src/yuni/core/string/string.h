@@ -1989,7 +1989,6 @@ namespace Yuni
 		void decalOffset(Size count);
 
 	private:
-
 		/*!
 		** \brief Set the string from a sequence of escaped characters (O(N))
 		**

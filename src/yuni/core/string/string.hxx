@@ -1301,12 +1301,11 @@ namespace Yuni
 	inline void
 	CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::removeLast()
 	{
-		YUNI_STATIC_ASSERT(!adapter, CString_Adapter_ReadOnly);
 		if (AncestorType::size != 0)
 		{
 			--(AncestorType::size);
 			if (zeroTerminated)
-				AncestorType::data[AncestorType::size] = Char();
+				Yuni::Private::CStringImpl::FinalZero<adapter>::Set(AncestorType::data, AncestorType::size);
 		}
 	}
 
@@ -1315,15 +1314,10 @@ namespace Yuni
 	inline void
 	CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::removeTrailingSlash()
 	{
-		YUNI_STATIC_ASSERT(!adapter, CString_Adapter_ReadOnly);
 		if (AncestorType::size != 0)
 		{
 			if (('/' == AncestorType::data[AncestorType::size - 1] || '\\' == AncestorType::data[AncestorType::size - 1]))
-			{
-				--AncestorType::size;
-				if (zeroTerminated)
-					AncestorType::data[AncestorType::size] = Char();
-			}
+				resize(AncestorType::size - 1);
 		}
 	}
 
@@ -1337,13 +1331,13 @@ namespace Yuni
 		{
 			AncestorType::size -= n;
 			if (zeroTerminated)
-				AncestorType::data[AncestorType::size] = Char();
+				Yuni::Private::CStringImpl::FinalZero<adapter>::Set(AncestorType::data, AncestorType::size);
 		}
 		else
 		{
 			AncestorType::size = 0;
 			if (zeroTerminated && AncestorType::capacity)
-				AncestorType::data[0] = Char();
+				Yuni::Private::CStringImpl::FinalZero<adapter>::Set(AncestorType::data, 0);
 		}
 	}
 
@@ -2522,7 +2516,7 @@ namespace Yuni
 		}
 		// Zero-Terminated cstrs
 		if (!adapter && zeroTerminated)
-			AncestorType::data[AncestorType::size] = Char();
+			Yuni::Private::CStringImpl::FinalZero<adapter>::Set(AncestorType::data, AncestorType::size);
 	}
 
 
@@ -2551,7 +2545,7 @@ namespace Yuni
 		while (AncestorType::size > 0 && AncestorType::data[AncestorType::size - 1] == c)
 			--AncestorType::size;
 		if (zeroTerminated)
-			AncestorType::data[AncestorType::size] = Char();
+			Yuni::Private::CStringImpl::FinalZero<adapter>::Set(AncestorType::data, AncestorType::size);
 	}
 
 
@@ -2609,7 +2603,7 @@ namespace Yuni
 		// The const_cast is only here to make it compile when the string
 		// is an adapter
 		if (!adapter && zeroTerminated)
-			const_cast<char*>(AncestorType::data)[AncestorType::size] = Char();
+			Yuni::Private::CStringImpl::FinalZero<adapter>::Set(AncestorType::data, AncestorType::size);
 	}
 
 
