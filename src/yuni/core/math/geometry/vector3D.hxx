@@ -16,7 +16,7 @@ namespace Yuni
 
 	template<typename T>
 	inline Vector3D<T>::Vector3D()
-		:x(), y(), z()
+		:x(0), y(0), z(0)
 	{}
 
 	template<typename T>
