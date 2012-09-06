@@ -115,7 +115,7 @@ namespace File
 		** \param mode The open mode to use
 		** \return True if the operation succeeded, false otherwise
 		*/
-		bool open(const AnyString& filename, const int mode = OpenMode::read);
+		bool open(const AnyString& filename, int mode = OpenMode::read);
 
 		/*!
 		** \brief Open a file for writing
