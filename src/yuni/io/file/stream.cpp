@@ -77,7 +77,7 @@ namespace File
 		// fopen should used O_CLOEXEC as one of the option. However, at the current
 		// state, not all operating systems do that.
 		// So we have to do it by ourselves with open and fdopen.
-		int flag = O_CLOEXEC;
+		/*int flag = O_CLOEXEC;
 		if (0 != (mode & OpenMode::read) && 0 != (mode & OpenMode::write))
 			flag |= O_RDWR;
 		else if (0 != (mode & OpenMode::read))
@@ -97,8 +97,8 @@ namespace File
 		if (fd < 0) // error
 			pFd = nullptr;
 		else
-			pFd = ::fdopen(fd, OpenMode::ToCString(mode));
-		// pFd = ::fopen(filename.c_str(), OpenMode::ToCString(mode));
+			pFd = ::fdopen(fd, OpenMode::ToCString(mode));*/
+		pFd = ::fopen(filename.c_str(), OpenMode::ToCString(mode));
 		# endif
 
 		return (NULL != pFd);
