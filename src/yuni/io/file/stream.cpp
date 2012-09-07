@@ -77,7 +77,7 @@ namespace File
 		// fopen should used O_CLOEXEC as one of the option. However, at the current
 		// state, not all operating systems do that.
 		// So we have to do it by ourselves with open and fdopen.
-		int flag = O_SYMLINK | O_CLOEXEC;
+		int flag = O_CLOEXEC;
 		if (0 != (mode & OpenMode::read) && 0 != (mode & OpenMode::write))
 			flag |= O_RDWR;
 		else if (0 != (mode & OpenMode::read))
