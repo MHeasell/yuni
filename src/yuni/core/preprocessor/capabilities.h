@@ -23,6 +23,8 @@
 **
 ** - Unixes
 ** YUNI_OS_UNIX
+** - Linux
+** YUNI_OS_LINUX
 **
 ** - MacOS
 ** YUNI_OS_MACOS or YUNI_OS_MAC or YUNI_OS_DARWIN
