@@ -47,6 +47,19 @@ namespace Variant
 	}
 
 
+	template<class T> inline bool IDataHolder::to(T& out) const
+	{
+		DataConverter<T> dc;
+		if (convertUsing(dc))
+		{
+			out = dc.result;
+			return true;
+		}
+		out = T();
+		return false;
+	}
+
+
 	inline void IDataHolder::addRef() const
 	{
 		ThreadingPolicy::MutexLocker locker(*this);

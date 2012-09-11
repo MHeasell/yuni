@@ -143,6 +143,9 @@ namespace Variant
 	}; // class Data
 
 
+
+
+
 } // namespace Variant
 } // namespace Private
 } // namespace Yuni
