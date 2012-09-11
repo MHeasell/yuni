@@ -1689,68 +1689,83 @@ namespace Yuni
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
-	inline void
+	inline uint
 	CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::replace(char from, char to)
 	{
 		YUNI_STATIC_ASSERT(!adapter, CString_Adapter_ReadOnly);
+		uint count = 0;
 		for (Size i = 0; i != AncestorType::size; ++i)
 		{
 			if (from == AncestorType::data[i])
+			{
 				AncestorType::data[i] = to;
+				++count;
+			}
 		}
+		return 0;
 	}
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
-	inline void
+	inline uint
 	CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::ireplace(char from, char to)
 	{
 		YUNI_STATIC_ASSERT(!adapter, CString_Adapter_ReadOnly);
+		uint count = 0;
 		from = static_cast<char>(ToLower(from));
 		for (Size i = 0; i != AncestorType::size; ++i)
 		{
 			if (from == AncestorType::data[i])
+			{
 				AncestorType::data[i] = to;
+				++count;
+			}
 		}
+		return count;
 	}
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
-	inline void
+	inline uint
 	CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::replace(Size offset, char from, char to)
 	{
 		YUNI_STATIC_ASSERT(!adapter, CString_Adapter_ReadOnly);
+		uint count = 0;
 		for (Size i = offset; i != AncestorType::size; ++i)
 		{
 			if (from == AncestorType::data[i])
+			{
 				AncestorType::data[i] = to;
+				++count;
+			}
 		}
+		return count;
 	}
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class StringT1, class StringT2>
-	inline void
+	inline uint
 	CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::replace(const StringT1& from, const StringT2& to)
 	{
 		YUNI_STATIC_ASSERT(!adapter, CString_Adapter_ReadOnly);
-		replace<StringT1, StringT2>(0, from, to);
+		return replace<StringT1, StringT2>(0, from, to);
 	}
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class StringT1, class StringT2>
-	inline void
+	inline uint
 	CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::ireplace(const StringT1& from, const StringT2& to)
 	{
 		YUNI_STATIC_ASSERT(!adapter, CString_Adapter_ReadOnly);
-		ireplace<StringT1, StringT2>(0, from, to);
+		return ireplace<StringT1, StringT2>(0, from, to);
 	}
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class StringT1, class StringT2>
-	void
+	uint
 	CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::replace(Size offset, const StringT1& from, const StringT2& to)
 	{
 		YUNI_STATIC_ASSERT(!adapter, CString_Adapter_ReadOnly);
@@ -1759,6 +1774,7 @@ namespace Yuni
 		YUNI_STATIC_ASSERT(Traits::Length<StringT1>::valid,  CString_InvalidTypeForBufferSize1);
 		YUNI_STATIC_ASSERT(Traits::Length<StringT2>::valid,  CString_InvalidTypeForBufferSize2);
 
+		uint count = 0;
 		Size lenfrom = Traits::Length<StringT1,Size>::Value(from);
 		if (lenfrom && offset < AncestorType::size)
 		{
@@ -1768,19 +1784,21 @@ namespace Yuni
 			{
 				pos = find(from, offset);
 				if (pos == npos)
-					return;
+					return count;
 				erase(pos, lenfrom);
 				insert(pos, to);
 				offset = pos + lento;
+				++count;
 			}
 			while (offset < AncestorType::size);
 		}
+		return count;
 	}
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	template<class StringT1, class StringT2>
-	void
+	uint
 	CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::ireplace(Size offset, const StringT1& from, const StringT2& to)
 	{
 		YUNI_STATIC_ASSERT(!adapter, CString_Adapter_ReadOnly);
@@ -1790,6 +1808,7 @@ namespace Yuni
 		YUNI_STATIC_ASSERT(Traits::Length<StringT2>::valid,  CString_InvalidTypeForBufferSize2);
 
 		Size lenfrom = Traits::Length<StringT1,Size>::Value(from);
+		uint count = 0;
 		if (lenfrom && offset < AncestorType::size)
 		{
 			Size lento = Traits::Length<StringT2,Size>::Value(to);
@@ -1798,27 +1817,34 @@ namespace Yuni
 			{
 				pos = ifind(from, offset);
 				if (pos == npos)
-					return;
+					return count;
 				erase(pos, lenfrom);
 				insert(pos, to);
 				offset = pos + lento;
+				++count;
 			}
 			while (offset < AncestorType::size);
 		}
+		return count;
 	}
 
 
 	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
-	inline void
+	inline uint
 	CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::ireplace(Size offset, char from, char to)
 	{
 		YUNI_STATIC_ASSERT(!adapter, CString_Adapter_ReadOnly);
+		uint count = 0;
 		from = static_cast<char>(ToLower(from));
 		for (Size i = offset; i < AncestorType::size; ++i)
 		{
 			if (from == AncestorType::data[i])
+			{
 				AncestorType::data[i] = to;
+				++count;
+			}
 		}
+		return count;
 	}
 
 
