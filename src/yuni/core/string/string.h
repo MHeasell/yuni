@@ -1348,9 +1348,10 @@ namespace Yuni
 		**
 		** \param from The string to find
 		** \param to   The string to replace with
+		** \return The number  the number of replacements performed
 		*/
 		template<class StringT1, class StringT2>
-		void replace(const StringT1& from, const StringT2& to);
+		uint replace(const StringT1& from, const StringT2& to);
 
 		/*!
 		** \brief Replace all occurrences of a string by another one
@@ -1358,17 +1359,19 @@ namespace Yuni
 		** \param offset The offset where to start from
 		** \param from The string to find
 		** \param to   The string to replace with
+		** \return The number  the number of replacements performed
 		*/
 		template<class StringT1, class StringT2>
-		void replace(Size offset, const StringT1& from, const StringT2& to);
+		uint replace(Size offset, const StringT1& from, const StringT2& to);
 
 		/*!
 		** \brief Replace all occurrences of a given char by another one
 		**
 		** \param from The character to search
 		** \param to   The replacement
+		** \return The number  the number of replacements performed
 		*/
-		void replace(char from, char to);
+		uint replace(char from, char to);
 
 		/*!
 		** \brief Replace all occurrences of a given char by another one
@@ -1376,16 +1379,18 @@ namespace Yuni
 		** \param offset The offset where to start from
 		** \param from The character to search
 		** \param to   The replacement
+		** \return The number  the number of replacements performed
 		*/
-		void replace(Size offset, char from, char to);
+		uint replace(Size offset, char from, char to);
 
 		/*!
 		** \brief Replace all occurrences of a given char by another one (case insensitive)
 		**
 		** \param from The character to search
 		** \param to   The replacement
+		** \return The number  the number of replacements performed
 		*/
-		void ireplace(char from, char to);
+		uint ireplace(char from, char to);
 
 		/*!
 		** \brief Replace all occurrences of a given char by another one (case insensitive)
@@ -1393,17 +1398,19 @@ namespace Yuni
 		** \param offset The offset where to start from
 		** \param from The character to search
 		** \param to   The replacement
+		** \return The number  the number of replacements performed
 		*/
-		void ireplace(Size offset, char from, char to);
+		uint ireplace(Size offset, char from, char to);
 
 		/*!
 		** \brief Replace all occurrences of a string by another one (case insensitive)
 		**
 		** \param from The string to find
 		** \param to   The string to replace with
+		** \return The number  the number of replacements performed
 		*/
 		template<class StringT1, class StringT2>
-		void ireplace(const StringT1& from, const StringT2& to);
+		uint ireplace(const StringT1& from, const StringT2& to);
 
 		/*!
 		** \brief Replace all occurrences of a string by another one (case insensitive)
@@ -1411,9 +1418,10 @@ namespace Yuni
 		** \param offset The offset where to start from
 		** \param from The string to find
 		** \param to   The string to replace with
+		** \return The number  the number of replacements performed
 		*/
 		template<class StringT1, class StringT2>
-		void ireplace(Size offset, const StringT1& from, const StringT2& to);
+		uint ireplace(Size offset, const StringT1& from, const StringT2& to);
 
 		/*!
 		** \brief Remove the 'n' first characters
