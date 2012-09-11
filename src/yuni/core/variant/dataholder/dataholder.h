@@ -281,7 +281,7 @@ namespace Variant
 	{
 		static bool Value(const From& from, String& to)
 		{
-			to += from;
+			to.append(from);
 			return true;
 		}
 	};
