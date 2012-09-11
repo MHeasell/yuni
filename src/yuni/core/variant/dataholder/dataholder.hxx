@@ -25,20 +25,6 @@ namespace Variant
 	};
 
 
-	/*!
-	** \brief Specialization for anything to String.
-	*/
-	template<class W>
-	struct Converter<W, String>
-	{
-		static bool Value(const W& from, String& to)
-		{
-			to.append(from);
-			return true;
-		}
-	};
-
-
 	template<class T> inline T IDataHolder::to() const
 	{
 		DataConverter<T> dc;
