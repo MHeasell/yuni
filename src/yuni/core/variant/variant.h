@@ -29,8 +29,14 @@ namespace Yuni
 	** \code
 	** Variant v = 12;
 	**
+	** // for direct conversions, without checking
 	** std::cout << v.to<float>() << std::endl;
-	** std::cout << v.to<String>() << std::endl;
+	** // with conversion checking
+	** String s;
+	** if (v.to(s))
+	** 	std::cout << s << std::endl;
+	** else
+	** 	std::cout << "impossible to converter the variant into a string" << std::endl;
 	** \endcode
 	**
 	** \ingroup Core
@@ -49,6 +55,30 @@ namespace Yuni
 
 		//! Data holder
 		typedef Private::Variant::IDataHolder  IDataHolder;
+
+		enum InnerType
+		{
+			//! Nil / Not assigned
+			typeNil,
+			//! Bool
+			typeBool,
+			//! char
+			typeChar,
+			//! sint32
+			typeInt32,
+			//! sint64
+			typeInt64,
+			//! uint32
+			typeUInt32,
+			//! uint64
+			typeUInt64,
+			//! string
+			typeString,
+			//! struct, with members
+			typeClass,
+			//! array of variants
+			typeArray
+		};
 
 	public:
 		//! \name Constructors
@@ -138,10 +168,33 @@ namespace Yuni
 
 		//! \name Information methods
 		//@{
-		//! Returns true if the Variant is empty.
+		/*!
+		** \brief Get the type held by the inner value
+		*/
+		InnerType type() const;
+		/*!
+		** \brief Returns true if the Variant is empty.
+		*/
 		bool empty() const;
-		//! Get if empty
+		/*!
+		** \brief Get if empty
+		*/
 		bool isnil() const;
+		//@}
+
+
+		//! \name Retrieval methods
+		//@{
+		/*!
+		** \brief Retrieve the inner value into a given type
+		** \return True if the conversion succeeded, false otherwise
+		*/
+		template<class T> bool to(T& out) const;
+
+		/*!
+		** \brief Retrieve the inner value into a given type
+		*/
+		template<class T> T to() const;
 		//@}
 
 
@@ -179,12 +232,6 @@ namespace Yuni
 		Variant operator () (const String& method, const Variant& a1, const Variant& a2, const Variant& a3);
 		//! Invoke method with 4 parameters
 		Variant operator () (const String& method, const Variant& a1, const Variant& a2, const Variant& a3, const Variant& a4);
-		//@}
-
-
-		//! \name Retrieval methods
-		//@{
-		template<class T> T to() const;
 		//@}
 
 

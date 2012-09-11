@@ -60,13 +60,15 @@ namespace Yuni
 	template<class T>
 	inline void Variant::add(const T& value)
 	{
-		if (!(!pData))
+		if (!pData)
+		{
+			assign(value);
+		}
+		else
 		{
 			deepCopyIfNonUnique();
 			pData->add(value);
 		}
-		else
-			assign(value);
 	}
 
 
@@ -124,6 +126,16 @@ namespace Yuni
 	inline T Variant::to() const
 	{
 		return (!(!pData)) ? pData->to<T>() : T();
+	}
+
+
+	template<class T>
+	inline bool Variant::to(T& out) const
+	{
+		if (!(!pData))
+			return pData->to(out);
+		out = T();
+		return false;
 	}
 
 
@@ -248,7 +260,7 @@ inline Yuni::Variant operator / (const Yuni::Variant& lhs, const Yuni::Variant& 
 
 
 # define YUNI_VARIANT_OPERATOR(TYPE) \
-	inline Yuni::Variant operator + (TYPE lhs, const Yuni::Variant& rhs) \
+	/*inline Yuni::Variant operator + (TYPE lhs, const Yuni::Variant& rhs) \
 	{ \
 		Yuni::Variant a(lhs); \
 		a += rhs; \
@@ -271,7 +283,7 @@ inline Yuni::Variant operator / (const Yuni::Variant& lhs, const Yuni::Variant& 
 		Yuni::Variant a(lhs); \
 		a /= rhs; \
 		return a; \
-	} \
+	} */ \
 	\
 	\
 	inline Yuni::Variant operator + (const Yuni::Variant& lhs, TYPE rhs) \

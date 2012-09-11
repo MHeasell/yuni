@@ -39,6 +39,8 @@ namespace Variant
 
 		//! Converts the data to the type T.
 		template<class T> T to() const;
+		//! Converts the data to the type T.
+		template<class T> bool to(T& out) const;
 
 		/*!
 		** \brief Clear the inner content
@@ -270,6 +272,16 @@ namespace Variant
 				to += "(nil)";
 			else
 				to += from->to<String>();
+			return true;
+		}
+	};
+
+	template<class From>
+	struct Converter<From, String>
+	{
+		static bool Value(const From& from, String& to)
+		{
+			to += from;
 			return true;
 		}
 	};
