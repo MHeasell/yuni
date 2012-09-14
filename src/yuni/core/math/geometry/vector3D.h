@@ -62,6 +62,15 @@ namespace Yuni
 		static Vector3D CrossProduct(const Vector3D& p1, const Vector3D& p2);
 
 		/*!
+		** \brief Calculate whether two vectors are colinear
+		**
+		** \param p1 The first vector
+		** \param p2 The second vector
+		** \param ignoreDirection True to accept colinearity with opposite directions
+		*/
+		static bool AreColinear(const Vector3D& p1, const Vector3D& p2, bool ignoreDirection = true);
+
+		/*!
 		** \brief Compute the angle between two arbitrary vectors
 		**
 		** \param p1 The first vector

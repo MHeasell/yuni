@@ -227,6 +227,16 @@ namespace Yuni
 	}
 
 	template<typename T>
+	inline bool Vector3D<T>::AreColinear(const Vector3D& p1, const Vector3D& p2, bool ignoreDirection)
+	{
+		T value = DotProduct(p1, p2) / (p1.magnitude() * p2.magnitude());
+		bool colinear = (value > (1. - YUNI_EPSILON));
+		if (ignoreDirection)
+			colinear = colinear || (value < YUNI_EPSILON - 1.);
+		return colinear;
+	}
+
+	template<typename T>
 	inline T Vector3D<T>::Angle(const Vector3D<T>& p1, const Vector3D<T>& p2)
 	{
 		// By definition: cos(alpha) = (p1.p2)/(|p1|.|p2|)
