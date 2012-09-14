@@ -4,8 +4,8 @@
 #ifndef YUNI_OS_WINDOWS
 # include <unistd.h>
 # include <stdio.h>
-# include <sys/wait.h>
 # include <signal.h>
+# include <sys/wait.h>
 # include <fcntl.h>
 #else
 #endif
@@ -315,6 +315,7 @@ namespace Process
 		virtual void onKill()
 		{
 			bool killed = false;
+			# ifndef YUNI_OS_WINDOWS
 			// try to kill the attached child process if any
 			{
 				auto envptr = pProcess.pEnv;
@@ -329,6 +330,7 @@ namespace Process
 					killed = true;
 				}
 			}
+			# endif
 			auto endTime = Yuni::DateTime::Now();
 			theProcessHasStopped(killed, -127, endTime);
 		}
