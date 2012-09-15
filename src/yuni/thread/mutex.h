@@ -45,9 +45,9 @@ namespace Yuni
 		*/
 		Mutex();
 		/*!
-		** \brief Default constructor
+		** \brief Default constructor, with recursive option
 		*/
-		//explicit Mutex(const bool recursive);
+		explicit Mutex(bool recursive);
 		/*!
 		** \brief Copy constructor
 		**
