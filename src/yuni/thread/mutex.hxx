@@ -38,8 +38,7 @@ namespace Yuni
 	}
 
 
-	/*
-	inline Mutex::Mutex(const bool recursive)
+	inline Mutex::Mutex(bool recursive)
 	{
 		# ifndef YUNI_NO_THREAD_SAFE
 		if (recursive)
@@ -60,7 +59,6 @@ namespace Yuni
 		(void) recursive;
 		# endif
 	}
-	*/
 
 
 	inline Mutex::~Mutex()
