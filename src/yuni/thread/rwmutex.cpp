@@ -6,7 +6,7 @@ namespace Yuni
 {
 
 
-	inline void RWMutex::writeLock()
+	void RWMutex::writeLock()
 	{
 		# ifndef YUNI_NO_THREAD_SAFE
 		pMutex.lock();
@@ -16,7 +16,7 @@ namespace Yuni
 	}
 
 
-	inline void RWMutex::writeUnlock()
+	void RWMutex::writeUnlock()
 	{
 		# ifndef YUNI_NO_THREAD_SAFE
 		pMutex.lock();
