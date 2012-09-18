@@ -41,6 +41,25 @@ namespace Yuni
 	inline Mutex::Mutex(bool recursive)
 	{
 		# ifndef YUNI_NO_THREAD_SAFE
+		# ifdef YUNI_OS_WINDOWS
+		(void) recursive; // already recursive on Windows
+		enum
+		{
+			/*!
+			** \brief The spin count for the critical section object
+			**
+			** On single-processor systems, the spin count is ignored and the critical section
+			** spin count is set to 0 (zero). On multiprocessor systems, if the critical section
+			** is unavailable, the calling thread spinsdwSpinCount times before performing a
+			** wait operation on a semaphore associated with the critical section. If the critical
+			** section becomes free during the spin operation, the calling thread avoids the
+			** wait operation.
+			** \see http://msdn.microsoft.com/en-us/library/ms683476%28v=vs.85%29.aspx
+			*/
+			spinCount = 3000,
+		};
+		InitializeCriticalSectionAndSpinCount(&pSection, spinCount);
+		# else
 		if (recursive)
 		{
 			::pthread_mutexattr_t mutexattr;
@@ -55,6 +74,7 @@ namespace Yuni
 		}
 		else
 			::pthread_mutex_init(&pPthreadLock, NULL);
+		# endif
 		# else
 		(void) recursive;
 		# endif
