@@ -12,11 +12,15 @@ namespace QueueService
 
 	WaitingRoom::WaitingRoom() :
 		pJobCount(0)
-	{}
+	{
+		pMutexes = new Mutex[priorityCount];
+	}
 
 
 	WaitingRoom::~WaitingRoom()
-	{}
+	{
+		delete[] pMutexes;
+	}
 
 
 	void WaitingRoom::add(const Yuni::Job::IJob::Ptr& job)
