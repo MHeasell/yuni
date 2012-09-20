@@ -36,7 +36,7 @@ namespace CStringImpl
 	template<bool AdapterT>
 	struct FinalZero
 	{
-		static void Set(const char*, uint offset) {}
+		static void Set(const char*, uint) {}
 	};
 
 	template<>
