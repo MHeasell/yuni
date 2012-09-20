@@ -583,6 +583,7 @@ set(SRC_THREADS
 		thread/fwd.h
 		thread/pthread.h
 		thread/mutex.h
+		thread/mutex.cpp
 		thread/mutex.hxx
 		thread/thread.h
 		thread/thread.hxx

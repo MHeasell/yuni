@@ -89,7 +89,12 @@ namespace Yuni
 		#	ifdef YUNI_OS_MAC
 		sem_close(pSemaphore);
 		#	else
-		sem_destroy(& pSemaphore);
+		if (0 != sem_destroy(& pSemaphore))
+		{
+			std::cerr << "impossible to destroy a semaphore\n";
+			assert(false && "impossible to destroy a semaphore");
+			exit(-1);
+		}
 		#	endif
 		# endif
 		# endif
