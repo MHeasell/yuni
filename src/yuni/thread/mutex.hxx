@@ -1,111 +1,30 @@
 #ifndef __YUNI_THREADS_MUTEX_HXX__
 # define __YUNI_THREADS_MUTEX_HXX__
 
+# include <cassert>
+
 
 namespace Yuni
 {
 
-	inline Mutex::Mutex()
-	{
-		# ifndef YUNI_NO_THREAD_SAFE
-		# ifdef YUNI_OS_WINDOWS
-		enum
-		{
-			/*!
-			** \brief The spin count for the critical section object
-			**
-			** On single-processor systems, the spin count is ignored and the critical section
-			** spin count is set to 0 (zero). On multiprocessor systems, if the critical section
-			** is unavailable, the calling thread spinsdwSpinCount times before performing a
-			** wait operation on a semaphore associated with the critical section. If the critical
-			** section becomes free during the spin operation, the calling thread avoids the
-			** wait operation.
-			** \see http://msdn.microsoft.com/en-us/library/ms683476%28v=vs.85%29.aspx
-			*/
-			spinCount = 3000,
-		};
-		InitializeCriticalSectionAndSpinCount(&pSection, spinCount);
-		# else
-		#	ifndef NDEBUG
-		pthread_mutexattr_init(&pMutexAttr);
-		pthread_mutexattr_settype(&pMutexAttr, PTHREAD_MUTEX_ERRORCHECK);
-		::pthread_mutex_init(&pPthreadLock, &pMutexAttr);
-		#	else
-		::pthread_mutex_init(&pPthreadLock, NULL);
-		#	endif
-		# endif
-		# endif
-	}
 
-
-	inline Mutex::Mutex(bool recursive)
+	inline Mutex::Mutex(const Mutex& rhs)
 	{
-		# ifndef YUNI_NO_THREAD_SAFE
-		# ifdef YUNI_OS_WINDOWS
-		(void) recursive; // already recursive on Windows
-		enum
-		{
-			/*!
-			** \brief The spin count for the critical section object
-			**
-			** On single-processor systems, the spin count is ignored and the critical section
-			** spin count is set to 0 (zero). On multiprocessor systems, if the critical section
-			** is unavailable, the calling thread spinsdwSpinCount times before performing a
-			** wait operation on a semaphore associated with the critical section. If the critical
-			** section becomes free during the spin operation, the calling thread avoids the
-			** wait operation.
-			** \see http://msdn.microsoft.com/en-us/library/ms683476%28v=vs.85%29.aspx
-			*/
-			spinCount = 3000,
-		};
-		InitializeCriticalSectionAndSpinCount(&pSection, spinCount);
-		# else
-		if (recursive)
-		{
-			::pthread_mutexattr_t mutexattr;
-			::pthread_mutexattr_init(&mutexattr);
-			# if defined(YUNI_OS_DARWIN) || defined(YUNI_OS_FREEBSD) || defined(YUNI_OS_SOLARIS) || defined(YUNI_OS_SUNOS) || defined(YUNI_OS_HAIKU) || defined(YUNI_OS_CYGWIN)
-			::pthread_mutexattr_settype(&mutexattr, PTHREAD_MUTEX_RECURSIVE);
-			# else
-			::pthread_mutexattr_settype(&mutexattr, PTHREAD_MUTEX_RECURSIVE_NP);
-			# endif
-			::pthread_mutex_init(&pPthreadLock, &mutexattr);
-			::pthread_mutexattr_destroy(&mutexattr);
-		}
-		else
-			::pthread_mutex_init(&pPthreadLock, NULL);
-		# endif
-		# else
-		(void) recursive;
-		# endif
+		copy(rhs);
 	}
 
 
 	inline Mutex::~Mutex()
 	{
-		# ifndef YUNI_NO_THREAD_SAFE
-		# ifdef YUNI_OS_WINDOWS
-		DeleteCriticalSection(&pSection);
-		# else
-		pthread_mutex_destroy(&pPthreadLock);
-		#	ifndef NDEBUG
-		pthread_mutexattr_destroy(&pMutexAttr);
-		#	endif
-		# endif
-		# endif
+		destroy();
 	}
 
 
-
-	inline Mutex::Mutex(const Mutex&)
+	inline Mutex& Mutex::operator = (const Mutex& rhs)
 	{
-		// Do nothing on purpose
-	}
-
-
-	inline Mutex& Mutex::operator = (const Mutex&)
-	{
-		// Do nothing on purpose
+		// We will recreate the mutex
+		destroy();
+		copy(rhs);
 		return *this;
 	}
 
@@ -116,7 +35,7 @@ namespace Yuni
 		# ifdef YUNI_OS_WINDOWS
 		EnterCriticalSection(&pSection);
 		# else
-		pthread_mutex_lock(&pPthreadLock);
+		::pthread_mutex_lock(&pLock);
 		# endif
 		# endif
 	}
@@ -128,7 +47,7 @@ namespace Yuni
 		# ifdef YUNI_OS_WINDOWS
 		LeaveCriticalSection(&pSection);
 		# else
-		pthread_mutex_unlock(&pPthreadLock);
+		::pthread_mutex_unlock(&pLock);
 		# endif
 		# endif
 	}
@@ -138,15 +57,20 @@ namespace Yuni
 	# ifndef YUNI_OS_WINDOWS
 	inline pthread_mutex_t& Mutex::pthreadMutex()
 	{
-		return pPthreadLock;
+		return pLock;
+	}
+
+	inline const pthread_mutex_t& Mutex::pthreadMutex() const
+	{
+		return pLock;
 	}
 	# endif
 	# endif
 
 
 
-	inline MutexLocker::MutexLocker(Mutex& m)
-		:pMutex(m)
+	inline MutexLocker::MutexLocker(Mutex& m) :
+		pMutex(m)
 	{
 		m.lock();
 	}
