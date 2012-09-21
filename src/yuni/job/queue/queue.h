@@ -25,14 +25,14 @@ namespace Job
 		class SchedulerT = Scheduler::HighestPriorityFirst // The Scheduler Policy
 		>
 	class YUNI_DECL QueueService
-		:public Policy::ObjectLevelLockable<QueueService<SchedulerT> >
+		:public Policy::ObjectLevelLockableNotRecursive<QueueService<SchedulerT> >
 		,public SchedulerT
 	{
 	public:
 		//! QueueService
 		typedef QueueService<SchedulerT> QueueServiceType;
 		//! The threading policy
-		typedef Policy::ObjectLevelLockable<QueueServiceType> ThreadingPolicy;
+		typedef Policy::ObjectLevelLockableNotRecursive<QueueServiceType> ThreadingPolicy;
 		//! The most suitable smart pointer for the class
 		typedef SmartPtr<QueueServiceType> Ptr;
 
