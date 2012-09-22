@@ -7,6 +7,7 @@
 # include <signal.h>
 # include <sys/wait.h>
 # include <fcntl.h>
+# include <errno.h>
 #else
 #endif
 #include "../../datetime/timestamp.h"
@@ -87,13 +88,13 @@ namespace Process
 
 		bool launch()
 		{
-			auto envptr = pProcess.pEnv;
+			Yuni::Process::ProcessEnvironment::Ptr envptr = pProcess.pEnv;
 			if (!envptr)
 			{
 				assert(false && "Launching a new process with an invalid thread environment");
 				return false; // should never happen
 			}
-			auto& env = *envptr;
+			Yuni::Process::ProcessEnvironment& env = *envptr;
 
 			if (pProgram.empty())
 			{
@@ -218,7 +219,7 @@ namespace Process
 
 			# ifndef YUNI_OS_WINDOWS
 
-			auto stream = pProcess.pStream;
+			Yuni::Process::Stream::Ptr stream = pProcess.pStream;
 			bool hasStream = !(!stream);
 
 			enum {bufferSize = 4096 * 2};
@@ -229,8 +230,8 @@ namespace Process
 			{
 				// Read data from the standard output
 				// standard output
-				auto stdcoutsize = read(pData.infd[0], buffer,    bufferSize - 1);
-				auto stdcerrsize = read(pData.errd[0], buffererr, bufferSize - 1);
+				size_t stdcoutsize = read(pData.infd[0], buffer,    bufferSize - 1);
+				size_t stdcerrsize = read(pData.errd[0], buffererr, bufferSize - 1);
 
 				if (stdcoutsize > 0)
 				{
@@ -280,7 +281,7 @@ namespace Process
 			}
 			while (true);
 
-			auto endTime = Yuni::DateTime::Now();
+			sint64 endTime = Yuni::DateTime::Now();
 
 			// close all remaining fd
 			int ca = close(pData.infd[0]);
@@ -295,7 +296,7 @@ namespace Process
 
 			# else
 
-			auto endTime = Yuni::DateTime::Now();
+			sint64 endTime = Yuni::DateTime::Now();
 
 			# endif
 
@@ -318,10 +319,10 @@ namespace Process
 			# ifndef YUNI_OS_WINDOWS
 			// try to kill the attached child process if any
 			{
-				auto envptr = pProcess.pEnv;
+				Yuni::Process::ProcessEnvironment::Ptr envptr = pProcess.pEnv;
 				if (!envptr)
 					return;
-				auto& env = *envptr;
+				Yuni::Process::ProcessEnvironment& env = *envptr;
 
 				MutexLocker locker(env.mutex);
 				if (env.processID > 0)
@@ -331,17 +332,17 @@ namespace Process
 				}
 			}
 			# endif
-			auto endTime = Yuni::DateTime::Now();
+			sint64 endTime = Yuni::DateTime::Now();
 			theProcessHasStopped(killed, -127, endTime);
 		}
 
 
 		void theProcessHasStopped(bool killed, int exitstatus, sint64 endTime)
 		{
-			auto envptr = pProcess.pEnv;
+			Yuni::Process::ProcessEnvironment::Ptr envptr = pProcess.pEnv;
 			if (!envptr)
 				return;
-			auto& env = *envptr;
+			Yuni::Process::ProcessEnvironment& env = *envptr;
 
 			// Making sure that the process ID is invalid
 			sint64 duration;
@@ -407,10 +408,10 @@ namespace Yuni
 
 	void Process::cancel()
 	{
-		auto envptr = pEnv;
+		ProcessEnvironment::Ptr envptr = pEnv;
 		if (!envptr)
 			return;
-		auto& env = *envptr;
+		ProcessEnvironment& env = *envptr;
 
 		env.mutex.lock();
 		if (0 == env.running)
@@ -432,13 +433,13 @@ namespace Yuni
 	bool Process::execute(uint timeout)
 	{
 		// new environment
-		auto envptr = pEnv;
+		ProcessEnvironment::Ptr envptr = pEnv;
 		if (!envptr)
 		{
 			envptr = new ProcessEnvironment();
 			pEnv = envptr;
 		}
-		auto& env = *envptr;
+		ProcessEnvironment& env = *envptr;
 
 		// The mutex will be unlocked by the new thread
 		env.mutex.lock();
@@ -464,7 +465,7 @@ namespace Yuni
 
 		// starting a new thread
 		// prepare commands
-		auto* newthread = new Yuni::Private::Process::SubProcess(*this);
+		Yuni::Private::Process::SubProcess* newthread = new Yuni::Private::Process::SubProcess(*this);
 		newthread->command(env.executable, env.arguments);
 		// keep somewhere
 		env.thread = newthread;
@@ -475,10 +476,10 @@ namespace Yuni
 
 	int Process::wait(sint64* duration)
 	{
-		auto envptr = pEnv;
+		ProcessEnvironment::Ptr envptr = pEnv;
 		if (!envptr)
 			return 0;
-		auto& env = *envptr;
+		ProcessEnvironment& env = *envptr;
 
 		// thread operation
 		{
@@ -585,7 +586,7 @@ namespace Yuni
 
 	bool Process::dispatchExecution(const Bind<void (const Callback&)>& dispatcher, uint timeout)
 	{
-		auto envptr = pEnv; // keeping a reference to the current env
+		ProcessEnvironment::Ptr envptr = pEnv; // keeping a reference to the current env
 		if (!envptr)
 		{
 			envptr = new ProcessEnvironment();
@@ -604,7 +605,7 @@ namespace Yuni
 		// The code is within a block to let the variable
 		// `runner` destroyed, thus to notify the end of the execution
 		// (via signal->notify())
-		auto* runner = new ExecutionHelper(*this, signal, result);
+		ExecutionHelper* runner = new ExecutionHelper(*this, signal, result);
 		{
 			Bind<bool ()>  callback;
 			callback.bind(runner, &ExecutionHelper::perform, timeout);
@@ -623,20 +624,20 @@ namespace Yuni
 
 	bool Process::running() const
 	{
-		auto envptr = pEnv;
+		ProcessEnvironment::Ptr envptr = pEnv;
 		return (!envptr) ? false : (envptr->running);
 	}
 
 
 	void Process::commandLine(const AnyString& cmd)
 	{
-		auto envptr = pEnv; // keeping a reference to the current env
+		ProcessEnvironment::Ptr envptr = pEnv; // keeping a reference to the current env
 		if (!envptr)
 		{
 			envptr = new ProcessEnvironment();
 			pEnv = envptr;
 		}
-		auto& env = *envptr;
+		ProcessEnvironment& env = *envptr;
 
 		MutexLocker locker(env.mutex);
 		env.executable.clear();
@@ -709,13 +710,13 @@ namespace Yuni
 
 	void Process::workingDirectory(const AnyString& directory)
 	{
-		auto envptr = pEnv; // keeping a reference to the current env
+		ProcessEnvironment::Ptr envptr = pEnv; // keeping a reference to the current env
 		if (!envptr)
 		{
 			envptr = new ProcessEnvironment();
 			pEnv = envptr;
 		}
-		auto& env = *envptr;
+		ProcessEnvironment& env = *envptr;
 
 		MutexLocker locker(env.mutex);
 		env.workingDirectory = directory;
@@ -724,10 +725,10 @@ namespace Yuni
 
 	String Process::workingDirectory() const
 	{
-		auto envptr = pEnv; // keeping a reference to the current env
+		ProcessEnvironment::Ptr envptr = pEnv; // keeping a reference to the current env
 		if (!envptr)
 			return nullptr;
-		auto& env = *envptr;
+		ProcessEnvironment& env = *envptr;
 		MutexLocker locker(env.mutex);
 		return env.workingDirectory;
 	}
@@ -735,10 +736,10 @@ namespace Yuni
 
 	bool Process::redirectToConsole() const
 	{
-		auto envptr = pEnv; // keeping a reference to the current env
+		ProcessEnvironment::Ptr envptr = pEnv; // keeping a reference to the current env
 		if (!envptr)
 			return true;
-		auto& env = *envptr;
+		ProcessEnvironment& env = *envptr;
 		MutexLocker locker(env.mutex);
 		return env.redirectToConsole;
 
@@ -747,7 +748,7 @@ namespace Yuni
 
 	void Process::redirectToConsole(bool flag)
 	{
-		auto envptr = pEnv; // keeping a reference to the current env
+		ProcessEnvironment::Ptr envptr = pEnv; // keeping a reference to the current env
 		if (!envptr)
 		{
 			if (flag)
@@ -756,7 +757,7 @@ namespace Yuni
 			envptr = new ProcessEnvironment();
 			pEnv = envptr;
 		}
-		auto& env = *envptr;
+		ProcessEnvironment& env = *envptr;
 
 		MutexLocker locker(env.mutex);
 		env.redirectToConsole = flag;
@@ -773,23 +774,23 @@ namespace Yuni
 
 	String Process::program() const
 	{
-		auto envptr = pEnv; // keeping a reference to the current env
+		ProcessEnvironment::Ptr envptr = pEnv; // keeping a reference to the current env
 		if (!envptr)
 			return nullptr;
-		auto& env = *envptr;
+		ProcessEnvironment& env = *envptr;
 		MutexLocker locker(env.mutex);
 		return env.executable;
 	}
 
 	void Process::program(const AnyString& prgm)
 	{
-		auto envptr = pEnv; // keeping a reference to the current env
+		ProcessEnvironment::Ptr envptr = pEnv; // keeping a reference to the current env
 		if (!envptr)
 		{
 			envptr = new ProcessEnvironment();
 			pEnv = envptr;
 		}
-		auto& env = *envptr;
+		ProcessEnvironment& env = *envptr;
 		MutexLocker locker(env.mutex);
 		env.executable = prgm;
 	}
@@ -797,10 +798,10 @@ namespace Yuni
 
 	void Process::argumentClear()
 	{
-		auto envptr = pEnv; // keeping a reference to the current env
+		ProcessEnvironment::Ptr envptr = pEnv; // keeping a reference to the current env
 		if (!envptr)
 			return;
-		auto& env = *envptr;
+		ProcessEnvironment& env = *envptr;
 		MutexLocker locker(env.mutex);
 		return env.arguments.clear();
 	}
@@ -808,13 +809,13 @@ namespace Yuni
 
 	void Process::argumentAdd(const AnyString& arg)
 	{
-		auto envptr = pEnv; // keeping a reference to the current env
+		ProcessEnvironment::Ptr envptr = pEnv; // keeping a reference to the current env
 		if (!envptr)
 		{
 			envptr = new ProcessEnvironment();
 			pEnv = envptr;
 		}
-		auto& env = *envptr;
+		ProcessEnvironment& env = *envptr;
 		MutexLocker locker(env.mutex);
 		env.arguments.push_back(arg);
 	}
