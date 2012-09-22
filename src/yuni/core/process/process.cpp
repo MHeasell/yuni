@@ -234,9 +234,11 @@ namespace Process
 			{
 				// Read data from the standard output
 				// standard output
-				size_t stdcoutsize = read(pData.infd[0], buffer,    bufferSize - 1);
-				size_t stdcerrsize = read(pData.errd[0], buffererr, bufferSize - 1);
+				ssize_t stdcoutsize = ::read(pData.infd[0], buffer,    bufferSize - 1);
+				ssize_t stdcerrsize = ::read(pData.errd[0], buffererr, bufferSize - 1);
 
+				assert(stdcoutsize < bufferSize);
+				assert(stdcerrsize < bufferSize);
 				if (stdcoutsize > 0)
 				{
 					buffer[stdcoutsize] = '\0';
