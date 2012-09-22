@@ -168,7 +168,8 @@ namespace Process
 				if (not env.workingDirectory.empty())
 				{
 					// ignoring return value
-					(void)::chdir(env.workingDirectory.c_str());
+					if (0 != chdir(env.workingDirectory.c_str()))
+						std::cerr << "invalid working directory: " << env.workingDirectory << std::endl;
 				}
 
 				// Should never returns
