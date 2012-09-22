@@ -166,7 +166,10 @@ namespace Process
 				signal(SIGCHLD, SIG_DFL);
 
 				if (not env.workingDirectory.empty())
-					chdir(env.workingDirectory.c_str());
+				{
+					// ignoring return value
+					(void)::chdir(env.workingDirectory.c_str());
+				}
 
 				// Should never returns
 				execvp(pProgram.c_str(), pArguments);

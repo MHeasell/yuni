@@ -24,6 +24,8 @@ namespace IO
 		errMemoryLimit,
 		//! It is impossible to overwrite an eisting file
 		errOverwriteNotAllowed,
+		//! Impossible to write
+		errWriteFailed,
 	};
 
 
