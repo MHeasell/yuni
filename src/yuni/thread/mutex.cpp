@@ -2,6 +2,7 @@
 #include "mutex.h"
 #include <cassert>
 #include <iostream>
+#include <cerrno>
 
 
 namespace Yuni
@@ -111,6 +112,8 @@ namespace Yuni
 		}
 		::pthread_mutex_init(& pLock, &pAttr);
 		# endif
+		# else
+		(void) rhs; // unused
 		# endif // no thread safe
 	}
 
