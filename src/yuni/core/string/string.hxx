@@ -492,7 +492,7 @@ namespace Yuni
 		if (!adapter)
 			AncestorType::assign(Traits::CString<StringT>::Perform(str) + offset, size);
 		else
-			adapt(Traits::CString<StringT>::Perform(str), size);
+			adapt(Traits::CString<StringT>::Perform(str) + offset, size);
 	}
 
 
