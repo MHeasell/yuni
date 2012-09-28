@@ -41,13 +41,12 @@ namespace Yuni
 		//! \name Constructor & Destructor
 		//@{
 		/*!
-		** \brief Default constructor, non recursive by default
+		** \brief Default constructor
+		**
+		** Recursive by default to keep homogeneous behavior between
+		** platforms.
 		*/
-		Mutex();
-		/*!
-		** \brief Default constructor, with recursive option
-		*/
-		explicit Mutex(bool recursive);
+		explicit Mutex(bool recursive = true);
 		/*!
 		** \brief Copy constructor
 		**
