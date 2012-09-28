@@ -27,19 +27,6 @@ namespace Yuni
 
 
 
-	Mutex::Mutex()
-	{
-		# ifndef YUNI_NO_THREAD_SAFE
-		# ifdef YUNI_OS_WINDOWS
-		InitializeCriticalSectionAndSpinCount(&pSection, spinCount);
-		# else
-		::pthread_mutexattr_init(&pAttr);
-		::pthread_mutex_init(&pLock, &pAttr);
-		# endif
-		# endif
-	}
-
-
 	Mutex::Mutex(bool recursive)
 	{
 		# ifndef YUNI_NO_THREAD_SAFE
