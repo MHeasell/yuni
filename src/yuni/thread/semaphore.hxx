@@ -5,6 +5,12 @@
 namespace Yuni
 {
 
+	inline uint Semaphore::maxReaders() const
+	{
+		return pMaxReaders;
+	}
+
+
 	inline void Semaphore::acquire()
 	{
 		# ifndef YUNI_NO_THREAD_SAFE
@@ -82,12 +88,6 @@ namespace Yuni
 		return *this;
 	}
 
-
-	inline Semaphore& Semaphore::operator = (const Semaphore&)
-	{
-		// Do nothing on purpose
-		return *this;
-	}
 
 
 

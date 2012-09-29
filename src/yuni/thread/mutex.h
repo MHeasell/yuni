@@ -95,9 +95,9 @@ namespace Yuni
 
 	private:
 		//! Destroy the current mutex
-		void destroy();
+		inline void destroy();
 		//! Create the mutex with settings from another mutex
-		void copy(const Mutex& rhs);
+		inline void copy(const Mutex& rhs);
 
 	private:
 		# ifndef YUNI_NO_THREAD_SAFE

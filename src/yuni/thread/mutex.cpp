@@ -26,32 +26,7 @@ namespace Yuni
 
 
 
-
-	Mutex::Mutex(bool recursive)
-	{
-		# ifndef YUNI_NO_THREAD_SAFE
-		# ifdef YUNI_OS_WINDOWS
-		(void) recursive; // already recursive on Windows
-		InitializeCriticalSectionAndSpinCount(&pSection, spinCount);
-		# else
-		::pthread_mutexattr_init(&pAttr);
-		if (recursive)
-		{
-			# if defined(YUNI_OS_DARWIN) || defined(YUNI_OS_FREEBSD) || defined(YUNI_OS_SOLARIS) || defined(YUNI_OS_SUNOS) || defined(YUNI_OS_HAIKU) || defined(YUNI_OS_CYGWIN)
-			::pthread_mutexattr_settype(&pAttr, PTHREAD_MUTEX_RECURSIVE);
-			# else
-			::pthread_mutexattr_settype(&pAttr, PTHREAD_MUTEX_RECURSIVE_NP);
-			# endif
-		}
-		::pthread_mutex_init(&pLock, &pAttr);
-		# endif
-		# else
-		(void) recursive;
-		# endif
-	}
-
-
-	void Mutex::destroy()
+	inline void Mutex::destroy()
 	{
 		# ifndef YUNI_NO_THREAD_SAFE
 		# ifdef YUNI_OS_WINDOWS
@@ -78,7 +53,7 @@ namespace Yuni
 	}
 
 
-	void Mutex::copy(const Mutex& rhs)
+	inline void Mutex::copy(const Mutex& rhs)
 	{
 		# ifndef YUNI_NO_THREAD_SAFE
 		# ifdef YUNI_OS_WINDOWS
@@ -103,6 +78,54 @@ namespace Yuni
 		(void) rhs; // unused
 		# endif // no thread safe
 	}
+
+
+
+	Mutex::Mutex(const Mutex& rhs)
+	{
+		copy(rhs);
+	}
+
+
+	Mutex::~Mutex()
+	{
+		destroy();
+	}
+
+
+	Mutex::Mutex(bool recursive)
+	{
+		# ifndef YUNI_NO_THREAD_SAFE
+		# ifdef YUNI_OS_WINDOWS
+		(void) recursive; // already recursive on Windows
+		InitializeCriticalSectionAndSpinCount(&pSection, spinCount);
+		# else
+		::pthread_mutexattr_init(&pAttr);
+		if (recursive)
+		{
+			# if defined(YUNI_OS_DARWIN) || defined(YUNI_OS_FREEBSD) || defined(YUNI_OS_SOLARIS) || defined(YUNI_OS_SUNOS) || defined(YUNI_OS_HAIKU) || defined(YUNI_OS_CYGWIN)
+			::pthread_mutexattr_settype(&pAttr, PTHREAD_MUTEX_RECURSIVE);
+			# else
+			::pthread_mutexattr_settype(&pAttr, PTHREAD_MUTEX_RECURSIVE_NP);
+			# endif
+		}
+		::pthread_mutex_init(&pLock, &pAttr);
+		# endif
+		# else
+		(void) recursive;
+		# endif
+	}
+
+
+	Mutex& Mutex::operator = (const Mutex& rhs)
+	{
+		// We will recreate the mutex
+		destroy();
+		copy(rhs);
+		return *this;
+	}
+
+
 
 
 

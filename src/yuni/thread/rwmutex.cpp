@@ -10,7 +10,7 @@ namespace Yuni
 	{
 		# ifndef YUNI_NO_THREAD_SAFE
 		pMutex.lock();
-		pSemaphore.acquire(pMaxReaders);
+		pSemaphore.acquire(pSemaphore.maxReaders());
 		pMutex.unlock();
 		# endif
 	}
@@ -20,7 +20,7 @@ namespace Yuni
 	{
 		# ifndef YUNI_NO_THREAD_SAFE
 		pMutex.lock();
-		pSemaphore.release(pMaxReaders);
+		pSemaphore.release(pSemaphore.maxReaders());
 		pMutex.unlock();
 		# endif
 	}
@@ -29,5 +29,4 @@ namespace Yuni
 
 
 } // namespace Yuni
-
 

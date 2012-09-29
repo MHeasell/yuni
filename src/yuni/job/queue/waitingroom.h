@@ -100,7 +100,7 @@ namespace QueueService
 		//! List of waiting jobs by priority
 		LinkedList<Yuni::Job::IJob::Ptr>  pJobs[priorityCount];
 		//! Mutexes, by priority to reduce congestion
-		Mutex* pMutexes; // [priorityCount];
+		Mutex pMutexes[priorityCount];
 
 	}; // class WaitingRoom
 

@@ -8,25 +8,6 @@ namespace Yuni
 {
 
 
-	inline Mutex::Mutex(const Mutex& rhs)
-	{
-		copy(rhs);
-	}
-
-
-	inline Mutex::~Mutex()
-	{
-		destroy();
-	}
-
-
-	inline Mutex& Mutex::operator = (const Mutex& rhs)
-	{
-		// We will recreate the mutex
-		destroy();
-		copy(rhs);
-		return *this;
-	}
 
 
 	inline void Mutex::lock()

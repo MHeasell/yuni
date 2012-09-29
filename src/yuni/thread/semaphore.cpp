@@ -17,7 +17,8 @@
 namespace Yuni
 {
 
-	Semaphore::Semaphore(uint readers)
+	// inline for keeping the method local
+	inline void Semaphore::initialize(uint readers)
 	{
 		# ifndef YUNI_NO_THREAD_SAFE
 		# ifdef YUNI_OS_WINDOWS
@@ -81,7 +82,8 @@ namespace Yuni
 	}
 
 
-	Semaphore::~Semaphore()
+	// inline for keeping the method local
+	inline void Semaphore::finalize()
 	{
 		# ifndef YUNI_NO_THREAD_SAFE
 		# ifdef YUNI_OS_WINDOWS
@@ -99,6 +101,41 @@ namespace Yuni
 		# endif
 		# endif
 	}
+
+
+
+
+	Semaphore::Semaphore(uint readers) :
+		pMaxReaders(readers)
+	{
+		initialize(readers);
+	}
+
+
+	Semaphore::Semaphore(const Semaphore& rhs) :
+		pMaxReaders(rhs.pMaxReaders)
+	{
+		initialize(pMaxReaders);
+	}
+
+
+	Semaphore::~Semaphore()
+	{
+		finalize();
+	}
+
+
+	Semaphore& Semaphore::operator = (const Semaphore& copy)
+	{
+		uint readers = copy.maxReaders();
+		if (readers != pMaxReaders)
+		{
+			finalize();
+			initialize(readers);
+		}
+		return *this;
+	}
+
 
 
 
