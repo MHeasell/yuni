@@ -52,6 +52,7 @@ namespace Yuni
 		~RWMutex();
 		//@}
 
+
 		//! \name Read Lock & Unlock
 		//@{
 		/*!
@@ -94,8 +95,6 @@ namespace Yuni
 		//! Real mutex
 		Mutex pMutex;
 		# endif
-		//! Maximum number of concurrent readers
-		uint pMaxReaders;
 
 	}; // class Mutex
 

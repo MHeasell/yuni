@@ -13,13 +13,11 @@ namespace QueueService
 	WaitingRoom::WaitingRoom() :
 		pJobCount(0)
 	{
-		pMutexes = new Mutex[priorityCount];
 	}
 
 
 	WaitingRoom::~WaitingRoom()
 	{
-		delete[] pMutexes;
 	}
 
 

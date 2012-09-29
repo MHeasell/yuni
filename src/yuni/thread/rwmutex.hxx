@@ -6,8 +6,7 @@ namespace Yuni
 {
 
 	inline RWMutex::RWMutex(uint maxReaders) :
-		pSemaphore(maxReaders),
-		pMaxReaders(maxReaders)
+		pSemaphore(maxReaders)
 	{
 	}
 
@@ -18,8 +17,7 @@ namespace Yuni
 
 
 	inline RWMutex::RWMutex(const RWMutex& copy) :
-		pSemaphore(copy.pMaxReaders),
-		pMaxReaders(copy.pMaxReaders)
+		pSemaphore(copy.pSemaphore)
 	{
 	}
 
@@ -50,7 +48,6 @@ namespace Yuni
 
 
 
-
 	inline ReadMutexLocker::ReadMutexLocker(RWMutex& m) :
 		pMutex(m)
 	{
@@ -75,6 +72,7 @@ namespace Yuni
 	{
 		pMutex.writeUnlock();
 	}
+
 
 
 

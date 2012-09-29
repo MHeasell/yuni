@@ -17,7 +17,9 @@ namespace Yuni
 {
 
 	/*!
+	** \brief Semaphore, protect access to shared data with concurrent read
 	**
+	** \ingroup Threads
 	*/
 	class YUNI_DECL Semaphore
 	{
@@ -26,6 +28,10 @@ namespace Yuni
 		** \brief Default constructor
 		*/
 		Semaphore(uint readers = 64);
+		/*!
+		** \brief Copy constructor
+		*/
+		Semaphore(const Semaphore&);
 		//! Destructor
 		~Semaphore();
 		//@}
@@ -57,6 +63,13 @@ namespace Yuni
 		//@}
 
 
+		//! \name Informations
+		//@{
+		//! Get the maximum number of concurrent readers
+		uint maxReaders() const;
+		//@}
+
+
 		//! \name Operators
 		//@{
 		//! Try to acquire a resource
@@ -67,6 +80,12 @@ namespace Yuni
 		Semaphore& operator = (const Semaphore&);
 		//@}
 
+
+	private:
+		//! Initialize the internal semaphore
+		inline void initialize(uint readers);
+		//! Release the internal semaphore
+		inline void finalize();
 
 	private:
 		# ifndef YUNI_NO_THREAD_SAFE
@@ -80,6 +99,7 @@ namespace Yuni
 		#	endif
 		# endif
 		# endif
+		uint pMaxReaders;
 
 	}; // class Semaphore
 
