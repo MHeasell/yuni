@@ -283,7 +283,7 @@ namespace Process
 							break;
 					}
 				}
-				suspend(20); // arbitrary
+				suspend(50); // arbitrary
 			}
 			while (true);
 
