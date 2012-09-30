@@ -114,7 +114,7 @@ namespace Yuni
 	**   string with a fixed-length capacity (equals to ChunkSizeT)
 	** \tparam ZeroTerminatedT True to make the string zero-terminated
 	*/
-	template<unsigned int ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
+	template<uint ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	class YUNI_DECL CString :
 		protected Private::CStringImpl::Data<ChunkSizeT,ExpandableT,ZeroTerminatedT, char>
 	{
@@ -202,7 +202,7 @@ namespace Yuni
 		** \return An integer greater than, equal to, or less than 0, according as the string is greater than,
 		**   equal to, or less than the given string
 		*/
-		static int Compare(const char* const s1, unsigned int l1, const char* const s2, unsigned int l2);
+		static int Compare(const char* const s1, uint l1, const char* const s2, uint l2);
 
 		/*!
 		** \brief Compare two strings like stricmp() (case-insensitive)
@@ -211,7 +211,7 @@ namespace Yuni
 		** \return An integer greater than, equal to, or less than 0, according as the string is greater than,
 		**   equal to, or less than the given string
 		*/
-		static int CompareInsensitive(const char* const s1, unsigned int l1, const char* const s2, unsigned int l2);
+		static int CompareInsensitive(const char* const s1, uint l1, const char* const s2, uint l2);
 		//@}
 
 
@@ -276,7 +276,7 @@ namespace Yuni
 		** The substring is the portion of str that begins at the character position
 		** 'offset'.
 		*/
-		template<unsigned int SizeT, bool ExpT, bool ZeroT>
+		template<uint SizeT, bool ExpT, bool ZeroT>
 		CString(const CString<SizeT,ExpT,ZeroT>& s, Size offset);
 
 		/*!
@@ -286,7 +286,7 @@ namespace Yuni
 		** 'offset' and takes up to 'n' characters (it takes less than n if the end
 		** of 's' is reached before).
 		*/
-		template<unsigned int SizeT, bool ExpT, bool ZeroT>
+		template<uint SizeT, bool ExpT, bool ZeroT>
 		CString(const CString<SizeT,ExpT,ZeroT>& s, Size offset, Size n /*= npos*/);
 
 		/*!
@@ -990,12 +990,12 @@ namespace Yuni
 		/*!
 		** \brief Get the number of occurrences of a single char
 		*/
-		unsigned int countChar(char c) const;
+		uint countChar(char c) const;
 
 		/*!
 		** \brief Get the number of occurrences of a single unsigned char
 		*/
-		unsigned int countChar(unsigned char c) const;
+		uint countChar(unsigned char c) const;
 
 		/*!
 		** \brief Find the offset of a sub-string from the left
@@ -1006,7 +1006,7 @@ namespace Yuni
 		** \param cstr An arbitrary string character
 		** \return The position of the first occurence found, `npos` if not found
 		*/
-		unsigned int indexOf(Size offset, char cstr) const;
+		uint indexOf(Size offset, char cstr) const;
 
 		/*!
 		** \brief Find the offset of a raw sub-string with a given length (in bytes) from the left
@@ -1018,7 +1018,7 @@ namespace Yuni
 		** \param len Size of the given string
 		** \return The position of the first occurence found, `npos` if not found
 		*/
-		unsigned int indexOf(Size offset, const char* const cstr, Size len) const;
+		uint indexOf(Size offset, const char* const cstr, Size len) const;
 
 		/*!
 		** \brief Find the offset of any supported CString from the left
@@ -1029,7 +1029,7 @@ namespace Yuni
 		** \param cstr Any supported String
 		** \return The position of the first occurence found, `npos` if not found
 		*/
-		template<class StringT> unsigned int indexOf(Size offset, const StringT& s) const;
+		template<class StringT> uint indexOf(Size offset, const StringT& s) const;
 
 		/*!
 		** \brief Searches the string for an individual character
@@ -1251,7 +1251,7 @@ namespace Yuni
 		/*!
 		** \brief Remove up to `n` characters from the end of the string
 		*/
-		void chop(unsigned int n);
+		void chop(uint n);
 
 		/*!
 		** \brief Remove the last char
@@ -1487,7 +1487,7 @@ namespace Yuni
 		** The supported types (by default) are :
 		** - std::string
 		** - const char* (equivalent to `c_str()`)
-		** - numeric (int, long, unsigned int, double...)
+		** - numeric (int, long, uint, double...)
 		** - bool
 		*/
 		template<class U> U to() const;
@@ -2015,7 +2015,7 @@ namespace Yuni
 		template<class, class> friend class Yuni::Extension::CString::Fill;
 		template<class, bool>  friend struct Private::CStringImpl::AdapterAssign;
 		template<class, bool>  friend struct Private::CStringImpl::Consume;
-		template<unsigned int, bool, bool> friend class CString;
+		template<uint, bool, bool> friend class CString;
 
 	}; // class CString
 
