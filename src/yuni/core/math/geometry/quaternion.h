@@ -4,6 +4,7 @@
 # include <ostream>
 # include "vector3D.h"
 
+
 namespace Yuni
 {
 
@@ -27,27 +28,11 @@ namespace Yuni
 		*/
 		static T SquareMagnitude(const Quaternion& q);
 
-		/*!
-		** \brief Addition of two quaternions
-		**
-		** q + q' = [w + w', v + v']
-		*/
-		template<class U, class V>
-		static void Add(Quaternion& result, const Quaternion<U>& left, const Quaternion<V>& right);
-
-		/*!
-		** Multiplication of two quaternions
-		**
-		** q * q' = [ww' - v.v', v^v' + wv' + w'v]
-		*/
-		template<class U, class V>
-		static void Multiply(Quaternion& result, const Quaternion<U>& left, const Quaternion<V>& right);
-
 		//! \name Vector rotation
 		//@{
 		//! Vector rotation
-		template<class U, class V>
-		static Vector3D<U> Rotate(const Vector3D<U>& v, const Vector3D<V>& axis, float angle);
+		template<class U>
+		static Vector3D<T> Rotate(const Vector3D<T>& v, const Vector3D<U>& axis, T angle);
 		//@}
 
 
@@ -70,8 +55,8 @@ namespace Yuni
 
 		//! \name Reset the coordinates
 		//@{
-		//! Reset the quaternion to the null quaternion
-		Quaternion<T>& reset();
+		//! Clear the quaternion to the null quaternion
+		Quaternion<T>& clear();
 		//@}
 
 		//! \name Informations
@@ -139,6 +124,14 @@ inline const Yuni::Quaternion<T> operator + (const Yuni::Quaternion<U>& lhs, con
 {
 	Yuni::Quaternion<T> result(lhs);
 	result += rhs;
+	return result;
+}
+
+template<class T, class U, class V>
+inline const Yuni::Quaternion<T> operator * (const Yuni::Quaternion<U>& lhs, const Yuni::Quaternion<V>& rhs)
+{
+	Yuni::Quaternion<T> result(lhs);
+	result *= rhs;
 	return result;
 }
 

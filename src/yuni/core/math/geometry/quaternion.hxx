@@ -3,6 +3,7 @@
 
 # include "../math.h"
 
+
 namespace Yuni
 {
 
@@ -15,37 +16,14 @@ namespace Yuni
 
 
 	template<class T>
-	template<class U, class V>
-	inline void Quaternion<T>::Add(Quaternion<T>& result, const Quaternion<U>& left,
-		const Quaternion<V>& right)
-	{
-		result.w = static_cast<T>(left.w + right.w);
-		result.v.x = static_cast<T>(left.v.x + right.v.x);
-		result.v.y = static_cast<T>(left.v.y + right.v.y);
-		result.v.z = static_cast<T>(left.v.z + right.v.z);
-	}
-
-
-	template<class T>
-	template<class U, class V>
-	inline void Quaternion<T>::Multiply(Quaternion<T>& result, const Quaternion<U>& left,
-		const Quaternion<V>& right)
-	{
-		result.w = static_cast<T>(left.w * right.w) - Vector3D<T>::DotProduct(left.v, right.v);
-		result.v = Vector3D<T>::CrossProduct(left.v, right.v);
-		result.v += right.v * left.w + left.v * right.w;
-	}
-
-	template<class T>
-	template<class U, class V>
-	inline Vector3D<U> Quaternion<T>::Rotate(const Vector3D<U>& v, const Vector3D<V>& axis, float angle)
+	template<class U>
+	inline Vector3D<T> Quaternion<T>::Rotate(const Vector3D<T>& v, const Vector3D<U>& axis, T angle)
 	{
 		// The view quaternion is [0, v]
 		Quaternion<T> view(0, v);
-		float sinA = Math::Sin(angle / 2);
-		Quaternion<U> rotation(Math::Cos(angle / 2), axis.x * sinA, axis.y * sinA, axis.z * sinA);
-		Quaternion<U> result(Multiply(Multiply(rotation, view), rotation.conjugate()));
-		return Vector3D<U>(result.x, result.y, result.z);
+		T sinA = Math::Sin(angle / (T)2);
+		Quaternion<T> rot(Math::Cos(angle / (T)2), axis.x * sinA, axis.y * sinA, axis.z * sinA);
+		return ((rot * view) * rot.conjugate()).v;
 	}
 
 
@@ -80,10 +58,10 @@ namespace Yuni
 
 
 	template<class T>
-	inline Quaternion<T>& Quaternion<T>::reset()
+	inline Quaternion<T>& Quaternion<T>::clear()
 	{
 		w = T();
-		v.reset();
+		v.clear();
 		return *this;
 	}
 
@@ -98,14 +76,14 @@ namespace Yuni
 	template<class T>
 	inline bool Quaternion<T>::isUnit() const
 	{
-		return Math::Zero(SquareMagnitude(*this) - 1.0f);
+		return Math::Zero(SquareMagnitude(*this) - T(1));
 	}
 
 
 	template<class T>
 	inline Quaternion<T> Quaternion<T>::conjugate() const
 	{
-		return Quaternion<T>();
+		return Quaternion<T>(w, -v.x, -v.y, -v.z);
 	}
 
 
