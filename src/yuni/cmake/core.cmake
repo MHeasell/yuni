@@ -346,6 +346,9 @@ set(SRC_CORE_MATH
 		core/math/geometry/point2D.h
 		core/point3D.h
 		core/math/geometry/point3D.h
+		core/quaternion.h
+		core/math/geometry/quaternion.h
+		core/math/geometry/quaternion.hxx
 		core/boundingbox.h
 		core/math/geometry/boundingbox.h
 		core/math/geometry/boundingbox.hxx
