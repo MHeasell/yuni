@@ -28,8 +28,13 @@ namespace Yuni
 		*/
 		static T SquareMagnitude(const Quaternion& q);
 
-		//! \name Vector rotation
+		//! \name Rotation
 		//@{
+		//! Point rotation
+		template<class U>
+		static Point3D<T> Rotate(const Point3D<T>& p, const Point3D<T>& origin,
+			const Vector3D<U>& axis, T angle);
+
 		//! Vector rotation
 		template<class U>
 		static Vector3D<T> Rotate(const Vector3D<T>& v, const Vector3D<U>& axis, T angle);
@@ -64,8 +69,11 @@ namespace Yuni
 		//! Magnitude of the quaternion
 		T magnitude() const;
 
+		//! Is the quaternion null ?
+		bool null() const;
+
 		//! Is the quaternion unit ?
-		bool isUnit() const;
+		bool unit() const;
 		//@}
 
 		//! \name Dependent quaternions
@@ -109,8 +117,6 @@ namespace Yuni
 
 } // namespace Yuni
 
-# include "quaternion.hxx"
-
 
 //! \name Operator overload for stream printing
 //@{
@@ -119,16 +125,16 @@ template<class T>
 inline std::ostream& operator << (std::ostream& out, const Yuni::Quaternion<T>& v)
 { return v.print(out); }
 
-template<class T, class U, class V>
-inline const Yuni::Quaternion<T> operator + (const Yuni::Quaternion<U>& lhs, const Yuni::Quaternion<V>& rhs)
+template<class T>
+inline const Yuni::Quaternion<T> operator + (const Yuni::Quaternion<T>& lhs, const Yuni::Quaternion<T>& rhs)
 {
 	Yuni::Quaternion<T> result(lhs);
 	result += rhs;
 	return result;
 }
 
-template<class T, class U, class V>
-inline const Yuni::Quaternion<T> operator * (const Yuni::Quaternion<U>& lhs, const Yuni::Quaternion<V>& rhs)
+template<class T>
+inline const Yuni::Quaternion<T> operator * (const Yuni::Quaternion<T>& lhs, const Yuni::Quaternion<T>& rhs)
 {
 	Yuni::Quaternion<T> result(lhs);
 	result *= rhs;
@@ -136,6 +142,9 @@ inline const Yuni::Quaternion<T> operator * (const Yuni::Quaternion<U>& lhs, con
 }
 
 //@}
+
+
+# include "quaternion.hxx"
 
 
 #endif // __YUNI_CORE_MATH_GEOMETRY_QUATERNION_H__

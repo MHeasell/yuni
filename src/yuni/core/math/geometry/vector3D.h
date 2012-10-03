@@ -44,6 +44,7 @@ namespace Yuni
 		*/
 		static T Magnitude(const Vector3D& p1, const Vector3D& p2);
 
+
 		/*!
 		** \brief Compute the dot product of two arbitrary vectors
 		**
@@ -157,6 +158,11 @@ namespace Yuni
 		** \brief Get if the vector is null
 		*/
 		bool null() const;
+
+		/*!
+		** \brief Get if the vector is null
+		*/
+		bool unit() const;
 
 		/*!
 		** \brief Compute the magnitude of the vector
@@ -360,6 +366,10 @@ inline std::ostream& operator << (std::ostream& out, const Yuni::Vector3D<T>& v)
 template<class T>
 inline const Yuni::Vector3D<T> operator + (const Yuni::Vector3D<T>& lhs, const Yuni::Vector3D<T>& rhs)
 { return Yuni::Vector3D<T>(lhs) += rhs; }
+
+template<class T>
+inline const Yuni::Vector3D<T> operator * (const Yuni::Vector3D<T>& lhs, const T& rhs)
+{ return Yuni::Vector3D<T>(lhs) *= rhs; }
 
 //@}
 
