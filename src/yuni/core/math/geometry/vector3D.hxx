@@ -162,6 +162,13 @@ namespace Yuni
 
 
 	template<typename T>
+	inline bool Vector3D<T>::unit() const
+	{
+		return Math::Zero(squareMagnitude() - T(1));
+	}
+
+
+	template<typename T>
 	Vector3D<T>& Vector3D<T>::normalize()
 	{
 		T m = magnitude();
@@ -197,11 +204,13 @@ namespace Yuni
 		return Math::SquareRoot(x*x + y*y + z*z);
 	}
 
+
 	template<typename T>
 	inline T Vector3D<T>::squareMagnitude() const
 	{
 		return x*x + y*y + z*z;
 	}
+
 
 	template<typename T>
 	inline T Vector3D<T>::Magnitude(const Vector3D& p1, const Vector3D& p2)
@@ -209,17 +218,20 @@ namespace Yuni
 		return Math::SquareRoot(p1.x*p2.x + p1.y*p2.y + p1.z*p2.z /* dot product */);
 	}
 
+
 	template<typename T>
 	inline T Vector3D<T>::dotProduct(const Vector3D& p1) const
 	{
 		return p1.x*x + p1.y*y + p1.z*z;
 	}
 
+
 	template<typename T>
 	inline T Vector3D<T>::DotProduct(const Vector3D& p1, const Vector3D& p2)
 	{
 		return p1.x*p2.x + p1.y*p2.y + p1.z*p2.z;
 	}
+
 
 	template<typename T>
 	inline Vector3D<T> Vector3D<T>::CrossProduct(const Vector3D<T>& p1, const Vector3D<T>& p2)
@@ -229,6 +241,7 @@ namespace Yuni
 			p1.z * p2.x - p1.x * p2.z,
 			p1.x * p2.y - p1.y * p2.x);
 	}
+
 
 	template<typename T>
 	inline bool Vector3D<T>::AreColinear(const Vector3D& p1, const Vector3D& p2, bool ignoreDirection)
@@ -240,12 +253,14 @@ namespace Yuni
 		return colinear;
 	}
 
+
 	template<typename T>
 	inline T Vector3D<T>::Angle(const Vector3D<T>& p1, const Vector3D<T>& p2)
 	{
 		// By definition: cos(alpha) = (p1.p2)/(|p1|.|p2|)
 		return static_cast<T>(Math::ACos(DotProduct(p1, p2) / (p1.magnitude() * p2.magnitude())));
 	}
+
 
 	template<class T>
 	template<class R>

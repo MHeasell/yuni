@@ -17,6 +17,20 @@ namespace Yuni
 
 	template<class T>
 	template<class U>
+	inline Point3D<T> Quaternion<T>::Rotate(const Point3D<T>& p, const Point3D<T>& origin,
+		const Vector3D<U>& axis, T angle)
+	{
+		// The view quaternion is [0, v]
+		Quaternion<T> view(0, p.x - origin.x, p.y - origin.y, p.z - origin.z);
+		T sinA = Math::Sin(angle / (T)2);
+		Quaternion<T> rot(Math::Cos(angle / (T)2), axis.x * sinA, axis.y * sinA, axis.z * sinA);
+		Vector3D<T> result = ((rot * view) * rot.conjugate()).v;
+		return Point3D<T>(result.x + origin.x, result.y + origin.y, result.z + origin.z);
+	}
+
+
+	template<class T>
+	template<class U>
 	inline Vector3D<T> Quaternion<T>::Rotate(const Vector3D<T>& v, const Vector3D<U>& axis, T angle)
 	{
 		// The view quaternion is [0, v]
@@ -74,7 +88,14 @@ namespace Yuni
 
 
 	template<class T>
-	inline bool Quaternion<T>::isUnit() const
+	inline bool Quaternion<T>::null() const
+	{
+		return Math::Zero(w) && v.null();
+	}
+
+
+	template<class T>
+	inline bool Quaternion<T>::unit() const
 	{
 		return Math::Zero(SquareMagnitude(*this) - T(1));
 	}
