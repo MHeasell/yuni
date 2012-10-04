@@ -366,7 +366,11 @@ namespace System
 
 
 # ifndef YUNI_HAS_CONSTEXPR
-#	define constexpr  /* does nothing, but compiles */
+// There are some issues with Visual Studio 11
+// The feature is disabled, waiting for a valid fix
+#	ifndef constexpr
+//#		define constexpr  /* does nothing, but compiles */
+#	endif
 # endif
 
 # endif
