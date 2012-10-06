@@ -25,6 +25,17 @@
 # endif
 
 
+/*!
+** \brief Convenient macro for debugging
+**
+** \code
+** logs.error() << YN_LOGENV << "my message";
+** \endcode
+*/
+# define YN_LOGENV  __FILE__ << ':' << __LINE__ << ": "
+
+
+
 
 namespace Yuni
 {
