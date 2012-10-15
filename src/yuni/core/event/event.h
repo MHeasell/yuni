@@ -154,8 +154,6 @@ namespace Yuni
 
 		//! Get if the event does not have any single callback
 		bool empty() const;
-		//! Get if the event has at least one callback
-		bool notEmpty() const;
 		//@}
 
 		//[!] \name Invoke (documentation imported from the class WithNArguments)

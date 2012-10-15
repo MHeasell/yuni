@@ -2503,15 +2503,6 @@ namespace Yuni
 	}
 
 
-
-	template<uint ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
-	inline bool
-	CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::notEmpty() const
-	{
-		return (0 != AncestorType::size);
-	}
-
-
 	template<uint ChunkSizeT, bool ExpandableT, bool ZeroTerminatedT>
 	inline void
 	CString<ChunkSizeT,ExpandableT,ZeroTerminatedT>::shrink()
@@ -2916,7 +2907,7 @@ namespace Yuni
 		if (emptyBefore)
 			out.clear();
 		// String empty
-		if (this->notEmpty())
+		if (AncestorType::size != 0)
 		{
 			// Indexes
 			Size indx = 0;
@@ -2934,7 +2925,7 @@ namespace Yuni
 					segment.assign(AncestorType::data + indx, AncestorType::size - indx);
 					if (trimElements)
 						segment.trim();
-					if (segment.notEmpty() || keepEmptyElements)
+					if (not segment.empty() || keepEmptyElements)
 						out.push_back(segment.template to<UType>());
 					return;
 				}
@@ -2944,7 +2935,7 @@ namespace Yuni
 					segment.assign(AncestorType::data + indx, len);
 					if (trimElements)
 						segment.trim();
-					if (segment.notEmpty() || keepEmptyElements)
+					if (not segment.empty() || keepEmptyElements)
 						out.push_back(segment.template to<UType>());
 				}
 				indx = newIndx + 1;

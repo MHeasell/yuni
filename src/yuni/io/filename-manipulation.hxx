@@ -85,7 +85,7 @@ namespace IO
 	template<class StringT1, class StringT2>
 	void ExtractFileName(StringT1& out, const StringT2& p, const bool systemDependant)
 	{
-		if (p.notEmpty())
+		if (not p.empty())
 			out.clear();
 		const typename StringT2::size_type pos = (systemDependant)
 			? p.find_last_of(IO::Constant<char>::Separator)

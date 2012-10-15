@@ -271,12 +271,6 @@ namespace Yuni
 		*/
 		bool empty() const;
 
-		/*!
-		** \brief Get if the container is not empty
-		** \return True if the container is not empty, false otherwise
-		*/
-		bool notEmpty() const;
-
 		//! Get the number of items in the container
 		Size size() const;
 		//@}

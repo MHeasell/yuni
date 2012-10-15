@@ -200,7 +200,7 @@ namespace CString
 
 		template<class StringT> static bool Perform(const StringT& s)
 		{
-			if (s.notEmpty())
+			if (not s.empty())
 			{
 				const unsigned int count = static_cast<unsigned int>(s.sizeInBytes());
 				if (count < 5)
@@ -369,7 +369,7 @@ namespace CString
 
 		template<class StringT> static bool Perform(const StringT& s, float& out)
 		{
-			if (s.notEmpty())
+			if (not s.empty())
 			{
 				char* pend;
 				const char* cstr;
@@ -405,7 +405,7 @@ namespace CString
 
 		template<class StringT> static float Perform(const StringT& s)
 		{
-			if (s.notEmpty())
+			if (not s.empty())
 			{
 				char* pend;
 				const char* cstr;
@@ -451,7 +451,7 @@ namespace CString
 
 		template<class StringT> static bool Perform(const StringT& s, double& out)
 		{
-			if (s.notEmpty())
+			if (not s.empty())
 			{
 				char* pend;
 				const char* cstr;
@@ -482,7 +482,7 @@ namespace CString
 
 		template<class StringT> static double Perform(const StringT& s)
 		{
-			if (s.notEmpty())
+			if (not s.empty())
 			{
 				char* pend;
 				const char* cstr;
