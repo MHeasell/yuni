@@ -36,13 +36,13 @@ namespace CStringImpl
 	template<bool AdapterT>
 	struct FinalZero
 	{
-		static void Set(const char*, uint) {}
+		YNATTR_ALWAYS_INLINE static void Set(const char*, uint) {}
 	};
 
 	template<>
 	struct FinalZero<false>
 	{
-		static void Set(char* buffer, uint offset)
+		YNATTR_ALWAYS_INLINE static void Set(char* buffer, uint offset)
 		{
 			buffer[offset] = '\0';
 		}
@@ -53,7 +53,7 @@ namespace CStringImpl
 	template<class StringT, bool Adapter>
 	struct AdapterAssign
 	{
-		static void Perform(StringT& out, const char* const cstring, typename StringT::Size size)
+		static inline void Perform(StringT& out, const char* const cstring, typename StringT::Size size)
 		{
 			out.adaptWithoutChecking(cstring, size);
 		}
@@ -62,7 +62,7 @@ namespace CStringImpl
 	template<class StringT>
 	struct AdapterAssign<StringT, false>
 	{
-		static void Perform(StringT& out, const char* const cstring, typename StringT::Size size)
+		static inline void Perform(StringT& out, const char* const cstring, typename StringT::Size size)
 		{
 			// fallback
 			out.assign(cstring, size);
@@ -73,7 +73,7 @@ namespace CStringImpl
 	template<class StringT, bool Adapter>
 	struct Consume
 	{
-		static void Perform(StringT& out, typename StringT::Size count)
+		static inline void Perform(StringT& out, typename StringT::Size count)
 		{
 			if (count >= out.size())
 				out.clear();
@@ -85,7 +85,7 @@ namespace CStringImpl
 	template<class StringT>
 	struct Consume<StringT, false>
 	{
-		static void Perform(StringT& out, typename StringT::Size count)
+		static inline void Perform(StringT& out, typename StringT::Size count)
 		{
 			out.erase(0, count);
 		}
