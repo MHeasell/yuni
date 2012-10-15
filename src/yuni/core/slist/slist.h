@@ -20,7 +20,7 @@ namespace Yuni
 	{
 	public:
 		//! Size type
-		typedef unsigned int Size;
+		typedef uint Size;
 		//! Size type (STL compliant)
 		typedef Size size_type;
 
@@ -365,7 +365,7 @@ namespace Yuni
 		//! The last item in the list
 		Item* pLast;
 		//! Item count
-		unsigned int pCount;
+		uint pCount;
 
 	}; // class LinkedList
 
