@@ -226,12 +226,6 @@ namespace Yuni
 	}
 
 
-	template<typename P>
-	inline bool Event<P>::notEmpty() const
-	{
-		return !(AncestorType::pEmpty);
-	}
-
 
 
 

@@ -1728,11 +1728,6 @@ namespace Yuni
 		bool null() const;
 
 		/*!
-		** \brief Get if the string is not empty (the exact opposite of `empty()`)
-		*/
-		bool notEmpty() const;
-
-		/*!
 		** \brief Get the current capacity of the string (in bytes)
 		** \return The amount of memory used by the string
 		*/
