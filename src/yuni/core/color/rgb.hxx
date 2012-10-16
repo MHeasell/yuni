@@ -424,6 +424,23 @@ namespace Color
 
 
 	template<class T>
+	inline T& RGB<T>::operator [] (const uint i)
+	{
+		switch (i)
+		{
+			case 0:
+				return red;
+			case 1:
+				return green;
+			case 2:
+				return blue;
+			default:
+				assert(false && "Index out of bounds !");
+		}
+	}
+
+
+	template<class T>
 	template<class StreamT>
 	void RGB<T>::print(StreamT& stream) const
 	{

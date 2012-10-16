@@ -447,6 +447,25 @@ namespace Color
 
 
 	template<class T>
+	inline T& RGBA<T>::operator [] (const uint i)
+	{
+		switch (i)
+		{
+			case 0:
+				return red;
+			case 1:
+				return green;
+			case 2:
+				return blue;
+			case 3:
+				return alpha;
+			default:
+				assert(false && "Index out of bounds !");
+		}
+	}
+
+
+	template<class T>
 	template<class StreamT>
 	void RGBA<T>::print(StreamT& stream) const
 	{
