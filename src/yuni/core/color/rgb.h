@@ -128,6 +128,8 @@ namespace Color
 		template<class U> bool operator == (const U& rhs) const;
 		//! Comparison
 		template<class U> bool operator != (const U& rhs) const;
+		//! Index access
+		T& operator [] (const uint i);
 		//@}
 
 
