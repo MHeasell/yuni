@@ -51,14 +51,14 @@ set(YUNI_COMMON_GCC_OPTIONS  "${YUNI_COMMON_GCC_OPTIONS} -D_REENTRANT -D_LARGEFI
 set(YUNI_COMMON_GCC_OPTIONS_UNIX  "${YUNI_COMMON_GCC_OPTIONS} -fPIC")
 
 include(CheckCXXCompilerFlag)
-if(MINGW OR (NOT WIN32 AND NOT WIN64))
-	check_cxx_compiler_flag("-std=c++0x" YUNI_HAS_GCC_CPP0X_SUPPORT)
+if(NOT MSVC)
+	check_cxx_compiler_flag("-std=gnu++0x" YUNI_HAS_GCC_CPP0X_SUPPORT)
 	if(YUNI_HAS_GCC_CPP0X_SUPPORT)
 		set(YUNI_COMMON_GCC_OPTIONS  "${YUNI_COMMON_GCC_OPTIONS} -std=gnu++0x")
 		set(YUNI_COMMON_GCC_OPTIONS_UNIX  "${YUNI_COMMON_GCC_OPTIONS_UNIX} -std=gnu++0x -Wconversion")
 	endif()
 endif()
-if (NOT MSVC AND NOT CLANG)
+if (NOT MSVC)
 	check_cxx_compiler_flag("-ggdb3" YUNI_HAS_GCC_FLAG_GGDB3)
 endif()
 
