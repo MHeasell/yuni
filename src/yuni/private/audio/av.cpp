@@ -50,7 +50,7 @@ namespace Audio
 					}
 
 					// Copy the packet and free it
-					YUNI_MEMCPY(&(*iter)->Data[idx], packet.data, packet.size);
+					YUNI_MEMCPY(&(*iter)->Data[idx], packet.size, packet.data, packet.size);
 					(*iter)->DataSize += packet.size;
 
 					// Return if this stream is what we needed a packet for
@@ -83,6 +83,43 @@ namespace Audio
 	}
 
 
+	AudioFile* AV::OpenFile(const AnyString& filename)
+	{
+		if (filename.empty())
+			return nullptr;
+
+		AudioFile* file = (AudioFile*) calloc(1, sizeof(AudioFile));
+		if (!file)
+			return nullptr;
+
+		# if LIBAVFORMAT_VERSION_MAJOR < 53
+		if (not av_open_input_file(&file->FormatContext, filename.c_str(), NULL, 0, NULL))
+		# else
+		if (not avformat_open_input(&file->FormatContext, filename.c_str(), NULL, NULL))
+		# endif // LIBAVFORMAT_VERSION_MAJOR < 53
+		{
+			// After opening, we must search for the stream information because not
+			// all formats will have it in stream headers (eg. system MPEG streams)
+			# if LIBAVFORMAT_VERSION_MAJOR < 53
+			if (av_find_stream_info(file->FormatContext) >= 0)
+			# else
+			if (avformat_find_stream_info(file->FormatContext, NULL) >= 0)
+			# endif // LIBAVFORMAT_VERSION_MAJOR < 53
+				return file;
+
+			# if LIBAVFORMAT_VERSION_MAJOR < 53
+			av_close_input_file(file->FormatContext);
+			# else
+			avformat_close_input(&file->FormatContext);
+			# endif // LIBAVFORMAT_VERSION_MAJOR < 53
+		}
+
+		free(file);
+		return nullptr;
+	}
+
+
+
 	void AV::CloseFile(AudioFile*& file)
 	{
 		if (!file)
@@ -112,7 +149,7 @@ namespace Audio
 		if (!file)
 			return NULL;
 
-		for (unsigned int i = 0; i < file->FormatContext->nb_streams; ++i)
+		for (uint i = 0; i < file->FormatContext->nb_streams; ++i)
 		{
 			// Reject streams that are not AUDIO
 			# if LIBAVFORMAT_VERSION_MAJOR < 53
@@ -212,7 +249,7 @@ namespace Audio
 	}
 
 
-	unsigned int AV::GetStreamDuration(const AudioStream* stream)
+	uint AV::GetStreamDuration(const AudioStream* stream)
 	{
 		if (!stream)
 			return 0;
@@ -243,7 +280,7 @@ namespace Audio
 					rem = stream->DecodedDataSize;
 
 				// Copy the data to the app's buffer and increment
-				YUNI_MEMCPY(data, stream->DecodedData, rem);
+				YUNI_MEMCPY(data, rem, stream->DecodedData, rem);
 				data = (char*)data + rem;
 				dec += rem;
 
@@ -304,7 +341,7 @@ namespace Audio
 				{
 					// If any input data is left, move it to the start of the
 					// buffer, and decrease the buffer size
-					size_t rem = insize-len;
+					size_t rem = insize - len;
 					if (rem)
 						memmove(stream->Data, &stream->Data[len], rem);
 					stream->DataSize = rem;
