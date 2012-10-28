@@ -662,7 +662,7 @@ namespace Yuni
 	{
 		// Cleanup before anything
 		clear();
-		if (!raw.empty())
+		if (not raw.empty())
 		{
 			// Go ahead !
 			BuildSession(pInfos, raw).run();
