@@ -63,7 +63,7 @@ namespace Yuni
 		uint buffersize = (uint) (sizeof(buffer) - (size_t)(p - buffer) - 1);
 		if (size > buffersize)
 			size = buffersize;
-		memcpy(p, text, size);
+		YUNI_MEMCPY(p, text, size);
 		p[size] = '\0';
 
 		for (uint i = 0; Argv[i]; ++i)
