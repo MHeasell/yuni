@@ -89,6 +89,7 @@
 ** All those informations can be found at http://predef.sourceforge.net/
 */
 
+# include <assert.h>
 
 # define YUNI_OS_FLAG_WINDOWS  0
 # define YUNI_OS_FLAG_UNIX     0
@@ -337,9 +338,17 @@
 
 /* Memcopy*/
 # ifdef YUNI_OS_MSVC
-#	define YUNI_MEMCPY(dst, dstsize, source, count)   memcpy_s(dst, (size_t)dstsize, source, (size_t)count)
+#	define YUNI_MEMCPY(dst, dstsize, source, count)   do \
+		{ \
+			assert(dstsize >= count); \
+			memcpy_s(dst, (size_t)dstsize, source, (size_t)count); \
+		} while (0)
 # else
-#	define YUNI_MEMCPY(dst, dstsize, source, count)   memcpy(dst, source, (size_t)count)
+#	define YUNI_MEMCPY(dst, dstsize, source, count)   do \
+		{ \
+			assert(dstsize >= count); \
+			memcpy(dst, source, (size_t)count); \
+		} while(0)
 # endif
 
 
