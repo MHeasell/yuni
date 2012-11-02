@@ -329,26 +329,36 @@
 
 # ifdef YUNI_OS_MSVC
 // Annoying warning from Visual Studio :
-// decorated name length exceeded, name was truncated
+// decorated name length exceeded, name was truncated (when using a lot of templates)
 #	pragma warning( disable : 4503)
 # endif
 
 
 
 
-/* Memcopy*/
-# ifdef YUNI_OS_MSVC
-#	define YUNI_MEMCPY(dst, dstsize, source, count)   do \
-		{ \
-			assert(dstsize >= count); \
-			memcpy_s(dst, (size_t)dstsize, source, (size_t)count); \
-		} while (0)
+/* Memcpy */
+# ifndef NDEBUG
+#	ifdef YUNI_OS_MSVC
+#		define YUNI_MEMCPY(dst, dstsize, source, count)   do \
+			{ \
+				assert(dstsize >= count && "memcpy: destination buffer too small"); \
+				memcpy_s(dst, (size_t) dstsize, source, (size_t) count); \
+			} while (0)
+#	 else
+#		define YUNI_MEMCPY(dst, dstsize, source, count)   do \
+			{ \
+				assert(dstsize >= count && "memcpy: destination buffer too small"); \
+				memcpy(dst, source, (size_t)count); \
+			} while(0)
+#	endif
 # else
-#	define YUNI_MEMCPY(dst, dstsize, source, count)   do \
-		{ \
-			assert(dstsize >= count); \
-			memcpy(dst, source, (size_t)count); \
-		} while(0)
+#	ifdef YUNI_OS_MSVC
+#		define YUNI_MEMCPY(dst, dstsize, source, count) \
+			(void) memcpy_s(dst, (size_t) dstsize, source, (size_t) count)
+#	 else
+#		define YUNI_MEMCPY(dst, dstsize, source, count) \
+			(void) memcpy(dst, source, (size_t) count)
+#	endif
 # endif
 
 
