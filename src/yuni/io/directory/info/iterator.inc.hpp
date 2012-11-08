@@ -11,7 +11,7 @@ public:
 
 		// Forward declarations
 		class NullIterator;
-		template<unsigned int FlagsT> class Iterator;
+		template<uint FlagsT> class Iterator;
 
 
 		class NullIterator
@@ -19,7 +19,7 @@ public:
 		public:
 			//! The type of the orignal object
 			typedef String value_type;
-			//! An unsigned integral type
+			//! An uintegral type
 			typedef uint64  uint64ype;
 			//! A signed integral type
 			typedef sint64  difference_type;
@@ -86,13 +86,13 @@ public:
 		** \tparam FlagsT See enum Yuni::IO::Directory::Info::OptionIterator
 		** \see enum Yuni::IO::Directory::Info::OptionIterator
 		*/
-		template<unsigned int FlagsT>
+		template<uint FlagsT>
 		class Iterator
 		{
 		public:
 			//! The type of the orignal object
 			typedef String value_type;
-			//! An unsigned integral type
+			//! An uintegral type
 			typedef uint64 uint64ype;
 			//! A signed integral type
 			typedef sint64 difference_type;
@@ -126,9 +126,16 @@ public:
 				return Private::IO::Directory::IteratorDataParentName(pData);
 			}
 
+			//! Size in bytes
 			uint64 size() const
 			{
 				return Private::IO::Directory::IteratorDataSize(pData);
+			}
+
+			//! Date of the last modification
+			sint64 modified() const
+			{
+				return Private::IO::Directory::IteratorDataModified(pData);
 			}
 
 			bool valid() const

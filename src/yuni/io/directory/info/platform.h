@@ -36,6 +36,8 @@ namespace Directory
 
 	uint64 IteratorDataSize(const IteratorData*);
 
+	sint64 IteratorDataModified(const IteratorData*);
+
 	bool IteratorDataIsFolder(const IteratorData*);
 
 	bool IteratorDataIsFile(const IteratorData*);

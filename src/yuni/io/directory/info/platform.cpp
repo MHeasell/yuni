@@ -100,12 +100,16 @@ namespace Directory
 			isFolder = false;
 		}
 
-		bool next(unsigned int flags)
+		bool next(uint flags)
 		{
 			# ifndef YUNI_OS_WINDOWS
 
 			if (!pdir)
+			{
+				size = 0;
+				modified = 0;
 				return false;
+			}
 			while ((pent = readdir(pdir)))
 			{
 				// Avoid `.` and `..`
@@ -128,6 +132,7 @@ namespace Directory
 					{
 						isFolder = true;
 						size = 0;
+						modified = (sint64) s.st_mtime;
 						return true;
 					}
 				}
@@ -136,11 +141,15 @@ namespace Directory
 					if (0 != (flags & Yuni::IO::Directory::Info::itFile))
 					{
 						isFolder = false;
-						size = static_cast<uint64>(s.st_size);
+						size = (uint64) s.st_size;
+						modified = (sint64) s.st_mtime;
 						return true;
 					}
 				}
 			}
+
+			size = 0;
+			modified = 0;
 			return false;
 
 			# else // WINDOWS
@@ -150,7 +159,11 @@ namespace Directory
 			do
 			{
 				if (callNext && 0 != _wfindnexti64(h, &data))
+				{
+					size = 0;
+					modified = 0;
 					return false;
+				}
 				callNext = true;
 
 				// Avoid `.` and `..`
@@ -163,9 +176,9 @@ namespace Directory
 				const int sizeRequired = WideCharToMultiByte(CP_UTF8, 0, data.name, -1, NULL, 0,  NULL, NULL);
 				if (sizeRequired <= 0)
 					continue;
-				name.reserve((unsigned int) sizeRequired);
+				name.reserve((uint) sizeRequired);
 				WideCharToMultiByte(CP_UTF8, 0, data.name, -1, (char*)name.data(), sizeRequired,  NULL, NULL);
-				name.resize(((unsigned int) sizeRequired) - 1);
+				name.resize(((uint) sizeRequired) - 1);
 
 				filename.clear();
 				filename << parent << '\\' << name;
@@ -177,6 +190,7 @@ namespace Directory
 					{
 						isFolder = true;
 						size = 0;
+						modified = (sint64) data.time_write;
 						return true;
 					}
 				}
@@ -186,6 +200,7 @@ namespace Directory
 					{
 						isFolder = false;
 						size = (uint64) data.size;
+						modified = (sint64) data.time_write;
 						return true;
 					}
 				}
@@ -203,7 +218,11 @@ namespace Directory
 		String name;
 		//! The complete filename of the current node
 		String filename;
+		//! File size
 		uint64 size;
+		//! Date of the last modification
+		sint64 modified;
+		//! Flag to determine whether the inode is a folder or a file
 		bool isFolder;
 
 
@@ -248,7 +267,7 @@ namespace Directory
 		void push(const char* const str, uint64 length)
 		{
 			dirinfo.push_front();
-			dirinfo.front().parent.assign(str, static_cast<String::Size>(length));
+			dirinfo.front().parent.assign(str, (String::Size) length);
 			# ifdef YUNI_OS_WINDOWS
 			dirinfo.front().open(wbuffer);
 			# else
@@ -302,7 +321,7 @@ namespace Directory
 
 
 	public:
-		unsigned int flags;
+		uint flags;
 		LinkedList<DirInfo> dirinfo;
 		# ifdef YUNI_OS_WINDOWS
 		wchar_t wbuffer[wbufferMax];
@@ -312,7 +331,7 @@ namespace Directory
 
 
 
-	IteratorData* IteratorDataCreate(const char* folder, uint64 length, unsigned int flags)
+	IteratorData* IteratorDataCreate(const char* folder, uint64 length, uint flags)
 	{
 		if (length)
 		{
@@ -371,6 +390,13 @@ namespace Directory
 	{
 		assert(data != NULL);
 		return data->dirinfo.front().size;
+	}
+
+
+	sint64 IteratorDataModified(const IteratorData* data)
+	{
+		assert(data != NULL);
+		return data->dirinfo.front().modified;
 	}
 
 
