@@ -122,7 +122,7 @@ namespace File
 			return Yuni::IO::errBadFilename;
 
 		String  norm;
-		Yuni::IO::Normalize(norm, p, len);
+		Yuni::IO::Normalize(norm, AnyString(p, len));
 		// Conversion into wchar_t
 		Private::WString<true> wstr(norm);
 		if (wstr.empty())
