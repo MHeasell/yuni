@@ -5,13 +5,16 @@
 
 #include <string.h>
 #include "stream.h"
-#include "../../core/system/windows.hdr.h"
 #include "../../core/string.h"
 #include "../../core/string/wstring.h"
 
 #ifndef YUNI_OS_WINDOWS
 // lock
 # include <sys/file.h>
+#endif
+#ifdef YUNI_OS_WINDOWS
+# include "../../core/system/windows.hdr.h"
+# include <io.h>
 #endif
 
 
@@ -170,6 +173,18 @@ namespace File
 	}
 
 
+	bool Stream::truncate(uint64 size)
+	{
+		if (pFd)
+		{
+			# ifndef YUNI_OS_WINDOWS
+			return (0 == ::ftruncate(fileno(pFd), (off_t) size));
+			# else
+			return (0 == _chsize_s(fileno(pFd), (sint64) size));
+			# endif
+		}
+		return false;
+	}
 
 
 

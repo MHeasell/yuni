@@ -340,6 +340,16 @@ namespace File
 		//@}
 
 
+		//! \name Truncating
+		//@{
+		/*!
+		** \brief Truncate or extend the opened file
+		** \return True if the file has been resized
+		*/
+		bool truncate(uint64 size);
+		//@}
+
+
 		//! \name Native
 		//@{
 		//! Get the OS Dependant handle
