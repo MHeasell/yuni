@@ -21,34 +21,34 @@ if(YUNI_HAS_GCC_CPP0X_SUPPORT)
 	endif()
 endif()
 check_cxx_source_compiles("
-    #include <cstddef>
+	#include <cstddef>
 	typedef decltype(nullptr) NullPtr;
 	class A {}; int main() {A* a = nullptr;return 0;}" YUNI_HAS_NULLPTR)
 
 
 
 # constexpr
-if(YUNI_HAS_GCC_CPP0X_SUPPORT)
-	set(CMAKE_REQUIRED_FLAGS_SAVE ${CMAKE_REQUIRED_FLAGS})
-	set(CMAKE_REQUIRED_FLAGS "${YUNI_GCC_CPP0X_FLAG}")
-	check_cxx_source_compiles("
-		class Foo
-		{
-		public:
-			constexpr static int dummy = 42;
-		};
-		int main() {return 0;}"
-		YUNI_HAS_CONSTEXPR)
-	set(CMAKE_REQUIRED_FLAGS ${CMAKE_REQUIRED_FLAGS_SAVE})
-else()
-	check_cxx_source_compiles("
-	class Foo
-		{
-		public:
-			constexpr static int dummy = 42;
-		};
-		int main() {return 0;}"
-		YUNI_HAS_CONSTEXPR)
-endif()
+#if(YUNI_HAS_GCC_CPP0X_SUPPORT)
+#	set(CMAKE_REQUIRED_FLAGS_SAVE ${CMAKE_REQUIRED_FLAGS})
+#	set(CMAKE_REQUIRED_FLAGS "${YUNI_GCC_CPP0X_FLAG}")
+#	check_cxx_source_compiles("
+#		class Foo
+#		{
+#		public:
+#			constexpr static int dummy = 42;
+#		};
+#		int main() {return 0;}"
+#		YUNI_HAS_CONSTEXPR)
+#	set(CMAKE_REQUIRED_FLAGS ${CMAKE_REQUIRED_FLAGS_SAVE})
+#else()
+#	check_cxx_source_compiles("
+#	class Foo
+#		{
+#		public:
+#			constexpr static int dummy = 42;
+#		};
+#		int main() {return 0;}"
+#		YUNI_HAS_CONSTEXPR)
+#endif()
 
 
