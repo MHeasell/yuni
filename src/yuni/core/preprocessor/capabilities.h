@@ -393,13 +393,13 @@ namespace System
 } /* namespace Yuni */
 
 
-# ifndef YUNI_HAS_CONSTEXPR
+//# ifndef YUNI_HAS_CONSTEXPR
 // There are some issues with Visual Studio 11
 // The feature is disabled, waiting for a valid fix
-#	ifndef constexpr
+//#	ifndef constexpr
 //#		define constexpr  /* does nothing, but compiles */
-#	endif
-# endif
+//#	endif
+//# endif
 
 # endif
 
