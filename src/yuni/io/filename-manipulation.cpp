@@ -281,6 +281,57 @@ namespace IO
 
 
 
+	template<class StringT>
+	static inline void ExtractFilePathImpl(StringT& out, const AnyString& path, bool systemDependant)
+	{
+		AnyString::size_type pos = (systemDependant)
+			? path.find_last_of(IO::Constant<char>::Separator)
+			: path.find_last_of(IO::Constant<char>::AllSeparators);
+		if (AnyString::npos == pos)
+			out.clear();
+		else
+			out.assign(path, pos);
+	}
+
+
+	void ExtractFilePath(String& out, const AnyString& path, bool systemDependant)
+	{
+		ExtractFilePathImpl(out, path, systemDependant);
+	}
+
+
+	void ExtractFilePath(Clob& out, const AnyString& path, bool systemDependant)
+	{
+		ExtractFilePathImpl(out, path, systemDependant);
+	}
+
+
+	template<class StringT>
+	static inline void ExtractFileNameImpl(StringT& out, const AnyString& path, bool systemDependant)
+	{
+		AnyString::size_type pos = (systemDependant)
+			? path.find_last_of(IO::Constant<char>::Separator)
+			: path.find_last_of(IO::Constant<char>::AllSeparators);
+		if (AnyString::npos == pos)
+			out.clear();
+		else
+			out.assign(path.c_str() +  pos + 1);
+	}
+
+
+	void ExtractFileName(String& out, const AnyString& path, bool systemDependant)
+	{
+		ExtractFileNameImpl(out, path, systemDependant);
+	}
+
+	void ExtractFileName(Clob& out, const AnyString& path, bool systemDependant)
+	{
+		ExtractFileNameImpl(out, path, systemDependant);
+	}
+
+
+
+
 
 } // namespace IO
 } // namespace Yuni
