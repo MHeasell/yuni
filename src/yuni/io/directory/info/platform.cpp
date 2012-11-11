@@ -5,6 +5,7 @@
 #include "../../io.h"
 #include "../../directory.h"
 #include "../info.h"
+#include "../../../core/noncopyable.h"
 
 #ifdef YUNI_OS_WINDOWS
 # include "../../../core/system/windows.hdr.h"
@@ -38,7 +39,7 @@ namespace Directory
 
 
 
-	class DirInfo
+	class DirInfo : private Yuni::NonCopyable<DirInfo>
 	{
 	public:
 		DirInfo() :
@@ -246,13 +247,17 @@ namespace Directory
 		IteratorData()
 		{}
 
-		IteratorData(const IteratorData& rhs)
+		IteratorData(const IteratorData& rhs) :
+			flags(rhs.flags)
 		{
 			if (not rhs.dirinfo.empty())
+			{
 				push(rhs.dirinfo.front().parent);
+				next();
+			}
 		}
 
-		template<class StringT> void push(const StringT& v)
+		void push(const AnyString& v)
 		{
 			dirinfo.push_front();
 			dirinfo.front().parent = v;
@@ -262,17 +267,6 @@ namespace Directory
 			dirinfo.front().open();
 			# endif
 
-		}
-
-		void push(const char* const str, uint64 length)
-		{
-			dirinfo.push_front();
-			dirinfo.front().parent.assign(str, (String::Size) length);
-			# ifdef YUNI_OS_WINDOWS
-			dirinfo.front().open(wbuffer);
-			# else
-			dirinfo.front().open();
-			# endif
 		}
 
 		void pop()
@@ -331,13 +325,13 @@ namespace Directory
 
 
 
-	IteratorData* IteratorDataCreate(const char* folder, uint64 length, uint flags)
+	IteratorData* IteratorDataCreate(const AnyString& folder, uint flags)
 	{
-		if (length)
+		if (not folder.empty())
 		{
 			IteratorData* data = new IteratorData();
 			data->flags = flags;
-			data->push(folder, length);
+			data->push(folder);
 			return data;
 		}
 		return NULL;
@@ -351,7 +345,6 @@ namespace Directory
 
 	void IteratorDataFree(const IteratorData* data)
 	{
-		assert(data != NULL);
 		delete data;
 	}
 

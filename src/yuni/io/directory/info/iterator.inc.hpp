@@ -40,8 +40,7 @@ public:
 			NullIterator(const NullIterator&)
 			{}
 
-			template<class ModelT>
-			NullIterator(const ModelT&)
+			template<class ModelT> NullIterator(const ModelT&)
 			{}
 
 			static void forward(difference_type)
@@ -60,8 +59,7 @@ public:
 				return true;
 			}
 
-			template<class ModelT>
-			bool equals(const ModelT& model)
+			template<class ModelT> bool equals(const ModelT& model)
 			{
 				return (model.pData == NULL);
 			}
@@ -154,13 +152,8 @@ public:
 			{}
 			template<class StringT> explicit Iterator(const StringT& directory)
 			{
-				YUNI_STATIC_ASSERT(Traits::IsString<StringT>::yes, InvalidType);
-
 				// Initializing
-				pData = Private::IO::Directory::IteratorDataCreate(
-					Traits::CString<StringT>::Perform(directory), // c-string
-					Traits::Length<StringT>::Value(directory),    // length of the string
-					FlagsT);                                      // flags
+				pData = Private::IO::Directory::IteratorDataCreate(directory, FlagsT);
 				// We must forward once to get the first item
 				forward();
 			}
@@ -171,11 +164,12 @@ public:
 
 			Iterator(const Iterator& copy) :
 				pData(Private::IO::Directory::IteratorDataCopy(copy.pData))
-			{}
+			{
+			}
+
 			~Iterator()
 			{
-				if (pData)
-					Private::IO::Directory::IteratorDataFree(pData);
+				Private::IO::Directory::IteratorDataFree(pData);
 			}
 
 			void forward()
@@ -227,6 +221,13 @@ public:
 			{
 				assert(pData != NULL);
 				return &Private::IO::Directory::IteratorDataName(pData);
+			}
+
+			Iterator& operator = (const Iterator& copy)
+			{
+				Private::IO::Directory::IteratorDataFree(pData);
+				pData = Private::IO::Directory::IteratorDataCopy(copy.pData);
+				return *this;
 			}
 
 		private:
