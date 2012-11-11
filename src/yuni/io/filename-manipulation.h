@@ -66,6 +66,26 @@ namespace IO
 	*/
 	void ExtractFileName(Clob& out, const AnyString& path, bool systemDependant = true);
 
+	/*!
+	** \brief Extract the path part and the bare file name
+	**
+	** \param[out] path       The path from the original one
+	** \param[out] name       The bare filename from the original one
+	** \param path            The original filename
+	** \param systemDependant Consider only the system-dependant path-separator
+	*/
+	void ExtractFilePathAndName(String& path, String& name, const AnyString& filename, bool systemDependant = true);
+
+	/*!
+	** \brief Extract the path part and the bare file name
+	**
+	** \param[out] path       The path from the original one
+	** \param[out] name       The bare filename from the original one
+	** \param path            The original filename
+	** \param systemDependant Consider only the system-dependant path-separator
+	*/
+	void ExtractFilePathAndName(Clob& path, Clob& name, const AnyString& filename, bool systemDependant = true);
+
 
 	/*!
 	** \brief Extract the bare file name without its extension

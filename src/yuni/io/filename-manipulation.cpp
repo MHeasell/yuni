@@ -331,6 +331,36 @@ namespace IO
 
 
 
+	template<class StringT>
+	static inline void ExtractFilePathAndNameImpl(StringT& path, StringT& name, const AnyString& filename, bool systemDependant)
+	{
+		AnyString::size_type pos = (systemDependant)
+			? filename.find_last_of(IO::Constant<char>::Separator)
+			: filename.find_last_of(IO::Constant<char>::AllSeparators);
+
+		if (AnyString::npos == pos)
+		{
+			path.clear();
+			name.clear();
+		}
+		else
+		{
+			path.assign(filename, pos);
+			name.assign(filename.c_str() +  pos + 1);
+		}
+	}
+
+	void ExtractFilePathAndName(String& path, String& name, const AnyString& filename, bool systemDependant)
+	{
+		ExtractFilePathAndNameImpl(path, name, filename, systemDependant);
+	}
+
+	void ExtractFilePathAndName(Clob& path, Clob& name, const AnyString& filename, bool systemDependant)
+	{
+		ExtractFilePathAndNameImpl(path, name, filename, systemDependant);
+	}
+
+
 
 
 } // namespace IO
