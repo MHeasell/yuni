@@ -18,7 +18,7 @@ namespace Directory
 
 
 
-	IteratorData* IteratorDataCreate(const char* folder, uint64 length, unsigned int flags);
+	IteratorData* IteratorDataCreate(const AnyString& folder, uint flags);
 
 	IteratorData* IteratorDataCopy(const IteratorData*);
 
