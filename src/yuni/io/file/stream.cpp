@@ -180,7 +180,11 @@ namespace File
 			# ifndef YUNI_OS_WINDOWS
 			return (0 == ::ftruncate(fileno(pFd), (off_t) size));
 			# else
+			#	ifndef YUNI_OS_MSVC
+			return (0 == ::chsize(fileno(pFd), (off_t) size));
+			#	else
 			return (0 == _chsize_s(fileno(pFd), (sint64) size));
+			#	endif
 			# endif
 		}
 		return false;
