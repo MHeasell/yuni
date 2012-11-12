@@ -39,16 +39,13 @@ namespace DateTime
 	** \param emptyBefore True to empty the string before anything else
 	** \return True if the operation succeded, false otherwise
 	*/
-	template<class StringT1, class StringT2>
-	bool TimestampToString(StringT1& out, const StringT2& format, Timestamp timestamp = 0,
-		bool emptyBefore = true);
+	bool TimestampToString(String& out, const AnyString& format, Timestamp timestamp = 0, bool emptyBefore = true);
 
+	bool TimestampToString(Clob& out, const AnyString& format, Timestamp timestamp = 0, bool emptyBefore = true);
 
 
 
 } // namespace DateTime
 } // namespace Yuni
-
-# include "timestamp.hxx"
 
 #endif // __YUNI_DATETIME_TIMESTAMP_H__
