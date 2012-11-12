@@ -2,17 +2,26 @@
 #include "timestamp.h"
 #include <time.h>
 #include <cassert>
-#include <iostream>
+
 
 
 namespace Yuni
 {
-namespace Private
-{
 namespace DateTime
 {
 
-	static uint FormatString(char* buffer, uint size, const char* format, sint64 timestamp)
+	Timestamp Now()
+	{
+		# ifdef YUNI_OS_MSVC
+		return (sint64) ::_time64(NULL);
+		# else
+		return (sint64) ::time(NULL);
+		# endif
+	}
+
+
+
+	static inline uint FormatString(char* buffer, uint size, const char* format, sint64 timestamp)
 	{
 		assert(format && '\0' != *format && "invalid format");
 
@@ -44,13 +53,11 @@ namespace DateTime
 		#	endif
 		# endif
 
-		if (written && written < size)
-			return written;
-		return 0;
+		return (written && written < size) ? written : 0;
 	}
 
 
-	char* FormatStringDynBuffer(uint size, const char* format, sint64 timestamp)
+	static inline char* FormatStringDynBuffer(uint size, const char* format, sint64 timestamp)
 	{
 		if (!timestamp)
 		{
@@ -75,29 +82,40 @@ namespace DateTime
 	}
 
 
-
-
-} // namespace DateTime
-} // namespace Private
-} // namespace Yuni
-
-
-
-
-
-namespace Yuni
-{
-namespace DateTime
-{
-
-	Timestamp Now()
+	template<class StringT>
+	static inline bool TimestampToStringImpl(StringT& out, const AnyString& format, Timestamp timestamp, bool emptyBefore)
 	{
-		# ifdef YUNI_OS_MSVC
-		return (sint64) ::_time64(NULL);
-		# else
-		return (sint64) ::time(NULL);
-		# endif
+		if (emptyBefore)
+			out.clear();
+
+		uint guesssize = format.size();
+		if (!guesssize)
+			return true;
+		// valgrind / assert...
+		assert(format.c_str()[format.size()] == '\0' && "format must be zero-terminated");
+
+		guesssize += 128; // arbitrary value
+		char* buffer = FormatStringDynBuffer(guesssize, format.c_str(), timestamp);
+		if (buffer)
+		{
+			out += (const char*) buffer;
+			delete[] buffer;
+			return true;
+		}
+		return false;
 	}
+
+
+	bool TimestampToString(String& out, const AnyString& format, Timestamp timestamp, bool emptyBefore)
+	{
+		return TimestampToString(out, format, timestamp, emptyBefore);
+	}
+
+	bool TimestampToString(Clob& out, const AnyString& format, Timestamp timestamp, bool emptyBefore)
+	{
+		return TimestampToString(out, format, timestamp, emptyBefore);
+	}
+
 
 
 
