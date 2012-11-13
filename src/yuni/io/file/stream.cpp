@@ -9,10 +9,9 @@
 #include "../../core/string/wstring.h"
 
 #ifndef YUNI_OS_WINDOWS
-// lock
-# include <sys/file.h>
-#endif
-#ifdef YUNI_OS_WINDOWS
+# include <unistd.h>   // ftruncate
+# include <sys/file.h> // lock
+#else
 # include "../../core/system/windows.hdr.h"
 # include <io.h>
 #endif
