@@ -108,12 +108,12 @@ namespace DateTime
 
 	bool TimestampToString(String& out, const AnyString& format, Timestamp timestamp, bool emptyBefore)
 	{
-		return TimestampToString(out, format, timestamp, emptyBefore);
+		return TimestampToStringImpl(out, format, timestamp, emptyBefore);
 	}
 
 	bool TimestampToString(Clob& out, const AnyString& format, Timestamp timestamp, bool emptyBefore)
 	{
-		return TimestampToString(out, format, timestamp, emptyBefore);
+		return TimestampToStringImpl(out, format, timestamp, emptyBefore);
 	}
 
 
