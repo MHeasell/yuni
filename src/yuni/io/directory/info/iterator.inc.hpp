@@ -153,7 +153,7 @@ public:
 			template<class StringT> explicit Iterator(const StringT& directory)
 			{
 				// Initializing
-				pData = Private::IO::Directory::IteratorDataCreate(directory, FlagsT);
+				pData = Private::IO::Directory::IteratorDataCreate(AnyString(directory), FlagsT);
 				// We must forward once to get the first item
 				forward();
 			}
