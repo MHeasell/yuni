@@ -20,6 +20,7 @@
 # endif
 
 # include <string>
+# include <functional> // std::hash
 
 
 # ifdef YUNI_HAS_VECTOR
@@ -1743,7 +1744,6 @@ namespace Yuni
 		** \warning Not STL compatible
 		*/
 		const char* data() const;
-
 		//@}
 
 
@@ -1780,6 +1780,11 @@ namespace Yuni
 
 		//! \name Misc
 		//@{
+		/*!
+		** \brief Get the hash of the string (SDBM Hash Function)
+		*/
+		size_t hash() const;
+
 		/*!
 		** \brief Get the first char of the string
 		** \return The last char of the string if not empty, \0 otherwise
