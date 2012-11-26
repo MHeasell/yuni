@@ -8,13 +8,21 @@
 #include "../../core/string.h"
 #include "../../core/string/wstring.h"
 
-#ifndef YUNI_OS_WINDOWS
-# include <unistd.h>   // ftruncate
-# include <sys/file.h> // lock
-#else
+#ifdef YUNI_OS_WINDOWS
 # include "../../core/system/windows.hdr.h"
 # include <io.h>
+# include <stdio.h>    // _FILENO
+#else
+# include <unistd.h>   // ftruncate
+# include <sys/file.h> // lock
 #endif
+
+#ifdef YUNI_OS_MSVC
+# define FILENO(X)  _fileno(X)
+#else
+# define FILENO(X)  fileno(X)
+#endif
+
 
 
 namespace Yuni
@@ -27,24 +35,20 @@ namespace File
 
 	# ifdef YUNI_OS_WINDOWS
 
-	namespace // anonymous
+	static Stream::HandleType OpenFileOnWindows(const AnyString& filename, int mode)
 	{
-		static Stream::HandleType OpenFileOnWindows(const AnyString& filename, int mode)
-		{
-			Private::WString<> wfilenm(filename);
-			if (wfilenm.empty())
-				return NULL;
-			FILE* f;
-			# ifdef YUNI_OS_MSVC
-			if (0 != _wfopen_s(&f, wfilenm.c_str(), OpenMode::ToWCString(mode)))
-				return NULL;
-			# else
-			f = _wfopen(wfilenm.c_str(), OpenMode::ToWCString(mode));
-			# endif
-			return f;
-		}
-
-	} // anonymous namespace
+		Private::WString<> wfilenm(filename);
+		if (wfilenm.empty())
+			return NULL;
+		FILE* f;
+		# ifdef YUNI_OS_MSVC
+		if (0 != _wfopen_s(&f, wfilenm.c_str(), OpenMode::ToWCString(mode)))
+			return NULL;
+		# else
+		f = _wfopen(wfilenm.c_str(), OpenMode::ToWCString(mode));
+		# endif
+		return f;
+	}
 
 	# endif
 
@@ -139,7 +143,7 @@ namespace File
 	bool Stream::lockShared()
 	{
 		# ifndef YUNI_OS_WINDOWS
-		return pFd ? (0 == flock(fileno(pFd), LOCK_SH)) : false;
+		return pFd ? (0 == flock(FILENO(pFd), LOCK_SH)) : false;
 		# else
 		// warning The implementation is missing on Windows (#346)
 		assert("Stream::lock: the implementation is missing on Windows, see ticket #346");
@@ -151,7 +155,7 @@ namespace File
 	bool Stream::lockExclusive()
 	{
 		# ifndef YUNI_OS_WINDOWS
-		return pFd ? (0 == flock(fileno(pFd), LOCK_EX)) : false;
+		return pFd ? (0 == flock(FILENO(pFd), LOCK_EX)) : false;
 		# else
 		// warning The implementation is missing on Windows (#346)
 		assert("Stream::lock: the implementation is missing on Windows, see ticket #346");
@@ -164,7 +168,7 @@ namespace File
 	{
 		# ifndef YUNI_OS_WINDOWS
 		if (pFd)
-			flock(fileno(pFd), LOCK_UN);
+			flock(FILENO(pFd), LOCK_UN);
 		# else
 		// warning The implementation is missing on Windows (#346)
 		assert("Stream::lock: the implementation is missing on Windows, see ticket #346");
@@ -177,12 +181,12 @@ namespace File
 		if (pFd)
 		{
 			# ifndef YUNI_OS_WINDOWS
-			return (0 == ::ftruncate(fileno(pFd), (off_t) size));
+			return (0 == ::ftruncate(FILENO(pFd), (off_t) size));
 			# else
 			#	ifndef YUNI_OS_MSVC
-			return (0 == ::chsize(fileno(pFd), (off_t) size));
+			return (0 == ::chsize(FILENO(pFd), (off_t) size));
 			#	else
-			return (0 == _chsize_s(fileno(pFd), (sint64) size));
+			return (0 == _chsize_s(FILENO(pFd), (sint64) size));
 			#	endif
 			# endif
 		}
