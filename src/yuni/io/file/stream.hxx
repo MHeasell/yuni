@@ -146,25 +146,22 @@ namespace File
 		template<int IsStringT, class U>
 		struct StreamTraitsWrite
 		{
-			static inline size_t Perform(FILE* pFd, const U& u)
+			static inline size_t Perform(FILE* pFd, const AnyString& string)
 			{
-				YUNI_STATIC_ASSERT(Traits::IsString<U>::yes, InvalidTypeForBuffer);
-
 				return ::fwrite(
-					Traits::CString<U>::Perform(u),  // raw data
-					1,                               // nb items
-					Traits::Length<U>::Value(u),     // length
-					pFd);                            // file descriptor
+					string.c_str(),  // raw data
+					1,               // nb items
+					string.size(),   // length
+					pFd);            // file descriptor
 			}
-			static inline size_t Perform(FILE* pFd, const U& u, uint size)
+			static inline size_t Perform(FILE* pFd, const U& string, uint size)
 			{
 				YUNI_STATIC_ASSERT(Traits::IsString<U>::yes, InvalidTypeForBuffer);
-
 				return ::fwrite(
-					Traits::CString<U>::Perform(u),  // raw data
-					1,                               // nb items
-					size,                            // size
-					pFd);                            // file descriptor
+					Traits::CString<U>::Perform(string),  // raw data
+					1,                                    // nb items
+					size,                                 // size
+					pFd);                                 // file descriptor
 			}
 		};
 
@@ -173,6 +170,7 @@ namespace File
 		{
 			static inline size_t Perform(FILE* pFd, const U& u)
 			{
+				// TODO : Find a faster alternative
 				String translator;
 				translator << u;
 				return ::fwrite(translator.c_str(), 1, translator.size(), pFd);
