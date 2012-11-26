@@ -227,7 +227,7 @@ namespace std
 {
 
 	template<unsigned int SizeT, bool ExpT>
-	class YUNI_DECL hash<Yuni::CString<SizeT, ExpT> >
+	struct YUNI_DECL hash<Yuni::CString<SizeT, ExpT> >
 	{
 	public:
 		size_t operator() (const Yuni::CString<SizeT, ExpT>& string) const
