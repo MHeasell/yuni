@@ -25,6 +25,26 @@ check_cxx_source_compiles("
 	typedef decltype(nullptr) NullPtr;
 	class A {}; int main() {A* a = nullptr;return 0;}" YUNI_HAS_NULLPTR)
 
+check_cxx_source_compiles("
+	#include <functional>
+
+	class Dummy {};
+
+	namespace std
+	{
+		template<>
+		struct hash<Dummy>
+		{
+			size_t operator() (const Dummy& ) const
+			{
+				return 0;
+			}
+		};
+
+	} // namespace std
+
+	int main() {return 0;}" YUNI_HAS_STL_HASH)
+
 
 
 # constexpr
