@@ -73,7 +73,7 @@ if (NOT MSVC AND NOT CLANG)
 	check_cxx_compiler_flag("-ggdb3" YUNI_HAS_GCC_FLAG_GGDB3)
 endif()
 
-if (CLANG AND APPLE)
+if (APPLE)
 	# http://lists.cs.uiuc.edu/pipermail/cfe-dev/2011-January/012999.html
 	# Temporary workaround for compiling with Clang on OS X
 	set(YUNI_COMMON_GCC_OPTIONS_UNIX  "${YUNI_COMMON_GCC_OPTIONS_UNIX} -U__STRICT_ANSI__")
@@ -135,7 +135,6 @@ else()
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_DEBUG}")
 endif()
 
-message(STATUS ">>> ${CMAKE_CXX_FLAGS}")
 
 
 #

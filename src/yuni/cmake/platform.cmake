@@ -111,6 +111,9 @@
 /* C++11 constexpr */
 #cmakedefine YUNI_HAS_CONSTEXPR
 
+/* C++11 std::hash */
+#cmakedefine YUNI_HAS_STL_HASH
+
 
 
 #endif /* __YUNI_PLATFORM_CHECKS_H__ */
