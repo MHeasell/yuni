@@ -22,7 +22,7 @@ namespace Directory
 	{
 		uint len = path.size();
 		String norm;
-		Yuni::IO::Normalize(norm, path, len);
+		Yuni::IO::Normalize(norm, AnyString(path, len));
 
 		Private::WString<true> wstr(norm);
 		if (wstr.size() < 4)
