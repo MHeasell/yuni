@@ -681,13 +681,13 @@ namespace Variant
 		virtual void div(char) { }
 		virtual void div(const String&) { }
 
-		virtual bool isEquals(uint32 n) const {return pValue == (T) n;}
-		virtual bool isEquals(sint32 n) const {return pValue == (T) n;}
-		virtual bool isEquals(uint64 n) const {return pValue == (T) n;}
-		virtual bool isEquals(sint64 n) const {return pValue == (T) n;}
+		virtual bool isEquals(uint32 n) const {return pValue == (n != 0);}
+		virtual bool isEquals(sint32 n) const {return pValue == (n != 0);}
+		virtual bool isEquals(uint64 n) const {return pValue == (n != 0);}
+		virtual bool isEquals(sint64 n) const {return pValue == (n != 0);}
 		virtual bool isEquals(double n) const {return Math::Equals<double>((double)pValue, n);}
-		virtual bool isEquals(bool n) const {return pValue == (T) n;}
-		virtual bool isEquals(char n) const {return pValue == (T) n;}
+		virtual bool isEquals(bool n) const {return pValue == n;}
+		virtual bool isEquals(char n) const {return pValue == (n != '\0');}
 		virtual bool isEquals(const String& n) const {return pValue == n.to<T>();}
 
 		virtual void loopbackAssign(IDataHolder& dataholder) const {dataholder.assign(pValue);}
