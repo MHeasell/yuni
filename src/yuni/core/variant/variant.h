@@ -4,10 +4,7 @@
 # include "../../yuni.h"
 # include "../string.h"
 # include "../static/remove.h"
-# include "dataholder/dataholder.h"
-# include "dataholder/string.h"
-# include "dataholder/array.h"
-
+# include "fwd.h"
 
 
 namespace Yuni
@@ -56,29 +53,31 @@ namespace Yuni
 		//! Data holder
 		typedef Private::Variant::IDataHolder  IDataHolder;
 
+		//! Variant internal data type
 		enum InnerType
 		{
 			//! Nil / Not assigned
-			typeNil,
+			tNil,
 			//! Bool
-			typeBool,
+			tBool,
 			//! char
-			typeChar,
+			tChar,
 			//! sint32
-			typeInt32,
+			tInt32,
 			//! sint64
-			typeInt64,
+			tInt64,
 			//! uint32
-			typeUInt32,
+			tUInt32,
 			//! uint64
-			typeUInt64,
+			tUInt64,
 			//! string
-			typeString,
+			tString,
 			//! struct, with members
-			typeClass,
+			tClass,
 			//! array of variants
-			typeArray
+			tArray
 		};
+
 
 	public:
 		//! \name Constructors
@@ -232,6 +231,12 @@ namespace Yuni
 		Variant operator () (const String& method, const Variant& a1, const Variant& a2, const Variant& a3);
 		//! Invoke method with 4 parameters
 		Variant operator () (const String& method, const Variant& a1, const Variant& a2, const Variant& a3, const Variant& a4);
+
+		//! Comparison
+		bool operator == (const Variant& rhs) const;
+		template<class U> bool operator == (const U& rhs) const;
+		template<class U> bool operator != (const U& rhs) const;
+		bool operator ! () const;
 		//@}
 
 
@@ -241,7 +246,7 @@ namespace Yuni
 
 	private:
 		//! Pointer to storage object
-		IDataHolder::Ptr pData;
+		Private::Variant::IDataHolderPtr pData;
 		//! Flag to know if the content is currently shared
 		bool pShareContent;
 
@@ -254,6 +259,9 @@ namespace Yuni
 
 } // namespace Yuni
 
+# include "dataholder/dataholder.h"
+# include "dataholder/string.h"
+# include "dataholder/array.h"
 # include "variant.hxx"
 
 #endif // __YUNI_CORE_VARIANT_VARIANT_H__

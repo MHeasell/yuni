@@ -35,6 +35,11 @@ namespace Yuni
 	}
 
 
+	Variant::InnerType  Variant::type() const
+	{
+		return (!pData) ? tNil : pData->type();
+	}
+
 
 	void Variant::assign(uint32 rhs)
 	{
@@ -43,6 +48,8 @@ namespace Yuni
 		else
 			pData = new Private::Variant::Data<uint32>(rhs);
 	}
+
+
 	void Variant::assign(sint32 rhs)
 	{
 		if (pShareContent && !(!pData))
@@ -50,6 +57,8 @@ namespace Yuni
 		else
 			pData = new Private::Variant::Data<sint32>(rhs);
 	}
+
+
 	void Variant::assign(uint64 rhs)
 	{
 		if (pShareContent && !(!pData))
@@ -57,6 +66,8 @@ namespace Yuni
 		else
 			pData = new Private::Variant::Data<uint64>(rhs);
 	}
+
+
 	void Variant::assign(sint64 rhs)
 	{
 		if (pShareContent && !(!pData))
@@ -64,6 +75,8 @@ namespace Yuni
 		else
 			pData = new Private::Variant::Data<sint64>(rhs);
 	}
+
+
 	void Variant::assign(char rhs)
 	{
 		if (pShareContent && !(!pData))
@@ -71,6 +84,8 @@ namespace Yuni
 		else
 			pData = new Private::Variant::Data<char>(rhs);
 	}
+
+
 	void Variant::assign(bool rhs)
 	{
 		if (pShareContent && !(!pData))
@@ -78,6 +93,8 @@ namespace Yuni
 		else
 			pData = new Private::Variant::Data<bool>(rhs);
 	}
+
+
 	void Variant::assign(double rhs)
 	{
 		if (pShareContent && !(!pData))
@@ -85,6 +102,8 @@ namespace Yuni
 		else
 			pData = new Private::Variant::Data<double>(rhs);
 	}
+
+
 	void Variant::assign(const String& rhs)
 	{
 		if (pShareContent && !(!pData))
@@ -92,6 +111,8 @@ namespace Yuni
 		else
 			pData = new Private::Variant::Data<String>(rhs);
 	}
+
+
 	void Variant::assign(const Variant& rhs)
 	{
 		if (pShareContent && !rhs.isnil())
@@ -185,6 +206,16 @@ namespace Yuni
 	{
 		pData = nullptr;
 		pShareContent = false;
+	}
+
+
+	bool Variant::operator == (const Variant& rhs) const
+	{
+		if (!pData)
+			return rhs.isnil();
+		if (rhs.isnil())
+			return false;
+		return pData->loopbackIsEquals(*rhs.pData);
 	}
 
 

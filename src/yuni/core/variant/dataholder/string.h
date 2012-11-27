@@ -31,6 +31,8 @@ namespace Variant
 		virtual IDataHolder* clone() const
 		{ return new Data<String>(pValue); }
 
+		virtual Yuni::Variant::InnerType type() const {return Yuni::Variant::tString;}
+
 		virtual void clear() { pValue.clear(); }
 
 		virtual IDataHolder* at(uint index) {return index < pValue.size() ? new Data<char>(pValue[index]) : NULL;}
@@ -83,11 +85,21 @@ namespace Variant
 		virtual void div(char) { }
 		virtual void div(const String&) { }
 
+		virtual bool isEquals(uint32 n) const {return pValue.to<uint32>() == n;}
+		virtual bool isEquals(sint32 n) const {return pValue.to<sint32>() == n;}
+		virtual bool isEquals(uint64 n) const {return pValue.to<uint64>() == n;}
+		virtual bool isEquals(sint64 n) const {return pValue.to<sint64>() == n;}
+		virtual bool isEquals(double n) const {return Math::Equals(pValue.to<double>(), n);}
+		virtual bool isEquals(bool n) const {return n == pValue.to<bool>();}
+		virtual bool isEquals(char n) const {return pValue.size() == 1 and n == pValue[0];}
+		virtual bool isEquals(const String& n) const {return pValue == n;}
+
 		virtual void loopbackAssign(IDataHolder& dataholder) const {dataholder.assign(pValue);}
 		virtual void loopbackAdd(IDataHolder& dataholder) const {dataholder.add(pValue);}
 		virtual void loopbackMultiply(IDataHolder& dataholder) const {dataholder.mult(pValue);}
 		virtual void loopbackSub(IDataHolder& dataholder) const {dataholder.sub(pValue);}
 		virtual void loopbackDiv(IDataHolder& dataholder) const {dataholder.div(pValue);}
+		virtual bool loopbackIsEquals(IDataHolder& dataholder) const {return dataholder.isEquals(pValue);};
 
 	private:
 		//! The real data element.
