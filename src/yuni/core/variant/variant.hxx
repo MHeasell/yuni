@@ -150,6 +150,11 @@ namespace Yuni
 		return !pData;
 	}
 
+	inline bool Variant::operator ! () const
+	{
+		return isnil();
+	}
+
 
 	inline Variant& Variant::operator = (const Variant& rhs)
 	{
@@ -210,6 +215,19 @@ namespace Yuni
 	{
 		div(rhs);
 		return *this;
+	}
+
+
+	template<class U>
+	inline bool Variant::operator == (const U& rhs) const
+	{
+		return !pData ? false : pData->isEquals(rhs);
+	}
+
+	template<class U>
+	inline bool Variant::operator != (const U& rhs) const
+	{
+		return not this->operator == (rhs);
 	}
 
 

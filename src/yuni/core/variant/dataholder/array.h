@@ -31,6 +31,8 @@ namespace Variant
 
 		virtual IDataHolder* clone() const { return new ArrayData<T>(*this); }
 
+		virtual Yuni::Variant::InnerType type() const {return Yuni::Variant::tArray;}
+
 		virtual void clear() { pValue.clear(); }
 
 		virtual void assignList(const IDataHolder::Vector& n)
@@ -91,6 +93,15 @@ namespace Variant
 		virtual void div(char) { }
 		virtual void div(const String&) { }
 
+		virtual bool isEquals(uint32 n) const {return false;}
+		virtual bool isEquals(sint32 n) const {return false;}
+		virtual bool isEquals(uint64 n) const {return false;}
+		virtual bool isEquals(sint64 n) const {return false;}
+		virtual bool isEquals(double n) const {return false;}
+		virtual bool isEquals(bool n) const {return false;}
+		virtual bool isEquals(char n) const {return false;}
+		virtual bool isEquals(const String& n) const {return false;}
+
 		//! Method invokation, with no parameter
 		virtual IDataHolder* invoke(const String& name)
 		{
@@ -135,6 +146,7 @@ namespace Variant
 		virtual void loopbackMultiply(IDataHolder&) const {}
 		virtual void loopbackSub(IDataHolder&) const {}
 		virtual void loopbackDiv(IDataHolder&) const {}
+		virtual bool loopbackIsEquals(IDataHolder& dataholder) const {assert(false && "not implemented");return false;};
 
 	private:
 		//! The real data element.
