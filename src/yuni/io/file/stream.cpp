@@ -3,6 +3,9 @@
 # define _GNU_SOURCE
 #endif
 
+// We need to remove strict ansi compliance under MinGW
+// otherwise _wfopen and _fileno are not defined...
+// And we need to do it here, before the first inclusion of <stdio.h>
 #undef __STRICT_ANSI__
 
 #include <string.h>
