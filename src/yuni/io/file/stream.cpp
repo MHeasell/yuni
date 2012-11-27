@@ -3,6 +3,8 @@
 # define _GNU_SOURCE
 #endif
 
+#undef __STRICT_ANSI__
+
 #include <string.h>
 #include "stream.h"
 #include "../../core/string.h"
@@ -11,13 +13,16 @@
 #ifdef YUNI_OS_WINDOWS
 # include "../../core/system/windows.hdr.h"
 # include <io.h>
-# include <stdio.h>    // _FILENO
+# include <stdio.h>    // _fileno
 #else
-# include <unistd.h>   // ftruncate
 # include <sys/file.h> // lock
 #endif
 
-#ifdef YUNI_OS_MSVC
+#ifndef YUNI_OS_MSVC
+# include <unistd.h>   // ftruncate
+#endif
+
+#ifdef YUNI_OS_WINDOWS
 # define FILENO(X)  _fileno(X)
 #else
 # define FILENO(X)  fileno(X)
@@ -180,14 +185,10 @@ namespace File
 	{
 		if (pFd)
 		{
-			# ifndef YUNI_OS_WINDOWS
+			# ifndef YUNI_OS_MSVC
 			return (0 == ::ftruncate(FILENO(pFd), (off_t) size));
 			# else
-			#	ifndef YUNI_OS_MSVC
-			return (0 == ::chsize(FILENO(pFd), (off_t) size));
-			#	else
 			return (0 == _chsize_s(FILENO(pFd), (sint64) size));
-			#	endif
 			# endif
 		}
 		return false;
