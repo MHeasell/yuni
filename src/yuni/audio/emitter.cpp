@@ -85,6 +85,16 @@ namespace Audio
 	}
 
 
+	bool Emitter::pauseSoundDispatched()
+	{
+		if (!pPlaying)
+			return false;
+
+		Private::Audio::OpenAL::PauseSource(pID);
+		return true;
+	}
+
+
 	bool Emitter::stopSoundDispatched()
 	{
 		if (!pPlaying)
