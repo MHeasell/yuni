@@ -325,6 +325,20 @@ namespace Audio
 	}
 
 
+	bool QueueService::Emitters::playing(const AnyString& name)
+	{
+		return playing(get(name));
+	}
+
+
+	bool QueueService::Emitters::playing(Emitter::Ptr emitter)
+	{
+		if (!emitter)
+			return false;
+		return emitter->playing();
+	}
+
+
 	bool QueueService::Emitters::play(Emitter::Ptr emitter)
 	{
 		if (!emitter)
@@ -337,12 +351,27 @@ namespace Audio
 	}
 
 
+	bool QueueService::Emitters::pause(Emitter::Ptr emitter)
+	{
+		if (!emitter)
+			return false;
+		Audio::Loop::RequestType callback;
+ 		callback.bind(emitter, &Emitter::pauseSoundDispatched);
+		// Dispatching...
+ 		pQueueService->pAudioLoop.dispatch(callback);
+		return true;
+	}
+
+
 	bool QueueService::Emitters::stop(const Emitter::Ptr& emitter)
 	{
 		if (!emitter)
 			return false;
-		// TODO
-		return false;
+		Audio::Loop::RequestType callback;
+ 		callback.bind(emitter, &Emitter::stopSoundDispatched);
+		// Dispatching...
+ 		pQueueService->pAudioLoop.dispatch(callback);
+		return true;
 	}
 
 
