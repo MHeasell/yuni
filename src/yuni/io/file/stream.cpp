@@ -6,7 +6,9 @@
 // We need to remove strict ansi compliance under MinGW
 // otherwise _wfopen and _fileno are not defined...
 // And we need to do it here, before the first inclusion of <stdio.h>
-#undef __STRICT_ANSI__
+#ifdef __STRICT_ANSI__
+# undef __STRICT_ANSI__
+#endif
 
 #include <string.h>
 #include "stream.h"
