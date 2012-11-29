@@ -55,7 +55,6 @@ namespace Audio
 		if (!pBuffer)
 			return false;
 
-		std::cout << "Beginning playback on emitter " << pID << "..." << std::endl;
 		pPlaying = Private::Audio::OpenAL::PlaySource(pID);
 		if (!pPlaying)
 		{
@@ -67,8 +66,6 @@ namespace Audio
 		Yuni::timeval now;
 		YUNI_SYSTEM_GETTIMEOFDAY(&now, NULL);
 		pStartTime = now.tv_sec;
-
-		std::cout << "Playback started successfully !" << std::endl;
 		return true;
 	}
 

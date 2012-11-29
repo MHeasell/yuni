@@ -65,7 +65,7 @@ namespace Audio
 	}
 
 
-	bool Sound::destroyDispatched(Thread::Signal& signal)
+	bool Sound::destroyDispatched(Thread::Signal* signal)
 	{
 		if (!pStream)
 			return false;
@@ -74,7 +74,8 @@ namespace Audio
 		pStream = nullptr;
 		Private::Audio::OpenAL::DestroyBuffers(pBufferCount, pIDs);
 		pBufferCount = 0;
-		signal.notify();
+		if (signal)
+			signal->notify();
 		return true;
 	}
 

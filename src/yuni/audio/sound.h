@@ -42,7 +42,7 @@ namespace Audio
 
 		bool prepareDispatched(unsigned int source);
 
-		bool destroyDispatched(Thread::Signal& signal);
+		bool destroyDispatched(Thread::Signal* signal);
 
 		bool updateDispatched(unsigned int source);
 

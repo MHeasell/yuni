@@ -1,6 +1,8 @@
 #ifndef __YUNI_PRIVATE_AUDIO_TYPES_H__
 # define __YUNI_PRIVATE_AUDIO_TYPES_H__
 
+# include <vector>
+
 namespace Yuni
 {
 namespace Private
@@ -32,7 +34,7 @@ namespace Audio
 	struct AudioFile
 	{
 		AVFormatContext* FormatContext;
-		AudioStream** Streams;
+		std::vector<AudioStream*> Streams;
 		size_t StreamsSize;
 	};
 
