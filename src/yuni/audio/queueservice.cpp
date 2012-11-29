@@ -68,6 +68,8 @@ namespace Audio
 		if (!pReady)
 			return;
 
+		pAudioLoop.beginClose();
+
 		// Close OpenAL buffers properly
 		bank.clear();
 
@@ -84,7 +86,7 @@ namespace Audio
 		Yuni::Bind<bool()> callback;
 		callback.bind(&Private::Audio::OpenAL::Close);
 		pAudioLoop.dispatch(callback);
-		pAudioLoop.stop();
+		pAudioLoop.endClose();
 		pReady = false;
 		sHasRunningInstance = 0;
 	}
@@ -399,7 +401,8 @@ namespace Audio
 			Sound::Map::iterator bEnd = pBuffers.end();
 			for (Sound::Map::iterator it = pBuffers.begin(); it != bEnd; ++it)
 			{
-				callback.bind(it->second, &Sound::destroyDispatched, signal);
+				// We have to pass a pointer here, otherwise bind() will call the copy ctor
+				callback.bind(it->second, &Sound::destroyDispatched, &signal);
 				pQueueService->pAudioLoop.dispatch(callback);
 				signal.wait();
 				signal.reset();
@@ -441,7 +444,7 @@ namespace Audio
 			Thread::Signal signal;
 			Yuni::Bind<bool()> callback;
 
-			callback.bind(it->second, &Sound::destroyDispatched, signal);
+			callback.bind(it->second, &Sound::destroyDispatched, &signal);
 			pQueueService->pAudioLoop.dispatch(callback);
 			signal.wait();
 		}
