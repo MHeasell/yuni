@@ -93,14 +93,14 @@ namespace Variant
 		virtual void div(char) { }
 		virtual void div(const String&) { }
 
-		virtual bool isEquals(uint32 n) const {return false;}
-		virtual bool isEquals(sint32 n) const {return false;}
-		virtual bool isEquals(uint64 n) const {return false;}
-		virtual bool isEquals(sint64 n) const {return false;}
-		virtual bool isEquals(double n) const {return false;}
-		virtual bool isEquals(bool n) const {return false;}
-		virtual bool isEquals(char n) const {return false;}
-		virtual bool isEquals(const String& n) const {return false;}
+		virtual bool isEquals(uint32) const {return false;}
+		virtual bool isEquals(sint32) const {return false;}
+		virtual bool isEquals(uint64) const {return false;}
+		virtual bool isEquals(sint64) const {return false;}
+		virtual bool isEquals(double) const {return false;}
+		virtual bool isEquals(bool) const {return false;}
+		virtual bool isEquals(char) const {return false;}
+		virtual bool isEquals(const String&) const {return false;}
 
 		//! Method invokation, with no parameter
 		virtual IDataHolder* invoke(const String& name)
@@ -146,7 +146,7 @@ namespace Variant
 		virtual void loopbackMultiply(IDataHolder&) const {}
 		virtual void loopbackSub(IDataHolder&) const {}
 		virtual void loopbackDiv(IDataHolder&) const {}
-		virtual bool loopbackIsEquals(IDataHolder& dataholder) const {assert(false && "not implemented");return false;};
+		virtual bool loopbackIsEquals(IDataHolder&) const {assert(false && "not implemented");return false;};
 
 	private:
 		//! The real data element.
