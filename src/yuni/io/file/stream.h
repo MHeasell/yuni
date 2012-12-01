@@ -344,9 +344,17 @@ namespace File
 		//@{
 		/*!
 		** \brief Truncate or extend the opened file
+		**
+		** The operation does not guarantee that the data can be really allocated
+		** on disk (depending the platform), and some extra code is required to make
+		** sure of it.
+		** Using `ensureAllocation = true` is the best way for allocating big files.
+		**
+		** \param size The new size of the file
+		** \param allocate True to make sure that the data are really allocated
 		** \return True if the file has been resized
 		*/
-		bool truncate(uint64 size);
+		bool truncate(uint64 size, bool ensureAllocation = false);
 		//@}
 
 

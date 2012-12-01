@@ -27,6 +27,10 @@
 # include <unistd.h>   // ftruncate
 #endif
 
+#if defined(YUNI_HAS_POSIX_FALLOCATE) || defined(YUNI_OS_MAC)
+# include <fcntl.h>
+#endif
+
 #ifdef YUNI_OS_WINDOWS
 # define FILENO(X)  _fileno(X)
 #else
@@ -186,15 +190,117 @@ namespace File
 	}
 
 
-	bool Stream::truncate(uint64 size)
+
+	# if !defined(YUNI_HAS_POSIX_FALLOCATE) && !defined(YUNI_OS_MAC)
+
+	static bool TruncateFileDefault(Stream& file, uint64 size)
+	{
+		// Default implementation
+
+		// Getting the current end of file
+		if (not file.seekFromEndOfFile(0))
+			return false;
+		ssize_t end = (ssize_t) file.tell();
+
+		#	ifndef YUNI_OS_MSVC
+		bool result = (0 == ::ftruncate(FILENO(file.nativeHandle()), (off_t) size));
+		#	else
+		bool result = (0 == _chsize_s(FILENO(file.nativeHandle()), (sint64) size));
+		#	endif
+		if (result)
+		{
+			// if the file was already bigger than the new size, there is nothing to do
+			if ((uint64)end >= size)
+				return true;
+
+			if (not file.seekFromBeginning(end))
+				return false;
+
+			enum
+			{
+				bufferSize = 1024 * 1024
+			};
+			size -= end;
+
+			if (size)
+			{
+				char* zero = new char[bufferSize];
+				(void)::memset(zero, '\0', sizeof(char) * bufferSize);
+
+				while (size > bufferSize)
+				{
+					if (bufferSize != file.write(zero, bufferSize))
+					{
+						delete[] zero;
+						return false;
+					}
+					size -= bufferSize;
+				}
+
+				if (size)
+				{
+					if (size != file.write(zero, size))
+					{
+						delete[] zero;
+						return false;
+					}
+				}
+				delete[] zero;
+			}
+			return true;
+		}
+		return false;
+	}
+
+	# endif
+
+
+
+	bool Stream::truncate(uint64 size, bool ensureAllocation)
 	{
 		if (pFd)
 		{
-			# ifndef YUNI_OS_MSVC
-			return (0 == ::ftruncate(FILENO(pFd), (off_t) size));
-			# else
-			return (0 == _chsize_s(FILENO(pFd), (sint64) size));
-			# endif
+			int fd = FILENO(pFd);
+
+			if (not ensureAllocation)
+			{
+				# ifndef YUNI_OS_MSVC
+				return (0 == ::ftruncate(fd, (off_t) size));
+				# else
+				return (0 == _chsize_s(fd, (sint64) size));
+				# endif
+			}
+			else
+			{
+				# ifdef YUNI_HAS_POSIX_FALLOCATE
+				return (0 == posix_fallocate(fd, 0, (off_t) size));
+				# else
+
+				# ifdef YUNI_OS_MAC
+				// On OS X, we can use fcntl(F_PREALLOCATE) to emulate posix_fallocate
+				// (but ftruncate must be called anyway)
+				fstore_t store;
+				memset(&store, 0, sizeof(store));
+				store.fst_flags    = F_ALLOCATECONTIG;
+				store.fst_posmode  = F_PEOFPOSMODE;
+				store.fst_length   = (off_t) size;
+
+				if (-1 == fcntl(fd, F_PREALLOCATE, &store))
+				{
+					// OK, perhaps we are too fragmented, allocate non-continuous
+					store.fst_flags = F_ALLOCATEALL;
+					if (-1 == fcntl(fd, F_PREALLOCATE, &store))
+						return false;
+				}
+				return (0 == ::ftruncate(fd, (off_t) size));
+
+				# else
+
+				return TruncateFileDefault(*this, size);
+
+				# endif // OS X
+				# endif // POSIX_FALLOCATE
+			}
 		}
 		return false;
 	}
