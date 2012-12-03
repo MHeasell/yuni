@@ -190,6 +190,22 @@ namespace File
 	}
 
 
+	uint64 Stream::read(char* buffer, uint64 size)
+	{
+		//TODO We should not read with block too large (especially on 32bits)
+		// systems. It can make the process/thread interruptible  too long
+		return (uint64) ::fread(buffer, 1, size, pFd);
+	}
+
+
+	uint64 Stream::write(const char* buffer, uint64 size)
+	{
+		//TODO We should not write with block too large (especially on 32bits)
+		// systems. It can make the process/thread interruptible  too long
+		return (uint64) ::fwrite(buffer, 1, (size_t)size, pFd);
+	}
+
+
 
 	# if !defined(YUNI_HAS_POSIX_FALLOCATE) && !defined(YUNI_OS_MAC)
 
