@@ -88,7 +88,7 @@ namespace File
 		if (f.opened())
 		{
 			char buffer[2096 + 1];
-			size_t numRead = 0;
+			uint64 numRead = 0;
 			uint64 totalRead = 0;
 			while ((numRead = f.read((char*)buffer, sizeof(buffer) - 1)) != 0)
 			{

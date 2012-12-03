@@ -137,7 +137,7 @@ namespace Directory
 					if (toFile.open(tmp, IO::OpenMode::write | IO::OpenMode::truncate))
 					{
 						// reading the whole source file
-						size_t numRead;
+						uint64 numRead;
 						while ((numRead = fromFile.read(buffer, bufferSize)) != 0)
 						{
 							// progression
