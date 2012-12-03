@@ -194,7 +194,7 @@ namespace File
 	{
 		//TODO We should not read with block too large (especially on 32bits)
 		// systems. It can make the process/thread interruptible  too long
-		return (uint64) ::fread(buffer, 1, size, pFd);
+		return (uint64) ::fread(buffer, 1, (size_t)size, pFd);
 	}
 
 

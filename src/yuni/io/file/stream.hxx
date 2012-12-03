@@ -149,7 +149,7 @@ namespace File
 				return (uint64) ::fwrite(
 					Traits::CString<U>::Perform(string),  // raw data
 					1,                                    // nb items
-					size,                                 // size
+					(size_t)size,                         // size
 					pFd);                                 // file descriptor
 			}
 		};
@@ -186,8 +186,8 @@ namespace File
 			static inline uint64 Perform(FILE* pFd, bool u, uint64 size)
 			{
 				return u
-					? (uint64)::fwrite("true", 1, 4 > size ? size : 4, pFd)
-					: (uint64)::fwrite("false", 1, 5 > size ? size : 5, pFd);
+					? (uint64)::fwrite("true", 1, 4 > size ? (size_t)size : 4, pFd)
+					: (uint64)::fwrite("false", 1, 5 > size ? (size_t)size : 5, pFd);
 			}
 
 		};
