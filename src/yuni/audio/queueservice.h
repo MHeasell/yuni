@@ -93,6 +93,11 @@ namespace Audio
 			//! Get whether an emitter is playing
 			bool playing(Emitter::Ptr emitter);
 
+			//! Get whether an emitter is paused
+			bool paused(const AnyString& name);
+			//! Get whether an emitter is paused
+			bool paused(Emitter::Ptr emitter);
+
 			//! Start playback on an emitter
 			bool play(const AnyString& name);
 			//! Start playback on an emitter

@@ -341,6 +341,20 @@ namespace Audio
 	}
 
 
+	bool QueueService::Emitters::paused(const AnyString& name)
+	{
+		return paused(get(name));
+	}
+
+
+	bool QueueService::Emitters::paused(Emitter::Ptr emitter)
+	{
+		if (!emitter)
+			return false;
+		return emitter->paused();
+	}
+
+
 	bool QueueService::Emitters::play(Emitter::Ptr emitter)
 	{
 		if (!emitter)

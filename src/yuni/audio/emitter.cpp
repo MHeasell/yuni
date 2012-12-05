@@ -94,7 +94,7 @@ namespace Audio
 
 	bool Emitter::stopSoundDispatched()
 	{
-		if (!pPlaying)
+		if (!pPlaying && !pPaused)
 			return false;
 
 		Private::Audio::OpenAL::StopSource(pID);
@@ -107,6 +107,8 @@ namespace Audio
 		if (!pReady)
 			return false;
 		pPlaying = Private::Audio::OpenAL::IsSourcePlaying(pID);
+		pPaused = Private::Audio::OpenAL::IsSourcePaused(pID);
+		// If not playing, nothing else to do
 		if (!pPlaying)
 			return false;
 		if (pModified)
