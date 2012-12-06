@@ -16,13 +16,13 @@ namespace Display
 	{}
 
 
-	inline unsigned int Resolution::width() const
+	inline uint Resolution::width() const
 	{
 		return pWidth;
 	}
 
 
-	inline unsigned int Resolution::height() const
+	inline uint Resolution::height() const
 	{
 		return pHeight;
 	}

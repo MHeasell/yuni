@@ -228,7 +228,7 @@ operator != (const std::basic_string<char,TraitsT,AllocT>& lhs, const Yuni::CStr
 
 namespace std
 {
-	template<unsigned int SizeT, bool ExpT>
+	template<uint SizeT, bool ExpT>
 	struct YUNI_DECL hash<Yuni::CString<SizeT, ExpT> >
 	{
 		size_t operator() (const Yuni::CString<SizeT, ExpT>& string) const

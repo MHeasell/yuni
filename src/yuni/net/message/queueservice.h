@@ -133,12 +133,12 @@ namespace Message
 		/*!
 		** \brief Send a raw buffer as message to all peers
 		*/
-		Error sendAll(const char* const buffer, unsigned int length);
+		Error sendAll(const char* const buffer, uint length);
 
 		//! Get the maximum size (in bytes) of a message
-		unsigned int messageMaxSize() const;
+		uint messageMaxSize() const;
 		//! Set the maximum size (in bytes, > 0) of a message
-		bool messageMaxSize(unsigned int size);
+		bool messageMaxSize(uint size);
 		//@}
 
 
@@ -171,7 +171,7 @@ namespace Message
 		//! All addresses to listen
 		Transport::ITransport::Set  pListenInfos;
 		//! The maximum size (in bytes) of a message
-		unsigned int pMessageMaxSize;
+		uint pMessageMaxSize;
 		//! Flag to know the state of the server
 		State pState;
 

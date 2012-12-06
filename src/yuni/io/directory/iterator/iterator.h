@@ -89,14 +89,14 @@ namespace Directory
 	** private:
 	** 	void printSpaces()
 	** 	{
-	** 		for (unsigned int i = 0; i != pCounter; ++i)
+	** 		for (uint i = 0; i != pCounter; ++i)
 	** 			std::cout << "    ";
 	** 	}
 	**
 	** private:
-	** 	unsigned int pCounter;
-	** 	unsigned int pFolderCount;
-	** 	unsigned int pFileCount;
+	** 	uint pCounter;
+	** 	uint pFolderCount;
+	** 	uint pFileCount;
 	** 	uint64 pTotalSize;
 	** };
 	**
