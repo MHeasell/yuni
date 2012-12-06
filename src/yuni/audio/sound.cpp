@@ -8,18 +8,19 @@ namespace Audio
 {
 
 
-	bool Sound::prepareDispatched(unsigned int source)
+	bool Sound::prepareDispatched(uint source)
 	{
 		if (!pStream || !pStream->Size)
 			return false;
 
- 		pBufferCount = (pStream->Size > (maxBufferCount - 1) * bufferSize)
- 			? static_cast<unsigned int>(maxBufferCount)
-			: (static_cast<unsigned int>(pStream->Size) / bufferSize + 1);
+		pBufferCount = (pStream->Size > (maxBufferCount - 1) * bufferSize)
+			? static_cast<uint>(maxBufferCount)
+			: (static_cast<uint>(pStream->Size) / bufferSize + 1);
 
 		if (!Private::Audio::OpenAL::CreateBuffers(pBufferCount, pIDs))
 			return false;
-		for (unsigned int i = 0; i < pBufferCount; ++i)
+
+		for (uint i = 0; i < pBufferCount; ++i)
 		{
 			// Make sure we get some data to give to the buffer
 			const size_t count = Private::Audio::AV::GetAudioData(pStream, pData.data(), bufferSize);
@@ -38,7 +39,7 @@ namespace Audio
 	}
 
 
-	bool Sound::updateDispatched(unsigned int source)
+	bool Sound::updateDispatched(uint source)
 	{
 		if (!pStream)
 			return false;

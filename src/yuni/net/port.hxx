@@ -12,7 +12,7 @@ namespace Net
 	{}
 
 
-	inline Port::Port(unsigned int rhs)
+	inline Port::Port(uint rhs)
 		:pValue(rhs)
 	{}
 
@@ -45,7 +45,7 @@ namespace Net
 	}
 
 
-	inline unsigned int Port::value() const
+	inline uint Port::value() const
 	{
 		return pValue;
 	}
@@ -63,7 +63,7 @@ namespace Net
 	}
 
 
-	inline Port& Port::operator = (unsigned int rhs)
+	inline Port& Port::operator = (uint rhs)
 	{
 		pValue = rhs;
 		return *this;
@@ -84,21 +84,21 @@ namespace Net
 	}
 
 
-	inline Port& Port::operator += (unsigned int rhs)
+	inline Port& Port::operator += (uint rhs)
 	{
 		pValue += rhs;
 		return *this;
 	}
 
 
-	inline Port& Port::operator -= (unsigned int rhs)
+	inline Port& Port::operator -= (uint rhs)
 	{
 		pValue -= rhs;
 		return *this;
 	}
 
 
-	inline bool Port::operator == (unsigned int rhs) const
+	inline bool Port::operator == (uint rhs) const
 	{
 		return rhs == pValue;
 	}
@@ -110,7 +110,7 @@ namespace Net
 	}
 
 
-	inline bool Port::operator != (unsigned int rhs) const
+	inline bool Port::operator != (uint rhs) const
 	{
 		return rhs != pValue;
 	}

@@ -29,7 +29,7 @@ namespace File
 
 	bool Size(const AnyString& filename, uint64& value)
 	{
-		unsigned int len = filename.size();
+		uint len = filename.size();
 		if (!len)
 		{
 			value = 0u;
@@ -112,7 +112,7 @@ namespace File
 		# else
 
 		const char* const p = filename.c_str();
-		unsigned int len = filename.size();
+		uint len = filename.size();
 
 		if (p[len - 1] == '\\' || p[len - 1] == '/')
 			--len;

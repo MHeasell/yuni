@@ -77,26 +77,26 @@ namespace Message
 	}
 
 
-	unsigned int QueueService::messageMaxSize() const
- 	{
- 		ThreadingPolicy::MutexLocker locker(*this);
- 		return pMessageMaxSize;
- 	}
- 
- 
- 	bool QueueService::messageMaxSize(unsigned int size)
- 	{
- 		if (!size)
- 			return false;
- 		{
- 			ThreadingPolicy::MutexLocker locker(*this);
- 			pMessageMaxSize = size;
- 		}
- 		return true;
- 	}
+	uint QueueService::messageMaxSize() const
+	{
+		ThreadingPolicy::MutexLocker locker(*this);
+		return pMessageMaxSize;
+	}
 
 
-	Error QueueService::sendAll(const char* const buffer, unsigned int length)
+	bool QueueService::messageMaxSize(uint size)
+	{
+		if (!size)
+			return false;
+		{
+			ThreadingPolicy::MutexLocker locker(*this);
+			pMessageMaxSize = size;
+		}
+		return true;
+	}
+
+
+	Error QueueService::sendAll(const char* const buffer, uint length)
 	{
 		(void) buffer;
 		if (!length)

@@ -25,7 +25,7 @@ namespace Message
 		/*!
 		** \brief Constructor
 		*/
-		IConnection(unsigned int id);
+		IConnection(uint id);
 		//! Destructor
 		virtual ~IConnection();
 		//@}
@@ -33,7 +33,7 @@ namespace Message
 		/*!
 		** \brief Get the local unique ID of the connection
 		*/
-		unsigned int id() const {return pID;}
+		uint id() const {return pID;}
 
 		/*!
 		** \brief Disconnect the client
@@ -51,11 +51,11 @@ namespace Message
 		** \param data Any string
 		** \param size The size of the data
 		*/
-		template<class StringT> void send(const StringT& data, unsigned int size);
+		template<class StringT> void send(const StringT& data, uint size);
 
 	private:
 		//! Local Unique ID
-		unsigned int pID;
+		uint pID;
 		//! Amount of data (bytes) sent to the client
 		uint64 pDataSent;
 		//! Amount of data (bytes) received from the client
