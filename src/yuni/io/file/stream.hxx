@@ -251,6 +251,7 @@ namespace File
 	Stream::read(CString<CSizeT, ExpT>& buffer, uint64 size)
 	{
 		assert(pFd && "File not opened");
+		assert(size <= 2 * 1024 * 1024 * 1024);
 		if (!size)
 			return 0;
 
@@ -259,7 +260,7 @@ namespace File
 			size = buffer.chunkSize;
 
 		// Resizing the buffer
-		buffer.resize(size);
+		buffer.resize((uint) size);
 
 		// Assert to prevent SegV
 		assert(buffer.capacity() != 0 && "When reading a file, the buffer must have reserved some space");
@@ -267,10 +268,10 @@ namespace File
 		typedef CString<CSizeT, ExpT> StringType;
 		typedef typename StringType::Char C;
 		// Reading the file
-		const uint64 result = ::fread(const_cast<char*>(buffer.data()), 1, sizeof(C) * size, pFd);
+		size_t result = ::fread(const_cast<char*>(buffer.data()), 1, (size_t) (sizeof(C) * size), pFd);
 		// Setting the good size, because we may have read less than asked
-		if (result < buffer.size())
-			buffer.truncate(result);
+		if (result < (size_t) buffer.size())
+			buffer.truncate((uint)result);
 		// Making sure that the buffer is zero-terminated if required
 		if (buffer.zeroTerminated)
 			*((C*)(buffer.data() + buffer.size())) = C();
