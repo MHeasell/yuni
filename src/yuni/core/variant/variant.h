@@ -4,6 +4,7 @@
 # include "../../yuni.h"
 # include "../string.h"
 # include "../static/remove.h"
+# include "../static/if.h"
 # include "fwd.h"
 
 
@@ -78,6 +79,14 @@ namespace Yuni
 			tArray
 		};
 
+		template<class T>
+		struct SupportedType
+		{
+			enum { yes = 0, no = 1 };
+
+			//! Type used for operator overloading
+			typedef SupportedType<T> OperatorType;
+		};
 
 	public:
 		//! \name Constructors
@@ -86,14 +95,33 @@ namespace Yuni
 		Variant();
 		//! Constructs a copy of an existing Variant.
 		Variant(const Variant& rhs);
-		//! Constructs a Variant based on an existing variable of simple type.
-		template<class T> Variant(const T& rhs);
 		//! Constructs from a dataholder
 		Variant(const IDataHolder* rhs, bool ref = false);
 		//! Constructs from a dataholder
 		Variant(IDataHolder* rhs, bool ref = false);
 		//! Constructor from nullptr
 		Variant(const NullPtr&);
+
+		//! Constructs a Variant based on an integer.
+		Variant(sint32 rhs);
+		//! Constructs a Variant based on an integer.
+		Variant(sint64 rhs);
+		//! Constructs a Variant based on an integer.
+		Variant(uint32 rhs);
+		//! Constructs a Variant based on an integer.
+		Variant(uint64 rhs);
+		//! Constructs a Variant based on an integer.
+		Variant(float rhs);
+		//! Constructs a Variant based on an integer.
+		Variant(double rhs);
+		//! Constructs a Variant based on a char.
+		Variant(char rhs);
+		//! Constructs a Variant based on a bool
+		Variant(bool rhs);
+		//! Constructs a Variant based on a string
+		Variant(const char* rhs);
+		//! Constructs a Variant based on a string
+		template<uint ChunkT, bool ExpT> Variant(const CString<ChunkT, ExpT>& rhs);
 
 		//! Destructor
 		~Variant() {}

@@ -1,18 +1,9 @@
+
 #include "variant.h"
 
 
 namespace Yuni
 {
-
-	Variant::Variant() :
-		pShareContent(false)
-	{}
-
-
-	Variant::Variant(const NullPtr&) :
-		pShareContent(false)
-	{}
-
 
 	Variant::Variant(const Private::Variant::IDataHolder* rhs, bool ref) :
 		pData(const_cast<Private::Variant::IDataHolder*>(rhs)),
@@ -28,16 +19,9 @@ namespace Yuni
 	}
 
 
-	Variant::Variant(const Variant& rhs) :
-		pShareContent(false)
-	{
-		assign(rhs);
-	}
-
-
 	Variant::InnerType  Variant::type() const
 	{
-		return (!pData) ? tNil : pData->type();
+		return (not pData) ? tNil : pData->type();
 	}
 
 
@@ -222,7 +206,9 @@ namespace Yuni
 	Variant Variant::operator [] (uint index)
 	{
 		if (!pData)
+		{
 			return nullptr;
+		}
 		else
 		{
 			deepCopyIfNonUnique();
