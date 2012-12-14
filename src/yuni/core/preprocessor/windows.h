@@ -37,7 +37,13 @@
 /* MinGW */
 #	ifdef __MINGW32__
 #		define YUNI_OS_MINGW
-#		define YUNI_COMPILER_NAME "MinGW"
+#		ifdef __MINGW64__
+#			define YUNI_OS_MINGW64
+#			define YUNI_COMPILER_NAME "MinGW64"
+#		else
+#			define YUNI_OS_MINGW32
+#			define YUNI_COMPILER_NAME "MinGW32"
+#		endif
 #	endif
 
 
