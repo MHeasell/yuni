@@ -166,22 +166,22 @@
 ** \brief Force inline
 **
 ** \code
-** YNATTR_ALWAYS_INLINE static void max(int x, int y)
+** YUNI_ALWAYS_INLINE static void max(int x, int y)
 ** {
 **	return x > y ? x : y;
 ** }
 ** \endcode
 */
-# ifdef YNATTR_OS_GCC
-#	define YNATTR_ALWAYS_INLINE  __attribute__((always_inline))
-# else
-#	ifdef YUNI_OS_MSVC
-#		define YNATTR_ALWAYS_INLINE  __forceinline
-# 	endif
+# if !defined(YUNI_ALWAYS_INLINE) && defined(YUNI_HAS_GCC_ALWAYS_INLINE)
+#	define YUNI_ALWAYS_INLINE  __attribute__((always_inline))
 # endif
-# ifndef YNATTR_ALWAYS_INLINE
-#	define YNATTR_ALWAYS_INLINE
+# if !defined(YUNI_ALWAYS_INLINE) && defined(YUNI_HAS_MSVC_FORCE_INLINE)
+#	define YUNI_ALWAYS_INLINE  __forceinline
 # endif
+# if !defined(YUNI_ALWAYS_INLINE)
+#	define YUNI_ALWAYS_INLINE
+# endif
+
 
 
 /*!
