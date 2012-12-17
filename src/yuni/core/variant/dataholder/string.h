@@ -13,7 +13,7 @@ namespace Variant
 	** \brief Concrete variant data container (string)
 	*/
 	template<>
-	class Data<String> : public IDataHolder
+	class Data<String> final : public IDataHolder
 	{
 	public:
 		//! Constructor from the variable type

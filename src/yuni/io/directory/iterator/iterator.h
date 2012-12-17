@@ -118,7 +118,7 @@ namespace Directory
 	**    the detached mode is automatically disabled.
 	*/
 	template<bool DetachedT = true>
-	class IIterator
+	class IIterator final
 		# ifndef YUNI_NO_THREAD_SAFE
 		:public Policy::ObjectLevelLockable< IIterator<DetachedT> >
 		# else
@@ -331,7 +331,7 @@ namespace Directory
 		# ifndef YUNI_NO_THREAD_SAFE
 		typedef Yuni::Private::IO::Directory::Iterator::IDetachedThread  ThreadType;
 
-		class DetachedThread : public ThreadType
+		class DetachedThread final : public ThreadType
 		{
 		public:
 			DetachedThread();

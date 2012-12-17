@@ -88,7 +88,7 @@ namespace Iterator
 
 
 	# ifndef YUNI_NO_THREAD_SAFE
-	class IDetachedThread : public Yuni::Thread::IThread
+	class IDetachedThread final : public Yuni::Thread::IThread
 	{
 	public:
 		IDetachedThread() {}
@@ -103,7 +103,7 @@ namespace Iterator
 		Options options;
 
 	protected:
-		virtual bool onExecute()
+		virtual bool onExecute() override
 		{
 			Traverse(options, this);
 			return false;

@@ -343,7 +343,7 @@ namespace Variant
 	** \brief Concrete DataConverter implementation
 	*/
 	template<class TargetType>
-	struct DataConverter : public IDataConverter
+	struct DataConverter final : public IDataConverter
 	{
 	public:
 		DataConverter() : result()
@@ -412,7 +412,7 @@ namespace Variant
 	** This is templated with the real data type.
 	*/
 	template<class T>
-	class Data : public IDataHolder
+	class Data final : public IDataHolder
 	{
 	public:
 		//! Constructor from the variable type
@@ -510,7 +510,7 @@ namespace Variant
 	** \brief Concrete variant data container (char)
 	*/
 	template<>
-	class Data<char> : public IDataHolder
+	class Data<char> final : public IDataHolder
 	{
 	public:
 		typedef int T;
@@ -609,7 +609,7 @@ namespace Variant
 	** \brief Concrete variant data container (bool)
 	*/
 	template<>
-	class Data<bool> : public IDataHolder
+	class Data<bool> final : public IDataHolder
 	{
 	public:
 		typedef bool T;
