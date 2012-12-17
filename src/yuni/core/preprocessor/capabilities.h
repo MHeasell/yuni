@@ -150,7 +150,7 @@
 
 /* 32/64 Bits modes */
 # if !defined(YUNI_OS_32) && !defined(YUNI_OS_64)
-#	if defined(__IA64__) || defined(_IA64) || defined(__amd64__) || defined(__x86_64__) || defined(_M_IA64) || defined(_WIN64)
+#	if defined(__IA64__) || defined(_IA64) || defined(__amd64__) || defined(__x86_64__) || defined(_M_IA64) || defined(_WIN64) || defined(__MINGW64__)
 #		 define YUNI_OS_64
 #	else
 #		 define YUNI_OS_32
