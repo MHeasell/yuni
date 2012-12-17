@@ -120,6 +120,12 @@
 /* C++ msvc force inline */
 #cmakedefine YUNI_HAS_MSVC_FORCE_INLINE
 
+/* C++11 keyword override */
+#cmakedefine YUNI_HAS_CPP_KEYWORD_OVERRIDE
+
+/* C++11 keyword final */
+#cmakedefine YUNI_HAS_CPP_KEYWORD_FINAL
+
 
 
 #endif /* __YUNI_PLATFORM_CHECKS_H__ */
