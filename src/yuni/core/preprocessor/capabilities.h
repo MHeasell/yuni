@@ -183,6 +183,16 @@
 # endif
 
 
+# ifndef YUNI_HAS_CPP_KEYWORD_OVERRIDE
+#	define override
+# endif
+
+# ifndef YUNI_HAS_CPP_KEYWORD_FINAL
+#	define final
+# endif
+
+
+
 
 /*!
 ** \def YUNI_DEPRECATED

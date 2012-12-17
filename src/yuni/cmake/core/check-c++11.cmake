@@ -20,10 +20,13 @@ if(YUNI_HAS_GCC_CPP0X_SUPPORT)
 		set(CMAKE_REQUIRED_FLAGS "-std=c++0x")
 	endif()
 endif()
+
+
 check_cxx_source_compiles("
 	#include <cstddef>
 	typedef decltype(nullptr) NullPtr;
 	class A {}; int main() {A* a = nullptr;return 0;}" YUNI_HAS_NULLPTR)
+
 
 check_cxx_source_compiles("
 	#include <functional>
@@ -63,6 +66,37 @@ else()
 			return max(42, 0);
 		} "  YUNI_HAS_GCC_ALWAYS_INLINE)
 endif()
+
+
+
+check_cxx_source_compiles("
+	class IBase
+	{
+	public:
+		virtual void foo() {}
+	};
+	class Foo : public IBase
+	{
+	public:
+		virtual void foo() override {}
+	};
+
+	int main() {Foo foo;return 0;}" YUNI_HAS_CPP_KEYWORD_OVERRIDE)
+
+
+check_cxx_source_compiles("
+	class IBase
+	{
+	public:
+		virtual void foo() {}
+	};
+	class Foo : public IBase
+	{
+	public:
+		virtual void foo() final {}
+	};
+
+	int main() {Foo foo;return 0;}" YUNI_HAS_CPP_KEYWORD_FINAL)
 
 
 # constexpr
