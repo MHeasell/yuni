@@ -39,7 +39,7 @@
 # endif
 
 /* MinGW */
-# ifdef __MINGW32__
+# if defined(__MINGW32__) || defined(__MINGW64__)
 #	define YUNI_OS_MINGW
 #	ifdef __MINGW64__
 #		define YUNI_OS_MINGW64
