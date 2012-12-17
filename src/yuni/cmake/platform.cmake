@@ -114,6 +114,12 @@
 /* C++11 std::hash */
 #cmakedefine YUNI_HAS_STL_HASH
 
+/* C++ gcc always inline */
+#cmakedefine YUNI_HAS_GCC_ALWAYS_INLINE
+
+/* C++ msvc force inline */
+#cmakedefine YUNI_HAS_MSVC_FORCE_INLINE
+
 
 
 #endif /* __YUNI_PLATFORM_CHECKS_H__ */

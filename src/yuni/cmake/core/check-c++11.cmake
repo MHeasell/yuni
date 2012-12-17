@@ -46,6 +46,24 @@ check_cxx_source_compiles("
 	int main() {return 0;}" YUNI_HAS_STL_HASH)
 
 
+if (MSVC)
+	# MSVC __forceinline
+	check_cxx_source_compiles("
+		__forceinline static int max(int x, int y) { return x > y ? x : y;}
+		int main(void)
+		{
+			return max(42, 0);
+		} "  YUNI_HAS_MSVC_FORCE_INLINE)
+else()
+	# gcc __attribute__((always_inline))
+	check_cxx_source_compiles("
+		__attribute__((always_inline)) static int max(int x, int y) { return x > y ? x : y;}
+		int main(void)
+		{
+			return max(42, 0);
+		} "  YUNI_HAS_GCC_ALWAYS_INLINE)
+endif()
+
 
 # constexpr
 #if(YUNI_HAS_GCC_CPP0X_SUPPORT)
