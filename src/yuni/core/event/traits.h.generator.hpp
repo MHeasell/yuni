@@ -36,8 +36,8 @@ namespace EventImpl
 	class PredicateRemoveObject
 	{
 	public:
-		PredicateRemoveObject(const void* object)
-			:pObject(object)
+		PredicateRemoveObject(const void* object) :
+			pObject(object)
 		{}
 
 		bool operator == (const BindT& rhs) const
@@ -53,8 +53,8 @@ namespace EventImpl
 	class PredicateRemoveObserverBase
 	{
 	public:
-		PredicateRemoveObserverBase(IEvent* event, const IEventObserverBase* object)
-			:pEvent(event), pObject(object)
+		PredicateRemoveObserverBase(IEvent* event, const IEventObserverBase* object) :
+			pEvent(event), pObject(object)
 		{}
 
 		bool operator == (const BindT& rhs) const
@@ -76,8 +76,8 @@ namespace EventImpl
 	class PredicateRemoveWithoutChecks
 	{
 	public:
-		PredicateRemoveWithoutChecks(const IEventObserverBase* object)
-			:pObject(object)
+		PredicateRemoveWithoutChecks(const IEventObserverBase* object) :
+			pObject(object)
 		{}
 
 		inline bool operator == (const BindT& rhs) const
@@ -92,7 +92,7 @@ namespace EventImpl
 
 <% (0..generator.argumentCount).each do |i| %>
 	template<class BindT>
-	class WithNArguments<<%=i%>, BindT> : public Policy::ObjectLevelLockable<WithNArguments<<%=i%>,BindT> >
+	class WithNArguments<<%=i%>, BindT> final : public Policy::ObjectLevelLockable<WithNArguments<<%=i%>,BindT> >
 	{
 	public:
 		//! The Threading Policy
@@ -108,8 +108,8 @@ namespace EventImpl
 		//! \name Constructors
 		//@{
 		//! Default constructor
-		WithNArguments()
-			:pEmpty(true)
+		WithNArguments() :
+			pEmpty(true)
 		{}
 		//! Copy constructor
 		WithNArguments(const WithNArguments& rhs)

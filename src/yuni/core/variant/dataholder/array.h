@@ -13,7 +13,7 @@ namespace Variant
 	** \brief Concrete variant data container
 	*/
 	template<class T>
-	class ArrayData : public IDataHolder
+	class ArrayData final : public IDataHolder
 	{
 	public:
 		ArrayData() {}
