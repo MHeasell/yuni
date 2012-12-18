@@ -251,7 +251,7 @@ namespace File
 	Stream::read(CString<CSizeT, ExpT>& buffer, uint64 size)
 	{
 		assert(pFd && "File not opened");
-		assert(size <= 2 * 1024 * 1024 * 1024);
+		assert(size <= uint64(2 * 1024) * 1024 * 1024);
 		if (!size)
 			return 0;
 
