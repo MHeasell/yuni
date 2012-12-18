@@ -93,7 +93,7 @@ namespace EventImpl
 
 
 	template<class BindT>
-	class WithNArguments<0, BindT> final : public Policy::ObjectLevelLockable<WithNArguments<0,BindT> >
+	class WithNArguments<0, BindT> : public Policy::ObjectLevelLockable<WithNArguments<0,BindT> >
 	{
 	public:
 		//! The Threading Policy
@@ -203,7 +203,7 @@ namespace EventImpl
 
 
 	template<class BindT>
-	class WithNArguments<1, BindT> final : public Policy::ObjectLevelLockable<WithNArguments<1,BindT> >
+	class WithNArguments<1, BindT> : public Policy::ObjectLevelLockable<WithNArguments<1,BindT> >
 	{
 	public:
 		//! The Threading Policy
@@ -315,7 +315,7 @@ namespace EventImpl
 
 
 	template<class BindT>
-	class WithNArguments<2, BindT> final : public Policy::ObjectLevelLockable<WithNArguments<2,BindT> >
+	class WithNArguments<2, BindT> : public Policy::ObjectLevelLockable<WithNArguments<2,BindT> >
 	{
 	public:
 		//! The Threading Policy
@@ -429,7 +429,7 @@ namespace EventImpl
 
 
 	template<class BindT>
-	class WithNArguments<3, BindT> final : public Policy::ObjectLevelLockable<WithNArguments<3,BindT> >
+	class WithNArguments<3, BindT> : public Policy::ObjectLevelLockable<WithNArguments<3,BindT> >
 	{
 	public:
 		//! The Threading Policy
@@ -545,7 +545,7 @@ namespace EventImpl
 
 
 	template<class BindT>
-	class WithNArguments<4, BindT> final : public Policy::ObjectLevelLockable<WithNArguments<4,BindT> >
+	class WithNArguments<4, BindT> : public Policy::ObjectLevelLockable<WithNArguments<4,BindT> >
 	{
 	public:
 		//! The Threading Policy
@@ -663,7 +663,7 @@ namespace EventImpl
 
 
 	template<class BindT>
-	class WithNArguments<5, BindT> final : public Policy::ObjectLevelLockable<WithNArguments<5,BindT> >
+	class WithNArguments<5, BindT> : public Policy::ObjectLevelLockable<WithNArguments<5,BindT> >
 	{
 	public:
 		//! The Threading Policy
@@ -783,7 +783,7 @@ namespace EventImpl
 
 
 	template<class BindT>
-	class WithNArguments<6, BindT> final : public Policy::ObjectLevelLockable<WithNArguments<6,BindT> >
+	class WithNArguments<6, BindT> : public Policy::ObjectLevelLockable<WithNArguments<6,BindT> >
 	{
 	public:
 		//! The Threading Policy
@@ -905,7 +905,7 @@ namespace EventImpl
 
 
 	template<class BindT>
-	class WithNArguments<7, BindT> final : public Policy::ObjectLevelLockable<WithNArguments<7,BindT> >
+	class WithNArguments<7, BindT> : public Policy::ObjectLevelLockable<WithNArguments<7,BindT> >
 	{
 	public:
 		//! The Threading Policy
@@ -1029,7 +1029,7 @@ namespace EventImpl
 
 
 	template<class BindT>
-	class WithNArguments<8, BindT> final : public Policy::ObjectLevelLockable<WithNArguments<8,BindT> >
+	class WithNArguments<8, BindT> : public Policy::ObjectLevelLockable<WithNArguments<8,BindT> >
 	{
 	public:
 		//! The Threading Policy
@@ -1155,7 +1155,7 @@ namespace EventImpl
 
 
 	template<class BindT>
-	class WithNArguments<9, BindT> final : public Policy::ObjectLevelLockable<WithNArguments<9,BindT> >
+	class WithNArguments<9, BindT> : public Policy::ObjectLevelLockable<WithNArguments<9,BindT> >
 	{
 	public:
 		//! The Threading Policy
@@ -1283,7 +1283,7 @@ namespace EventImpl
 
 
 	template<class BindT>
-	class WithNArguments<10, BindT> final : public Policy::ObjectLevelLockable<WithNArguments<10,BindT> >
+	class WithNArguments<10, BindT> : public Policy::ObjectLevelLockable<WithNArguments<10,BindT> >
 	{
 	public:
 		//! The Threading Policy
@@ -1413,7 +1413,7 @@ namespace EventImpl
 
 
 	template<class BindT>
-	class WithNArguments<11, BindT> final : public Policy::ObjectLevelLockable<WithNArguments<11,BindT> >
+	class WithNArguments<11, BindT> : public Policy::ObjectLevelLockable<WithNArguments<11,BindT> >
 	{
 	public:
 		//! The Threading Policy
@@ -1545,7 +1545,7 @@ namespace EventImpl
 
 
 	template<class BindT>
-	class WithNArguments<12, BindT> final : public Policy::ObjectLevelLockable<WithNArguments<12,BindT> >
+	class WithNArguments<12, BindT> : public Policy::ObjectLevelLockable<WithNArguments<12,BindT> >
 	{
 	public:
 		//! The Threading Policy
@@ -1679,7 +1679,7 @@ namespace EventImpl
 
 
 	template<class BindT>
-	class WithNArguments<13, BindT> final : public Policy::ObjectLevelLockable<WithNArguments<13,BindT> >
+	class WithNArguments<13, BindT> : public Policy::ObjectLevelLockable<WithNArguments<13,BindT> >
 	{
 	public:
 		//! The Threading Policy
@@ -1815,7 +1815,7 @@ namespace EventImpl
 
 
 	template<class BindT>
-	class WithNArguments<14, BindT> final : public Policy::ObjectLevelLockable<WithNArguments<14,BindT> >
+	class WithNArguments<14, BindT> : public Policy::ObjectLevelLockable<WithNArguments<14,BindT> >
 	{
 	public:
 		//! The Threading Policy
@@ -1953,7 +1953,7 @@ namespace EventImpl
 
 
 	template<class BindT>
-	class WithNArguments<15, BindT> final : public Policy::ObjectLevelLockable<WithNArguments<15,BindT> >
+	class WithNArguments<15, BindT> : public Policy::ObjectLevelLockable<WithNArguments<15,BindT> >
 	{
 	public:
 		//! The Threading Policy
@@ -2093,7 +2093,7 @@ namespace EventImpl
 
 
 	template<class BindT>
-	class WithNArguments<16, BindT> final : public Policy::ObjectLevelLockable<WithNArguments<16,BindT> >
+	class WithNArguments<16, BindT> : public Policy::ObjectLevelLockable<WithNArguments<16,BindT> >
 	{
 	public:
 		//! The Threading Policy

@@ -74,7 +74,7 @@ namespace File
 	**   routines 'fopen', 'fclose'... The implementation is a bit different on Windows
 	**   because 'fopen' only handles ansi filenames.
 	*/
-	class Stream
+	class Stream final
 	{
 	public:
 		//! The native handle type

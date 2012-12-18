@@ -106,7 +106,7 @@ namespace Yuni
 	**   string with a fixed-length capacity (equals to ChunkSizeT)
 	*/
 	template<uint ChunkSizeT, bool ExpandableT>
-	class YUNI_DECL CString :
+	class YUNI_DECL CString final :
 		protected Private::CStringImpl::Data<ChunkSizeT,ExpandableT>
 	{
 	public:
