@@ -39,7 +39,7 @@ namespace Yuni
 	**
 	** \ingroup Core
 	*/
-	class YUNI_DECL Variant
+	class YUNI_DECL Variant final
 	{
 	public:
 		template<class T>

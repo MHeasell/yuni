@@ -92,7 +92,7 @@ namespace EventImpl
 
 <% (0..generator.argumentCount).each do |i| %>
 	template<class BindT>
-	class WithNArguments<<%=i%>, BindT> final : public Policy::ObjectLevelLockable<WithNArguments<<%=i%>,BindT> >
+	class WithNArguments<<%=i%>, BindT> : public Policy::ObjectLevelLockable<WithNArguments<<%=i%>,BindT> >
 	{
 	public:
 		//! The Threading Policy

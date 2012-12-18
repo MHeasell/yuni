@@ -21,7 +21,7 @@ namespace Yuni
 	**
 	** \ingroup Threads
 	*/
-	class YUNI_DECL Semaphore
+	class YUNI_DECL Semaphore final
 	{
 	public:
 		/*!
