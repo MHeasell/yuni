@@ -38,66 +38,66 @@ namespace Directory
 	**	typedef IO::Flow Flow;
 	**
 	** public:
-	** 	MyIterator() {}
-	** 	virtual ~MyIterator()
-	** 	{
-	** 		// For code robustness and to avoid corrupt vtable
-	** 		stop();
-	** 	}
+	**	MyIterator() {}
+	**	virtual ~MyIterator()
+	**	{
+	**		// For code robustness and to avoid corrupt vtable
+	**		stop();
+	**	}
 	**
 	** protected:
-	** 	virtual bool onStart(const String& rootFolder)
-	** 	{
-	** 		std::cout << " [+] " << rootFolder << std::endl;
-	** 		pCounter = 1;
-	** 		pFileCount = 0;
-	** 		pFolderCount = 0;
-	** 		pTotalSize = 0;
-	** 		return true;
-	** 	}
+	**	virtual bool onStart(const String& rootFolder)
+	**	{
+	**		std::cout << " [+] " << rootFolder << std::endl;
+	**		pCounter = 1;
+	**		pFileCount = 0;
+	**		pFolderCount = 0;
+	**		pTotalSize = 0;
+	**		return true;
+	**	}
 	**
-	** 	virtual Flow onBeginFolder(const String&, const String&, const String& name)
-	** 	{
-	** 		printSpaces();
-	** 		std::cout << " [+] " << name << std::endl;
-	** 		++pCounter;
-	** 		++pFolderCount;
-	** 		return IO::flowContinue;
-	** 	}
+	**	virtual Flow onBeginFolder(const String&, const String&, const String& name)
+	**	{
+	**		printSpaces();
+	**		std::cout << " [+] " << name << std::endl;
+	**		++pCounter;
+	**		++pFolderCount;
+	**		return IO::flowContinue;
+	**	}
 	**
 	**	virtual void onEndFolder(const String&, const String&, const String&)
 	**	{
 	**		--pCounter;
 	**	}
 	**
-	** 	virtual Flow onFile(const String&, const String&, const String& name, uint64 size)
-	** 	{
-	** 		printSpaces();
-	** 		std::cout << "  -  " << name << " (" << size << " bytes)" << std::endl;
-	** 		++pFileCount;
-	** 		pTotalSize += size;
-	** 		return IO::flowContinue;
-	** 	}
+	**	virtual Flow onFile(const String&, const String&, const String& name, uint64 size)
+	**	{
+	**		printSpaces();
+	**		std::cout << "  -  " << name << " (" << size << " bytes)" << std::endl;
+	**		++pFileCount;
+	**		pTotalSize += size;
+	**		return IO::flowContinue;
+	**	}
 	**
-	** 	virtual void onTerminate()
-	** 	{
-	** 		std::cout << "\n";
+	**	virtual void onTerminate()
+	**	{
+	**		std::cout << "\n";
 	**		std::cout << pFolderCount << " folder(s), " << pFileCount << " file(s),  "
 	**			<< pTotalSize << " bytes" << std::endl;
-	** 	}
+	**	}
 	**
 	** private:
-	** 	void printSpaces()
-	** 	{
-	** 		for (uint i = 0; i != pCounter; ++i)
-	** 			std::cout << "    ";
-	** 	}
+	**	void printSpaces()
+	**	{
+	**		for (uint i = 0; i != pCounter; ++i)
+	**			std::cout << "    ";
+	**	}
 	**
 	** private:
-	** 	uint pCounter;
-	** 	uint pFolderCount;
-	** 	uint pFileCount;
-	** 	uint64 pTotalSize;
+	**	uint pCounter;
+	**	uint pFolderCount;
+	**	uint pFileCount;
+	**	uint64 pTotalSize;
 	** };
 	**
 	**
@@ -118,7 +118,7 @@ namespace Directory
 	**    the detached mode is automatically disabled.
 	*/
 	template<bool DetachedT = true>
-	class IIterator final
+	class IIterator
 		# ifndef YUNI_NO_THREAD_SAFE
 		:public Policy::ObjectLevelLockable< IIterator<DetachedT> >
 		# else
