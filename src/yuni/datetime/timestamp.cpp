@@ -19,7 +19,18 @@ namespace DateTime
 		# endif
 	}
 
+} // namespace DateTime
+} // namespace Yuni
 
+
+
+
+namespace Yuni
+{
+namespace Private
+{
+namespace DateTime
+{
 
 	static inline uint FormatString(char* buffer, uint size, const char* format, sint64 timestamp)
 	{
@@ -57,9 +68,11 @@ namespace DateTime
 	}
 
 
-	static inline char* FormatStringDynBuffer(uint size, const char* format, sint64 timestamp)
+	char* FormatTimestampToString(const AnyString& format, sint64 timestamp)
 	{
-		if (!timestamp)
+		assert(not format.empty() && "this routine must not be called if the format is empty");
+
+		if (timestamp <= 0)
 		{
 			# ifdef YUNI_OS_MSVC
 			timestamp = (sint64) ::_time64(NULL);
@@ -68,58 +81,36 @@ namespace DateTime
 			# endif
 		}
 
-		uint tick = 5;
+		// trying to guess the future size of the formatted string to reduce memory allocation
+		uint size = format.size();
+		// valgrind / assert...
+		assert(format.c_str()[format.size()] == '\0' && "format must be zero-terminated");
+		size += 128; // arbitrary value
+
+		char* buffer = nullptr;
+		uint tick = 10;
 		do
 		{
-			char* buffer = new char[size];
-			if (FormatString(buffer, size, format, timestamp))
+			buffer  = (char*)::realloc(buffer, size * sizeof(char));
+			if (FormatString(buffer, size, format.c_str(), timestamp))
 				return buffer;
+
+			// there was not enough room for storing the formatted string
+			// trying again with more rooms
 			size += 256;
-			delete[] buffer;
 		}
 		while (--tick);
+
+		::free(buffer);
 		return nullptr;
 	}
 
-
-	template<class StringT>
-	static inline bool TimestampToStringImpl(StringT& out, const AnyString& format, Timestamp timestamp, bool emptyBefore)
-	{
-		if (emptyBefore)
-			out.clear();
-
-		uint guesssize = format.size();
-		if (!guesssize)
-			return true;
-		// valgrind / assert...
-		assert(format.c_str()[format.size()] == '\0' && "format must be zero-terminated");
-
-		guesssize += 128; // arbitrary value
-		char* buffer = FormatStringDynBuffer(guesssize, format.c_str(), timestamp);
-		if (buffer)
-		{
-			out += (const char*) buffer;
-			delete[] buffer;
-			return true;
-		}
-		return false;
-	}
-
-
-	bool TimestampToString(String& out, const AnyString& format, Timestamp timestamp, bool emptyBefore)
-	{
-		return TimestampToStringImpl(out, format, timestamp, emptyBefore);
-	}
-
-	bool TimestampToString(Clob& out, const AnyString& format, Timestamp timestamp, bool emptyBefore)
-	{
-		return TimestampToStringImpl(out, format, timestamp, emptyBefore);
-	}
 
 
 
 
 } // namespace DateTime
+} // namespace Private
 } // namespace Yuni
 
 

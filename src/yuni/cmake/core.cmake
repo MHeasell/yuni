@@ -670,6 +670,7 @@ source_group(core\\any FILES ${SRC_CORE_ANY})
 
 set(SRC_DATETIME
 		datetime/timestamp.h
+		datetime/timestamp.hxx
 		datetime/timestamp.cpp
 )
 source_group(datetime\\ FILES ${SRC_DATETIME})
