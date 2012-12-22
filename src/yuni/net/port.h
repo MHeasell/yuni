@@ -17,6 +17,17 @@ namespace Net
 	class Port
 	{
 	public:
+		struct Range
+		{
+			//! Get if the port is well-known (0..1023)
+			static bool IsWellKnown(const Port& port);
+			//! Get if the port is registered (0..49151)
+			static bool IsRegistered(const Port& port);
+			//! Get if the port is dynamic and/or private (>= 49152)
+			static bool IsDynamic(const Port& port);
+		};
+
+	public:
 		//! \name Constructors
 		//@{
 		//! Default constructor
@@ -35,18 +46,6 @@ namespace Net
 		uint value() const;
 		//! Get if the port is valid
 		bool valid() const;
-		//@}
-
-		//! \name Ranges
-		//@{
-		//! Get if the port is well-known (0..1023)
-		bool wellKnown() const;
-
-		//! Get if the port is registered (0..49151)
-		bool registered() const;
-
-		//! Get if the port is dynamic and/or private (>= 49152)
-		bool dynamic() const;
 
 		//! Get if no port is allocated
 		bool none() const;

@@ -1,6 +1,42 @@
 
 #include "queueservice.h"
-#include "transport/tcp.h"
+#include "worker.h"
+#include "../../thread/array.h"
+
+
+typedef Yuni::Thread::Array<Yuni::Private::Net::Message::Worker>  Workers;
+
+typedef Yuni::Net::Message::Transport::ITransport::Set  Listeners;
+
+
+
+namespace Yuni
+{
+namespace Private
+{
+namespace Net
+{
+namespace Message
+{
+
+	class QueueServiceData
+	{
+	public:
+		//! All workers
+		Workers workers;
+		//! All addresses to listen
+		Listeners listeners;
+
+	}; // class QueueServiceData
+
+
+
+} // namespace Message
+} // namespace Net
+} // namespace Private
+} // namespace Yuni
+
+
 
 
 namespace Yuni
@@ -10,60 +46,48 @@ namespace Net
 namespace Message
 {
 
-	QueueService::QueueService()
-		:pMessageMaxSize(messageDefaultMaxSize),
-		pState(stStopped)
-	{}
+	static inline void InitializeInternalData(Yuni::Private::Net::Message::QueueServiceData* data)
+	{
+		if (not data)
+			data = new Yuni::Private::Net::Message::QueueServiceData();
+	}
+
+
+
+	QueueService::QueueService() :
+		pState(stStopped),
+		pData(nullptr)
+	{
+	}
 
 
 	QueueService::~QueueService()
 	{
-		// Removing all user infos
-		pListenInfos.clear();
 		// Stopping all workers
-		if (pState != stStopped)
-			stop();
-
-		// Asserts
-		assert(pWorkers.empty() && "All workers must be stopped at this point");
+		stop();
+		// release internal data
+		delete pData;
 	}
 
 
-
-	Error  QueueService::listen(const AnyString& address, const Port& port, TransportLayer transport)
+	Error  QueueService::addListener(const AnyString& address, const Port& port, Transport::ITransport::Ptr transport)
 	{
-		using namespace Yuni::Net::Message::Transport;
-		switch (transport)
-		{
-			case tlTCP:
-				return listen(address, port, new Transport::TCP(tmServer));
-			case tlUDP:
-				return listen(address, port, nullptr);
-			default:
-				break;
-		}
-		return errInvalidTransport;
-	}
-
-
-
-	Error  QueueService::listen(const AnyString& address, const Port& port, Transport::ITransport::Ptr transport)
-	{
-		if (!port.valid())
+		if (not port.valid())
 			return errInvalidPort;
-		if (!transport || transport->mode != Transport::tmServer)
+		if (not transport || transport->mode != Transport::tmServer)
 			return errInvalidTransport;
 
 		// The address
 		transport->address = address;
 		transport->port    = port;
-		if (!transport->address)
+		if (not transport->address)
 			return errInvalidHostAddress;
 
 		// Adding the new address
 		{
 			ThreadingPolicy::MutexLocker locker(*this);
-			if (!pListenInfos.insert(transport).second)
+			InitializeInternalData(pData);
+			if (not pData->listeners.insert(transport).second)
 				return errDupplicatedAddress;
 		}
 		return errNone;
@@ -73,41 +97,9 @@ namespace Message
 	void QueueService::clear()
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
-		pListenInfos.clear();
+		if (pData)
+			pData->listeners.clear();
 	}
-
-
-	uint QueueService::messageMaxSize() const
-	{
-		ThreadingPolicy::MutexLocker locker(*this);
-		return pMessageMaxSize;
-	}
-
-
-	bool QueueService::messageMaxSize(uint size)
-	{
-		if (!size)
-			return false;
-		{
-			ThreadingPolicy::MutexLocker locker(*this);
-			pMessageMaxSize = size;
-		}
-		return true;
-	}
-
-
-	Error QueueService::sendAll(const char* const buffer, uint length)
-	{
-		(void) buffer;
-		if (!length)
-			return errNone;
-		if (length < pMessageMaxSize)
-		{
-			return errNone;
-		}
-		return errMessageMaxSize;
-	}
-
 
 
 	Error QueueService::start()
@@ -115,44 +107,85 @@ namespace Message
 		// Checking if the service is not already running
 		{
 			ThreadingPolicy::MutexLocker locker(*this);
+
+			// Directly stop if there is no transport available
+			if (not pData || pData->listeners.empty())
+			{
+				pState = stStopped;
+				return errNoTransport;
+			}
+
+			// checking the current state
 			if (pState != stStopped)
 				return (pState == stRunning) ? errNone : errUnknown;
+
+			// ok, let's start
 			pState = stStarting;
 		}
 
+		// note: from now on, we know that pData is initialized due to the previous check
+
+		// no error by default
 		Error err = errNone;
 
 		// The internal mutex must be unlocked whenever an event is called to prevent
 		// any deadlocks.
-		onStarting(err);
+		events.starting(err);
 		if (err != errNone)
 		{
 			ThreadingPolicy::MutexLocker locker(*this);
 			pState = stStopped;
 			return err;
 		}
+
 		// Trying to start all workers
 		{
 			ThreadingPolicy::MutexLocker locker(*this);
+
+			// destroy all workers, just to be sure
+			Workers& workers = pData->workers;
+			workers.stop();
+			workers.clear();
 			// Ok, attempt to start the server from the real implementation
-			Transport::ITransport::Set::iterator end = pListenInfos.end();
-			for (Transport::ITransport::Set::iterator i = pListenInfos.begin(); i != end; ++i)
-				pWorkers += new Worker(*this, *i);
+			// recreating all workers
+			Listeners& listeners = pData->listeners;
+			Listeners::iterator end = listeners.end();
+			for (Listeners::iterator i = listeners.begin(); i != end; ++i)
+			{
+				// start the transport
+				if (errNone != (err = (*i)->start()))
+					break;
+				workers += new Worker(*this, *i);
+			}
 
 			// The new state
 			pState = (err == errNone) ? stRunning : stStopped;
 		}
+
 		if (err == errNone)
 		{
 			// Great ! The server is working !
-			onStarted();
+			events.started();
 			return errNone;
 		}
+		else
+		{
+			ThreadingPolicy::MutexLocker locker(*this);
+			// destroy all workers
+			Workers& workers = pData->workers;
+			workers.stop();
+			workers.clear();
+		}
+
 		// An error has occured
-		onError(stStarting, err);
+		events.error(stStarting, err);
 		return err;
 	}
 
+
+	void QueueService::wait()
+	{
+	}
 
 
 	Error QueueService::stop()
@@ -160,6 +193,8 @@ namespace Message
 		// Checking if the service is not already running
 		{
 			ThreadingPolicy::MutexLocker locker(*this);
+			if (pData == NULL)
+				return errNone;
 			if (pState != stRunning)
 				return (pState == stStopped) ? errNone : errUnknown;
 			pState = stStopping;
@@ -167,27 +202,31 @@ namespace Message
 
 		// The internal mutex must be unlocked whenever an event is called to prevent
 		// any deadlocks.
-		onStopping();
+		events.stopping();
 
 		Error err = errNone;
 
 		// Trying to start all workers
 		{
 			ThreadingPolicy::MutexLocker locker(*this);
-			// Ok, stopping all workers
-			pWorkers.stop();
-			pWorkers.clear();
+
+			// destroy all workers
+			Workers& workers = pData->workers;
+			workers.stop();
+			workers.clear();
 			// The current state
 			pState = (err == errNone) ? stStopped : stRunning;
 		}
+
 		if (err == errNone)
 		{
 			// Great ! The server is working !
-			onStopped();
+			events.stopped();
 			return errNone;
 		}
+
 		// An error has occured
-		onError(stStopping, err);
+		events.error(stStopping, err);
 		return err;
 	}
 
