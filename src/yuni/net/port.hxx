@@ -7,42 +7,45 @@ namespace Yuni
 namespace Net
 {
 
-	inline Port::Port()
-		:pValue(0)
-	{}
-
-
-	inline Port::Port(uint rhs)
-		:pValue(rhs)
-	{}
-
-
-	inline Port::Port(const Port& rhs)
-		:pValue(rhs.pValue)
-	{}
-
-
-	inline Port::Port(const NullPtr&)
-		:pValue(0)
-	{}
-
-
-	inline bool Port::wellKnown() const
+	inline bool Port::Range::IsWellKnown(const Port& port)
 	{
-		return pValue < 1024u;
+		return port.value() < 1024u;
 	}
 
 
-	inline bool Port::registered() const
+	inline bool Port::Range::IsRegistered(const Port& port)
 	{
-		return (pValue >= 1024) && (pValue <= 49151);
+		return (port.value() >= 1024) and (port.value() <= 49151);
 	}
 
 
-	inline bool Port::dynamic() const
+	inline bool Port::Range::IsDynamic(const Port& port)
 	{
-		return pValue > 49151;
+		return port.value() > 49151;
 	}
+
+
+
+
+
+	inline Port::Port() :
+		pValue()
+	{}
+
+
+	inline Port::Port(uint rhs) :
+		pValue(rhs)
+	{}
+
+
+	inline Port::Port(const Port& rhs) :
+		pValue(rhs.pValue)
+	{}
+
+
+	inline Port::Port(const NullPtr&) :
+		pValue()
+	{}
 
 
 	inline uint Port::value() const
@@ -59,7 +62,8 @@ namespace Net
 
 	inline bool Port::none() const
 	{
-		return !pValue;
+		// note: prevent warning from MSVC
+		return (pValue == 0) ? true : false;
 	}
 
 
@@ -124,7 +128,8 @@ namespace Net
 
 	inline bool Port::operator ! () const
 	{
-		return ! pValue;
+		// note: prevent warning from MSVC
+		return (pValue == 0) ? true : false;
 	}
 
 
