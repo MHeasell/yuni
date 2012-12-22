@@ -30,22 +30,24 @@ namespace DateTime
 	**
 	** \code
 	** String s;
-	** DateTime::TimestampToString(s, "");
+	** DateTime::TimestampToString(s, "%D");
 	** \endcode
 	**
 	** \param[out] out The string where the result will be written
-	** \param format Format (man strftime)
-	** \param timestamp An Unix Timestamp (0 will be replaced by the current timestamp)
+	** \param format Format (man strftime). The string must be zero-terminated
+	** \param timestamp An Unix Timestamp (0 or negative value will be replaced by the current timestamp)
 	** \param emptyBefore True to empty the string before anything else
 	** \return True if the operation succeded, false otherwise
 	*/
-	bool TimestampToString(String& out, const AnyString& format, Timestamp timestamp = 0, bool emptyBefore = true);
+	template<class StringT>
+	bool TimestampToString(StringT& out, const AnyString& format, Timestamp timestamp = 0, bool emptyBefore = true);
 
-	bool TimestampToString(Clob& out, const AnyString& format, Timestamp timestamp = 0, bool emptyBefore = true);
 
 
 
 } // namespace DateTime
 } // namespace Yuni
+
+# include "timestamp.hxx"
 
 #endif // __YUNI_DATETIME_TIMESTAMP_H__
