@@ -64,7 +64,7 @@ namespace Thread
 		/*!
 		** \brief Constructor with a given amount of thread
 		*/
-		Array(uint n);
+		explicit Array(uint n);
 
 		/*!
 		** \brief Constructor, with a given amount of thread
