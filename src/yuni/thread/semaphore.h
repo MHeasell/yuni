@@ -27,7 +27,7 @@ namespace Yuni
 		/*!
 		** \brief Default constructor
 		*/
-		Semaphore(uint readers = 64);
+		explicit Semaphore(uint readers = 64);
 		/*!
 		** \brief Copy constructor
 		*/
