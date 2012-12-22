@@ -88,7 +88,7 @@ namespace Iterator
 
 
 	# ifndef YUNI_NO_THREAD_SAFE
-	class IDetachedThread final : public Yuni::Thread::IThread
+	class IDetachedThread : public Yuni::Thread::IThread
 	{
 	public:
 		IDetachedThread() {}
