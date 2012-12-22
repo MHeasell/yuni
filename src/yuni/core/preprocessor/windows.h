@@ -41,6 +41,8 @@
 /* MinGW */
 # if defined(__MINGW32__) || defined(__MINGW64__)
 #	define YUNI_OS_MINGW
+#	undef YUNI_OS_32
+#	undef YUNI_OS_64
 #	ifdef __MINGW64__
 #		define YUNI_OS_MINGW64
 #		define YUNI_OS_64
