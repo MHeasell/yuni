@@ -30,7 +30,7 @@ namespace Message
 		enum State
 		{
 			//! The queue service is currently stopped
-			stStopped = 0,
+			stStopped,
 			//! The queue service is currently starting
 			stStarting,
 			//! The queue service is working
@@ -51,28 +51,6 @@ namespace Message
 		~QueueService();
 		//@}
 
-		//! \name Addresses management
-		//@{
-		/*!
-		** \brief Add a new address where the server should listen for incoming connections
-		**
-		** This action will be effective the next time the server starts
-		** \code
-		** Net::Message::QueueService  server;
-		** server.listen("::1", 4242);
-		** server.listen("82.125.10.31", 4242);
-		** server.start();
-		** \endcode
-		*/
-		Error  addListener(const AnyString& address, const Port& port, Transport::ITransport::Ptr transport);
-
-		/*!
-		** \brief Clear all addresses where the server should listen for incoming connections
-		**
-		** This action will be effective the next time the server starts
-		*/
-		void clear();
-		//@}
 
 		//! \name Service management
 		//@{
@@ -90,10 +68,44 @@ namespace Message
 		** \brief Stop the server
 		*/
 		Error stop();
+
+		//! Get if the queueservice is started
+		bool started() const;
 		//@}
 
 
 	public:
+		//! Listeners management
+		class Listeners
+		{
+		public:
+			/*!
+			** \brief Add a new address where the server should listen for incoming connections
+			**
+			** This action will be effective the next time the server starts
+			** \code
+			** Net::Message::QueueService  server;
+			** server.addListener("82.125.10.31", 4242, new Net::Transport::REST());
+			** server.start();
+			** server.wait();
+			** server.stop();
+			** \endcode
+			*/
+			Error add(const AnyString& address, const Port& port, Transport::ITransport::Ptr transport);
+
+			/*!
+			** \brief Clear all addresses where the server should listen for incoming connections
+			**
+			** This action will be effective the next time the server starts
+			*/
+			void clear();
+
+		private:
+			QueueService* pService;
+			friend class QueueService;
+		}
+		listeners;
+
 		//! Events
 		class Events
 		{
@@ -130,10 +142,6 @@ namespace Message
 
 
 	protected:
-		//! A single worker
-		typedef Yuni::Private::Net::Message::Worker  Worker;
-
-	protected:
 		//! Flag to know the state of the server
 		State pState;
 		//! Internal data
@@ -141,6 +149,7 @@ namespace Message
 
 		// Friends
 		friend class Yuni::Private::Net::Message::Worker;
+		friend class Listeners;
 
 	}; // class QueueService
 

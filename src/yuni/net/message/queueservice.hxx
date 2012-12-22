@@ -11,8 +11,6 @@ namespace Message
 
 
 
-
-
 } // namespace Message
 } // namespace Net
 } // namespace Yuni

@@ -9,7 +9,6 @@
 # include "../../errors.h"
 # include "../../hostaddressport.h"
 # include "../../port.h"
-# include "layer.h"
 # include <set>
 
 
