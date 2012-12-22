@@ -97,7 +97,7 @@
 # define YUNI_OS_FLAG_MACOS    0
 
 
-# if defined(__TOS_WIN__) || defined(__WIN32__) || defined(_WIN64) || defined(_WIN32)
+# if defined(__TOS_WIN__) || defined(__WIN32__) || defined(_WIN64) || defined(_WIN32) || defined(YUNI_OS_WINDOWS)
 #	include "windows.h"
 # else
 #	include "unixes.h"
