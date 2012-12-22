@@ -6,7 +6,7 @@
 
 typedef Yuni::Thread::Array<Yuni::Private::Net::Message::Worker>  Workers;
 
-typedef Yuni::Net::Message::Transport::ITransport::Set  Listeners;
+typedef Yuni::Net::Message::Transport::ITransport::Set  ListenerList;
 
 
 
@@ -25,7 +25,7 @@ namespace Message
 		//! All workers
 		Workers workers;
 		//! All addresses to listen
-		Listeners listeners;
+		ListenerList listeners;
 
 	}; // class QueueServiceData
 
@@ -58,6 +58,7 @@ namespace Message
 		pState(stStopped),
 		pData(nullptr)
 	{
+		listeners.pService = this;
 	}
 
 
@@ -70,7 +71,7 @@ namespace Message
 	}
 
 
-	Error  QueueService::addListener(const AnyString& address, const Port& port, Transport::ITransport::Ptr transport)
+	Error  QueueService::Listeners::add(const AnyString& address, const Port& port, Transport::ITransport::Ptr transport)
 	{
 		if (not port.valid())
 			return errInvalidPort;
@@ -78,27 +79,27 @@ namespace Message
 			return errInvalidTransport;
 
 		// The address
+		if (not address)
+			return errInvalidHostAddress;
 		transport->address = address;
 		transport->port    = port;
-		if (not transport->address)
-			return errInvalidHostAddress;
 
 		// Adding the new address
 		{
-			ThreadingPolicy::MutexLocker locker(*this);
-			InitializeInternalData(pData);
-			if (not pData->listeners.insert(transport).second)
+			ThreadingPolicy::MutexLocker locker(*pService);
+			InitializeInternalData(pService->pData);
+			if (not pService->pData->listeners.insert(transport).second)
 				return errDupplicatedAddress;
 		}
 		return errNone;
 	}
 
 
-	void QueueService::clear()
+	void QueueService::Listeners::clear()
 	{
-		ThreadingPolicy::MutexLocker locker(*this);
-		if (pData)
-			pData->listeners.clear();
+		ThreadingPolicy::MutexLocker locker(*pService);
+		if (pService->pData)
+			pService->pData->listeners.clear();
 	}
 
 
@@ -148,14 +149,16 @@ namespace Message
 			workers.clear();
 			// Ok, attempt to start the server from the real implementation
 			// recreating all workers
-			Listeners& listeners = pData->listeners;
-			Listeners::iterator end = listeners.end();
-			for (Listeners::iterator i = listeners.begin(); i != end; ++i)
+			ListenerList& listeners = pData->listeners;
+			ListenerList::iterator end = listeners.end();
+			for (ListenerList::iterator i = listeners.begin(); i != end; ++i)
 			{
 				// start the transport
 				if (errNone != (err = (*i)->start()))
 					break;
-				workers += new Worker(*this, *i);
+
+				// creating a new worker
+				workers += new Yuni::Private::Net::Message::Worker(*this, *i);
 			}
 
 			// The new state
@@ -228,6 +231,13 @@ namespace Message
 		// An error has occured
 		events.error(stStopping, err);
 		return err;
+	}
+
+
+	bool QueueService::started() const
+	{
+		ThreadingPolicy::MutexLocker locker(*this);
+		return (pState == stStarting) or (pState == stRunning);
 	}
 
 

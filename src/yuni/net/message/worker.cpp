@@ -51,12 +51,6 @@ namespace Message
 	}
 
 
-	void Worker::stopTransport()
-	{
-		if (!(!pTransport))
-			pTransport->stop();
-	}
-
 
 
 
