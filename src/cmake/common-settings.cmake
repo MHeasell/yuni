@@ -12,6 +12,13 @@ include(CheckIncludeFile)
 include(CheckCXXCompilerFlag)
 
 
+if ("${CMAKE_BUILD_TYPE}" STREQUAL "release" OR "${CMAKE_BUILD_TYPE}" STREQUAL "RELEASE")
+	set(YUNI_)
+else()
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_DEBUG}")
+endif()
+
+
 #
 # Clang Detection
 #
@@ -105,6 +112,13 @@ if(APPLE)
 endif()
 if (YUNI_HAS_GCC_FLAG_GGDB3)
 	set(CMAKE_CXX_FLAGS_DEBUG           "${CMAKE_CXX_FLAGS_DEBUG}   -ggdb3")
+endif()
+
+# NDEBUG
+if(MSVC)
+	set(CMAKE_CXX_FLAGS_RELEASE         "${CMAKE_CXX_FLAGS_RELEASE} /DNDEBUG")
+else()
+	set(CMAKE_CXX_FLAGS_RELEASE         "${CMAKE_CXX_FLAGS_RELEASE} -DNDEBUG")
 endif()
 
 set(CMAKE_CXX_FLAGS_RELEASE       "${CMAKE_CXX_FLAGS_RELEASE}      ${YUNI_PROFILE_CXX_FLAGS_INSTRUCTIONS_SETS}")
