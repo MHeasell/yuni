@@ -172,8 +172,8 @@ namespace Thread
 			error = ::pthread_cond_timedwait(&pCondition, &pMutex, &t);
 		}
 		while (!pSignalled        // Condition not verified
-			&& error != ETIMEDOUT // We have not timedout
-			&& error != EINVAL);   // When t is in the past, we got EINVAL. We consider this as a timeout.
+			and error != ETIMEDOUT // We have not timedout
+			and error != EINVAL);   // When t is in the past, we got EINVAL. We consider this as a timeout.
 
 		bool result = (pSignalled != false);
 		::pthread_mutex_unlock(&pMutex);
@@ -192,7 +192,7 @@ namespace Thread
 		#ifndef YUNI_NO_THREAD_SAFE
 		# ifdef YUNI_OS_WINDOWS
 
-		return (pHandle && SetEvent(pHandle));
+		return (pHandle and SetEvent(pHandle));
 
 		# else
 

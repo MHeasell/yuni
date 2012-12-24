@@ -69,8 +69,8 @@ namespace Message
 		*/
 		Error stop();
 
-		//! Get if the queueservice is started
-		bool started() const;
+		//! Get if the queueservice is running (state running / starting)
+		bool running() const;
 		//@}
 
 

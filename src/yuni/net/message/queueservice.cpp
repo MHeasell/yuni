@@ -75,7 +75,7 @@ namespace Message
 	{
 		if (not port.valid())
 			return errInvalidPort;
-		if (not transport || transport->mode != Transport::tmServer)
+		if (not transport or transport->mode != Transport::tmServer)
 			return errInvalidTransport;
 
 		// The address
@@ -110,7 +110,7 @@ namespace Message
 			ThreadingPolicy::MutexLocker locker(*this);
 
 			// Directly stop if there is no transport available
-			if (not pData || pData->listeners.empty())
+			if (not pData or pData->listeners.empty())
 			{
 				pState = stStopped;
 				return errNoTransport;
@@ -234,7 +234,7 @@ namespace Message
 	}
 
 
-	bool QueueService::started() const
+	bool QueueService::running() const
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 		return (pState == stStarting) or (pState == stRunning);

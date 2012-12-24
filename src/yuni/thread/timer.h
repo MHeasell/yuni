@@ -79,7 +79,7 @@ namespace Thread
 		**
 		** An infinite number of cycles will be used by default.
 		*/
-		Timer(uint interval);
+		explicit Timer(uint interval);
 		/*!
 		** \brief Constructor with a time interval + cycle count
 		**
@@ -210,7 +210,7 @@ namespace Thread
 		**
 		** \return True to stop and to destroy the thread
 		*/
-		virtual bool onExecute();
+		virtual bool onExecute() final;
 
 		/*!
 		** \brief Run an infinite loop
