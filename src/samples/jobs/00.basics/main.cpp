@@ -3,8 +3,9 @@
 #include <yuni/job/job.h>
 #include <yuni/job/queue.h>
 #include <iostream>
-#include <yuni/core/system/sleep.h>
 #include <yuni/core/system/cpu.h>
+
+using namespace Yuni;
 
 
 
@@ -20,18 +21,18 @@ static Yuni::Mutex mutex;
 ** This task is implemented in the onExecute() method, and consists
 ** here of a sample: counting beer bottles.
 */
-class MyJob : public Yuni::Job::IJob
+class MyJob final : public Yuni::Job::IJob
 {
 public:
-	MyJob(const int identifier)
-		:x(identifier)
+	MyJob(int identifier) :
+		x(identifier)
 	{
 		nameWL("Bottle counting");
 	}
 	virtual ~MyJob() { }
 
 private:
-	virtual void onExecute()
+	virtual void onExecute() override
 	{
 		mutex.lock();
 		std::cout << " ["<< x <<"] Starting..." << std::endl;
@@ -52,7 +53,8 @@ private:
 			// - for example a long calculation, for the purpose of this example.
 			//
 			// The bottom line is: DO NOT use sleep() to wait in threads.
-			Yuni::SuspendMilliSeconds(1200); // seconds
+			// SuspendMilliSeconds(1200); // seconds
+			suspend(1200); // milliseconds
 		}
 		mutex.lock();
 		std::cout << " ["<< x <<"] Finished." << std::endl;
@@ -64,7 +66,7 @@ private:
 	int x;
 
 }; // class MyJob
- 
+
 
 
 
@@ -89,7 +91,7 @@ int main(void)
 	// bottle counting task is running in background. But, beware,
 	// because of the mutual access to the standard output, we
 	// should lock a mutex before printing anything on it.
-	
+
 //	mutex.lock();
 //	std::cout << "[M] Doing some processing here too." << std::endl;
 //	mutex.unlock();
