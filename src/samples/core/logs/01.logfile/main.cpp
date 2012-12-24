@@ -13,16 +13,17 @@ int main(void)
 	Yuni::Logs::Logger<MyLogHandlers>  logs;
 
 	// Creating the log file (in the current directory, read-write access required)
-	logs.outputFilename("./sample.log");
-	if (!logs.logFileIsOpened())
+	logs.logfile("./sample.log");
+	if (not logs.logfileIsOpened())
 	{
 		// An error has occured. That means the log file could not be opened for
 		// writing for some reason
 		// In this sample, we will continue anyway
 		logs.error() << "Impossible to open the log file !";
+		return EXIT_FAILURE;
 	}
-	else
-		logs.info() << "Log file : " << logs.outputFilename();
+
+	logs.info() << "Log file : " << logs.logfile();
 
 	// Hello, world !, all standard verbosity levels
 	logs.checkpoint() << "Hello, " << "world !";

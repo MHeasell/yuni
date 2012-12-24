@@ -28,16 +28,17 @@ if(Yuni_FOUND)
 
 	add_subdirectory(audio)
 	add_subdirectory(core)
+	add_subdirectory(io)
 	add_subdirectory(devices)
 	add_subdirectory(jobs)
 	add_subdirectory(threads)
 	add_subdirectory(extra)
+
 else()
 	YMESSAGE("A working Yuni Framework was not found (could not locate yuni-config).")
 	YMESSAGE("If you are not building from within the source tree, you should define")
 	YMESSAGE("YUNI_CONFIG to the path to the yuni-config binary, e.g.:")
 	YMESSAGE(" $ cmake -DYUNI_CONFIG=path/to/yuni-config <samples_path>")
 	YERROR("Aborting.")
-
 endif()
 
