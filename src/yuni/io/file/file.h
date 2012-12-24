@@ -102,7 +102,9 @@ namespace File
 	** \param content The new content of the file
 	** \return True if the operation succeeded, false otherwise
 	*/
-	template<class StringT, class U> bool SaveToFile(const StringT& filename, const U& content);
+	template<class StringT, class U>
+	YUNI_DEPRECATED("use SetContent / AppendContent instead",
+	bool SaveToFile(const StringT& filename, const U& content));
 	//@}
 
 
@@ -131,7 +133,7 @@ namespace File
 	** \param filename An UTF8 filename
 	** \return True if the file has been created or truncated
 	*/
-	template<class StringT> bool CreateEmptyFile(const StringT& filename);
+	bool CreateEmptyFile(const AnyString& filename);
 
 
 	/*!
@@ -141,7 +143,7 @@ namespace File
 	** IO::File::SetContent("/tmp/anyfile.txt", "Hello world !\n");
 	** \endcode
 	*/
-	template<class StringT, class U> bool SetContent(const StringT& filename, const U& content);
+	template<class U> bool SetContent(const AnyString& filename, const U& content);
 
 	/*!
 	** \brief Append the content of an arbitrary string to a file
@@ -150,7 +152,7 @@ namespace File
 	** IO::File::AppendContent("/tmp/anyfile.txt", "lorem ipsumi\n");
 	** \endcode
 	*/
-	template<class StringT, class U> bool AppendContent(const StringT& filename, const U& content);
+	template<class U> bool AppendContent(const AnyString& filename, const U& content);
 
 
 	/*!

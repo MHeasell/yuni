@@ -24,6 +24,13 @@ namespace IO
 namespace File
 {
 
+	bool CreateEmptyFile(const AnyString& filename)
+	{
+		IO::File::Stream file(filename, OpenMode::write | OpenMode::truncate);
+		return file.opened();
+	}
+
+
 
 	# ifdef YUNI_OS_WINDOWS
 
