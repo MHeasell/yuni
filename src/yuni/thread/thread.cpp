@@ -109,8 +109,13 @@ namespace Thread
 			{
 				if (not thread.onExecute())
 					break;
-				if (thread.pShouldStop ||  not thread.pStarted)
-					break;
+
+				// check if the thread should stop as soon as possible
+				{
+					Yuni::MutexLocker flagLocker(thread.pInnerFlagMutex);
+					if (thread.pShouldStop ||  not thread.pStarted)
+						break;
+				}
 
 				// Notifying the thread that it has just been paused and waiting for
 				// being waked up
