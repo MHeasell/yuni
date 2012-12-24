@@ -22,25 +22,14 @@ namespace File
 	}
 
 
-
-
 	inline bool Exists(const AnyString& filename)
 	{
 		return ((Yuni::IO::typeFile & Yuni::IO::TypeOf(filename)) != 0);
 	}
 
 
-
-	template<class StringT>
-	inline bool CreateEmptyFile(const StringT& filename)
-	{
-		IO::File::Stream file(filename, OpenMode::write | OpenMode::truncate);
-		return file.opened();
-	}
-
-
-	template<class StringT, class U>
-	bool SetContent(const StringT& filename, const U& content)
+	template<class U>
+	bool SetContent(const AnyString& filename, const U& content)
 	{
 		IO::File::Stream file(filename, OpenMode::write | OpenMode::truncate);
 		if (file.opened())
@@ -52,8 +41,8 @@ namespace File
 	}
 
 
-	template<class StringT, class U>
-	bool AppendContent(const StringT& filename, const U& content)
+	template<class U>
+	bool AppendContent(const AnyString& filename, const U& content)
 	{
 		IO::File::Stream file(filename, OpenMode::write | OpenMode::append);
 		if (file.opened())
