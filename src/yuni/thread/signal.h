@@ -2,6 +2,7 @@
 # define __YUNI_THREAD_SIGNAL_H__
 
 # include "../yuni.h"
+# include "../core/smartptr.h"
 # include "pthread.h"
 
 
@@ -15,6 +16,11 @@ namespace Thread
 	*/
 	class YUNI_DECL Signal final
 	{
+	public:
+		//! Most suitable smart pointer for the class
+		typedef Yuni::SmartPtr<Signal> Ptr;
+
+
 	public:
 		//! \name Constructor & Destructor
 		//@{
