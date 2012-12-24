@@ -282,12 +282,10 @@ namespace Thread
 		# endif // YUNI_OS_WINDOWS
 		# endif // YUNI_NO_THREAD_SAFE
 
-		//! Get if the thread is running
+		//! Get if the thread is running (must be protected by pInnerFlagMutex)
 		volatile bool pStarted;
-		//! Should stop the thread ?
+		//! Should stop the thread ? (must be protected by pInnerFlagMutex)
 		volatile bool pShouldStop;
-		//! Get if the thread is paused
-		Atomic::Int<32> pPaused;
 
 		# ifndef YUNI_NO_THREAD_SAFE
 		// our friend
