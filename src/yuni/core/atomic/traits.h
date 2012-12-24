@@ -94,6 +94,14 @@ namespace AtomicImpl
 	struct TypeFromSize {};
 
 
+	// bool
+	template<> struct TypeFromSize<1>
+	{
+		// We should use a signed 32 bits integer for boolean
+		enum { size = 32 };
+		typedef sint32 Type;
+	};
+
 	// Int16
 	template<> struct TypeFromSize<16>
 	{

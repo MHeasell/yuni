@@ -13,7 +13,6 @@ namespace Yuni
 namespace Atomic
 {
 
-
 	/*!
 	** \brief An atomic scalar type
 	**
@@ -32,7 +31,7 @@ namespace Atomic
 		int Size = 8 * sizeof(void*), /* 32 or 64Bits */        // Size in Bits of the scalar type
 		template<class> class TP = Policy::ObjectLevelLockable  // The threading policy
 		>
-	class YUNI_DECL  Int YUNI_ATOMIC_INHERITS
+	class YUNI_DECL  Int final YUNI_ATOMIC_INHERITS
 	{
 	public:
 		enum
@@ -43,7 +42,9 @@ namespace Atomic
 		enum
 		{
 			//! Get if we have to guarantee ourselves the thread-safety
-			mustUseMutex = YUNI_ATOMIC_MUST_USE_MUTEX,
+			useMutex  = YUNI_ATOMIC_MUST_USE_MUTEX,
+			//! Get if we have a boolean type
+			isBoolean = (Size == 1),
 		};
 
 		/*!
@@ -86,15 +87,15 @@ namespace Atomic
 		/*!
 		** \brief Constructor with an initial value (int16)
 		*/
-		Int(const sint16 v);
+		Int(sint16 v);
 		/*!
 		** \brief Constructor with an initial value (int32)
 		*/
-		Int(const sint32 v);
+		Int(sint32 v);
 		/*!
 		** \brief Constructor with an initial value (int64)
 		*/
-		Int(const sint64 v);
+		Int(sint64 v);
 
 		/*!
 		** \brief Copy constructor

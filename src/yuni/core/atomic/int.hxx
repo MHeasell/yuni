@@ -9,40 +9,40 @@ namespace Atomic
 
 
 	template<int Size, template<class> class TP>
-	inline Int<Size,TP>::Int()
+	inline Int<Size,TP>::Int() :
 		# if YUNI_ATOMIC_MUST_USE_MUTEX != 1
-		:pValue()
+		pValue()
 		# else
-		:TP<Int<Size,TP> >(), pValue()
+		TP<Int<Size,TP> >(), pValue()
 		# endif
 	{}
 
 
 	template<int Size, template<class> class TP>
-	Int<Size,TP>::Int(const sint16 v)
+	inline Int<Size,TP>::Int(sint16 v) :
 		# if YUNI_ATOMIC_MUST_USE_MUTEX != 1
-		:pValue((ScalarType)v)
+		pValue((ScalarType)v)
 		# else
-		:TP<Int<Size,TP> >(), pValue((ScalarType)v)
+		TP<Int<Size,TP> >(), pValue((ScalarType)v)
 		# endif
 	{}
 
 	template<int Size, template<class> class TP>
-	inline Int<Size,TP>::Int(const sint32 v)
+	inline Int<Size,TP>::Int(sint32 v) :
 		# if YUNI_ATOMIC_MUST_USE_MUTEX != 1
-		:pValue((ScalarType)v)
+		pValue((ScalarType)v)
 		# else
-		:TP<Int<Size,TP> >(), pValue((ScalarType)v)
+		TP<Int<Size,TP> >(), pValue((ScalarType)v)
 		# endif
 	{}
 
 
 	template<int Size, template<class> class TP>
-	inline Int<Size,TP>::Int(const sint64 v)
+	inline Int<Size,TP>::Int(sint64 v) :
 		# if YUNI_ATOMIC_MUST_USE_MUTEX != 1
-		:pValue((ScalarType)v)
+		pValue((ScalarType)v)
 		# else
-		:TP<Int<Size,TP> >(), pValue((ScalarType)v)
+		TP<Int<Size,TP> >(), pValue((ScalarType)v)
 		# endif
 	{}
 
@@ -50,11 +50,11 @@ namespace Atomic
 
 
 	template<int Size, template<class> class TP>
-	inline Int<Size,TP>::Int(const Int<Size,TP>& v)
+	inline Int<Size,TP>::Int(const Int<Size,TP>& v) :
 		# if YUNI_ATOMIC_MUST_USE_MUTEX != 1
-		:pValue((ScalarType)v)
+		pValue((ScalarType)v)
 		# else
-		:TP<Int<Size,TP> >(), pValue((ScalarType)v.pValue)
+		TP<Int<Size,TP> >(), pValue((ScalarType)v.pValue)
 		# endif
 	{
 	}
