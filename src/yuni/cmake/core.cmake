@@ -83,6 +83,7 @@ set(SRC_CORE_ATOMIC
 		core/atomic/int.hxx
 		core/atomic/traits.h
 		core/atomic/string.hxx
+		core/atomic/bool.h
 )
 source_group(core\\atomic FILES ${SRC_CORE_ATOMIC})
 
