@@ -1,6 +1,6 @@
 
 #include "worker.h"
-#include "queueservice.h"
+#include "service.h"
 
 
 namespace Yuni
@@ -9,12 +9,12 @@ namespace Private
 {
 namespace Net
 {
-namespace Message
+namespace Messaging
 {
 
-	Worker::Worker(QueueService& queueservice, ITransport::Ptr transport) :
+	Worker::Worker(Service& service, ITransport::Ptr transport) :
 		pTransport(transport),
-		pQueueService(queueservice)
+		pService(service)
 	{}
 
 
@@ -41,7 +41,7 @@ namespace Message
 			transport.attachedThread(nullptr);
 
 			if (error != Yuni::Net::errNone)
-				pQueueService.events.error(QueueService::stRunning, error);
+				pService.events.error(Service::stRunning, error);
 
 			// directly unassign / destroy the transport here (from the thread
 			// to avoid long unexplained delay
@@ -54,7 +54,7 @@ namespace Message
 
 
 
-} // namespace Message
+} // namespace Messaging
 } // namespace Net
 } // namespace Private
 } // namespace Yuni

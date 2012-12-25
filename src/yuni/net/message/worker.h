@@ -1,5 +1,5 @@
-#ifndef __YUNI_NET_MESSAGE_WORKER_H__
-# define __YUNI_NET_MESSAGE_WORKER_H__
+#ifndef __YUNI_NET_MESSAGING_WORKER_H__
+# define __YUNI_NET_MESSAGING_WORKER_H__
 
 # include "../../yuni.h"
 # include "../net.h"
@@ -15,7 +15,7 @@ namespace Private
 {
 namespace Net
 {
-namespace Message
+namespace Messaging
 {
 
 	/*!
@@ -27,9 +27,9 @@ namespace Message
 		//! The most suitable smart pointer
 		typedef Yuni::Thread::IThread::Ptr  Ptr;
 		//! Alias to the queue service
-		typedef Yuni::Net::Message::QueueService  QueueService;
+		typedef Yuni::Net::Messaging::Service Service;
 		//! Transport layer (abstract)
-		typedef Yuni::Net::Message::Transport::ITransport ITransport;
+		typedef Yuni::Net::Messaging::Transport::ITransport ITransport;
 
 	public:
 		//! \name Constructor & Destructor
@@ -37,7 +37,7 @@ namespace Message
 		/*!
 		** \brief Default constructor
 		*/
-		explicit Worker(QueueService& queueservice, ITransport::Ptr transport);
+		explicit Worker(Service& service, ITransport::Ptr transport);
 		//! Destructor
 		virtual ~Worker();
 		//@}
@@ -50,7 +50,7 @@ namespace Message
 		//! The transport layer
 		ITransport::Ptr pTransport;
 		//! Pointer to the queue service
-		QueueService& pQueueService;
+		Service& pService;
 
 	}; // class Worker
 
@@ -59,11 +59,11 @@ namespace Message
 
 
 
-} // namespace Message
+} // namespace Messaging
 } // namespace Net
 } // namespace Private
 } // namespace Yuni
 
 # include "worker.hxx"
 
-#endif // __YUNI_NET_MESSAGE_QUEUESERVICE_WORKER_H__
+#endif // __YUNI_NET_MESSAGING_WORKER_H__

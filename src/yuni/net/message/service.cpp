@@ -1,12 +1,12 @@
 
-#include "queueservice.h"
+#include "service.h"
 #include "worker.h"
 #include "../../thread/array.h"
 
 
-typedef Yuni::Thread::Array<Yuni::Private::Net::Message::Worker>  Workers;
+typedef Yuni::Thread::Array<Yuni::Private::Net::Messaging::Worker>  Workers;
 
-typedef Yuni::Net::Message::Transport::ITransport::Set  ListenerList;
+typedef Yuni::Net::Messaging::Transport::ITransport::Set  TransportList;
 
 
 
@@ -16,22 +16,24 @@ namespace Private
 {
 namespace Net
 {
-namespace Message
+namespace Messaging
 {
 
-	class QueueServiceData
+	class ServiceData
 	{
 	public:
 		//! All workers
 		Workers workers;
 		//! All addresses to listen
-		ListenerList listeners;
+		TransportList transports;
+		//! Protocol
+		Yuni::Net::Messaging::Protocol::Ptr protocol;
 
-	}; // class QueueServiceData
+	}; // class ServiceData
 
 
 
-} // namespace Message
+} // namespace Messaging
 } // namespace Net
 } // namespace Private
 } // namespace Yuni
@@ -43,35 +45,39 @@ namespace Yuni
 {
 namespace Net
 {
-namespace Message
+namespace Messaging
 {
 
-	static inline void InitializeInternalData(Yuni::Private::Net::Message::QueueServiceData* data)
+	//! ensuring that the internal data is properly initialized
+	static inline void InitializeInternalData(Yuni::Private::Net::Messaging::ServiceData*& data)
 	{
 		if (not data)
-			data = new Yuni::Private::Net::Message::QueueServiceData();
+			data = new Yuni::Private::Net::Messaging::ServiceData();
 	}
 
 
 
-	QueueService::QueueService() :
+	Service::Service() :
 		pState(stStopped),
 		pData(nullptr)
 	{
-		listeners.pService = this;
+		transports.pService = this;
 	}
 
 
-	QueueService::~QueueService()
+	Service::~Service()
 	{
 		// Stopping all workers
 		stop();
+
+		// for code robustness
+		ThreadingPolicy::MutexLocker locker(*this);
 		// release internal data
 		delete pData;
 	}
 
 
-	Error  QueueService::Listeners::add(const AnyString& address, const Port& port, Transport::ITransport::Ptr transport)
+	Error  Service::Transports::add(const AnyString& address, const Port& port, Transport::ITransport::Ptr transport)
 	{
 		if (not port.valid())
 			return errInvalidPort;
@@ -88,29 +94,29 @@ namespace Message
 		{
 			ThreadingPolicy::MutexLocker locker(*pService);
 			InitializeInternalData(pService->pData);
-			if (not pService->pData->listeners.insert(transport).second)
+			if (not pService->pData->transports.insert(transport).second)
 				return errDupplicatedAddress;
 		}
 		return errNone;
 	}
 
 
-	void QueueService::Listeners::clear()
+	void Service::Transports::clear()
 	{
 		ThreadingPolicy::MutexLocker locker(*pService);
 		if (pService->pData)
-			pService->pData->listeners.clear();
+			pService->pData->transports.clear();
 	}
 
 
-	Error QueueService::start()
+	Error Service::start()
 	{
 		// Checking if the service is not already running
 		{
 			ThreadingPolicy::MutexLocker locker(*this);
 
 			// Directly stop if there is no transport available
-			if (not pData or pData->listeners.empty())
+			if (not pData or pData->transports.empty())
 			{
 				pState = stStopped;
 				return errNoTransport;
@@ -149,16 +155,16 @@ namespace Message
 			workers.clear();
 			// Ok, attempt to start the server from the real implementation
 			// recreating all workers
-			ListenerList& listeners = pData->listeners;
-			ListenerList::iterator end = listeners.end();
-			for (ListenerList::iterator i = listeners.begin(); i != end; ++i)
+			TransportList& transports = pData->transports;
+			TransportList::iterator end = transports.end();
+			for (TransportList::iterator i = transports.begin(); i != end; ++i)
 			{
 				// start the transport
 				if (errNone != (err = (*i)->start()))
 					break;
 
 				// creating a new worker
-				workers += new Yuni::Private::Net::Message::Worker(*this, *i);
+				workers += new Yuni::Private::Net::Messaging::Worker(*this, *i);
 			}
 
 			// The new state
@@ -186,12 +192,12 @@ namespace Message
 	}
 
 
-	void QueueService::wait()
+	void Service::wait()
 	{
 	}
 
 
-	Error QueueService::stop()
+	Error Service::stop()
 	{
 		// Checking if the service is not already running
 		{
@@ -234,17 +240,39 @@ namespace Message
 	}
 
 
-	bool QueueService::running() const
+	bool Service::running() const
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 		return (pState == stStarting) or (pState == stRunning);
 	}
 
 
+	void Service::protocol(Protocol* newapi)
+	{
+		// creating a new smart pointer for the new api
+		Protocol::Ptr newproto = (not newapi) ? new Protocol() : newapi;
+
+		// Locking the whole object
+		ThreadingPolicy::MutexLocker locker(*this);
+
+		// making sure that internal data are allocated
+		InitializeInternalData(pData);
+		assert(pData != NULL && "internal error");
+
+		// Making all transports switch to the new protocol
+
+
+		// All transports have switched to the new protocol
+		// we can release our own pointer. The old protocol should
+		// be destroyed here, in the current thread, instead
+		// of inside a worker of one of the transports
+		pData->protocol = newproto;
+	}
 
 
 
-} // namespace Message
+
+} // namespace Messaging
 } // namespace Net
 } // namespace Yuni
 

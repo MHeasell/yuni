@@ -1,5 +1,5 @@
-#ifndef __YUNI_NET_MESSAGE_QUEUESERVICE_H__
-# define __YUNI_NET_MESSAGE_QUEUESERVICE_H__
+#ifndef __YUNI_NET_MESSAGING_SERVICE_H__
+# define __YUNI_NET_MESSAGING_SERVICE_H__
 
 # include "../../yuni.h"
 # include "../net.h"
@@ -8,21 +8,22 @@
 # include "fwd.h"
 # include "transport.h"
 # include "../../core/noncopyable.h"
+# include "protocol.h"
 
 
 namespace Yuni
 {
 namespace Net
 {
-namespace Message
+namespace Messaging
 {
 
 
-	class QueueService final : private Yuni::NonCopyable<QueueService>, public Policy::ObjectLevelLockable<QueueService>
+	class YUNI_DECL Service final : private Yuni::NonCopyable<Service>, public Policy::ObjectLevelLockable<Service>
 	{
 	public:
 		//! The threading policy
-		typedef Policy::ObjectLevelLockable<QueueService>  ThreadingPolicy;
+		typedef Policy::ObjectLevelLockable<Service>  ThreadingPolicy;
 
 		/*!
 		** \brief Different states of a queue service
@@ -46,9 +47,9 @@ namespace Message
 		/*!
 		** \brief Default constructor
 		*/
-		QueueService();
+		Service();
 		//! Destructor
-		~QueueService();
+		~Service();
 		//@}
 
 
@@ -74,9 +75,23 @@ namespace Message
 		//@}
 
 
+		//! \name Protocol
+		//@{
+		/*!
+		** \brief Install a new protocol
+		**
+		** \note This method will take ownership of the pointer, thus this pointer
+		**   should not be used any longer
+		**
+		** \param newapi The new protocol (can be null)
+		*/
+		void protocol(Protocol* newapi);
+		//@}
+
+
 	public:
 		//! Listeners management
-		class Listeners
+		class Transports final : private NonCopyable<Transports>
 		{
 		public:
 			/*!
@@ -84,7 +99,7 @@ namespace Message
 			**
 			** This action will be effective the next time the server starts
 			** \code
-			** Net::Message::QueueService  server;
+			** Net::Messaging::Service  server;
 			** server.addListener("82.125.10.31", 4242, new Net::Transport::REST());
 			** server.start();
 			** server.wait();
@@ -101,13 +116,13 @@ namespace Message
 			void clear();
 
 		private:
-			QueueService* pService;
-			friend class QueueService;
+			Service* pService;
+			friend class Service;
 		}
-		listeners;
+		transports;
 
 		//! Events
-		class Events
+		class Events final : private NonCopyable<Events>
 		{
 		public:
 			//! Prototype event: The queue service is starting
@@ -145,23 +160,23 @@ namespace Message
 		//! Flag to know the state of the server
 		State pState;
 		//! Internal data
-		Yuni::Private::Net::Message::QueueServiceData* pData;
+		Yuni::Private::Net::Messaging::ServiceData* pData;
 
 		// Friends
-		friend class Yuni::Private::Net::Message::Worker;
+		friend class Yuni::Private::Net::Messaging::Worker;
 		friend class Listeners;
 
-	}; // class QueueService
+	}; // class Service
 
 
 
 
 
 
-} // namespace Message
+} // namespace Messaging
 } // namespace Net
 } // namespace Yuni
 
-# include "queueservice.hxx"
+# include "service.hxx"
 
-#endif // __YUNI_NET_MESSAGE_QUEUESERVICE_H__
+#endif // __YUNI_NET_MESSAGING_SERVICE_H__

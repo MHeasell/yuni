@@ -1,5 +1,5 @@
-#ifndef __YUNI_NET_MESSAGE_FWD_H__
-# define __YUNI_NET_MESSAGE_FWD_H__
+#ifndef __YUNI_NET_MESSAGING_FWD_H__
+# define __YUNI_NET_MESSAGING_FWD_H__
 
 // Forward declarations
 
@@ -7,10 +7,10 @@ namespace Yuni
 {
 namespace Net
 {
-namespace Message
+namespace Messaging
 {
 
-	class QueueService;
+	class Service;
 
 namespace Transport
 {
@@ -31,16 +31,16 @@ namespace Private
 {
 namespace Net
 {
-namespace Message
+namespace Messaging
 {
 
 	class Worker;
-	class QueueServiceData;
+	class ServiceData;
 
 
-} // namespace Message
+} // namespace Messaging
 } // namespace Net
 } // namespace Private
 } // namespace Yuni
 
-#endif // __YUNI_NET_MESSAGE_FWD_H__
+#endif // __YUNI_NET_MESSAGING_FWD_H__
