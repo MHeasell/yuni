@@ -32,6 +32,7 @@ if(Yuni_FOUND)
 	add_subdirectory(devices)
 	add_subdirectory(jobs)
 	add_subdirectory(threads)
+	add_subdirectory(net)
 	add_subdirectory(extra)
 
 else()
