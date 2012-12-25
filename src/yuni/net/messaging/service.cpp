@@ -23,7 +23,7 @@ namespace Messaging
 	{
 	public:
 		//! All workers
-		Workers workers;
+		Workers::Ptr workers;
 		//! All addresses to listen
 		TransportList transports;
 		//! Protocol
@@ -114,13 +114,7 @@ namespace Messaging
 		// Checking if the service is not already running
 		{
 			ThreadingPolicy::MutexLocker locker(*this);
-
-			// Directly stop if there is no transport available
-			if (not pData or pData->transports.empty())
-			{
-				pState = stStopped;
-				return errNoTransport;
-			}
+			InitializeInternalData(pData);
 
 			// checking the current state
 			if (pState != stStopped)
@@ -145,45 +139,68 @@ namespace Messaging
 			return err;
 		}
 
+		// pointer to all workers
+		Workers::Ptr workers;
+
 		// Trying to start all workers
 		{
 			ThreadingPolicy::MutexLocker locker(*this);
 
+			// destroy the old instance if not already done
+			pData->workers = nullptr;
+
 			// destroy all workers, just to be sure
-			Workers& workers = pData->workers;
-			workers.stop();
-			workers.clear();
+			workers = new Workers();
+			// disable the autostart
+			workers->autoStart(false);
+
 			// Ok, attempt to start the server from the real implementation
 			// recreating all workers
 			TransportList& transports = pData->transports;
-			TransportList::iterator end = transports.end();
-			for (TransportList::iterator i = transports.begin(); i != end; ++i)
+
+			if (not transports.empty())
 			{
-				// start the transport
-				if (errNone != (err = (*i)->start()))
-					break;
+				TransportList::iterator end = transports.end();
+				for (TransportList::iterator i = transports.begin(); i != end; ++i)
+				{
+					// start the transport
+					if (errNone != (err = (*i)->start()))
+						break;
 
-				// creating a new worker
-				workers += new Yuni::Private::Net::Messaging::Worker(*this, *i);
+					// creating a new worker
+					*workers += new Yuni::Private::Net::Messaging::Worker(*this, *i);
+				}
+
+				// The new state
+				if (err == errNone)
+				{
+					pData->workers = workers;
+					pState = stRunning;
+				}
+				else
+					pState = stStopped;
 			}
-
-			// The new state
-			pState = (err == errNone) ? stRunning : stStopped;
+			else
+			{
+				err = errNoTransport;
+				pState = stStopped;
+			}
 		}
 
 		if (err == errNone)
 		{
+			// start all workers
+			workers->start();
+
 			// Great ! The server is working !
 			events.started();
 			return errNone;
 		}
-		else
+
+		if (!(!workers))
 		{
-			ThreadingPolicy::MutexLocker locker(*this);
-			// destroy all workers
-			Workers& workers = pData->workers;
-			workers.stop();
-			workers.clear();
+			workers->stop();
+			workers = nullptr; // should be destroyed here
 		}
 
 		// An error has occured
@@ -194,6 +211,19 @@ namespace Messaging
 
 	void Service::wait()
 	{
+		Workers::Ptr workers;
+
+		// retrieving a pointer to the workers
+		{
+			ThreadingPolicy::MutexLocker locker(*this);
+			if (pData)
+				workers = pData->workers;
+			else
+				return;
+		}
+
+		if (!(!workers))
+			workers->wait();
 	}
 
 
@@ -202,7 +232,7 @@ namespace Messaging
 		// Checking if the service is not already running
 		{
 			ThreadingPolicy::MutexLocker locker(*this);
-			if (pData == NULL)
+			if (pData == NULL or not pData->workers)
 				return errNone;
 			if (pState != stRunning)
 				return (pState == stStopped) ? errNone : errUnknown;
@@ -214,21 +244,26 @@ namespace Messaging
 		events.stopping();
 
 		Error err = errNone;
+		Workers::Ptr workers;
 
 		// Trying to start all workers
 		{
 			ThreadingPolicy::MutexLocker locker(*this);
 
-			// destroy all workers
-			Workers& workers = pData->workers;
-			workers.stop();
-			workers.clear();
+			workers = pData->workers;
+			pData->workers = nullptr;
 			// The current state
 			pState = (err == errNone) ? stStopped : stRunning;
 		}
 
 		if (err == errNone)
 		{
+			// stopping then destroying all workers
+			if (!(!workers))
+			{
+				workers->stop();
+				workers = nullptr; // should be destroyed here
+			}
 			// Great ! The server is working !
 			events.stopped();
 			return errNone;
