@@ -24,6 +24,9 @@ Set(SRC_NET_PROTO
 	net/message/worker.h
 	net/message/worker.hxx
 	net/message/worker.cpp
+
+	net/message/transport/rest/mongoose.c
+	net/message/transport/rest/mongoose.h
 )
 source_group("Network\\Protocol" FILES ${SRC_NET_PROTO})
 
