@@ -18,40 +18,40 @@ source_group("Net" FILES ${SRC_NET_COMMUN})
 
 
 set(SRC_NET_MESSAGE
-	net/message/service.h
-	net/message/service.cpp
-	net/message/service.hxx
-	net/message/fwd.h
+	net/messaging/service.h
+	net/messaging/service.cpp
+	net/messaging/service.hxx
+	net/messaging/fwd.h
 
-	net/message/transport.h
-	net/message/transport/transport.h
-	net/message/transport/transport.hxx
-	net/message/worker.h
-	net/message/worker.hxx
-	net/message/worker.cpp
-	net/message/protocol.h
+	net/messaging/transport.h
+	net/messaging/transport/transport.h
+	net/messaging/transport/transport.hxx
+	net/messaging/worker.h
+	net/messaging/worker.hxx
+	net/messaging/worker.cpp
+	net/messaging/protocol.h
 
-	net/message/transport/rest/mongoose.c
-	net/message/transport/rest/mongoose.h
+	net/messaging/transport/rest/mongoose.c
+	net/messaging/transport/rest/mongoose.h
 )
-source_group("Net\\Message" FILES ${SRC_NET_MESSAGE})
+source_group("Net\\Messaging" FILES ${SRC_NET_MESSAGE})
 
 set(SRC_NET_MESSAGE_TRANSPORT_REST
-	net/message/transport/rest/mongoose.c
-	net/message/transport/rest/mongoose.h
+	net/messaging/transport/rest/mongoose.c
+	net/messaging/transport/rest/mongoose.h
 )
-source_group("Net\\Message\\Transport" FILES ${SRC_NET_MESSAGE_TRANSPORT_REST})
+source_group("Net\\Messaging\\Transport" FILES ${SRC_NET_MESSAGE_TRANSPORT_REST})
 
 
 set(SRC_NET_MESSAGE_API
-	net/message/api/methods.cpp
-	net/message/api/methods.h
-	net/message/api/methods.hxx
-	net/message/api/fwd.h
-	net/message/api/method.h
-	net/message/api/method.hxx
+	net/messaging/api/methods.cpp
+	net/messaging/api/methods.h
+	net/messaging/api/methods.hxx
+	net/messaging/api/fwd.h
+	net/messaging/api/method.h
+	net/messaging/api/method.hxx
 )
-source_group("Net\\Message\\API" FILES ${SRC_NET_MESSAGE_API})
+source_group("Net\\Messaging\\API" FILES ${SRC_NET_MESSAGE_API})
 
 
 
