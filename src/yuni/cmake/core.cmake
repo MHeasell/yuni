@@ -666,6 +666,7 @@ source_group(core\\system\\Console FILES ${SRC_CORE_SYSTEM_CONSOLE})
 
 set(SRC_CORE_MISC
 		core/noncopyable.h
+		core/dictionary.h
 )
 source_group(core\\any FILES ${SRC_CORE_ANY})
 
