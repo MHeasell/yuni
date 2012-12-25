@@ -7,6 +7,7 @@ LIBYUNI_CONFIG_LIB("both" "net"        "yuni-static-net")
 set(SRC_NET_COMMON
 	net/net.h
 	net/errors.h
+	net/errors.cpp
 	net/port.h
 	net/port.hxx
 	net/hostaddressport.h
