@@ -170,6 +170,20 @@ namespace Thread
 		*/
 		void wakeUp();
 
+		/*!
+		** \brief Wait for all threads to finish
+		*/
+		void wait();
+
+		/*!
+		** \brief Wait for all threads to finish
+		**
+		** \warning The current implementation is naive and wait for each thread
+		**   N milliseconds
+		** \param timeout A timeout in milliseconds
+		*/
+		void wait(uint milliseconds);
+
 
 		/*!
 		** \brief Get the number of threads

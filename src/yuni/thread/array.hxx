@@ -197,6 +197,46 @@ namespace Thread
 
 
 	template<class T>
+	void Array<T>::wait()
+	{
+		// We will make a copy of the list to release the lock as soon as
+		// possible since this routine may take some time...
+		ThreadList copy;
+		{
+			typename ThreadingPolicy::MutexLocker locker(*this);
+			if (pList.empty())
+				return;
+			copy = pList;
+		}
+
+		// waiting for all threads
+		const typename ThreadList::iterator end = copy.end();
+		for (typename ThreadList::iterator i = copy.begin(); i != end; ++i)
+			(*i)->wait();
+	}
+
+
+	template<class T>
+	void Array<T>::wait(uint milliseconds)
+	{
+		// We will make a copy of the list to release the lock as soon as
+		// possible since this routine may take some time...
+		ThreadList copy;
+		{
+			typename ThreadingPolicy::MutexLocker locker(*this);
+			if (pList.empty())
+				return;
+			copy = pList;
+		}
+
+		// waiting for all threads
+		const typename ThreadList::iterator end = copy.end();
+		for (typename ThreadList::iterator i = copy.begin(); i != end; ++i)
+			(*i)->wait(milliseconds);
+	}
+
+
+	template<class T>
 	void Array<T>::stop(uint timeout)
 	{
 		// We will make a copy of the list to release the lock as soon as
