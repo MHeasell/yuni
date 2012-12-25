@@ -109,10 +109,10 @@ namespace Thread
 		** \brief Wait for the end of the thread
 		**
 		** The thread is not stopped during the process.
-		** \param timeout The timeout in milliseconds
+		** \param milliseconds A timeout in milliseconds
 		** \return An error status (`errNone` if succeeded)
 		*/
-		Error wait(uint timeout);
+		Error wait(uint milliseconds);
 
 		/*!
 		** \brief Restart the thread

@@ -386,9 +386,9 @@ namespace Thread
 
 
 
-	Error IThread::wait(uint timeout)
+	Error IThread::wait(uint milliseconds)
 	{
-		assert(timeout < INVALID_TIMEOUT && "Invalid range for timeout, IThread::wait");
+		assert(milliseconds < INVALID_TIMEOUT && "Invalid range for timeout, IThread::wait");
 
 		# ifndef YUNI_NO_THREAD_SAFE
 		ThreadingPolicy::MutexLocker locker(*this);
@@ -398,11 +398,11 @@ namespace Thread
 				return errNone;
 		}
 
-		if (not pSignalHaveStopped.wait(timeout)) // We timed out.
+		if (not pSignalHaveStopped.wait(milliseconds)) // We timed out.
 			return errTimeout;
 
 		# else // YUNI_NO_THREAD_SAFE
-		(void) timeout;
+		(void) milliseconds;
 		# endif
 
 		return errNone;
