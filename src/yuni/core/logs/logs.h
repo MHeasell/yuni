@@ -51,11 +51,11 @@ namespace Logs
 	**
 	** int main()
 	** {
-	** 		// The logger
-	** 		Yuni::Logs::Logger<>  logs;
-	** 		// Hello world !
-	** 		logs.notice() << "Hello world !";
-	** 	return 0;
+	**	// The logger
+	**	Yuni::Logs::Logger<>  logs;
+	**	// Hello world !
+	**	logs.notice() << "Hello world !";
+	**	return 0;
 	** }
 	** \endcode
 	**
