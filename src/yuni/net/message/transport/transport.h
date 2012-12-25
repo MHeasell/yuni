@@ -16,7 +16,7 @@ namespace Yuni
 {
 namespace Net
 {
-namespace Message
+namespace Messaging
 {
 namespace Transport
 {

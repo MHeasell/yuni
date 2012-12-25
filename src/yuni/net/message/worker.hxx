@@ -1,5 +1,5 @@
-#ifndef __YUNI_NET_MESSAGE_WORKER_HXX__
-# define __YUNI_NET_MESSAGE_WORKER_HXX__
+#ifndef __YUNI_NET_MESSAGING_WORKER_HXX__
+# define __YUNI_NET_MESSAGING_WORKER_HXX__
 
 
 namespace Yuni
@@ -8,15 +8,15 @@ namespace Private
 {
 namespace Net
 {
-namespace Message
+namespace Messaging
 {
 
 
 
 
-} // namespace Message
+} // namespace Messaging
 } // namespace Net
 } // namespace Private
 } // namespace Yuni
 
-#endif // __YUNI_NET_MESSAGE_QUEUESERVICE_WORKER_HXX__
+#endif // __YUNI_NET_MESSAGING_QUEUESERVICE_WORKER_HXX__

@@ -6,7 +6,7 @@ namespace Yuni
 {
 namespace Net
 {
-namespace Message
+namespace Messaging
 {
 namespace Transport
 {
@@ -49,7 +49,7 @@ namespace Transport
 
 
 } // namespace Transport
-} // namespace Server
+} // namespace Messaging
 } // namespace Net
 } // namespace Yuni
 
