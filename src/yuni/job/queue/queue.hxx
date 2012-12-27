@@ -260,7 +260,7 @@ namespace Job
 			}
 
 			template<class ThreadPtrT>
-			bool operator () (const ThreadPtrT& thread)
+			bool operator () (const ThreadPtrT& thread) const
 			{
 				ThreadInfoType* info = new ThreadInfoType();
 				info->thread = thread;
@@ -285,7 +285,7 @@ namespace Job
 			}
 
 		private:
-			VectorType& pList;
+			mutable VectorType& pList;
 		};
 
 	} // anonymous namespace
