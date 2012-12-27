@@ -1,6 +1,8 @@
 #ifndef __YUNI_CORE_DICTIONARY_H__
 # define __YUNI_CORE_DICTIONARY_H__
 
+# include "../yuni.h"
+# include "string.h"
 # include <map>
 # include <set>
 
@@ -33,6 +35,10 @@ namespace Yuni
 
 	}; // struct Set
 
+
+
+	//! Convenient typedef for a key/value store
+	typedef Dictionary<String, String>::Hash  KeyValueStore;
 
 
 } // namespace Yuni

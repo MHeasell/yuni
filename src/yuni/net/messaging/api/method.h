@@ -5,6 +5,7 @@
 # include "fwd.h"
 # include "../../../core/string.h"
 # include "../../../core/dictionary.h"
+# include "../../../core/bind.h"
 
 
 namespace Yuni
@@ -45,13 +46,23 @@ namespace API
 		//@}
 
 
+	public:
+		/*!
+		** \brief Callback to invoker
+		**
+		** The key `api.method` is reserved for the name of the method which is called.
+		** The key `api.schema` is reserved for the name of the schema which is used.
+		*/
+		Bind<void (KeyValueStore& params)> callback;
+
+
 	private:
 		//! Name of the method
 		String pName;
 		//! Brief
 		String pBrief;
 		//! Options
-		Dictionary<String,String>::Hash pOptions;
+		KeyValueStore pOptions;
 
 		//! Temporary string
 		String pTmp;

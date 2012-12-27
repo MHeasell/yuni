@@ -11,6 +11,11 @@ Logs::Logger<> logs;
 
 
 
+static void HelloWorld(KeyValueStore& params)
+{
+	logs.info() << "callback: hello world !";
+}
+
 
 
 static void PrepareTheAPI(Net::Messaging::Service& service)
@@ -18,11 +23,14 @@ static void PrepareTheAPI(Net::Messaging::Service& service)
 	logs.debug() << "preparing protocol";
 	// note: contrary to the object `service`, `myapi` is not thread-safe
 	Net::Messaging::Protocol* myapi = new Net::Messaging::Protocol();
+	// retrieving the default schema
+	Net::Messaging::Schema& schema = myapi->schema();
 
 	// method: hello_world
-	myapi->methods.add("hello_world")
+	schema.methods.add("hello_world")
 		.brief("Always answer 'hello world to any request'")
-		.option("http.method", "GET");
+		.option("http.method", "GET")
+		.callback.bind(& HelloWorld);
 
 	// Switching to the new protocol
 	//
@@ -54,10 +62,10 @@ static bool StartService(Net::Messaging::Service& service)
 			break;
 		default:
 			logs.fatal() << "impossible to start the service: " << error;
-			logs.info() << "aborting";
 			return false;
 	}
 
+	logs.info() << "help: wget 'http://localhost:54042/hello_world'";
 	logs.info(); // empty line for beauty
 	return true;
 }
