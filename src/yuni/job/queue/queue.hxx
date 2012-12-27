@@ -285,7 +285,7 @@ namespace Job
 			}
 
 		private:
-			mutable VectorType& pList;
+			VectorType& pList;
 		};
 
 	} // anonymous namespace
