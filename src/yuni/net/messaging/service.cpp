@@ -6,7 +6,7 @@
 
 typedef Yuni::Thread::Array<Yuni::Private::Net::Messaging::Worker>  Workers;
 
-typedef Yuni::Net::Messaging::Transport::ITransport::Set  TransportList;
+typedef Yuni::Net::Messaging::Transport::ITransport::Hash  TransportList;
 
 
 
@@ -87,14 +87,21 @@ namespace Messaging
 		// The address
 		if (not address)
 			return errInvalidHostAddress;
+
+		HostAddressPort addrport;
+		addrport.address   = address;
+		addrport.port      = port;
 		transport->address = address;
 		transport->port    = port;
 
 		// Adding the new address
 		{
+			// The item to insert
+			std::pair<HostAddressPort, Net::Messaging::Transport::ITransport::Ptr> item(addrport, transport);
+
 			ThreadingPolicy::MutexLocker locker(*pService);
 			InitializeInternalData(pService->pData);
-			if (not pService->pData->transports.insert(transport).second)
+			if (not pService->pData->transports.insert(item).second)
 				return errDupplicatedAddress;
 		}
 		return errNone;
@@ -164,11 +171,11 @@ namespace Messaging
 				for (TransportList::iterator i = transports.begin(); i != end; ++i)
 				{
 					// start the transport
-					if (errNone != (err = (*i)->start()))
+					if (errNone != (err = (i->second)->start()))
 						break;
 
 					// creating a new worker
-					*workers += new Yuni::Private::Net::Messaging::Worker(*this, *i);
+					(*workers) += new Yuni::Private::Net::Messaging::Worker(*this, i->second);
 				}
 
 				// The new state

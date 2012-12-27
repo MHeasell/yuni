@@ -5,7 +5,6 @@
 # include "port.h"
 # include "../core/string.h"
 # include <vector>
-# include <set>
 
 
 namespace Yuni
@@ -21,15 +20,8 @@ namespace Net
 	class HostAddressPort
 	{
 	public:
-		//! Predicate for comparing two host addresses
-		struct Compare
-		{
-			bool operator () (const HostAddressPort& a, const HostAddressPort& b) const;
-		};
 		//! Vector
 		typedef std::vector<HostAddressPort>  Vector;
-		//! Set
-		typedef std::set<HostAddressPort, Compare>  Set;
 
 
 	public:
@@ -41,6 +33,9 @@ namespace Net
 		HostAddress  address;
 		//! Socket port number
 		Port port;
+
+		//! operator <
+		bool operator < (const HostAddressPort& rhs) const;
 
 	}; // class HostAddressPort
 

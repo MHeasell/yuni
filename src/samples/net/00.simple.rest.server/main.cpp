@@ -1,6 +1,7 @@
 
 #include <yuni/yuni.h>
 #include <yuni/net/messaging/service.h>
+#include <yuni/net/messaging/transport/rest/server.h>
 #include <yuni/core/logs.h>
 
 using namespace Yuni;
@@ -10,9 +11,11 @@ Logs::Logger<> logs;
 
 
 
+
+
 static void PrepareTheAPI(Net::Messaging::Service& service)
 {
-	logs.info() << "preparing protocol";
+	logs.debug() << "preparing protocol";
 	// note: contrary to the object `service`, `myapi` is not thread-safe
 	Net::Messaging::Protocol* myapi = new Net::Messaging::Protocol();
 
@@ -34,8 +37,8 @@ static void PrepareTheAPI(Net::Messaging::Service& service)
 
 static void PrepareTransports(Net::Messaging::Service& service)
 {
-	logs.info() << "preparing transports";
-	//service.transports += new Net::Messaging::Transport::REST::Server();
+	logs.debug() << "preparing transports";
+	service.transports.add("*", 54042, new Net::Messaging::Transport::REST::Server());
 }
 
 

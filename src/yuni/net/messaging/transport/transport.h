@@ -1,5 +1,5 @@
-#ifndef __YUNI_NET_MESSAGE_TRANSPORT_TRANSPORT_H__
-# define __YUNI_NET_MESSAGE_TRANSPORT_TRANSPORT_H__
+#ifndef __YUNI_NET_MESSAGING_TRANSPORT_TRANSPORT_H__
+# define __YUNI_NET_MESSAGING_TRANSPORT_TRANSPORT_H__
 
 # include "../../../yuni.h"
 # include "../../../core/string.h"
@@ -9,7 +9,7 @@
 # include "../../errors.h"
 # include "../../hostaddressport.h"
 # include "../../port.h"
-# include <set>
+# include "../../../core/dictionary.h"
 
 
 namespace Yuni
@@ -41,8 +41,9 @@ namespace Transport
 	public:
 		//! The most suitable smart pointer for the class
 		typedef SmartPtr<ITransport>  Ptr;
+		//!
 		//! Set
-		typedef std::set<Ptr> Set;
+		typedef Dictionary<HostAddressPort, Ptr>::Hash Hash;
 
 	public:
 		//! \name Constructor & Destructor
@@ -85,7 +86,7 @@ namespace Transport
 		const Mode mode;
 
 	protected:
-		//! The attached thread
+		//! The attached thread, if any
 		Thread::IThread* pAttachedThread;
 
 	}; // class Transport
@@ -102,4 +103,4 @@ namespace Transport
 
 # include "transport.hxx"
 
-#endif // __YUNI_NET_MESSAGE_TRANSPORT_TRANSPORT_H__
+#endif // __YUNI_NET_MESSAGING_TRANSPORT_TRANSPORT_H__
