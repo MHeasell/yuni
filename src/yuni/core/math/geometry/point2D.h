@@ -207,6 +207,22 @@ namespace Yuni
 		template<typename U>
 		Point2D<T>& operator = (const Point2D<U>& p) { x = (T)p.x; y = (T)p.y; return (*this); }
 
+
+		/*!
+		** \brief Operator [] overload.
+		*/
+		T& operator [] (const uint i)
+		{
+			switch (i)
+			{
+				case 0:
+					return x;
+				case 1:
+					return y;
+				default:
+					assert(false && "Index out of bounds !");
+			}
+		}
 		//} Operators
 
 
