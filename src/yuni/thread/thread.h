@@ -150,14 +150,8 @@ namespace Thread
 		//@}
 
 
-		//! \name Operators
+		//! \name Thread cancellation
 		//@{
-		//! Get if the thread is currently stopped
-		bool operator ! () const;
-		//@}
-
-
-	protected:
 		/*!
 		** \brief Suspend the execution of the thread of X miliseconds
 		**
@@ -167,10 +161,10 @@ namespace Thread
 		**
 		** \attention This method must only be called inside the execution of the thread
 		**
-		** \param delay The delay in miliseconds. O will only return if the thread should exit
+		** \param timeout The delay in milliseconds to wait. O will only return if the thread should exit
 		** \return True indicates that the thread should stop immediately
 		*/
-		bool suspend(uint delay = 0);
+		bool suspend(uint timeout = 0);
 
 		/*!
 		** \brief Get if the thread should abort as soon as possible
@@ -180,7 +174,17 @@ namespace Thread
 		** \return True indicates that the thread should stop immediately
 		*/
 		bool shouldAbort();
+		//@}
 
+
+		//! \name Operators
+		//@{
+		//! Get if the thread is currently stopped
+		bool operator ! () const;
+		//@}
+
+
+	protected:
 		/*!
 		** \brief Event: The thread has just been started
 		**

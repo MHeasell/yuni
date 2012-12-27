@@ -15,7 +15,8 @@ namespace Messaging
 	Worker::Worker(Service& service, ITransport::Ptr transport) :
 		pTransport(transport),
 		pService(service)
-	{}
+	{
+	}
 
 
 	Worker::~Worker()
@@ -26,9 +27,11 @@ namespace Messaging
 
 	bool Worker::onExecute()
 	{
+		// note : this method should not keep a lock on the smart pointer.
+		// A memory leak would happen if the thread is killed in action.
 		if (!(!pTransport)) // valid pointer to transport
 		{
-			// The current transport layer
+			// pointer aliasing
 			ITransport& transport = *pTransport;
 
 			// Attach the current thread to the transport layer
@@ -37,17 +40,31 @@ namespace Messaging
 			// run the transport layer, and wait for it
 			Yuni::Net::Error error = transport.run();
 
-			// Detach the thread, just in case
-			transport.attachedThread(nullptr);
-
 			if (error != Yuni::Net::errNone)
 				pService.events.error(Service::stRunning, error);
+		}
+		return false;
+	}
 
+
+	void Worker::onStop()
+	{
+		// getting apointer to the transport
+		ITransport::Ptr transport = pTransport;
+		if (!(!transport))
+		{
+			// Detach the thread, just in case
+			transport->attachedThread(nullptr);
 			// directly unassign / destroy the transport here (from the thread
-			// to avoid long unexplained delay
+			// to avoid long unexplained delay from the destructor
 			pTransport = nullptr;
 		}
-		return true;
+	}
+
+
+	void Worker::onKill()
+	{
+		onStop();
 	}
 
 

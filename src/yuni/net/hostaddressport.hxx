@@ -8,18 +8,17 @@ namespace Net
 {
 
 
-	inline bool HostAddressPort::Compare::operator () (const HostAddressPort& a, const HostAddressPort& b) const
-	{
-		return (a.port < b.port) && (a.address < b.address);
-	}
-
-
 	inline void HostAddressPort::reset()
 	{
 		address.clear();
 		port = nullptr;
 	}
 
+
+	inline bool HostAddressPort::operator < (const HostAddressPort& rhs) const
+	{
+		return (port < rhs.port) and (address < rhs.address);
+	}
 
 
 

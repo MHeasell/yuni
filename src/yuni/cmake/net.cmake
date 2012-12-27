@@ -34,6 +34,8 @@ set(SRC_NET_MESSAGE
 
 	net/messaging/transport/rest/mongoose.c
 	net/messaging/transport/rest/mongoose.h
+	net/messaging/transport/rest/server.h
+	net/messaging/transport/rest/server.cpp
 )
 source_group("Net\\Messaging" FILES ${SRC_NET_MESSAGE})
 

@@ -45,6 +45,10 @@ namespace Messaging
 	protected:
 		//! Thread execution
 		virtual bool onExecute() override;
+		//! Thread terminate
+		virtual void onStop() override;
+		//! Thread terminate
+		virtual void onKill() override;
 
 	protected:
 		//! The transport layer
