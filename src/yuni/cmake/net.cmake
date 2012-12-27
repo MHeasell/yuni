@@ -31,6 +31,7 @@ set(SRC_NET_MESSAGE
 	net/messaging/worker.hxx
 	net/messaging/worker.cpp
 	net/messaging/protocol.h
+	net/messaging/schema.h
 
 	net/messaging/transport/rest/mongoose.c
 	net/messaging/transport/rest/mongoose.h
