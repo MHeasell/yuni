@@ -37,8 +37,8 @@ static void PrepareTheAPI(Net::Messaging::Service& service)
 	// note: The method `protocol()` must be call to make any modification to
 	//   the protocol visible, and can be called anytime, even if started
 	//   (useful for reloading the service while running)
-	// note: this method will take ownership of the pointer, thus you no
-	//   longer be used
+	// note: this method will take ownership of the pointer, thus the pointer
+	//   must not be used after this statement
 	service.protocol(myapi);
 }
 
