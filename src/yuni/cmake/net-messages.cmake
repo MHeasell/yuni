@@ -6,20 +6,24 @@ LIBYUNI_CONFIG_LIB("both" "net-messages"        "yuni-static-net-messages")
 
 
 Set(SRC_NET
-	net/message/connection.h
-	net/message/queueservice.cpp
-	net/message/queueservice.h
-	net/message/queueservice.hxx
-	net/message/worker.h
-	net/message/worker.hxx
-	net/message/worker.cpp
-	net/message/transport.h
-	net/message/transport
-	net/message/transport/layer.h
-	net/message/transport/transport.h
-	net/message/transport/transport.hxx
-	net/message/transport/tcp.h
-	net/message/transport/tcp.cpp
+	net/messaging/protocol.h
+	net/messaging/service.cpp
+	net/messaging/service.h
+	net/messaging/service.hxx
+	net/messaging/worker.h
+	net/messaging/worker.hxx
+	net/messaging/worker.cpp
+	net/messaging/api/method.h
+	net/messaging/api/method.hxx
+	net/messaging/api/methods.cpp
+	net/messaging/api/methods.h
+	net/messaging/api/methods.hxx
+	net/messaging/transport.h
+	net/messaging/transport
+	net/messaging/transport/transport.h
+	net/messaging/transport/transport.hxx
+	net/messaging/transport/rest/mongoose.h
+	net/messaging/transport/rest/mongoose.c
 	)
 source_group("Network\\Messages" FILES ${SRC_NET})
 
