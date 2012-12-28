@@ -253,10 +253,10 @@ namespace Job
 			typedef typename ThreadInfoType::Vector VectorType;
 
 		public:
-			QueueActivityPredicate(VectorType& out) :
+			QueueActivityPredicate(VectorType* out) :
 				pList(out)
 			{
-				pList.clear();
+				pList->clear();
 			}
 
 			template<class ThreadPtrT>
@@ -272,7 +272,7 @@ namespace Job
 						// We have a job which is currently working !
 						info->hasJob = true;
 						info->job->fillInformation(*info);
-						pList.push_back(info);
+						pList->push_back(info);
 						return true;
 					}
 				}
@@ -280,12 +280,12 @@ namespace Job
 				info->state = Yuni::Job::stateIdle;
 				info->canceling = false;
 				info->progression = 0;
-				pList.push_back(info);
+				pList->push_back(info);
 				return true;
 			}
 
 		private:
-			VectorType& pList;
+			mutable VectorType* pList;
 		};
 
 	} // anonymous namespace
@@ -295,7 +295,7 @@ namespace Job
 	void QueueService<SchedulerT>::activitySnapshot(
 		typename QueueService<SchedulerT>::ThreadInfo::Vector& out)
 	{
-		QueueActivityPredicate<SchedulerT> predicate(out);
+		QueueActivityPredicate<SchedulerT> predicate(&out);
 		SchedulerPolicy::schedulerForeachThread(predicate);
 	}
 
