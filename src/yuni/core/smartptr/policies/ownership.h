@@ -176,9 +176,7 @@ namespace Ownership
 		*/
 		static bool release(const T& rhs)
 		{
-			if (0 != rhs)
-				rhs->release();
-			return false;
+			return (0 != rhs) ? rhs->release() : false;
 		}
 
 		static void swapPointer(COMReferenceCounted&) {}

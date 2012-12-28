@@ -217,7 +217,7 @@ namespace Variant
 		//! Increment the internal reference counter
 		void addRef() const;
 		//! Decrement the internal reference counter
-		void release() const;
+		bool release() const;
 		//! Get if the object is an unique reference
 		bool unique() const;
 		//@}

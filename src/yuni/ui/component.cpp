@@ -24,15 +24,15 @@ namespace UI
 	}
 
 
-	void IComponent::release()
+	bool IComponent::release()
 	{
 		{
 			ThreadingPolicy::MutexLocker locker(*this);
 			if (--pRefCount > 0)
-				return;
+				return false;
 			detachWL();
 		}
-		delete this;
+		return true;
 	}
 
 

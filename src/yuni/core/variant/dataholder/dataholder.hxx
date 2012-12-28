@@ -53,16 +53,16 @@ namespace Variant
 	}
 
 
-	inline void IDataHolder::release() const
+	inline bool IDataHolder::release() const
 	{
 		{
 			ThreadingPolicy::MutexLocker locker(*this);
 			assert(pRefCount > 0);
 			if (--pRefCount != 0)
-				return;
+				return false;
 			// Early clean-up here
 		}
-		delete this;
+		return true;
 	}
 
 

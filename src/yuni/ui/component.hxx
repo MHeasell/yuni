@@ -115,9 +115,7 @@ namespace UI
 	inline void IComponent::addRef()
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
-		//++pRefCount;
-		// FIXME This value is artificially increased due to a design flaw in smartptr
-		pRefCount += 50;
+		++pRefCount;
 	}
 
 
