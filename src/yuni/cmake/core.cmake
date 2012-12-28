@@ -232,6 +232,8 @@ set(SRC_CORE_SMARTPTR
 		core/smartptr/policies/constness.h
 		core/smartptr/smartptr.h
 		core/smartptr/smartptr.hxx
+		core/smartptr/intrusive.h
+		core/smartptr/intrusive.hxx
 )
 source_group(core\\smartptr FILES ${SRC_CORE_SMARTPTR})
 

@@ -144,7 +144,7 @@ namespace Adapter
 		//! \name Pointer management
 		//@{
 		void addRef();
-		void release();
+		bool release();
 		//@}
 
 
