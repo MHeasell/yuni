@@ -72,6 +72,9 @@ namespace Net
 		bool operator > (const Port& rhs) const;
 		bool operator <= (const Port& rhs) const;
 		bool operator >= (const Port& rhs) const;
+
+		//! Cast uint
+		operator uint () const;
 		//@}
 
 	private:

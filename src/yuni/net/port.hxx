@@ -157,6 +157,10 @@ namespace Net
 	}
 
 
+	inline Port::operator uint () const
+	{
+		return pValue;
+	}
 
 
 

@@ -18,6 +18,12 @@ namespace API
 	}
 
 
+	inline const Method::Hash& Methods::all() const
+	{
+		return pMethods;
+	}
+
+
 
 
 } // namespace API

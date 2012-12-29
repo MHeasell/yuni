@@ -94,6 +94,8 @@ namespace Messaging
 		transport->address = address;
 		transport->port    = port;
 
+
+
 		// Adding the new address
 		{
 			// The item to insert
@@ -101,6 +103,12 @@ namespace Messaging
 
 			ThreadingPolicy::MutexLocker locker(*pService);
 			InitializeInternalData(pService->pData);
+
+			Protocol::Ptr& protocol = pService->pData->protocol;
+			if (not protocol)
+				pService->pData->protocol = new Protocol();
+			transport->protocol(*protocol);
+
 			if (not pService->pData->transports.insert(item).second)
 				return errDupplicatedAddress;
 		}
@@ -301,8 +309,15 @@ namespace Messaging
 		InitializeInternalData(pData);
 		assert(pData != NULL && "internal error");
 
-		// Making all transports switch to the new protocol
+		// Reference to the new protocol
+		const Protocol& protoref = *newproto;
 
+		// Making all transports switch to the new protocol
+		TransportList::iterator end = pData->transports.end();
+		for (TransportList::iterator i = pData->transports.begin(); i != end; ++i)
+		{
+			(i->second)->protocol(protoref);
+		}
 
 		// All transports have switched to the new protocol
 		// we can release our own pointer. The old protocol should

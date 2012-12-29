@@ -29,6 +29,8 @@ namespace Net
 		errNoTransport,
 		//! Invalid transport layer
 		errInvalidTransport,
+		//! Impossible to start web server
+		errStartFailed,
 		//! The maximum number of errors
 		errMax
 	};
