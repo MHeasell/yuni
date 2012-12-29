@@ -30,6 +30,12 @@ namespace Messaging
 		*/
 		Schema& schema(const AnyString& name);
 
+		/*!
+		** \brief All schemas
+		*/
+		const Schema::Hash& allSchemas() const;
+
+
 	private:
 		//! All schemas
 		Schema::Hash pSchemas;

@@ -18,7 +18,13 @@ namespace REST
 	class Server final : public ITransport
 	{
 	public:
+		//! Opaque structure for Internal data related to the rest server
+		class ServerData;
+
+	public:
+		//! Default constructor
 		Server();
+		//! Destructor
 		virtual ~Server();
 
 		virtual Net::Error  start() override;
@@ -27,12 +33,17 @@ namespace REST
 
 		virtual void stop() override;
 
+		virtual void protocol(const Protocol& protocol) override;
+
 	private:
-		class ServerData;
+		void wait();
+
+	private:
 		//! Internal data
 		ServerData* pData;
 
 	}; // class Server
+
 
 
 

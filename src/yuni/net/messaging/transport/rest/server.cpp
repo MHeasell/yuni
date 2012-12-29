@@ -2,9 +2,10 @@
 #include "server.h"
 #include "../../../../thread/signal.h"
 #include <cassert>
-
 #define _MSC_VER 0 // seems to be required with this version
 #include "mongoose.h"
+#include "data.inc.hxx"
+#include "serverequest.inc.hxx"
 
 
 namespace Yuni
@@ -17,37 +18,6 @@ namespace Transport
 {
 namespace REST
 {
-
-	class Server::ServerData
-	{
-	public:
-		ServerData() :
-			thread(nullptr)
-		{
-		}
-
-		void waitWithoutSignal();
-
-	public:
-		//! Signal for stopping the web server
-		Thread::Signal signal;
-		//! Attached thread
-		Thread::IThread* thread;
-	};
-
-
-	void Server::ServerData::waitWithoutSignal()
-	{
-		std::cerr << "invalid signal. using active loop\n";
-		// signal missing
-		while (not thread->suspend(1200)) // milliseconds
-		{
-			// infinite
-		}
-	}
-
-
-
 
 
 	Server::Server() :
@@ -65,32 +35,60 @@ namespace REST
 
 	Net::Error  Server::start()
 	{
+		// stopping mongoose if not alreayd done
+		if (pData->ctx)
+			mg_stop(pData->ctx);
+
+		// reset all internal states
 		pData->thread = nullptr;
 		pData->signal.reset();
+
+		// re-create mongoose options
+		pData->prepareOptionsForMongoose(port, 4);
+
+		// starting mongoose
+		pData->ctx = mg_start(& TransportRESTCallback, pData, pData->options);
+		if (not pData->ctx)
+			return errStartFailed;
+
 		return errNone;
+	}
+
+
+	void Server::wait()
+	{
+		if (pData)
+		{
+			// wait for being stopped
+			if (pData->signal.valid())
+			{
+				pData->signal.wait();
+			}
+			else
+			{
+				// the code should never reach this location
+				// (unless the signal is invalid)
+				pData->waitWithoutSignal();
+			}
+		}
 	}
 
 
 	Net::Error  Server::run()
 	{
 		assert(pData && "internal error");
-		ServerData& data = *pData;
 
 		// Get the attached thread
-		data.thread = pAttachedThread;
+		pData->thread = pAttachedThread;
 
-		if (data.signal.valid())
-		{
-			// wait for being stopped
-			data.signal.wait();
-		}
-		else
-		{
-			// should never happen
-			data.waitWithoutSignal();
-		}
+		// infinite wait, until we receive a message to stop
+		wait();
 
-		data.thread = nullptr;
+		// waiting for mongoose to stop
+		mg_stop(pData->ctx);
+
+		pData->ctx = nullptr;
+		pData->thread = nullptr;
 		return errNone;
 	}
 
@@ -108,6 +106,59 @@ namespace REST
 			if (pData->thread)
 				pData->thread->gracefulStop();
 		}
+	}
+
+
+	void Server::protocol(const Protocol& protocol)
+	{
+		DecisionTree* decisionTree = new DecisionTree();
+		String url;
+		String httpMethod;
+
+		// walking through all schemas
+		const Schema::Hash& allSchemas = protocol.allSchemas();
+		Schema::Hash::const_iterator end = allSchemas.end();
+		for (Schema::Hash::const_iterator i = allSchemas.begin(); i != end; ++i)
+		{
+			// relative path access
+			const String& schemaName = i->first;
+			// alias to the current schema
+			const Schema& schema = i->second;
+
+			API::Method::Hash::const_iterator jend = schema.methods.all().end();
+			for (API::Method::Hash::const_iterator j = schema.methods.all().begin(); j != jend; ++j)
+			{
+				const API::Method& method = j->second;
+
+				httpMethod = method.option("http.method");
+				// using const char* to avoid assert from Yuni::String
+				RequestMethod rqmd = StringToRequestMethod(httpMethod.c_str());
+				if (rqmd == rqmdInvalid)
+					rqmd = rqmdGET;
+
+				// the full url
+				url.clear() << schemaName << method.name();
+
+				// keeping the url somewhere
+				// IMPORTANT: read notes about how urls are stored
+				std::set<String>& mapset = decisionTree->mapset[rqmd];
+				mapset.insert(url);
+				// retrieving the real pointer to the string
+				std::set<String>::const_iterator mapi = mapset.find(url);
+				AnyString urlstr = *mapi;
+
+				// alias to the corresponding method handler
+				DecisionTree::MethodHandler& mhandler = decisionTree->requestMethods[rqmd][urlstr];
+
+				mhandler.schema = schemaName;
+				mhandler.name = method.name();
+				mhandler.httpMethod = httpMethod;
+				mhandler.callback = method.callback;
+			}
+		}
+
+		// Switching to the new protocol
+		pData->decisionTree = decisionTree;
 	}
 
 

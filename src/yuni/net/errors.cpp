@@ -23,7 +23,8 @@ namespace Net
 				return "no transport available";
 			case errInvalidTransport:
 				return "invalid transport";
-
+			case errStartFailed:
+				return "impossible to start the server";
 			case errUnknown:
 			case errMax:
 				break;

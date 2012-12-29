@@ -11,7 +11,7 @@ namespace Messaging
 
 	inline Schema& Protocol::schema()
 	{
-		return pSchemas[(pTmp.clear())];
+		return pSchemas[(pTmp = "/")];
 	}
 
 
@@ -20,6 +20,11 @@ namespace Messaging
 		return pSchemas[(pTmp = name)];
 	}
 
+
+	inline const Schema::Hash& Protocol::allSchemas() const
+	{
+		return pSchemas;
+	}
 
 
 

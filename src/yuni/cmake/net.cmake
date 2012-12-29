@@ -32,11 +32,14 @@ set(SRC_NET_MESSAGE
 	net/messaging/worker.cpp
 	net/messaging/protocol.h
 	net/messaging/schema.h
+	net/messaging/message.h
 
 	net/messaging/transport/rest/mongoose.c
 	net/messaging/transport/rest/mongoose.h
 	net/messaging/transport/rest/server.h
 	net/messaging/transport/rest/server.cpp
+	net/messaging/transport/rest/data.inc.hxx
+	net/messaging/transport/rest/serverequest.inc.hxx
 )
 source_group("Net\\Messaging" FILES ${SRC_NET_MESSAGE})
 

@@ -6,6 +6,7 @@
 # include "../../../core/string.h"
 # include "../../../core/dictionary.h"
 # include "../../../core/bind.h"
+# include "../message.h"
 
 
 namespace Yuni
@@ -21,7 +22,8 @@ namespace API
 	{
 	public:
 		//! Hash table
-		typedef Dictionary<String, Method>::Hash  MethodDictionary;
+		typedef Dictionary<String, Method>::Hash  Hash;
+		typedef Bind<void (Net::Messaging::Message&)>  Callback;
 
 	public:
 		/*!
@@ -43,17 +45,15 @@ namespace API
 		//@{
 		//! Set an option
 		template<class StringT> Method& option(const StringT& key, const AnyString& value);
+		template<class StringT> const String& option(const StringT& key) const;
 		//@}
 
 
 	public:
 		/*!
 		** \brief Callback to invoker
-		**
-		** The key `api.method` is reserved for the name of the method which is called.
-		** The key `api.schema` is reserved for the name of the schema which is used.
 		*/
-		Bind<void (KeyValueStore& params)> callback;
+		Callback callback;
 
 
 	private:
@@ -62,10 +62,10 @@ namespace API
 		//! Brief
 		String pBrief;
 		//! Options
-		KeyValueStore pOptions;
+		mutable KeyValueStore pOptions;
 
 		//! Temporary string
-		String pTmp;
+		mutable String pTmp;
 		// Our friend !
 		friend class Methods;
 

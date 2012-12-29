@@ -11,7 +11,7 @@ Logs::Logger<> logs;
 
 
 
-static void HelloWorld(KeyValueStore& params)
+static void HelloWorld(Net::Messaging::Message& params)
 {
 	logs.info() << "callback: hello world !";
 }
@@ -46,7 +46,7 @@ static void PrepareTheAPI(Net::Messaging::Service& service)
 static void PrepareTransports(Net::Messaging::Service& service)
 {
 	logs.debug() << "preparing transports";
-	service.transports.add("*", 54042, new Net::Messaging::Transport::REST::Server());
+	service.transports.add("*", 6042, new Net::Messaging::Transport::REST::Server());
 }
 
 
@@ -65,7 +65,7 @@ static bool StartService(Net::Messaging::Service& service)
 			return false;
 	}
 
-	logs.info() << "help: wget 'http://localhost:54042/hello_world'";
+	logs.info() << "help: wget 'http://localhost:6042/hello_world'";
 	logs.info(); // empty line for beauty
 	return true;
 }

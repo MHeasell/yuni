@@ -10,6 +10,7 @@
 # include "../../hostaddressport.h"
 # include "../../port.h"
 # include "../../../core/dictionary.h"
+# include "../protocol.h"
 
 
 namespace Yuni
@@ -76,6 +77,15 @@ namespace Transport
 		//! Ask to stop the transport layer (if not already done)
 		virtual void stop() = 0;
 		//@}
+
+		//! \name Protocol
+		//@{
+		/*!
+		** \brief Install a new protocol
+		*/
+		virtual void protocol(const Protocol& protocol) = 0;
+		//@}
+
 
 	public:
 		//! Address to listen

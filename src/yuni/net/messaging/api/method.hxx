@@ -38,6 +38,13 @@ namespace API
 	}
 
 
+	template<class StringT>
+	inline const String& Method::option(const StringT& key) const
+	{
+		return pOptions[(pTmp = key)];
+	}
+
+
 
 
 } // namespace API

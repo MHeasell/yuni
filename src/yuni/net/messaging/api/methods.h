@@ -29,9 +29,12 @@ namespace API
 		*/
 		void clear();
 
+		//! All methods
+		const Method::Hash& all() const;
+
 	private:
 		//! methods
-		Method::MethodDictionary pMethods;
+		Method::Hash  pMethods;
 
 	}; // class Methods
 
