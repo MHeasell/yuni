@@ -36,6 +36,12 @@ namespace Messaging
 		const Schema::Hash& allSchemas() const;
 
 
+		/*!
+		** \brief Shrink the memory as much as possible
+		*/
+		void shrinkMemory();
+
+
 	private:
 		//! All schemas
 		Schema::Hash pSchemas;

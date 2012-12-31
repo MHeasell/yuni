@@ -11,10 +11,28 @@ Logs::Logger<> logs;
 
 
 
-static void HelloWorld(Net::Messaging::Message& params)
+static void APIHelloWorld(Net::Messaging::ThreadContext&, Net::Messaging::Message&)
 {
-	logs.info() << "callback: hello world !";
+	logs.info() << "sending hello world !";
 }
+
+
+static void APISum(Net::Messaging::ThreadContext& threadctx, Net::Messaging::Message& message)
+{
+	// temporary string provided by threadctx, for avoid useless reallocation
+	String key = threadctx.text;
+	double a, b;
+
+	if (not message.params[(key = "a")].to(a)
+		or not message.params[(key = "b")].to(b))
+	{
+		message.httpStatus = 400; // bad request
+		return;
+	}
+
+	logs.info() << "sum " << a << " + " << b << " = " << (a + b);
+}
+
 
 
 
@@ -30,7 +48,15 @@ static void PrepareTheAPI(Net::Messaging::Service& service)
 	schema.methods.add("hello_world")
 		.brief("Always answer 'hello world to any request'")
 		.option("http.method", "GET")
-		.callback.bind(& HelloWorld);
+		.invoke(& APIHelloWorld);
+
+	// method: sum
+	schema.methods.add("sum")
+		.brief("Computes the sum of two numbers")
+		.option("http.method", "GET")
+		.param("a", "First operad", "0")
+		.param("b", "Second operad", "0")
+		.invoke(& APISum);
 
 	// Switching to the new protocol
 	//
@@ -65,7 +91,10 @@ static bool StartService(Net::Messaging::Service& service)
 			return false;
 	}
 
-	logs.info() << "help: wget 'http://localhost:6042/hello_world'";
+	logs.info() << "example:";
+	logs.info() << "# wget 'http://localhost:6042/hello_world'";
+	logs.info() << "# wget 'http://localhost:6042/sum?a=50&amp;b=42'";
+	logs.info() << "<ctrl> + C to quit";
 	logs.info(); // empty line for beauty
 	return true;
 }

@@ -31,8 +31,13 @@ set(SRC_NET_MESSAGE
 	net/messaging/worker.hxx
 	net/messaging/worker.cpp
 	net/messaging/protocol.h
+	net/messaging/protocol.hxx
+	net/messaging/protocol.cpp
 	net/messaging/schema.h
+	net/messaging/schema.hxx
 	net/messaging/message.h
+	net/messaging/threadcontext.h
+	net/messaging/threadcontext.hxx
 
 	net/messaging/transport/rest/mongoose.c
 	net/messaging/transport/rest/mongoose.h
@@ -56,6 +61,7 @@ set(SRC_NET_MESSAGE_API
 	net/messaging/api/methods.hxx
 	net/messaging/api/fwd.h
 	net/messaging/api/method.h
+	net/messaging/api/method.cpp
 	net/messaging/api/method.hxx
 )
 source_group("Net\\Messaging\\API" FILES ${SRC_NET_MESSAGE_API})

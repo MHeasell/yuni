@@ -11,6 +11,11 @@ namespace Messaging
 namespace API
 {
 
+	inline Method::Method() :
+		pCallback(nullptr)
+	{}
+
+
 	inline const String& Method::name() const
 	{
 		return pName;
@@ -30,18 +35,35 @@ namespace API
 	}
 
 
-	template<class StringT>
-	inline Method& Method::option(const StringT& key, const AnyString& value)
+	inline Method& Method::invoke(Callback callback)
+	{
+		pCallback = callback;
+		return *this;
+	}
+
+
+	inline Method::Callback Method::invoke() const
+	{
+		return pCallback;
+	}
+
+
+	inline Method& Method::option(const AnyString& key, const AnyString& value)
 	{
 		pOptions[(pTmp = key)] = value;
 		return *this;
 	}
 
 
-	template<class StringT>
-	inline const String& Method::option(const StringT& key) const
+	inline const String& Method::option(const AnyString& key) const
 	{
 		return pOptions[(pTmp = key)];
+	}
+
+
+	inline const Method::Parameter::Hash& Method::params() const
+	{
+		return pParams;
 	}
 
 

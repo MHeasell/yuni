@@ -16,14 +16,14 @@ namespace Messaging
 	{
 	public:
 		Message() :
-			httpError(200)
+			httpStatus(200)
 		{}
 
 	public:
 		// returned message
 		Clob body;
 		// HTTP Error
-		uint httpError;
+		uint httpStatus;
 		// parameters
 		KeyValueStore params;
 		// Name of the method invoked

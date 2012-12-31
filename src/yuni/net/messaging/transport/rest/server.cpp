@@ -130,6 +130,10 @@ namespace REST
 			{
 				const API::Method& method = j->second;
 
+				// The method will be ignored is no callback has been provided
+				if (not method.invoke())
+					continue;
+
 				httpMethod = method.option("http.method");
 				// using const char* to avoid assert from Yuni::String
 				RequestMethod rqmd = StringToRequestMethod(httpMethod.c_str());
@@ -153,7 +157,22 @@ namespace REST
 				mhandler.schema = schemaName;
 				mhandler.name = method.name();
 				mhandler.httpMethod = httpMethod;
-				mhandler.callback = method.callback;
+				mhandler.invoke = method.invoke();
+
+				// copying parameters
+				const API::Method::Parameter::Hash& parameters = method.params();
+				if (not parameters.empty())
+				{
+					API::Method::Parameter::Hash::const_iterator pend = parameters.end();
+					API::Method::Parameter::Hash::const_iterator pi = parameters.begin();
+					for (; pi != pend; ++pi)
+					{
+						const API::Method::Parameter& param = pi->second;
+						mhandler.parameters[param.name] = param.defvalue;
+					}
+				}
+				else
+					mhandler.parameters.clear();
 			}
 		}
 
