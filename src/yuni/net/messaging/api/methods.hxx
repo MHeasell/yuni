@@ -24,6 +24,11 @@ namespace API
 	}
 
 
+	inline void Methods::shrinkMemory()
+	{
+	}
+
+
 
 
 } // namespace API

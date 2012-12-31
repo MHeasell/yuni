@@ -161,10 +161,13 @@ namespace Messaging
 		{
 			ThreadingPolicy::MutexLocker locker(*this);
 
+			// releasing memory held by the protocol if not already done
+			if (!(!pData->protocol))
+				pData->protocol->shrinkMemory();
+
 			// destroy the old instance if not already done
 			pData->workers = nullptr;
-
-			// destroy all workers, just to be sure
+			// recreate our workers
 			workers = new Workers();
 			// disable the autostart
 			workers->autoStart(false);
@@ -310,14 +313,15 @@ namespace Messaging
 		assert(pData != NULL && "internal error");
 
 		// Reference to the new protocol
-		const Protocol& protoref = *newproto;
+		Protocol& protoref = *newproto;
 
 		// Making all transports switch to the new protocol
 		TransportList::iterator end = pData->transports.end();
 		for (TransportList::iterator i = pData->transports.begin(); i != end; ++i)
-		{
 			(i->second)->protocol(protoref);
-		}
+
+		// relesing some memory
+		protoref.shrinkMemory();
 
 		// All transports have switched to the new protocol
 		// we can release our own pointer. The old protocol should

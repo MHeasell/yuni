@@ -40,8 +40,10 @@ namespace REST
 			String schema;
 			//! Method request (GET, POST, DELETE, PUT)
 			String httpMethod;
+			//! All parameters, with they default value
+			KeyValueStore parameters;
 			//!
-			API::Method::Callback callback;
+			API::Method::Callback invoke;
 
 		}; // class DecisionTree
 

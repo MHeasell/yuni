@@ -32,6 +32,9 @@ namespace API
 		//! All methods
 		const Method::Hash& all() const;
 
+		//! Reduce the memory consumption as much as possible
+		void shrinkMemory();
+
 	private:
 		//! methods
 		Method::Hash  pMethods;
