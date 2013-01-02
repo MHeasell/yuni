@@ -11,6 +11,22 @@ namespace Static
 {
 
 
+	/*!
+	** \brief Choose statically between two types
+	**
+	** \code
+	** #include <yuni/yuni.h>
+	** #include <yuni/core/static/if.h>
+	**
+	** template<bool x86_64>
+	** class IntWrapper
+	** {
+	** public:
+	**     typedef typename Yuni::Static::If<x86_64, int64, int32>::Type  IntType;
+	**
+	** };
+	** \endcode
+	*/
 	template <bool b, typename IfTrue, typename IfFalse>
 	struct If
 	{
@@ -24,7 +40,8 @@ namespace Static
 
 		static const RetTrue& choose (const RetTrue& tr, const RetFalse&)
 		{ return tr; }
-	};
+
+	}; // struct If
 
 
 
