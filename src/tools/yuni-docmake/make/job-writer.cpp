@@ -936,7 +936,7 @@ void JobWriter::onExecute()
 	content.replace("&#x09;", "\t");
 	content.replace("&quot;", "\"");
 
-	if (!IO::File::SaveToFile(filenameInHtdocs, content))
+	if (!IO::File::SetContent(filenameInHtdocs, content))
 	{
 		logs.error() << "impossible to generate '" << pArticle.htdocsFilename
 			<< "' into '" << filenameInHtdocs << "'";
