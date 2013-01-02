@@ -24,9 +24,6 @@ set(SRC_NET_MESSAGE
 	net/messaging/service.hxx
 	net/messaging/fwd.h
 
-	net/messaging/transport.h
-	net/messaging/transport/transport.h
-	net/messaging/transport/transport.hxx
 	net/messaging/worker.h
 	net/messaging/worker.hxx
 	net/messaging/worker.cpp
@@ -38,7 +35,17 @@ set(SRC_NET_MESSAGE
 	net/messaging/message.h
 	net/messaging/threadcontext.h
 	net/messaging/threadcontext.hxx
+)
+source_group("Net\\Messaging" FILES ${SRC_NET_MESSAGE})
 
+set(SRC_NET_MESSAGE_TRANSPORT
+	net/messaging/transport.h
+	net/messaging/transport/transport.h
+	net/messaging/transport/transport.hxx
+)
+source_group("Net\\Messaging\\Transport" FILES ${SRC_NET_MESSAGE_TRANSPORT})
+
+set(SRC_NET_MESSAGE_TRANSPORT_REST
 	net/messaging/transport/rest/mongoose.c
 	net/messaging/transport/rest/mongoose.h
 	net/messaging/transport/rest/server.h
@@ -46,13 +53,10 @@ set(SRC_NET_MESSAGE
 	net/messaging/transport/rest/data.inc.hxx
 	net/messaging/transport/rest/serverequest.inc.hxx
 )
-source_group("Net\\Messaging" FILES ${SRC_NET_MESSAGE})
-
-set(SRC_NET_MESSAGE_TRANSPORT_REST
-	net/messaging/transport/rest/mongoose.c
-	net/messaging/transport/rest/mongoose.h
-)
-source_group("Net\\Messaging\\Transport" FILES ${SRC_NET_MESSAGE_TRANSPORT_REST})
+source_group("Net\\Messaging\\Transport\\REST" FILES ${SRC_NET_MESSAGE_TRANSPORT_REST})
+if (YUNI_HAS_STDINT_H)
+	set_source_files_properties(net/messaging/transport/rest/mongoose.c PROPERTIES COMPILE_FLAGS -DHAVE_STDINT)
+endif()
 
 
 set(SRC_NET_MESSAGE_API
@@ -72,6 +76,7 @@ add_Library(yuni-static-net STATIC
 	${SRC_NET_COMMON}
 	${SRC_NET_MESSAGE}
 	${SRC_NET_MESSAGE_API}
+	${SRC_NET_MESSAGE_TRANSPORT}
 	${SRC_NET_MESSAGE_TRANSPORT_REST}
 	${SRC_NET_MSG})
 
