@@ -3,9 +3,8 @@
 #include "../../../../thread/signal.h"
 #include <cassert>
 #define _MSC_VER 0 // seems to be required with this version
-#include "mongoose.h"
-#include "data.inc.hxx"
-#include "serverequest.inc.hxx"
+#include "../../../../private/net/messaging/transport/rest/mongoose.h"
+#include "request.inc.hpp"
 
 
 namespace Yuni
