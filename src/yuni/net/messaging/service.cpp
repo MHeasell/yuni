@@ -1,6 +1,6 @@
 
 #include "service.h"
-#include "worker.h"
+#include "worker.inc.hpp"
 #include "../../thread/array.h"
 
 

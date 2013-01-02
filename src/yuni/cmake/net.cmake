@@ -24,9 +24,7 @@ set(SRC_NET_MESSAGE
 	net/messaging/service.hxx
 	net/messaging/fwd.h
 
-	net/messaging/worker.h
-	net/messaging/worker.hxx
-	net/messaging/worker.cpp
+	net/messaging/worker.inc.hpp
 	net/messaging/protocol.h
 	net/messaging/protocol.hxx
 	net/messaging/protocol.cpp
@@ -46,12 +44,9 @@ set(SRC_NET_MESSAGE_TRANSPORT
 source_group("Net\\Messaging\\Transport" FILES ${SRC_NET_MESSAGE_TRANSPORT})
 
 set(SRC_NET_MESSAGE_TRANSPORT_REST
-	net/messaging/transport/rest/mongoose.c
-	net/messaging/transport/rest/mongoose.h
 	net/messaging/transport/rest/server.h
 	net/messaging/transport/rest/server.cpp
-	net/messaging/transport/rest/data.inc.hxx
-	net/messaging/transport/rest/serverequest.inc.hxx
+	net/messaging/transport/rest/request.inc.hpp
 )
 source_group("Net\\Messaging\\Transport\\REST" FILES ${SRC_NET_MESSAGE_TRANSPORT_REST})
 if (YUNI_HAS_STDINT_H)
@@ -71,6 +66,12 @@ set(SRC_NET_MESSAGE_API
 source_group("Net\\Messaging\\API" FILES ${SRC_NET_MESSAGE_API})
 
 
+set(SRC_PRIVATE_NET_MESSAGE_TRANSPORT_REST
+	private/net/messaging/transport/rest/mongoose.c
+	private/net/messaging/transport/rest/mongoose.h
+)
+source_group("Private\\Net\\Messaging\\Transport\\REST" FILES ${SRC_PRIVATE_NET_MESSAGE_TRANSPORT_REST})
+
 
 add_Library(yuni-static-net STATIC
 	${SRC_NET_COMMON}
@@ -78,6 +79,7 @@ add_Library(yuni-static-net STATIC
 	${SRC_NET_MESSAGE_API}
 	${SRC_NET_MESSAGE_TRANSPORT}
 	${SRC_NET_MESSAGE_TRANSPORT_REST}
+	${SRC_PRIVATE_NET_MESSAGE_TRANSPORT_REST}
 	${SRC_NET_MSG})
 
 # Setting output path
