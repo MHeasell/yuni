@@ -155,15 +155,15 @@ static void to_unicode(const char *path, wchar_t *wbuf, size_t wbuf_len);
 struct file;
 static char *mg_fgets(char *buf, size_t size, struct file *filep, char **p);
 
-#if defined(YUNI_HAS_STDINT_H)
-# include <stdint.h>
+#if defined(HAVE_STDINT)
+#include <stdint.h>
 #else
 typedef unsigned int  uint32_t;
 typedef unsigned short  uint16_t;
 typedef unsigned __int64 uint64_t;
 typedef __int64   int64_t;
-# define INT64_MAX  9223372036854775807LL
-#endif // YUNI_HAS_STDINT_H
+#define INT64_MAX  9223372036854775807
+#endif // HAVE_STDINT
 
 // POSIX dirent interface
 struct dirent {
