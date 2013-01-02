@@ -163,7 +163,7 @@ typedef unsigned short  uint16_t;
 typedef unsigned __int64 uint64_t;
 typedef __int64   int64_t;
 # define INT64_MAX  9223372036854775807LL
-#endif // HAVE_STDINT
+#endif // YUNI_HAS_STDINT_H
 
 // POSIX dirent interface
 struct dirent {
