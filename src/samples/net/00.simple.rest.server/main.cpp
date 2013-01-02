@@ -92,8 +92,8 @@ static bool StartService(Net::Messaging::Service& service)
 	}
 
 	logs.info() << "example:";
-	logs.info() << "# wget 'http://localhost:6042/hello_world'";
-	logs.info() << "# wget 'http://localhost:6042/sum?a=50&amp;b=42'";
+	logs.info() << "# curl -i -X GET 'http://localhost:6042/hello_world'";
+	logs.info() << "# curl -i -X GET 'http://localhost:6042/sum?a=50&amp;b=42'";
 	logs.info() << "<ctrl> + C to quit";
 	logs.info(); // empty line for beauty
 	return true;
