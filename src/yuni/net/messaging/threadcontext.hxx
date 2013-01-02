@@ -22,6 +22,22 @@ namespace Messaging
 	}
 
 
+	template<uint MaxSize, class StringT>
+	inline void ThreadContext::AutoShrink(StringT& variable)
+	{
+		variable.clear();
+		if (variable.capacity() > MaxSize)
+			variable.shrink();
+	}
+
+
+	inline void ThreadContext::autoshrink()
+	{
+		AutoShrink<6 * 1024>(text);
+		AutoShrink<5 * 1024 * 1024>(clob);
+	}
+
+
 
 
 } // namespace Messaging

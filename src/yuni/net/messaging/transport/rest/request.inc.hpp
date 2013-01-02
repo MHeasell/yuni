@@ -1,5 +1,7 @@
 
 #include "return-status-code.inc.hpp"
+#include "../../../../core/system/cpu.h"
+#include "../../../../thread/id.h"
 
 
 namespace Yuni
@@ -25,6 +27,8 @@ namespace REST
 
 	template<class StringT>
 	static RequestMethod StringToRequestMethod(const StringT& text);
+
+
 
 
 	class DecisionTree final
@@ -66,12 +70,20 @@ namespace REST
 	class Server::ServerData
 	{
 	public:
+		/*!
+		** \brief Default constructor
+		*/
 		ServerData();
+		//! Destructor
 		~ServerData();
 
-		void waitWithoutSignal();
-
+		/*!
+		** \brief Prepare a C-style array for mongoose options
+		*/
 		void prepareOptionsForMongoose(uint port, uint threads);
+
+		//! Fallback implementation when the signal could not be initialized
+		void waitWithoutSignal();
 
 	public:
 		//! The decision tree
@@ -92,7 +104,6 @@ namespace REST
 		String::Vector optionsString;
 
 	}; // class ServerData
-
 
 
 
@@ -150,24 +161,29 @@ namespace REST
 	template<class StringT>
 	static inline RequestMethod StringToRequestMethod(const StringT& text)
 	{
+		// note: we assume that `text` is zero-terminated
 		switch (text[0])
 		{
 			case 'G':
 				{
+					// GET
 					if (text[1] == 'E' and text[2] == 'T' and text[3] == '\0')
 						return rqmdGET;
 					break;
 				}
 			case 'P':
 				{
+					// POST
 					if (text[1] == 'O' and text[2] == 'S' and text[3] == 'T' and text[4] == '\0')
 						return rqmdPOST;
+					// PUT
 					if (text[1] == 'U' and text[2] == 'T' and text[3] == '\0')
 						return rqmdPUT;
 					break;
 				}
 			case 'D':
 				{
+					// DELETE
 					if (text[1] == 'E' and text[2] == 'L' and text[3] == 'E' and text[4] == 'T'
 						and text[5] == 'E' and text[6] == '\0')
 							return rqmdDELETE;
@@ -180,18 +196,8 @@ namespace REST
 
 
 
-	template<uint MaxSize, class StringT>
-	static inline void AutoShrink(StringT& variable)
-	{
-		if (variable.capacity() > MaxSize)
-		{
-			variable.clear();
-			variable.shrink();
-		}
-	}
 
-
-	static bool DecodeURLQuery(KeyValueStore& params, const AnyString& query, String& key)
+	static bool DecodeURLQuery(KeyValueStore& params, const AnyString& query)
 	{
 		// note: mongoose does not provide the fragment here, so we don't have
 		// to check it
@@ -199,6 +205,7 @@ namespace REST
 		// Some tests are already done before calling this method
 		assert(not query.empty());
 
+		String key; // temporary string for parameters handling
 		uint offset = 0;
 		uint start = 0;
 		AnyString value;
@@ -261,6 +268,8 @@ namespace REST
 		// Serving a new request
 		if (event == MG_NEW_REQUEST)
 		{
+			// -- 1 - preliminary checks
+
 			// Retrieving information associated to the current connection
 			// The method from mongoose directly return a pointer from within
 			// the mg_connection struct, thus it can not fail.
@@ -273,61 +282,64 @@ namespace REST
 			if (rqmd == rqmdInvalid)
 				return HTTPErrorCode<404>(conn);
 
+			// server data
+			Server::ServerData* serverdata = (Server::ServerData*) reqinfo.user_data;
+
 			// Decision Tree
 			// For thread safety reasons, we must keep a smart pointer of the decision tree
 			// until the request is served.
-			DecisionTree::Ptr dectreeptr = ((Server::ServerData*) reqinfo.user_data)->decisionTree;
+			DecisionTree::Ptr dectreeptr = serverdata->decisionTree;
 			assert(!(!dectreeptr));
 			const DecisionTree::UrlDictionary& urls = dectreeptr->requestMethods[rqmd];
-
-			// Message provided to the user
-			Net::Messaging::Message message;
-			// Thread Context
-			Net::Messaging::ThreadContext threadcontext;
 
 			// invoking the user's callback according the decision tree
 			DecisionTree::UrlDictionary::const_iterator mi = urls.find(reqinfo.uri);
 			if (mi == urls.end())
 			{
 				// the url has not been found
-				std::cerr << "method not found: " << reqinfo.uri << std::endl;
 				return HTTPErrorCode<404>(conn);
 			}
-
 			// alias to the method handler
 			const DecisionTree::MethodHandler& mhandler = mi->second;
 
-			// checking for parameters
+
+			// Message provided to the user
+			Net::Messaging::Message message;
+
+			// reading / checking for parameters
 			if (not mhandler.parameters.empty())
 			{
 				// copying all default parameters
 				message.params = mhandler.parameters;
 
 				// reading parameters from the url query
+				// ignoring unknown parameters
 				if (reqinfo.query_string and reqinfo.query_string[0] != '\0')
 				{
-					String& tmp = threadcontext.text;
-					if (not DecodeURLQuery(message.params, reqinfo.query_string, tmp))
+					if (not DecodeURLQuery(message.params, reqinfo.query_string))
 						return HTTPErrorCode<400>(conn);
 				}
 			}
 			else
 				message.params.clear();
 
+
+			// -- 2 - Thread specific data
+			// FIXME this variable should be really thread-specific, and not recreated
+			// for each call
+			Net::Messaging::ThreadContext threadctx;
+
+			// filling informations
 			message.method = mhandler.name;
 			message.schema = mhandler.schema;
-			message.httpMethod = mhandler.httpMethod;
 
-			// reset thread context local variables
-			threadcontext.clear();
 
+			// -- 3 - method invocation
 			// Invoke user callback
-			mhandler.invoke(threadcontext, message);
+			mhandler.invoke(threadctx, message);
 
-			// reduce memory usage
-			AutoShrink<6 * 1024>(threadcontext.text);
-			AutoShrink<5 * 1024 * 1024>(threadcontext.clob);
 
+			// -- 4 - http status code
 			if  (200 == message.httpStatus)
 			{
 				String header;
@@ -336,10 +348,16 @@ namespace REST
 				header += "\r\n\r\n";
 				mg_write(conn, header.c_str(), header.size());
 				mg_write(conn, message.body.c_str(), message.body.size());
+
+				// reducing memory usage for some Memory-hungry apps
+				threadctx.autoshrink();
 				return (void*)"ok"; // the request has been managed
 			}
 			else
 			{
+				// reducing memory usage for some Memory-hungry apps
+				threadctx.autoshrink();
+
 				switch (message.httpStatus)
 				{
 					case 404: // not found

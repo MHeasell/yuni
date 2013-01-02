@@ -52,6 +52,9 @@ namespace REST
 	} // anonymous
 
 
+
+
+
 	template<uint ErrorIndex> static inline void* HTTPErrorCode(struct mg_connection* conn)
 	{
 		mg_write(conn, HttpErrorCode<ErrorIndex>::Message(), HttpErrorCode<ErrorIndex>::size);
