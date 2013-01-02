@@ -47,6 +47,7 @@ set(SRC_NET_MESSAGE_TRANSPORT_REST
 	net/messaging/transport/rest/server.h
 	net/messaging/transport/rest/server.cpp
 	net/messaging/transport/rest/request.inc.hpp
+	net/messaging/transport/rest/return-status-code.inc.hpp
 )
 source_group("Net\\Messaging\\Transport\\REST" FILES ${SRC_NET_MESSAGE_TRANSPORT_REST})
 if (YUNI_HAS_STDINT_H)

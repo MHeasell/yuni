@@ -1,4 +1,7 @@
 
+#include "return-status-code.inc.hpp"
+
+
 namespace Yuni
 {
 namespace Net
@@ -253,7 +256,7 @@ namespace REST
 
 
 
-	static void* TransportRESTCallback(enum mg_event event, struct mg_connection *conn)
+	static void* TransportRESTCallback(enum mg_event event, struct mg_connection* conn)
 	{
 		// Serving a new request
 		if (event == MG_NEW_REQUEST)
@@ -268,10 +271,7 @@ namespace REST
 			// and directly aborting if invalid
 			RequestMethod rqmd = StringToRequestMethod(reqinfo.request_method);
 			if (rqmd == rqmdInvalid)
-			{
-				std::cerr << "invalid method request (GET, POST, DELETE, PUT), got : " << reqinfo.request_method << std::endl;
-				return nullptr;
-			}
+				return HTTPErrorCode<404>(conn);
 
 			// Decision Tree
 			// For thread safety reasons, we must keep a smart pointer of the decision tree
@@ -287,80 +287,76 @@ namespace REST
 
 			// invoking the user's callback according the decision tree
 			DecisionTree::UrlDictionary::const_iterator mi = urls.find(reqinfo.uri);
-			if (mi != urls.end())
+			if (mi == urls.end())
 			{
-				// alias to the method handler
-				const DecisionTree::MethodHandler& mhandler = mi->second;
+				// the url has not been found
+				std::cerr << "method not found: " << reqinfo.uri << std::endl;
+				return HTTPErrorCode<404>(conn);
+			}
 
-				// checking for parameters
-				if (not mhandler.parameters.empty())
+			// alias to the method handler
+			const DecisionTree::MethodHandler& mhandler = mi->second;
+
+			// checking for parameters
+			if (not mhandler.parameters.empty())
+			{
+				// copying all default parameters
+				message.params = mhandler.parameters;
+
+				// reading parameters from the url query
+				if (reqinfo.query_string and reqinfo.query_string[0] != '\0')
 				{
-					// copying all default parameters
-					message.params = mhandler.parameters;
-
-					// reading parameters from the url query
-					if (reqinfo.query_string and reqinfo.query_string[0] != '\0')
-					{
-						String& tmp = threadcontext.text;
-						if (not DecodeURLQuery(message.params, reqinfo.query_string, tmp))
-							message.httpStatus = 400;
-					}
-				}
-				else
-					message.params.clear();
-
-				if (message.httpStatus == 200) // still ok ?
-				{
-					message.method = mhandler.name;
-					message.schema = mhandler.schema;
-					message.httpMethod = mhandler.httpMethod;
-
-					// reset thread context local variables
-					threadcontext.clear();
-
-					// Invoke user callback
-					mhandler.invoke(threadcontext, message);
-
-					// reduce memory usage
-					AutoShrink<6 * 1024>(threadcontext.text);
-					AutoShrink<5 * 1024 * 1024>(threadcontext.clob);
+					String& tmp = threadcontext.text;
+					if (not DecodeURLQuery(message.params, reqinfo.query_string, tmp))
+						return HTTPErrorCode<400>(conn);
 				}
 			}
 			else
+				message.params.clear();
+
+			message.method = mhandler.name;
+			message.schema = mhandler.schema;
+			message.httpMethod = mhandler.httpMethod;
+
+			// reset thread context local variables
+			threadcontext.clear();
+
+			// Invoke user callback
+			mhandler.invoke(threadcontext, message);
+
+			// reduce memory usage
+			AutoShrink<6 * 1024>(threadcontext.text);
+			AutoShrink<5 * 1024 * 1024>(threadcontext.clob);
+
+			if  (200 == message.httpStatus)
 			{
-				// the url has not been found
-				message.httpStatus = 404;
-				std::cerr << "method not found: " << reqinfo.uri << std::endl;
+				String header;
+				header = "HTTP/1.1 200 OK\r\nCache: no-cache\r\nContent-Length: ";
+				header += message.body.size();
+				header += "\r\n\r\n";
+				mg_write(conn, header.c_str(), header.size());
+				mg_write(conn, message.body.c_str(), message.body.size());
+				return (void*)"ok"; // the request has been managed
+			}
+			else
+			{
+				switch (message.httpStatus)
+				{
+					case 404: // not found
+						return HTTPErrorCode<404>(conn);
+					case 400: // Bad request
+						return HTTPErrorCode<400>(conn);
+					case 403: // Forbidden
+						return HTTPErrorCode<403>(conn);
+					case 401: // Unauthorized
+						return HTTPErrorCode<401>(conn);
+				}
 			}
 
-			switch (message.httpStatus)
-			{
-				case 200:
-					{
-						String header;
-						header = "HTTP/1.1 200 OK\r\nCache: no-cache\r\nContent-Length: ";
-						header += message.body.size();
-						header += "\r\n\r\n";
-						mg_write(conn, header.c_str(), header.size());
-						mg_write(conn, message.body.c_str(), message.body.size());
-						return (void*)"ok"; // the request has been managed
-					}
-				case 404:
-					{
-						static const char* const message = "HTTP/1.1 404 Error\r\n\r\nNot found";
-						mg_write(conn, message, 31);
-						return (void*)"ok"; // the request has been managed
-					}
-				case 400:
-					{
-						static const char* const message = "HTTP/1.1 400 Error\r\n\r\nBad request";
-						mg_write(conn, message, 33);
-						return (void*)"ok"; // the request has been managed
-					}
-			}
+			// not handled by default
+			return HTTPErrorCode<500>(conn);
 		}
 
-		// the request has not been handled
 		return nullptr;
 	}
 
