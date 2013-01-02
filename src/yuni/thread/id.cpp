@@ -16,6 +16,9 @@
 #		include "../core/system/windows.hdr.h"
 # 	endif
 # endif
+# ifdef YUNI_HAS_PTHREAD_GETTHREADID_NP
+# include <pthread.h>
+# endif
 
 
 namespace Yuni
@@ -23,23 +26,40 @@ namespace Yuni
 namespace Thread
 {
 
+	# ifndef YUNI_NO_THREAD_SAFE
 	uint64 ID()
 	{
-		# ifndef YUNI_NO_THREAD_SAFE
-		#	ifndef YUNI_OS_WINDOWS
-		#		ifdef YUNI_OS_LINUX
+		# ifdef YUNI_HAS_PTHREAD_GETTHREADID_NP
+		return (uint64) pthread_getthreadid_np();
+		# else
+
+		#	ifdef YUNI_OS_MAC
+		return (uint64) pthread_self();
+		#	else
+		#		ifndef YUNI_OS_WINDOWS
+		#			ifdef YUNI_OS_LINUX
 		return (uint64) syscall(SYS_gettid);
-		#		else
+		#			else
 		// man : The pthread_self() function returns the thread ID of the calling thread
 		return (uint64) pthread_self();
-		#		endif
-		#	else
+		#			endif
+		#		else
 		return (uint64) GetCurrentThreadId();
+		#		endif
 		#	endif
-		# else
-		return 0;
+
 		# endif
+		return 0;
 	}
+
+	# else
+
+	uint64 ID()
+	{
+		return 0;
+	}
+
+	# endif
 
 
 

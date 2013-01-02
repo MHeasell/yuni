@@ -33,6 +33,11 @@ namespace Messaging
 		//! Clear all internal variables
 		void clear();
 
+		//! Reduce memory usage by internal variables if necessary,
+		// usefull for some memory-hungry apps
+		void autoshrink();
+
+
 	public:
 		//! User data pointer
 		void* userdata;
@@ -45,6 +50,9 @@ namespace Messaging
 		// to reduce memory usage, the internal memory of this variable will automatically
 		// be wipe out if using more than 5MiB
 		Clob clob;
+
+	private:
+		template<uint MaxSize, class StringT> void AutoShrink(StringT& variable);
 
 	}; // class ThreadContext
 

@@ -260,6 +260,8 @@
 ** YUNI_THREAD_LOCAL_STORAGE(int)  myThreadLocalVariable = 0;
 ** \endcode
 **
+** \warning The compiler directive is not supported on OS X
+**
 ** \see Rules and Limitations for TLS on Windows http://msdn.microsoft.com/en-us/library/2s9wt68x.aspx
 ** \see http://gcc.gnu.org/onlinedocs/gcc-4.2.4/gcc/Thread_002dLocal.html
 ** \see http://msdn.microsoft.com/en-us/library/6e298fy4(VS.71).aspx

@@ -126,6 +126,9 @@
 /* C++11 keyword final */
 #cmakedefine YUNI_HAS_CPP_KEYWORD_FINAL
 
+/* pthread pthread_getthreadid_np */
+#cmakedefine YUNI_HAS_PTHREAD_GETTHREADID_NP
+
 
 
 #endif /* __YUNI_PLATFORM_CHECKS_H__ */

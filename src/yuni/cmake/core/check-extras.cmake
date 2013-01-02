@@ -19,3 +19,16 @@ if (UNIX)
 			return (0 != posix_fallocate(42, 0, 1024)) ? EXIT_FAILURE : 0;
 		} " YUNI_HAS_POSIX_FALLOCATE)
 endif()
+
+
+# pthread_getthreadid_np();
+if (UNIX)
+	check_c_source_compiles("
+		#include <pthread.h>
+		int main() {
+			int ret = pthread_getthreadid_np();
+			return 0;
+		} " YUNI_HAS_PTHREAD_GETTHREADID_NP)
+endif()
+
+

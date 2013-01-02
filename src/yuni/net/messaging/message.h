@@ -30,10 +30,8 @@ namespace Messaging
 		AnyString method;
 		// Schema
 		AnyString schema;
-		//! Method request (GET, POST, DELETE, PUT)
-		AnyString httpMethod;
 
-		//! Temporary string for computing container access (to avoid memory reallocation)
+		//! Temporary string provided for convenient uses (to reduce memory reallocation)
 		String key;
 
 	}; // class Message
