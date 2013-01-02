@@ -16,8 +16,6 @@ It intends to provide a complete set of coherent API and to be a reliable and
 simple bridge between different worlds, allowing to write all sorts of applications
 while letting the developer focus on her real work.
 
-The Yuni project is connected to all these domains:
-
 
 
 Misconceptions
