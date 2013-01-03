@@ -11,7 +11,9 @@
 # include <sys/stat.h>
 # include <limits.h>
 #endif
-
+#ifdef YUNI_HAS_ERRNO_H
+# include <errno.h>
+#endif
 
 
 namespace Yuni
