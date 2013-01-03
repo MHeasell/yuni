@@ -28,6 +28,7 @@ if(Yuni_FOUND)
 
 	add_subdirectory(audio)
 	add_subdirectory(core)
+	add_subdirectory(marshal)
 	add_subdirectory(io)
 	add_subdirectory(devices)
 	add_subdirectory(jobs)
