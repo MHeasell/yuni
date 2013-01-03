@@ -10,62 +10,60 @@ namespace Private
 namespace Audio
 {
 
-	namespace // anonymous
+	/*!
+	** \brief Get the next packet of data
+	**
+	** Used by get*Data to search for more compressed data, and buffer it in the
+	** correct stream. It won't buffer data for streams that the app doesn't have a
+	** handle for.
+	*/
+	static void GetNextPacket(AudioFile* file, int streamidx)
 	{
-
-		/*!
-		** \brief Get the next packet of data
-		**
-		** Used by get*Data to search for more compressed data, and buffer it in the
-		** correct stream. It won't buffer data for streams that the app doesn't have a
-		** handle for.
-		*/
-		static void GetNextPacket(AudioFile* file, int streamidx)
+		AVPacket packet;
+		while (av_read_frame(file->formatContext, &packet) >= 0)
 		{
-			AVPacket packet;
-			while (av_read_frame(file->FormatContext, &packet) >= 0)
+			// Check each stream the user has a handle for, looking for the one
+			// this packet belongs to
+
+			for (uint i = 0; i != file->streams.size(); ++i)
 			{
-				// Check each stream the user has a handle for, looking for the one
-				// this packet belongs to
-				for (AudioStream* stream : file->Streams)
+				AudioStream* stream = file->streams[i];
+				if (stream->StreamIdx != packet.stream_index)
+					continue;
+
+				size_t idx = stream->DataSize;
+
+				// Found the stream. Grow the input data buffer as needed to
+				// hold the new packet's data. Additionally, some ffmpeg codecs
+				// need some padding so they don't overread the allocated
+				// buffer
+				if (idx + packet.size > stream->DataSizeMax)
 				{
-					if (stream->StreamIdx != packet.stream_index)
-						continue;
-
-					size_t idx = stream->DataSize;
-
-					// Found the stream. Grow the input data buffer as needed to
-					// hold the new packet's data. Additionally, some ffmpeg codecs
-					// need some padding so they don't overread the allocated
-					// buffer
-					if (idx + packet.size > stream->DataSizeMax)
-					{
-						char* temp = (char*)realloc(stream->Data, idx + packet.size +
-							FF_INPUT_BUFFER_PADDING_SIZE);
-						if (!temp)
-							break;
-						stream->Data = temp;
-						stream->DataSizeMax = idx + packet.size;
-					}
-
-					// Copy the packet and free it
-					YUNI_MEMCPY(&stream->Data[idx], packet.size, packet.data, packet.size);
-					stream->DataSize += packet.size;
-
-					// Return if this stream is what we needed a packet for
-					if (streamidx == stream->StreamIdx)
-					{
-						av_free_packet(&packet);
-						return;
-					}
-					break;
+					char* temp = (char*)realloc(stream->Data, idx + packet.size +
+												FF_INPUT_BUFFER_PADDING_SIZE);
+					if (!temp)
+						break;
+					stream->Data = temp;
+					stream->DataSizeMax = idx + packet.size;
 				}
-				// Free the packet and look for another
-				av_free_packet(&packet);
-			}
-		}
 
-	} // namespace anonymous
+				// Copy the packet and free it
+				YUNI_MEMCPY(&stream->Data[idx], packet.size, packet.data, packet.size);
+				stream->DataSize += packet.size;
+
+				// Return if this stream is what we needed a packet for
+				if (streamidx == stream->StreamIdx)
+				{
+					av_free_packet(&packet);
+					return;
+				}
+				break;
+			}
+			// Free the packet and look for another
+			av_free_packet(&packet);
+		}
+	}
+
 
 
 	bool AV::Init()
@@ -87,29 +85,29 @@ namespace Audio
 		if (filename.empty())
 			return nullptr;
 
-		AudioFile* file = (AudioFile*)calloc(1, sizeof(AudioFile));
+		AudioFile* file = (AudioFile*) calloc(1, sizeof(AudioFile));
 		if (!file)
 			return nullptr;
 
 		# if LIBAVFORMAT_VERSION_MAJOR < 53
-		if (not av_open_input_file(&file->FormatContext, filename.c_str(), NULL, 0, NULL))
+		if (not av_open_input_file(&file->formatContext, filename.c_str(), NULL, 0, NULL))
 		# else
-		if (not avformat_open_input(&file->FormatContext, filename.c_str(), NULL, NULL))
+		if (not avformat_open_input(&file->formatContext, filename.c_str(), NULL, NULL))
 		# endif // LIBAVFORMAT_VERSION_MAJOR < 53
 		{
 			// After opening, we must search for the stream information because not
 			// all formats will have it in stream headers (eg. system MPEG streams)
 			# if LIBAVFORMAT_VERSION_MAJOR < 53
-			if (av_find_stream_info(file->FormatContext) >= 0)
+			if (av_find_stream_info(file->formatContext) >= 0)
 			# else
-			if (avformat_find_stream_info(file->FormatContext, NULL) >= 0)
+			if (avformat_find_stream_info(file->formatContext, NULL) >= 0)
 			# endif // LIBAVFORMAT_VERSION_MAJOR < 53
 				return file;
 
 			# if LIBAVFORMAT_VERSION_MAJOR < 53
-			av_close_input_file(file->FormatContext);
+			av_close_input_file(file->formatContext);
 			# else
-			avformat_close_input(&file->FormatContext);
+			avformat_close_input(&file->formatContext);
 			# endif // LIBAVFORMAT_VERSION_MAJOR < 53
 		}
 
@@ -124,18 +122,18 @@ namespace Audio
 		if (!file)
 			return;
 
-		uint size = file->StreamsSize;
+		uint size = file->streamsSize;
 		for (uint i = 0; i < size; ++i)
 		{
-			avcodec_close(file->Streams[i]->CodecContext);
-			free(file->Streams[i]->Data);
-			free(file->Streams[i]->DecodedData);
+			avcodec_close(file->streams[i]->CodecContext);
+			free(file->streams[i]->Data);
+			free(file->streams[i]->DecodedData);
 		}
 
 		# if LIBAVFORMAT_VERSION_MAJOR < 53
-		av_close_input_file(file->FormatContext);
+		av_close_input_file(file->formatContext);
 		# else
-		avformat_close_input(&file->FormatContext);
+		avformat_close_input(&file->formatContext);
 		# endif // LIBAVFORMAT_VERSION_MAJOR < 53
 		free(file);
 		file = nullptr;
@@ -145,15 +143,15 @@ namespace Audio
 	AudioStream* AV::GetAudioStream(AudioFile* file, int streamIndex)
 	{
 		if (!file)
-			return NULL;
+			return nullptr;
 
-		for (uint i = 0; i < file->FormatContext->nb_streams; ++i)
+		for (uint i = 0; i < file->formatContext->nb_streams; ++i)
 		{
 			// Reject streams that are not AUDIO
 			# if LIBAVFORMAT_VERSION_MAJOR < 53
-			if (file->FormatContext->streams[i]->codec->codec_type != CODEC_TYPE_AUDIO)
+			if (file->formatContext->streams[i]->codec->codec_type != CODEC_TYPE_AUDIO)
 			# else
-			if (file->FormatContext->streams[i]->codec->codec_type != AVMEDIA_TYPE_AUDIO)
+			if (file->formatContext->streams[i]->codec->codec_type != AVMEDIA_TYPE_AUDIO)
 			# endif // LIBAVFORMAT_VERSION_MAJOR < 53
 			{
 				continue;
@@ -168,20 +166,20 @@ namespace Audio
 
 			// Check if a handle to this stream already exists
 			// and return it if it does
-			for (size_t j = 0; j < file->StreamsSize; ++j)
+			for (size_t j = 0; j < file->streamsSize; ++j)
 			{
-				if (file->Streams[j]->StreamIdx == (int)i)
-					return file->Streams[j];
+				if (file->streams[j]->StreamIdx == (int)i)
+					return file->streams[j];
 			}
 
 			// Doesn't yet exist. Now allocate a new stream object and fill in
 			// its info
 			AudioStream* stream = (AudioStream*)calloc(1, sizeof(*stream));
 			if (!stream)
-				return NULL;
+				return nullptr;
 
 			stream->parent = file;
-			stream->CodecContext = file->FormatContext->streams[i]->codec;
+			stream->CodecContext = file->formatContext->streams[i]->codec;
 			stream->StreamIdx = i;
 
 			// Try to find the codec for the given codec ID, and open it
@@ -193,12 +191,12 @@ namespace Audio
 			# endif // LIBAVFORMAT_VERSION_MAJOR < 53
 			{
 				free(stream);
-				return NULL;
+				return nullptr;
 			}
 
 			uint64_t frameSize = stream->CodecContext->sample_rate * 2 *
 				stream->CodecContext->channels;
-			stream->Size = frameSize * (file->FormatContext->duration / AV_TIME_BASE);
+			stream->Size = frameSize * (file->formatContext->duration / AV_TIME_BASE);
 
 			// Allocate space for the decoded data to be stored in before it
 			// gets passed to the app
@@ -207,15 +205,15 @@ namespace Audio
 			{
 				avcodec_close(stream->CodecContext);
 				free(stream);
-				return NULL;
+				return nullptr;
 			}
 
 			// Append the new stream object to the stream list.
-			file->StreamsSize++;
-			file->Streams.push_back(stream);
+			file->streamsSize++;
+			file->streams.push_back(stream);
 			return stream;
 		}
-		return NULL;
+		return nullptr;
 	}
 
 
@@ -240,7 +238,9 @@ namespace Audio
 	{
 		if (!stream)
 			return 0;
-		return stream->parent->FormatContext->duration / AV_TIME_BASE;
+		assert(stream->parent);
+		assert(stream->parent->formatContext);
+		return stream->parent->formatContext->duration / AV_TIME_BASE;
 	}
 
 
