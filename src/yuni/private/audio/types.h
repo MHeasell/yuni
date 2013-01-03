@@ -14,8 +14,9 @@ namespace Audio
 	struct AudioFile;
 
 
-	struct AudioStream
+	class AudioStream final
 	{
+	public:
 		AVCodecContext* CodecContext;
 		int StreamIdx;
 
@@ -31,11 +32,12 @@ namespace Audio
 		AudioFile* parent;
 	};
 
-	struct AudioFile
+	class AudioFile final
 	{
-		AVFormatContext* FormatContext;
-		std::vector<AudioStream*> Streams;
-		size_t StreamsSize;
+	public:
+		AVFormatContext* formatContext;
+		std::vector<AudioStream*> streams;
+		size_t streamsSize;
 	};
 
 
