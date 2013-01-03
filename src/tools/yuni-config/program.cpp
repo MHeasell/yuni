@@ -153,7 +153,7 @@ namespace Yuni
 
 	void LibConfigProgram::initializeSystemPathList()
 	{
-		if (!pOptNoDefaultPath && pDefaultPathList.empty())
+		if (not pOptNoDefaultPath && pDefaultPathList.empty())
 		{
 			# ifdef YUNI_OS_WINDOWS
 			pDefaultPathList.push_back("${PROGRAMFILES}\\libyuni");
@@ -161,10 +161,10 @@ namespace Yuni
 			pDefaultPathList.push_back("C:\\Dev\\libyuni");
 			# else
 			pDefaultPathList.push_back(String() << YUNI_INSTALL_PREFIX << "/include/" << YUNI_VERSIONED_INST_PATH);
-			pDefaultPathList.push_back(String() << YUNI_INSTALL_PREFIX << "/include"); 
-			pDefaultPathList.push_back("/usr/include/yuni"); 
-			pDefaultPathList.push_back("/usr/local/include/yuni"); 
-			pDefaultPathList.push_back("/opt/yuni/include"); 
+			pDefaultPathList.push_back(String() << YUNI_INSTALL_PREFIX << "/include");
+			pDefaultPathList.push_back("/usr/include/yuni");
+			pDefaultPathList.push_back("/usr/local/include/yuni");
+			pDefaultPathList.push_back("/opt/yuni/include");
 			# endif
 			# ifdef YUNI_OS_MAC
 			pDefaultPathList.push_back("/opt/local/include/yuni");
@@ -205,7 +205,7 @@ namespace Yuni
 		pVersionList.compiler(pOptCompiler);
 		pVersionList.checkRootFolder(pRootPath);
 		pVersionList.findFromPrefixes(pOptPrefix);
-		if (!pOptNoDefaultPath)
+		if (not pOptNoDefaultPath)
 		{
 			initializeSystemPathList();
 			pVersionList.findFromPrefixes(pDefaultPathList);
@@ -321,7 +321,7 @@ namespace Yuni
 					}
 				}
 			}
-			if (!deps.empty())
+			if (not deps.empty())
 			{
 				// Merge results
 				const String::List::const_iterator end = deps.end();
@@ -331,7 +331,8 @@ namespace Yuni
 						pOptModules.push_back(*i);
 				}
 			}
-		} while (!deps.empty());
+		}
+		while (not deps.empty());
 	}
 
 
@@ -363,7 +364,7 @@ namespace Yuni
 		const String::List::const_iterator end = pOptModules.end();
 		for (String::List::const_iterator i = pOptModules.begin(); i != end; ++i)
 		{
-			if (!isCoreModule(*i) && version.modules.end() == std::find(version.modules.begin(), version.modules.end(), *i))
+			if (not isCoreModule(*i) && version.modules.end() == std::find(version.modules.begin(), version.modules.end(), *i))
 			{
 				pExitStatus = 3;
 				if (pOptPrintErrors)
@@ -378,7 +379,7 @@ namespace Yuni
 	{
 		// Getting the config file
 		String::List options;
-		if (!version.configFile(options, pOptPrintErrors) || !version.parserModulesOptions(options, pOptPrintErrors))
+		if (not version.configFile(options, pOptPrintErrors) or not version.parserModulesOptions(options, pOptPrintErrors))
 		{
 			pExitStatus = 1;
 			return false;
@@ -397,22 +398,23 @@ namespace Yuni
 	}
 
 
-	namespace // anonymous
-	{
-		void PrintArgs(const LibConfig::VersionInfo::Settings::SettingsPerModule::OptionMap& args)
-		{
-			bool first = true;
-			const LibConfig::VersionInfo::Settings::SettingsPerModule::OptionMap::const_iterator end = args.end();
-			for (LibConfig::VersionInfo::Settings::SettingsPerModule::OptionMap::const_iterator i = args.begin(); i != end; ++i)
-			{
-				if (!first)
-					std::cout << ' ';
-				first = false;
-				std::cout << i->first;
-			}
-		}
 
-	} // anonymous namespace
+
+
+	static void PrintArgs(const LibConfig::VersionInfo::Settings::SettingsPerModule::OptionMap& args)
+	{
+		typedef LibConfig::VersionInfo::Settings::SettingsPerModule::OptionMap::const_iterator const_iterator;
+
+		bool first = true;
+		const const_iterator end = args.end();
+		for (const_iterator i = args.begin(); i != end; ++i)
+		{
+			if (!first)
+				std::cout << ' ';
+			first = false;
+			std::cout << i->first;
+		}
+	}
 
 
 	void LibConfigProgram::createArguments(LibConfig::VersionInfo::Settings& version) const

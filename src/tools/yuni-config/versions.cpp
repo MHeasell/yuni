@@ -16,23 +16,20 @@ namespace VersionInfo
 {
 
 
-	namespace // anonymous
+	template<class StringT>
+	static const String& QuotePath(const StringT& value)
 	{
+		static String s;
+		# ifndef YUNI_OS_WINDOWS
+		s = value;
+		s.replace(" ", "\\ ");
+		# else
+		s.clear();
+		s << '"' << value << '"';
+		# endif
+		return s;
+	}
 
-		template<class StringT> const String& QuotePath(const StringT& value)
-		{
-			static String s;
-			# ifndef YUNI_OS_WINDOWS
-			s = value;
-			s.replace(" ", "\\ ");
-			# else
-			s.clear();
-			s << '"' << value << '"';
-			# endif
-			return s;
-		}
-
-	} // anonymous namespace
 
 
 
@@ -65,7 +62,7 @@ namespace VersionInfo
 
 	void List::findFromPrefixes(const String::List& prefix)
 	{
-		if (!prefix.empty())
+		if (not prefix.empty())
 		{
 			const String::List::const_iterator end = prefix.end();
 			for (String::List::const_iterator i = prefix.begin(); i != end; ++i)
@@ -85,14 +82,14 @@ namespace VersionInfo
 		info.mapping = mappingStandard;
 		String s(path);
 		s << SEP << "yuni.version";
-		if (!IO::File::Exists(s))
+		if (not IO::File::Exists(s))
 		{
 			s.clear() << path << SEP << "include" << SEP << "yuni" << SEP << "yuni.version";
 			if (!IO::File::Exists(s))
 			{
 				info.mapping = mappingSVNSources;
 				s.clear() << path << SEP << "src" << SEP << "yuni" << SEP << "yuni.version";
-				if (!IO::File::Exists(s))
+				if (not IO::File::Exists(s))
 					return;
 			}
 		}
@@ -140,7 +137,8 @@ namespace VersionInfo
 						info.libPath.push_back(value);
 				}
 			}
-			if (!version.null() && !info.modules.empty())
+
+			if (not version.null() && not info.modules.empty())
 			{
 				info.path = path;
 				info.compiler = pCompiler;
@@ -180,7 +178,7 @@ namespace VersionInfo
 
 	void List::printWithInfos()
 	{
-		if (!pList.empty())
+		if (not pList.empty())
 		{
 			const const_iterator end = pList.rend();
 			for (const_iterator i = pList.rbegin(); i != end; ++i)
@@ -213,7 +211,7 @@ namespace VersionInfo
 	VersionInfo::Settings* List::selected()
 	{
 		if (pList.empty())
-			return NULL;
+			return nullptr;
 		InternalList::iterator i = pList.begin();
 		return &i->second;
 	}
@@ -241,7 +239,7 @@ namespace VersionInfo
 		}
 		out << "yuni.config." << this->compiler;
 
-		if (!IO::File::Exists(out))
+		if (not IO::File::Exists(out))
 		{
 			if (displayError)
 				std::cout << "Error: impossible to open the config file '" << out << "'\n";
@@ -310,7 +308,7 @@ namespace VersionInfo
 				continue;
 			group.assign(key, p);
 			modName.assign(key, key.size() - p - 1, p + 1);
-			if (!group || !modName)
+			if (not group or not modName)
 				continue;
 
 			SettingsPerModule& s = moduleSettings[modName];
@@ -355,11 +353,28 @@ namespace VersionInfo
 			if (group == "lib")
 			{
 				IO::Normalize(norm, value);
+				# ifdef YUNI_OS_MAC
+				// it may happen that cmake provides a framework for linking, which is wrong obvioulsy
+				CString<32,false> ext;
+				IO::ExtractExtension(ext, norm);
+				ext.toLower();
+				if (ext != ".framework")
+					s.libs[String() << "-l" << QuotePath(norm)] = true;
+				else
+				{
+					// adding the parent directory
+					String frameworkpath;
+					norm += "/../";
+					IO::Normalize(frameworkpath, norm);
+					s.libIncludes[String() << "-F" << QuotePath(frameworkpath)] = true;
+				}
+				# else
 				switch (compliant)
 				{
 					case gcc          : s.libs[String() << "-l" << QuotePath(norm)] = true; break;
 					case visualstudio : s.libs[String() << QuotePath(norm)] = true; break;
 				}
+				# endif
 				continue;
 			}
 
