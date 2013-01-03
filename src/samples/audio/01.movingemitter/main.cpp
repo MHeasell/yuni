@@ -24,6 +24,10 @@ int main(int argc, char* argv[])
 
 	// Audio manager
 	Audio::QueueService audio;
+	audio.start();
+
+	if (!audio.running())
+		return 1;
 
 	static const float LIMIT = 20.0f;
 

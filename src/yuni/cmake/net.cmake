@@ -15,7 +15,7 @@ set(SRC_NET_COMMON
 	net/protocol.h
 	net/protocol.cpp
 )
-source_group("Net" FILES ${SRC_NET_COMMUN})
+source_group("Net" FILES ${SRC_NET_COMMON})
 
 
 set(SRC_NET_MESSAGE
