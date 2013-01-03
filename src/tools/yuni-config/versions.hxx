@@ -10,8 +10,9 @@ namespace VersionInfo
 {
 
 
-	inline Settings::Settings()
-		:supportOpenGL(false), supportDirectX(false)
+	inline Settings::Settings() :
+		supportOpenGL(false),
+		supportDirectX(false)
 	{}
 
 
