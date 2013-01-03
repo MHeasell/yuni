@@ -17,7 +17,7 @@ namespace Messaging
 	**
 	** A schema is some kink of namespace, where methods will belong
 	*/
-	class YUNI_DECL ThreadContext final
+	class YUNI_DECL Context final
 	{
 	public:
 		//! The most suitable smart pointer
@@ -28,7 +28,7 @@ namespace Messaging
 		/*!
 		** \brief Default constructor
 		*/
-		ThreadContext();
+		Context();
 
 		//! Clear all internal variables
 		void clear();
@@ -39,6 +39,8 @@ namespace Messaging
 
 
 	public:
+		//! Parameters
+		KeyValueStore params;
 		//! User data pointer
 		void* userdata;
 
@@ -50,6 +52,19 @@ namespace Messaging
 		// to reduce memory usage, the internal memory of this variable will automatically
 		// be wipe out if using more than 5MiB
 		Clob clob;
+
+		//! Name of the method invoked
+		AnyString method;
+		//! Schema of the method invoked
+		AnyString schema;
+
+		//! Http status
+		uint httpStatus;
+
+		//! Buffer reused by transports for generating a response
+		// However, it can be safely used by the method invoked
+		Clob buffer;
+
 
 	private:
 		template<uint MaxSize, class StringT> void AutoShrink(StringT& variable);

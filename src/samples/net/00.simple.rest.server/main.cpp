@@ -11,26 +11,26 @@ Logs::Logger<> logs;
 
 
 
-static void APIHelloWorld(Net::Messaging::ThreadContext&, Net::Messaging::Message&)
+static void APIHelloWorld(Net::Messaging::Context&, Marshal::Object& response)
 {
 	logs.info() << "sending hello world !";
+	response["message"] = "Hellow world !";
 }
 
 
-static void APISum(Net::Messaging::ThreadContext& threadctx, Net::Messaging::Message& message)
+static void APISum(Net::Messaging::Context& context, Marshal::Object& response)
 {
-	// temporary string provided by threadctx, for avoid useless reallocation
-	String key = threadctx.text;
+	// our parameters
 	double a, b;
 
-	if (not message.params[(key = "a")].to(a)
-		or not message.params[(key = "b")].to(b))
+	if (not context.params["a"].to(a) or not context.params["b"].to(b))
 	{
-		message.httpStatus = 400; // bad request
+		context.httpStatus = 400; // bad request
 		return;
 	}
 
 	logs.info() << "sum " << a << " + " << b << " = " << (a + b);
+	response["result"] = (a + b);
 }
 
 

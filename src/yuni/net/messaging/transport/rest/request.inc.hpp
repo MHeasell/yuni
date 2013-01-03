@@ -268,8 +268,6 @@ namespace REST
 		// Serving a new request
 		if (event == MG_NEW_REQUEST)
 		{
-			// -- 1 - preliminary checks
-
 			// Retrieving information associated to the current connection
 			// The method from mongoose directly return a pointer from within
 			// the mg_connection struct, thus it can not fail.
@@ -303,62 +301,59 @@ namespace REST
 			const DecisionTree::MethodHandler& mhandler = mi->second;
 
 
-			// Message provided to the user
-			Net::Messaging::Message message;
+			// Message context
+			Net::Messaging::Context context;
 
 			// reading / checking for parameters
 			if (not mhandler.parameters.empty())
 			{
 				// copying all default parameters
-				message.params = mhandler.parameters;
+				context.params = mhandler.parameters;
 
 				// reading parameters from the url query
 				// ignoring unknown parameters
 				if (reqinfo.query_string and reqinfo.query_string[0] != '\0')
 				{
-					if (not DecodeURLQuery(message.params, reqinfo.query_string))
+					if (not DecodeURLQuery(context.params, reqinfo.query_string))
 						return HTTPErrorCode<400>(conn);
 				}
 			}
-			else
-				message.params.clear();
 
+			// resetting context
+			context.method = mhandler.name;
+			context.schema = mhandler.schema;
+			context.httpStatus = 200;
+			// response
+			Marshal::Object response;
 
-			// -- 2 - Thread specific data
-			// FIXME this variable should be really thread-specific, and not recreated
-			// for each call
-			Net::Messaging::ThreadContext threadctx;
-
-			// filling informations
-			message.method = mhandler.name;
-			message.schema = mhandler.schema;
-
-
-			// -- 3 - method invocation
 			// Invoke user callback
-			mhandler.invoke(threadctx, message);
+			mhandler.invoke(context, response);
 
 
-			// -- 4 - http status code
-			if  (200 == message.httpStatus)
+			// sending the response
+			if  (200 == context.httpStatus)
 			{
-				String header;
-				header = "HTTP/1.1 200 OK\r\nCache: no-cache\r\nContent-Length: ";
-				header += message.body.size();
-				header += "\r\n\r\n";
-				mg_write(conn, header.c_str(), header.size());
-				mg_write(conn, message.body.c_str(), message.body.size());
+				Clob& out  = context.buffer;
+				Clob& body = context.clob;
+				response.toJSON(body);
+				out.clear();
+				out += "HTTP/1.1 200 OK\r\nCache: no-cache\r\nContent-Length: ";
+				out += body.size();
+				out += "\r\n\r\n";
+				out += body;
+				mg_write(conn, out.c_str(), out.size());
+				//mg_write(conn, message.body.c_str(), message.body.size());
 
 				// reducing memory usage for some Memory-hungry apps
-				threadctx.autoshrink();
+				context.autoshrink();
 				return (void*)"ok"; // the request has been managed
 			}
 			else
 			{
 				// reducing memory usage for some Memory-hungry apps
-				threadctx.autoshrink();
+				context.autoshrink();
 
-				switch (message.httpStatus)
+				switch (context.httpStatus)
 				{
 					case 404: // not found
 						return HTTPErrorCode<404>(conn);

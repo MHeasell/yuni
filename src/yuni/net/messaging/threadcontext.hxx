@@ -9,13 +9,13 @@ namespace Net
 namespace Messaging
 {
 
-	inline ThreadContext::ThreadContext() :
+	inline Context::Context() :
 		userdata(NULL)
 	{
 	}
 
 
-	inline void ThreadContext::clear()
+	inline void Context::clear()
 	{
 		text.clear();
 		clob.clear();
@@ -23,7 +23,7 @@ namespace Messaging
 
 
 	template<uint MaxSize, class StringT>
-	inline void ThreadContext::AutoShrink(StringT& variable)
+	inline void Context::AutoShrink(StringT& variable)
 	{
 		variable.clear();
 		if (variable.capacity() > MaxSize)
@@ -31,10 +31,11 @@ namespace Messaging
 	}
 
 
-	inline void ThreadContext::autoshrink()
+	inline void Context::autoshrink()
 	{
 		AutoShrink<6 * 1024>(text);
 		AutoShrink<5 * 1024 * 1024>(clob);
+		AutoShrink<1 * 1024 * 1024>(buffer);
 	}
 
 
