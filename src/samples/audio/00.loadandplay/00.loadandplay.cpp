@@ -43,7 +43,7 @@ int main(int argc, char* argv[])
 		return 1;
 
 	// Generate a name for the emitter ...
-	String emitterName = "Emitter 1";
+	AnyString emitterName = "Emitter 1";
 	// ... and create it
 	if (!audio.emitter.add(emitterName))
 	{
@@ -93,7 +93,7 @@ int main(int argc, char* argv[])
 			}
 		}
 		audio.emitter.detach(emitterName);
-		//audio.bank.unload(argv[i]);
+		audio.bank.unload(argv[i]);
 	}
 
 	// Properly stop the queue service and unload everything
