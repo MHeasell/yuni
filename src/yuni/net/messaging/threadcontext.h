@@ -61,6 +61,9 @@ namespace Messaging
 		//! Http status
 		uint httpStatus;
 
+		//! Remote port of the current connection
+		uint remotePort;
+
 		//! Buffer reused by transports for generating a response
 		// However, it can be safely used by the method invoked
 		Clob buffer;

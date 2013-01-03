@@ -323,6 +323,7 @@ namespace REST
 			context.method = mhandler.name;
 			context.schema = mhandler.schema;
 			context.httpStatus = 200;
+			context.remotePort = reqinfo.remote_port;
 			// response
 			Marshal::Object response;
 
@@ -337,16 +338,15 @@ namespace REST
 				Clob& body = context.clob;
 				response.toJSON(body);
 				out.clear();
-				out += "HTTP/1.1 200 OK\r\nCache: no-cache\r\nContent-Length: ";
+				out += "HTTP/1.1 200 OK\r\nCache: no-cache\r\nContent-Type: application/json\r\nContent-Length: ";
 				out += body.size();
 				out += "\r\n\r\n";
 				out += body;
 				mg_write(conn, out.c_str(), out.size());
-				//mg_write(conn, message.body.c_str(), message.body.size());
 
 				// reducing memory usage for some Memory-hungry apps
 				context.autoshrink();
-				return (void*)"ok"; // the request has been managed
+				return (void*)"ok"; // the request has been handled
 			}
 			else
 			{
