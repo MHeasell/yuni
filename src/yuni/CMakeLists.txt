@@ -73,6 +73,14 @@ if(YUNI_MODULE_DEVICES)
 endif()
 
 
+#
+# Module: marshal
+#
+if(YUNI_MODULE_MARSHAL)
+	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/marshal.cmake")
+endif()
+
+
 
 #
 # Module : Network
