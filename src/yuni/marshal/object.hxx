@@ -20,6 +20,27 @@ namespace Marshal
 	}
 
 
+	inline void Object::assign(const char* string)
+	{
+		assign(AnyString(string));
+	}
+
+
+	template<uint N>
+	inline void Object::assign(const char string[N])
+	{
+		assign(AnyString(string));
+	}
+
+
+	template<uint N>
+	inline Object& Object::operator = (const char string[N])
+	{
+		assign(AnyString(string));
+		return *this;
+	}
+
+
 	inline Object& Object::operator = (const Object& rhs)
 	{
 		assign(rhs);
