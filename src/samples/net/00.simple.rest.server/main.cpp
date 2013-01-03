@@ -13,7 +13,9 @@ Logs::Logger<> logs;
 
 static void APIHelloWorld(Net::Messaging::Context&, Marshal::Object& response)
 {
-	logs.info() << "sending hello world !";
+	// log server
+	logs.info() << "[method:hello_world] sending hello world !";
+	// the response
 	response["message"] = "Hellow world !";
 }
 
@@ -25,12 +27,21 @@ static void APISum(Net::Messaging::Context& context, Marshal::Object& response)
 
 	if (not context.params["a"].to(a) or not context.params["b"].to(b))
 	{
-		context.httpStatus = 400; // bad request
+		// the parameters are not valid, exiting with a 400 status code
+		// (Bad Request, The request cannot be fulfilled due to bad syntax.)
+		// see http://en.wikipedia.org/wiki/List_of_HTTP_status_codes
+		context.httpStatus = 400;
+		// log server
+		logs.error() << "[method:sum] invalid parameters";
 		return;
 	}
 
-	logs.info() << "sum " << a << " + " << b << " = " << (a + b);
-	response["result"] = (a + b);
+	// log server
+	logs.info() << "[method:sum] " << a << " + " << b << " = " << (a + b);
+	// the response
+	response["a"] = a;
+	response["b"] = b;
+	response["sum"] = (a + b);
 }
 
 
@@ -54,12 +65,11 @@ static void PrepareTheAPI(Net::Messaging::Service& service)
 	schema.methods.add("sum")
 		.brief("Computes the sum of two numbers")
 		.option("http.method", "GET")
-		.param("a", "First operad", "0")
-		.param("b", "Second operad", "0")
+		.param("a", "First operand", "0")
+		.param("b", "Second operand", "0")
 		.invoke(& APISum);
 
-	// Switching to the new protocol
-	//
+	// -- Switching to the new protocol
 	// note: The method `protocol()` must be call to make any modification to
 	//   the protocol visible, and can be called anytime, even if started
 	//   (useful for reloading the service while running)
@@ -79,7 +89,6 @@ static void PrepareTransports(Net::Messaging::Service& service)
 static bool StartService(Net::Messaging::Service& service)
 {
 	logs.info() << "starting";
-
 	Net::Error error = service.start();
 
 	switch (error)
@@ -91,9 +100,9 @@ static bool StartService(Net::Messaging::Service& service)
 			return false;
 	}
 
-	logs.info() << "example:";
+	logs.info() << "examples:";
 	logs.info() << "# curl -i -X GET 'http://localhost:6042/hello_world'";
-	logs.info() << "# curl -i -X GET 'http://localhost:6042/sum?a=50&amp;b=42'";
+	logs.info() << "# curl -i -X GET 'http://localhost:6042/sum?a=50&b=42'";
 	logs.info() << "<ctrl> + C to quit";
 	logs.info(); // empty line for beauty
 	return true;
@@ -115,7 +124,6 @@ int main(int, char**)
 
 	// Prepare the API
 	PrepareTheAPI(service);
-
 	// Preparing all transports
 	PrepareTransports(service);
 
@@ -125,6 +133,7 @@ int main(int, char**)
 
 	// Waiting for the end of the server
 	service.wait();
+
 	return 0;
 }
 
