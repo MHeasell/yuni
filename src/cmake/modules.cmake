@@ -9,12 +9,14 @@ if (WIN32 OR WIN64)
 	set(YUNICOMPONENT_AUDIO_CORE        "yuni_audio_core")
 	set(YUNICOMPONENT_DEVICE_DISPLAY    "yuni_device_display")
 	set(YUNICOMPONENT_UUID              "yuni_uuid")
+	set(YUNICOMPONENT_MARSHAL           "yuni_marshal")
 else()
 	set(YUNICOMPONENT_CORE              "yuni-core")
 	set(YUNICOMPONENT_ALGORITHMS        "yuni-algorithms")
 	set(YUNICOMPONENT_AUDIO_CORE        "yuni-audio-core")
 	set(YUNICOMPONENT_DEVICE_DISPLAY    "yuni-device-display")
-	set(YUNICOMPONENT_DEVICE_DISPLAY    "yuni-uuid")
+	set(YUNICOMPONENT_UUID              "yuni-uuid")
+	set(YUNICOMPONENT_MARSHAL           "yuni-marshal")
 endif()
 
 
@@ -29,6 +31,9 @@ set(YUNI_MODULE_CORE                      true) # Must be True
 
 # VM
 set(YUNI_MODULE_VM                        false)
+
+# Marshal
+set(YUNI_MARSHAL                          false)
 
 # Devices
 set(YUNI_MODULE_DEVICES                   false)
@@ -74,6 +79,7 @@ set(YUNI_TESTS   false)
 set(YUNI_MODULE_LIST
 	algorithms
 	vm
+	marshal
 	vfs
 		vfs-local
 	audio
@@ -136,6 +142,7 @@ if(MODULES)
 			set(YUNI_MODULE_EXTRA_UUID true)
 			set(YUNI_MODULE_LDO true)
 			set(YUNI_MODULE_DOCUMENTATION true)
+			set(YUNI_MODULE_MARSHAL true)
 			set(YUNI_TESTS true)
 			set(KeywordIsKnown true)
 		endif()
@@ -171,6 +178,17 @@ if(MODULES)
 		# -vm
 		if("${it}" STREQUAL "-vm")
 			set(YUNI_MODULE_VM false)
+			set(KeywordIsKnown true)
+		endif()
+
+		# marshal
+		if("${it}" STREQUAL "marshal")
+			set(YUNI_MODULE_MARSHAL true)
+			set(KeywordIsKnown true)
+		endif()
+		# -marshal
+		if("${it}" STREQUAL "-marshal")
+			set(YUNI_MODULE_MARSHAL false)
 			set(KeywordIsKnown true)
 		endif()
 
@@ -376,7 +394,7 @@ if(MODULES)
 		YMESSAGE("    -/+vm          : The Virtual machine")
 		YMESSAGE(" The extra modules")
 		YMESSAGE("    -/+uuid        : UUID (default: disabled)")
-		YMESSAGE(" The algorithms")
+		YMESSAGE("    -/+marshal     : The Marshal module (for Object serialization, default: disabled)")
 		YMESSAGE("    -/+algorithms  : Standard algorithms")
 		YMESSAGE("")
 		message(FATAL_ERROR "Errors on module names")
@@ -399,7 +417,12 @@ if(YUNI_MODULE_LDO)
 endif()
 if(YUNI_MODULE_NET_MESSAGES)
 	set(YUNI_MODULE_NET true)
+	set(YUNI_MODULE_MARSHAL true)
 endif()
+if(YUNI_MODULE_NET)
+	set(YUNI_MODULE_MARSHAL true) # temporary fix, until messaging got its own module
+endif()
+
 
 
 
@@ -441,6 +464,11 @@ if(YUNI_MODULE_VM)
 	list(APPEND YUNI_MODULE_AVAILABLE vm)
 endif()
 
+if(YUNI_MODULE_MARSHAL)
+	list(APPEND YUNI_MODULE_AVAILABLE marshal)
+endif()
+
+
 
 
 if(YUNI_MODULE_NET)
@@ -477,3 +505,4 @@ endif()
 if(YUNI_MODULE_EXTRA_UUID)
 	LIST(APPEND YUNI_MODULE_AVAILABLE uuid)
 endif()
+
