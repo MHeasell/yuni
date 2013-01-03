@@ -8,6 +8,7 @@
 # include "../../../core/bind.h"
 # include "../message.h"
 # include "../threadcontext.h"
+# include "../../../marshal/object.h"
 
 
 namespace Yuni
@@ -24,14 +25,20 @@ namespace API
 	public:
 		//! Hash table
 		typedef Dictionary<String, Method>::Hash  Hash;
+
 		/*!
 		** \brief Callback when a method is invoked
 		**
 		** C-Style callbacks are used for performance reasons. std::function or
 		** Yuni::Bind should not be used. Anyway, using thread-context related data
 		** should be encouraged instead of shared data between all treads.
+		**
+		** The return value is an http status code, even for non http transports. As
+		** a consequence, you should use standard status, like 200 (ok),
+		** 400 (bad request, invalid parameters), 401 (not enough credentials),
+		** 403 (no credentials and access denied), and 404 (not found).
 		*/
-		typedef void (* Callback) (Net::Messaging::ThreadContext&, Net::Messaging::Message&);
+		typedef void (*Callback) (Net::Messaging::Context& /*context*/, Marshal::Object& /*response*/);
 
 		class Parameter
 		{
