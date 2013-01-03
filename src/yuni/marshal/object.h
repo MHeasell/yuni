@@ -101,6 +101,10 @@ namespace Marshal
 		void assign(sint64 integer);
 		//! assign string
 		void assign(const AnyString& string);
+		//! assign cstring
+		template<uint N> void assign(const char string[N]);
+		//! assign cstring
+		void assign(const char* string);
 		//@}
 
 
@@ -146,6 +150,8 @@ namespace Marshal
 		//@{
 		//! Copy operator
 		Object& operator = (const Object& rhs);
+		//! assign string
+		template<uint N> Object& operator = (const char string[N]);
 		//! assign something else
 		template<class T> Object& operator = (const T& value);
 		//! append
