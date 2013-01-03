@@ -285,52 +285,129 @@ namespace Marshal
 	}
 
 
-	void Object::valueToJSON(Clob& out, uint depth) const
+
+	template<class StreamT, class ValueT>
+	static inline bool ObjectBuiltinTypeToJSON(StreamT& out, Object::Type type, const ValueT& value)
+	{
+		switch (type)
+		{
+			case Object::otString:
+				{
+					out << '"' << *value.string << '"';
+					return true;
+				}
+			case Object::otInteger:
+				{
+					out << value.integer;
+					return true;
+				}
+			case Object::otBool:
+				{
+					out << ((value.boolean) ? '1' : '0');
+					return true;
+				}
+			case Object::otDouble:
+				{
+					out << value.decimal;
+					return true;
+				}
+			case Object::otNil:
+				{
+					out << "null";
+					return true;
+				}
+			default:
+				return false;
+		}
+		return false;
+	}
+
+
+	template<class StreamT>
+	static inline void AppendIndentSpaces(StreamT& out, uint depth, uint tabsize = 4)
+	{
+		assert(tabsize <= 16);
+		for (uint i = 0; i != depth; ++i)
+			out.append("                ", tabsize);
+	}
+
+
+	template<bool PrettyT, class StreamT>
+	inline void Object::valueToJSON(StreamT& out, uint depth) const
 	{
 		switch (pType)
 		{
-			case otString:
-				{
-					out << '"' << *pValue.string << '"';
-					break;
-				}
 			case otDictionary:
 				{
 					InternalTable& table = *pValue.dictionary;
-					if (not table.empty())
-					{
-						out.append("{\n", 2);
-						InternalTable::const_iterator it = table.begin();
-
-						for (uint i = 0; i != depth; ++i)
-							out.append("    ", 4);
-						out << '"' << it->first << "\": ";
-						it->second.valueToJSON(out, depth + 1);
-						++it;
-
-						InternalTable::const_iterator end = table.end();
-						for (; it != end; ++it)
-						{
-							out.append(",\n", 2);
-							for (uint i = 0; i != depth; ++i)
-								out.append("    ", 4);
-
-							out << '"' << it->first << "\": ";
-							it->second.valueToJSON(out, depth + 1);
-						}
-
-						out += '\n';
-						--depth;
-						for (uint i = 0; i != depth; ++i)
-							out.append("    ", 4);
-						out += '}';
-					}
-					else
+					if (table.empty())
 					{
 						out.append("{ }", 3);
+						break;
 					}
+
+					if (PrettyT)
+						out.append("{\n", 2);
+					else
+						out += '{';
+
+					// manually handling the first item, to not be annyoyed again by commas
+					if (PrettyT)
+						AppendIndentSpaces(out, depth);
+					InternalTable::const_iterator it = table.begin();
+					out << '"' << it->first << "\": ";
+					{
+						const Object& child = it->second;
+						if ((uint) child.pType < (uint) Object::firstComplexDatatype)
+						{
+							// simple type
+							ObjectBuiltinTypeToJSON(out, child.pType, child.pValue);
+						}
+						else
+						{
+							// complex type, recursive call
+							child.valueToJSON<PrettyT>(out, depth + 1);
+						}
+					}
+					++it;
+
+					// each item
+					InternalTable::const_iterator end = table.end();
+					for (; it != end; ++it)
+					{
+						if (PrettyT)
+						{
+							out.append(",\n", 2);
+							AppendIndentSpaces(out, depth);
+						}
+						else
+							out += ',';
+
+						out << '"' << it->first << "\": ";
+						const Object& child = it->second;
+						if ((uint) child.pType < (uint) Object::firstComplexDatatype)
+						{
+							// simple type
+							ObjectBuiltinTypeToJSON(out, child.pType, child.pValue);
+						}
+						else
+						{
+							// complex type, recursive call
+							child.valueToJSON<PrettyT>(out, depth + 1);
+						}
+					}
+
+					// final
+					if (PrettyT)
+					{
+						out += '\n';
+						--depth;
+						AppendIndentSpaces(out, depth);
+					}
+					out += '}';
 					break;
 				}
+
 			case otArray:
 				{
 					out << "[\n";
@@ -338,46 +415,41 @@ namespace Marshal
 
 					for (uint index = 0; index != array.size(); ++index)
 					{
-						for (uint i = 0; i != depth; ++i)
-							out.append("    ", 4);
-
-						array[index].valueToJSON(out, depth + 1);
+						AppendIndentSpaces(out, depth);
+						const Object& child = array[index];
+						if ((uint) child.pType < (uint) Object::firstComplexDatatype)
+						{
+							// simple type
+							ObjectBuiltinTypeToJSON(out, child.pType, child.pValue);
+						}
+						else
+						{
+							// complex type, recursive call
+							child.valueToJSON<PrettyT>(out, depth + 1);
+						}
 						out << ",\n";
 					}
 
 					--depth;
-					for (uint i = 0; i != depth; ++i)
-						out.append("    ", 4);
+					AppendIndentSpaces(out, depth);
 					out << "]\n";
 					break;
 				}
-			case otInteger:
+			default:
 				{
-					out << pValue.integer;
-					break;
-				}
-			case otBool:
-				{
-					out << ((pValue.boolean) ? '1' : '0');
-					break;
-				}
-			case otDouble:
-				{
-					out << pValue.decimal;
-					break;
-				}
-			case otNil:
-				{
-					out << "nil";
+					ObjectBuiltinTypeToJSON(out, pType, pValue);
 					break;
 				}
 		}
 	}
 
 
-	void Object::toJSON(Clob& out) const
+	void Object::toJSON(Clob& out, bool pretty) const
 	{
-		valueToJSON(out, 1);
+		if (pretty)
+			valueToJSON<true> (out, 1);
+		else
+			valueToJSON<false>(out, 1);
 	}
 
 
