@@ -20,26 +20,33 @@ namespace Marshal
 	** Additionally, this class remains a POD type (no smart pointer or C++ advanced techniques)
 	** for being used with malloc / calloc.
 	*/
-	struct Object final
+	class Object final
 	{
 	public:
 		//! Internal type
 		enum Type
 		{
+			// builtin types
 			//! Nil object
 			otNil = 0,
+			//! String
+			otString,
 			//! Boolean
 			otBool,
 			//! Integer
 			otInteger,
 			//! Double,
 			otDouble,
-			//! String
-			otString,
+			// complex datatypes
 			//! Array
 			otArray,
 			//! Dictionary
 			otDictionary
+		};
+		enum
+		{
+			//! Index within enum Type of the first complex datatype (for internal uses)
+			firstComplexDatatype = otArray,
 		};
 
 
@@ -141,8 +148,11 @@ namespace Marshal
 		//@{
 		/*!
 		** \brief Dump the content into a JSON structure
+		**
+		** \param out Stream output
+		** \param pretty True to export in a pretty format (with spaces and indentation)
 		*/
-		void toJSON(Clob& out) const;
+		void toJSON(Clob& out, bool pretty = true) const;
 		//@}
 
 
@@ -162,7 +172,8 @@ namespace Marshal
 
 
 	private:
-		void valueToJSON(Clob& out, uint depth) const;
+		template<bool PrettyT, class StreamT>
+		void valueToJSON(StreamT& out, uint depth) const;
 
 	private:
 		//! Internal data type
