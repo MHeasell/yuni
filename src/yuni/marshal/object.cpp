@@ -296,23 +296,39 @@ namespace Marshal
 				}
 			case otDictionary:
 				{
-					out << "{\n";
 					InternalTable& table = *pValue.dictionary;
-					InternalTable::const_iterator end = table.end();
-					for (InternalTable::const_iterator it = table.begin(); it != end; ++it)
+					if (not table.empty())
 					{
+						out.append("{\n", 2);
+						InternalTable::const_iterator it = table.begin();
+
 						for (uint i = 0; i != depth; ++i)
 							out.append("    ", 4);
-
 						out << '"' << it->first << "\": ";
 						it->second.valueToJSON(out, depth + 1);
-						out += ",\n";
-					}
+						++it;
 
-					--depth;
-					for (uint i = 0; i != depth; ++i)
-						out.append("    ", 4);
-					out << "}\n";
+						InternalTable::const_iterator end = table.end();
+						for (; it != end; ++it)
+						{
+							out.append(",\n", 2);
+							for (uint i = 0; i != depth; ++i)
+								out.append("    ", 4);
+
+							out << '"' << it->first << "\": ";
+							it->second.valueToJSON(out, depth + 1);
+						}
+
+						out += '\n';
+						--depth;
+						for (uint i = 0; i != depth; ++i)
+							out.append("    ", 4);
+						out += '}';
+					}
+					else
+					{
+						out.append("{ }", 3);
+					}
 					break;
 				}
 			case otArray:
