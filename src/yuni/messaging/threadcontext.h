@@ -1,13 +1,11 @@
-#ifndef __YUNI_NET_MESSAGING_THREAD_CONTEXT_H__
-# define __YUNI_NET_MESSAGING_THREAD_CONTEXT_H__
+#ifndef __YUNI_MESSAGING_THREAD_CONTEXT_H__
+# define __YUNI_MESSAGING_THREAD_CONTEXT_H__
 
-# include "../../yuni.h"
-# include "../../core/smartptr.h"
+# include "../yuni.h"
+# include "../core/smartptr.h"
 
 
 namespace Yuni
-{
-namespace Net
 {
 namespace Messaging
 {
@@ -77,10 +75,10 @@ namespace Messaging
 
 
 
+
 } // namespace Messaging
-} // namespace Net
 } // namespace Yuni
 
 # include "threadcontext.hxx"
 
-#endif // __YUNI_NET_MESSAGING_THREAD_CONTEXT_H__
+#endif // __YUNI_MESSAGING_THREAD_CONTEXT_H__

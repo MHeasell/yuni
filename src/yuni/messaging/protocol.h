@@ -1,5 +1,5 @@
-#ifndef __YUNI_NET_MESSAGING_PROTOCOL_H__
-# define __YUNI_NET_MESSAGING_PROTOCOL_H__
+#ifndef __YUNI_MESSAGING_PROTOCOL_H__
+# define __YUNI_MESSAGING_PROTOCOL_H__
 
 # include "api/fwd.h"
 # include "api/methods.h"
@@ -7,8 +7,6 @@
 
 
 namespace Yuni
-{
-namespace Net
 {
 namespace Messaging
 {
@@ -55,9 +53,8 @@ namespace Messaging
 
 
 } // namespace Messaging
-} // namespace Net
 } // namespace Yuni
 
 # include "protocol.hxx"
 
-#endif // __YUNI_NET_MESSAGING_PROTOCOL_H__
+#endif // __YUNI_MESSAGING_PROTOCOL_H__

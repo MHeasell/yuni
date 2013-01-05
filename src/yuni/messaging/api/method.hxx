@@ -1,10 +1,8 @@
-#ifndef __YUNI_NET_MESSAGE_API_METHOD_HXX__
-# define __YUNI_NET_MESSAGE_API_METHOD_HXX__
+#ifndef __YUNI_MESSAGE_API_METHOD_HXX__
+# define __YUNI_MESSAGE_API_METHOD_HXX__
 
 
 namespace Yuni
-{
-namespace Net
 {
 namespace Messaging
 {
@@ -71,7 +69,6 @@ namespace API
 
 } // namespace API
 } // namespace Messaging
-} // namespace Net
 } // namespace Yuni
 
-#endif // __YUNI_NET_MESSAGE_API_METHOD_HXX__
+#endif // __YUNI_MESSAGE_API_METHOD_HXX__

@@ -1,12 +1,10 @@
 
 #include "return-status-code.inc.hpp"
-#include "../../../../core/system/cpu.h"
-#include "../../../../thread/id.h"
+#include "../../../core/system/cpu.h"
+#include "../../../thread/id.h"
 
 
 namespace Yuni
-{
-namespace Net
 {
 namespace Messaging
 {
@@ -302,7 +300,7 @@ namespace REST
 
 
 			// Message context
-			Net::Messaging::Context context;
+			Messaging::Context context;
 
 			// reading / checking for parameters
 			if (not mhandler.parameters.empty())
@@ -385,6 +383,5 @@ namespace REST
 } // namespace REST
 } // namespace Transport
 } // namespace Messaging
-} // namespace Net
 } // namespace Yuni
 

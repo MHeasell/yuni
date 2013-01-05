@@ -1,19 +1,17 @@
-#ifndef __YUNI_NET_MESSAGING_WORKER_INC_HPP__
-# define __YUNI_NET_MESSAGING_WORKER_INC_HPP__
+#ifndef __YUNI_MESSAGING_WORKER_INC_HPP__
+# define __YUNI_MESSAGING_WORKER_INC_HPP__
 
-# include "../../yuni.h"
-# include "../net.h"
+# include "../yuni.h"
+# include "../net/net.h"
 # include "fwd.h"
 # include "transport.h"
-# include "../../thread/thread.h"
-# include "../../thread/array.h"
+# include "../thread/thread.h"
+# include "../thread/array.h"
 
 
 namespace Yuni
 {
 namespace Private
-{
-namespace Net
 {
 namespace Messaging
 {
@@ -27,9 +25,9 @@ namespace Messaging
 		//! The most suitable smart pointer
 		typedef Yuni::Thread::IThread::Ptr  Ptr;
 		//! Alias to the queue service
-		typedef Yuni::Net::Messaging::Service Service;
+		typedef Yuni::Messaging::Service Service;
 		//! Transport layer (abstract)
-		typedef Yuni::Net::Messaging::Transport::ITransport ITransport;
+		typedef Yuni::Messaging::Transport::ITransport ITransport;
 
 	public:
 		//! \name Constructor & Destructor
@@ -123,8 +121,7 @@ namespace Messaging
 
 
 } // namespace Messaging
-} // namespace Net
 } // namespace Private
 } // namespace Yuni
 
-#endif // __YUNI_NET_MESSAGING_WORKER_INC_HPP__
+#endif // __YUNI_MESSAGING_WORKER_INC_HPP__

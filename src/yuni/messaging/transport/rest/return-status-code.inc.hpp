@@ -1,8 +1,6 @@
 
 namespace Yuni
 {
-namespace Net
-{
 namespace Messaging
 {
 namespace Transport
@@ -67,6 +65,5 @@ namespace REST
 } // namespace REST
 } // namespace Transport
 } // namespace Messaging
-} // namespace Net
 } // namespace Yuni
 

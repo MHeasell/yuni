@@ -1,12 +1,10 @@
-#ifndef __YUNI_NET_MESSAGING_TRANSPORT_REST_SERVER_H__
-# define __YUNI_NET_MESSAGING_TRANSPORT_REST_SERVER_H__
+#ifndef __YUNI_MESSAGING_TRANSPORT_REST_SERVER_H__
+# define __YUNI_MESSAGING_TRANSPORT_REST_SERVER_H__
 
 # include "../transport.h"
 
 
 namespace Yuni
-{
-namespace Net
 {
 namespace Messaging
 {
@@ -51,7 +49,6 @@ namespace REST
 } // namespace REST
 } // namespace Transport
 } // namespace Messaging
-} // namespace Net
 } // namespace Yuni
 
-#endif // __YUNI_NET_MESSAGING_TRANSPORT_REST_SERVER_H__
+#endif // __YUNI_MESSAGING_TRANSPORT_REST_SERVER_H__

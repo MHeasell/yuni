@@ -87,11 +87,16 @@ endif()
 #
 If(YUNI_MODULE_NET)
 	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/net.cmake")
-
-	if(YUNI_MODULE_NET_MESSAGES)
-		include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/net-messages.cmake")
-	endif()
 endif()
+
+#
+# Module Messaging
+#
+if(YUNI_MODULE_MESSAGING)
+	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/messaging.cmake")
+endif()
+
+
 
 if(YUNI_MODULE_LDO)
 	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/ldo.cmake")

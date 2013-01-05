@@ -10,6 +10,8 @@ if (WIN32 OR WIN64)
 	set(YUNICOMPONENT_DEVICE_DISPLAY    "yuni_device_display")
 	set(YUNICOMPONENT_UUID              "yuni_uuid")
 	set(YUNICOMPONENT_MARSHAL           "yuni_marshal")
+	set(YUNICOMPONENT_NET               "yuni_net")
+	set(YUNICOMPONENT_MESSAGING         "yuni_messaging")
 else()
 	set(YUNICOMPONENT_CORE              "yuni-core")
 	set(YUNICOMPONENT_ALGORITHMS        "yuni-algorithms")
@@ -17,6 +19,8 @@ else()
 	set(YUNICOMPONENT_DEVICE_DISPLAY    "yuni-device-display")
 	set(YUNICOMPONENT_UUID              "yuni-uuid")
 	set(YUNICOMPONENT_MARSHAL           "yuni-marshal")
+	set(YUNICOMPONENT_NET               "yuni-net")
+	set(YUNICOMPONENT_MESSAGING         "yuni-messaging")
 endif()
 
 
@@ -46,6 +50,9 @@ set(YUNI_MODULE_AUDIO                     false)
 
 # Network
 set(YUNI_MODULE_NET                       false)
+
+# Messaging
+set(YUNI_MODULE_MESSAGING                 false)
 
 # LDO
 set(YUNI_MODULE_LDO                       false)
@@ -133,6 +140,7 @@ if(MODULES)
 			set(YUNI_MODULE_VM true)
 			set(YUNI_MODULE_AUDIO true)
 			set(YUNI_MODULE_NET true)
+			set(YUNI_MODULE_MESSAGING true)
 			set(YUNI_MODULE_GRAPHICS true)
 			set(YUNI_MODULE_OPENGL true)
 			set(YUNI_MODULE_UI true)
@@ -187,6 +195,17 @@ if(MODULES)
 		# -marshal
 		if("${it}" STREQUAL "-marshal")
 			set(YUNI_MODULE_MARSHAL false)
+			set(KeywordIsKnown true)
+		endif()
+
+		# messaging
+		if("${it}" STREQUAL "messaging")
+			set(YUNI_MODULE_MESSAGING true)
+			set(KeywordIsKnown true)
+		endif()
+		# -messaging
+		if("${it}" STREQUAL "-messaging")
+			set(YUNI_MODULE_MESSAGING false)
 			set(KeywordIsKnown true)
 		endif()
 
@@ -381,6 +400,7 @@ if(MODULES)
 		YMESSAGE("    -/+vm          : The Virtual machine")
 		YMESSAGE(" The network modules")
 		YMESSAGE("    -/+net         : The network core module (default: disabled)")
+		YMESSAGE("    -/+messaging   : The messaging module (default: disabled)")
 		YMESSAGE(" The extra modules")
 		YMESSAGE("    -/+uuid        : UUID (default: disabled)")
 		YMESSAGE("    -/+marshal     : The Marshal module (for Object serialization, default: disabled)")
@@ -404,8 +424,9 @@ endif()
 if(YUNI_MODULE_LDO)
 	set(YUNI_MODULE_NET true)
 endif()
-if(YUNI_MODULE_NET)
-	set(YUNI_MODULE_MARSHAL true) # temporary fix, until messaging got its own module
+if (YUNI_MODULE_MESSAGING)
+	set(YUNI_MODULE_NET true)
+	set(YUNI_MODULE_MARSHAL true)
 endif()
 
 
@@ -460,10 +481,13 @@ if(YUNI_MODULE_NET)
 	list(APPEND YUNI_MODULE_AVAILABLE net)
 endif()
 
+if(YUNI_MODULE_MESSAGING)
+	list(APPEND YUNI_MODULE_AVAILABLE messaging)
+endif()
+
 if(YUNI_MODULE_LDO)
 	list(APPEND YUNI_MODULE_AVAILABLE ldo)
 endif()
-
 
 if(YUNI_MODULE_AUDIO)
 	list(APPEND YUNI_MODULE_AVAILABLE audio)

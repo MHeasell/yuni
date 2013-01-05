@@ -4,8 +4,6 @@
 
 namespace Yuni
 {
-namespace Net
-{
 namespace Messaging
 {
 namespace API
@@ -45,6 +43,5 @@ namespace API
 
 } // namespace API
 } // namespace Messaging
-} // namespace Net
 } // namespace Yuni
 
