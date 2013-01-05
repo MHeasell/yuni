@@ -1,19 +1,17 @@
-#ifndef __YUNI_NET_MESSAGING_SERVICE_H__
-# define __YUNI_NET_MESSAGING_SERVICE_H__
+#ifndef __YUNI_MESSAGING_SERVICE_H__
+# define __YUNI_MESSAGING_SERVICE_H__
 
-# include "../../yuni.h"
-# include "../net.h"
-# include "../../thread/policy.h"
-# include "../../core/event.h"
+# include "../yuni.h"
+# include "../net/net.h"
+# include "../thread/policy.h"
+# include "../core/event.h"
 # include "fwd.h"
 # include "transport.h"
-# include "../../core/noncopyable.h"
+# include "../core/noncopyable.h"
 # include "protocol.h"
 
 
 namespace Yuni
-{
-namespace Net
 {
 namespace Messaging
 {
@@ -58,7 +56,7 @@ namespace Messaging
 		/*!
 		** \brief Try to start the queue service
 		*/
-		Error start();
+		Net::Error start();
 
 		/*!
 		** \brief Wait for the service to stop
@@ -68,7 +66,7 @@ namespace Messaging
 		/*!
 		** \brief Stop the server
 		*/
-		Error stop();
+		Net::Error stop();
 
 		//! Get if the queueservice is running (state running / starting)
 		bool running() const;
@@ -99,19 +97,19 @@ namespace Messaging
 			**
 			** This action will be effective the next time the server starts
 			** \code
-			** Net::Messaging::Service  server;
-			** server.addListener("82.125.10.31", 4242, new Net::Transport::REST());
+			** Messaging::Service  server;
+			** server.addListener("82.125.10.31", 4242, new Transport::REST());
 			** server.start();
 			** server.wait();
 			** server.stop();
 			** \endcode
 			*/
-			Error add(const AnyString& address, const Port& port, Transport::ITransport::Ptr transport);
+			Net::Error add(const AnyString& address, const Net::Port& port, Transport::ITransport::Ptr transport);
 
 			/*!
 			** \brief Add a new transport for *:<port>
 			*/
-			Error add(const Port& port, Transport::ITransport::Ptr transport);
+			Net::Error add(const Net::Port& port, Transport::ITransport::Ptr transport);
 
 			/*!
 			** \brief Clear all addresses where the server should listen for incoming connections
@@ -133,7 +131,7 @@ namespace Messaging
 		{
 		public:
 			//! Prototype event: The queue service is starting
-			typedef Event<void (Error&)> Starting;
+			typedef Event<void (Net::Error&)> Starting;
 			//! Prototype event: The queue service has started
 			typedef Event<void ()> Started;
 			//! Prototype event: The queue service is stopping
@@ -141,9 +139,9 @@ namespace Messaging
 			//! Prototype event: The queue service has been stopped
 			typedef Event<void ()> Stopped;
 			//! Prototype event: An error has occured
-			typedef Event<void (State, Error)> ErrorTriggered;
+			typedef Event<void (State, Net::Error)> ErrorTriggered;
 			//! Prototype event: accepting a client
-			typedef Event<void (bool&, const String&, Port, const String&, Port)> ClientAccept;
+			typedef Event<void (bool&, const String&, Net::Port, const String&, Net::Port)> ClientAccept;
 
 		public:
 			//! Event: The queue service is starting
@@ -167,10 +165,10 @@ namespace Messaging
 		//! Flag to know the state of the server
 		State pState;
 		//! Internal data
-		Yuni::Private::Net::Messaging::ServiceData* pData;
+		Yuni::Private::Messaging::ServiceData* pData;
 
 		// Friends
-		friend class Yuni::Private::Net::Messaging::Worker;
+		friend class Yuni::Private::Messaging::Worker;
 		friend class Listeners;
 
 	}; // class Service
@@ -181,9 +179,8 @@ namespace Messaging
 
 
 } // namespace Messaging
-} // namespace Net
 } // namespace Yuni
 
 # include "service.hxx"
 
-#endif // __YUNI_NET_MESSAGING_SERVICE_H__
+#endif // __YUNI_MESSAGING_SERVICE_H__

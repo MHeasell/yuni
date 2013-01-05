@@ -1,11 +1,9 @@
-#ifndef __YUNI_NET_MESSAGING_FWD_H__
-# define __YUNI_NET_MESSAGING_FWD_H__
+#ifndef __YUNI_MESSAGING_FWD_H__
+# define __YUNI_MESSAGING_FWD_H__
 
 // Forward declarations
 
 namespace Yuni
-{
-namespace Net
 {
 namespace Messaging
 {
@@ -19,7 +17,6 @@ namespace Transport
 
 } // namespace Transport
 } // namespace Server
-} // namespace Net
 } // namespace Yuni
 
 
@@ -29,8 +26,6 @@ namespace Yuni
 {
 namespace Private
 {
-namespace Net
-{
 namespace Messaging
 {
 
@@ -39,8 +34,7 @@ namespace Messaging
 
 
 } // namespace Messaging
-} // namespace Net
 } // namespace Private
 } // namespace Yuni
 
-#endif // __YUNI_NET_MESSAGING_FWD_H__
+#endif // __YUNI_MESSAGING_FWD_H__

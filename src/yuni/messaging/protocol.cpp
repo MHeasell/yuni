@@ -4,8 +4,6 @@
 
 namespace Yuni
 {
-namespace Net
-{
 namespace Messaging
 {
 
@@ -25,7 +23,6 @@ namespace Messaging
 
 
 } // namespace Messaging
-} // namespace Net
 } // namespace Yuni
 
 

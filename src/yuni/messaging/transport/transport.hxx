@@ -1,10 +1,8 @@
-#ifndef __YUNI_NET_MESSAGING_TRANSPORT_TRANSPORT_HXX__
-# define __YUNI_NET_MESSAGING_TRANSPORT_TRANSPORT_HXX__
+#ifndef __YUNI_MESSAGING_TRANSPORT_TRANSPORT_HXX__
+# define __YUNI_MESSAGING_TRANSPORT_TRANSPORT_HXX__
 
 
 namespace Yuni
-{
-namespace Net
 {
 namespace Messaging
 {
@@ -50,7 +48,6 @@ namespace Transport
 
 } // namespace Transport
 } // namespace Messaging
-} // namespace Net
 } // namespace Yuni
 
-#endif // __YUNI_NET_MESSAGING_TRANSPORT_TRANSPORT_HXX__
+#endif // __YUNI_MESSAGING_TRANSPORT_TRANSPORT_HXX__

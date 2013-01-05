@@ -1,14 +1,12 @@
-#ifndef __YUNI_NET_MESSAGING_API_METHODS_H__
-# define __YUNI_NET_MESSAGING_API_METHODS_H__
+#ifndef __YUNI_MESSAGING_API_METHODS_H__
+# define __YUNI_MESSAGING_API_METHODS_H__
 
-# include "../../../yuni.h"
+# include "../../yuni.h"
 # include "fwd.h"
 # include "method.h"
 
 
 namespace Yuni
-{
-namespace Net
 {
 namespace Messaging
 {
@@ -44,11 +42,11 @@ namespace API
 
 
 
+
 } // namespace API
 } // namespace Messaging
-} // namespace Net
 } // namespace Yuni
 
 # include "methods.hxx"
 
-#endif // __YUNI_NET_MESSAGING_API_METHODS_H__
+#endif // __YUNI_MESSAGING_API_METHODS_H__

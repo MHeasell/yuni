@@ -1,13 +1,11 @@
-#ifndef __YUNI_NET_MESSAGING_API_SCHEMA_H__
-# define __YUNI_NET_MESSAGING_API_SCHEMA_H__
+#ifndef __YUNI_MESSAGING_API_SCHEMA_H__
+# define __YUNI_MESSAGING_API_SCHEMA_H__
 
-# include "../../yuni.h"
-# include "../../core/dictionary.h"
+# include "../yuni.h"
+# include "../core/dictionary.h"
 
 
 namespace Yuni
-{
-namespace Net
 {
 namespace Messaging
 {
@@ -40,9 +38,8 @@ namespace Messaging
 
 
 } // namespace Messaging
-} // namespace Net
 } // namespace Yuni
 
 # include "schema.hxx"
 
-#endif // __YUNI_NET_MESSAGING_API_SCHEMA_H__
+#endif // __YUNI_MESSAGING_API_SCHEMA_H__

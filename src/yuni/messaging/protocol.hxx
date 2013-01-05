@@ -1,10 +1,8 @@
-#ifndef __YUNI_NET_MESSAGING_PROTOCOL_HXX__
-# define __YUNI_NET_MESSAGING_PROTOCOL_HXX__
+#ifndef __YUNI_MESSAGING_PROTOCOL_HXX__
+# define __YUNI_MESSAGING_PROTOCOL_HXX__
 
 
 namespace Yuni
-{
-namespace Net
 {
 namespace Messaging
 {
@@ -30,7 +28,6 @@ namespace Messaging
 
 
 } // namespace Messaging
-} // namespace Net
 } // namespace Yuni
 
-#endif // __YUNI_NET_MESSAGING_PROTOCOL_HXX__
+#endif // __YUNI_MESSAGING_PROTOCOL_HXX__

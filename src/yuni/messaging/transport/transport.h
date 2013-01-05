@@ -1,21 +1,19 @@
-#ifndef __YUNI_NET_MESSAGING_TRANSPORT_TRANSPORT_H__
-# define __YUNI_NET_MESSAGING_TRANSPORT_TRANSPORT_H__
+#ifndef __YUNI_MESSAGING_TRANSPORT_TRANSPORT_H__
+# define __YUNI_MESSAGING_TRANSPORT_TRANSPORT_H__
 
-# include "../../../yuni.h"
-# include "../../../core/string.h"
-# include "../../../core/noncopyable.h"
-# include "../../../thread/thread.h"
+# include "../../yuni.h"
+# include "../../core/string.h"
+# include "../../core/noncopyable.h"
+# include "../../thread/thread.h"
 # include "../fwd.h"
-# include "../../errors.h"
-# include "../../hostaddressport.h"
-# include "../../port.h"
-# include "../../../core/dictionary.h"
+# include "../../net/errors.h"
+# include "../../net/hostaddressport.h"
+# include "../../net/port.h"
+# include "../../core/dictionary.h"
 # include "../protocol.h"
 
 
 namespace Yuni
-{
-namespace Net
 {
 namespace Messaging
 {
@@ -44,7 +42,7 @@ namespace Transport
 		typedef SmartPtr<ITransport>  Ptr;
 		//!
 		//! Set
-		typedef Dictionary<HostAddressPort, Ptr>::Hash Hash;
+		typedef Dictionary<Net::HostAddressPort, Ptr>::Hash Hash;
 
 	public:
 		//! \name Constructor & Destructor
@@ -89,9 +87,9 @@ namespace Transport
 
 	public:
 		//! Address to listen
-		HostAddress  address;
+		Net::HostAddress  address;
 		//! Port
-		Port port;
+		Net::Port port;
 		//! Mode (server/client)
 		const Mode mode;
 
@@ -108,9 +106,8 @@ namespace Transport
 
 } // namespace Transport
 } // namespace Server
-} // namespace Net
 } // namespace Yuni
 
 # include "transport.hxx"
 
-#endif // __YUNI_NET_MESSAGING_TRANSPORT_TRANSPORT_H__
+#endif // __YUNI_MESSAGING_TRANSPORT_TRANSPORT_H__

@@ -1,20 +1,18 @@
 
 #include "service.h"
 #include "worker.inc.hpp"
-#include "../../thread/array.h"
+#include "../thread/array.h"
 
 
-typedef Yuni::Thread::Array<Yuni::Private::Net::Messaging::Worker>  Workers;
+typedef Yuni::Thread::Array<Yuni::Private::Messaging::Worker>  Workers;
 
-typedef Yuni::Net::Messaging::Transport::ITransport::Hash  TransportList;
+typedef Yuni::Messaging::Transport::ITransport::Hash  TransportList;
 
 
 
 namespace Yuni
 {
 namespace Private
-{
-namespace Net
 {
 namespace Messaging
 {
@@ -27,14 +25,13 @@ namespace Messaging
 		//! All addresses to listen
 		TransportList transports;
 		//! Protocol
-		Yuni::Net::Messaging::Protocol::Ptr protocol;
+		Yuni::Messaging::Protocol::Ptr protocol;
 
 	}; // class ServiceData
 
 
 
 } // namespace Messaging
-} // namespace Net
 } // namespace Private
 } // namespace Yuni
 
@@ -43,16 +40,14 @@ namespace Messaging
 
 namespace Yuni
 {
-namespace Net
-{
 namespace Messaging
 {
 
 	//! ensuring that the internal data is properly initialized
-	static inline void InitializeInternalData(Yuni::Private::Net::Messaging::ServiceData*& data)
+	static inline void InitializeInternalData(Yuni::Private::Messaging::ServiceData*& data)
 	{
 		if (not data)
-			data = new Yuni::Private::Net::Messaging::ServiceData();
+			data = new Yuni::Private::Messaging::ServiceData();
 	}
 
 
@@ -77,18 +72,18 @@ namespace Messaging
 	}
 
 
-	Error  Service::Transports::add(const AnyString& address, const Port& port, Transport::ITransport::Ptr transport)
+	Net::Error  Service::Transports::add(const AnyString& address, const Net::Port& port, Transport::ITransport::Ptr transport)
 	{
 		if (not port.valid())
-			return errInvalidPort;
+			return Net::errInvalidPort;
 		if (not transport or transport->mode != Transport::tmServer)
-			return errInvalidTransport;
+			return Net::errInvalidTransport;
 
 		// The address
 		if (not address)
-			return errInvalidHostAddress;
+			return Net::errInvalidHostAddress;
 
-		HostAddressPort addrport;
+		Net::HostAddressPort addrport;
 		addrport.address   = address;
 		addrport.port      = port;
 		transport->address = address;
@@ -99,7 +94,7 @@ namespace Messaging
 		// Adding the new address
 		{
 			// The item to insert
-			std::pair<HostAddressPort, Net::Messaging::Transport::ITransport::Ptr> item(addrport, transport);
+			std::pair<Net::HostAddressPort, Messaging::Transport::ITransport::Ptr> item(addrport, transport);
 
 			ThreadingPolicy::MutexLocker locker(*pService);
 			InitializeInternalData(pService->pData);
@@ -110,9 +105,9 @@ namespace Messaging
 			transport->protocol(*protocol);
 
 			if (not pService->pData->transports.insert(item).second)
-				return errDupplicatedAddress;
+				return Net::errDupplicatedAddress;
 		}
-		return errNone;
+		return Net::errNone;
 	}
 
 
@@ -124,7 +119,7 @@ namespace Messaging
 	}
 
 
-	Error Service::start()
+	Net::Error Service::start()
 	{
 		// Checking if the service is not already running
 		{
@@ -133,7 +128,7 @@ namespace Messaging
 
 			// checking the current state
 			if (pState != stStopped)
-				return (pState == stRunning) ? errNone : errUnknown;
+				return (pState == stRunning) ? Net::errNone : Net::errUnknown;
 
 			// ok, let's start
 			pState = stStarting;
@@ -142,12 +137,12 @@ namespace Messaging
 		// note: from now on, we know that pData is initialized due to the previous check
 
 		// no error by default
-		Error err = errNone;
+		Net::Error err = Net::errNone;
 
 		// The internal mutex must be unlocked whenever an event is called to prevent
 		// any deadlocks.
 		events.starting(err);
-		if (err != errNone)
+		if (err != Net::errNone)
 		{
 			ThreadingPolicy::MutexLocker locker(*this);
 			pState = stStopped;
@@ -182,15 +177,15 @@ namespace Messaging
 				for (TransportList::iterator i = transports.begin(); i != end; ++i)
 				{
 					// start the transport
-					if (errNone != (err = (i->second)->start()))
+					if (Net::errNone != (err = (i->second)->start()))
 						break;
 
 					// creating a new worker
-					(*workers) += new Yuni::Private::Net::Messaging::Worker(*this, i->second);
+					(*workers) += new Yuni::Private::Messaging::Worker(*this, i->second);
 				}
 
 				// The new state
-				if (err == errNone)
+				if (err == Net::errNone)
 				{
 					pData->workers = workers;
 					pState = stRunning;
@@ -200,19 +195,19 @@ namespace Messaging
 			}
 			else
 			{
-				err = errNoTransport;
+				err = Net::errNoTransport;
 				pState = stStopped;
 			}
 		}
 
-		if (err == errNone)
+		if (err == Net::errNone)
 		{
 			// start all workers
 			workers->start();
 
 			// Great ! The server is working !
 			events.started();
-			return errNone;
+			return Net::errNone;
 		}
 
 		if (!(!workers))
@@ -245,15 +240,15 @@ namespace Messaging
 	}
 
 
-	Error Service::stop()
+	Net::Error Service::stop()
 	{
 		// Checking if the service is not already running
 		{
 			ThreadingPolicy::MutexLocker locker(*this);
 			if (pData == NULL or not pData->workers)
-				return errNone;
+				return Net::errNone;
 			if (pState != stRunning)
-				return (pState == stStopped) ? errNone : errUnknown;
+				return (pState == stStopped) ? Net::errNone : Net::errUnknown;
 			pState = stStopping;
 		}
 
@@ -261,7 +256,7 @@ namespace Messaging
 		// any deadlocks.
 		events.stopping();
 
-		Error err = errNone;
+		Net::Error err = Net::errNone;
 		Workers::Ptr workers;
 
 		// Trying to start all workers
@@ -271,10 +266,10 @@ namespace Messaging
 			workers = pData->workers;
 			pData->workers = nullptr;
 			// The current state
-			pState = (err == errNone) ? stStopped : stRunning;
+			pState = (err == Net::errNone) ? stStopped : stRunning;
 		}
 
-		if (err == errNone)
+		if (err == Net::errNone)
 		{
 			// stopping then destroying all workers
 			if (!(!workers))
@@ -284,7 +279,7 @@ namespace Messaging
 			}
 			// Great ! The server is working !
 			events.stopped();
-			return errNone;
+			return Net::errNone;
 		}
 
 		// An error has occured
@@ -334,6 +329,5 @@ namespace Messaging
 
 
 } // namespace Messaging
-} // namespace Net
 } // namespace Yuni
 

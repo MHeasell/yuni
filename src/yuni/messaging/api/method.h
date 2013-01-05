@@ -1,19 +1,17 @@
-#ifndef __YUNI_NET_MESSAGE_API_METHOD_H__
-# define __YUNI_NET_MESSAGE_API_METHOD_H__
+#ifndef __YUNI_MESSAGE_API_METHOD_H__
+# define __YUNI_MESSAGE_API_METHOD_H__
 
-# include "../../../yuni.h"
+# include "../../yuni.h"
 # include "fwd.h"
-# include "../../../core/string.h"
-# include "../../../core/dictionary.h"
-# include "../../../core/bind.h"
+# include "../../core/string.h"
+# include "../../core/dictionary.h"
+# include "../../core/bind.h"
 # include "../message.h"
 # include "../threadcontext.h"
-# include "../../../marshal/object.h"
+# include "../../marshal/object.h"
 
 
 namespace Yuni
-{
-namespace Net
 {
 namespace Messaging
 {
@@ -38,7 +36,7 @@ namespace API
 		** 400 (bad request, invalid parameters), 401 (not enough credentials),
 		** 403 (no credentials and access denied), and 404 (not found).
 		*/
-		typedef void (*Callback) (Net::Messaging::Context& /*context*/, Marshal::Object& /*response*/);
+		typedef void (*Callback) (Messaging::Context& /*context*/, Marshal::Object& /*response*/);
 
 		class Parameter
 		{
@@ -134,9 +132,8 @@ namespace API
 
 } // namespace API
 } // namespace Messaging
-} // namespace Net
 } // namespace Yuni
 
 # include "method.hxx"
 
-#endif // __YUNI_NET_MESSAGE_API_METHOD_H__
+#endif // __YUNI_MESSAGE_API_METHOD_H__

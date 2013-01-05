@@ -1,7 +1,7 @@
 
 #include <yuni/yuni.h>
-#include <yuni/net/messaging/service.h>
-#include <yuni/net/messaging/transport/rest/server.h>
+#include <yuni/messaging/service.h>
+#include <yuni/messaging/transport/rest/server.h>
 #include <yuni/core/logs.h>
 
 using namespace Yuni;
@@ -11,7 +11,7 @@ Logs::Logger<> logs;
 
 
 
-static void APIHelloWorld(Net::Messaging::Context&, Marshal::Object& response)
+static void APIHelloWorld(Messaging::Context&, Marshal::Object& response)
 {
 	// log server
 	logs.info() << "[method:hello_world] sending hello world !";
@@ -20,7 +20,7 @@ static void APIHelloWorld(Net::Messaging::Context&, Marshal::Object& response)
 }
 
 
-static void APISum(Net::Messaging::Context& context, Marshal::Object& response)
+static void APISum(Messaging::Context& context, Marshal::Object& response)
 {
 	// our parameters
 	double a, b;
@@ -47,13 +47,13 @@ static void APISum(Net::Messaging::Context& context, Marshal::Object& response)
 
 
 
-static void PrepareTheAPI(Net::Messaging::Service& service)
+static void PrepareTheAPI(Messaging::Service& service)
 {
 	logs.debug() << "preparing protocol";
 	// note: contrary to the object `service`, `myapi` is not thread-safe
-	Net::Messaging::Protocol* myapi = new Net::Messaging::Protocol();
+	Messaging::Protocol* myapi = new Messaging::Protocol();
 	// retrieving the default schema
-	Net::Messaging::Schema& schema = myapi->schema();
+	Messaging::Schema& schema = myapi->schema();
 
 	// method: hello_world
 	schema.methods.add("hello_world")
@@ -79,14 +79,14 @@ static void PrepareTheAPI(Net::Messaging::Service& service)
 }
 
 
-static void PrepareTransports(Net::Messaging::Service& service)
+static void PrepareTransports(Messaging::Service& service)
 {
 	logs.debug() << "preparing transports";
-	service.transports.add("*", 6042, new Net::Messaging::Transport::REST::Server());
+	service.transports.add("*", 6042, new Messaging::Transport::REST::Server());
 }
 
 
-static bool StartService(Net::Messaging::Service& service)
+static bool StartService(Messaging::Service& service)
 {
 	logs.info() << "starting";
 	Net::Error error = service.start();
@@ -120,7 +120,7 @@ int main(int, char**)
 	logs.info(); // empty line
 
 	// The service itself
-	Net::Messaging::Service  service;
+	Messaging::Service  service;
 
 	// Prepare the API
 	PrepareTheAPI(service);

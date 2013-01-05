@@ -1,15 +1,13 @@
 
 #include "server.h"
-#include "../../../../thread/signal.h"
+#include "../../../thread/signal.h"
 #include <cassert>
 #define _MSC_VER 0 // seems to be required with this version
-#include "../../../../private/net/messaging/transport/rest/mongoose.h"
+#include "../../../private/net/messaging/transport/rest/mongoose.h"
 #include "request.inc.hpp"
 
 
 namespace Yuni
-{
-namespace Net
 {
 namespace Messaging
 {
@@ -48,9 +46,9 @@ namespace REST
 		// starting mongoose
 		pData->ctx = mg_start(& TransportRESTCallback, pData, pData->options);
 		if (not pData->ctx)
-			return errStartFailed;
+			return Net::errStartFailed;
 
-		return errNone;
+		return Net::errNone;
 	}
 
 
@@ -88,7 +86,7 @@ namespace REST
 
 		pData->ctx = nullptr;
 		pData->thread = nullptr;
-		return errNone;
+		return Net::errNone;
 	}
 
 
@@ -186,7 +184,5 @@ namespace REST
 } // namespace REST
 } // namespace Transport
 } // namespace Messaging
-} // namespace Net
 } // namespace Yuni
-
 
