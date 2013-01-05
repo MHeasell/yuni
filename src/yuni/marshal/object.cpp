@@ -1,6 +1,7 @@
 
 #include "object.h"
 #include <cassert>
+#include "../core/string/escape.h"
 
 
 namespace Yuni
@@ -293,7 +294,9 @@ namespace Marshal
 		{
 			case Object::otString:
 				{
-					out << '"' << *value.string << '"';
+					out += '"';
+					AppendEscapedString(out, *value.string, '"');
+					out += '"';
 					return true;
 				}
 			case Object::otInteger:
@@ -355,7 +358,9 @@ namespace Marshal
 					if (PrettyT)
 						AppendIndentSpaces(out, depth);
 					InternalTable::const_iterator it = table.begin();
-					out << '"' << it->first << "\": ";
+					out += '"';
+					AppendEscapedString(out, it->first, '"');
+					out += "\": ";
 					{
 						const Object& child = it->second;
 						if ((uint) child.pType < (uint) Object::firstComplexDatatype)
@@ -383,7 +388,9 @@ namespace Marshal
 						else
 							out += ',';
 
-						out << '"' << it->first << "\": ";
+						out += '"';
+						AppendEscapedString(out, it->first, '"');
+						out += "\": ";
 						const Object& child = it->second;
 						if ((uint) child.pType < (uint) Object::firstComplexDatatype)
 						{
