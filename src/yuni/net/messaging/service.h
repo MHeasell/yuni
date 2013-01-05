@@ -95,7 +95,7 @@ namespace Messaging
 		{
 		public:
 			/*!
-			** \brief Add a new address where the server should listen for incoming connections
+			** \brief Add a new transport for a list of addresses and a specific port
 			**
 			** This action will be effective the next time the server starts
 			** \code
@@ -109,17 +109,24 @@ namespace Messaging
 			Error add(const AnyString& address, const Port& port, Transport::ITransport::Ptr transport);
 
 			/*!
+			** \brief Add a new transport for *:<port>
+			*/
+			Error add(const Port& port, Transport::ITransport::Ptr transport);
+
+			/*!
 			** \brief Clear all addresses where the server should listen for incoming connections
 			**
 			** This action will be effective the next time the server starts
 			*/
 			void clear();
 
+
 		private:
 			Service* pService;
 			friend class Service;
 		}
 		transports;
+
 
 		//! Events
 		class Events final : private NonCopyable<Events>
