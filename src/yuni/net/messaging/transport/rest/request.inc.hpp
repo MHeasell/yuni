@@ -334,9 +334,14 @@ namespace REST
 			// sending the response
 			if  (200 == context.httpStatus)
 			{
-				Clob& out  = context.buffer;
 				Clob& body = context.clob;
-				response.toJSON(body);
+				# ifndef NDEBUG
+				response.toJSON(body, true);
+				# else
+				response.toJSON(body, false); // reduce size output
+				# endif
+
+				Clob& out  = context.buffer;
 				out.clear();
 				out += "HTTP/1.1 200 OK\r\nCache: no-cache\r\nContent-Type: application/json\r\nContent-Length: ";
 				out += body.size();
@@ -372,6 +377,7 @@ namespace REST
 
 		return nullptr;
 	}
+
 
 
 

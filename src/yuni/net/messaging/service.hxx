@@ -9,6 +9,12 @@ namespace Net
 namespace Messaging
 {
 
+	inline Error Service::Transports::add(const Port& port, Transport::ITransport::Ptr transport)
+	{
+		return add("*", port, transport);
+	}
+
+
 
 
 } // namespace Messaging
