@@ -191,6 +191,10 @@ set(SRC_CORE_STRING
 		core/string/wstring.h
 		core/string/wstring.hxx
 
+		# misc
+		core/string/escape.h
+		core/string/escape.hxx
+
 		core/string.h
 )
 source_group(core\\string FILES ${SRC_CORE_STRING})
