@@ -9,7 +9,8 @@ namespace Messaging
 
 	inline Schema& Protocol::schema()
 	{
-		return pSchemas[(pTmp = "/")];
+		pTmp.clear();
+		return pSchemas[pTmp];
 	}
 
 
