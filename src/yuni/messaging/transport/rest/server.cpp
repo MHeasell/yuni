@@ -5,6 +5,7 @@
 #define _MSC_VER 0 // seems to be required with this version
 #include "../../../private/net/messaging/transport/rest/mongoose.h"
 #include "request.inc.hpp"
+#include "../../../io/filename-manipulation.h"
 
 
 namespace Yuni
@@ -110,6 +111,7 @@ namespace REST
 	{
 		DecisionTree* decisionTree = new DecisionTree();
 		String url;
+		String tmp;
 		String httpMethod;
 
 		// walking through all schemas
@@ -138,7 +140,8 @@ namespace REST
 					rqmd = rqmdGET;
 
 				// the full url
-				url.clear() << schemaName << method.name();
+				tmp.clear() << '/' << schemaName << '/' << method.name();
+				IO::Normalize(url, tmp);
 
 				// keeping the url somewhere
 				// IMPORTANT: read notes about how urls are stored
