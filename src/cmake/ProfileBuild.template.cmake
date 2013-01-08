@@ -1,6 +1,6 @@
 
 ###############################################################################
-# Profile 
+# Profile
 #  Everything related to this particular profile
 ###############################################################################
 
@@ -19,10 +19,10 @@ set(YUNI_PROFILE_NAME "Default")
 # YUNI_MACPORTS_PREFIX
 # Mac-specific: MacPorts path. When you specify "macports" in a package search,
 # this prefix is used.
-# 
+#
 # Default: Prefix of the first «port» program found in PATH.
 # Should be /opt/local in the most common case.
-# 
+#
 #set(YUNI_MACPORTS_PREFIX "/my/twisted/macports/prefix")
 set(YUNI_MACPORTS_PREFIX "/opt/local/")
 
@@ -37,7 +37,7 @@ set(YUNI_MACPORTS_PREFIX "/opt/local/")
 # Specifies the compilation profile. Accepted values are:
 # - debug: No optimization, debug info, very slow.
 # - release: O3 optimization level, no debug, production code.
-# 
+#
 # Default: debug
 #
 #set(YUNI_TARGET "debug")
@@ -46,9 +46,9 @@ set(YUNI_MACPORTS_PREFIX "/opt/local/")
 # MODULES
 # Specifies which Yuni components should be build.
 # Uncomment the following line to override the module list
-# Example : `ui,scripts,-net`
+# Example : `messaging,audio,-uuid`
 # Note : `cmake -DMODULES=help` to have a list of all available modules
-#set(MODULES "ui,scripts")
+#set(MODULES "messaging,audio")
 
 
 
@@ -69,6 +69,8 @@ set(YUNI_MACPORTS_PREFIX "/opt/local/")
 # software that already uses the package.
 #
 # Generic modes :
+#
+#    auto    : Automatically choose a mode depending on platform
 #
 #    disabled: Do as if the particular package could not be found.
 #              Implemented only for certain packages providing optional support.
@@ -97,13 +99,6 @@ set(YUNI_MACPORTS_PREFIX "/opt/local/")
 #
 ###############################################################################
 
-## Core
-
-# PThread [FIXME: NOT IMPLEMENTED]
-# Provides: Threads, locking, synchronisation
-# Modes: system
-# Required for Core module.
-#set(YUNI_DvP_PTHREAD_MODE     system)
 
 ## Audio
 
@@ -116,7 +111,7 @@ set(YUNI_MACPORTS_PREFIX "/opt/local/")
 # Provides: Audio abstraction layer.
 # Modes: system, devpack, custom
 # Required for Audio module.
-set(YUNI_DvP_OPENAL_MODE      system)
+set(YUNI_DvP_OPENAL_MODE      auto)
 
 
 ## Scripts
@@ -125,7 +120,7 @@ set(YUNI_DvP_OPENAL_MODE      system)
 # Provides: Lua scripting support
 # Modes: devpack, system, macports, custom
 # Optional.
-set(YUNI_DvP_LUA_MODE         system)
+set(YUNI_DvP_LUA_MODE         auto)
 
 
 
@@ -158,15 +153,15 @@ set(YUNI_DvP_LUA_MODE         system)
 #  no    : Completely disable it
 #  yes   : Try to use it anyways (it may not even compile, though)
 #
-set(YUNI_PROFILE_MMX       "auto")    # MMX
-set(YUNI_PROFILE_3DNOW     "auto")    # 3DNow!
-set(YUNI_PROFILE_SSE       "auto")    # SSE
-set(YUNI_PROFILE_SSE2      "auto")    # SSE2 (depends on SSE)
-set(YUNI_PROFILE_SSE3      "auto")    # SSE3 (depends on SSE2)
-set(YUNI_PROFILE_SSE4      "auto")    # SSE4 (depends on SSE3)
-set(YUNI_PROFILE_SSE4a     "auto")    # SSE4a (depends on SSE3)
-set(YUNI_PROFILE_SSE4_1    "auto")    # SSE 4.1 (depends on SSE3)
-set(YUNI_PROFILE_SSE4_2    "auto")    # SSE 4.2 (depends on SSE3)
+set(YUNI_PROFILE_MMX       auto)    # MMX
+set(YUNI_PROFILE_3DNOW     auto)    # 3DNow!
+set(YUNI_PROFILE_SSE       auto)    # SSE
+set(YUNI_PROFILE_SSE2      auto)    # SSE2 (depends on SSE)
+set(YUNI_PROFILE_SSE3      auto)    # SSE3 (depends on SSE2)
+set(YUNI_PROFILE_SSE4      auto)    # SSE4 (depends on SSE3)
+set(YUNI_PROFILE_SSE4a     auto)    # SSE4a (depends on SSE3)
+set(YUNI_PROFILE_SSE4_1    auto)    # SSE 4.1 (depends on SSE3)
+set(YUNI_PROFILE_SSE4_2    auto)    # SSE 4.2 (depends on SSE3)
 
 
 # yuni-config

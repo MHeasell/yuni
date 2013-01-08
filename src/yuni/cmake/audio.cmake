@@ -35,26 +35,28 @@ set(SRC_AUDIO
 
 include(CheckIncludeFile)
 
+
 #
 # OpenAL
 #
-
 # Select default OpenAL mode
-if(NOT YUNI_DvP_OPENAL_MODE)
+if(NOT "${YUNI_DvP_OPENAL_MODE}" OR YUNI_DvP_OPENAL_MODE STREQUAL "auto")
 	if(WIN32 OR WIN64)
-		set(YUNI_DvP_OPENAL_MODE devpack)
+		set(OPENAL_MODE devpack)
 	else()
-		set(YUNI_DvP_OPENAL_MODE system)
+		set(OPENAL_MODE system)
 	endif()
+else()
+	set(OPENAL_MODE "${YUNI_DvP_OPENAL_MODE}")
 endif()
 
 
-YMESSAGE("      -> OpenAL Libraries: ${YUNI_DvP_OPENAL_MODE}")
+YMESSAGE("      -> OpenAL Libraries: ${OPENAL_MODE}")
 
-if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/cmake/deps/openal-${YUNI_DvP_OPENAL_MODE}.cmake)
-	include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/deps/openal-${YUNI_DvP_OPENAL_MODE}.cmake)
+if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/cmake/deps/openal-${OPENAL_MODE}.cmake)
+	include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/deps/openal-${OPENAL_MODE}.cmake)
 else()
-	YFATAL("[!!] Invalid YUNI_DvP_OPENAL_MODE: ${YUNI_DvP_OPENAL_MODE}")
+	YFATAL("[!!] Invalid OPENAL_MODE: ${OPENAL_MODE}")
 endif()
 
 YMESSAGE("      -> OpenAL Libraries: ${OPENAL_INCLUDE_DIR}")
