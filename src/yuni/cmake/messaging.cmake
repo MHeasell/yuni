@@ -17,6 +17,7 @@ set(SRC_NET_MESSAGE
 	messaging/protocol.hxx
 	messaging/protocol.cpp
 	messaging/schema.h
+	messaging/schema.cpp
 	messaging/schema.hxx
 	messaging/message.h
 	messaging/threadcontext.h

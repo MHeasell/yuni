@@ -65,6 +65,13 @@ namespace API
 	}
 
 
+	inline Method::Parameter::Parameter() :
+		hasDefault(false)
+	{
+	}
+
+
+
 
 
 } // namespace API

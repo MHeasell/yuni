@@ -9,8 +9,23 @@ namespace Messaging
 
 	inline void Schema::shrinkMemory()
 	{
+		defaults.shrinkMemory();
 		methods.shrinkMemory();
 	}
+
+
+	inline void Schema::Defaults::shrinkMemory()
+	{
+		pTmp.clear();
+		pTmp.shrink();
+	}
+
+
+	inline const API::Method::Parameter::Hash& Schema::Defaults::params() const
+	{
+		return pParams;
+	}
+
 
 
 

@@ -25,6 +25,7 @@ namespace API
 		param.name = name;
 		param.brief = brief;
 		param.defvalue.clear();
+		param.hasDefault = false;
 		return *this;
 	}
 
@@ -35,6 +36,7 @@ namespace API
 		param.name = name;
 		param.brief = brief;
 		param.defvalue = defvalue;
+		param.hasDefault = true;
 		return *this;
 	}
 

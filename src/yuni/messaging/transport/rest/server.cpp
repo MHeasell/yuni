@@ -168,7 +168,18 @@ namespace REST
 					for (; pi != pend; ++pi)
 					{
 						const API::Method::Parameter& param = pi->second;
-						mhandler.parameters[param.name] = param.defvalue;
+						if (param.hasDefault)
+						{
+							mhandler.parameters[param.name] = param.defvalue;
+						}
+						else
+						{
+							API::Method::Parameter::Hash::const_iterator defit = schema.defaults.params().find(param.name);
+							if (defit != schema.defaults.params().end())
+								mhandler.parameters[param.name] = defit->second.defvalue;
+							else
+								mhandler.parameters[param.name].clear();
+						}
 					}
 				}
 				else
