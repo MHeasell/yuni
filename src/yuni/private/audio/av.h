@@ -9,6 +9,7 @@
 
 extern "C"
 {
+# include "libavutil/pixdesc.h"
 # include "libavcodec/avcodec.h"
 # include "libavformat/avformat.h"
 }
@@ -35,10 +36,10 @@ namespace Audio
 		static bool Init();
 
 		//! Open a file with ffmpeg and sets up the streams' information
-		static AudioFile* OpenFile(const AnyString& filename);
+		static File* OpenFile(const AnyString& filename);
 
 		//! Close an opened file and any of its streams
-		static void CloseFile(AudioFile*& file);
+		static void CloseFile(File*& file);
 
 		/*!
 		** \brief Retrieve a handle for the given audio stream number
@@ -46,15 +47,20 @@ namespace Audio
 		** The stream number will generally be 0, but some files can have
 		** multiple audio streams in one file.
 		*/
-		static AudioStream* GetAudioStream(AudioFile* file, int streamIndex);
+		static Stream* GetAudioStream(File* file, int streamIndex);
+
+		static Stream* GetVideoStream(File* file, int streamIndex);
 
 		/*!
 		** \brief Get information about the given audio stream
 		**
 		** Currently, ffmpeg always decodes audio (even 8-bit PCM) to 16-bit PCM
-		** \returns 0 on success
+		** \returns true on success, false on failure
 		*/
-		static int GetAudioInfo(AudioStream* stream, int& rate, int& channels, int& bits);
+		static bool GetAudioInfo(const Stream* stream, int& rate, int& channels, int& bits);
+
+		static float GetVideoFrameRate(const Stream* stream);
+		static bool GetVideoInfo(const Stream* stream, uint& width, uint& height, uint& bits);
 
 		/*!
 		** \brief Get the duration of an audio stream
@@ -62,7 +68,7 @@ namespace Audio
 		** \param stream Stream to get duration for
 		** \returns The duration of the stream, 0 if null
 		*/
-		static uint GetStreamDuration(const AudioStream* stream);
+		static uint GetStreamDuration(const Stream* stream);
 
 		/*!
 		** \brief Decode audio and write at most length bytes into the provided data buffer
@@ -70,7 +76,9 @@ namespace Audio
 		** Will only return less for end-of-stream or error conditions
 		** \returns The number of bytes written
 		*/
-		static size_t GetAudioData(AudioStream* stream, void* data, size_t length);
+		static size_t GetAudioData(Stream* stream, void* data, size_t length);
+
+		static bool GetNextVideoFrame(Stream* stream);
 
 	}; // class AV
 

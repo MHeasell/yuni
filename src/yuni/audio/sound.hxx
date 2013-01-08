@@ -8,7 +8,7 @@ namespace Audio
 {
 
 
-	inline Sound::Sound(Private::Audio::AudioStream* stream) :
+	inline Sound::Sound(Private::Audio::Stream* stream) :
 		pStream(stream), pBufferCount(0)
 	{
 	}

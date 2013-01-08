@@ -68,7 +68,7 @@ int main(int argc, char* argv[])
 
 		Yuni::SuspendMilliSeconds(1000);
 		// Get stream duration
-		unsigned int duration = audio.bank.duration(argv[i]);
+		uint duration = audio.bank.duration(argv[i]);
 		std::cout << "Sound duration: ";
 		writeTime(duration);
 		std::cout << std::endl;

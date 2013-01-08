@@ -11,34 +11,44 @@ namespace Audio
 {
 
 
-	struct AudioFile;
+	class File;
 
 
-	class AudioStream final
+	class Stream final
 	{
 	public:
-		AVCodecContext* CodecContext;
-		int StreamIdx;
+		AVCodecContext* codec;
+		int streamIdx;
 
-		uint Format;
-		uint64_t Size;
+		uint format;
+		uint64_t size;
 
-		char* Data;
-		size_t DataSize;
-		size_t DataSizeMax;
-		char* DecodedData;
-		size_t DecodedDataSize;
+		//! \name Temporary data for old version reading
+		//@{
+		char* data;
+		size_t dataSize;
+		size_t dataSizeMax;
+		//@}
 
-		AudioFile* parent;
-	};
+		//! \name Temporary data for new version reading
+		//@{
+		uint8* decodedData;
+		size_t decodedDataSize;
+		AVFrame* frame;
+		//@}
 
-	class AudioFile final
+		File* parent;
+
+	}; // class Stream
+
+
+	class File final
 	{
 	public:
-		AVFormatContext* formatContext;
-		std::vector<AudioStream*> streams;
-		size_t streamsSize;
-	};
+		AVFormatContext* format;
+		std::vector<Stream*> streams;
+
+	}; // class File
 
 
 

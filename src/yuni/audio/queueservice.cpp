@@ -108,12 +108,12 @@ namespace Audio
 		// std::cout << "Loading file \"" << filePath << "\"..." << std::endl;
 
 		// Try to open the file
-		Private::Audio::AudioFile* file = Private::Audio::AV::OpenFile(filePath);
+		Private::Audio::File* file = Private::Audio::AV::OpenFile(filePath);
 		if (!file)
 			return false;
 
 		// Try to get an audio stream from it
-		Private::Audio::AudioStream* stream = Private::Audio::AV::GetAudioStream(file, 0);
+		Private::Audio::Stream* stream = Private::Audio::AV::GetAudioStream(file, 0);
 		if (!stream)
 		{
 			Private::Audio::AV::CloseFile(file);
@@ -124,15 +124,15 @@ namespace Audio
 		int rate;
 		int channels;
 		int bits;
-		if (0 != Private::Audio::AV::GetAudioInfo(stream, rate, channels, bits))
+		if (!Private::Audio::AV::GetAudioInfo(stream, rate, channels, bits))
 		{
 			Private::Audio::AV::CloseFile(file);
 			return false;
 		}
 
 		// Check the format
-		stream->Format = Private::Audio::OpenAL::GetFormat(bits, channels);
-		if (0 == stream->Format)
+		stream->format = Private::Audio::OpenAL::GetFormat(bits, channels);
+		if (0 == stream->format)
 		{
 			Private::Audio::AV::CloseFile(file);
 			return false;
@@ -144,7 +144,7 @@ namespace Audio
 		{
 			ThreadingPolicy::MutexLocker locker(*this);
 			Sound::Ptr buffer = bank.get(filePath);
-			assert(NULL != buffer);
+			assert(nullptr != buffer);
 			buffer->stream(stream);
 		}
 
@@ -434,7 +434,7 @@ namespace Audio
 			return false;
 
 		// Create the buffer, store it in the map
-		pBuffers[filePath] = new Sound(NULL);
+		pBuffers[filePath] = new Sound(nullptr);
 
 		Yuni::Bind<bool()> callback;
 		callback.bind(pQueueService, &QueueService::loadSoundDispatched, filePath);

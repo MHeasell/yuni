@@ -10,12 +10,12 @@ namespace Audio
 
 	bool Sound::prepareDispatched(uint source)
 	{
-		if (!pStream || !pStream->Size)
+		if (!pStream || !pStream->size)
 			return false;
 
-		pBufferCount = (pStream->Size > (maxBufferCount - 1) * bufferSize)
+		pBufferCount = (pStream->size > (maxBufferCount - 1) * bufferSize)
 			? static_cast<uint>(maxBufferCount)
-			: (static_cast<uint>(pStream->Size) / bufferSize + 1);
+			: (static_cast<uint>(pStream->size) / bufferSize + 1);
 
 		if (!Private::Audio::OpenAL::CreateBuffers(pBufferCount, pIDs))
 			return false;
@@ -28,8 +28,8 @@ namespace Audio
 				return false;
 
 			// Buffer the data with OpenAL
-			if (!Private::Audio::OpenAL::SetBufferData(pIDs[i], pStream->Format, pData.data(),
-				count, pStream->CodecContext->sample_rate))
+			if (!Private::Audio::OpenAL::SetBufferData(pIDs[i], pStream->format, pData.data(),
+				count, pStream->codec->sample_rate))
 				return false;
 			// Queue the buffers onto the source
 			if (!Private::Audio::OpenAL::QueueBufferToSource(pIDs[i], source))
@@ -58,8 +58,8 @@ namespace Audio
 			return false;
 
 		// Buffer the data with OpenAL and queue the buffer onto the source
-		if (!Private::Audio::OpenAL::SetBufferData(buffer, pStream->Format, pData.data(), count,
-			pStream->CodecContext->sample_rate))
+		if (!Private::Audio::OpenAL::SetBufferData(buffer, pStream->format, pData.data(), count,
+			pStream->codec->sample_rate))
 			return false;
 
 		return Private::Audio::OpenAL::QueueBufferToSource(buffer, source);
