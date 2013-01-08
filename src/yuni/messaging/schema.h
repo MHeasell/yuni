@@ -3,6 +3,8 @@
 
 # include "../yuni.h"
 # include "../core/dictionary.h"
+# include "api/methods.h"
+# include "api/method.h"
 
 
 namespace Yuni
@@ -32,7 +34,29 @@ namespace Messaging
 		//! All methods
 		API::Methods methods;
 
-	}; // class Protocol
+		//! Default settings inherited by real method parameters
+		class Defaults final
+		{
+		public:
+			//! Add a default configuration for a single parameter
+			Defaults& param(const AnyString& name, const AnyString& brief);
+			//! Add a default condifuration for a single parameter, with a default value
+			Defaults& param(const AnyString& name, const AnyString& brief, const AnyString& defvalue);
+			//! Get all default configurations for parameters
+			const API::Method::Parameter::Hash& params() const;
+
+			//! Reduce the memory consumption as much as possible
+			void shrinkMemory();
+
+		private:
+			//! Parameters
+			API::Method::Parameter::Hash pParams;
+			//! Temporary string
+			String pTmp;
+		}
+		defaults;
+
+	}; // class Schema
 
 
 

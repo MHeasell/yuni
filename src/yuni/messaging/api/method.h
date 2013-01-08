@@ -43,12 +43,16 @@ namespace API
 		public:
 			typedef Dictionary<String,Parameter>::Hash  Hash;
 		public:
+			//! Default constructor
+			Parameter();
 			//! Name of the parameter
 			String name;
 			//! Brief
 			String brief;
 			//! Default value
 			String defvalue;
+			//! Flag to know if there a default value
+			bool hasDefault;
 		};
 
 	public:
