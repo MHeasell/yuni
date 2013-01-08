@@ -37,7 +37,7 @@ namespace Audio
 
 	public:
 		//! Constructor
-		Sound(Private::Audio::AudioStream* stream);
+		Sound(Private::Audio::Stream* stream);
 		~Sound();
 
 		bool prepareDispatched(uint source);
@@ -46,7 +46,7 @@ namespace Audio
 
 		bool updateDispatched(uint source);
 
-		void stream(Private::Audio::AudioStream* stream) { pStream = stream; }
+		void stream(Private::Audio::Stream* stream) { pStream = stream; }
 
 		bool valid() { return NULL != pStream; }
 
@@ -55,7 +55,7 @@ namespace Audio
 
 	private:
 		//! The audio stream contains the link to the file and the data
-		Private::Audio::AudioStream* pStream;
+		Private::Audio::Stream* pStream;
 
 		//! Actual number of buffers
 		uint pBufferCount;
