@@ -373,13 +373,19 @@ namespace Audio
 	}
 
 
-	uint AV::GetStreamDuration(const Stream* stream)
+	uint AV::GetDuration(const File* file)
+	{
+		if (!file)
+			return 0u;
+		assert(file->format);
+		return file->format->duration / AV_TIME_BASE;
+	}
+
+	uint AV::GetDuration(const Stream* stream)
 	{
 		if (!stream)
-			return 0;
-		assert(stream->parent);
-		assert(stream->parent->format);
-		return stream->parent->format->duration / AV_TIME_BASE;
+			return 0u;
+		return GetDuration(stream->parent);
 	}
 
 
@@ -516,6 +522,7 @@ namespace Audio
 		}
 		return false;
 	}
+
 
 // 	bool AV::GetNextVideoFrame(Stream* stream)
 // 	{

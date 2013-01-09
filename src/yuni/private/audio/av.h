@@ -63,12 +63,19 @@ namespace Audio
 		static bool GetVideoInfo(const Stream* stream, uint& width, uint& height, uint& bits);
 
 		/*!
-		** \brief Get the duration of an audio stream
+		** \brief Get the duration of a media file
+		**
+		** \param file File to get duration for
+		** \returns The duration of the file in seconds, 0 if null
+		*/
+		static uint GetDuration(const File* file);
+		/*!
+		** \brief Get the duration of a media stream
 		**
 		** \param stream Stream to get duration for
-		** \returns The duration of the stream, 0 if null
+		** \returns The duration of the stream in seconds, 0 if null
 		*/
-		static uint GetStreamDuration(const Stream* stream);
+		static uint GetDuration(const Stream* stream);
 
 		/*!
 		** \brief Decode audio and write at most length bytes into the provided data buffer
