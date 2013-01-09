@@ -145,6 +145,9 @@ namespace Messaging
 			//! Enable / disable the task manager (valid for the next start / reload)
 			void enabled(bool on);
 
+			HeavyTasks& operator += (Job::IJob* job);
+			HeavyTasks& operator += (Job::IJob::Ptr& job);
+
 		public:
 			//! Queue service for heavy tasks
 			Job::QueueService<> queue;

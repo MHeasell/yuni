@@ -25,6 +25,20 @@ namespace Messaging
 	}
 
 
+	inline Service::HeavyTasks& Service::HeavyTasks::operator += (Job::IJob* job)
+	{
+		queue += job;
+		return *this;
+	}
+
+
+	inline Service::HeavyTasks& Service::HeavyTasks::operator += (Job::IJob::Ptr& job)
+	{
+		queue += job;
+		return *this;
+	}
+
+
 
 
 
