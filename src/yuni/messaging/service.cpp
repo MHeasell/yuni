@@ -288,6 +288,19 @@ namespace Messaging
 	}
 
 
+	void Service::gracefulStop()
+	{
+		ThreadingPolicy::MutexLocker locker(*this);
+
+		// checking if the service is still alive
+		if (pState == stStarting or pState == stRunning)
+		{
+			if (pData != NULL and !(!pData->workers))
+				pData->workers->gracefulStop();
+		}
+	}
+
+
 	bool Service::running() const
 	{
 		ThreadingPolicy::MutexLocker locker(*this);

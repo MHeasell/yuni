@@ -68,6 +68,11 @@ namespace Messaging
 		*/
 		Net::Error stop();
 
+		/*!
+		** \brief Stop the service gracefully (as soon as possible)
+		*/
+		void gracefulStop();
+
 		//! Get if the queueservice is running (state running / starting)
 		bool running() const;
 		//@}
