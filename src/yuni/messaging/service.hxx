@@ -13,6 +13,19 @@ namespace Messaging
 	}
 
 
+	inline bool Service::HeavyTasks::enabled() const
+	{
+		return pEnabled;
+	}
+
+
+	inline void Service::HeavyTasks::enabled(bool on)
+	{
+		pEnabled = (on ? 1 : 0);
+	}
+
+
+
 
 
 } // namespace Messaging

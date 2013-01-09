@@ -31,6 +31,7 @@ namespace Messaging
 
 
 
+
 } // namespace Messaging
 } // namespace Private
 } // namespace Yuni
@@ -57,6 +58,7 @@ namespace Messaging
 		pData(nullptr)
 	{
 		transports.pService = this;
+		heavyTasks.pService = this;
 	}
 
 
@@ -84,12 +86,11 @@ namespace Messaging
 			return Net::errInvalidHostAddress;
 
 		Net::HostAddressPort addrport;
-		addrport.address   = address;
-		addrport.port      = port;
-		transport->address = address;
-		transport->port    = port;
-
-
+		addrport.address    = address;
+		addrport.port       = port;
+		transport->address  = address;
+		transport->port     = port;
+		transport->pService = pService;
 
 		// Adding the new address
 		{
@@ -160,6 +161,8 @@ namespace Messaging
 			if (!(!pData->protocol))
 				pData->protocol->shrinkMemory();
 
+			// start the task manager before any worker / transport
+			reloadTaskQueue();
 			// destroy the old instance if not already done
 			pData->workers = nullptr;
 			// recreate our workers
@@ -277,6 +280,11 @@ namespace Messaging
 				workers->stop();
 				workers = nullptr; // should be destroyed here
 			}
+
+			// waiting for heavy tasks, after all workers have stopped
+			heavyTasks.queue.wait();
+			heavyTasks.queue.stop();
+
 			// Great ! The server is working !
 			events.stopped();
 			return Net::errNone;
@@ -298,6 +306,23 @@ namespace Messaging
 			if (pData != NULL and !(!pData->workers))
 				pData->workers->gracefulStop();
 		}
+	}
+
+
+	void Service::reloadTaskQueue()
+	{
+		heavyTasks.queue.stop();
+		if (heavyTasks.enabled())
+			heavyTasks.queue.start();
+	}
+
+
+	Net::Error Service::reload()
+	{
+		ThreadingPolicy::MutexLocker locker(*this);
+		if (pState == stStarting or pState == stRunning)
+			reloadTaskQueue();
+		return Net::errNone;
 	}
 
 
@@ -337,6 +362,7 @@ namespace Messaging
 		// of inside a worker of one of the transports
 		pData->protocol = newproto;
 	}
+
 
 
 

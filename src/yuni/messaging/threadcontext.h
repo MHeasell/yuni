@@ -3,6 +3,7 @@
 
 # include "../yuni.h"
 # include "../core/smartptr.h"
+# include "fwd.h"
 
 
 namespace Yuni
@@ -25,8 +26,10 @@ namespace Messaging
 	public:
 		/*!
 		** \brief Default constructor
+		**
+		** \param service Reference to the original service instance
 		*/
-		Context();
+		Context(Service& service);
 
 		//! Clear all internal variables
 		void clear();
@@ -66,6 +69,8 @@ namespace Messaging
 		// However, it can be safely used by the method invoked
 		Clob buffer;
 
+		//! Service
+		Service& service;
 
 	private:
 		template<uint MaxSize, class StringT> void AutoShrink(StringT& variable);

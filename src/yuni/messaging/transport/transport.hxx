@@ -12,7 +12,8 @@ namespace Transport
 
 	inline ITransport::ITransport(Mode m) :
 		mode(m),
-		pAttachedThread(NULL)
+		pAttachedThread(nullptr),
+		pService(nullptr)
 	{
 		// do nothing
 	}
