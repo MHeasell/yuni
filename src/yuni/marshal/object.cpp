@@ -219,9 +219,9 @@ namespace Marshal
 		switch (pType)
 		{
 			case otArray:
-				return pValue.array->size();
+				return (uint )pValue.array->size();
 			case otDictionary:
-				return pValue.dictionary->size();
+				return (uint) pValue.dictionary->size();
 			case otNil:
 				return 0;
 			default:
