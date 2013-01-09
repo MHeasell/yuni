@@ -1,5 +1,7 @@
 
 # include "highestpriorityfirst.h"
+#include "../../core/system/cpu.h"
+
 
 namespace Yuni
 {
@@ -64,11 +66,22 @@ namespace Scheduler
 	}
 
 
-	bool HighestPriorityFirst::maximumThreadCount(uint n)
+	bool HighestPriorityFirst::maximumThreadCount(uint count)
 	{
-		if (n < 1 || n > 512)
+		if (count > 512)
 			return false;
-		pMaximumThreadCount = n;
+
+		if (count == 0)
+		{
+			// automatic discovery
+			count = System::CPU::Count();
+			if (count < 1)
+				count = 1;
+			else if (count > 2)
+				--count; // keep one core for other tasks
+		}
+
+		pMaximumThreadCount = count;
 		return true;
 	}
 

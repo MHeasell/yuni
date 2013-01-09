@@ -21,7 +21,7 @@ namespace REST
 	Server::Server() :
 		ITransport(tmServer)
 	{
-		pData = new ServerData();
+		pData = new ServerData(*pService);
 	}
 
 

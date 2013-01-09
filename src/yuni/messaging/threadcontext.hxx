@@ -7,8 +7,9 @@ namespace Yuni
 namespace Messaging
 {
 
-	inline Context::Context() :
-		userdata(NULL)
+	inline Context::Context(Service& service) :
+		userdata(NULL),
+		service(service)
 	{
 	}
 

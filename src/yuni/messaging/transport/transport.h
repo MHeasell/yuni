@@ -96,6 +96,10 @@ namespace Transport
 	protected:
 		//! The attached thread, if any
 		Thread::IThread* pAttachedThread;
+		//! Service (initialized by the service owner)
+		Yuni::Messaging::Service* pService;
+		// Our friends
+		friend class Yuni::Messaging::Service;
 
 	}; // class Transport
 

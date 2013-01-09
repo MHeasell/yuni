@@ -71,7 +71,7 @@ namespace REST
 		/*!
 		** \brief Default constructor
 		*/
-		ServerData();
+		ServerData(Yuni::Messaging::Service& service);
 		//! Destructor
 		~ServerData();
 
@@ -101,6 +101,9 @@ namespace REST
 		//! Options for mongoose
 		String::Vector optionsString;
 
+		//! Service
+		Yuni::Messaging::Service& service;
+
 	}; // class ServerData
 
 
@@ -108,11 +111,12 @@ namespace REST
 
 
 
-	inline Server::ServerData::ServerData() :
+	inline Server::ServerData::ServerData(Yuni::Messaging::Service& service) :
 		thread(nullptr),
 		options(nullptr),
 		optionCount(),
-		ctx(nullptr)
+		ctx(nullptr),
+		service(service)
 	{
 	}
 
@@ -299,8 +303,10 @@ namespace REST
 			const DecisionTree::MethodHandler& mhandler = mi->second;
 
 
+			// Original service instance
+			Service& service = serverdata->service;
 			// Message context
-			Messaging::Context context;
+			Messaging::Context context(service);
 
 			// reading / checking for parameters
 			if (not mhandler.parameters.empty())

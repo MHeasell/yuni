@@ -9,6 +9,8 @@
 # include "transport.h"
 # include "../core/noncopyable.h"
 # include "protocol.h"
+# include "../job/queue.h"
+# include "../core/atomic/bool.h"
 
 
 namespace Yuni
@@ -67,6 +69,9 @@ namespace Messaging
 		** \brief Stop the server
 		*/
 		Net::Error stop();
+
+		//! Reload internal settings
+		Net::Error reload();
 
 		/*!
 		** \brief Stop the service gracefully (as soon as possible)
@@ -131,6 +136,27 @@ namespace Messaging
 		transports;
 
 
+		//! Heavy task manager (disabled by default)
+		class HeavyTasks final
+		{
+		public:
+			//! Get if the task manager is enabled
+			bool enabled() const;
+			//! Enable / disable the task manager (valid for the next start / reload)
+			void enabled(bool on);
+
+		public:
+			//! Queue service for heavy tasks
+			Job::QueueService<> queue;
+
+		private:
+			Atomic::Bool pEnabled; // 0 default
+			Service* pService;
+			friend class Service;
+		}
+		heavyTasks;
+
+
 		//! Events
 		class Events final : private NonCopyable<Events>
 		{
@@ -165,6 +191,9 @@ namespace Messaging
 		}
 		events;
 
+
+	protected:
+		void reloadTaskQueue();
 
 	protected:
 		//! Flag to know the state of the server
