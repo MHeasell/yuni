@@ -7,13 +7,6 @@ namespace Yuni
 namespace Messaging
 {
 
-	inline Context::Context(Service& service) :
-		userdata(NULL),
-		service(service)
-	{
-	}
-
-
 	inline void Context::clear()
 	{
 		text.clear();

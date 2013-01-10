@@ -2,8 +2,8 @@
 # define __YUNI_MESSAGING_THREAD_CONTEXT_H__
 
 # include "../yuni.h"
-# include "../core/smartptr.h"
 # include "fwd.h"
+# include "../core/dictionary.h"
 
 
 namespace Yuni
@@ -19,9 +19,21 @@ namespace Messaging
 	class YUNI_DECL Context final
 	{
 	public:
-		//! The most suitable smart pointer
-		typedef SmartPtr<Protocol> Ptr;
-
+		class HttpStatusCode final
+		{
+		public:
+			enum
+			{
+				max2xx = 204,
+				max4xx = 404,
+				max5xx = 500,
+			};
+			CString<32,false> header2xx[5];
+			CString<32,false> header4xx[5];
+			CString<32,false> header5xx[1];
+			CString<64,false> response4xx[5];
+			CString<64,false> response5xx[1];
+		};
 
 	public:
 		/*!
@@ -71,6 +83,9 @@ namespace Messaging
 
 		//! Service
 		Service& service;
+
+		//! Pre-prepared header responses
+		const HttpStatusCode httpStatusCode;
 
 	private:
 		template<uint MaxSize, class StringT> void AutoShrink(StringT& variable);

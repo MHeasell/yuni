@@ -14,6 +14,8 @@ set(SRC_NET_COMMON
 	net/hostaddressport.hxx
 	net/protocol.h
 	net/protocol.cpp
+	net/http-status-code.cpp
+	net/http-status-code.h
 )
 source_group("Net" FILES ${SRC_NET_COMMON})
 
