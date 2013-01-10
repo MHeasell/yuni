@@ -29,9 +29,6 @@ namespace Audio
 
 			// Allocate a new stream object and fill in its info
 			typename MyStream::Ptr stream = new MyStream(this, pFormat, pFormat->streams[i]->codec, i);
-			if (!stream)
-				// The new stream is destroyed here by the SmartPtr
-				return nullptr;
 
 			// Check that the codec was properly loaded
 			if (!stream->valid())
@@ -85,8 +82,7 @@ namespace Audio
 				// buffer
 				if (idx + packet.size > crtStream->pDataSizeMax)
 				{
-					char* temp = (char*)realloc(crtStream->pData, idx + packet.size +
-												FF_INPUT_BUFFER_PADDING_SIZE);
+					char* temp = (char*)realloc(crtStream->pData, idx + packet.size + FF_INPUT_BUFFER_PADDING_SIZE);
 					if (!temp)
 						break;
 					crtStream->pData = temp;
@@ -157,6 +153,7 @@ namespace Audio
 		YUNI_STATIC_ASSERT(false, InvalidStreamType);
 		return pVStreams;
 	}
+
 
 
 
