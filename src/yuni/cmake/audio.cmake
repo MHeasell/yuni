@@ -26,7 +26,6 @@ set(SRC_AUDIO
 		audio/sound.h
 		audio/sound.hxx
 		audio/sound.cpp
-		private/audio/types.h
 		private/audio/file.cpp
 		private/audio/file.h
 		private/audio/file.hxx
