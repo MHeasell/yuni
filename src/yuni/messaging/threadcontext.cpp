@@ -10,7 +10,8 @@ namespace Messaging
 
 	Context::Context(Service& service) :
 		userdata(NULL),
-		service(service)
+		service(service),
+		httpStatusCode() // gcc 4.5 - error uninitialized with const
 	{
 		HttpStatusCode& codes = const_cast<HttpStatusCode&>(httpStatusCode);
 
