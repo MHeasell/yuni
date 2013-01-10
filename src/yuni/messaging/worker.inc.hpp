@@ -23,7 +23,7 @@ namespace Messaging
 	{
 	public:
 		//! The most suitable smart pointer
-		typedef Yuni::Thread::IThread::Ptr  Ptr;
+		typedef Yuni::SmartPtr<Worker>  Ptr;
 		//! Alias to the queue service
 		typedef Yuni::Messaging::Service Service;
 		//! Transport layer (abstract)
@@ -39,6 +39,10 @@ namespace Messaging
 		//! Destructor
 		virtual ~Worker();
 		//@}
+
+		//! Tell to the transport to stop as soon as possible
+		void stopAsSoonAsPossible();
+
 
 	protected:
 		//! Thread execution
@@ -94,6 +98,15 @@ namespace Messaging
 				pService.events.error(Service::stRunning, error);
 		}
 		return false;
+	}
+
+
+	void Worker::stopAsSoonAsPossible()
+	{
+		// getting apointer to the transport
+		ITransport::Ptr transport = pTransport;
+		if (!(!transport))
+			transport->stop();
 	}
 
 
