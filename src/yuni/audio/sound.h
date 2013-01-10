@@ -7,7 +7,7 @@
 # include "../core/smartptr.h"
 # include "../core/string.h"
 # include "../thread/signal.h"
-# include "../private/audio/av.h"
+# include "../private/audio/file.h"
 
 namespace Yuni
 {
@@ -27,6 +27,8 @@ namespace Audio
 		typedef std::map<String, Ptr> Map;
 		//! Threading Policy
 		typedef Policy::ObjectLevelLockable<Sound>  ThreadingPolicy;
+		//! Stream pointer type
+		typedef typename Private::Audio::Stream<Private::Audio::stAudio>::Ptr  StreamPtr;
 
 	public:
 		enum // anonymous
@@ -37,7 +39,7 @@ namespace Audio
 
 	public:
 		//! Constructor
-		Sound(Private::Audio::Stream* stream);
+		Sound();
 		~Sound();
 
 		bool prepareDispatched(uint source);
@@ -46,7 +48,7 @@ namespace Audio
 
 		bool updateDispatched(uint source);
 
-		void stream(Private::Audio::Stream* stream) { pStream = stream; }
+		void stream(const StreamPtr& stream) { pStream = stream; }
 
 		bool valid() { return NULL != pStream; }
 
@@ -55,7 +57,7 @@ namespace Audio
 
 	private:
 		//! The audio stream contains the link to the file and the data
-		Private::Audio::Stream* pStream;
+		StreamPtr pStream;
 
 		//! Actual number of buffers
 		uint pBufferCount;

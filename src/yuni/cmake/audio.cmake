@@ -27,6 +27,11 @@ set(SRC_AUDIO
 		audio/sound.hxx
 		audio/sound.cpp
 		private/audio/types.h
+		private/audio/file.cpp
+		private/audio/file.h
+		private/audio/file.hxx
+		private/audio/stream.h
+		private/audio/stream.hxx
 		private/audio/openal.h
 		private/audio/openal.cpp
 		private/audio/av.h
@@ -129,5 +134,6 @@ install(
 )
 
 target_link_libraries(yuni-static-audio-core ${OPENAL_LIBRARY})
+LIBYUNI_CONFIG_INCLUDE_PATH("both" "audio" "${OPENAL_INCLUDE_DIR}")
 LIBYUNI_CONFIG_LIB_RAW_COMMAND("both" "audio" "${OPENAL_LIBRARY}")
 
