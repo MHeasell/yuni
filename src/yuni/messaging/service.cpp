@@ -296,6 +296,21 @@ namespace Messaging
 	}
 
 
+	namespace // anonymous
+	{
+
+		class WorkerStopper
+		{
+		public:
+			bool operator () (Yuni::Private::Messaging::Worker::Ptr& worker) const
+			{
+				worker->stopAsSoonAsPossible();
+				return true;
+			}
+		};
+
+	} // anonymous
+
 	void Service::gracefulStop()
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
@@ -304,7 +319,13 @@ namespace Messaging
 		if (pState == stStarting or pState == stRunning)
 		{
 			if (pData != NULL and !(!pData->workers))
+			{
+				// stop all transports
+				WorkerStopper workerStopper;
+				pData->workers->foreachThread(workerStopper);
+				// tell to the thread to stop as well
 				pData->workers->gracefulStop();
+			}
 		}
 	}
 
