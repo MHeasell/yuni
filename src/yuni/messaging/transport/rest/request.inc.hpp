@@ -76,7 +76,7 @@ namespace REST
 		/*!
 		** \brief Default constructor
 		*/
-		ServerData(Yuni::Messaging::Service& service);
+		ServerData();
 		//! Destructor
 		~ServerData();
 
@@ -107,7 +107,7 @@ namespace REST
 		String::Vector optionsString;
 
 		//! Service
-		Yuni::Messaging::Service& service;
+		Yuni::Messaging::Service* service;
 
 	}; // class ServerData
 
@@ -116,12 +116,12 @@ namespace REST
 
 
 
-	inline Server::ServerData::ServerData(Yuni::Messaging::Service& service) :
+	inline Server::ServerData::ServerData() :
 		thread(nullptr),
 		options(nullptr),
 		optionCount(),
 		ctx(nullptr),
-		service(service)
+		service(nullptr)
 	{
 	}
 
@@ -336,7 +336,8 @@ namespace REST
 
 
 			// Original service instance
-			Service& service = serverdata->service;
+			Service& service = *(serverdata->service);
+			assert(serverdata->service != NULL and "invalid reference to Messaging::Service");
 			// Message context
 			Messaging::Context context(service);
 

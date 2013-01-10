@@ -21,7 +21,7 @@ namespace REST
 	Server::Server() :
 		ITransport(tmServer)
 	{
-		pData = new ServerData(*pService);
+		pData = new ServerData();
 	}
 
 
@@ -33,6 +33,9 @@ namespace REST
 
 	Net::Error  Server::start()
 	{
+		pData->service = pService;
+		assert(pService != NULL and "invalid reference to Messaging::Service");
+
 		// stopping mongoose if not alreayd done
 		if (pData->ctx)
 			mg_stop(pData->ctx);
