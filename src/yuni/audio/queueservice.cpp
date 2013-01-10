@@ -5,6 +5,7 @@
 #include "../core/vector3D.h"
 #include "../thread/signal.h"
 #include "../private/audio/av.h"
+#include "../private/audio/file.h"
 #include "../private/audio/openal.h"
 
 namespace Yuni
@@ -105,36 +106,27 @@ namespace Audio
 
 	bool QueueService::loadSoundDispatched(const String& filePath)
 	{
-		// std::cout << "Loading file \"" << filePath << "\"..." << std::endl;
-
 		// Try to open the file
-		Private::Audio::File* file = Private::Audio::AV::OpenFile(filePath);
-		if (!file)
-			return false;
-
-		// Try to get an audio stream from it
-		Private::Audio::Stream* stream = Private::Audio::AV::GetAudioStream(file, 0);
-		if (!stream)
+		Private::Audio::File* file = new Private::Audio::File(filePath);
+		if (!file->valid())
 		{
-			Private::Audio::AV::CloseFile(file);
+			delete file;
 			return false;
 		}
 
-		// Get info on the audio stream
-		int rate;
-		int channels;
-		int bits;
-		if (!Private::Audio::AV::GetAudioInfo(stream, rate, channels, bits))
+		// Try to get an audio stream from it
+		Private::Audio::Stream<Private::Audio::stAudio>::Ptr stream =
+			file->getStream<Private::Audio::stAudio>();
+		if (!stream)
 		{
-			Private::Audio::AV::CloseFile(file);
+			delete file;
 			return false;
 		}
 
 		// Check the format
-		stream->format = Private::Audio::OpenAL::GetFormat(bits, channels);
-		if (0 == stream->format)
+		if (!stream->valid())
 		{
-			Private::Audio::AV::CloseFile(file);
+			delete file;
 			return false;
 		}
 		//std::cout << "Sound is " << bits << " bits " << (channels > 1 ? "stereo " : "mono ")
@@ -434,7 +426,7 @@ namespace Audio
 			return false;
 
 		// Create the buffer, store it in the map
-		pBuffers[filePath] = new Sound(nullptr);
+		pBuffers[filePath] = new Sound();
 
 		Yuni::Bind<bool()> callback;
 		callback.bind(pQueueService, &QueueService::loadSoundDispatched, filePath);

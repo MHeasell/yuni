@@ -10,12 +10,12 @@ namespace Audio
 
 	bool Sound::prepareDispatched(uint source)
 	{
-		if (!pStream || !pStream->size)
+		if (!pStream || !pStream->size())
 			return false;
 
-		pBufferCount = (pStream->size > (maxBufferCount - 1) * bufferSize)
+		pBufferCount = (pStream->size() > (maxBufferCount - 1) * bufferSize)
 			? static_cast<uint>(maxBufferCount)
-			: (static_cast<uint>(pStream->size) / bufferSize + 1);
+			: (static_cast<uint>(pStream->size()) / bufferSize + 1);
 
 		if (!Private::Audio::OpenAL::CreateBuffers(pBufferCount, pIDs))
 			return false;
@@ -23,13 +23,13 @@ namespace Audio
 		for (uint i = 0; i < pBufferCount; ++i)
 		{
 			// Make sure we get some data to give to the buffer
-			const size_t count = Private::Audio::AV::GetAudioData(pStream, pData.data(), bufferSize);
+			const uint count = pStream->nextBuffer(pData);
 			if (!count)
 				return false;
 
 			// Buffer the data with OpenAL
-			if (!Private::Audio::OpenAL::SetBufferData(pIDs[i], pStream->format, pData.data(),
-				count, pStream->codec->sample_rate))
+			if (!Private::Audio::OpenAL::SetBufferData(pIDs[i], pStream->alFormat(), pData.data(),
+				count, pStream->rate()))
 				return false;
 			// Queue the buffers onto the source
 			if (!Private::Audio::OpenAL::QueueBufferToSource(pIDs[i], source))
@@ -53,13 +53,13 @@ namespace Audio
 		// A buffer has finished playing, unqueue it
 		ALuint buffer = Private::Audio::OpenAL::UnqueueBufferFromSource(source);
 		// Get the next data to feed the buffer
-		size_t count = Private::Audio::AV::GetAudioData(pStream, pData.data(), bufferSize);
+		uint count = pStream->nextBuffer(pData);
 		if (!count)
 			return false;
 
 		// Buffer the data with OpenAL and queue the buffer onto the source
-		if (!Private::Audio::OpenAL::SetBufferData(buffer, pStream->format, pData.data(), count,
-			pStream->codec->sample_rate))
+		if (!Private::Audio::OpenAL::SetBufferData(buffer, pStream->alFormat(), pData.data(), count,
+			pStream->rate()))
 			return false;
 
 		return Private::Audio::OpenAL::QueueBufferToSource(buffer, source);
@@ -71,7 +71,7 @@ namespace Audio
 		if (!pStream)
 			return false;
 
-		Private::Audio::AV::CloseFile(pStream->parent);
+		delete pStream->parent();
 		pStream = nullptr;
 		Private::Audio::OpenAL::DestroyBuffers(pBufferCount, pIDs);
 		pBufferCount = 0;
