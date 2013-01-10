@@ -1,5 +1,4 @@
 
-#include "return-status-code.inc.hpp"
 #include "../../../core/system/cpu.h"
 #include "../../../thread/id.h"
 
@@ -26,6 +25,12 @@ namespace REST
 	template<class StringT>
 	static RequestMethod StringToRequestMethod(const StringT& text);
 
+
+	template<class StringT>
+	static int inline mg_write(struct mg_connection* conn, const StringT& string)
+	{
+		return mg_write(conn, string.c_str(), string.size());
+	}
 
 
 
@@ -197,6 +202,33 @@ namespace REST
 
 
 
+	static inline void* ReturnSimpleHTTPCode404(struct mg_connection* conn)
+	{
+		static const AnyString msg("HTTP/1.1 404 Not found\r\n\r\nNot found");
+		mg_write(conn, msg);
+		return (void*)"ok"; // the request has been managed
+	}
+
+
+	template<uint ErrorIndex>
+	static inline void* ReturnSimpleHTTPCode(struct mg_connection* conn, const Messaging::Context& context)
+	{
+		if (ErrorIndex >= 400 and ErrorIndex <= context.httpStatusCode.max4xx)
+		{
+			mg_write(conn, context.httpStatusCode.response4xx[ErrorIndex - 400]);
+		}
+		else if (ErrorIndex >= 500 and ErrorIndex <= context.httpStatusCode.max5xx)
+		{
+			mg_write(conn, context.httpStatusCode.response5xx[ErrorIndex - 500]);
+		}
+		else
+		{
+			assert(false and "unhandled http status code");
+		}
+		return (void*)"ok"; // the request has been managed
+	}
+
+
 
 
 	static bool DecodeURLQuery(KeyValueStore& params, const AnyString& query)
@@ -280,7 +312,7 @@ namespace REST
 			// and directly aborting if invalid
 			RequestMethod rqmd = StringToRequestMethod(reqinfo.request_method);
 			if (rqmd == rqmdInvalid)
-				return HTTPErrorCode<404>(conn);
+				return ReturnSimpleHTTPCode404(conn);
 
 			// server data
 			Server::ServerData* serverdata = (Server::ServerData*) reqinfo.user_data;
@@ -297,7 +329,7 @@ namespace REST
 			if (mi == urls.end())
 			{
 				// the url has not been found
-				return HTTPErrorCode<404>(conn);
+				return ReturnSimpleHTTPCode404(conn);
 			}
 			// alias to the method handler
 			const DecisionTree::MethodHandler& mhandler = mi->second;
@@ -319,7 +351,7 @@ namespace REST
 				if (reqinfo.query_string and reqinfo.query_string[0] != '\0')
 				{
 					if (not DecodeURLQuery(context.params, reqinfo.query_string))
-						return HTTPErrorCode<400>(conn);
+						return ReturnSimpleHTTPCode<400>(conn, context);
 				}
 			}
 
@@ -336,7 +368,8 @@ namespace REST
 
 
 			// sending the response
-			if  (200 == context.httpStatus)
+			uint statusCode = context.httpStatus;
+			if  (statusCode >= 200 and statusCode <= context.httpStatusCode.max2xx)
 			{
 				Clob& body = context.clob;
 				# ifndef NDEBUG
@@ -346,8 +379,8 @@ namespace REST
 				# endif
 
 				Clob& out  = context.buffer;
-				out.clear();
-				out += "HTTP/1.1 200 OK\r\nCache: no-cache\r\nContent-Type: application/json\r\nContent-Length: ";
+				out = context.httpStatusCode.header2xx[statusCode - 200];
+				out += "Content-Type: application/json\r\nContent-Length: ";
 				out += body.size();
 				out += "\r\n\r\n";
 				out += body;
@@ -355,28 +388,21 @@ namespace REST
 
 				// reducing memory usage for some Memory-hungry apps
 				context.autoshrink();
-				return (void*)"ok"; // the request has been handled
 			}
-			else
+			else if (statusCode >= 400 and statusCode <= context.httpStatusCode.max4xx)
 			{
 				// reducing memory usage for some Memory-hungry apps
 				context.autoshrink();
-
-				switch (context.httpStatus)
-				{
-					case 404: // not found
-						return HTTPErrorCode<404>(conn);
-					case 400: // Bad request
-						return HTTPErrorCode<400>(conn);
-					case 403: // Forbidden
-						return HTTPErrorCode<403>(conn);
-					case 401: // Unauthorized
-						return HTTPErrorCode<401>(conn);
-				}
+				// response
+				mg_write(conn, context.httpStatusCode.response4xx[statusCode - 400]);
+			}
+			else
+			{
+				// not handled by default
+				mg_write(conn, context.httpStatusCode.response5xx[500 - 500]);
 			}
 
-			// not handled by default
-			return HTTPErrorCode<500>(conn);
+			return (void*)"ok";
 		}
 
 		return nullptr;

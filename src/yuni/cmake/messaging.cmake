@@ -21,6 +21,7 @@ set(SRC_NET_MESSAGE
 	messaging/schema.hxx
 	messaging/message.h
 	messaging/threadcontext.h
+	messaging/threadcontext.cpp
 	messaging/threadcontext.hxx
 )
 source_group("Messaging" FILES ${SRC_NET_MESSAGE})
@@ -36,7 +37,6 @@ set(SRC_NET_MESSAGE_TRANSPORT_REST
 	messaging/transport/rest/server.h
 	messaging/transport/rest/server.cpp
 	messaging/transport/rest/request.inc.hpp
-	messaging/transport/rest/return-status-code.inc.hpp
 )
 source_group("Messaging\\Transport\\REST" FILES ${SRC_NET_MESSAGE_TRANSPORT_REST})
 if (YUNI_HAS_STDINT_H)
