@@ -376,10 +376,14 @@ namespace Thread
 	Error IThread::wait()
 	{
 		# ifndef YUNI_NO_THREAD_SAFE
-		while (errTimeout == wait(604800000u))
 		{
-			// infinite wait
+			ThreadingPolicy::MutexLocker locker(*this);
+			Yuni::MutexLocker flagLocker(pInnerFlagMutex);
+			if (not pStarted) // already stopped, nothing to do.
+				return errNone;
 		}
+
+		pSignalHaveStopped.wait();
 		# endif
 		return errNone;
 	}
@@ -391,8 +395,8 @@ namespace Thread
 		assert(milliseconds < INVALID_TIMEOUT && "Invalid range for timeout, IThread::wait");
 
 		# ifndef YUNI_NO_THREAD_SAFE
-		ThreadingPolicy::MutexLocker locker(*this);
 		{
+			ThreadingPolicy::MutexLocker locker(*this);
 			Yuni::MutexLocker flagLocker(pInnerFlagMutex);
 			if (not pStarted) // already stopped, nothing to do.
 				return errNone;
@@ -451,16 +455,14 @@ namespace Thread
 	void IThread::gracefulStop()
 	{
 		# ifndef YUNI_NO_THREAD_SAFE
-		pMutex.lock();
-		{
-			pInnerFlagMutex.lock();
-			pShouldStop = true;
-			pInnerFlagMutex.unlock();
+		ThreadingPolicy::MutexLocker locker(*this);
 
-			pSignalWakeUp.notify();
-			pSignalMustStop.notify();
-		}
-		pMutex.unlock();
+		pInnerFlagMutex.lock();
+		pShouldStop = true;
+		pInnerFlagMutex.unlock();
+
+		pSignalWakeUp.notify();
+		pSignalMustStop.notify();
 		# endif
 	}
 
