@@ -62,6 +62,8 @@ namespace Yuni
 	/*! 8-bit unsigned int, guaranteed to be 1 byte in size */
 	typedef char           sint8;
 
+	/*! unsigned char */
+	typedef unsigned char  uchar;
 
 	/*!
 	** \brief Constant int64 value to indicate that the size must be autodetected by the location
