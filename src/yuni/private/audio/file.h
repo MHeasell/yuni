@@ -24,6 +24,9 @@ namespace Audio
 		//! Smart pointer
 		typedef SmartPtr<File>  Ptr;
 
+		// TODO temporary typedef for compilation fix
+		typedef enum CodecType AVMediaType;
+
 	public:
 		//! Constructor
 		File(const AnyString& filePath);

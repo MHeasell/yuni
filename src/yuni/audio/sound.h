@@ -28,7 +28,7 @@ namespace Audio
 		//! Threading Policy
 		typedef Policy::ObjectLevelLockable<Sound>  ThreadingPolicy;
 		//! Stream pointer type
-		typedef typename Private::Audio::Stream<Private::Audio::stAudio>::Ptr  StreamPtr;
+		typedef Private::Audio::Stream<Private::Audio::stAudio>::Ptr  StreamPtr;
 
 	public:
 		enum // anonymous
