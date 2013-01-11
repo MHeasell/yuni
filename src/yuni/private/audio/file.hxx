@@ -49,8 +49,8 @@ namespace Audio
 	inline typename Stream<TypeT>::Ptr File::getStream(uint index)
 	{
 		assert(pFormat);
-		auto& cache = getCache<TypeT>();
-		auto it = cache.find(index);
+		typename Stream<TypeT>::Map& cache = getCache<TypeT>();
+		typename Stream<TypeT>::Map::iterator it = cache.find(index);
 		if (cache.end() != it)
 			return it->second;
 
@@ -66,9 +66,9 @@ namespace Audio
 		{
 			// Check each stream the user has a handle for, looking for the one
 			// this packet belongs to
-			auto& cache = getCache<TypeT>();
-			auto end = cache.end();
-			for (auto it = cache.begin(); it != end; ++it)
+			typename Stream<TypeT>::Map& cache = getCache<TypeT>();
+			typename Stream<TypeT>::Map::iterator end = cache.end();
+			for (typename Stream<TypeT>::Map::iterator it = cache.begin(); it != end; ++it)
 			{
 				typename Stream<TypeT>::Ptr crtStream = it->second;
 				if (crtStream->index() != (uint)packet.stream_index)
@@ -136,13 +136,13 @@ namespace Audio
 
 
 	template<>
-	inline typename Stream<stVideo>::Map& File::getCache<stVideo>()
+	inline Stream<stVideo>::Map& File::getCache<stVideo>()
 	{
 		return pVStreams;
 	}
 
 	template<>
-	inline typename Stream<stAudio>::Map& File::getCache<stAudio>()
+	inline Stream<stAudio>::Map& File::getCache<stAudio>()
 	{
 		return pAStreams;
 	}
