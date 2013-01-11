@@ -8,6 +8,7 @@
 
 extern "C"
 {
+# include "libavutil/pixfmt.h"
 # include "libavutil/pixdesc.h"
 # include "libavcodec/avcodec.h"
 # include "libavformat/avformat.h"
