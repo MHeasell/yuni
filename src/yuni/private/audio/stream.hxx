@@ -43,21 +43,8 @@ namespace Audio
 			return;
 		}
 
-		uint64 frameSize = rate() * 2 * channels();
-		pSize = frameSize * pFormat->duration / AV_TIME_BASE;
-
-		// Allocate space for the decoded data to be stored in before it
-		// gets passed to the app
-		pDecodedData = (uint8*)::malloc(AVCODEC_MAX_AUDIO_FRAME_SIZE);
-		if (!pDecodedData)
-		{
-			::avcodec_close(pCodec);
-			pCodec = nullptr;
-			return;
-		}
-
 		if (IsAudio)
-			pALFormat = Private::Audio::OpenAL::GetFormat(bits(), channels());
+			pALFormat = Private::Audio::OpenAL::GetFormat(16,  pCodec->channels);
 	}
 
 
@@ -76,6 +63,15 @@ namespace Audio
 	inline uint Stream<TypeT>::nextBuffer(CString<SizeT, false>& buffer)
 	{
 		YUNI_STATIC_ASSERT(IsAudio, nextFrameNotAccessibleInVideo);
+
+		if (!pDecodedData)
+		{
+			uint64 frameSize = rate() * 2 * channels();
+			pSize = frameSize * pFormat->duration / AV_TIME_BASE;
+
+			// Allocate space for the decoded data to be stored in
+			pDecodedData = (uint8*)::malloc(AVCODEC_MAX_AUDIO_FRAME_SIZE);
+		}
 
 		uint dec = 0;
 		char* data = buffer.data();
@@ -226,7 +222,7 @@ namespace Audio
 	template<StreamType TypeT>
 	inline uint Stream<TypeT>::width() const
 	{
-		YUNI_STATIC_ASSERT(IsVideo, WidthNotAccessibleInAudio);
+		YUNI_STATIC_ASSERT(IsVideo, NotAccessibleInAudio);
 		return pCodec->width;
 	}
 
@@ -234,7 +230,7 @@ namespace Audio
 	template<StreamType TypeT>
 	inline uint Stream<TypeT>::height() const
 	{
-		YUNI_STATIC_ASSERT(IsVideo, HeightNotAccessibleInAudio);
+		YUNI_STATIC_ASSERT(IsVideo, NotAccessibleInAudio);
 		return pCodec->height;
 	}
 
@@ -242,8 +238,17 @@ namespace Audio
 	template<StreamType TypeT>
 	inline uint Stream<TypeT>::depth() const
 	{
-		YUNI_STATIC_ASSERT(IsVideo, DepthNotAccessibleInAudio);
+		YUNI_STATIC_ASSERT(IsVideo, NotAccessibleInAudio);
 		return ::av_get_bits_per_pixel(&::av_pix_fmt_descriptors[pCodec->pix_fmt]);
+	}
+
+
+	template<StreamType TypeT>
+	inline float Stream<TypeT>::fps() const
+	{
+		YUNI_STATIC_ASSERT(IsVideo, NotAccessibleInAudio);
+		assert(pCodec);
+		return (float)pCodec->time_base.den / pCodec->time_base.num;
 	}
 
 
