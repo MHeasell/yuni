@@ -38,7 +38,7 @@ namespace Lifetime
 		/*!
 		** If a dead reference is detected, throw an exception
 		*/
-		static void OnDeadReference() { throw std::runtime_error("Singleton dead reference detected !"); }
+		static void OnDeadReference() YUNI_NORETURN { throw std::runtime_error("Singleton dead reference detected !"); }
 	};
 
 
