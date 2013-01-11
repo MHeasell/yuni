@@ -5,6 +5,6 @@ if(Yuni_FOUND)
 	link_libraries("${Yuni_LIBS}")
 
 	message(STATUS "Sample: Messaging / Simple REST Server")
-	add_executable(net_00_simple-rest-server main.cpp)
+	add_executable(messaging_00_simple-rest-server main.cpp)
 endif(Yuni_FOUND)
 
