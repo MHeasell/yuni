@@ -189,7 +189,7 @@ namespace Yuni
 		/*!
 		** \brief Compare two strings like strcmp()
 		**
-		** The comparison is done using unsigned characters.
+		** The comparison is done using ucharacters.
 		** \return An integer greater than, equal to, or less than 0, according as the string is greater than,
 		**   equal to, or less than the given string
 		*/
@@ -198,7 +198,7 @@ namespace Yuni
 		/*!
 		** \brief Compare two strings like stricmp() (case-insensitive)
 		**
-		** The comparison is done using unsigned characters.
+		** The comparison is done using ucharacters.
 		** \return An integer greater than, equal to, or less than 0, according as the string is greater than,
 		**   equal to, or less than the given string
 		*/
@@ -331,7 +331,7 @@ namespace Yuni
 		/*!
 		** \brief Construct a string formed by a repetition of the character c, n times
 		*/
-		CString(size_t n, unsigned char c);
+		CString(size_t n, uchar c);
 
 		/*!
 		** \brief Destructor
@@ -573,9 +573,9 @@ namespace Yuni
 		*/
 		void put(char c);
 		/*!
-		** \brief Append a single unsigned char
+		** \brief Append a single uchar
 		*/
-		void put(const unsigned char c);
+		void put(const uchar c);
 		// equivalent to append, provided for compatibility with other containers
 		template<class U> void put(const U& rhs);
 
@@ -974,9 +974,9 @@ namespace Yuni
 		bool hasChar(char c) const;
 
 		/*!
-		** \brief Get if the string contains at least one occurence of a given unsigned char
+		** \brief Get if the string contains at least one occurence of a given uchar
 		*/
-		bool hasChar(unsigned char c) const;
+		bool hasChar(uchar c) const;
 
 		/*!
 		** \brief Get the number of occurrences of a single char
@@ -984,9 +984,9 @@ namespace Yuni
 		uint countChar(char c) const;
 
 		/*!
-		** \brief Get the number of occurrences of a single unsigned char
+		** \brief Get the number of occurrences of a single uchar
 		*/
-		uint countChar(unsigned char c) const;
+		uint countChar(uchar c) const;
 
 		/*!
 		** \brief Find the offset of a sub-string from the left
@@ -1453,7 +1453,7 @@ namespace Yuni
 		/*!
 		** \brief Compare the string with another one
 		**
-		** The comparison is done using unsigned characters.
+		** The comparison is done using ucharacters.
 		** \return An integer greater than, equal to, or less than 0, according as the string is greater than,
 		**   equal to, or less than the given string
 		*/
@@ -1462,7 +1462,7 @@ namespace Yuni
 		/*!
 		** \brief Compare the string with another one (ignoring the case)
 		**
-		** The comparison is done using unsigned characters.
+		** The comparison is done using ucharacters.
 		** \return An integer greater than, equal to, or less than 0, according as the string is greater than,
 		**   equal to, or less than the given string
 		*/

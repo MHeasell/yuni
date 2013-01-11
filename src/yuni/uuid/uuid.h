@@ -155,7 +155,7 @@ namespace Yuni
 	public:
 		union StorageType
 		{
-			unsigned char cstring[16];
+			uchar cstring[16];
 			char signedcstring[16];
 			uint32 n32[4];
 		};

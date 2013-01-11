@@ -13,15 +13,15 @@ namespace Bit
 	static uint Find(const Bit::Array::BufferType& pBuffer, uint pCount, uint offset)
 	{
 		// bitmask
-		static const unsigned char mask[] = { 128, 64, 32, 16, 8, 4, 2, 1 };
+		static const uchar mask[] = { 128, 64, 32, 16, 8, 4, 2, 1 };
 		// alias to npos
 		enum { npos = Yuni::Bit::Array::npos };
 
 		for (uint i = (offset >> 3); i < pBuffer.size(); ++i)
 		{
-			if ((unsigned char)(pBuffer[i]) != (ValueT ? (unsigned char)0 : (unsigned char)0xFF))
+			if ((uchar)(pBuffer[i]) != (ValueT ? (uchar)0 : (uchar)0xFF))
 			{
-				const unsigned char c = static_cast<unsigned char>(pBuffer[i]);
+				const uchar c = static_cast<uchar>(pBuffer[i]);
 
 				// trivial cases
 				if (ValueT && c == 0xFF)
@@ -115,7 +115,7 @@ namespace Bit
 	{
 		for (uint i = 0; i != pBuffer.size(); ++i)
 		{
-			if ((unsigned char) pBuffer[i] != 0xFF)
+			if ((uchar) pBuffer[i] != 0xFF)
 				return false;
 		}
 		return true;
