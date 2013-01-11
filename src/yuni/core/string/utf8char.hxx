@@ -8,14 +8,14 @@ namespace Yuni
 namespace UTF8
 {
 
-	inline unsigned char Char::Mask8Bits(const void* p)
+	inline uchar Char::Mask8Bits(const void* p)
 	{
-		return static_cast<unsigned char>(0xFF & *(static_cast<const char*>(p)));
+		return static_cast<uchar>(0xFF & *(static_cast<const char*>(p)));
 	}
 
-	inline unsigned char Char::Mask8Bits(const char p)
+	inline uchar Char::Mask8Bits(const char p)
 	{
-		return static_cast<unsigned char>(0xFF & p);
+		return static_cast<uchar>(0xFF & p);
 	}
 
 
@@ -29,7 +29,7 @@ namespace UTF8
 		// 0000 0800-0000 FFFF | 1110xxxx 10xxxxxx 10xxxxxx
 		// 0001 0000-0010 FFFF | 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
 
-		const unsigned char lead = Mask8Bits(p);
+		const uchar lead = Mask8Bits(p);
 		if (lead < 0x80) // the leas byte is zero, ascii
 			return 1;
 		if ((lead >> 5) == 0x6)  // 110x xxxx
@@ -54,13 +54,13 @@ namespace UTF8
 	}
 
 
-	inline bool Char::IsASCII(unsigned char c)
+	inline bool Char::IsASCII(uchar c)
 	{
 		return c < 0x80;
 	}
 
 
-	inline bool Char::IsTrail(unsigned char c)
+	inline bool Char::IsTrail(uchar c)
 	{
 		return ((c >> 6) == 0x2);
 	}
@@ -70,28 +70,28 @@ namespace UTF8
 	void Char::write(StreamT& out) const
 	{
 		if (pValue < 0x80)
-			out.put(static_cast<char>(static_cast<unsigned char>(pValue)));
+			out.put(static_cast<char>(static_cast<uchar>(pValue)));
 		else
 		{
 			if (pValue < 0x800)
 			{
-				out.put(static_cast<char>(static_cast<unsigned char>((pValue >> 6)   | 0xc0)));
-				out.put(static_cast<char>(static_cast<unsigned char>((pValue & 0x3f) | 0x80)));
+				out.put(static_cast<char>(static_cast<uchar>((pValue >> 6)   | 0xc0)));
+				out.put(static_cast<char>(static_cast<uchar>((pValue & 0x3f) | 0x80)));
 			}
 			else
 			{
 				if (pValue < 0x10000)
 				{
-					out.put(static_cast<char>(static_cast<unsigned char>((pValue >> 12)         | 0xe0)));
-					out.put(static_cast<char>(static_cast<unsigned char>(((pValue >> 6) & 0x3f) | 0x80)));
-					out.put(static_cast<char>(static_cast<unsigned char>((pValue & 0x3f)        | 0x80)));
+					out.put(static_cast<char>(static_cast<uchar>((pValue >> 12)         | 0xe0)));
+					out.put(static_cast<char>(static_cast<uchar>(((pValue >> 6) & 0x3f) | 0x80)));
+					out.put(static_cast<char>(static_cast<uchar>((pValue & 0x3f)        | 0x80)));
 				}
 				else
 				{                                // four bytes
-					out.put(static_cast<char>(static_cast<unsigned char>((pValue >> 18)         | 0xf0)));
-					out.put(static_cast<char>(static_cast<unsigned char>(((pValue >> 12)& 0x3f) | 0x80)));
-					out.put(static_cast<char>(static_cast<unsigned char>(((pValue >> 6) & 0x3f) | 0x80)));
-					out.put(static_cast<char>(static_cast<unsigned char>((pValue & 0x3f)        | 0x80)));
+					out.put(static_cast<char>(static_cast<uchar>((pValue >> 18)         | 0xf0)));
+					out.put(static_cast<char>(static_cast<uchar>(((pValue >> 12)& 0x3f) | 0x80)));
+					out.put(static_cast<char>(static_cast<uchar>(((pValue >> 6) & 0x3f) | 0x80)));
+					out.put(static_cast<char>(static_cast<uchar>((pValue & 0x3f)        | 0x80)));
 				}
 			}
 		}

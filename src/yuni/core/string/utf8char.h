@@ -37,20 +37,20 @@ namespace UTF8
 		static uint Size(const void* p);
 
 		/*!
-		** \brief Extract the first unsigned char from a raw buffer
+		** \brief Extract the first uchar from a raw buffer
 		*/
-		static unsigned char Mask8Bits(const void* p);
-		static unsigned char Mask8Bits(const char p);
+		static uchar Mask8Bits(const void* p);
+		static uchar Mask8Bits(const char p);
 
 		/*!
 		** \brief Is the UTF-8 a simple ascii char ?
 		*/
-		static bool IsASCII(unsigned char c);
+		static bool IsASCII(uchar c);
 
 		/*!
 		** \brief Check if the two first bits are set
 		*/
-		static bool IsTrail(unsigned char c);
+		static bool IsTrail(uchar c);
 
 		enum
 		{
@@ -89,34 +89,34 @@ namespace UTF8
 			return *this;
 		}
 
-		Char& operator = (const char c)
+		Char& operator = (char c)
 		{
 			pValue  = (uint32) c;
 			return *this;
 		}
 
-		Char& operator = (const unsigned char c)
+		Char& operator = (uchar c)
 		{
 			pValue  = (uint32) c;
 			return *this;
 		}
 
-		bool operator == (const char c) const
+		bool operator == (char c) const
 		{
 			return (pValue < 0x80 && static_cast<char>(pValue) == c);
 		}
 
-		bool operator != (const char c) const
+		bool operator != (char c) const
 		{
 			return !(*this == c);
 		}
 
-		bool operator == (const unsigned char c) const
+		bool operator == (uchar c) const
 		{
-			return (pValue < 0x80 && static_cast<unsigned char>(pValue) == c);
+			return (pValue < 0x80 && static_cast<uchar>(pValue) == c);
 		}
 
-		bool operator != (const unsigned char c) const
+		bool operator != (uchar c) const
 		{
 			return !(*this == c);
 		}
