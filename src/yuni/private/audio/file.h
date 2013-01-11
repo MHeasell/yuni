@@ -25,7 +25,11 @@ namespace Audio
 		typedef SmartPtr<File>  Ptr;
 
 		// TODO temporary typedef for compilation fix
-		typedef enum CodecType AVMediaType;
+		# if LIBAVFORMAT_VERSION_MAJOR < 53
+		typedef enum CodecType  MediaType;
+		# else
+		typedef enum AVMediaType  MediaType;
+		# endif // LIBAVFORMAT_VERSION_MAJOR < 53
 
 	public:
 		//! Constructor
@@ -54,7 +58,7 @@ namespace Audio
 
 		//! Check that the given media type is the same as the static one
 		template<StreamType TypeT>
-		bool isSameType(AVMediaType type) const;
+		bool isSameType(MediaType type) const;
 
 		//! Get the proper cache depending on the media type (audio or video)
 		template<StreamType TypeT>

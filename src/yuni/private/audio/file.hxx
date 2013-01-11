@@ -108,7 +108,7 @@ namespace Audio
 
 
 	template<>
-	inline bool File::isSameType<stVideo>(AVMediaType type) const
+	inline bool File::isSameType<stVideo>(MediaType type) const
 	{
 		# if LIBAVFORMAT_VERSION_MAJOR < 53
 		return CODEC_TYPE_VIDEO == type;
@@ -118,7 +118,7 @@ namespace Audio
 	}
 
 	template<>
-	inline bool File::isSameType<stAudio>(AVMediaType type) const
+	inline bool File::isSameType<stAudio>(MediaType type) const
 	{
 		# if LIBAVFORMAT_VERSION_MAJOR < 53
 		return CODEC_TYPE_AUDIO == type;
@@ -128,7 +128,7 @@ namespace Audio
 	}
 
 	template<StreamType TypeT>
-	inline bool File::isSameType(AVMediaType type) const
+	inline bool File::isSameType(MediaType type) const
 	{
 		YUNI_STATIC_ASSERT(false, InvalidStreamType);
 		return false;

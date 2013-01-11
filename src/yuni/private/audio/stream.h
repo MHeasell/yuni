@@ -86,6 +86,8 @@ namespace Audio
 		uint height() const;
 		//! Color depth, in bits per pixel (Video only !)
 		uint depth() const;
+		//! Number of frames per second (Video only !)
+		float fps() const;
 
 		//! Sample rate (Audio only !)
 		uint rate() const;
