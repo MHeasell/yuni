@@ -101,6 +101,8 @@ int main(void)
 	// Keyboard will use the already existing Log
 	Keyboard& keyboard = Keyboard::Singleton::Instance();
 
+	(void) display; // remove warning
+	(void) keyboard;
 	return 0;
 }
 // And all the fun stuff happens now :
@@ -108,3 +110,4 @@ int main(void)
 // Then Log is (more or less) destroyed.
 // When finally Display is destroyed, Log is reborn from its ashes to serve its needs.
 // And in the end, Log is destroyed again and all is well with the world.
+
