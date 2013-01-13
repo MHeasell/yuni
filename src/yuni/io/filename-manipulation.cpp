@@ -364,7 +364,7 @@ namespace IO
 
 
 	template<class StringT>
-	static inline void ExtractAbsoluteFilePathImpl(String& out, const AnyString& path, bool systemDependant)
+	static inline void ExtractAbsoluteFilePathImpl(StringT& out, const AnyString& path, bool systemDependant)
 	{
 		String tmp;
 		if (IsAbsolute(path))
@@ -375,7 +375,7 @@ namespace IO
 		{
 			String absolute;
 			MakeAbsolute(absolute, path);
-			ExtractFilePath(tmp, path, systemDependant);
+			ExtractFilePath(tmp, absolute, systemDependant);
 		}
 		Normalize(out, tmp);
 	}
