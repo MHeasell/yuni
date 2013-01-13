@@ -15,7 +15,7 @@ namespace IO
 	** The path part will be extracted according the system-(un)dependant path-separator
 	** \code
 	**    String outputString;
-	**	  IO::Filename::ExtractFilePath(outputString, "/tmp/foo.txt");
+	**	  IO::ExtractFilePath(outputString, "/tmp/foo.txt");
 	**    std::cout << outputString << std::endl; // writes `/tmp`
 	** \endcode
 	**
@@ -31,7 +31,7 @@ namespace IO
 	** The path part will be extracted according the system-(un)dependant path-separator
 	** \code
 	**    String outputString;
-	**	  IO::Filename::ExtractFilePath(outputString, "/tmp/foo.txt");
+	**	  IO::ExtractFilePath(outputString, "/tmp/foo.txt");
 	**    std::cout << outputString << std::endl; // writes `/tmp`
 	** \endcode
 	**
@@ -40,6 +40,42 @@ namespace IO
 	** \param[in] systemDependant Consider only the system-dependant path-separator
 	*/
 	void ExtractFilePath(Clob& out, const AnyString& path, bool systemDependant = false);
+
+
+
+	/*!
+	** \brief Extract the path part of a filename and make it absolute
+	**
+	** The path part will be extracted according the system-(un)dependant path-separator
+	** \code
+	**    String outputString;
+	**	  IO::ExtractAbsoluteFilePath(outputString, "../foo.txt");
+	**    std::cout << outputString << std::endl;
+	** \endcode
+	**
+	** \param[out] out The output string
+	** \param[in] path The filename
+	** \param[in] systemDependant Consider only the system-dependant path-separator
+	*/
+	void ExtractAbsoluteFilePath(String& out, const AnyString& path, bool systemDependant = false);
+
+	/*!
+	** \brief Extract the path part of a filename and make it absolute
+	**
+	** The path part will be extracted according the system-(un)dependant path-separator
+	** \code
+	**    String outputString;
+	**	  IO::ExtractAbsoluteFilePath(outputString, "../foo.txt");
+	**    std::cout << outputString << std::endl;
+	** \endcode
+	**
+	** \param[out] out The output string
+	** \param[in] path The filename
+	** \param[in] systemDependant Consider only the system-dependant path-separator
+	*/
+	void ExtractAbsoluteFilePath(Clob& out, const AnyString& path, bool systemDependant = false);
+
+
 
 
 	/*!

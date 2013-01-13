@@ -363,6 +363,38 @@ namespace IO
 
 
 
+	template<class StringT>
+	static inline void ExtractAbsoluteFilePathImpl(String& out, const AnyString& path, bool systemDependant)
+	{
+		String tmp;
+		if (IsAbsolute(path))
+		{
+			ExtractFilePath(tmp, path, systemDependant);
+		}
+		else
+		{
+			String absolute;
+			MakeAbsolute(absolute, path);
+			ExtractFilePath(tmp, path, systemDependant);
+		}
+		Normalize(out, tmp);
+	}
+
+
+	void ExtractAbsoluteFilePath(String& out, const AnyString& path, bool systemDependant)
+	{
+		ExtractAbsoluteFilePathImpl(out, path, systemDependant);
+	}
+
+
+	void ExtractAbsoluteFilePath(Clob& out, const AnyString& path, bool systemDependant)
+	{
+		ExtractAbsoluteFilePathImpl(out, path, systemDependant);
+	}
+
+
+
+
 } // namespace IO
 } // namespace Yuni
 
