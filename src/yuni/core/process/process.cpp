@@ -412,27 +412,19 @@ namespace Yuni
 	}
 
 
-	void Process::cancel()
+	void Process::terminate()
 	{
 		ProcessEnvironment::Ptr envptr = pEnv;
-		if (!envptr)
-			return;
-		ProcessEnvironment& env = *envptr;
+		if (!(!envptr))
+			envptr->sendSignal(SIGTERM);
+	}
 
-		env.mutex.lock();
-		if (0 == env.running)
-		{
-			env.mutex.unlock();
-			return;
-		}
-		# ifndef YUNI_OS_WINDOWS
-		const pid_t pid = static_cast<pid_t>(env.processID);
-		env.mutex.unlock();
-		if (pid)
-			kill(pid, SIGTERM);
-		# else
-		env.mutex.unlock();
-		# endif
+
+	void Process::kill()
+	{
+		ProcessEnvironment::Ptr envptr = pEnv;
+		if (!(!envptr))
+			envptr->sendSignal(SIGKILL);
 	}
 
 
@@ -836,6 +828,27 @@ namespace Yuni
 	void Process::CaptureOutput::onErrorRead(const AnyString& buffer)
 	{
 		cerr += buffer;
+	}
+
+
+	void Process::ProcessEnvironment::sendSignal(int sigvalue)
+	{
+		mutex.lock();
+		if (0 == running)
+		{
+			mutex.unlock();
+			return;
+		}
+		# ifndef YUNI_OS_WINDOWS
+		const pid_t pid = static_cast<pid_t>(processID);
+		mutex.unlock();
+		if (pid)
+			::kill(pid, sigvalue);
+		# else
+		// TODO missing implementation
+		(void) sigvalue;
+		mutex.unlock();
+		# endif
 	}
 
 
