@@ -155,9 +155,20 @@ namespace Yuni
 		int wait(sint64* duration = nullptr);
 
 		/*!
-		** \brief Cancel the execution of the sub-process
+		** \brief Terminate the execution of the process
+		**
+		** This is the prefered way to terminate a process. On Unix, SIGTERM
+		** will be sent, which can be intercepted.
 		*/
-		void cancel();
+		void terminate();
+
+		/*!
+		** \brief Kill the process (cause immediate program termination)
+		**
+		** The method `terminate()` should be prefered for simply stopping a process.
+		*/
+		void kill();
+
 
 		//! Get if the process is currently running
 		bool running() const;
@@ -193,6 +204,8 @@ namespace Yuni
 
 		public:
 			ProcessEnvironment();
+
+			void sendSignal(int value);
 
 		public:
 			String executable;
