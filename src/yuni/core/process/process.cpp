@@ -429,7 +429,7 @@ namespace Yuni
 		const pid_t pid = static_cast<pid_t>(env.processID);
 		env.mutex.unlock();
 		if (pid)
-			kill(pid, SIGKILL);
+			kill(pid, SIGTERM);
 		# else
 		env.mutex.unlock();
 		# endif
