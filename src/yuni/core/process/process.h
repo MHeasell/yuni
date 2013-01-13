@@ -22,7 +22,7 @@ namespace Yuni
 	** process.execute();
 	** process.wait();
 	*/
-	class Process
+	class Process final
 	{
 	public:
 		/*!
@@ -70,10 +70,10 @@ namespace Yuni
 			virtual ~CaptureOutput() {}
 
 			//! Some data from the standard output are ready
-			virtual void onRead(const AnyString& buffer);
+			virtual void onRead(const AnyString& buffer) override;
 
 			//! Some data from the error output are ready
-			virtual void onErrorRead(const AnyString& buffer);
+			virtual void onErrorRead(const AnyString& buffer) override;
 
 		public:
 			Clob cout;
@@ -185,7 +185,7 @@ namespace Yuni
 		bool dispatchExecution(const Bind<void (const Callback&)>& dispatcher, uint timeout);
 
 	private:
-		class ProcessEnvironment
+		class ProcessEnvironment final
 		{
 		public:
 			//! Smart pointer
