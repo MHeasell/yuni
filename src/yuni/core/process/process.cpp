@@ -1,13 +1,17 @@
 
 #include "process.h"
 #include "../../thread/thread.h"
-#ifndef YUNI_OS_WINDOWS
+#ifndef YUNI_OS_MSVC
 # include <unistd.h>
 # include <stdio.h>
 # include <signal.h>
-# include <sys/wait.h>
 # include <fcntl.h>
 # include <errno.h>
+# ifndef YUNI_OS_WINDOWS
+#	include <sys/wait.h>
+# else
+#	define SIGKILL SIGINT
+# endif
 #else
 #endif
 #include "../../datetime/timestamp.h"
@@ -414,17 +418,21 @@ namespace Yuni
 
 	void Process::terminate()
 	{
+		#ifndef YUNI_OS_MSVC
 		ProcessEnvironment::Ptr envptr = pEnv;
 		if (!(!envptr))
 			envptr->sendSignal(SIGTERM);
+		#endif
 	}
 
 
 	void Process::kill()
 	{
+		#ifndef YUNI_OS_MSVC
 		ProcessEnvironment::Ptr envptr = pEnv;
 		if (!(!envptr))
 			envptr->sendSignal(SIGKILL);
+		#endif
 	}
 
 
