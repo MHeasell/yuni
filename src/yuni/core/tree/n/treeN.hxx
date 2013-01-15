@@ -569,14 +569,14 @@ namespace Core
 
 	template<class T, template<class> class TP, template <class> class ChckP,
 		class ConvP>
-	void
+	bool
 	TreeN<T,TP,ChckP,ConvP>::release() const
 	{
 		{
 			typename ThreadingPolicy::MutexLocker locker(*this);
 			assert(pRefCount > 0);
 			if (--pRefCount != 0)
-				return;
+				return false;
 			// Early clean-up
 			// The method 'release' must be const for good code design. But
 			// we have to be properly detached from the parent node.
@@ -586,7 +586,7 @@ namespace Core
 			if (pChildrenCount)
 				ref.clearWL();
 		}
-		delete this;
+		return true;
 	}
 
 
