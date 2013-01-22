@@ -174,7 +174,7 @@ namespace Audio
 			if (::av_read_frame(pFormat, &packet) != 0)
 				break;
 			// Ignore packets from other streams
-			if (packet.stream_index != pIndex)
+			if ((uint)packet.stream_index != pIndex)
 				continue;
 
 			// If we can decode it
@@ -186,7 +186,10 @@ namespace Audio
 			{
 				// If the frame is finished (should be in one shot for video stream)
 				if (frameFinished)
-					return;
+				{
+					pFrame->pts = packet.pts;
+					break;
+				}
 			}
 		}
 

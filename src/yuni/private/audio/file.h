@@ -24,7 +24,6 @@ namespace Audio
 		//! Smart pointer
 		typedef SmartPtr<File>  Ptr;
 
-		// TODO temporary typedef for compilation fix
 		# if LIBAVFORMAT_VERSION_MAJOR < 53
 		typedef enum CodecType  MediaType;
 		# else
