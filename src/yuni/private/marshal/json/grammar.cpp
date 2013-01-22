@@ -937,7 +937,7 @@ namespace JSON
 			Private::JSON::grammar.symbols.table[symbol].kind == Private::JSON::Symbols::kdNonTerminal;
 
 		childIndex = 0;
-		childrenCount = token.tokens.size();
+		childrenCount = (uint) token.tokens.size();
 	}
 
 
