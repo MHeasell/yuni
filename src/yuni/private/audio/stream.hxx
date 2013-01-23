@@ -62,7 +62,7 @@ namespace Audio
 	template<uint SizeT>
 	inline uint Stream<TypeT>::nextBuffer(CString<SizeT, false>& buffer)
 	{
-		YUNI_STATIC_ASSERT(IsAudio, nextFrameNotAccessibleInVideo);
+		YUNI_STATIC_ASSERT(IsAudio, nextBufferNotAccessibleInVideo);
 
 		if (!pDecodedData)
 		{
@@ -172,7 +172,11 @@ namespace Audio
 		{
 			// Read a packet
 			if (::av_read_frame(pFormat, &packet) != 0)
+			{
+				::av_free(pFrame);
+				pFrame = nullptr;
 				break;
+			}
 			// Ignore packets from other streams
 			if ((uint)packet.stream_index != pIndex)
 				continue;
