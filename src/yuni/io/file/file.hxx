@@ -68,44 +68,6 @@ namespace File
 	}
 
 
-	template<class StringT1, class StringT2>
-	IO::Error
-	LoadFromFile(StringT1& out, const StringT2& filename, const uint64 hardlimit)
-	{
-		out.clear();
-		Yuni::IO::File::Stream f(filename);
-		if (f.opened())
-		{
-			char buffer[2096 + 1];
-			uint64 numRead = 0;
-			uint64 totalRead = 0;
-			while ((numRead = f.read((char*)buffer, sizeof(buffer) - 1)) != 0)
-			{
-				// This assignment is mandatory to prevent some bad use with
-				// strlen (according to StringT1).
-				// In some string implementation, the class might use strlen
-				// on the buffer even if the length is given
-				buffer[numRead] = '\0';
-
-				totalRead += numRead;
-				if (totalRead > hardlimit)
-				{
-					const size_t minus = (size_t)(totalRead - hardlimit);
-					if (minus < numRead)
-					{
-						numRead -= minus;
-						out.append((const char*) buffer, (uint) numRead);
-					}
-					return errMemoryLimit;
-				}
-				// we use the standard method `append()` to allow the use of std::string
-				out.append((const char*) buffer, (uint) numRead);
-			}
-			return errNone;
-		}
-		return errNotFound;
-	}
-
 
 	template<class StringT, class PredicateT>
 	bool

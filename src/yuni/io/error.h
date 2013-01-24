@@ -26,6 +26,8 @@ namespace IO
 		errOverwriteNotAllowed,
 		//! Impossible to write
 		errWriteFailed,
+		//! Impossible to read
+		errReadFailed,
 	};
 
 
