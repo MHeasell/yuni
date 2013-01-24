@@ -7,6 +7,7 @@
 
 # include "../../yuni.h"
 # include "../../core/smartptr.h"
+# include "frame.h"
 # include <map>
 
 # if (YUNI_OS_GCC_VERSION >= 40102)
@@ -116,6 +117,7 @@ namespace Audio
 		**
 		** \returns Number of bytes read
 		*/
+//		uint8* nextBuffer(uint& count);
 		template<uint SizeT>
 		uint nextBuffer(CString<SizeT, false>& buffer);
 
@@ -125,7 +127,7 @@ namespace Audio
 
 	private:
 		//! Read a frame from the stream
-		void readFrame();
+		uint readFrame();
 
 	private:
 		//! Codec information
