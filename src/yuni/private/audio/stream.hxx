@@ -2,6 +2,7 @@
 # define __YUNI_PRIVATE_AUDIO_STREAM_HXX__
 
 #include "openal.h"
+#include "../../core/math.h"
 
 namespace Yuni
 {
@@ -160,10 +161,11 @@ namespace Audio
 
 
 	template<StreamType TypeT>
-	void Stream<TypeT>::readFrame()
+	uint Stream<TypeT>::readFrame()
 	{
 		AVPacket packet;
 		int frameFinished = 0;
+		uint bytesRead = 0;
 
 		if (!pFrame)
 			pFrame = ::avcodec_alloc_frame();
@@ -181,24 +183,45 @@ namespace Audio
 			if ((uint)packet.stream_index != pIndex)
 				continue;
 
-			// If we can decode it
-			#if LIBAVCODEC_VERSION_INT > AV_VERSION_INT(52,30,0)
-			if (::avcodec_decode_video2(pCodec, pFrame, &frameFinished, &packet) >= 0)
-			#else
-			if (::avcodec_decode_video(pCodec, pFrame, &frameFinished, packet.data, packet.size) >= 0)
-			#endif
+			if (IsVideo)
 			{
-				// If the frame is finished (should be in one shot for video stream)
-				if (frameFinished)
+				// If we can decode it
+				#if LIBAVCODEC_VERSION_INT > AV_VERSION_INT(52,30,0)
+				if ((bytesRead = ::avcodec_decode_video2(pCodec, pFrame, &frameFinished, &packet)) >= 0)
+				#else
+				if ((bytesRead = ::avcodec_decode_video(pCodec, pFrame, &frameFinished, packet.data, packet.size)) >= 0)
+				#endif
 				{
-					pFrame->pts = packet.pts;
-					break;
+					// If the frame is finished (should be in one shot for video stream)
+					if (frameFinished)
+					{
+						pFrame->pts = packet.pts;
+						break;
+					}
+				}
+			}
+			else // IsAudio
+			{
+				// If we can decode it
+				#if LIBAVCODEC_VERSION_INT > AV_VERSION_INT(52,30,0)
+				if ((bytesRead = ::avcodec_decode_audio4(pCodec, pFrame, &frameFinished, &packet)) >= 0)
+				#else
+				if ((bytesRead = ::avcodec_decode_audio4(pCodec, pFrame, &frameFinished, packet.data, packet.size)) >= 0)
+				#endif
+				{
+					// If the frame is finished (should be in one shot for video stream)
+					if (frameFinished)
+					{
+						pFrame->pts = packet.pts;
+						break;
+					}
 				}
 			}
 		}
 
 		// free packet
 		::av_free_packet(&packet);
+		return bytesRead;
 	}
 
 
@@ -209,6 +232,15 @@ namespace Audio
 		readFrame();
 		return pFrame;
 	}
+
+
+	// template<StreamType TypeT>
+	// inline uint8* Stream<TypeT>::nextBuffer(uint& count)
+	// {
+	// 	YUNI_STATIC_ASSERT(IsAudio, nextBufferNotAccessibleInVideo);
+	// 	count = readFrame();
+	// 	return pFrame->data[0];
+	// }
 
 
 	template<StreamType TypeT>
@@ -255,7 +287,9 @@ namespace Audio
 	{
 		YUNI_STATIC_ASSERT(IsVideo, NotAccessibleInAudio);
 		assert(pCodec);
-		return (float)pCodec->time_base.den / pCodec->time_base.num;
+		float variable = (float)pFormat->streams[pIndex]->avg_frame_rate.num / pFormat->streams[pIndex]->avg_frame_rate.den;
+		float constant = (float)pCodec->time_base.den / (pCodec->time_base.num * pCodec->ticks_per_frame);
+		return Math::Min(variable, constant);
 	}
 
 
