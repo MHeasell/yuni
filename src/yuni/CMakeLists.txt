@@ -114,8 +114,8 @@ endif()
 
 
 
-if(YUNI_MODULE_AUDIO)
-	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/audio.cmake")
+if(YUNI_MODULE_MEDIA)
+	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/media.cmake")
 endif()
 
 

@@ -18,7 +18,7 @@ namespace Yuni
 {
 namespace Private
 {
-namespace Audio
+namespace Media
 {
 
 
@@ -37,6 +37,6 @@ namespace Audio
 
 
 
-} // namespace Audio
+} // namespace Media
 } // namespace Private
 } // namespace Yuni

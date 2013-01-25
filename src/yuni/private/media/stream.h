@@ -1,13 +1,12 @@
-#ifndef __YUNI_PRIVATE_AUDIO_FILE_H__
+#ifndef __YUNI_PRIVATE_MEDIA_FILE_H__
 # error "Do not include stream.h directly, please include file.h instead !"
 #endif
 
-#ifndef __YUNI_PRIVATE_AUDIO_STREAM_H__
-# define __YUNI_PRIVATE_AUDIO_STREAM_H__
+#ifndef __YUNI_PRIVATE_MEDIA_STREAM_H__
+# define __YUNI_PRIVATE_MEDIA_STREAM_H__
 
 # include "../../yuni.h"
 # include "../../core/smartptr.h"
-# include "frame.h"
 # include <map>
 
 # if (YUNI_OS_GCC_VERSION >= 40102)
@@ -22,11 +21,13 @@ extern "C"
 # include "libavformat/avformat.h"
 }
 
+# include "frame.h"
+
 namespace Yuni
 {
 namespace Private
 {
-namespace Audio
+namespace Media
 {
 
 
@@ -170,8 +171,8 @@ namespace Audio
 
 
 
-} // namespace Audio
+} // namespace Media
 } // namespace Private
 } // namespace Yuni
 
-#endif // __YUNI_PRIVATE_AUDIO_STREAM_H__
+#endif // __YUNI_PRIVATE_MEDIA_STREAM_H__

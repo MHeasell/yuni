@@ -1,27 +1,16 @@
-#ifndef __YUNI_PRIVATE_AUDIO_FRAME_H__
-# define __YUNI_PRIVATE_AUDIO_FRAME_H__
+#ifndef __YUNI_PRIVATE_MEDIA_FRAME_H__
+# define __YUNI_PRIVATE_MEDIA_FRAME_H__
 
 # include "../../yuni.h"
 # include "../../core/smartptr.h"
 # include <queue>
 
-# if (YUNI_OS_GCC_VERSION >= 40102)
-#	pragma GCC diagnostic ignored "-Wconversion"
-# endif
-
-extern "C"
-{
-# include "libavutil/pixfmt.h"
-# include "libavutil/pixdesc.h"
-# include "libavcodec/avcodec.h"
-# include "libavformat/avformat.h"
-}
 
 namespace Yuni
 {
 namespace Private
 {
-namespace Audio
+namespace Media
 {
 
 
@@ -69,8 +58,8 @@ namespace Audio
 
 
 
-} // namespace Audio
+} // namespace Media
 } // namespace Private
 } // namespace Yuni
 
-#endif // __YUNI_PRIVATE_AUDIO_STREAM_H__
+#endif // __YUNI_PRIVATE_MEDIA_STREAM_H__

@@ -1,5 +1,5 @@
-#ifndef __YUNI_AUDIO_SOUND_H__
-# define __YUNI_AUDIO_SOUND_H__
+#ifndef __YUNI_MEDIA_SOUND_H__
+# define __YUNI_MEDIA_SOUND_H__
 
 # include <map>
 # include "../yuni.h"
@@ -7,11 +7,11 @@
 # include "../core/smartptr.h"
 # include "../core/string.h"
 # include "../thread/signal.h"
-# include "../private/audio/file.h"
+# include "../private/media/file.h"
 
 namespace Yuni
 {
-namespace Audio
+namespace Media
 {
 
 
@@ -28,7 +28,7 @@ namespace Audio
 		//! Threading Policy
 		typedef Policy::ObjectLevelLockable<Sound>  ThreadingPolicy;
 		//! Stream pointer type
-		typedef Private::Audio::Stream<Private::Audio::stAudio>::Ptr  StreamPtr;
+		typedef Private::Media::Stream<Private::Media::stAudio>::Ptr  StreamPtr;
 
 	public:
 		enum // anonymous
@@ -75,9 +75,9 @@ namespace Audio
 
 
 
-} // namespace Audio
+} // namespace Media
 } // namespace Yuni
 
 # include "sound.hxx"
 
-#endif // __YUNI_AUDIO_SOUND_H__
+#endif // __YUNI_MEDIA_SOUND_H__

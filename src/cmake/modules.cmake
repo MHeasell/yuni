@@ -6,7 +6,7 @@ if (WIN32 OR WIN64)
 	# NSIS does not support semicolons.....
 	set(YUNICOMPONENT_CORE              "yuni_core")
 	set(YUNICOMPONENT_ALGORITHMS        "yuni_algorithms")
-	set(YUNICOMPONENT_AUDIO_CORE        "yuni_audio_core")
+	set(YUNICOMPONENT_MEDIA_CORE        "yuni_media_core")
 	set(YUNICOMPONENT_DEVICE_DISPLAY    "yuni_device_display")
 	set(YUNICOMPONENT_UUID              "yuni_uuid")
 	set(YUNICOMPONENT_MARSHAL           "yuni_marshal")
@@ -15,7 +15,7 @@ if (WIN32 OR WIN64)
 else()
 	set(YUNICOMPONENT_CORE              "yuni-core")
 	set(YUNICOMPONENT_ALGORITHMS        "yuni-algorithms")
-	set(YUNICOMPONENT_AUDIO_CORE        "yuni-audio-core")
+	set(YUNICOMPONENT_MEDIA_CORE        "yuni-media-core")
 	set(YUNICOMPONENT_DEVICE_DISPLAY    "yuni-device-display")
 	set(YUNICOMPONENT_UUID              "yuni-uuid")
 	set(YUNICOMPONENT_MARSHAL           "yuni-marshal")
@@ -45,8 +45,8 @@ set(YUNI_MODULE_DEVICES                   false)
 	set(YUNI_MODULE_DEVICE_KEYBOARD       true)
 	set(YUNI_MODULE_DEVICE_MOUSE          true)
 
-# Audio
-set(YUNI_MODULE_AUDIO                     false)
+# Media
+set(YUNI_MODULE_MEDIA                     false)
 
 # Network
 set(YUNI_MODULE_NET                       false)
@@ -88,7 +88,7 @@ set(YUNI_MODULE_LIST
 	marshal
 	vfs
 		vfs-local
-	audio
+	media
 	devices
 		display
 		keyboard
@@ -138,7 +138,7 @@ if(MODULES)
 			#set(YUNI_MODULE_VFS true)
 			set(YUNI_MODULE_DEVICES true)
 			set(YUNI_MODULE_VM true)
-			set(YUNI_MODULE_AUDIO true)
+			set(YUNI_MODULE_MEDIA true)
 			set(YUNI_MODULE_NET true)
 			set(YUNI_MODULE_MESSAGING true)
 			set(YUNI_MODULE_GRAPHICS true)
@@ -288,15 +288,15 @@ if(MODULES)
 			set(KeywordIsKnown true)
 		endif()
 
-		# audio
-		if("${it}" STREQUAL "audio")
+		# media
+		if("${it}" STREQUAL "media")
 			set(KeywordIsKnown true)
-			set(YUNI_MODULE_AUDIO true)
+			set(YUNI_MODULE_MEDIA true)
 		endif()
-		# -audio
-		if("${it}" STREQUAL "-audio")
+		# -media
+		if("${it}" STREQUAL "-media")
 			set(KeywordIsKnown true)
-			set(YUNI_MODULE_AUDIO false)
+			set(YUNI_MODULE_MEDIA false)
 		endif()
 
 
@@ -390,8 +390,8 @@ if(MODULES)
 		YMESSAGE("    -/+display     : The Display device")
 		YMESSAGE("    -/+keyboard    : The Keyboard device")
 		YMESSAGE("    -/+mouse       : The Mouse device")
-		YMESSAGE(" The audio modules")
-		YMESSAGE("    -/+audio       : The Audio module (default: disabled)")
+		YMESSAGE(" The media modules")
+		YMESSAGE("    -/+media       : The Media module (default: disabled)")
 		YMESSAGE(" The graphics modules")
 		YMESSAGE("    -/+opengl      : The OpenGL renderer module (default: disabled)")
 		YMESSAGE(" The ui modules")
@@ -489,8 +489,8 @@ if(YUNI_MODULE_LDO)
 	list(APPEND YUNI_MODULE_AVAILABLE ldo)
 endif()
 
-if(YUNI_MODULE_AUDIO)
-	list(APPEND YUNI_MODULE_AVAILABLE audio)
+if(YUNI_MODULE_MEDIA)
+	list(APPEND YUNI_MODULE_AVAILABLE media)
 endif()
 
 if(YUNI_MODULE_GRAPHICS)

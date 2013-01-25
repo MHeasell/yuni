@@ -1,10 +1,10 @@
-#ifndef __YUNI_AUDIO_QUEUESERVICE_HXX__
-# define __YUNI_AUDIO_QUEUESERVICE_HXX__
+#ifndef __YUNI_MEDIA_QUEUESERVICE_HXX__
+# define __YUNI_MEDIA_QUEUESERVICE_HXX__
 
 
 namespace Yuni
 {
-namespace Audio
+namespace Media
 {
 
 	inline sint64 QueueService::Emitters::elapsedTime(const AnyString& name)
@@ -39,7 +39,7 @@ namespace Audio
 
 
 
-} // namespace Audio
+} // namespace Media
 } // namespace Yuni
 
-#endif // __YUNI_AUDIO_QUEUESERVICE_HXX__
+#endif // __YUNI_MEDIA_QUEUESERVICE_HXX__

@@ -1,5 +1,5 @@
-#ifndef __YUNI_AUDIO_QUEUESERVICE_H__
-# define __YUNI_AUDIO_QUEUESERVICE_H__
+#ifndef __YUNI_MEDIA_QUEUESERVICE_H__
+# define __YUNI_MEDIA_QUEUESERVICE_H__
 
 # include "../yuni.h"
 # include "../core/string.h"
@@ -10,7 +10,7 @@
 
 namespace Yuni
 {
-namespace Audio
+namespace Media
 {
 
 	/*!
@@ -27,7 +27,7 @@ namespace Audio
 
 	public:
 		//! Forward declaration
-		class Bank;
+		class Library;
 
 		/*!
 		** \brief This is the the access to all the emitters for this queue service
@@ -124,36 +124,36 @@ namespace Audio
 
 			//! Associated queue service
 			QueueService* pQueueService;
-			//! Associated bank
-			Bank* pBank;
+			//! Associated library
+			Library* pLibrary;
 		};
 
 
 
 
 		/*!
-		** \brief The bank contains the audio buffers currently loaded in the queue service
+		** \brief The Library contains the media buffers currently loaded in the queue service
 		**
-		** It can be accessed through: queueService.bank
+		** It can be accessed through: queueService.library
 		*/
-		class Bank: public Policy::ObjectLevelLockable<Bank>
+		class Library: public Policy::ObjectLevelLockable<Library>
 		{
 		public:
-			typedef Policy::ObjectLevelLockable<Bank>  ThreadingPolicy;
+			typedef Policy::ObjectLevelLockable<Library>  ThreadingPolicy;
 
 		private:
 			//! \name Constructors
 			//@{
 			//! Empty constructor
-			Bank()
+			Library()
 			{}
 
 			//! Copy constructor
-			Bank(const Bank&);
+			Library(const Library&);
 			//@}
 
 		public:
-			//! Clear the bank, free the loaded buffers
+			//! Clear the library, free the loaded buffers
 			void clear();
 
 			/*!
@@ -175,7 +175,7 @@ namespace Audio
 
 
 		private:
-			//! Get a sound from the bank
+			//! Get a sound from the library
 			Sound::Ptr get(const AnyString& name);
 
 		private:
@@ -229,7 +229,7 @@ namespace Audio
 		//! Control block for emitters
 		Emitters emitter;
 		//! Control block for audio buffers
-		Bank bank;
+		Library library;
 
 	private:
 		//! \name Private operations
@@ -268,23 +268,23 @@ namespace Audio
 
 	private:
 		/*!
-		** \brief Audio initialization
+		** \brief Media initialization
 		**
-		** \note Dispatched in the audio loop
+		** \note Dispatched in the media loop
 		*/
 		bool initDispatched(InitData& initData);
 
 		/*!
 		** \brief Sound loading
 		**
-		** \note Dispatched in the audio loop
+		** \note Dispatched in the media loop
 		*/
 		bool loadSoundDispatched(const String& filePath);
 
 		/*!
 		** \brief Buffer update
 		**
-		** \note Called in the Audio::Loop::onLoop()
+		** \note Called in the Media::Loop::onLoop()
 		*/
 		bool updateDispatched();
 
@@ -294,8 +294,8 @@ namespace Audio
 
 		//! Has the manager been properly started ?
 		bool pReady;
-		//! Event loop for audio events
-		Loop pAudioLoop;
+		//! Event loop for media events
+		Loop pMediaLoop;
 
 	private:
 		//! Friend declaration
@@ -303,16 +303,16 @@ namespace Audio
 		//! Friend declaration
 		friend class Emitters;
 		//! Friend declaration
-		friend class Bank;
+		friend class Library;
 
 	}; // class QueueService
 
 
 
 
-} // namespace Audio
+} // namespace Media
 } // namespace Yuni
 
 #include "queueservice.hxx"
 
-#endif // __YUNI_AUDIO_QUEUESERVICE_H__
+#endif // __YUNI_MEDIA_QUEUESERVICE_H__

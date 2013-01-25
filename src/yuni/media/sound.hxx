@@ -1,10 +1,10 @@
-#ifndef __YUNI_AUDIO_SOUND_HXX__
-# define __YUNI_AUDIO_SOUND_HXX__
+#ifndef __YUNI_MEDIA_SOUND_HXX__
+# define __YUNI_MEDIA_SOUND_HXX__
 
 
 namespace Yuni
 {
-namespace Audio
+namespace Media
 {
 
 
@@ -30,7 +30,7 @@ namespace Audio
 
 
 
-} // namespace Audio
+} // namespace Media
 } // namespace Yuni
 
-#endif // __YUNI_AUDIO_SOUND_HXX__
+#endif // __YUNI_MEDIA_SOUND_HXX__

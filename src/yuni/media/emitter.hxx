@@ -1,11 +1,11 @@
-#ifndef __YUNI_AUDIO_EMITTER_HXX__
-# define __YUNI_AUDIO_EMITTER_HXX__
+#ifndef __YUNI_MEDIA_EMITTER_HXX__
+# define __YUNI_MEDIA_EMITTER_HXX__
 
 # include "../yuni.h"
 
 namespace Yuni
 {
-namespace Audio
+namespace Media
 {
 
 	inline Emitter::Emitter(bool loop):
@@ -148,7 +148,7 @@ namespace Audio
 
 
 
-} // namespace Audio
+} // namespace Media
 } // namespace Yuni
 
-#endif // __YUNI_AUDIO_EMITTER_HXX__
+#endif // __YUNI_MEDIA_EMITTER_HXX__

@@ -6,7 +6,7 @@ namespace Yuni
 {
 namespace Private
 {
-namespace Audio
+namespace Media
 {
 
 	bool OpenAL::Init()
@@ -276,6 +276,6 @@ namespace Audio
 
 
 
-} // namespace Audio
+} // namespace Media
 } // namespace Private
 } // namespace Yuni
