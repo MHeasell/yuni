@@ -1,11 +1,11 @@
-#ifndef __YUNI_PRIVATE_AUDIO_FILE_HXX__
-# define __YUNI_PRIVATE_AUDIO_FILE_HXX__
+#ifndef __YUNI_PRIVATE_MEDIA_FILE_HXX__
+# define __YUNI_PRIVATE_MEDIA_FILE_HXX__
 
 namespace Yuni
 {
 namespace Private
 {
-namespace Audio
+namespace Media
 {
 
 
@@ -157,8 +157,8 @@ namespace Audio
 
 
 
-} // namespace Audio
+} // namespace Media
 } // namespace Private
 } // namespace Yuni
 
-#endif // __YUNI_PRIVATE_AUDIO_FILE_HXX__
+#endif // __YUNI_PRIVATE_MEDIA_FILE_HXX__

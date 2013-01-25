@@ -1,10 +1,10 @@
 
-# include "../private/audio/openal.h"
+# include "../private/media/openal.h"
 # include "sound.h"
 
 namespace Yuni
 {
-namespace Audio
+namespace Media
 {
 
 
@@ -17,7 +17,7 @@ namespace Audio
 			? static_cast<uint>(maxBufferCount)
 			: (static_cast<uint>(pStream->size()) / bufferSize + 1);
 
-		if (!Private::Audio::OpenAL::CreateBuffers(pBufferCount, pIDs))
+		if (!Private::Media::OpenAL::CreateBuffers(pBufferCount, pIDs))
 			return false;
 
 		for (uint i = 0; i < pBufferCount; ++i)
@@ -28,11 +28,11 @@ namespace Audio
 				return false;
 
 			// Buffer the data with OpenAL
-			if (!Private::Audio::OpenAL::SetBufferData(pIDs[i], pStream->alFormat(), pData.data(),
+			if (!Private::Media::OpenAL::SetBufferData(pIDs[i], pStream->alFormat(), pData.data(),
 				count, pStream->rate()))
 				return false;
 			// Queue the buffers onto the source
-			if (!Private::Audio::OpenAL::QueueBufferToSource(pIDs[i], source))
+			if (!Private::Media::OpenAL::QueueBufferToSource(pIDs[i], source))
 				return false;
 		}
 		return true;
@@ -51,18 +51,18 @@ namespace Audio
 			return true;
 
 		// A buffer has finished playing, unqueue it
-		ALuint buffer = Private::Audio::OpenAL::UnqueueBufferFromSource(source);
+		ALuint buffer = Private::Media::OpenAL::UnqueueBufferFromSource(source);
 		// Get the next data to feed the buffer
 		uint count = pStream->nextBuffer(pData);
 		if (!count)
 			return false;
 
 		// Buffer the data with OpenAL and queue the buffer onto the source
-		if (!Private::Audio::OpenAL::SetBufferData(buffer, pStream->alFormat(), pData.data(), count,
+		if (!Private::Media::OpenAL::SetBufferData(buffer, pStream->alFormat(), pData.data(), count,
 			pStream->rate()))
 			return false;
 
-		return Private::Audio::OpenAL::QueueBufferToSource(buffer, source);
+		return Private::Media::OpenAL::QueueBufferToSource(buffer, source);
 	}
 
 
@@ -73,7 +73,7 @@ namespace Audio
 
 		delete pStream->parent();
 		pStream = nullptr;
-		Private::Audio::OpenAL::DestroyBuffers(pBufferCount, pIDs);
+		Private::Media::OpenAL::DestroyBuffers(pBufferCount, pIDs);
 		pBufferCount = 0;
 		if (signal)
 			signal->notify();
@@ -83,5 +83,5 @@ namespace Audio
 
 
 
-} // namespace Audio
+} // namespace Media
 } // namespace Yuni

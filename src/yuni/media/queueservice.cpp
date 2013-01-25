@@ -4,13 +4,13 @@
 #include "../core/point3D.h"
 #include "../core/vector3D.h"
 #include "../thread/signal.h"
-#include "../private/audio/av.h"
-#include "../private/audio/file.h"
-#include "../private/audio/openal.h"
+#include "../private/media/av.h"
+#include "../private/media/file.h"
+#include "../private/media/openal.h"
 
 namespace Yuni
 {
-namespace Audio
+namespace Media
 {
 
 	Atomic::Int<32> QueueService::sHasRunningInstance = 0;
@@ -18,11 +18,11 @@ namespace Audio
 
 	QueueService::QueueService() :
 		pReady(false),
-		pAudioLoop(this)
+		pMediaLoop(this)
 	{
-		bank.pQueueService = this;
+		library.pQueueService = this;
 		emitter.pQueueService = this;
-		emitter.pBank = &bank;
+		emitter.pLibrary = &library;
 	}
 
 
@@ -40,15 +40,15 @@ namespace Audio
 		if (pReady || sHasRunningInstance)
 			return false;
 
-		pAudioLoop.start();
+		pMediaLoop.start();
 
-		// Init audio from the audio loop
+		// Init media from the media loop
 		{
 			Thread::Signal signal;
 			InitData initData(signal, pReady);
 			Bind<bool()> callback;
 			callback.bind(this, &QueueService::initDispatched, (InitData&)initData);
-			pAudioLoop.dispatch(callback);
+			pMediaLoop.dispatch(callback);
 			// Wait for the initDispatched to finish
 			signal.wait();
 		}
@@ -69,25 +69,25 @@ namespace Audio
 		if (!pReady)
 			return;
 
-		pAudioLoop.beginClose();
+		pMediaLoop.beginClose();
 
 		// Close OpenAL buffers properly
-		bank.clear();
+		library.clear();
 
 		// Close OpenAL emitters properly
 		{
 			Emitter::Map::iterator sEnd = emitter.pEmitters.end();
 			for (Emitter::Map::iterator it = emitter.pEmitters.begin(); it != sEnd; ++it)
 			{
-				Private::Audio::OpenAL::DestroySource(it->second->id());
+				Private::Media::OpenAL::DestroySource(it->second->id());
 			}
 		}
 		emitter.pEmitters.clear();
 		// Close OpenAL
 		Yuni::Bind<bool()> callback;
-		callback.bind(&Private::Audio::OpenAL::Close);
-		pAudioLoop.dispatch(callback);
-		pAudioLoop.endClose();
+		callback.bind(&Private::Media::OpenAL::Close);
+		pMediaLoop.dispatch(callback);
+		pMediaLoop.endClose();
 		pReady = false;
 		sHasRunningInstance = 0;
 	}
@@ -95,7 +95,7 @@ namespace Audio
 
 	bool QueueService::initDispatched(InitData& data)
 	{
-		data.ready = Private::Audio::AV::Init() && Private::Audio::OpenAL::Init();
+		data.ready = Private::Media::AV::Init() && Private::Media::OpenAL::Init();
 		// The variable must be considered as destroyed as soon as the method
 		// 'notify()' is called
 		bool ready = data.ready;
@@ -107,7 +107,7 @@ namespace Audio
 	bool QueueService::loadSoundDispatched(const String& filePath)
 	{
 		// Try to open the file
-		Private::Audio::File* file = new Private::Audio::File(filePath);
+		Private::Media::File* file = new Private::Media::File(filePath);
 		if (!file->valid())
 		{
 			delete file;
@@ -115,8 +115,8 @@ namespace Audio
 		}
 
 		// Try to get an audio stream from it
-		Private::Audio::Stream<Private::Audio::stAudio>::Ptr stream =
-			file->getStream<Private::Audio::stAudio>();
+		Private::Media::Stream<Private::Media::stAudio>::Ptr stream =
+			file->getStream<Private::Media::stAudio>();
 		if (!stream)
 		{
 			delete file;
@@ -135,7 +135,7 @@ namespace Audio
 		// Associate the buffer with the stream
 		{
 			ThreadingPolicy::MutexLocker locker(*this);
-			Sound::Ptr buffer = bank.get(filePath);
+			Sound::Ptr buffer = library.get(filePath);
 			assert(nullptr != buffer);
 			buffer->stream(stream);
 		}
@@ -194,10 +194,10 @@ namespace Audio
 		// Create the emitter and add it
 		pEmitters[emitterName] = newEmitter;
 
-		Audio::Loop::RequestType callback;
+		Media::Loop::RequestType callback;
  		callback.bind(newEmitter, &Emitter::prepareDispatched);
 		// Dispatching...
- 		pQueueService->pAudioLoop.dispatch(callback);
+ 		pQueueService->pMediaLoop.dispatch(callback);
 
 		return true;
 	}
@@ -206,7 +206,7 @@ namespace Audio
 	bool QueueService::Emitters::attach(const AnyString& emitterName,
 		const AnyString& bufferName)
 	{
-		Sound::Ptr buffer = pBank->get(bufferName);
+		Sound::Ptr buffer = pLibrary->get(bufferName);
 		if (!buffer)
 			return false;
 
@@ -220,10 +220,10 @@ namespace Audio
 				return false;
 			Emitter::Ptr emitter = it->second;
 
-			Audio::Loop::RequestType callback;
+			Media::Loop::RequestType callback;
 			callback.bind(emitter, &Emitter::attachBufferDispatched, buffer);
 			// Dispatching...
-			pQueueService->pAudioLoop.dispatch(callback);
+			pQueueService->pMediaLoop.dispatch(callback);
 		}
 		return true;
 	}
@@ -234,7 +234,7 @@ namespace Audio
 		if (!emitter || !bufferName)
 			return false;
 
-		Sound::Ptr buffer = pBank->get(bufferName);
+		Sound::Ptr buffer = pLibrary->get(bufferName);
 		if (!buffer)
 			return false;
 
@@ -243,10 +243,10 @@ namespace Audio
 			if (!pQueueService->pReady)
 				return false;
 
-			Audio::Loop::RequestType callback;
+			Media::Loop::RequestType callback;
 			callback.bind(emitter, &Emitter::attachBufferDispatched, buffer);
 			// Dispatching...
-			pQueueService->pAudioLoop.dispatch(callback);
+			pQueueService->pMediaLoop.dispatch(callback);
 		}
 		return true;
 	}
@@ -262,10 +262,10 @@ namespace Audio
 			if (!pQueueService->pReady)
 				return false;
 
-			Audio::Loop::RequestType callback;
+			Media::Loop::RequestType callback;
 			callback.bind(emitter, &Emitter::attachBufferDispatched, buffer);
 			// Dispatching...
-	 		pQueueService->pAudioLoop.dispatch(callback);
+	 		pQueueService->pMediaLoop.dispatch(callback);
 		}
 		return true;
 	}
@@ -282,10 +282,10 @@ namespace Audio
 		if (!emitter)
 			return;
 
-		Audio::Loop::RequestType callback;
+		Media::Loop::RequestType callback;
  		callback.bind(emitter, &Emitter::detachBufferDispatched);
 		// Dispatching...
- 		pQueueService->pAudioLoop.dispatch(callback);
+ 		pQueueService->pMediaLoop.dispatch(callback);
 	}
 
 
@@ -351,10 +351,10 @@ namespace Audio
 	{
 		if (!emitter)
 			return false;
-		Audio::Loop::RequestType callback;
+		Media::Loop::RequestType callback;
  		callback.bind(emitter, &Emitter::playSoundDispatched);
 		// Dispatching...
- 		pQueueService->pAudioLoop.dispatch(callback);
+ 		pQueueService->pMediaLoop.dispatch(callback);
 		return true;
 	}
 
@@ -363,10 +363,10 @@ namespace Audio
 	{
 		if (!emitter)
 			return false;
-		Audio::Loop::RequestType callback;
+		Media::Loop::RequestType callback;
  		callback.bind(emitter, &Emitter::pauseSoundDispatched);
 		// Dispatching...
- 		pQueueService->pAudioLoop.dispatch(callback);
+ 		pQueueService->pMediaLoop.dispatch(callback);
 		return true;
 	}
 
@@ -375,18 +375,18 @@ namespace Audio
 	{
 		if (!emitter)
 			return false;
-		Audio::Loop::RequestType callback;
+		Media::Loop::RequestType callback;
  		callback.bind(emitter, &Emitter::stopSoundDispatched);
 		// Dispatching...
- 		pQueueService->pAudioLoop.dispatch(callback);
+ 		pQueueService->pMediaLoop.dispatch(callback);
 		return true;
 	}
 
 
 
-	////////////////////////// Bank
+	////////////////////////// Library
 
-	Sound::Ptr QueueService::Bank::get(const AnyString& name)
+	Sound::Ptr QueueService::Library::get(const AnyString& name)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 
@@ -397,7 +397,7 @@ namespace Audio
 	}
 
 
-	void QueueService::Bank::clear()
+	void QueueService::Library::clear()
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 
@@ -409,7 +409,7 @@ namespace Audio
 			{
 				// We have to pass a pointer here, otherwise bind() will call the copy ctor
 				callback.bind(it->second, &Sound::destroyDispatched, &signal);
-				pQueueService->pAudioLoop.dispatch(callback);
+				pQueueService->pMediaLoop.dispatch(callback);
 				signal.wait();
 				signal.reset();
 			}
@@ -418,7 +418,7 @@ namespace Audio
 	}
 
 
-	bool QueueService::Bank::load(const AnyString& filePath)
+	bool QueueService::Library::load(const AnyString& filePath)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 
@@ -430,12 +430,12 @@ namespace Audio
 
 		Yuni::Bind<bool()> callback;
 		callback.bind(pQueueService, &QueueService::loadSoundDispatched, filePath);
-		pQueueService->pAudioLoop.dispatch(callback);
+		pQueueService->pMediaLoop.dispatch(callback);
 		return true;
 	}
 
 
-	bool QueueService::Bank::unload(const AnyString& name)
+	bool QueueService::Library::unload(const AnyString& name)
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 
@@ -451,7 +451,7 @@ namespace Audio
 			Yuni::Bind<bool()> callback;
 
 			callback.bind(it->second, &Sound::destroyDispatched, &signal);
-			pQueueService->pAudioLoop.dispatch(callback);
+			pQueueService->pMediaLoop.dispatch(callback);
 			signal.wait();
 		}
 		// Wait for data to be properly unloaded before removing from the list
@@ -461,7 +461,7 @@ namespace Audio
 	}
 
 
-	unsigned int QueueService::Bank::duration(const AnyString& name)
+	unsigned int QueueService::Library::duration(const AnyString& name)
 	{
 		Sound::Ptr buffer = get(name);
 		if (!buffer)
@@ -477,7 +477,7 @@ namespace Audio
 	bool QueueService::running() const
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
-		return pReady && pAudioLoop.running();
+		return pReady && pMediaLoop.running();
 	}
 
 
@@ -485,6 +485,6 @@ namespace Audio
 
 
 
-} // namespace Audio
+} // namespace Media
 } // namespace Yuni
 

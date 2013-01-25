@@ -3,11 +3,11 @@
 
 namespace Yuni
 {
-namespace Audio
+namespace Media
 {
 
-	Loop::Loop(QueueService* audioService):
-		pAudioService(audioService),
+	Loop::Loop(QueueService* mediaService):
+		pMediaService(mediaService),
 		pClosing(false)
 	{}
 
@@ -24,13 +24,13 @@ namespace Audio
 
 	bool Loop::onLoop()
 	{
-		if (!pAudioService || pClosing)
+		if (!pMediaService || pClosing)
 			return false;
-		pAudioService->updateDispatched();
+		pMediaService->updateDispatched();
 		return true;
 	}
 
 
 
-} // namespace Audio
+} // namespace Media
 } // namespace Yuni

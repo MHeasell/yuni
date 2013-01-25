@@ -10,7 +10,7 @@
 #include <yuni/yuni.h>
 #include <yuni/core/string.h>
 #include <yuni/core/system/suspend.h>
-#include <yuni/audio/queueservice.h>
+#include <yuni/media/queueservice.h>
 
 using namespace Yuni;
 
@@ -35,17 +35,17 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
-	// The audio queue service is the center point for audio manipulation
-	Audio::QueueService audio;
-	audio.start();
+	// The media queue service is the center point for media manipulation
+	Media::QueueService media;
+	media.start();
 
-	if (!audio.running())
+	if (!media.running())
 		return 1;
 
 	// Generate a name for the emitter ...
 	AnyString emitterName = "Emitter 1";
 	// ... and create it
-	if (!audio.emitter.add(emitterName))
+	if (!media.emitter.add(emitterName))
 	{
 		std::cerr << "Emitter creation failed !" << std::endl;
 		return 1;
@@ -54,7 +54,7 @@ int main(int argc, char* argv[])
 	for (int i = 1; i < argc; ++i)
 	{
 		// Load sound file
-		if (!audio.bank.load(argv[i]))
+		if (!media.library.load(argv[i]))
 		{
 			std::cerr << "Failed to load \"" << argv[i] << "\"" << std::endl;
 			// Play the next song rather than just quitting
@@ -62,26 +62,26 @@ int main(int argc, char* argv[])
 		}
 
 		// Attach the emitter to the buffer
-		audio.emitter.attach(emitterName, argv[i]);
+		media.emitter.attach(emitterName, argv[i]);
 		// Start playback on the emitter
-		audio.emitter.play(emitterName);
+		media.emitter.play(emitterName);
 
 		Yuni::SuspendMilliSeconds(1000);
 		// Get stream duration
-		uint duration = audio.bank.duration(argv[i]);
+		uint duration = media.library.duration(argv[i]);
 		std::cout << "Sound duration: ";
 		writeTime(duration);
 		std::cout << std::endl;
 
 		sint64 elapsed = 0;
 		// Keep playing while at least one emitter is playing
-		while (audio.playing())
+		while (media.playing())
 		{
 			// Every 100ms
 			Yuni::SuspendMilliSeconds(100);
 
 			// Get elapsed playback time
-			sint64 newTime = audio.emitter.elapsedTime(emitterName);
+			sint64 newTime = media.emitter.elapsedTime(emitterName);
 			// Only update if different
 			if (newTime != elapsed)
 			{
@@ -92,12 +92,12 @@ int main(int argc, char* argv[])
 				std::cout << std::endl;
 			}
 		}
-		audio.emitter.detach(emitterName);
-		audio.bank.unload(argv[i]);
+		media.emitter.detach(emitterName);
+		media.library.unload(argv[i]);
 	}
 
 	// Properly stop the queue service and unload everything
-	audio.stop();
+	media.stop();
 	return 0;
 }
 

@@ -1,5 +1,5 @@
-#ifndef __YUNI_PRIVATE_AUDIO_OPENAL_H__
-# define __YUNI_PRIVATE_AUDIO_OPENAL_H__
+#ifndef __YUNI_PRIVATE_MEDIA_OPENAL_H__
+# define __YUNI_PRIVATE_MEDIA_OPENAL_H__
 
 # include "../../yuni.h"
 # include <list>
@@ -17,7 +17,7 @@ namespace Yuni
 {
 namespace Private
 {
-namespace Audio
+namespace Media
 {
 
 	/*!
@@ -132,8 +132,8 @@ namespace Audio
 
 
 
-} // namespace Audio
+} // namespace Media
 } // namespace Private
 } // namespace Yuni
 
-#endif // __YUNI_PRIVATE_AUDIO_OPENAL_H__
+#endif // __YUNI_PRIVATE_MEDIA_OPENAL_H__

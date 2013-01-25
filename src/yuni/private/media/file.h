@@ -1,5 +1,5 @@
-#ifndef __YUNI_PRIVATE_AUDIO_FILE_H__
-# define __YUNI_PRIVATE_AUDIO_FILE_H__
+#ifndef __YUNI_PRIVATE_MEDIA_FILE_H__
+# define __YUNI_PRIVATE_MEDIA_FILE_H__
 
 # include "../../yuni.h"
 # include "../../core/smartptr.h"
@@ -11,7 +11,7 @@ namespace Yuni
 {
 namespace Private
 {
-namespace Audio
+namespace Media
 {
 
 
@@ -81,11 +81,11 @@ namespace Audio
 
 
 
-} // namespace Audio
+} // namespace Media
 } // namespace Private
 } // namespace Yuni
 
 # include "stream.hxx"
 # include "file.hxx"
 
-#endif // __YUNI_PRIVATE_AUDIO_FILE_H__
+#endif // __YUNI_PRIVATE_MEDIA_FILE_H__

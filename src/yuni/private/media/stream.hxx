@@ -1,5 +1,5 @@
-#ifndef __YUNI_PRIVATE_AUDIO_STREAM_HXX__
-# define __YUNI_PRIVATE_AUDIO_STREAM_HXX__
+#ifndef __YUNI_PRIVATE_MEDIA_STREAM_HXX__
+# define __YUNI_PRIVATE_MEDIA_STREAM_HXX__
 
 #include "openal.h"
 #include "../../core/math.h"
@@ -8,7 +8,7 @@ namespace Yuni
 {
 namespace Private
 {
-namespace Audio
+namespace Media
 {
 
 
@@ -45,7 +45,7 @@ namespace Audio
 		}
 
 		if (IsAudio)
-			pALFormat = Private::Audio::OpenAL::GetFormat(16,  pCodec->channels);
+			pALFormat = Private::Media::OpenAL::GetFormat(16,  pCodec->channels);
 	}
 
 
@@ -329,8 +329,8 @@ namespace Audio
 
 
 
-} // namespace Audio
+} // namespace Media
 } // namespace Private
 } // namespace Yuni
 
-#endif // __YUNI_PRIVATE_AUDIO_STREAM_HXX__
+#endif // __YUNI_PRIVATE_MEDIA_STREAM_HXX__

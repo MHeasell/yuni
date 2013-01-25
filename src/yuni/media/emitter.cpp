@@ -2,14 +2,14 @@
 #include "../core/math.h"
 #include "../core/system/gettimeofday.h"
 #include "emitter.h"
-#include "../private/audio/av.h"
-#include "../private/audio/openal.h"
+#include "../private/media/av.h"
+#include "../private/media/openal.h"
 #include <iostream>
 
 
 namespace Yuni
 {
-namespace Audio
+namespace Media
 {
 
 	const float Emitter::DefaultPitch = 1.0f;
@@ -44,7 +44,7 @@ namespace Audio
 
 		stopSoundDispatched();
 
-		Private::Audio::OpenAL::UnbindBufferFromSource(pID);
+		Private::Media::OpenAL::UnbindBufferFromSource(pID);
 		pBuffer = nullptr;
 		return true;
 	}
@@ -55,11 +55,11 @@ namespace Audio
 		if (!pBuffer)
 			return false;
 
-		pPlaying = Private::Audio::OpenAL::PlaySource(pID);
+		pPlaying = Private::Media::OpenAL::PlaySource(pID);
 		if (!pPlaying)
 		{
 			std::cerr << "Emitter " << pID << " failed playing !" << std::endl;
-			Private::Audio::OpenAL::UnqueueBufferFromSource(pID);
+			Private::Media::OpenAL::UnqueueBufferFromSource(pID);
 			return false;
 		}
 		// Store start time
@@ -87,7 +87,7 @@ namespace Audio
 		if (!pPlaying)
 			return false;
 
-		Private::Audio::OpenAL::PauseSource(pID);
+		Private::Media::OpenAL::PauseSource(pID);
 		return true;
 	}
 
@@ -97,7 +97,7 @@ namespace Audio
 		if (!pPlaying && !pPaused)
 			return false;
 
-		Private::Audio::OpenAL::StopSource(pID);
+		Private::Media::OpenAL::StopSource(pID);
 		return true;
 	}
 
@@ -106,19 +106,19 @@ namespace Audio
 	{
 		if (!pReady)
 			return false;
-		pPlaying = Private::Audio::OpenAL::IsSourcePlaying(pID);
-		pPaused = Private::Audio::OpenAL::IsSourcePaused(pID);
+		pPlaying = Private::Media::OpenAL::IsSourcePlaying(pID);
+		pPaused = Private::Media::OpenAL::IsSourcePaused(pID);
 		// If not playing, nothing else to do
 		if (!pPlaying)
 			return false;
 		if (pModified)
 		{
-			if (!Private::Audio::OpenAL::MoveSource(pID, pPosition, pVelocity, pDirection))
+			if (!Private::Media::OpenAL::MoveSource(pID, pPosition, pVelocity, pDirection))
 			{
 				std::cerr << "Source position update failed !" << std::endl;
 				return false;
 			}
-			if (!Private::Audio::OpenAL::ModifySource(pID, DefaultPitch, pGain, DefaultAttenuation, pLoop))
+			if (!Private::Media::OpenAL::ModifySource(pID, DefaultPitch, pGain, DefaultAttenuation, pLoop))
 			{
 				std::cerr << "Source characteristics update failed !" << std::endl;
 				return false;
@@ -135,7 +135,7 @@ namespace Audio
 		if (pReady)
 			return true;
 
-		unsigned int source = Private::Audio::OpenAL::CreateSource(pPosition, pVelocity,
+		unsigned int source = Private::Media::OpenAL::CreateSource(pPosition, pVelocity,
 			pDirection, DefaultPitch, pGain, DefaultAttenuation, pLoop);
 
 		pID = source;
@@ -156,5 +156,5 @@ namespace Audio
 	}
 
 
-} // namespace Audio
+} // namespace Media
 } // namespace Yuni

@@ -1,5 +1,5 @@
-#ifndef __YUNI_AUDIO_LOOP_H__
-# define __YUNI_AUDIO_LOOP_H__
+#ifndef __YUNI_MEDIA_LOOP_H__
+# define __YUNI_MEDIA_LOOP_H__
 
 # include "../yuni.h"
 # include "../core/event/loop.h"
@@ -7,14 +7,14 @@
 
 namespace Yuni
 {
-namespace Audio
+namespace Media
 {
 	//! Forward Declaration
 	class QueueService;
 
 
 	/*!
-	** \brief The audio loop is where every audio event is run
+	** \brief The media loop is where every media event is run
 	*/
 	class Loop: public Core::EventLoop::IEventLoop<Loop, Core::EventLoop::Flow::Timer,
 		Core::EventLoop::Statistics::None, true>
@@ -33,9 +33,9 @@ namespace Audio
 		/*!
 		** \brief Constructor
 		**
-		** \param audioService Audio queue service corresponding to this loop
+		** \param mediaService Media queue service corresponding to this loop
 		*/
-		Loop(QueueService* audioService);
+		Loop(QueueService* queueService);
 
 		//! Virtual destructor
 		virtual ~Loop() { stop(); }
@@ -50,8 +50,8 @@ namespace Audio
 		void endClose();
 
 	public:
-		//! Audio queue service corresponding to this loop
-		QueueService* pAudioService;
+		//! Media queue service corresponding to this loop
+		QueueService* pMediaService;
 
 		//! When closing we must not execute onLoop()
 		bool pClosing;
@@ -60,7 +60,7 @@ namespace Audio
 
 
 
-} // namespace Audio
+} // namespace Media
 } // namespace Yuni
 
-#endif // __YUNI_AUDIO_LOOP_H__
+#endif // __YUNI_MEDIA_LOOP_H__

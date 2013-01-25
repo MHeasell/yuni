@@ -1,5 +1,5 @@
-#ifndef __YUNI_AUDIO_EMITTER_H__
-# define __YUNI_AUDIO_EMITTER_H__
+#ifndef __YUNI_MEDIA_EMITTER_H__
+# define __YUNI_MEDIA_EMITTER_H__
 
 # include "../yuni.h"
 # include <map>
@@ -11,13 +11,13 @@
 
 namespace Yuni
 {
-namespace Audio
+namespace Media
 {
 
 	/*!
-	** \brief An audio emitter is an object from which the sound is played
+	** \brief An emitter is a virtual object from which a sound is played
 	**
-	** Audio emitters can be placed in space, and be moved around.
+	** Emitters can be placed in space, and be moved around.
 	*/
 	class Emitter: public Policy::ObjectLevelLockable<Emitter>
 	{
@@ -183,9 +183,9 @@ namespace Audio
 
 
 
-} // namespace Audio
+} // namespace Media
 } // namespace Yuni
 
 # include "emitter.hxx"
 
-#endif // __YUNI_AUDIO_EMITTER_H__
+#endif // __YUNI_MEDIA_EMITTER_H__
