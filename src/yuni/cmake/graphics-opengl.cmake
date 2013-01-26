@@ -49,7 +49,7 @@ if (YUNI_HAS_OPENGL)
 # Not found
 else ()
 	set(YUNI_CMAKE_ERROR 1)
-	YMESSAGE(    "[!!] Impossible to find gl.h on your system. Please check your profile.")
+	YMESSAGE(    "[!!] Impossible to find OpenGL on your system. Please check your profile.")
 	YMESSAGE(    " * Packages needed on Debian: libopengl-dev")
 	YMESSAGE(    " * Packages needed on Fedora: opengl-devel")
 endif ()
