@@ -4,6 +4,7 @@
 #include "av.h"
 # if (YUNI_OS_GCC_VERSION >= 40102)
 #	pragma GCC diagnostic ignored "-Wconversion"
+#	pragma GCC diagnostic ignored "-Wundef"
 # endif
 
 extern "C"
