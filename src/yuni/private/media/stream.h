@@ -22,7 +22,9 @@ extern "C"
 # include "libavformat/avformat.h"
 }
 
+# include "streamtype.h"
 # include "frame.h"
+
 
 namespace Yuni
 {
@@ -31,23 +33,8 @@ namespace Private
 namespace Media
 {
 
-
 	//! Forward declaration
 	class File;
-
-
-
-	//! Stream type
-	enum StreamType
-	{
-		//! Audio stream type
-		stAudio,
-
-		//! Video stream type
-		stVideo
-
-	}; // enum StreamType
-
 
 
 	/*!
@@ -102,17 +89,16 @@ namespace Media
 		//! Stream duration in seconds
 		uint duration() const;
 
-		//! Stream data full size
-		uint size() const { return pSize; }
-
 		//! Get the stream type
 		StreamType type() const;
 
 		//! OpenAL audio format (Audio only !)
 		uint alFormat() const { YUNI_STATIC_ASSERT(IsAudio, NotAccessibleInVideo); return pALFormat; }
 
-		//! Get the next frame (Video only !)
-		AVFrame* nextFrame();
+		/*!
+		** \brief Get the next frame (Video only !)
+		*/
+		Frame::Ptr nextFrame();
 
 		/*!
 		** \brief Get the next buffer of data (Audio only !)

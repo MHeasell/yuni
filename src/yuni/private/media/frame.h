@@ -3,6 +3,8 @@
 
 # include "../../yuni.h"
 # include "../../core/smartptr.h"
+# include "../../core/bind.h"
+# include "streamtype.h"
 # include <queue>
 
 
@@ -12,6 +14,10 @@ namespace Private
 {
 namespace Media
 {
+
+
+	//! Forward declaration
+	class FrameImpl;
 
 
 	/*!
@@ -24,15 +30,15 @@ namespace Media
 		typedef SmartPtr<Frame>  Ptr;
 
 		//! Frame queue
-		typedef std::queue<Ptr>  Queue;
+		typedef std::list<Ptr>  Queue;
 
-	// public:
+	public:
 		// This event is triggered when it is time for a new frame to be displayed
-	// 	Yuni::Bind<void (const Frame::Ptr& frame)>  onFrameChanged;
+		static Yuni::Bind<void (const Frame::Ptr& frame)>  OnFrameChanged;
 
 	public:
 		//! Constructor
-		Frame(uint width, uint height, uint depth, uint nbChannels);
+		Frame(uint index);
 		//! Destructor
 		~Frame();
 
@@ -40,21 +46,43 @@ namespace Media
 		uint width() const;
 		//! Image height (Video only !)
 		uint height() const;
-		//! Color depth, in bits per pixel (Video only !)
-		uint depth() const;
+
+		//! Frame index in the stream
+		uint index() const { return pIndex; }
+
+		//! Y data
+		uint8* dataY() const;
+		//! Cb data
+		uint8* dataCb() const;
+		//! Cr data
+		uint8* dataCr() const;
+
+		//! Line size for Y data
+		uint lineSizeY() const;
+		//! Line size for Cb data (normally: lineSizeY / 2)
+		uint lineSizeCb() const;
+		//! Line size for Cr data (normally: lineSizeY / 2)
+		uint lineSizeCr() const;
 
 	private:
 		//! Read a frame from the stream
 		void readFrame();
 
+		//! Ugly hidden way of setting the frame in our FrameImpl
+		void setData(void* data);
+
 	private:
 		//! Frame number
 		uint pIndex;
 
-		//! AV Frame (internal data)
-		AVFrame* pFrame;
+		//! Internal data (wrapper for the AVFrame)
+		FrameImpl* pImpl;
 
-	}; // class Stream
+		//! Friend declaration
+		template<StreamType TypeT>
+		friend class Stream;
+
+	}; // class Frame
 
 
 

@@ -10,12 +10,13 @@ namespace Media
 
 	bool Sound::prepareDispatched(uint source)
 	{
-		if (!pStream || !pStream->size())
+		if (!pStream)
 			return false;
 
-		pBufferCount = (pStream->size() > (maxBufferCount - 1) * bufferSize)
-			? static_cast<uint>(maxBufferCount)
-			: (static_cast<uint>(pStream->size()) / bufferSize + 1);
+		// pBufferCount = (pStream->size() > (maxBufferCount - 1) * bufferSize)
+		// 	? static_cast<uint>(maxBufferCount)
+		// 	: (static_cast<uint>(pStream->size()) / bufferSize + 1);
+		pBufferCount = maxBufferCount;
 
 		if (!Private::Media::OpenAL::CreateBuffers(pBufferCount, pIDs))
 			return false;

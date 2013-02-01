@@ -29,8 +29,11 @@ set(SRC_MEDIA
 		private/media/file.cpp
 		private/media/file.h
 		private/media/file.hxx
+		private/media/frame.cpp
+		private/media/frame.h
 		private/media/stream.h
 		private/media/stream.hxx
+		private/media/streamtype.h
 		private/media/openal.h
 		private/media/openal.cpp
 		private/media/av.h
