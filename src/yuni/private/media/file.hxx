@@ -14,9 +14,10 @@ namespace Media
 	{
 		typedef Stream<TypeT> MyStream;
 
+		// Loop on streams in the file
 		for (uint i = 0; i < pFormat->nb_streams; ++i)
 		{
-			// Reject streams that are not VIDEO
+			// Reject streams that are not the requested codec type
 			if (!isSameType<TypeT>(pFormat->streams[i]->codec->codec_type))
 				continue;
 

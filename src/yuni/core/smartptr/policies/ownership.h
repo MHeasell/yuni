@@ -98,7 +98,7 @@ namespace Ownership
 			if (!(--(*pCount)))
 			{
 				delete pCount;
-				pCount = NULL;
+				pCount = nullptr;
 				return true;
 			}
 			return false;
@@ -250,7 +250,7 @@ namespace Ownership
 			if (!(--(*pCount)))
 			{
 				delete pCount;
-				pCount = NULL;
+				pCount = nullptr;
 				return true;
 			}
 			return false;

@@ -52,10 +52,12 @@ namespace Media
 	template<StreamType TypeT>
 	Stream<TypeT>::~Stream()
 	{
-		::avcodec_close(pCodec);
+		if (pCodec)
+			::avcodec_close(pCodec);
 		::free(pData);
 		::free(pDecodedData);
-		::av_free(pFrame);
+		if (pFrame)
+			::av_free(pFrame);
 	}
 
 
@@ -167,8 +169,12 @@ namespace Media
 		int frameFinished = 0;
 		uint bytesRead = 0;
 
-		if (!pFrame)
-			pFrame = ::avcodec_alloc_frame();
+		// We should not have to clean the frame here, but it's a security
+		// pFrame should be nullptr when entering here
+		if (pFrame)
+			::av_free(pFrame);
+
+		pFrame = ::avcodec_alloc_frame();
 
 		while (!frameFinished)
 		{
@@ -226,11 +232,15 @@ namespace Media
 
 
 	template<StreamType TypeT>
-	inline AVFrame* Stream<TypeT>::nextFrame()
+	inline Frame::Ptr Stream<TypeT>::nextFrame()
 	{
 		YUNI_STATIC_ASSERT(IsVideo, nextFrameNotAccessibleInAudio);
 		readFrame();
-		return pFrame;
+		// TODO : Give the real frame index
+		Frame::Ptr frame = new Frame(0u);
+		frame->setData(pFrame);
+		pFrame = nullptr;
+		return frame;
 	}
 
 
