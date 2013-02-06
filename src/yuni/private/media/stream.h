@@ -133,6 +133,9 @@ namespace Media
 		//! Stream data full size
 		uint64 pSize;
 
+		//! Current presentation time stamp
+		double pCrtPts;
+
 		//! \name Temporary data for old version reading
 		//@{
 		char* pData;

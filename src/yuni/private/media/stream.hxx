@@ -18,6 +18,8 @@ namespace Media
 		pFormat(format),
 		pIndex(index),
 		pALFormat(0),
+		pSize(0),
+		pCrtPts(AV_NOPTS_VALUE),
 		pData(nullptr),
 		pDataSize(0),
 		pDataSizeMax(0),
@@ -167,7 +169,7 @@ namespace Media
 	{
 		AVPacket packet;
 		int frameFinished = 0;
-		uint bytesRead = 0;
+		int bytesRead = 0;
 
 		// We should not have to clean the frame here, but it's a security
 		// pFrame should be nullptr when entering here
@@ -191,6 +193,7 @@ namespace Media
 
 			if (IsVideo)
 			{
+				pCrtPts = 0;
 				// If we can decode it
 				#if LIBAVCODEC_VERSION_INT > AV_VERSION_INT(52,30,0)
 				if ((bytesRead = ::avcodec_decode_video2(pCodec, pFrame, &frameFinished, &packet)) >= 0)
@@ -201,7 +204,14 @@ namespace Media
 					// If the frame is finished (should be in one shot for video stream)
 					if (frameFinished)
 					{
-						pFrame->pts = packet.pts;
+						if (AV_NOPTS_VALUE == packet.dts && pFrame->opaque
+							&& AV_NOPTS_VALUE != *(uint64_t*)pFrame->opaque)
+							pCrtPts = *(uint64_t*)pFrame->opaque;
+						else if (AV_NOPTS_VALUE != packet.dts)
+							pCrtPts = packet.dts;
+						else
+							pCrtPts = 0.0;
+						pCrtPts *= ::av_q2d(pCodec->time_base);
 						break;
 					}
 				}
@@ -212,13 +222,13 @@ namespace Media
 				#if LIBAVCODEC_VERSION_INT > AV_VERSION_INT(52,30,0)
 				if ((bytesRead = ::avcodec_decode_audio4(pCodec, pFrame, &frameFinished, &packet)) >= 0)
 				#else
-				if ((bytesRead = ::avcodec_decode_audio4(pCodec, pFrame, &frameFinished, packet.data, packet.size)) >= 0)
+				if ((bytesRead = ::avcodec_decode_audio3(pCodec, pFrame, &frameFinished, packet.data, packet.size)) >= 0)
 				#endif
 				{
 					// If the frame is finished (should be in one shot for video stream)
 					if (frameFinished)
 					{
-						pFrame->pts = packet.pts;
+						pFrame->pts = packet.dts;
 						break;
 					}
 				}
@@ -234,10 +244,10 @@ namespace Media
 	template<StreamType TypeT>
 	inline Frame::Ptr Stream<TypeT>::nextFrame()
 	{
-		YUNI_STATIC_ASSERT(IsVideo, nextFrameNotAccessibleInAudio);
+		//YUNI_STATIC_ASSERT(IsVideo, nextFrameNotAccessibleInAudio);
 		readFrame();
 		// TODO : Give the real frame index
-		Frame::Ptr frame = new Frame(0u);
+		Frame::Ptr frame = new Frame(0u, pCrtPts);
 		frame->setData(pFrame);
 		pFrame = nullptr;
 		return frame;
@@ -249,6 +259,9 @@ namespace Media
 	// {
 	// 	YUNI_STATIC_ASSERT(IsAudio, nextBufferNotAccessibleInVideo);
 	// 	count = readFrame();
+	// count = ::av_samples_get_buffer_size(NULL, stream->CodecCtx->channels,
+    //                                           stream->Frame->nb_samples,
+    //                                           stream->CodecCtx->sample_fmt, 1);
 	// 	return pFrame->data[0];
 	// }
 

@@ -38,7 +38,7 @@ namespace Media
 
 	public:
 		//! Constructor
-		Frame(uint index);
+		Frame(uint index, double pts);
 		//! Destructor
 		~Frame();
 
@@ -50,11 +50,17 @@ namespace Media
 		//! Frame index in the stream
 		uint index() const { return pIndex; }
 
-		//! Y data
+		//! Audio data (Audio only !)
+		uint8* audioData();
+
+		//! Audio data size (Audio only !)
+		uint audioSize() const;
+
+		//! Y data (Video only !)
 		uint8* dataY() const;
-		//! Cb data
+		//! Cb data (Video only !)
 		uint8* dataCb() const;
-		//! Cr data
+		//! Cr data (Video only !)
 		uint8* dataCr() const;
 
 		//! Line size for Y data
@@ -63,6 +69,9 @@ namespace Media
 		uint lineSizeCb() const;
 		//! Line size for Cr data (normally: lineSizeY / 2)
 		uint lineSizeCr() const;
+
+		//! Presentation time stamp for this frame
+		double timestamp() const;
 
 	private:
 		//! Read a frame from the stream
@@ -74,6 +83,9 @@ namespace Media
 	private:
 		//! Frame number
 		uint pIndex;
+
+		//! Presentation time stamp
+		double pTimestamp;
 
 		//! Internal data (wrapper for the AVFrame)
 		FrameImpl* pImpl;
