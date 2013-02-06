@@ -33,14 +33,16 @@ namespace Media
 			::av_free(frame);
 		}
 
+		// The AV Frame
 		::AVFrame* frame;
 
 	}; // class FrameImpl
 
 
 
-	Frame::Frame(uint index):
+	Frame::Frame(uint index, double pts):
 		pIndex(index),
+		pTimestamp(pts),
 		pImpl(new FrameImpl())
 	{}
 
@@ -61,6 +63,19 @@ namespace Media
 	{
 		assert(pImpl->frame);
 		return pImpl->frame->height;
+	}
+
+
+	uint8* Frame::audioData()
+	{
+		assert(pImpl->frame);
+		return pImpl->frame->extended_data[0];
+	}
+
+	uint Frame::audioSize() const
+	{
+		assert(pImpl->frame);
+		return pImpl->frame->linesize[0];
 	}
 
 
@@ -99,6 +114,12 @@ namespace Media
 	{
 		assert(pImpl->frame);
 		return pImpl->frame->linesize[0];
+	}
+
+
+	double Frame::timestamp() const
+	{
+		return pTimestamp;
 	}
 
 
