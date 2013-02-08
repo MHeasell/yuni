@@ -27,7 +27,7 @@ namespace Process
 {
 
 
-	class SubProcess : public Yuni::Thread::IThread
+	class SubProcess final : public Yuni::Thread::IThread
 	{
 	private:
 		struct Data
@@ -93,7 +93,7 @@ namespace Process
 		bool launch()
 		{
 			Yuni::Process::ProcessEnvironment::Ptr envptr = pProcess.pEnv;
-			if (!envptr)
+			if (not envptr)
 			{
 				assert(false && "Launching a new process with an invalid thread environment");
 				return false; // should never happen
@@ -220,13 +220,48 @@ namespace Process
 
 
 	protected:
-		virtual bool onExecute()
+		virtual bool onExecute() override
 		{
 			int exitstatus = 0;
 			bool killed = false;
+			sint64 endTime = 0;
 
-			# ifndef YUNI_OS_WINDOWS
+			# ifdef YUNI_OS_WINDOWS
+			onExecuteWindows(endTime);
+			# else
+			onExecuteUnix(endTime);
+			# endif
 
+			// prevent against invalid code
+			if (endTime == 0)
+			{
+				assert(false && "endTime is invalid");
+				endTime = Yuni::DateTime::Now();
+			}
+
+			theProcessHasStopped(killed, exitstatus, endTime);
+			return false;
+		}
+
+		virtual void onPause()
+		{
+		}
+
+		virtual void onStop()
+		{
+		}
+
+
+		# ifdef YUNI_OS_WINDOWS
+		void onExecuteWindows(sint64& endTime)
+		{
+			endTime = Yuni::DateTime::Now();
+		}
+		# endif
+
+		# ifndef YUNI_OS_WINDOWS
+		void onExecuteUnix(sint64& endTime)
+		{
 			Yuni::Process::Stream::Ptr stream = pProcess.pStream;
 			bool hasStream = !(!stream);
 
@@ -291,7 +326,7 @@ namespace Process
 			}
 			while (true);
 
-			sint64 endTime = Yuni::DateTime::Now();
+			endTime = Yuni::DateTime::Now();
 
 			// close all remaining fd
 			int ca = close(pData.infd[0]);
@@ -303,27 +338,11 @@ namespace Process
 			// release the buffer
 			delete[] buffer;
 			delete[] buffererr;
-
-			# else
-
-			sint64 endTime = Yuni::DateTime::Now();
-
-			# endif
-
-			theProcessHasStopped(killed, exitstatus, endTime);
-			return false;
 		}
+		# endif
+		
 
-		virtual void onPause()
-		{
-		}
-
-		virtual void onStop()
-		{
-		}
-
-
-		virtual void onKill()
+		virtual void onKill() override
 		{
 			bool killed = false;
 			# ifndef YUNI_OS_WINDOWS
