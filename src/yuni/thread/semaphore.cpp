@@ -5,25 +5,44 @@
 #include "../core/string.h"
 #ifdef YUNI_OS_MAC
 # include <unistd.h>
+# include <semaphore.h>
 #endif
 #ifdef YUNI_OS_LINUX
 # include <fcntl.h>    // for contants
 # include <sys/stat.h>
 # include <limits.h>
+# include <semaphore.h>
 #endif
 #ifdef YUNI_HAS_ERRNO_H
 # include <errno.h>
+#endif
+#ifdef YUNI_OS_WINDOWS
+# include "../core/system/windows.hdr.h"
 #endif
 
 
 namespace Yuni
 {
 
-	// inline for keeping the method local
-	inline void Semaphore::initialize(uint readers)
+	// for keeping the method local
+	void Semaphore::initialize(uint readers)
 	{
+		if (readers == 0) // can not be null
+			readers = 1;
+		assert(readers < 1024 * 1024 && "the number of readers seems quite high...");
+
 		# ifndef YUNI_NO_THREAD_SAFE
+
 		# ifdef YUNI_OS_WINDOWS
+
+		pSemaphore = CreateSemaphore(nullptr, readers, readers, nullptr);
+		if (not pSemaphore)
+		{
+			std::cerr << "impossible to create a new unamed semaphore" << std::endl;
+			assert(false && "impossible to initialize a semaphore");
+			exit(-1);
+		}
+
 		# else
 
 		// In every cases, for all UNIX operating systems, readers must not be greater than SEM_VALUE_MAX
@@ -42,7 +61,7 @@ namespace Yuni
 		name << "yuni_" << getpid() << '-' << (void*) this;
 
 		pSemaphore = sem_open(name.c_str(), O_CREAT, 0600, readers);
-		if (pSemaphore == SEM_FAILED)
+		if ((::sem_t*)pSemaphore == SEM_FAILED)
 		{
 			std::cerr << "impossible to create a new semaphore called " << name << std::endl;
 			assert(false && "impossible to initialize a semaphore");
@@ -84,14 +103,15 @@ namespace Yuni
 	}
 
 
-	// inline for keeping the method local
-	inline void Semaphore::finalize()
+	// for keeping the method local
+	void Semaphore::finalize()
 	{
 		# ifndef YUNI_NO_THREAD_SAFE
 		# ifdef YUNI_OS_WINDOWS
+		CloseHandle(pSemaphore);
 		# else
 		#	ifdef YUNI_OS_MAC
-		sem_close(pSemaphore);
+		sem_close((::sem_t*)pSemaphore);
 		#	else
 		if (0 != sem_destroy(& pSemaphore))
 		{
@@ -99,6 +119,75 @@ namespace Yuni
 			assert(false && "impossible to destroy a semaphore");
 			exit(-1);
 		}
+		#	endif
+		# endif
+		# endif
+	}
+
+	void Semaphore::acquire()
+	{
+		# ifndef YUNI_NO_THREAD_SAFE
+		# ifdef YUNI_OS_WINDOWS
+		WaitForSingleObject(pSemaphore, INFINITE);
+		# else
+		#	ifdef YUNI_OS_MAC
+		sem_wait((::sem_t*)pSemaphore);
+		#	else
+		sem_wait(& pSemaphore);
+		#	endif
+		# endif
+		# endif
+	}
+
+
+	void Semaphore::acquire(uint n)
+	{
+		# ifndef YUNI_NO_THREAD_SAFE
+		# ifdef YUNI_OS_WINDOWS
+		for (uint i = 0; i != n; ++i)
+			WaitForSingleObject(pSemaphore, INFINITE);
+		# else
+		#	ifdef YUNI_OS_MAC
+		for (uint i = 0; i != n; ++i)
+			sem_wait((::sem_t*)pSemaphore);
+		#	else
+		for (uint i = 0; i != n; ++i)
+			sem_wait(& pSemaphore);
+		#	endif
+		# endif
+		# endif
+	}
+
+
+	void Semaphore::release()
+	{
+		# ifndef YUNI_NO_THREAD_SAFE
+		# ifdef YUNI_OS_WINDOWS
+		ReleaseSemaphore(pSemaphore, 1, nullptr);
+		# else
+		#	ifdef YUNI_OS_MAC
+		sem_post((::sem_t*)pSemaphore);
+		#	else
+		sem_post(& pSemaphore);
+		#	endif
+		# endif
+		# endif
+	}
+
+
+	void Semaphore::release(uint n)
+	{
+		# ifndef YUNI_NO_THREAD_SAFE
+		# ifdef YUNI_OS_WINDOWS
+		if (n > 0)
+			ReleaseSemaphore(pSemaphore, n, nullptr);
+		# else
+		#	ifdef YUNI_OS_MAC
+		for (uint i = 0; i != n; ++i)
+			sem_post((::sem_t*)pSemaphore);
+		#	else
+		for (uint i = 0; i != n; ++i)
+			sem_post(& pSemaphore);
 		#	endif
 		# endif
 		# endif
