@@ -3,11 +3,9 @@
 
 # include "../yuni.h"
 # ifndef YUNI_NO_THREAD_SAFE
-#	ifdef YUNI_OS_WINDOWS
-#		include "../core/system/windows.hdr.h"
-#	else
-#		include <semaphore.h> // unix
-# 	endif
+#	if !defined(YUNI_OS_WINDOWS) && !defined(YUNI_OS_MAC)
+#		include <semaphore.h> // unix / sem_t
+#	endif
 # endif
 
 
@@ -90,12 +88,13 @@ namespace Yuni
 	private:
 		# ifndef YUNI_NO_THREAD_SAFE
 		# ifdef YUNI_OS_WINDOWS
+		void* pSemaphore;
 		# else
 		//! Pthread semaphore
 		#	ifdef YUNI_OS_MAC
-		::sem_t* pSemaphore;
+		void* pSemaphore;
 		#	else
-		::sem_t pSemaphore;
+		::sem_t pSemaphore; // not allocated by new
 		#	endif
 		# endif
 		# endif
