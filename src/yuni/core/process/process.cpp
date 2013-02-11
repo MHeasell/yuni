@@ -220,187 +220,26 @@ namespace Process
 
 
 	protected:
-		virtual bool onExecute() override
-		{
-			int exitstatus = 0;
-			bool killed = false;
-			sint64 endTime = 0;
+		virtual bool onExecute() override;
 
-			# ifdef YUNI_OS_WINDOWS
-			onExecuteWindows(endTime);
-			# else
-			onExecuteUnix(endTime);
-			# endif
+		virtual void onPause();
 
-			// prevent against invalid code
-			if (endTime == 0)
-			{
-				assert(false && "endTime is invalid");
-				endTime = Yuni::DateTime::Now();
-			}
-
-			theProcessHasStopped(killed, exitstatus, endTime);
-			return false;
-		}
-
-		virtual void onPause()
-		{
-		}
-
-		virtual void onStop()
-		{
-		}
-
+		virtual void onStop();
 
 		# ifdef YUNI_OS_WINDOWS
-		void onExecuteWindows(sint64& endTime)
-		{
-			endTime = Yuni::DateTime::Now();
-		}
+		void onExecuteWindows();
 		# endif
-
 		# ifndef YUNI_OS_WINDOWS
-		void onExecuteUnix(sint64& endTime)
-		{
-			Yuni::Process::Stream::Ptr stream = pProcess.pStream;
-			bool hasStream = !(!stream);
-
-			enum {bufferSize = 4096 * 2};
-			char* buffer    = new char[bufferSize];
-			char* buffererr = new char[bufferSize];
-
-			do
-			{
-				// Read data from the standard output
-				// standard output
-				ssize_t stdcoutsize = ::read(pData.infd[0], buffer,    bufferSize - 1);
-				ssize_t stdcerrsize = ::read(pData.errd[0], buffererr, bufferSize - 1);
-
-				assert(stdcoutsize < bufferSize);
-				assert(stdcerrsize < bufferSize);
-				if (stdcoutsize > 0)
-				{
-					buffer[stdcoutsize] = '\0';
-					if (hasStream)
-						stream->onRead(AnyString(buffer, (uint)stdcoutsize));
-					if (pRedirectToConsole)
-						std::cout.write(buffer, stdcoutsize);
-				}
-
-				if (stdcerrsize > 0)
-				{
-					buffererr[stdcerrsize] = '\0';
-					if (hasStream)
-						stream->onErrorRead(AnyString(buffererr, (uint)stdcerrsize));
-					if (pRedirectToConsole)
-						std::cerr.write(buffererr, stdcerrsize);
-					continue;
-				}
-
-				// direct call to `continue` if something has been read
-				if (stdcoutsize > 0)
-					continue;
-
-				// Check PID status
-				{
-					int status;
-					int wpid = waitpid(pData.pid, &status, WNOHANG | WUNTRACED | WCONTINUED);
-					if (wpid > 0)
-					{
-						if (WIFEXITED(status))
-							exitstatus = WEXITSTATUS(status);
-						else if (WIFSIGNALED(status))
-						{
-							exitstatus = -127;
-							killed = true;
-						}
-						break;
-					}
-					else
-					{
-						if (wpid == -1) // the process is already dead
-							break;
-					}
-				}
-				suspend(50); // arbitrary
-			}
-			while (true);
-
-			endTime = Yuni::DateTime::Now();
-
-			// close all remaining fd
-			int ca = close(pData.infd[0]);
-			int cb = close(pData.errd[0]);
-			int cc = close(pData.outfd[1]);
-			if (ca || cb || cc)
-				std::cerr << "close file descriptor failed\n";
-
-			// release the buffer
-			delete[] buffer;
-			delete[] buffererr;
-		}
+		void onExecuteUnix();
 		# endif
-		
-
-		virtual void onKill() override
-		{
-			bool killed = false;
-			# ifndef YUNI_OS_WINDOWS
-			// try to kill the attached child process if any
-			{
-				Yuni::Process::ProcessEnvironment::Ptr envptr = pProcess.pEnv;
-				if (!envptr)
-					return;
-				Yuni::Process::ProcessEnvironment& env = *envptr;
-
-				MutexLocker locker(env.mutex);
-				if (env.processID > 0)
-				{
-					kill(env.processID, SIGKILL);
-					killed = true;
-				}
-			}
-			# endif
-			sint64 endTime = Yuni::DateTime::Now();
-			theProcessHasStopped(killed, -127, endTime);
-		}
 
 
-		void theProcessHasStopped(bool killed, int exitstatus, sint64 endTime)
-		{
-			Yuni::Process::ProcessEnvironment::Ptr envptr = pProcess.pEnv;
-			if (!envptr)
-				return;
-			Yuni::Process::ProcessEnvironment& env = *envptr;
+		virtual void onKill() override;
 
-			// Making sure that the process ID is invalid
-			sint64 duration;
-			{
-				MutexLocker locker(env.mutex);
-				if (!env.running) // already stopped - should never happen
-					return;
-				env.running      = 0;
-				env.processInput = -1;
-				env.exitstatus   = exitstatus;
-				duration         = (endTime >= env.startTime) ? (endTime - env.startTime) : 0;
-				env.duration     = duration;
-			}
+		void theProcessHasStopped(bool killed, int exitstatus, sint64 endTime);
 
-			if (!(!pProcess.pStream))
-				pProcess.pStream->onStop(killed, exitstatus, duration);
-		}
+		void deleteAllArguments();
 
-
-		void deleteAllArguments()
-		{
-			if (pArguments)
-			{
-				for (uint i = 0; pArguments[i]; ++i)
-					::free(pArguments[i]);
-				::free(pArguments);
-				pArguments = nullptr;
-			}
-		}
 
 	private:
 		typedef char* CharPtr;
@@ -411,7 +250,201 @@ namespace Process
 		CharPtr* pArguments;
 		bool pRedirectToConsole;
 
+		int pExitStatus;
+		//! Flag to determine whether the process was killed or not
+		bool pKilled;
+		sint64 pEndTime;
+
 	}; // class SubProcess
+
+
+
+	bool SubProcess::onExecute()
+	{
+		pExitStatus = 0;
+		pKilled     = false;
+		pEndTime    = 0;
+
+		# ifdef YUNI_OS_WINDOWS
+		onExecuteWindows();
+		# else
+		onExecuteUnix();
+		# endif
+
+		// prevent against invalid code
+		if (pEndTime == 0)
+		{
+			assert(false && "endTime is invalid");
+			pEndTime = Yuni::DateTime::Now();
+		}
+
+		theProcessHasStopped(pKilled, pExitStatus, pEndTime);
+		return false;
+	}
+
+
+	inline void SubProcess::onPause()
+	{
+	}
+
+
+	inline void SubProcess::onStop()
+	{
+	}
+
+
+	void SubProcess::onKill()
+	{
+		bool killed = false;
+		# ifndef YUNI_OS_WINDOWS
+		// try to kill the attached child process if any
+		{
+			Yuni::Process::ProcessEnvironment::Ptr envptr = pProcess.pEnv;
+			if (not envptr)
+				return;
+			Yuni::Process::ProcessEnvironment& env = *envptr;
+
+			MutexLocker locker(env.mutex);
+			if (env.processID > 0)
+			{
+				kill(env.processID, SIGKILL);
+				killed = true;
+			}
+		}
+		# endif
+		sint64 endTime = Yuni::DateTime::Now();
+		theProcessHasStopped(killed, -127, endTime);
+	}
+
+
+	void SubProcess::theProcessHasStopped(bool killed, int exitstatus, sint64 endTime)
+	{
+		Yuni::Process::ProcessEnvironment::Ptr envptr = pProcess.pEnv;
+		if (not envptr)
+			return;
+		Yuni::Process::ProcessEnvironment& env = *envptr;
+
+		// Making sure that the process ID is invalid
+		sint64 duration;
+		{
+			MutexLocker locker(env.mutex);
+			if (!env.running) // already stopped - should never happen
+				return;
+			env.running      = 0;
+			env.processInput = -1;
+			env.exitstatus   = exitstatus;
+			duration         = (endTime >= env.startTime) ? (endTime - env.startTime) : 0;
+			env.duration     = duration;
+		}
+
+		if (!(!pProcess.pStream))
+			pProcess.pStream->onStop(killed, exitstatus, duration);
+	}
+
+
+	void SubProcess::deleteAllArguments()
+	{
+		if (pArguments)
+		{
+			for (uint i = 0; pArguments[i]; ++i)
+				::free(pArguments[i]);
+			::free(pArguments);
+			pArguments = nullptr;
+		}
+	}
+
+
+
+	# ifdef YUNI_OS_WINDOWS
+	void SubProcess::onExecuteWindows()
+	{
+		pEndTime = Yuni::DateTime::Now();
+	}
+	# endif
+
+
+	# ifndef YUNI_OS_WINDOWS
+	void SubProcess::onExecuteUnix()
+	{
+		Yuni::Process::Stream::Ptr stream = pProcess.pStream;
+		bool hasStream = !(!stream);
+
+		enum {bufferSize = 4096 * 2};
+		char* buffer    = new char[bufferSize];
+		char* buffererr = new char[bufferSize];
+
+		do
+		{
+			// Read data from the standard output
+			// standard output
+			ssize_t stdcoutsize = ::read(pData.infd[0], buffer,    bufferSize - 1);
+			ssize_t stdcerrsize = ::read(pData.errd[0], buffererr, bufferSize - 1);
+
+			assert(stdcoutsize < bufferSize);
+			assert(stdcerrsize < bufferSize);
+			if (stdcoutsize > 0)
+			{
+				buffer[stdcoutsize] = '\0';
+				if (hasStream)
+					stream->onRead(AnyString(buffer, (uint)stdcoutsize));
+				if (pRedirectToConsole)
+					std::cout.write(buffer, stdcoutsize);
+			}
+
+			if (stdcerrsize > 0)
+			{
+				buffererr[stdcerrsize] = '\0';
+				if (hasStream)
+					stream->onErrorRead(AnyString(buffererr, (uint)stdcerrsize));
+				if (pRedirectToConsole)
+					std::cerr.write(buffererr, stdcerrsize);
+				continue;
+			}
+
+			// direct call to `continue` if something has been read
+			if (stdcoutsize > 0)
+				continue;
+
+			// Check PID status
+			{
+				int status;
+				int wpid = waitpid(pData.pid, &status, WNOHANG | WUNTRACED | WCONTINUED);
+				if (wpid > 0)
+				{
+					if (WIFEXITED(status))
+						pExitStatus = WEXITSTATUS(status);
+					else if (WIFSIGNALED(status))
+					{
+						pExitStatus = -127;
+						pKilled = true;
+					}
+					break;
+				}
+				else
+				{
+					if (wpid == -1) // the process is already dead
+						break;
+				}
+			}
+			suspend(50); // arbitrary
+		}
+		while (true);
+
+		pEndTime = Yuni::DateTime::Now();
+
+		// close all remaining fd
+		int ca = close(pData.infd[0]);
+		int cb = close(pData.errd[0]);
+		int cc = close(pData.outfd[1]);
+		if (ca || cb || cc)
+			std::cerr << "close file descriptor failed\n";
+
+		// release the buffer
+		delete[] buffer;
+		delete[] buffererr;
+	}
+	# endif
+
 
 
 
