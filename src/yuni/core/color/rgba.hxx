@@ -109,7 +109,7 @@ namespace Color
 			}
 		}
 
-		static inline bool IsEqual(Yuni::Color::RGBA<U>& color, const Yuni::Color::RGBA<V>& value)
+		static inline bool IsEqual(const Yuni::Color::RGBA<U>& color, const Yuni::Color::RGBA<V>& value)
 		{
 			if ((int)Yuni::Color::RGBA<U>::upperBound == (int)Yuni::Color::RGBA<V>::upperBound
 				&& (int)Yuni::Color::RGBA<U>::lowerBound == (int)Yuni::Color::RGBA<V>::lowerBound)
