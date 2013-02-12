@@ -42,6 +42,9 @@ namespace Media
 		//! Destructor
 		~Frame();
 
+		//! Is the frame valid ?
+		bool valid() const;
+
 		//! Image width (Video only !)
 		uint width() const;
 		//! Image height (Video only !)

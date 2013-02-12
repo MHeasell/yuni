@@ -53,6 +53,13 @@ namespace Media
 	}
 
 
+	bool Frame::valid() const
+	{
+		return pImpl->frame && pImpl->frame->linesize[0] > 0 &&
+			pImpl->frame->linesize[1] > 0 && pImpl->frame->linesize[2] > 0;
+	}
+
+
 	uint Frame::width() const
 	{
 		assert(pImpl->frame);
