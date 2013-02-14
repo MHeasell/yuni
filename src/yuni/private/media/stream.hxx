@@ -20,11 +20,6 @@ namespace Media
 		pALFormat(0),
 		pSize(0),
 		pCrtPts(AV_NOPTS_VALUE),
-		pData(nullptr),
-		pDataSize(0),
-		pDataSizeMax(0),
-		pDecodedData(nullptr),
-		pDecodedDataSize(0),
 		pFrame(nullptr),
 		pParent(parent)
 	{
@@ -47,7 +42,7 @@ namespace Media
 		}
 
 		if (IsAudio)
-			pALFormat = Private::Media::OpenAL::GetFormat(16,  pCodec->channels);
+			pALFormat = Private::Media::OpenAL::GetFormat(16, pCodec->channels);
 	}
 
 
@@ -55,188 +50,123 @@ namespace Media
 	Stream<TypeT>::~Stream()
 	{
 		if (pCodec)
+		{
 			::avcodec_close(pCodec);
-		::free(pData);
-		::free(pDecodedData);
+			pCodec = nullptr;
+		}
 		if (pFrame)
 			::av_free(pFrame);
 	}
 
 
 	template<StreamType TypeT>
-	template<uint SizeT>
-	inline uint Stream<TypeT>::nextBuffer(CString<SizeT, false>& buffer)
+	AVPacket* Stream<TypeT>::nextPacket()
 	{
-		YUNI_STATIC_ASSERT(IsAudio, nextBufferNotAccessibleInVideo);
-
-		if (!pDecodedData)
+		// If the queue is empty
+		if (pPackets.empty())
 		{
-			uint64 frameSize = rate() * 2 * channels();
-			pSize = frameSize * pFormat->duration / AV_TIME_BASE;
+			if (!pParent)
+				return nullptr;
 
-			// Allocate space for the decoded data to be stored in
-			pDecodedData = (uint8*)::malloc(AVCODEC_MAX_AUDIO_FRAME_SIZE);
+			AVPacket* pkt = pParent->getNextPacket(this);
+			if (!pkt)
+				// No more packets
+				return nullptr;
 		}
 
-		uint dec = 0;
-		char* data = buffer.data();
-		while (dec < SizeT)
-		{
-			// If there's any pending decoded data, deal with it first
-			if (pDecodedDataSize > 0)
-			{
-				// Get the amount of bytes remaining to be written, and clamp to
-				// the amount of decoded data we have
-				size_t rem = SizeT - dec;
-				if (rem > pDecodedDataSize)
-					rem = pDecodedDataSize;
 
-				// Copy the data to the app's buffer and increment
-				YUNI_MEMCPY(data, rem, pDecodedData, rem);
-				data = (char*)data + rem;
-				dec += rem;
-
-				// If there's any decoded data left, move it to the front of the
-				// buffer for next time
-				if (rem < pDecodedDataSize)
-					::memmove(pDecodedData, &pDecodedData[rem], pDecodedDataSize - rem);
-				pDecodedDataSize -= rem;
-			}
-
-			// Check if we need to get more decoded data
-			if (pDecodedDataSize == 0)
-			{
-				size_t insize = pDataSize;
-				if (0 == insize)
-				{
-					pParent->getNextPacket<stAudio>(this);
-					// If there's no more input data, break and return what we have
-					if (insize == pDataSize)
-						break;
-					insize = pDataSize;
-					::memset(&pData[insize], 0, FF_INPUT_BUFFER_PADDING_SIZE);
-				}
-
-				// Clear the input padding bits
-				// Decode some data, and check for errors
-				int size = AVCODEC_MAX_AUDIO_FRAME_SIZE;
-				AVPacket pkt;
-				//AvFrame* decodedFrame = NULL;
-
-				::av_init_packet(&pkt);
-				pkt.data = (uint8_t*)pData;
-				pkt.size = insize;
-
-				int len;
-				while ((len = ::avcodec_decode_audio3(pCodec,
-					(int16_t*)pDecodedData, &size, &pkt)) == 0)
-				{
-					if (size > 0)
-						break;
-					pParent->getNextPacket<stAudio>(this);
-					if (insize == pDataSize)
-						break;
-					insize = pDataSize;
-					::memset(&pData[insize], 0, FF_INPUT_BUFFER_PADDING_SIZE);
-					pkt.data = (uint8_t*)pData;
-					pkt.size = insize;
-				}
-
-				if (len < 0)
-					break;
-
-				if (len > 0)
-				{
-					// If any input data is left, move it to the start of the
-					// buffer, and decrease the buffer size
-					size_t rem = insize - len;
-					if (rem)
-						memmove(pData, &pData[len], rem);
-					pDataSize = rem;
-				}
-				// Set the output buffer size
-				pDecodedDataSize = size;
-			}
-		}
-
-		// Return the number of bytes we were able to get
-		return dec;
+		// Get the first packet in queue
+		AVPacket* pkt = pPackets.front();
+		pPackets.pop_front();
+		return pkt;
 	}
 
 
 	template<StreamType TypeT>
 	uint Stream<TypeT>::readFrame()
 	{
-		AVPacket packet;
-		int frameFinished = 0;
+		// Frame allocation
+		if (!pFrame)
+		{
+			if (!(pFrame = ::avcodec_alloc_frame()))
+			{
+				std::cerr << "Error allocating a frame for audio decoding !" << std::endl;
+				return 0;
+			}
+		}
+		else
+			// Should not happen, but this is a security.
+			::avcodec_get_frame_defaults(pFrame);
+
+
 		int bytesRead = 0;
-
-		// We should not have to clean the frame here, but it's a security
-		// pFrame should be nullptr when entering here
-		if (pFrame)
-			::av_free(pFrame);
-
-		pFrame = ::avcodec_alloc_frame();
-
+		int frameFinished = 0;
+		AVPacket* packet;
 		while (!frameFinished)
 		{
-			// Read a packet
-			if (::av_read_frame(pFormat, &packet) != 0)
-			{
-				::av_free(pFrame);
-				pFrame = nullptr;
-				break;
-			}
-			// Ignore packets from other streams
-			if ((uint)packet.stream_index != pIndex)
-				continue;
+			// Get next packet
+			packet = nextPacket();
+			if (!packet)
+				return 0;
 
+			// VIDEO
 			if (IsVideo)
 			{
 				pCrtPts = 0;
-				// If we can decode it
+				// Decode the packet
 				#if LIBAVCODEC_VERSION_INT > AV_VERSION_INT(52,30,0)
-				if ((bytesRead = ::avcodec_decode_video2(pCodec, pFrame, &frameFinished, &packet)) >= 0)
+				if ((bytesRead = ::avcodec_decode_video2(pCodec, pFrame, &frameFinished, packet)) < 0)
 				#else
-				if ((bytesRead = ::avcodec_decode_video(pCodec, pFrame, &frameFinished, packet.data, packet.size)) >= 0)
+				if ((bytesRead = ::avcodec_decode_video(pCodec, pFrame, &frameFinished, packet->data, packet->size)) < 0)
 				#endif
 				{
-					// If the frame is finished (should be in one shot for video stream)
-					if (frameFinished)
-					{
-						if (AV_NOPTS_VALUE == packet.dts && pFrame->opaque
-							&& AV_NOPTS_VALUE != *(uint64_t*)pFrame->opaque)
-							pCrtPts = *(uint64_t*)pFrame->opaque;
-						else if (AV_NOPTS_VALUE != packet.dts)
-							pCrtPts = packet.dts;
-						else
-							pCrtPts = 0.0;
-						pCrtPts *= ::av_q2d(pCodec->time_base);
-						break;
-					}
+					std::cerr << "Error while decoding video !" << std::endl;
+					// Do not do anything here, just act normally and try to recover from the error
+				}
+
+				// If the frame is finished (should be in one shot)
+				if (frameFinished)
+				{
+					if (AV_NOPTS_VALUE == (uint64)packet->dts && pFrame->opaque
+						&& AV_NOPTS_VALUE != *(uint64*)pFrame->opaque)
+						pCrtPts = *(uint64*)pFrame->opaque;
+					else if (AV_NOPTS_VALUE != (uint64)packet->dts)
+						pCrtPts = packet->dts;
+					else
+						pCrtPts = 0.0;
+					pCrtPts *= ::av_q2d(pCodec->time_base);
+					break;
 				}
 			}
-			else // IsAudio
+			// AUDIO
+			else
 			{
-				// If we can decode it
+				// Decode the packet
 				#if LIBAVCODEC_VERSION_INT > AV_VERSION_INT(52,30,0)
-				if ((bytesRead = ::avcodec_decode_audio4(pCodec, pFrame, &frameFinished, &packet)) >= 0)
+				if ((bytesRead = ::avcodec_decode_audio4(pCodec, pFrame, &frameFinished, packet)) < 0)
 				#else
-				if ((bytesRead = ::avcodec_decode_audio3(pCodec, pFrame, &frameFinished, packet.data, packet.size)) >= 0)
+				if ((bytesRead = ::avcodec_decode_audio3(pCodec, pFrame, &frameFinished, packet->data, packet->size)) < 0)
 				#endif
 				{
-					// If the frame is finished (should be in one shot for video stream)
-					if (frameFinished)
-					{
-						pFrame->pts = packet.dts;
-						break;
-					}
+					std::cerr << "Error while decoding audio !" << std::endl;
+					// Do not do anything here, just act normally and try to recover from the error
+				}
+
+				// If the frame is finished (should be in one shot)
+				if (frameFinished)
+				{
+					break;
 				}
 			}
+
+			// Free packet before looping
+			::av_free_packet(packet);
+			delete packet;
 		}
 
-		// free packet
-		::av_free_packet(&packet);
+		// Free packet before quitting
+		::av_free_packet(packet);
+		delete packet;
 		return bytesRead;
 	}
 
@@ -245,25 +175,17 @@ namespace Media
 	inline Frame::Ptr Stream<TypeT>::nextFrame()
 	{
 		//YUNI_STATIC_ASSERT(IsVideo, nextFrameNotAccessibleInAudio);
-		readFrame();
+		if (IsVideo)
+			readFrame();
+		else // IsAudio
+			//readAudioFrame();
+			readFrame();
 		// TODO : Give the real frame index
 		Frame::Ptr frame = new Frame(0u, pCrtPts);
 		frame->setData(pFrame);
 		pFrame = nullptr;
 		return frame;
 	}
-
-
-	// template<StreamType TypeT>
-	// inline uint8* Stream<TypeT>::nextBuffer(uint& count)
-	// {
-	// 	YUNI_STATIC_ASSERT(IsAudio, nextBufferNotAccessibleInVideo);
-	// 	count = readFrame();
-	// count = ::av_samples_get_buffer_size(NULL, stream->CodecCtx->channels,
-    //                                           stream->Frame->nb_samples,
-    //                                           stream->CodecCtx->sample_fmt, 1);
-	// 	return pFrame->data[0];
-	// }
 
 
 	template<StreamType TypeT>
