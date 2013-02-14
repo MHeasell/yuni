@@ -34,7 +34,8 @@ namespace Media
 		enum // anonymous
 		{
 			maxBufferCount = 4,
-			bufferSize = 65536
+			minBufferSize = 60000, // ~4k buffers are apparently the norm
+			maxBufferSize = 65536
 		}; // enum anonymous
 
 	public:
@@ -56,6 +57,9 @@ namespace Media
 		uint duration() const;
 
 	private:
+		uint fillBuffer();
+
+	private:
 		//! The audio stream contains the link to the file and the data
 		StreamPtr pStream;
 
@@ -66,7 +70,7 @@ namespace Media
 		uint pIDs[maxBufferCount];
 
 		//! Buffer for storing raw data
-		CString<bufferSize, false> pData;
+		CString<maxBufferSize, false> pData;
 
 	}; // class Sound
 

@@ -42,7 +42,7 @@ namespace Media
 
 		//! Get next packet for a given stream
 		template<StreamType TypeT>
-		void getNextPacket(Stream<TypeT>* stream);
+		AVPacket* getNextPacket(Stream<TypeT>* stream);
 
 		//! Get file duration
 		uint duration() const;

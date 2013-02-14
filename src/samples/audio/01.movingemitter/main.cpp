@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
 	if (!media.running())
 		return 1;
 
-	static const float LIMIT = 20.0f;
+	static const float LIMIT = 300.0f;
 
 	// adding a new emitter
 	AnyString emitterName("Emitter");
@@ -59,7 +59,7 @@ int main(int argc, char* argv[])
 	for (uint i = 0; i < 2000; ++i) // arbitrary
 	{
 		// pause
-		SuspendMilliSeconds(100); // milliseconds (arbitrary)
+		SuspendMilliSeconds(50); // milliseconds (arbitrary)
 
 		// Moving the emitter around us
 		position.y += 1.0f * (inverse ? -1.0f : 1.0f);

@@ -22,6 +22,7 @@ namespace Media
 {
 
 
+	// Hidden implementation for PImpl idiom
 	class FrameImpl final
 	{
 	public:

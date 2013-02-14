@@ -60,10 +60,11 @@ namespace Media
 
 
 	template<StreamType TypeT>
-	inline void File::getNextPacket(Stream<TypeT>* stream)
+	inline AVPacket* File::getNextPacket(Stream<TypeT>* stream)
 	{
-		AVPacket packet;
-		while (::av_read_frame(pFormat, &packet) >= 0)
+		AVPacket* packet = new AVPacket();
+		// Get a packet
+		while (::av_read_frame(pFormat, packet) >= 0)
 		{
 			// Check each stream the user has a handle for, looking for the one
 			// this packet belongs to
@@ -71,40 +72,26 @@ namespace Media
 			typename Stream<TypeT>::Map::iterator end = cache.end();
 			for (typename Stream<TypeT>::Map::iterator it = cache.begin(); it != end; ++it)
 			{
+				// Is this the stream the packet belongs to ?
 				typename Stream<TypeT>::Ptr crtStream = it->second;
-				if (crtStream->index() != (uint)packet.stream_index)
+				if (crtStream->index() != (uint)packet->stream_index)
 					continue;
 
-				size_t idx = crtStream->pDataSize;
-
-				// Found the stream. Grow the input data buffer as needed to
-				// hold the new packet's data. Additionally, some ffmpeg codecs
-				// need some padding so they don't overread the allocated
-				// buffer
-				if (idx + packet.size > crtStream->pDataSizeMax)
-				{
-					char* temp = (char*)realloc(crtStream->pData, idx + packet.size + FF_INPUT_BUFFER_PADDING_SIZE);
-					if (!temp)
-						break;
-					crtStream->pData = temp;
-					crtStream->pDataSizeMax = idx + packet.size;
-				}
-
-				// Copy the packet and free it
-				YUNI_MEMCPY(&crtStream->pData[idx], packet.size, packet.data, packet.size);
-				crtStream->pDataSize += packet.size;
+				// This is a stream we handle, so enqueue the packet
+				crtStream->pPackets.push_back(packet);
 
 				// Return if this stream is what we needed a packet for
 				if (crtStream->index() == stream->index())
-				{
-					::av_free_packet(&packet);
-					return;
-				}
+					return packet;
+
+				// We have managed the packet, jump out to get another one
 				break;
 			}
 			// Free the packet and look for another
-			::av_free_packet(&packet);
+			::av_free_packet(packet);
 		}
+		delete packet;
+		return nullptr;
 	}
 
 

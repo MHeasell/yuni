@@ -58,6 +58,9 @@ namespace Media
 		//! Map
 		typedef std::map<uint, Ptr>  Map;
 
+		//! Packet queue
+		typedef std::list<AVPacket*>  PacketQueue;
+
 	public:
 		//! Constructor
 		Stream(File* parent, AVFormatContext* format, AVCodecContext* codec, uint index);
@@ -100,15 +103,6 @@ namespace Media
 		*/
 		Frame::Ptr nextFrame();
 
-		/*!
-		** \brief Get the next buffer of data (Audio only !)
-		**
-		** \returns Number of bytes read
-		*/
-//		uint8* nextBuffer(uint& count);
-		template<uint SizeT>
-		uint nextBuffer(CString<SizeT, false>& buffer);
-
 		//! Is the stream ready for decoding ?
 		// The OpenAL format check is done only for audio
 		bool valid() const { return nullptr != pCodec && IsAudio == (0 != pALFormat); }
@@ -116,6 +110,9 @@ namespace Media
 	private:
 		//! Read a frame from the stream
 		uint readFrame();
+
+		//! Get the next packet, either from queue, or from the stream if the queue is empty
+		AVPacket* nextPacket();
 
 	private:
 		//! Codec information
@@ -136,19 +133,11 @@ namespace Media
 		//! Current presentation time stamp
 		double pCrtPts;
 
-		//! \name Temporary data for old version reading
-		//@{
-		char* pData;
-		size_t pDataSize;
-		size_t pDataSizeMax;
-		//@}
-
-		//! \name Temporary data for new version reading
-		//@{
-		uint8* pDecodedData;
-		size_t pDecodedDataSize;
+		//! Currently read frame
 		AVFrame* pFrame;
-		//@}
+
+		//! Queue for this stream's packets
+		PacketQueue pPackets;
 
 		//! Parent file
 		File* pParent;
