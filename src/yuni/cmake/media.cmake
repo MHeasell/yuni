@@ -23,9 +23,9 @@ set(SRC_MEDIA
 		media/emitter.h
 		media/emitter.hxx
 		media/emitter.cpp
-		media/sound.h
-		media/sound.hxx
-		media/sound.cpp
+		media/source.h
+		media/source.hxx
+		media/source.cpp
 		private/media/file.cpp
 		private/media/file.h
 		private/media/file.hxx

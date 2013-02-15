@@ -6,7 +6,7 @@
 # include "../core/string.h"
 # include "../core/point3D.h"
 # include "../core/vector3D.h"
-# include "sound.h"
+# include "source.h"
 
 
 namespace Yuni
@@ -15,7 +15,7 @@ namespace Media
 {
 
 	/*!
-	** \brief An emitter is a virtual object from which a sound is played
+	** \brief An emitter is a virtual object from which a source is played
 	**
 	** Emitters can be placed in space, and be moved around.
 	*/
@@ -74,8 +74,8 @@ namespace Media
 
 		//! \name Methods
 		//@{
-		//! Attach a buffer to the emitter
-		bool attachBufferDispatched(Sound::Ptr& buffer);
+		//! Attach a source to the emitter
+		bool attachBufferDispatched(Source::Ptr& buffer);
 
 		//! Detach the emitter from any buffer
 		bool detachBufferDispatched();
@@ -83,16 +83,16 @@ namespace Media
 		//! Prepare the emitter for playing
 		bool prepareDispatched();
 
-		//! Play the sound
-		bool playSoundDispatched();
-		//! Play the sound
-		bool playSoundDispatched(Sound::Ptr& buffer);
+		//! Play the source
+		bool playSourceDispatched();
+		//! Play the source
+		bool playSourceDispatched(Source::Ptr& buffer);
 
-		//! Stop the sound
-		bool stopSoundDispatched();
+		//! Stop the source
+		bool stopSourceDispatched();
 
-		//! Pause the sound
-		bool pauseSoundDispatched();
+		//! Pause the source
+		bool pauseSourceDispatched();
 
 		//! Update buffers if necessary
 		bool updateDispatched();
@@ -167,7 +167,7 @@ namespace Media
 		//! Current playback position
 		sint64 pStartTime;
 		//! Sound to play. nullptr if none
-		Sound::Ptr pBuffer;
+		Source::Ptr pBuffer;
 
 		//! Is the emitter ready for use?
 		bool pReady;

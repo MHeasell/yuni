@@ -5,7 +5,7 @@
 # include "../core/string.h"
 # include "emitter.h"
 # include "loop.h"
-# include "sound.h"
+# include "source.h"
 
 
 namespace Yuni
@@ -60,7 +60,7 @@ namespace Media
 			//! Attach an emitter to a buffer
 			bool attach(Emitter::Ptr emitter, const AnyString& attachedBuffer);
 			//! Attach an emitter to a buffer
-			bool attach(Emitter::Ptr emitter, Sound::Ptr attachedBuffer);
+			bool attach(Emitter::Ptr emitter, Source::Ptr attachedBuffer);
 
 			//! Detach an emitter from any buffer
 			void detach(const AnyString& name);
@@ -157,26 +157,28 @@ namespace Media
 			void clear();
 
 			/*!
-			** \brief Load sound file from given path
+			** \brief Load media file from given path
 			**
-			** \param name Path to file, used from now on as an identifier for the sound
+			** \param name Path to file, used from now on as an identifier for the source
 			*/
 			bool load(const AnyString& name);
 
 			/*!
-			** \brief Load sound file from given path
+			** \brief Load media file from given path
 			**
-			** \param name Path to file, used from now on as an identifier for the sound
+			** \param name Path to file, used from now on as an identifier for the source
 			*/
 			bool unload(const AnyString& name);
 
-			//! Get the duration of a loaded sound
-			unsigned int duration(const AnyString& name);
+			//! Get the duration of a loaded source
+			uint duration(const AnyString& name);
 
+			//! Get elapsed time (current playing time) in the source
+			float elapsedTime(const AnyString& name);
 
 		private:
-			//! Get a sound from the library
-			Sound::Ptr get(const AnyString& name);
+			//! Get a source from the library
+			Source::Ptr get(const AnyString& name);
 
 		private:
 			//! Friend declaration
@@ -185,7 +187,7 @@ namespace Media
 			friend class QueueService::Emitters;
 
 			//! Map of currently loaded buffers, with string tags as keys
-			Sound::Map pBuffers;
+			Source::Map pBuffers;
 
 			//! Associated queue service
 			QueueService* pQueueService;
@@ -275,11 +277,11 @@ namespace Media
 		bool initDispatched(InitData& initData);
 
 		/*!
-		** \brief Sound loading
+		** \brief Source loading
 		**
 		** \note Dispatched in the media loop
 		*/
-		bool loadSoundDispatched(const String& filePath);
+		bool loadSourceDispatched(const String& filePath);
 
 		/*!
 		** \brief Buffer update
