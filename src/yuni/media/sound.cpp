@@ -20,7 +20,7 @@ namespace Media
 			if (!count)
 				return 0;
 			count = Math::Min(count, (uint)maxBufferSize - size);
-			pData.appendWithoutChecking((const char*)frame->audioData(), count);
+			pData.append((const char*)frame->audioData(), count);
 			size += count;
 		}
 		return size;
