@@ -482,7 +482,7 @@ namespace Yuni
 	{
 		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CString_InvalidTypeForBuffer);
 
-		if (!adapter)
+		if (not adapter)
 			AncestorType::assign(Traits::CString<StringT>::Perform(str), size);
 		else
 			adapt(Traits::CString<StringT>::Perform(str), size);
@@ -495,13 +495,8 @@ namespace Yuni
 	CString<ChunkSizeT,ExpandableT>::assign(const StringT& str, Size size, Size offset)
 	{
 		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CString_InvalidTypeForBuffer);
-		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  CString_InvalidTypeForBufferSize);
 
-		# ifndef NDEBUG
-		Size len = Traits::Length<StringT,Size>::Value(str);
-		assert(size + offset <= len && "Buffer overflow in CString::assign(s, size, offset) !");
-		# endif // NDEBUG
-		if (!adapter)
+		if (not adapter)
 			AncestorType::assign(Traits::CString<StringT>::Perform(str) + offset, size);
 		else
 			adapt(Traits::CString<StringT>::Perform(str) + offset, size);
@@ -510,7 +505,7 @@ namespace Yuni
 
 
 
-	namespace
+	namespace // anonymous
 	{
 		/*!
 		** \brief Find the end of a sequence, started and terminated by a given character (usually a quote)
@@ -521,9 +516,8 @@ namespace Yuni
 		** \param str The sequence
 		** \param quote The character to find, usually a quote
 		*/
-		template <class StringT>
-		typename StringT::Size
-		FindEndOfSequence(const char* str, char quote, typename StringT::Size maxLen)
+		template<class StringT>
+		static typename StringT::Size FindEndOfSequence(const char* str, char quote, typename StringT::Size maxLen)
 		{
 			if (str)
 			{
