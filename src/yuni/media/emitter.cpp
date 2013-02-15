@@ -18,7 +18,7 @@ namespace Media
 
 
 
-	bool Emitter::attachBufferDispatched(Sound::Ptr& buffer)
+	bool Emitter::attachBufferDispatched(Source::Ptr& buffer)
 	{
 		// Check buffer validity
 		if (!buffer || !buffer->valid())
@@ -42,7 +42,7 @@ namespace Media
 		if (!pReady || !pBuffer)
 			return false;
 
-		stopSoundDispatched();
+		stopSourceDispatched();
 
 		Private::Media::OpenAL::UnbindBufferFromSource(pID);
 		pBuffer = nullptr;
@@ -50,7 +50,7 @@ namespace Media
 	}
 
 
-	bool Emitter::playSoundDispatched()
+	bool Emitter::playSourceDispatched()
 	{
 		if (!pBuffer)
 			return false;
@@ -70,7 +70,7 @@ namespace Media
 	}
 
 
-	bool Emitter::playSoundDispatched(Sound::Ptr& buffer)
+	bool Emitter::playSourceDispatched(Source::Ptr& buffer)
 	{
 		if (!pReady && !prepareDispatched())
 			return false;
@@ -78,11 +78,11 @@ namespace Media
 		if (!attachBufferDispatched(buffer))
 			return false;
 
-		return playSoundDispatched();
+		return playSourceDispatched();
 	}
 
 
-	bool Emitter::pauseSoundDispatched()
+	bool Emitter::pauseSourceDispatched()
 	{
 		if (!pPlaying)
 			return false;
@@ -92,7 +92,7 @@ namespace Media
 	}
 
 
-	bool Emitter::stopSoundDispatched()
+	bool Emitter::stopSourceDispatched()
 	{
 		if (!pPlaying && !pPaused)
 			return false;
@@ -150,9 +150,12 @@ namespace Media
 
 		if (!pPlaying)
 			return 0;
-		Yuni::timeval now;
-		YUNI_SYSTEM_GETTIMEOFDAY(&now, NULL);
-		return now.tv_sec - pStartTime;
+		ALfloat elapsed;
+		::alGetSourcef(pID, AL_SEC_OFFSET, &elapsed);
+		return elapsed;
+		// Yuni::timeval now;
+		// YUNI_SYSTEM_GETTIMEOFDAY(&now, NULL);
+		// return now.tv_sec - pStartTime;
 	}
 
 
