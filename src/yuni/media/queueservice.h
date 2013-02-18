@@ -160,8 +160,28 @@ namespace Media
 			** \brief Load media file from given path
 			**
 			** \param name Path to file, used from now on as an identifier for the source
+			**
+			** \note Automatic stream detection is performed, if video and audio are found, both streams are loaded
 			*/
 			bool load(const AnyString& name);
+
+			/*!
+			** \brief Load audio file from given path
+			**
+			** \param name Path to file, used from now on as an identifier for the source
+			**
+			** \note Only the first found audio stream is loaded, even on video files
+			*/
+			bool loadSound(const AnyString& name);
+
+			/*!
+			** \brief Load audio file from given path
+			**
+			** \param name Path to file, used from now on as an identifier for the source
+			**
+			** \note Only the first found video stream is loaded, not the audio if any
+			*/
+			bool loadVideo(const AnyString& name);
 
 			/*!
 			** \brief Load media file from given path
@@ -281,7 +301,7 @@ namespace Media
 		**
 		** \note Dispatched in the media loop
 		*/
-		bool loadSourceDispatched(const String& filePath);
+		bool loadSource(const String& filePath, bool video, bool audio, bool strict);
 
 		/*!
 		** \brief Buffer update
