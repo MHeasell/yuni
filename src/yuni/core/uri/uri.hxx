@@ -4,14 +4,14 @@
 namespace Yuni
 {
 
-	Uri::Uri(const AnyString& string)
+	inline Uri::Uri(const AnyString& string)
 	{
 		extractURIFromString(string);
 	}
 
 
 	template<class StringT>
-	void Uri::path(const StringT& s)
+	inline void Uri::path(const StringT& s)
 	{
 		pInfos.path = s;
 		pInfos.isValid = true;
@@ -19,7 +19,7 @@ namespace Yuni
 
 
 	template<class StringT>
-	void Uri::user(const StringT& s)
+	inline void Uri::user(const StringT& s)
 	{
 		pInfos.user = s;
 		pInfos.isValid = true;
