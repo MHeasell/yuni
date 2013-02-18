@@ -104,7 +104,7 @@ namespace Media
 	}
 
 
-	bool QueueService::loadSourceDispatched(const String& filePath)
+	bool QueueService::loadSource(const String& filePath, bool video, bool audio, bool strict)
 	{
 		// Try to open the file
 		Private::Media::File* file = new Private::Media::File(filePath);
@@ -114,30 +114,46 @@ namespace Media
 			return false;
 		}
 
-		// Try to get an audio stream from it
-		Private::Media::Stream<Private::Media::stAudio>::Ptr stream =
-			file->getStream<Private::Media::stAudio>();
-		if (!stream)
+		Private::Media::Stream<Private::Media::stAudio>::Ptr aStream;
+		Private::Media::Stream<Private::Media::stVideo>::Ptr vStream;
+
+		if (audio)
 		{
-			delete file;
-			return false;
+			// Try to get an audio stream from it
+			aStream = file->getStream<Private::Media::stAudio>();
+			if ((!aStream || !aStream->valid()) && strict)
+			{
+				delete file;
+				return false;
+			}
 		}
 
-		// Check the format
-		if (!stream->valid())
+		if (video)
+		{
+			// Try to get a video stream from it
+			vStream = file->getStream<Private::Media::stVideo>();
+			if ((!vStream || !vStream->valid()) && strict)
+			{
+				delete file;
+				return false;
+			}
+		}
+
+		// At that point, if we have no valid stream, we should fail,
+		// even on the non-strict case.
+		if ((!vStream || !vStream->valid()) && (!aStream || !aStream->valid()))
 		{
 			delete file;
 			return false;
 		}
-		//std::cout << "Sound is " << bits << " bits " << (channels > 1 ? "stereo " : "mono ")
-		//	  << rate << "Hz" << std::endl;
 
 		// Associate the buffer with the stream
 		{
 			ThreadingPolicy::MutexLocker locker(*this);
 			Source::Ptr buffer = library.get(filePath);
 			assert(nullptr != buffer);
-			buffer->stream(stream);
+			// Set the streams
+			buffer->stream(vStream, aStream);
 		}
 
 		return true;
@@ -428,11 +444,60 @@ namespace Media
 		// Create the buffer, store it in the map
 		pBuffers[filePath] = new Source();
 
-		Yuni::Bind<bool()> callback;
-		callback.bind(pQueueService, &QueueService::loadSourceDispatched, filePath);
-		pQueueService->pMediaLoop.dispatch(callback);
+		// Yuni::Bind<bool()> callback;
+		// callback.bind(pQueueService, &QueueService::loadSourceDispatched, filePath);
+		// pQueueService->pMediaLoop.dispatch(callback);
+		if (!pQueueService->loadSource(filePath, true, true, false))
+		{
+			pBuffers.erase(filePath);
+			return false;
+		}
 		return true;
 	}
+
+	bool QueueService::Library::loadSound(const AnyString& filePath)
+	{
+		ThreadingPolicy::MutexLocker locker(*this);
+
+		if (!pQueueService->pReady)
+			return false;
+
+		// Create the buffer, store it in the map
+		pBuffers[filePath] = new Source();
+
+		// Yuni::Bind<bool()> callback;
+		// callback.bind(pQueueService, &QueueService::loadSourceDispatched, filePath);
+		// pQueueService->pMediaLoop.dispatch(callback);
+		if (!pQueueService->loadSource(filePath, false, true, true))
+		{
+			pBuffers.erase(filePath);
+			return false;
+		}
+		return true;
+	}
+
+
+	bool QueueService::Library::loadVideo(const AnyString& filePath)
+	{
+		ThreadingPolicy::MutexLocker locker(*this);
+
+		if (!pQueueService->pReady)
+			return false;
+
+		// Create the buffer, store it in the map
+		pBuffers[filePath] = new Source();
+
+		// Yuni::Bind<bool()> callback;
+		// callback.bind(pQueueService, &QueueService::loadSourceDispatched, filePath);
+		// pQueueService->pMediaLoop.dispatch(callback);
+		if (!pQueueService->loadSource(filePath, true, false, true))
+		{
+			pBuffers.erase(filePath);
+			return false;
+		}
+		return true;
+	}
+
 
 
 	bool QueueService::Library::unload(const AnyString& name)

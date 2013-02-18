@@ -150,9 +150,7 @@ namespace Media
 
 		if (!pPlaying)
 			return 0;
-		ALfloat elapsed;
-		::alGetSourcef(pID, AL_SEC_OFFSET, &elapsed);
-		return elapsed;
+		return pBuffer->elapsedTime();
 		// Yuni::timeval now;
 		// YUNI_SYSTEM_GETTIMEOFDAY(&now, NULL);
 		// return now.tv_sec - pStartTime;
