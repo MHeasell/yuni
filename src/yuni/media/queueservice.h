@@ -45,9 +45,6 @@ namespace Media
 			{}
 			Emitters(const Emitters&);
 
-			//! Map of currently registered emitters, with string tags as keys
-			Emitter::Map pEmitters;
-
 		public:
 			//! Get an emitter
 			Emitter::Ptr get(const AnyString& name);
@@ -55,16 +52,18 @@ namespace Media
 			//! Add an emitter
 			bool add(const AnyString& name);
 
-			//! Attach an emitter to a buffer
-			bool attach(const AnyString& name, const AnyString& attachedBuffer);
-			//! Attach an emitter to a buffer
-			bool attach(Emitter::Ptr emitter, const AnyString& attachedBuffer);
-			//! Attach an emitter to a buffer
-			bool attach(Emitter::Ptr emitter, Source::Ptr attachedBuffer);
+			//! Attach an emitter to a source
+			bool attach(const AnyString& name, const AnyString& attachedSource);
+			//! Attach an emitter to a source
+			bool attach(Emitter::Ptr& emitter, const AnyString& attachedSource);
+			//! Attach an emitter to a source
+			bool attach(const AnyString& name, Source::Ptr attachedSource);
+			//! Attach an emitter to a source
+			bool attach(Emitter::Ptr& emitter, Source::Ptr attachedSource);
 
-			//! Detach an emitter from any buffer
+			//! Detach an emitter from any source
 			void detach(const AnyString& name);
-			//! Detach an emitter from any buffer
+			//! Detach an emitter from any source
 			void detach(Emitter::Ptr name);
 
 			//! Modify an emitter's data
@@ -122,6 +121,9 @@ namespace Media
 			//! Friend declaration
 			friend class QueueService;
 
+			//! Map of currently registered emitters, with string tags as keys
+			Emitter::Map pEmitters;
+
 			//! Associated queue service
 			QueueService* pQueueService;
 			//! Associated library
@@ -132,7 +134,7 @@ namespace Media
 
 
 		/*!
-		** \brief The Library contains the media buffers currently loaded in the queue service
+		** \brief The Library contains the media sources currently loaded in the queue service
 		**
 		** It can be accessed through: queueService.library
 		*/
@@ -153,7 +155,7 @@ namespace Media
 			//@}
 
 		public:
-			//! Clear the library, free the loaded buffers
+			//! Clear the library, free the loaded sources
 			void clear();
 
 			/*!
@@ -196,7 +198,6 @@ namespace Media
 			//! Get elapsed time (current playing time) in the source
 			float elapsedTime(const AnyString& name);
 
-		private:
 			//! Get a source from the library
 			Source::Ptr get(const AnyString& name);
 
@@ -206,8 +207,8 @@ namespace Media
 			//! Friend declaration
 			friend class QueueService::Emitters;
 
-			//! Map of currently loaded buffers, with string tags as keys
-			Source::Map pBuffers;
+			//! Map of currently loaded sources, with string tags as keys
+			Source::Map pSources;
 
 			//! Associated queue service
 			QueueService* pQueueService;
@@ -250,7 +251,7 @@ namespace Media
 	public:
 		//! Control block for emitters
 		Emitters emitter;
-		//! Control block for audio buffers
+		//! Control block for audio sources
 		Library library;
 
 	private:
@@ -304,7 +305,7 @@ namespace Media
 		bool loadSource(const String& filePath, bool video, bool audio, bool strict);
 
 		/*!
-		** \brief Buffer update
+		** \brief Emitter and source update
 		**
 		** \note Called in the Media::Loop::onLoop()
 		*/

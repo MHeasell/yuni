@@ -99,12 +99,15 @@ namespace Media
 		uint alFormat() const { YUNI_STATIC_ASSERT(IsAudio, NotAccessibleInVideo); return pALFormat; }
 
 		/*!
-		** \brief Get the next frame (Video only !)
+		** \brief Get the next frame
 		*/
 		Frame::Ptr nextFrame();
 
-		//! Is the stream ready for decoding ?
-		// The OpenAL format check is done only for audio
+		/*!
+		** \brief Is the stream ready for decoding ?
+		**
+		** \note The OpenAL format check is done only for audio
+		*/
 		bool valid() const { return nullptr != pCodec && IsAudio == (0 != pALFormat); }
 
 	private:

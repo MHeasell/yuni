@@ -75,10 +75,10 @@ namespace Media
 		//! \name Methods
 		//@{
 		//! Attach a source to the emitter
-		bool attachBufferDispatched(Source::Ptr& buffer);
+		bool attachSourceDispatched(Source::Ptr& source);
 
-		//! Detach the emitter from any buffer
-		bool detachBufferDispatched();
+		//! Detach the emitter from any source
+		bool detachSourceDispatched();
 
 		//! Prepare the emitter for playing
 		bool prepareDispatched();
@@ -86,7 +86,7 @@ namespace Media
 		//! Play the source
 		bool playSourceDispatched();
 		//! Play the source
-		bool playSourceDispatched(Source::Ptr& buffer);
+		bool playSourceDispatched(Source::Ptr& source);
 
 		//! Stop the source
 		bool stopSourceDispatched();
@@ -94,14 +94,14 @@ namespace Media
 		//! Pause the source
 		bool pauseSourceDispatched();
 
-		//! Update buffers if necessary
+		//! Update sources if necessary
 		bool updateDispatched();
 		//@}
 
 
 		//! \name Accessors
 		//@{
-		//! Is the emitter attached to a buffer ?
+		//! Is the emitter attached to a source ?
 		bool attached() const;
 
 		//! Is the emitter currently playing ?
@@ -138,7 +138,7 @@ namespace Media
 		** \brief Get the elapsed playback time (in seconds)
 		** \returns Time elapsed since the emitter started playback. 0 if not playing.
 		*/
-		sint64 elapsedTime() const;
+		float elapsedTime() const;
 
 		//! Get the identifier for the emitter
 		unsigned int id() const;
@@ -167,7 +167,7 @@ namespace Media
 		//! Current playback position
 		sint64 pStartTime;
 		//! Sound to play. nullptr if none
-		Source::Ptr pBuffer;
+		Source::Ptr pSource;
 
 		//! Is the emitter ready for use?
 		bool pReady;

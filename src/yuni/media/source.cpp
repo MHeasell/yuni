@@ -54,6 +54,7 @@ namespace Media
 		// Audio
 		if (nullptr != pAStream)
 		{
+			std::cout << "Audio prepare !" << std::endl;
 			pBufferCount = maxBufferCount;
 
 			if (!Private::Media::OpenAL::CreateBuffers(pBufferCount, pIDs))
@@ -78,6 +79,7 @@ namespace Media
 		// Video
 		if (nullptr != pVStream)
 		{
+			std::cout << "Video prepare !" << std::endl;
 			fillQueue();
 		}
 
@@ -87,25 +89,32 @@ namespace Media
 
 	bool Source::updateDispatched(uint source)
 	{
-		if (!pAStream && !pVStream)
+		//std::cout << "Source update !" << std::endl;
+		if (!valid())
 			return false;
 
 		// Audio
-		if (nullptr != pAStream)
+		if (hasAudio())
 		{
+			::alGetSourcef(source, AL_SEC_OFFSET, &pSecondsCurrent);
 			// Check if a buffer has finished playing
 			ALint processed = 0;
 			::alGetSourcei(source, AL_BUFFERS_PROCESSED, &processed);
-			::alGetSourcei(source, AL_SAMPLE_OFFSET, (int*)&pSamplesCurrent);
 			if (!processed)
 				return true;
 
 			// A buffer has finished playing, unqueue it
 			ALuint buffer = Private::Media::OpenAL::UnqueueBufferFromSource(source);
-			pSamplesCurrent = 0;
+			pSecondsCurrent = 0.0f;
 			int bufferSize;
+			int bits;
+			int channels;
+			int frequency;
 			::alGetBufferi(buffer, AL_SIZE, &bufferSize);
-			pSamplesRead += bufferSize * pAStream->channels() * pAStream->bits();
+			::alGetBufferi(buffer, AL_BITS, &bits);
+			::alGetBufferi(buffer, AL_CHANNELS, &channels);
+			::alGetBufferi(buffer, AL_FREQUENCY, &frequency);
+			pSecondsElapsed += (float)bufferSize / channels * 8.0f / bits / frequency;
 			// Get the next data to feed the buffer
 			uint size = fillBuffer();
 			if (!size)
@@ -120,20 +129,26 @@ namespace Media
 		}
 
 		// Video
-		if (nullptr != pVStream)
+		if (hasVideo())
 		{
-			if (nullptr != pAStream && Private::Media::OpenAL::IsSourcePlaying(source))
-			{
-				// Try to sync with audio
-				ALfloat elapsed;
-				::alGetSourcef(source, AL_SEC_OFFSET, &elapsed);
-				while (!pFrames.empty() && elapsed > pFrames.front()->timestamp())
-				{
-					pFrames.pop_front();
-					if (pFrames.empty())
-						fillQueue();
-				}
-			}
+			// if (hasAudio() && Private::Media::OpenAL::IsSourcePlaying(source))
+			// {
+			// 	std::cout << "Video and audio sync !" << std::endl;
+			// 	// Try to sync with audio
+			// 	ALfloat elapsed;
+			// 	::alGetSourcef(source, AL_SEC_OFFSET, &elapsed);
+			// 	while (!pFrames.empty() && elapsed > pFrames.front()->timestamp())
+			// 	{
+			// 		pFrames.pop_front();
+			// 		if (pFrames.empty())
+			// 			fillQueue();
+			// 	}
+			// }
+
+			// TEMPORARY
+			// The sync code is not working yet, just get some frames when we need them for now
+			if (pFrames.empty())
+				fillQueue();
 
 			if (pFrames.empty())
 				// Failed to load anymore

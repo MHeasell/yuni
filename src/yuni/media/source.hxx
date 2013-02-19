@@ -12,8 +12,8 @@ namespace Media
 		pAStream(nullptr),
 		pVStream(nullptr),
 		pBufferCount(0),
-		pSamplesRead(0),
-		pSamplesCurrent(0)
+		pSecondsElapsed(0),
+		pSecondsCurrent(0)
 	{
 	}
 
