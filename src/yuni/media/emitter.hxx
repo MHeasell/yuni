@@ -11,7 +11,7 @@ namespace Media
 	inline Emitter::Emitter(bool loop):
 		pLoop(loop),
 		pGain(DefaultGain),
-		pBuffer(nullptr),
+		pSource(nullptr),
 		pReady(false),
 		pPlaying(false),
 		pPaused(false),
@@ -23,7 +23,7 @@ namespace Media
 		pPosition(position),
 		pLoop(loop),
 		pGain(DefaultGain),
-		pBuffer(nullptr),
+		pSource(nullptr),
 		pReady(false),
 		pPlaying(false),
 		pPaused(false),
@@ -38,7 +38,7 @@ namespace Media
 		pDirection(direction),
 		pLoop(loop),
 		pGain(DefaultGain),
-		pBuffer(nullptr),
+		pSource(nullptr),
 		pReady(false),
 		pPlaying(false),
 		pPaused(false),
@@ -49,7 +49,7 @@ namespace Media
 	inline bool Emitter::attached() const
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
-		return !(!pBuffer);
+		return !(!pSource);
 	}
 
 

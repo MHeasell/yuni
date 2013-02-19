@@ -25,6 +25,19 @@ static void writeTime(T timeInSeconds)
 	std::cout << (timeInSeconds % 60);
 }
 
+template<>
+void writeTime<float>(float timeInSeconds)
+{
+	std::cout << ((int)timeInSeconds / 60) << ":";
+	if ((int)timeInSeconds % 60 < 10)
+		std::cout << 0;
+	std::cout << ((int)timeInSeconds % 60);
+	int decimals = (int)((timeInSeconds - (uint)timeInSeconds) * 100);
+	if (decimals >= 10)
+		std::cout << '.' << decimals;
+	else
+		std::cout << ".0" << decimals;
+}
 
 
 int main(int argc, char* argv[])
@@ -53,8 +66,8 @@ int main(int argc, char* argv[])
 
 	for (int i = 1; i < argc; ++i)
 	{
-		// Load sound file
-		if (!media.library.load(argv[i]))
+		// Load sound file : using `loadSound` specifies we do not care about possible video content
+		if (!media.library.loadSound(argv[i]))
 		{
 			std::cerr << "Failed to load \"" << argv[i] << "\"" << std::endl;
 			// Play the next song rather than just quitting
@@ -66,14 +79,15 @@ int main(int argc, char* argv[])
 		// Start playback on the emitter
 		media.emitter.play(emitterName);
 
-		Yuni::SuspendMilliSeconds(1000);
+		while (!media.playing())
+			Yuni::SuspendMilliSeconds(100);
+
+		std::cout << "Playing \"" << argv[i] << "\"" << std::endl;
+
 		// Get stream duration
 		uint duration = media.library.duration(argv[i]);
-		std::cout << "Sound duration: ";
-		writeTime(duration);
-		std::cout << std::endl;
 
-		sint64 elapsed = 0;
+		float elapsed = 0;
 		// Keep playing while at least one emitter is playing
 		while (media.playing())
 		{
@@ -81,15 +95,16 @@ int main(int argc, char* argv[])
 			Yuni::SuspendMilliSeconds(100);
 
 			// Get elapsed playback time
-			sint64 newTime = media.emitter.elapsedTime(emitterName);
+			float newTime = media.library.elapsedTime(argv[i]);
 			// Only update if different
-			if (newTime != elapsed)
+			if (newTime > elapsed)
 			{
 				// Display elapsed time
 				elapsed = newTime;
-				std::cout << "Elapsed time: ";
+				std::cout << "\rTime : ";
 				writeTime(elapsed);
-				std::cout << std::endl;
+				std::cout << " / ";
+				writeTime(duration);
 			}
 		}
 		media.emitter.detach(emitterName);

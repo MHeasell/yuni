@@ -74,7 +74,6 @@ namespace Media
 				return nullptr;
 		}
 
-
 		// Get the first packet in queue
 		AVPacket* pkt = pPackets.front();
 		pPackets.pop_front();

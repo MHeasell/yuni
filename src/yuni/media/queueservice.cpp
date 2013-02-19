@@ -147,13 +147,13 @@ namespace Media
 			return false;
 		}
 
-		// Associate the buffer with the stream
+		// Associate the source with the stream
 		{
 			ThreadingPolicy::MutexLocker locker(*this);
-			Source::Ptr buffer = library.get(filePath);
-			assert(nullptr != buffer);
+			Source::Ptr source = library.get(filePath);
+			assert(nullptr != source);
 			// Set the streams
-			buffer->stream(vStream, aStream);
+			source->stream(vStream, aStream);
 		}
 
 		return true;
@@ -200,14 +200,13 @@ namespace Media
 
 	bool QueueService::Emitters::add(const AnyString& emitterName)
 	{
-		Emitter::Ptr newEmitter(new Emitter());
-
 		ThreadingPolicy::MutexLocker locker(*this);
 
 		if (!pQueueService->pReady)
 			return false;
 
 		// Create the emitter and add it
+		Emitter::Ptr newEmitter(new Emitter());
 		pEmitters[emitterName] = newEmitter;
 
 		Media::Loop::RequestType callback;
@@ -220,10 +219,10 @@ namespace Media
 
 
 	bool QueueService::Emitters::attach(const AnyString& emitterName,
-		const AnyString& bufferName)
+		const AnyString& sourceName)
 	{
-		Source::Ptr buffer = pLibrary->get(bufferName);
-		if (!buffer)
+		Source::Ptr source = pLibrary->get(sourceName);
+		if (!source)
 			return false;
 
 		ThreadingPolicy::MutexLocker locker(*this);
@@ -234,10 +233,10 @@ namespace Media
 			Emitter::Map::iterator it = pEmitters.find(emitterName);
 			if (it == pEmitters.end())
 				return false;
-			Emitter::Ptr emitter = it->second;
+			Emitter::Ptr& emitter = it->second;
 
 			Media::Loop::RequestType callback;
-			callback.bind(emitter, &Emitter::attachBufferDispatched, buffer);
+			callback.bind(emitter, &Emitter::attachSourceDispatched, source);
 			// Dispatching...
 			pQueueService->pMediaLoop.dispatch(callback);
 		}
@@ -245,13 +244,13 @@ namespace Media
 	}
 
 
-	bool QueueService::Emitters::attach(Emitter::Ptr emitter, const AnyString& bufferName)
+	bool QueueService::Emitters::attach(Emitter::Ptr& emitter, const AnyString& sourceName)
 	{
-		if (!emitter || !bufferName)
+		if (!emitter || !sourceName)
 			return false;
 
-		Source::Ptr buffer = pLibrary->get(bufferName);
-		if (!buffer)
+		Source::Ptr source = pLibrary->get(sourceName);
+		if (!source)
 			return false;
 
 		ThreadingPolicy::MutexLocker locker(*this);
@@ -260,7 +259,7 @@ namespace Media
 				return false;
 
 			Media::Loop::RequestType callback;
-			callback.bind(emitter, &Emitter::attachBufferDispatched, buffer);
+			callback.bind(emitter, &Emitter::attachSourceDispatched, source);
 			// Dispatching...
 			pQueueService->pMediaLoop.dispatch(callback);
 		}
@@ -268,9 +267,33 @@ namespace Media
 	}
 
 
-	bool QueueService::Emitters::attach(Emitter::Ptr emitter, Source::Ptr buffer)
+	bool QueueService::Emitters::attach(const AnyString& emitterName, Source::Ptr source)
 	{
-		if (!emitter || !buffer)
+		if (!source)
+			return false;
+
+		ThreadingPolicy::MutexLocker locker(*this);
+		{
+			if (!pQueueService->pReady)
+				return false;
+
+			Emitter::Map::iterator it = pEmitters.find(emitterName);
+			if (it == pEmitters.end())
+				return false;
+			Emitter::Ptr& emitter = it->second;
+
+			Media::Loop::RequestType callback;
+			callback.bind(emitter, &Emitter::attachSourceDispatched, source);
+			// Dispatching...
+	 		pQueueService->pMediaLoop.dispatch(callback);
+		}
+		return true;
+	}
+
+
+	bool QueueService::Emitters::attach(Emitter::Ptr& emitter, Source::Ptr source)
+	{
+		if (!emitter || !source)
 			return false;
 
 		ThreadingPolicy::MutexLocker locker(*this);
@@ -279,7 +302,7 @@ namespace Media
 				return false;
 
 			Media::Loop::RequestType callback;
-			callback.bind(emitter, &Emitter::attachBufferDispatched, buffer);
+			callback.bind(emitter, &Emitter::attachSourceDispatched, source);
 			// Dispatching...
 	 		pQueueService->pMediaLoop.dispatch(callback);
 		}
@@ -299,7 +322,7 @@ namespace Media
 			return;
 
 		Media::Loop::RequestType callback;
- 		callback.bind(emitter, &Emitter::detachBufferDispatched);
+ 		callback.bind(emitter, &Emitter::detachSourceDispatched);
 		// Dispatching...
  		pQueueService->pMediaLoop.dispatch(callback);
 	}
@@ -406,8 +429,8 @@ namespace Media
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 
-		Source::Map::iterator it = pBuffers.find(name);
-		if (it == pBuffers.end())
+		Source::Map::iterator it = pSources.find(name);
+		if (it == pSources.end())
 			return nullptr;
 		return it->second;
 	}
@@ -420,8 +443,8 @@ namespace Media
 		{
 			Thread::Signal signal;
 			Yuni::Bind<bool()> callback;
-			Source::Map::iterator bEnd = pBuffers.end();
-			for (Source::Map::iterator it = pBuffers.begin(); it != bEnd; ++it)
+			Source::Map::iterator bEnd = pSources.end();
+			for (Source::Map::iterator it = pSources.begin(); it != bEnd; ++it)
 			{
 				// We have to pass a pointer here, otherwise bind() will call the copy ctor
 				callback.bind(it->second, &Source::destroyDispatched, &signal);
@@ -430,7 +453,7 @@ namespace Media
 				signal.reset();
 			}
 		}
-		pBuffers.clear();
+		pSources.clear();
 	}
 
 
@@ -441,15 +464,15 @@ namespace Media
 		if (!pQueueService->pReady)
 			return false;
 
-		// Create the buffer, store it in the map
-		pBuffers[filePath] = new Source();
+		// Create the source, store it in the map
+		pSources[filePath] = new Source();
 
 		// Yuni::Bind<bool()> callback;
 		// callback.bind(pQueueService, &QueueService::loadSourceDispatched, filePath);
 		// pQueueService->pMediaLoop.dispatch(callback);
 		if (!pQueueService->loadSource(filePath, true, true, false))
 		{
-			pBuffers.erase(filePath);
+			pSources.erase(filePath);
 			return false;
 		}
 		return true;
@@ -462,15 +485,15 @@ namespace Media
 		if (!pQueueService->pReady)
 			return false;
 
-		// Create the buffer, store it in the map
-		pBuffers[filePath] = new Source();
+		// Create the source, store it in the map
+		pSources[filePath] = new Source();
 
 		// Yuni::Bind<bool()> callback;
 		// callback.bind(pQueueService, &QueueService::loadSourceDispatched, filePath);
 		// pQueueService->pMediaLoop.dispatch(callback);
 		if (!pQueueService->loadSource(filePath, false, true, true))
 		{
-			pBuffers.erase(filePath);
+			pSources.erase(filePath);
 			return false;
 		}
 		return true;
@@ -484,15 +507,15 @@ namespace Media
 		if (!pQueueService->pReady)
 			return false;
 
-		// Create the buffer, store it in the map
-		pBuffers[filePath] = new Source();
+		// Create the source, store it in the map
+		pSources[filePath] = new Source();
 
 		// Yuni::Bind<bool()> callback;
 		// callback.bind(pQueueService, &QueueService::loadSourceDispatched, filePath);
 		// pQueueService->pMediaLoop.dispatch(callback);
 		if (!pQueueService->loadSource(filePath, true, false, true))
 		{
-			pBuffers.erase(filePath);
+			pSources.erase(filePath);
 			return false;
 		}
 		return true;
@@ -507,8 +530,8 @@ namespace Media
 		if (!pQueueService->pReady)
 			return false;
 
-		Source::Map::iterator it = pBuffers.find(name);
-		if (pBuffers.end() == it)
+		Source::Map::iterator it = pSources.find(name);
+		if (pSources.end() == it)
 			return false;
 
 		{
@@ -520,7 +543,7 @@ namespace Media
 			signal.wait();
 		}
 		// Wait for data to be properly unloaded before removing from the list
-		pBuffers.erase(it);
+		pSources.erase(it);
 
 		return true;
 	}
@@ -528,27 +551,27 @@ namespace Media
 
 	unsigned int QueueService::Library::duration(const AnyString& name)
 	{
-		Source::Ptr buffer = get(name);
-		if (!buffer)
+		Source::Ptr source = get(name);
+		if (!source)
 			return 0;
 
 		ThreadingPolicy::MutexLocker locker(*this);
 		if (!pQueueService->pReady)
 			return 0;
-		return buffer->duration();
+		return source->duration();
 	}
 
 
 	float QueueService::Library::elapsedTime(const AnyString& name)
 	{
-		Source::Ptr buffer = get(name);
-		if (!buffer)
+		Source::Ptr source = get(name);
+		if (!source)
 			return 0;
 
 		ThreadingPolicy::MutexLocker locker(*this);
 		if (!pQueueService->pReady)
 			return 0;
-		return buffer->elapsedTime();
+		return source->elapsedTime();
 	}
 
 

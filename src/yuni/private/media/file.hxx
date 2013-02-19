@@ -66,28 +66,41 @@ namespace Media
 		// Get a packet
 		while (::av_read_frame(pFormat, packet) >= 0)
 		{
-			// Check each stream the user has a handle for, looking for the one
-			// this packet belongs to
-			typename Stream<TypeT>::Map& cache = getCache<TypeT>();
-			typename Stream<TypeT>::Map::iterator end = cache.end();
-			for (typename Stream<TypeT>::Map::iterator it = cache.begin(); it != end; ++it)
+			// Search for the corresponding stream in the video stream cache
+			auto vIt = pVStreams.find((uint)packet->stream_index);
+			if (pVStreams.end() != vIt)
 			{
-				// Is this the stream the packet belongs to ?
-				typename Stream<TypeT>::Ptr crtStream = it->second;
-				if (crtStream->index() != (uint)packet->stream_index)
-					continue;
-
 				// This is a stream we handle, so enqueue the packet
-				crtStream->pPackets.push_back(packet);
+				vIt->second->pPackets.push_back(packet);
 
 				// Return if this stream is what we needed a packet for
-				if (crtStream->index() == stream->index())
+				if (TypeT == stVideo && vIt->second->index() == stream->index())
 					return packet;
 
-				// We have managed the packet, jump out to get another one
-				break;
+				// Packet was stored, get another one
+				packet = new AVPacket();
+				continue;
 			}
-			// Free the packet and look for another
+			else
+			{
+				// Search for the corresponding stream in the audio stream cache
+				auto aIt = pAStreams.find((uint)packet->stream_index);
+				if (pAStreams.end() != aIt)
+				{
+					// This is a stream we handle, so enqueue the packet
+					aIt->second->pPackets.push_back(packet);
+
+					// Return if this stream is what we needed a packet for
+					if (TypeT == stAudio && aIt->second->index() == stream->index())
+						return packet;
+
+					// Packet was stored, get another one
+					packet = new AVPacket();
+					continue;
+				}
+			}
+
+			// Unmanaged packet, free it and look for another one
 			::av_free_packet(packet);
 		}
 		delete packet;

@@ -18,7 +18,7 @@ namespace Media
 	/*!
 	** \brief A media source loaded from a file or network stream
 	*/
-	class Source: public Policy::ObjectLevelLockable<Source>
+	class Source final: public Policy::ObjectLevelLockable<Source>
 	{
 	public:
 		//! Pointer type
@@ -64,7 +64,14 @@ namespace Media
 			pVStream = videoStream;
 		}
 
-		bool valid() { return nullptr != pAStream || nullptr != pVStream; }
+		//! Has either valid audio, valid video, or both.
+		bool valid() const { return hasAudio() || hasVideo(); }
+
+		//! Has a valid audio stream
+		bool hasAudio() const { return nullptr != pAStream && pAStream->valid(); }
+
+		//! Has a valid video stream
+		bool hasVideo() const { return nullptr != pVStream && pVStream->valid(); }
 
 		//! Get the duration of the stream, 0 if not set
 		uint duration() const;
@@ -73,9 +80,24 @@ namespace Media
 		float elapsedTime() const
 		{
 			if (!pAStream)
-				return 0.0;
-			return (float)(pSamplesRead + pSamplesCurrent) / pAStream->rate();
+				return 0.0f;
+			return pSecondsElapsed + pSecondsCurrent;
 		}
+
+		//! Width of the video (in pixels). Only valid if there is video !
+		uint width() const { assert(hasVideo()); return pVStream->width(); }
+
+		//! Height of the video (in pixels). Only valid if there is video !
+		uint height() const { assert(hasVideo()); return pVStream->height(); }
+
+		//! Depth of the video (in bits / pixel). Only valid if there is video !
+		uint depth() const { assert(hasVideo()); return pVStream->depth(); }
+
+		//! Frames per second of the video. Only valid if there is video !
+		float fps() const { assert(hasVideo()); return pVStream->fps(); }
+
+		//! Get the next video frame. Only valid if there is video !
+		Private::Media::Frame::Ptr nextFrame() { assert(hasVideo()); return pVStream->nextFrame(); }
 
 	private:
 		//! Refill audio buffer
@@ -94,11 +116,11 @@ namespace Media
 		//! Actual number of buffers
 		uint pBufferCount;
 
-		//! Samples already played in previous buffers
-		uint pSamplesRead;
+		//! Seconds already played from previous buffers
+		float pSecondsElapsed;
 
-		//! Samples played from current buffer
-		uint pSamplesCurrent;
+		//! Seconds already played from current buffer
+		float pSecondsCurrent;
 
 		//! Identifiers of the OpenAL buffers used
 		uint pIDs[maxBufferCount];

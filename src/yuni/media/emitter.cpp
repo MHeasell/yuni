@@ -18,41 +18,41 @@ namespace Media
 
 
 
-	bool Emitter::attachBufferDispatched(Source::Ptr& buffer)
+	bool Emitter::attachSourceDispatched(Source::Ptr& source)
 	{
-		// Check buffer validity
-		if (!buffer || !buffer->valid())
+		// Check source validity
+		if (!source || !source->valid())
 		{
-			std::cerr << "Invalid Buffer !" << std::endl;
+			std::cerr << "Invalid Source !" << std::endl;
 			return false;
 		}
 
-		pBuffer = buffer;
-		if (!pBuffer->prepareDispatched(pID))
+		pSource = source;
+		if (!pSource->prepareDispatched(pID))
 		{
-			std::cerr << "Failed loading buffers !" << std::endl;
+			std::cerr << "Failed loading sources !" << std::endl;
 			return false;
 		}
 		return true;
 	}
 
 
-	bool Emitter::detachBufferDispatched()
+	bool Emitter::detachSourceDispatched()
 	{
-		if (!pReady || !pBuffer)
+		if (!pReady || !pSource)
 			return false;
 
 		stopSourceDispatched();
 
 		Private::Media::OpenAL::UnbindBufferFromSource(pID);
-		pBuffer = nullptr;
+		pSource = nullptr;
 		return true;
 	}
 
 
 	bool Emitter::playSourceDispatched()
 	{
-		if (!pBuffer)
+		if (!pSource)
 			return false;
 
 		pPlaying = Private::Media::OpenAL::PlaySource(pID);
@@ -70,12 +70,12 @@ namespace Media
 	}
 
 
-	bool Emitter::playSourceDispatched(Source::Ptr& buffer)
+	bool Emitter::playSourceDispatched(Source::Ptr& source)
 	{
 		if (!pReady && !prepareDispatched())
 			return false;
 
-		if (!attachBufferDispatched(buffer))
+		if (!attachSourceDispatched(source))
 			return false;
 
 		return playSourceDispatched();
@@ -111,6 +111,7 @@ namespace Media
 		// If not playing, nothing else to do
 		if (!pPlaying)
 			return false;
+		//std::cout << "Emitter still playing !" << std::endl;
 		if (pModified)
 		{
 			if (!Private::Media::OpenAL::MoveSource(pID, pPosition, pVelocity, pDirection))
@@ -124,8 +125,11 @@ namespace Media
 				return false;
 			}
 		}
-		if (pBuffer)
-			pBuffer->updateDispatched(pID);
+		if (pSource)
+		{
+			//std::cout << "Emitter source still ok !" << std::endl;
+			pSource->updateDispatched(pID);
+		}
 		return true;
 	}
 
@@ -144,13 +148,13 @@ namespace Media
 	}
 
 
-	sint64 Emitter::elapsedTime() const
+	float Emitter::elapsedTime() const
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 
 		if (!pPlaying)
 			return 0;
-		return pBuffer->elapsedTime();
+		return pSource->elapsedTime();
 		// Yuni::timeval now;
 		// YUNI_SYSTEM_GETTIMEOFDAY(&now, NULL);
 		// return now.tv_sec - pStartTime;
