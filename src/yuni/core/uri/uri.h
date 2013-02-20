@@ -165,6 +165,8 @@ namespace Yuni
 		int port() const;
 		//! Set the port value (only if strictly positive, or equals to INT_MIN do disable it)
 		void port(int p);
+		//! Get if a port has been provided
+		bool hasPort() const;
 
 		//! User
 		const String& user() const;
