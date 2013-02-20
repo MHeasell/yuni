@@ -47,6 +47,11 @@ namespace Yuni
 		return pInfos.port;
 	}
 
+	inline bool Uri::hasPort() const
+	{
+		return (INT_MIN == pInfos.port);
+	}
+
 	inline const String& Uri::user() const
 	{
 		return pInfos.user;
