@@ -165,28 +165,28 @@ namespace Yuni
 						}
 					case partServerForSure:
 						{
-							infos.server.append(str, lastPosition, str.length());
+							infos.server.append(str, str.size() - lastPosition, lastPosition);
 							break;
 						}
 					case partPort:
 						{
-							infos.port = String(str, lastPosition, str.length()).to<sint32>();
+							infos.port = String(str, lastPosition, str.size() - lastPosition).to<sint32>();
 							break;
 						}
 					case partPath:
 						{
-							infos.path.append(str, lastPosition, str.length());
+							infos.path.append(str, str.size() - lastPosition, lastPosition);
 							break;
 						}
 
 					case partQuery:
 						{
-							infos.query.append(str, lastPosition, str.length());
+							infos.query.append(str, str.size() - lastPosition, lastPosition);
 							break;
 						}
 					case partFragment:
 						{
-							infos.fragment.append(str, lastPosition, str.length());
+							infos.fragment.append(str, str.size() - lastPosition, lastPosition);
 							break;
 						}
 					default: return false;
