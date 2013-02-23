@@ -214,7 +214,15 @@
 #	define YUNI_DEPRECATED(text, func...) func
 # endif
 
-/* Noreturn */
+/*!
+** \define Noreturn
+**
+** \code
+** void foo() YUNI_NORETURN
+** {
+** }
+** \endcode
+*/
 # if defined(YUNI_OS_GCC)
 #	if (__GNUC__ > 3 || (__GNUC__ == 3 && __GNUC_MINOR__ >= 1))
 #		define YUNI_NORETURN  __attribute__((noreturn))
