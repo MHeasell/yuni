@@ -12,6 +12,7 @@ if (WIN32 OR WIN64)
 	set(YUNICOMPONENT_MARSHAL           "yuni_marshal")
 	set(YUNICOMPONENT_NET               "yuni_net")
 	set(YUNICOMPONENT_MESSAGING         "yuni_messaging")
+	set(YUNICOMPONENT_DBI               "yuni_dbi")
 else()
 	set(YUNICOMPONENT_CORE              "yuni-core")
 	set(YUNICOMPONENT_ALGORITHMS        "yuni-algorithms")
@@ -21,6 +22,7 @@ else()
 	set(YUNICOMPONENT_MARSHAL           "yuni-marshal")
 	set(YUNICOMPONENT_NET               "yuni-net")
 	set(YUNICOMPONENT_MESSAGING         "yuni-messaging")
+	set(YUNICOMPONENT_DBI               "yuni-dbi")
 endif()
 
 
@@ -44,6 +46,9 @@ set(YUNI_MODULE_DEVICES                   false)
 	set(YUNI_MODULE_DEVICE_DISPLAY        true)
 	set(YUNI_MODULE_DEVICE_KEYBOARD       true)
 	set(YUNI_MODULE_DEVICE_MOUSE          true)
+
+set(YUNI_MODULE_DBI                       false)
+	set(YUNI_MODULE_DBI_SQLITE            false)
 
 # Media
 set(YUNI_MODULE_MEDIA                     false)
@@ -96,6 +101,8 @@ set(YUNI_MODULE_LIST
 	graphics
 		opengl
 	ui
+	dbi
+		dbi-sqlite
 	net
 		netserver
 		netclient
@@ -149,6 +156,7 @@ if(MODULES)
 			set(YUNI_MODULE_LDO true)
 			set(YUNI_MODULE_DOCUMENTATION true)
 			set(YUNI_MODULE_MARSHAL true)
+			set(YUNI_MODULE_DBI true)
 			set(YUNI_TESTS true)
 			set(KeywordIsKnown true)
 		endif()
@@ -184,6 +192,28 @@ if(MODULES)
 		# -vm
 		if("${it}" STREQUAL "-vm")
 			set(YUNI_MODULE_VM false)
+			set(KeywordIsKnown true)
+		endif()
+
+		# dbi
+		if("${it}" STREQUAL "dbi")
+			set(YUNI_MODULE_DBI true)
+			set(KeywordIsKnown true)
+		endif()
+		# -dbi
+		if("${it}" STREQUAL "-dbi")
+			set(YUNI_MODULE_DBI false)
+			set(KeywordIsKnown true)
+		endif()
+
+		# dbi-sqlite
+		if("${it}" STREQUAL "dbi-sqlite")
+			set(YUNI_MODULE_DBI_SQLITE true)
+			set(KeywordIsKnown true)
+		endif()
+		# -dbi-sqlite
+		if("${it}" STREQUAL "-dbi-sqlite")
+			set(YUNI_MODULE_DBI_SQLITE false)
 			set(KeywordIsKnown true)
 		endif()
 
@@ -401,6 +431,8 @@ if(MODULES)
 		YMESSAGE(" The network modules")
 		YMESSAGE("    -/+net         : The network core module (default: disabled)")
 		YMESSAGE("    -/+messaging   : The messaging module (default: disabled)")
+		YMESSAGE(" The DBI modules")
+		YMESSAGE("    -/+dbi         : The Database Indepedent module (default: disabled)")
 		YMESSAGE(" The extra modules")
 		YMESSAGE("    -/+uuid        : UUID (default: disabled)")
 		YMESSAGE("    -/+marshal     : The Marshal module (for Object serialization, default: disabled)")
@@ -428,7 +460,12 @@ if (YUNI_MODULE_MESSAGING)
 	set(YUNI_MODULE_NET true)
 	set(YUNI_MODULE_MARSHAL true)
 endif()
-
+if (YUNI_MODULE_DBI_SQLITE)
+	set(YUNI_MODULE_DBI true)
+endif()
+if (YUNI_MODULE_DBI)
+	set(YUNI_MODULE_DBI_SQLITE true)
+endif()
 
 
 
@@ -446,7 +483,14 @@ if(YUNI_MODULE_ALGORITHMS)
 	list(APPEND YUNI_MODULE_AVAILABLE algorithms)
 endif()
 
-if(YUNI_MODULE_DEVICES)
+if (YUNI_MODULE_DBI)
+	list(APPEND YUNI_MODULE_AVAILABLE dbi)
+	if (YUNI_MODULE_DBI_SQLITE)
+		list(APPEND YUNI_MODULE_AVAILABLE dbi-sqlite)
+	endif()
+endif()
+
+if (YUNI_MODULE_DEVICES)
 	list(APPEND YUNI_MODULE_AVAILABLE devices)
 	if(YUNI_MODULE_DEVICE_DISPLAY)
 		list(APPEND YUNI_MODULE_AVAILABLE display)
@@ -473,9 +517,6 @@ endif()
 if(YUNI_MODULE_MARSHAL)
 	list(APPEND YUNI_MODULE_AVAILABLE marshal)
 endif()
-
-
-
 
 if(YUNI_MODULE_NET)
 	list(APPEND YUNI_MODULE_AVAILABLE net)
@@ -505,10 +546,10 @@ if(YUNI_MODULE_UI)
 endif()
 
 if(YUNI_MODULE_DOCUMENTATION)
-	LIST(APPEND YUNI_MODULE_AVAILABLE docs)
+	list(APPEND YUNI_MODULE_AVAILABLE docs)
 endif()
 
 if(YUNI_MODULE_EXTRA_UUID)
-	LIST(APPEND YUNI_MODULE_AVAILABLE uuid)
+	list(APPEND YUNI_MODULE_AVAILABLE uuid)
 endif()
 
