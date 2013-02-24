@@ -53,7 +53,17 @@ endif()
 
 if(YUNI_MODULE_VFS)
 	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/vfs.cmake")
-endif(YUNI_MODULE_VFS)
+endif()
+
+
+#
+# Module : DBI
+#
+if(YUNI_MODULE_DBI)
+	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/dbi.cmake")
+	#include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/dbi-sqlite.cmake")
+endif()
+
 
 
 if(YUNI_MODULE_DEVICES)
@@ -74,7 +84,7 @@ endif()
 
 
 #
-# Module: marshal
+# Module : marshal
 #
 if(YUNI_MODULE_MARSHAL)
 	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/marshal.cmake")
