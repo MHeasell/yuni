@@ -16,16 +16,15 @@ namespace Yuni
 		class BuildSession
 		{
 		public:
-			BuildSession(Private::Uri::Informations& inf, const AnyString& s) :
+			BuildSession(Private::Uri::Informations& inf, String& string) :
 				location(partScheme),
 				infos(inf),
 				tag(0),
-				str(s),
+				str(string),
 				lastPosition(0u),
 				indx(0u),
 				pMustRemoveDotSegments(false)
 			{
-				str.trim();
 			}
 
 			/*!
@@ -130,10 +129,10 @@ namespace Yuni
 			Parts location;
 			//! Reference to the real container of all parts of the URI
 			Private::Uri::Informations& infos;
-			//! A variable used for several purposes
+			//! A state variable used for several purposes
 			int tag;
 			//! The raw string (trimmed)
-			String str;
+			String& str;
 			//! The last outstanding position in the string
 			uint lastPosition;
 			//! The current index in the string
@@ -151,10 +150,14 @@ namespace Yuni
 
 		bool BuildSession::postFlight()
 		{
-			if (lastPosition < (uint) str.length())
+			if (lastPosition < (uint) str.size())
 			{
 				// The last outstanding position was inside the string. Thus we
 				// still have some data that remain to be copied.
+
+				// size of the remaining string part
+				uint remainingSize = str.size() - lastPosition;
+
 				switch (location)
 				{
 					case partScheme:
@@ -165,28 +168,29 @@ namespace Yuni
 						}
 					case partServerForSure:
 						{
-							infos.server.append(str, str.size() - lastPosition, lastPosition);
+							infos.server.append(str, remainingSize, lastPosition);
 							break;
 						}
 					case partPort:
 						{
-							infos.port = String(str, lastPosition, str.size() - lastPosition).to<sint32>();
+							CString<32, false> intstr(str, lastPosition, remainingSize);
+							infos.port = intstr.to<sint32>();
 							break;
 						}
 					case partPath:
 						{
-							infos.path.append(str, str.size() - lastPosition, lastPosition);
+							infos.path.append(str, remainingSize, lastPosition);
 							break;
 						}
 
 					case partQuery:
 						{
-							infos.query.append(str, str.size() - lastPosition, lastPosition);
+							infos.query.append(str, remainingSize, lastPosition);
 							break;
 						}
 					case partFragment:
 						{
-							infos.fragment.append(str, str.size() - lastPosition, lastPosition);
+							infos.fragment.append(str, remainingSize, lastPosition);
 							break;
 						}
 					default: return false;
@@ -223,7 +227,7 @@ namespace Yuni
 			{
 				case '[': // Suffix reference ?
 					{
-						if (!this->indx) // Indeed, Here is the begining of an IPv6 address
+						if (0 == this->indx) // Indeed, Here is the begining of an IPv6 address
 						{
 							// `.` or `/` : Actually it is a path (absolute or relative)
 							// This part may not fully compliant with the RFC but it allows
@@ -242,7 +246,7 @@ namespace Yuni
 				case '.' :
 				case '/' :
 					{
-						if (!this->indx) // Begining of an absolute path
+						if (0 == this->indx) // Begining of an absolute path
 						{
 							// `.` or `/` : Actually it is a path (absolute or relative)
 							// This part may not fully compliant with the RFC but it allows
@@ -259,7 +263,7 @@ namespace Yuni
 					}
 				case '#': // Begining of a fragment in a scheme ?
 					{
-						if (!this->indx)
+						if (0 == this->indx)
 						{
 							// Actually the URI is only a fragment
 							lastPosition = indx + 1;
@@ -273,7 +277,7 @@ namespace Yuni
 					}
 				case '?': // Begining of a query in a scheme ?
 					{
-						if (!this->indx)
+						if (0 == this->indx)
 						{
 							// Actually the URI is only a query
 							lastPosition = indx + 1;
@@ -362,7 +366,7 @@ namespace Yuni
 			{
 				case '@': // We were actually deal with a user name
 					{
-						infos.user.append(str, lastPosition, indx - lastPosition);
+						infos.user.append(str, indx - lastPosition, lastPosition);
 						if (infos.user.empty())
 							return false;
 						lastPosition = indx + 1;
@@ -389,7 +393,7 @@ namespace Yuni
 						if (tag != 1)
 						{
 							// We are not inside of an IPv6 address
-							infos.server.append(str, lastPosition, indx - lastPosition);
+							infos.server.append(str, indx - lastPosition, lastPosition);
 							if (infos.server.empty())
 								return false;
 							lastPosition = indx;
@@ -406,7 +410,7 @@ namespace Yuni
 						{
 							// We are not inside of an IPv6 address
 							// Thus it is the begining of a port value
-							infos.server.append(str, lastPosition, indx - lastPosition);
+							infos.server.append(str, indx - lastPosition, lastPosition);
 							if (infos.server.empty())
 								return false;
 							lastPosition = indx + 1;
@@ -420,8 +424,8 @@ namespace Yuni
 						{
 							// We are not inside of an IPv6 address
 							// It is the begining of a query
-							infos.server.append(str, lastPosition, indx - lastPosition);
-							if (infos.server.empty())
+							infos.server.append(str, indx - lastPosition, lastPosition);
+							if (infos.server.empty(), lastPosition)
 								return false;
 							lastPosition = indx + 1;
 							location = partQuery;
@@ -437,7 +441,7 @@ namespace Yuni
 						{
 							// We are not inside of an IPv6 address
 							// It is the begining of a fragment
-							infos.server.append(str, lastPosition, indx - lastPosition);
+							infos.server.append(str, indx - lastPosition, lastPosition);
 							if (infos.server.empty())
 								return false;
 							lastPosition = indx + 1;
@@ -464,7 +468,7 @@ namespace Yuni
 						{
 							// Oups... Actually it was not a port but a password...
 							infos.user = infos.server;
-							infos.password.append(str, lastPosition, indx - lastPosition);
+							infos.password.append(str, indx - lastPosition, lastPosition);
 							infos.server.clear();
 							tag = 0;
 							location = partServerForSure;
@@ -476,11 +480,11 @@ namespace Yuni
 					}
 				case '/': // Begining of a path
 					{
-						infos.port = String(str, lastPosition, indx - lastPosition).to<sint32>();
-						if (!infos.port)
+						CString<32, false> intstr(str, lastPosition, indx - lastPosition);
+						if (not intstr.to(infos.port))
 						{
 							// May be a invalid sequence
-							if (indx - lastPosition != 1 || '\0' != str[lastPosition])
+							if (indx - lastPosition != 1 or '\0' != str[lastPosition])
 								return false;
 						}
 						lastPosition = indx;
@@ -489,11 +493,11 @@ namespace Yuni
 					}
 				case '#': // Begining of a fragment
 					{
-						infos.port = String(str, lastPosition, indx - lastPosition).to<sint32>();
-						if (!infos.port)
+						CString<32, false> intstr(str, lastPosition, indx - lastPosition);
+						if (not intstr.to(infos.port))
 						{
 							// May be a invalid sequence
-							if (indx - lastPosition != 1 || '\0' != str[lastPosition])
+							if (indx - lastPosition != 1 or '\0' != str[lastPosition])
 								return false;
 						}
 						lastPosition = indx + 1;
@@ -502,11 +506,11 @@ namespace Yuni
 					}
 				case '?': // Begining of a query
 					{
-						infos.port = String(str, lastPosition, indx - lastPosition).to<sint32>();
-						if (!infos.port)
+						CString<32, false> intstr(str, lastPosition, indx - lastPosition);
+						if (not intstr.to(infos.port))
 						{
 							// May be a invalid sequence
-							if (indx - lastPosition != 1 || '\0' != str[lastPosition])
+							if (indx - lastPosition != 1 or '\0' != str[lastPosition])
 								return false;
 						}
 						lastPosition = indx + 1;
@@ -526,14 +530,14 @@ namespace Yuni
 			{
 				case '?' : // Begining of a query
 					{
-						infos.path.append(str, lastPosition, indx - lastPosition);
+						infos.path.append(str, indx - lastPosition, lastPosition);
 						location = partQuery;
 						lastPosition = indx + 1;
 						break;
 					}
 				case '#' : // Begining of a fragment
 					{
-						infos.path.append(str, lastPosition, indx - lastPosition);
+						infos.path.append(str, indx - lastPosition, lastPosition);
 						location = partFragment;
 						lastPosition = indx + 1;
 						break;
@@ -558,7 +562,7 @@ namespace Yuni
 			{
 				case '#' : // Begining of a fragment
 					{
-						infos.query.append(str, lastPosition, indx - lastPosition);
+						infos.query.append(str, indx - lastPosition, lastPosition);
 						location = partFragment;
 						lastPosition = indx + 1;
 						break;
@@ -574,7 +578,7 @@ namespace Yuni
 			// A fragment is composed by the end of the URI
 			// Directly go to the end of the string, the routine postflight() will
 			// finish the job for us
-			indx = (uint) str.length();
+			indx = (uint) str.size();
 			return true;
 		}
 
@@ -583,57 +587,59 @@ namespace Yuni
 		void BuildSession::run()
 		{
 			// Foreach char in the string...
-			for (; this->indx < this->str.length(); ++(this->indx))
+			for (; indx < str.size(); ++indx)
 			{
 				const String::value_type c = str[indx];
-				switch (this->location)
+				switch (location)
 				{
-					case partScheme:
-						{
-							if (!this->extractScheme(c))
-								return;
-							break;
-						}
-					case partServer:
-						{
-							if (!this->extractAuthorty(c))
-								return;
-							break;
-						}
-					case partServerForSure:
-						{
-							if (!this->extractServerInfos(c))
-								return;
-							break;
-						}
-					case partPort:
-						{
-							if (!this->extractPort(c))
-								return;
-							break;
-						}
 					case partPath:
 						{
-							if (!this->extractPath(c))
+							if (not this->extractPath(c))
 								return;
 							break;
 						}
 					case partQuery:
 						{
-							if (!this->extractQuery(c))
+							if (not this->extractQuery(c))
+								return;
+							break;
+						}
+					case partScheme:
+						{
+							if (not this->extractScheme(c))
+								return;
+							break;
+						}
+					case partServer:
+						{
+							if (not this->extractAuthorty(c))
+								return;
+							break;
+						}
+					case partServerForSure:
+						{
+							if (not this->extractServerInfos(c))
+								return;
+							break;
+						}
+					case partPort:
+						{
+							if (not this->extractPort(c))
 								return;
 							break;
 						}
 					case partFragment:
 						{
-							if (!this->extractFragment())
+							if (not this->extractFragment())
 								return;
 							break;
 						}
 					default:
 						return; // We should not be in the middle of nowhere
-				}
-			}
+
+				} // switch location
+			} // for each char
+
 			// Postflight : Some content have not been copied yet
 			infos.isValid = postFlight();
 		}
@@ -662,11 +668,15 @@ namespace Yuni
 	{
 		// Cleanup before anything
 		clear();
-		if (not raw.empty())
-		{
-			// Go ahead !
-			BuildSession(pInfos, raw).run();
-		}
+
+		// trim the string for unwanted and useless char
+		// making a copy for the helper class
+		String copy = raw;
+		copy.trim();
+
+		// Go ahead !
+		if (not copy.empty())
+			BuildSession(pInfos, copy).run();
 	}
 
 
@@ -679,7 +689,7 @@ namespace Yuni
 
 	void Uri::port(int p)
 	{
-		if (p > 0 || p == INT_MIN)
+		if (p > 0 or p == INT_MIN)
 		{
 			pInfos.port = p;
 			pInfos.isValid = true;
