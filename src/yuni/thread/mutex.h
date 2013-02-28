@@ -68,6 +68,13 @@ namespace Yuni
 		void lock();
 
 		/*!
+		** \brief Try to lock the mutex
+		**
+		** \return True if the mutex has been locked, false otherwise
+		*/
+		bool trylock();
+
+		/*!
 		** \brief Release the lock
 		*/
 		void unlock();
