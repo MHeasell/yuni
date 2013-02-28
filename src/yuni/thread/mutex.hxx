@@ -17,6 +17,18 @@ namespace Yuni
 	}
 
 
+	inline bool Mutex::trylock()
+	{
+		# ifndef YUNI_NO_THREAD_SAFE
+		# ifdef YUNI_OS_WINDOWS
+		return (0 != TryEnterCriticalSection(&pSection));
+		# else
+		return (0 == ::pthread_mutex_trylock(&pLock));
+		# endif
+		# endif
+	}
+
+
 	inline void Mutex::unlock()
 	{
 		# ifndef YUNI_NO_THREAD_SAFE
