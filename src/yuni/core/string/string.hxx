@@ -70,6 +70,11 @@ namespace Yuni
 
 
 	template<uint ChunkSizeT, bool ExpandableT>
+	inline CString<ChunkSizeT,ExpandableT>::CString(const YuniNullPtr&)
+	{}
+
+
+	template<uint ChunkSizeT, bool ExpandableT>
 	inline CString<ChunkSizeT,ExpandableT>::~CString()
 	{}
 
@@ -96,9 +101,24 @@ namespace Yuni
 
 	template<uint ChunkSizeT, bool ExpandableT>
 	inline
-	CString<ChunkSizeT,ExpandableT>::CString(const CString<ChunkSizeT,ExpandableT>& rhs)
-		:AncestorType(rhs)
+	CString<ChunkSizeT,ExpandableT>::CString(const CString<ChunkSizeT,ExpandableT>& rhs) :
+		AncestorType(rhs)
 	{}
+
+
+	template<uint ChunkSizeT, bool ExpandableT>
+	inline CString<ChunkSizeT,ExpandableT>::CString(const char* text)
+	{
+		assign(text);
+	}
+
+
+	template<uint ChunkSizeT, bool ExpandableT>
+	template<uint SizeT, bool ExpT>
+	inline CString<ChunkSizeT,ExpandableT>::CString(const CString<SizeT, ExpT>& rhs)
+	{
+		assign(rhs);
+	}
 
 
 	template<uint ChunkSizeT, bool ExpandableT>
@@ -161,6 +181,14 @@ namespace Yuni
 			else
 				adapt(s.c_str() + offset, s.size() - offset);
 		}
+	}
+
+
+	template<uint ChunkSizeT, bool ExpandableT>
+	template<class TraitsT, class AllocT>
+	CString<ChunkSizeT,ExpandableT>::CString(const std::basic_string<char,TraitsT,AllocT>& string)
+	{
+		assign(string);
 	}
 
 
