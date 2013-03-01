@@ -262,6 +262,12 @@ namespace Yuni
 		CString(const char* const block, Size blockSize);
 
 		/*!
+		** \brief Constructor from another string
+		*/
+		template<uint SizeT, bool ExpT>
+		CString(const CString<SizeT,ExpT>& s);
+
+		/*!
 		** \brief Constructor from a copy of a substring of 's'
 		**
 		** The substring is the portion of str that begins at the character position
@@ -279,6 +285,12 @@ namespace Yuni
 		*/
 		template<uint SizeT, bool ExpT>
 		CString(const CString<SizeT,ExpT>& s, Size offset, Size n /*= npos*/);
+
+		/*!
+		** \brief Constructor from a std::string
+		*/
+		template<class TraitsT, class AllocT>
+		CString(const std::basic_string<char,TraitsT,AllocT>& string);
 
 		/*!
 		** \brief Constructor from a copy of a substring of 's' (std::string)
@@ -318,24 +330,22 @@ namespace Yuni
 		template<class ModelT, bool ConstT, class ModelT2, bool ConstT2, class StringT>
 		CString(const IIterator<ModelT,ConstT>& begin, const IIterator<ModelT2,ConstT2>& end, const StringT& separator);
 
-		/*!
-		** \brief Constructor with a default value
-		*/
-		template<class U> CString(const U& rhs);
+		//! Constructor with a null-terminated string
+		CString(const char* text);
 
-		/*!
-		** \brief Construct a string formed by a repetition of the character c, n times
-		*/
+		//! Constructor with a default value
+		template<class U> explicit CString(const U& rhs);
+
+		//! Construct a string formed by a repetition of the character c, n times
 		CString(size_t n, char c);
 
-		/*!
-		** \brief Construct a string formed by a repetition of the character c, n times
-		*/
+		//! Construct a string formed by a repetition of the character c, n times
 		CString(size_t n, uchar c);
 
-		/*!
-		** \brief Destructor
-		*/
+		//! Constructor from a nullptr
+		CString(const YuniNullPtr&);
+
+		//! Destructor
 		~CString();
 		//@}
 

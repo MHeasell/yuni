@@ -124,89 +124,145 @@ namespace File
 
 	inline bool Stream::put(char c)
 	{
-		return (0 == ::fputc((int) c, pFd));
+		return (EOF != ::fputc((int) c, pFd));
 	}
 
 
-
-	namespace // anonymous
+	inline uint Stream::write(bool value)
 	{
+		return value
+			? (uint) ::fwrite("true",  4, 1, pFd)
+			: (uint) ::fwrite("false", 5, 1, pFd);
+	}
 
-		template<int IsStringT, class U>
-		struct StreamTraitsWrite
-		{
-			static inline uint64 Perform(FILE* pFd, const AnyString& string)
-			{
-				return (uint64) ::fwrite(
-					string.c_str(),  // raw data
-					1,               // nb items
-					string.size(),   // length
-					pFd);            // file descriptor
-			}
-			static inline uint64 Perform(FILE* pFd, const U& string, uint64 size)
-			{
-				YUNI_STATIC_ASSERT(Traits::IsString<U>::yes, InvalidTypeForBuffer);
-				return (uint64) ::fwrite(
-					Traits::CString<U>::Perform(string),  // raw data
-					1,                                    // nb items
-					(size_t)size,                         // size
-					pFd);                                 // file descriptor
-			}
-		};
+	inline uint Stream::write(bool value, uint64 maxsize)
+	{
+		return value
+			? (uint) ::fwrite("true",  (4 < maxsize) ? 4 : maxsize, 1, pFd)
+			: (uint) ::fwrite("false", (5 < maxsize) ? 5 : maxsize, 1, pFd);
+	}
 
-		template<class U>
-		struct StreamTraitsWrite<0,U>
-		{
-			static inline uint64 Perform(FILE* pFd, const U& u)
-			{
-				// TODO : Find a faster alternative
-				String translator;
-				translator << u;
-				return (uint64) ::fwrite(translator.c_str(), 1, translator.size(), pFd);
-			}
+	inline uint Stream::write(char buffer)
+	{
+		return (EOF != ::fputc((int) buffer, pFd)) ? 1 : 0;
+	}
 
-			static inline uint64 Perform(FILE* pFd, const U& u, uint64 size)
-			{
-				String translator;
-				translator << u;
-				return (uint64)::fwrite(translator.c_str(), 1, translator.size() > size ? size : translator.size(), pFd);
-			}
-		};
+	inline uint Stream::write(float value)
+	{
+		CString<64,false> string(value);
+		return (uint) ::fwrite(string.c_str(), 1, string.size(), pFd);
+	}
 
+	inline uint Stream::write(float value, uint64 maxsize)
+	{
+		CString<64,false> string(value);
+		return (uint) ::fwrite(string.c_str(), 1, string.size() > maxsize ? maxsize : string.size(), pFd);
+	}
 
-		template<>
-		struct StreamTraitsWrite<0, bool>
-		{
-			static inline uint64 Perform(FILE* pFd, bool u)
-			{
-				return u
-					? (uint64)::fwrite("true", 1, 4, pFd)
-					: (uint64)::fwrite("false", 1, 5, pFd);
-			}
-			static inline uint64 Perform(FILE* pFd, bool u, uint64 size)
-			{
-				return u
-					? (uint64)::fwrite("true", 1, 4 > size ? (size_t)size : 4, pFd)
-					: (uint64)::fwrite("false", 1, 5 > size ? (size_t)size : 5, pFd);
-			}
+	inline uint Stream::write(double value)
+	{
+		CString<128,false> string(value);
+		return (uint) ::fwrite(string.c_str(), 1, string.size(), pFd);
+	}
 
-		};
+	inline uint Stream::write(double value, uint64 maxsize)
+	{
+		CString<128,false> string(value);
+		return (uint) ::fwrite(string.c_str(), 1, string.size() > maxsize ? maxsize : string.size(), pFd);
+	}
 
-	} // anonymous namespace
+	inline uint Stream::write(sint16 value)
+	{
+		CString<32,false> string(value);
+		return (uint) ::fwrite(string.c_str(), 1, string.size(), pFd);
+	}
 
+	inline uint Stream::write(sint16 value, uint64 maxsize)
+	{
+		CString<32,false> string(value);
+		return (uint) ::fwrite(string.c_str(), 1, string.size() > maxsize ? maxsize : string.size(), pFd);
+	}
 
+	inline uint Stream::write(sint32 value)
+	{
+		CString<32,false> string(value);
+		return (uint) ::fwrite(string.c_str(), 1, string.size(), pFd);
+	}
+
+	inline uint Stream::write(sint32 value, uint64 maxsize)
+	{
+		CString<32,false> string(value);
+		return (uint) ::fwrite(string.c_str(), 1, string.size() > maxsize ? maxsize : string.size(), pFd);
+	}
+
+	inline uint Stream::write(sint64 value)
+	{
+		CString<32,false> string(value);
+		return (uint) ::fwrite(string.c_str(), 1, string.size(), pFd);
+	}
+
+	inline uint Stream::write(sint64 value, uint64 maxsize)
+	{
+		CString<32,false> string(value);
+		return (uint) ::fwrite(string.c_str(), 1, string.size() > maxsize ? maxsize : string.size(), pFd);
+	}
+
+	inline uint Stream::write(uint16 value)
+	{
+		CString<32,false> string(value);
+		return (uint) ::fwrite(string.c_str(), 1, string.size(), pFd);
+	}
+
+	inline uint Stream::write(uint16 value, uint64 maxsize)
+	{
+		CString<32,false> string(value);
+		return (uint) ::fwrite(string.c_str(), 1, string.size() > maxsize ? maxsize : string.size(), pFd);
+	}
+
+	inline uint Stream::write(uint32 value)
+	{
+		CString<32,false> string(value);
+		return (uint) ::fwrite(string.c_str(), 1, string.size(), pFd);
+	}
+
+	inline uint Stream::write(uint32 value, uint64 maxsize)
+	{
+		CString<32,false> string(value);
+		return (uint) ::fwrite(string.c_str(), 1, string.size() > maxsize ? maxsize : string.size(), pFd);
+	}
+
+	inline uint Stream::write(uint64 value)
+	{
+		CString<32,false> string(value);
+		return (uint) ::fwrite(string.c_str(), 1, string.size(), pFd);
+	}
+
+	inline uint Stream::write(uint64 value, uint64 maxsize)
+	{
+		CString<32,false> string(value);
+		return (uint) ::fwrite(string.c_str(), 1, string.size() > maxsize ? maxsize : string.size(), pFd);
+	}
 
 	template<class U>
 	inline uint64 Stream::write(const U& buffer)
 	{
-		return StreamTraitsWrite<Traits::CString<U>::valid, U>::Perform(pFd, buffer);
+		String string(buffer);
+		return (uint64) ::fwrite(string.c_str(), 1, string.size(), pFd);
 	}
 
 
-	template<class U>
-	inline uint64 Stream::write(const U& buffer, uint64 size)
+	inline uint Stream::write(char buffer, uint64 maxsize)
 	{
-		return StreamTraitsWrite<Traits::CString<U>::valid, U>::Perform(pFd, buffer, size);
+		return (maxsize != 0)
+			? ((EOF != ::fputc((int) buffer, pFd)) ? 1 : 0)
+			: 0;
+	}
+
+	template<class U>
+	inline uint64 Stream::write(const U& buffer, uint64 maxsize)
+	{
+		String string(buffer);
+		return (uint64) ::fwrite(string.c_str(), 1, string.size() > maxsize ? maxsize : string.size(), pFd);
 	}
 
 

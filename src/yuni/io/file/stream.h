@@ -303,6 +303,27 @@ namespace File
 		*/
 		template<class U> uint64 write(const U& buffer);
 
+		//! Write an interger
+		uint write(char buffer);
+		//! Write an interger
+		uint write(sint16  value);
+		//! Write an interger
+		uint write(sint32  value);
+		//! Write an interger
+		uint write(sint64  value);
+		//! Write an interger
+		uint write(uint16  value);
+		//! Write an interger
+		uint write(uint32  value);
+		//! Write an interger
+		uint write(uint64  value);
+		//! Write a bool
+		uint write(bool value);
+		//! Write a float
+		uint write(float value);
+		//! Write a double
+		uint write(double value);
+
 		/*!
 		** \brief Write any arbitrary buffer
 		**
@@ -310,7 +331,27 @@ namespace File
 		** \param size Size of the buffer to write
 		** \return The number of bytes that have been written
 		*/
-		template<class U> uint64 write(const U& buffer, uint64 size);
+		template<class U> uint64 write(const U& buffer, uint64 maxsize);
+		uint write(char buffer, uint64 maxsize);
+
+		//! Write an interger
+		uint write(sint16  value, uint64 maxsize);
+		//! Write an interger
+		uint write(sint32  value, uint64 maxsize);
+		//! Write an interger
+		uint write(sint64  value, uint64 maxsize);
+		//! Write an interger
+		uint write(uint16  value, uint64 maxsize);
+		//! Write an interger
+		uint write(uint32  value, uint64 maxsize);
+		//! Write an interger
+		uint write(uint64  value, uint64 maxsize);
+		//! Write a bool
+		uint write(bool value, uint64 maxsize);
+		//! Write a float
+		uint write(float value, uint64 maxsize);
+		//! Write a double
+		uint write(double value, uint64 maxsize);
 		//@}
 
 
