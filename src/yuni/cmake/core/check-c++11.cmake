@@ -99,6 +99,17 @@ check_cxx_source_compiles("
 	int main() {Foo foo;return 0;}" YUNI_HAS_CPP_KEYWORD_FINAL)
 
 
+check_cxx_source_compiles("
+	class Foo
+	{
+	public:
+		Foo(Foo&& other)
+		{}
+	};
+
+	int main() {Foo foo;return 0;}" YUNI_HAS_CPP_MOVE_CONSTRUCTOR)
+
+
 # constexpr
 #if(YUNI_HAS_GCC_CPP0X_SUPPORT)
 #	set(CMAKE_REQUIRED_FLAGS_SAVE ${CMAKE_REQUIRED_FLAGS})

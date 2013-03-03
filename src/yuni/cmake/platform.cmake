@@ -126,6 +126,9 @@
 /* C++11 keyword final */
 #cmakedefine YUNI_HAS_CPP_KEYWORD_FINAL
 
+/* C++11 move constructor */
+#cmakedefine YUNI_HAS_CPP_MOVE_CONSTRUCTOR
+
 /* pthread pthread_getthreadid_np */
 #cmakedefine YUNI_HAS_PTHREAD_GETTHREADID_NP
 
