@@ -10,11 +10,12 @@ namespace DBI
 {
 
 
-	Channel::Channel(Yuni::DBI::Settings& settings) :
+	Channel::Channel(const Yuni::DBI::Settings& settings, const ::yn_dbi_adapter& adapter) :
+		mutex(true), // recursive
+		adapter(adapter),
 		nestedTransactionCount(0),
-		lastUsed(Yuni::DateTime::Now()),
 		settings(settings),
-		mutex(true) // recursive
+		lastUsed(Yuni::DateTime::Now())
 	{
 	}
 

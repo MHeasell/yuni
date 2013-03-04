@@ -7,7 +7,13 @@
 # include "../../core/noncopyable.h"
 # include "../../dbi/settings.h"
 # include "../../dbi/error.h"
+# include "../../dbi/adapter/entries.h"
 
+# ifdef YUNI_OS_32
+#	define YUNI_PRIVATE_DBI_ATOMIC_INT  32
+# else
+#	define YUNI_PRIVATE_DBI_ATOMIC_INT  64
+# endif
 
 
 namespace Yuni
@@ -32,7 +38,7 @@ namespace DBI
 	public:
 		//! \name Constructor & Destructor
 		//@{
-		Channel(Yuni::DBI::Settings& settings);
+		Channel(const Yuni::DBI::Settings& settings, const ::yn_dbi_adapter& adapter);
 		//! Destructor
 		~Channel();
 		//@}
@@ -52,14 +58,19 @@ namespace DBI
 
 
 	public:
+		//! Mutex, locked/released by transaction
+		Yuni::Mutex mutex;
+		//! Adapter
+		::yn_dbi_adapter adapter;
+		//! Database opaque pointer
+		void* dbHandle;
 		//! The total number of nested transactions
 		uint nestedTransactionCount;
-		//! Timestamp when the channel was last used
-		sint64 lastUsed;
 		//! Channel settings
-		Yuni::DBI::Settings& settings;
-		//! Mutex
-		Yuni::Mutex mutex;
+		Yuni::DBI::Settings settings;
+
+		//! Timestamp when the channel was last used
+		Atomic::Int<YUNI_PRIVATE_DBI_ATOMIC_INT> lastUsed;
 
 	}; // class Channel
 

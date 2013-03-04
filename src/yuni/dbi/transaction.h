@@ -4,7 +4,7 @@
 # include <yuni/yuni.h>
 # include <yuni/core/noncopyable.h>
 # include "fwd.h"
-# include "query.h"
+# include "query-builder.h"
 # include "error.h"
 
 
@@ -18,16 +18,33 @@ namespace DBI
 	**
 	** \code
 	**	auto tx = dbconnexion.begin();
-	**	tx.query("SELECT * FROM mytable").each([] (const DBI::Cursor& cursor)
+	**	auto query = tx.query("SELECT * FROM data WHERE year >= ? AND year <= ?");
+	**	query.map(2010, 2042);
+	**	if (DBI::errNone != query.each([] (const DBI::Row& row)
 	**	{
-	**	});
+	**		return true;
+	**	})
+	**	{
+	**
+	**	}
 	** \endcode
 	*/
-	class Transaction final
+	class Transaction final : private NonCopyable<Transaction>
 	{
+	public:
+		enum
+		{
+			//! Invalid transaction handle
+			nullHandle = 0
+		};
+
 	public:
 		//! \name Constructors & Destructor
 		//@{
+		/*!
+		** \brief Move constructor
+		*/
+		Transaction(Transaction&& other);
 		//! Destructor
 		~Transaction();
 		//@}
@@ -46,6 +63,11 @@ namespace DBI
 		DBI::Error rollback();
 
 		/*!
+		** \brief Start a new nested transaction (savepoint)
+		*/
+		Transaction&& savepoint();
+
+		/*!
 		** \brief re-start with a new transaction
 		**
 		** If a transaction was already taking place, it will be rolled back
@@ -59,12 +81,28 @@ namespace DBI
 		/*!
 		** \brief Create a new query
 		*/
-		Query prepare(const AnyString& stmt);
+		QueryBuilder&& query(const AnyString& stmt);
 
 		/*!
 		** \brief Perform a query and discard the resultset
 		*/
 		DBI::Error perform(const AnyString& script);
+		//@}
+
+
+		//! \name Convenient routines
+		//@{
+		/*!
+		** \brief Truncate a table
+		*/
+		DBI::Error truncate(const AnyString& tablename);
+
+		/*!
+		** \brief Garbage-collect and optionally analyze a database
+		**
+		** The real SQL query is adapter-dependent.
+		*/
+		DBI::Error vacuum();
 		//@}
 
 
@@ -78,26 +116,24 @@ namespace DBI
 		//! \name Operators
 		//@{
 		//! operator (), equivalent to query()
-		Query operator () (const AnyString& stmt);
+		QueryBuilder&& operator () (const AnyString& stmt);
 		//@}
 
 
 	protected:
-		//! Default constructor
-		Transaction(Yuni::Private::DBI::ConnectorDataPtr& data);
-		//! Copy constructor
-		Transaction(const Transaction&) YUNI_NORETURN;
-		//! operator =
-		Transaction& operator = (const Transaction&) YUNI_NORETURN;
-
+		//! Constructor from a connector
+		explicit Transaction(Yuni::Private::DBI::ConnectorDataPtr& data);
+		//! Constructor from a channel
+		explicit Transaction(Yuni::Private::DBI::ChannelPtr& data);
 
 	private:
 		//! Communication channel with the remote database
 		Yuni::Private::DBI::ChannelPtr pChannel;
 		//! Transaction handle
 		uint pTxHandle;
-
+		// friends
 		friend class ConnectorPool;
+
 	}; // class Transaction
 
 

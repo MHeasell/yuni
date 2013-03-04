@@ -15,6 +15,10 @@ extern "C" enum yn_dbierr
 	yerr_dbi_no_transaction,
 	//! Invalid nested transaction,
 	yerr_dbi_invalid_nested_transaction,
+	//! Invalid identifier
+	yerr_dbi_invalid_identifier,
+	//! No row
+	yerr_dbi_no_row,
 };
 
 
@@ -35,6 +39,10 @@ namespace DBI
 		errNoTransaction,
 		//! Invalid nested transaction,
 		errInvalidNestedTransaction,
+		//! Invalid identifier
+		errInvalidIdentifier,
+		//! No row
+		errNoRow,
 	};
 
 
