@@ -31,7 +31,9 @@ namespace DBI
 
 	inline Yuni::DBI::Error Channel::rollback(uint handle)
 	{
-		if (handle != nestedTransactionCount || not handle)
+		assert(handle != 0 and "invalid handle");
+
+		if (handle != nestedTransactionCount)
 		{
 			std::cerr << "\ninvalid transaction lifetime rollback" << std::endl;
 			assert(false && "invalid transaction lifetime rollback");
@@ -52,6 +54,8 @@ namespace DBI
 
 	inline Yuni::DBI::Error Channel::commit(uint handle)
 	{
+		assert(handle != 0 and "invalid handle");
+
 		if (handle != nestedTransactionCount)
 		{
 			std::cerr << "\ninvalid transaction lifetime commit" << std::endl;

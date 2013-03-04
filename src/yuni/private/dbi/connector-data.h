@@ -3,6 +3,7 @@
 
 # include "../../dbi/settings.h"
 # include "../../dbi/fwd.h"
+# include "../../dbi/adapter/entries.h"
 # include "channel.h"
 
 
@@ -27,10 +28,20 @@ namespace DBI
 		*/
 		ChannelPtr openChannel();
 
+		/*!
+		** \brief Close all old channels
+		**
+		** \param[out] remainingCount The number of channels currently opened (after cleanup)
+		** \return The number of channels which have been closed
+		*/
+		uint closeTooOldChannels(uint& remainingCount);
+
 
 	public:
 		//! Settings used to connect to the database
 		Yuni::DBI::Settings settings;
+		//! Adapter Entries
+		::yn_dbi_adapter adapter;
 		//! Mutex
 		Mutex mutex;
 

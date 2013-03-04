@@ -7,16 +7,29 @@ namespace Yuni
 namespace DBI
 {
 
-
-	inline Query Transaction::prepare(const AnyString& stmt)
+	inline Transaction::Transaction(Transaction&& other) :
+		pTxHandle(other.pTxhandle)
 	{
-		return Query(stmt);
+		pChannel.swap(other.pChannel);
+		other.pTxHandle = nullHandle;
 	}
 
 
-	inline Query Transaction::operator () (const AnyString& stmt)
+	inline Transaction&& Transaction::savepoint()
 	{
-		return Query(stmt);
+		return Transaction(pChannel);
+	}
+
+
+	inline QueryBuilder&& Transaction::query(const AnyString& stmt)
+	{
+		return QueryBuilder(stmt);
+	}
+
+
+	inline QueryBuilder&& Transaction::operator () (const AnyString& stmt)
+	{
+		return QueryBuilder(stmt);
 	}
 
 

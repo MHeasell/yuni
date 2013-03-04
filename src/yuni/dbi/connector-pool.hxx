@@ -8,22 +8,9 @@ namespace Yuni
 namespace DBI
 {
 
-	inline ConnectorPool::ConnectorPool()
-	{
-		// does nothing
-	}
-
-
-	inline ConnectorPool::~ConnectorPool()
-	{
-		// does nothing
-	}
-
-
-
 	inline Transaction  ConnectorPool::begin()
 	{
-		return  Transaction(pData);
+		return Transaction(pData);
 	}
 
 

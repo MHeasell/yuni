@@ -9,9 +9,21 @@ namespace Yuni
 namespace DBI
 {
 
+	ConnectorPool::ConnectorPool()
+	{
+		// does nothing
+	}
+
+
 	ConnectorPool::ConnectorPool(const Yuni::Private::DBI::ConnectorDataPtr& data) :
 		pData(data)
 	{
+	}
+
+
+	ConnectorPool::~ConnectorPool()
+	{
+		// does nothing
 	}
 
 
@@ -23,6 +35,7 @@ namespace DBI
 
 	void ConnectorPool::close()
 	{
+		// release pdata
 		pData = nullptr;
 	}
 

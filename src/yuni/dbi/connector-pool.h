@@ -35,12 +35,13 @@ namespace DBI
 		** \brief Try to open a connection to a remote database
 		**
 		** A real connexion attempt to the database will be performed to check
-		** input parameters.
+		** input parameters. All connections will be automatically closed at the
+		** destruction of the instance.
 		*/
 		Error open(const Settings& settings);
 
 		/*!
-		** \brief Close the connection to the remote database
+		** \brief Close all connections to the remote database
 		*/
 		void close();
 		//@}
@@ -51,7 +52,7 @@ namespace DBI
 		/*!
 		** \brief Start a new transaction
 		*/
-		Transaction  begin();
+		Transaction begin();
 		//@}
 
 

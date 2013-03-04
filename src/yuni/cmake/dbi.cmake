@@ -29,6 +29,13 @@ set(SRC_DBI
 	dbi/transaction.cpp
 	dbi/settings.h
 	dbi/settings.hxx
+	dbi/query-builder.h
+	dbi/query-builder.hxx
+	dbi/query-builder.cpp
+	dbi/adapter.h
+	dbi/adapter/entries.h
+	dbi/utils.h
+	dbi/utils.cpp
 )
 source_group("DBI" FILES ${SRC_DBI})
 
