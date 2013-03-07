@@ -28,11 +28,11 @@ namespace Messaging
 				max4xx = 404,
 				max5xx = 500,
 			};
-			CString<32,false> header2xx[5];
-			CString<32,false> header4xx[5];
-			CString<32,false> header5xx[1];
-			CString<64,false> response4xx[5];
-			CString<64,false> response5xx[1];
+			ShortString32 header2xx[5];
+			ShortString32 header4xx[5];
+			ShortString32 header5xx[1];
+			ShortString64 response4xx[5];
+			ShortString64 response5xx[1];
 		};
 
 	public:

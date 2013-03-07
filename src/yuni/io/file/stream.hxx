@@ -149,97 +149,97 @@ namespace File
 
 	inline uint Stream::write(float value)
 	{
-		CString<64,false> string(value);
+		ShortString64 string(value);
 		return (uint) ::fwrite(string.c_str(), 1, string.size(), pFd);
 	}
 
 	inline uint Stream::write(float value, uint64 maxsize)
 	{
-		CString<64,false> string(value);
+		ShortString64 string(value);
 		return (uint) ::fwrite(string.c_str(), 1, string.size() > maxsize ? maxsize : string.size(), pFd);
 	}
 
 	inline uint Stream::write(double value)
 	{
-		CString<128,false> string(value);
+		ShortString128 string(value);
 		return (uint) ::fwrite(string.c_str(), 1, string.size(), pFd);
 	}
 
 	inline uint Stream::write(double value, uint64 maxsize)
 	{
-		CString<128,false> string(value);
+		ShortString128 string(value);
 		return (uint) ::fwrite(string.c_str(), 1, string.size() > maxsize ? maxsize : string.size(), pFd);
 	}
 
 	inline uint Stream::write(sint16 value)
 	{
-		CString<32,false> string(value);
+		ShortString32 string(value);
 		return (uint) ::fwrite(string.c_str(), 1, string.size(), pFd);
 	}
 
 	inline uint Stream::write(sint16 value, uint64 maxsize)
 	{
-		CString<32,false> string(value);
+		ShortString32 string(value);
 		return (uint) ::fwrite(string.c_str(), 1, string.size() > maxsize ? maxsize : string.size(), pFd);
 	}
 
 	inline uint Stream::write(sint32 value)
 	{
-		CString<32,false> string(value);
+		ShortString32 string(value);
 		return (uint) ::fwrite(string.c_str(), 1, string.size(), pFd);
 	}
 
 	inline uint Stream::write(sint32 value, uint64 maxsize)
 	{
-		CString<32,false> string(value);
+		ShortString32 string(value);
 		return (uint) ::fwrite(string.c_str(), 1, string.size() > maxsize ? maxsize : string.size(), pFd);
 	}
 
 	inline uint Stream::write(sint64 value)
 	{
-		CString<32,false> string(value);
+		ShortString32 string(value);
 		return (uint) ::fwrite(string.c_str(), 1, string.size(), pFd);
 	}
 
 	inline uint Stream::write(sint64 value, uint64 maxsize)
 	{
-		CString<32,false> string(value);
+		ShortString32 string(value);
 		return (uint) ::fwrite(string.c_str(), 1, string.size() > maxsize ? maxsize : string.size(), pFd);
 	}
 
 	inline uint Stream::write(uint16 value)
 	{
-		CString<32,false> string(value);
+		ShortString32 string(value);
 		return (uint) ::fwrite(string.c_str(), 1, string.size(), pFd);
 	}
 
 	inline uint Stream::write(uint16 value, uint64 maxsize)
 	{
-		CString<32,false> string(value);
+		ShortString32 string(value);
 		return (uint) ::fwrite(string.c_str(), 1, string.size() > maxsize ? maxsize : string.size(), pFd);
 	}
 
 	inline uint Stream::write(uint32 value)
 	{
-		CString<32,false> string(value);
+		ShortString32 string(value);
 		return (uint) ::fwrite(string.c_str(), 1, string.size(), pFd);
 	}
 
 	inline uint Stream::write(uint32 value, uint64 maxsize)
 	{
-		CString<32,false> string(value);
+		ShortString32 string(value);
 		return (uint) ::fwrite(string.c_str(), 1, string.size() > maxsize ? maxsize : string.size(), pFd);
 	}
 
 	inline uint Stream::write(uint64 value)
 	{
-		CString<32,false> string(value);
+		ShortString32 string(value);
 		return (uint) ::fwrite(string.c_str(), 1, string.size(), pFd);
 	}
 
 	inline uint Stream::write(uint64 value, uint64 maxsize)
 	{
-		CString<32,false> string(value);
+		ShortString32 string(value);
 		return (uint) ::fwrite(string.c_str(), 1, string.size() > maxsize ? maxsize : string.size(), pFd);
 	}
 
