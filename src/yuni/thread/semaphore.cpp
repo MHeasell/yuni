@@ -57,7 +57,7 @@ namespace Yuni
 		#	ifdef YUNI_OS_MAC
 
 		// OS X does not support unnamed semaphores
-		CString<128,false> name;
+		ShortString128 name;
 		name << "yuni_" << getpid() << '-' << (void*) this;
 
 		pSemaphore = sem_open(name.c_str(), O_CREAT, 0600, readers);

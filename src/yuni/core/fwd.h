@@ -31,6 +31,19 @@ namespace Yuni
 	//! Character Large Object
 	typedef YUNI_DECL CString<4096>  Clob;
 
+	//! Convenient alias for short string 16 bytes
+	typedef YUNI_DECL  CString<16,false>  ShortString16;
+	//! Convenient alias for short string 32 bytes
+	typedef YUNI_DECL  CString<32,false>  ShortString32;
+	//! Convenient alias for short string 64 bytes
+	typedef YUNI_DECL  CString<64,false>  ShortString64;
+	//! Convenient alias for short string 128 bytes
+	typedef YUNI_DECL  CString<128,false>  ShortString128;
+	//! Convenient alias for short string 256 bytes
+	typedef YUNI_DECL  CString<256,false>  ShortString256;
+	//! Convenient alias for short string 512 bytes
+	typedef YUNI_DECL  CString<512,false>  ShortString512;
+
 
 } // namespace Yuni
 

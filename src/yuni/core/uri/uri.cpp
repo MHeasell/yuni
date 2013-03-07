@@ -173,7 +173,7 @@ namespace Yuni
 						}
 					case partPort:
 						{
-							CString<32, false> intstr(str, lastPosition, remainingSize);
+							ShortString32 intstr(str, lastPosition, remainingSize);
 							infos.port = intstr.to<sint32>();
 							break;
 						}
@@ -480,7 +480,7 @@ namespace Yuni
 					}
 				case '/': // Begining of a path
 					{
-						CString<32, false> intstr(str, lastPosition, indx - lastPosition);
+						ShortString16 intstr(str, lastPosition, indx - lastPosition);
 						if (not intstr.to(infos.port))
 						{
 							// May be a invalid sequence
@@ -493,7 +493,7 @@ namespace Yuni
 					}
 				case '#': // Begining of a fragment
 					{
-						CString<32, false> intstr(str, lastPosition, indx - lastPosition);
+						ShortString16 intstr(str, lastPosition, indx - lastPosition);
 						if (not intstr.to(infos.port))
 						{
 							// May be a invalid sequence
@@ -506,7 +506,7 @@ namespace Yuni
 					}
 				case '?': // Begining of a query
 					{
-						CString<32, false> intstr(str, lastPosition, indx - lastPosition);
+						ShortString16 intstr(str, lastPosition, indx - lastPosition);
 						if (not intstr.to(infos.port))
 						{
 							// May be a invalid sequence
