@@ -7,7 +7,15 @@ namespace Yuni
 namespace DBI
 {
 
-	inline QueryBuilder::QueryBuilder(QueryBuilder&& other) :
+	inline PreparedStatement::PreparedStatement(::yn_dbi_adapter& adapter, void* handle) :
+		pAdapter(adapter),
+		pHandle(handle),
+		pRowCount()
+	{
+	}
+
+
+	inline PreparedStatement::PreparedStatement(PreparedStatement&& other) :
 		pAdapter(other.pAdapter),
 		pHandle(other.pHandle),
 		pRowCount(other.pRowCount)
@@ -17,14 +25,14 @@ namespace DBI
 	}
 
 
-	inline QueryBuilder::~QueryBuilder()
+	inline PreparedStatement::~PreparedStatement()
 	{
 		if (pHandle)
 			pAdapter.query_ref_release(pHandle);
 	}
 
 
-	inline QueryBuilder& QueryBuilder::bind(uint index, const AnyString& value)
+	inline PreparedStatement& PreparedStatement::bind(uint index, const AnyString& value)
 	{
 		if (pHandle)
 			pAdapter.bind_str(pHandle, index, value.c_str(), value.size());
@@ -32,7 +40,7 @@ namespace DBI
 	}
 
 
-	inline QueryBuilder& QueryBuilder::bind(uint index, bool value)
+	inline PreparedStatement& PreparedStatement::bind(uint index, bool value)
 	{
 		if (pHandle)
 			pAdapter.bind_bool(pHandle, index, (int) value);
@@ -40,7 +48,7 @@ namespace DBI
 	}
 
 
-	inline QueryBuilder& QueryBuilder::bind(uint index, sint32 value)
+	inline PreparedStatement& PreparedStatement::bind(uint index, sint32 value)
 	{
 		if (pHandle)
 			pAdapter.bind_int32(pHandle, index, value);
@@ -48,7 +56,7 @@ namespace DBI
 	}
 
 
-	inline QueryBuilder& QueryBuilder::bind(uint index, sint64 value)
+	inline PreparedStatement& PreparedStatement::bind(uint index, sint64 value)
 	{
 		if (pHandle)
 			pAdapter.bind_int64(pHandle, index, value);
@@ -56,7 +64,7 @@ namespace DBI
 	}
 
 
-	inline QueryBuilder& QueryBuilder::bind(uint index, double value)
+	inline PreparedStatement& PreparedStatement::bind(uint index, double value)
 	{
 		if (pHandle)
 			pAdapter.bind_double(pHandle, index, value);
@@ -64,7 +72,7 @@ namespace DBI
 	}
 
 
-	inline QueryBuilder& QueryBuilder::bind(uint index, const NullPtr&)
+	inline PreparedStatement& PreparedStatement::bind(uint index, const NullPtr&)
 	{
 		if (pHandle)
 			pAdapter.bind_null(pHandle, index);
@@ -73,8 +81,8 @@ namespace DBI
 
 
 	template<class A1>
-	inline QueryBuilder&
-	QueryBuilder::map(const A1& a1)
+	inline PreparedStatement&
+	PreparedStatement::map(const A1& a1)
 	{
 		(void) bind(0, a1);
 		return *this;
@@ -82,8 +90,8 @@ namespace DBI
 
 
 	template<class A1, class A2>
-	inline QueryBuilder&
-	QueryBuilder::map(const A1& a1, const A2& a2)
+	inline PreparedStatement&
+	PreparedStatement::map(const A1& a1, const A2& a2)
 	{
 		(void) bind(0, a1);
 		(void) bind(1, a2);
@@ -92,8 +100,8 @@ namespace DBI
 
 
 	template<class A1, class A2, class A3>
-	inline QueryBuilder&
-	QueryBuilder::map(const A1& a1, const A2& a2, const A3& a3)
+	inline PreparedStatement&
+	PreparedStatement::map(const A1& a1, const A2& a2, const A3& a3)
 	{
 		(void) bind(0, a1);
 		(void) bind(1, a2);
@@ -103,8 +111,8 @@ namespace DBI
 
 
 	template<class A1, class A2, class A3, class A4>
-	inline QueryBuilder&
-	QueryBuilder::map(const A1& a1, const A2& a2, const A3& a3, const A4& a4)
+	inline PreparedStatement&
+	PreparedStatement::map(const A1& a1, const A2& a2, const A3& a3, const A4& a4)
 	{
 		(void) bind(0, a1);
 		(void) bind(1, a2);
@@ -114,19 +122,19 @@ namespace DBI
 	}
 
 
-	inline bool QueryBuilder::empty() const
+	inline bool PreparedStatement::empty() const
 	{
 		return (0 == pRowCount);
 	}
 
 
-	inline uint64 QueryBuilder::rowCount() const
+	inline uint64 PreparedStatement::rowCount() const
 	{
 		return pRowCount;
 	}
 
 
-	inline DBI::Error QueryBuilder::next()
+	inline DBI::Error PreparedStatement::next()
 	{
 		return (pHandle)
 			? (DBI::Error) pAdapter.cursor_go_to_next(pHandle)
@@ -134,7 +142,7 @@ namespace DBI
 	}
 
 
-	inline DBI::Error QueryBuilder::previous()
+	inline DBI::Error PreparedStatement::previous()
 	{
 		return (pHandle)
 			? (DBI::Error) pAdapter.cursor_go_to_previous(pHandle)
@@ -142,7 +150,7 @@ namespace DBI
 	}
 
 
-	inline DBI::Error QueryBuilder::moveTo(uint64 rowindex)
+	inline DBI::Error PreparedStatement::moveTo(uint64 rowindex)
 	{
 		return (pHandle)
 			? (DBI::Error) pAdapter.cursor_go_to(pHandle, rowindex)
@@ -151,9 +159,18 @@ namespace DBI
 
 
 	template<class CallbackT>
-	inline DBI::Error QueryBuilder::each(const CallbackT& callback)
+	inline DBI::Error PreparedStatement::each(const CallbackT& callback)
 	{
-		DBI::Error error = next();
+		auto error = next();
+		if (not error)
+		{
+			do
+			{
+		//		if (not callback(fetch()))
+		//			return;
+			}
+			while (DBI::errNone == (error = next()));
+		}
 		return error;
 	}
 

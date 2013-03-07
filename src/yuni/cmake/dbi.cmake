@@ -1,7 +1,10 @@
 
 YMESSAGE_MODULE("DBI (Database independant)  (EXPERIMENTAL)")
 
-LIBYUNI_CONFIG_LIB("both" "dbi"        "yuni-static-dbi")
+LIBYUNI_CONFIG_LIB("both"   "dbi"  "yuni-static-dbi")
+
+# only for sqlite
+LIBYUNI_CONFIG_LIB("both" "dbi"  "dl")
 
 
 # Sources for parsing JSON are imported from nany and no relative paths
@@ -10,10 +13,15 @@ include_directories("..")
 
 set (SRC_PRIVATE_DBI
 	private/dbi/connector-data.h
+	private/dbi/connector-data.hxx
 	private/dbi/connector-data.cpp
 	private/dbi/channel.h
 	private/dbi/channel.hxx
 	private/dbi/channel.cpp
+
+	private/dbi/adapter/sqlite/sqlite3.c
+	private/dbi/adapter/sqlite/sqlite3.h
+	private/dbi/adapter/sqlite/sqlite3ext.h
 )
 source_group("DBI\\Private" FILES ${SRC_PRIVATE_DBI})
 
@@ -32,10 +40,14 @@ set(SRC_DBI
 	dbi/query-builder.h
 	dbi/query-builder.hxx
 	dbi/query-builder.cpp
-	dbi/adapter.h
-	dbi/adapter/entries.h
 	dbi/utils.h
 	dbi/utils.cpp
+
+	dbi/adapter.h
+	dbi/adapter/entries.h
+	dbi/adapter/adapter.h
+	dbi/adapter/sqlite.h
+	dbi/adapter/sqlite.cpp
 )
 source_group("DBI" FILES ${SRC_DBI})
 

@@ -12,7 +12,7 @@ namespace Yuni
 namespace DBI
 {
 
-	class QueryBuilder final : private Yuni::NonCopyable<QueryBuilder>
+	class PreparedStatement final : private Yuni::NonCopyable<PreparedStatement>
 	{
 	public:
 		//! \name Constructors & Destructor
@@ -20,43 +20,43 @@ namespace DBI
 		/*!
 		** \brief Default constructor
 		*/
-		explicit QueryBuilder(::yn_dbi_adapter& adapter, const AnyString& stmt);
+		PreparedStatement(::yn_dbi_adapter& adapter, void* handle);
 		/*!
 		** \brief Move constructor
 		*/
-		QueryBuilder(QueryBuilder&& other);
+		PreparedStatement(PreparedStatement&& other);
 		//! Destructor
-		~QueryBuilder();
+		~PreparedStatement();
 		//@}
 
 
 		//! \name Bindings
 		//@{
 		//! Bind a sepcific parameter as a string
-		QueryBuilder& bind(uint index, const AnyString& value);
+		PreparedStatement& bind(uint index, const AnyString& value);
 		//! Bind a sepcific parameter as a bool
-		QueryBuilder& bind(uint index, bool value);
+		PreparedStatement& bind(uint index, bool value);
 		//! Bind a sepcific parameter as a sint32
-		QueryBuilder& bind(uint index, sint32 value);
+		PreparedStatement& bind(uint index, sint32 value);
 		//! Bind a sepcific parameter as a sint64
-		QueryBuilder& bind(uint index, sint64 value);
+		PreparedStatement& bind(uint index, sint64 value);
 		//! Bind a sepcific parameter as a double
-		QueryBuilder& bind(uint index, double value);
+		PreparedStatement& bind(uint index, double value);
 		//! Bind a sepcific parameter as a null
-		QueryBuilder& bind(uint index, const NullPtr&);
+		PreparedStatement& bind(uint index, const NullPtr&);
 
 		//! Convenient method for binding the first 1 parameter
 		template<class A1>
-		QueryBuilder& map(const A1& a1);
+		PreparedStatement& map(const A1& a1);
 		//! Convenient method for binding the first 2 parameters at once
 		template<class A1, class A2>
-		QueryBuilder& map(const A1& a1, const A2& a2);
+		PreparedStatement& map(const A1& a1, const A2& a2);
 		//! Convenient method for binding the first 3 parameters at once
 		template<class A1, class A2, class A3>
-		QueryBuilder& map(const A1& a1, const A2& a2, const A3& a3);
+		PreparedStatement& map(const A1& a1, const A2& a2, const A3& a3);
 		//! Convenient method for binding the first 4 parameters at once
 		template<class A1, class A2, class A3, class A4>
-		QueryBuilder& map(const A1& a1, const A2& a2, const A3& a3, const A4& a4);
+		PreparedStatement& map(const A1& a1, const A2& a2, const A3& a3, const A4& a4);
 		//@}
 
 
@@ -74,7 +74,7 @@ namespace DBI
 		//@}
 
 
-		//! \name Row management
+		//! \name Resultset
 		//@{
 		/*!
 		** \brief Iterate over all rows in the resultset
@@ -93,7 +93,7 @@ namespace DBI
 		/*!
 		** \brief Move the cursor to a specific row index in the result set
 		*/
-		bool moveTo(uint64 rowindex);
+		DBI::Error moveTo(uint64 rowindex);
 
 		/*!
 		** \brief Get if the result set is empty
@@ -109,13 +109,14 @@ namespace DBI
 
 	private:
 		//! Alias to the current channel
+		// \internal This reference can be null and must never be called if pHandle is null
 		::yn_dbi_adapter& pAdapter;
 		//! Opaque data for the current query
 		void* pHandle;
 		//! Row count
 		uint64 pRowCount;
 
-	}; // class QueryBuilder
+	}; // class PreparedStatement
 
 
 
@@ -123,5 +124,7 @@ namespace DBI
 
 } // namespace DBI
 } // namespace Yuni
+
+# include "query-builder.hxx"
 
 #endif // __YUNI_DBI_QUERY_BUILDER_H__

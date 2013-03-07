@@ -1,6 +1,5 @@
 
 #include "connector-data.h"
-#include "../../thread/id.h"
 #include "../../datetime/timestamp.h"
 
 
@@ -12,40 +11,22 @@ namespace Private
 namespace DBI
 {
 
-
-	ConnectorData::ConnectorData()
-	{
-		// reset adapter
-		::memset(&adapter, '\0', sizeof(adapter));
-	}
-
-
 	ConnectorData::~ConnectorData()
 	{
+		delete instance;
 	}
 
 
-	ChannelPtr ConnectorData::openChannel()
+
+	ChannelPtr ConnectorData::createNewChannelWL(uint64 threadid)
 	{
-		// current thread id
-		uint64 tid = Thread::ID();
-
-		// locker
-		Yuni::MutexLocker locker(mutex);
-
-		// checking if a channel does not already exists
-		Channel::Table::iterator i = channels.find(tid);
-		if (i != channels.end())
-			return i->second;
-
-		// otherwise we have to create a new one
 		ChannelPtr newchan = new Channel(settings, adapter);
-		channels[tid] = newchan;
+		channels[threadid] = newchan;
 		return newchan;
 	}
 
 
-	uint ConnectorData::closeTooOldChannels(uint& remainingCount)
+	uint ConnectorData::closeTooOldChannels(uint idleTime, uint& remainingCount)
 	{
 		// the current timestamp
 		sint64 now = Yuni::DateTime::Now();
@@ -68,10 +49,10 @@ namespace DBI
 			// beware : the variable `lastUsed` might be in the future in comparison
 			// of our variable `now`, since it can be modified without locking
 			// our variable `mutex`
-			if (now > channel.lastUsed)
+			if (now >= channel.lastUsed)
 			{
 				// checking idle time
-				if (settings.idleTime < (now - channel.lastUsed))
+				if (idleTime <= (now - channel.lastUsed))
 				{
 					// our channel may be idle for too long
 					// checking if it is not currently in use

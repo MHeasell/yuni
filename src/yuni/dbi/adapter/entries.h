@@ -5,17 +5,15 @@
 # include "../error.h"
 
 
+/*!
+** \brief Adapter entries table
+**
+** \note All routines must be reentrant
+*/
 struct yn_dbi_adapter
 {
 	//! Database handle, provided for convenient uses
 	void* dbh;
-
-	//! Open a connection to the remote database
-	yn_dbierr (*open) (void** dbh, const char* host, const char* user, const char* pass, const char* dbname);
-	//! Open a schema
-	yn_dbierr (*open_schema) (void* dbh, const char* name, uint length);
-	//! Close the connection
-	void (*close) (void* dbh);
 
 	//! Start a new transaction
 	yn_dbierr (*begin)(void* dbh);
@@ -49,6 +47,9 @@ struct yn_dbi_adapter
 
 	//! Execute a query
 	yn_dbierr (*query_execute)(void* qh, yuint64* rowcount);
+	//! Execute a query, and release the handler
+	yn_dbierr (*query_perform)(void* qh);
+
 	//! Go to the next row
 	yn_dbierr (*cursor_go_to_next)(void* qh);
 	//! Go to the previous row
@@ -64,6 +65,13 @@ struct yn_dbi_adapter
 	yn_dbierr (*vacuum)();
 	//! truncate a table
 	yn_dbierr (*truncate)(const char* tablename, uint length);
+
+	//! Open a connection to the remote database
+	yn_dbierr (*open) (void** dbh, const char* host, uint port, const char* user, const char* pass, const char* dbname);
+	//! Open a schema
+	yn_dbierr (*open_schema) (void* dbh, const char* name, uint length);
+	//! Close the connection
+	void (*close) (void* dbh);
 
 }; // class Adapter
 

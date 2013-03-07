@@ -9,10 +9,14 @@ extern "C" enum yn_dbierr
 {
 	//! No error
 	yerr_dbi_none,
+	//! Invalid adapter
+	yerr_dbi_invalid_adapter,
 	//! The database connection was lost, even after automatic reconnection
 	yerr_dbi_connection_failed,
 	//! No transaction
 	yerr_dbi_no_transaction,
+	//! No query
+	yerr_dbi_no_query,
 	//! Invalid nested transaction,
 	yerr_dbi_invalid_nested_transaction,
 	//! Invalid identifier
@@ -33,10 +37,14 @@ namespace DBI
 	{
 		//! No error
 		errNone,
+		//! Invalid adapter
+		errInvalidAdapter,
 		//! The database connection was lost, even after automatic reconnection
 		errConnectionFailed,
 		//! No transaction
 		errNoTransaction,
+		//! No query
+		errNoQuery,
 		//! Invalid nested transaction,
 		errInvalidNestedTransaction,
 		//! Invalid identifier

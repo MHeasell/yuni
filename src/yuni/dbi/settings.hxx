@@ -8,7 +8,8 @@ namespace DBI
 {
 
 	inline Settings::Settings() :
-		reconnectionAttemps(Default::maxReconnectionAttempt),
+		port(),
+		maxReconnectionAttempts(Default::maxReconnectionAttempts),
 		delayBetweenReconnectionAttempt(Default::delayBetweenReconnection),
 		idleTime(Default::idleTime)
 	{}
@@ -21,9 +22,10 @@ namespace DBI
 		password.clear();
 		database.clear();
 		schema.clear();
+		port = 0;
 
 		maxReconnectionAttempts = Default::maxReconnectionAttempts;
-		delayBetweenReconnectionAttempt = Default::delayBetweenReconnextion;
+		delayBetweenReconnectionAttempt = Default::delayBetweenReconnection;
 		idleTime = Default::idleTime;
 	}
 

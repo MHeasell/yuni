@@ -8,47 +8,35 @@ namespace Yuni
 namespace DBI
 {
 
-	QueryBuilder::QueryBuilder(::yn_dbi_adapter& adapter, const AnyString& stmt) :
-		pAdapter(adapter),
-		pRowCount()
-	{
-		if (not stmt.empty() and pAdapter.dbh)
-		{
-			assert(pAdapter.query_new != NULL  and "invalid adapter query_new");
-			assert(pAdapter.query_ref_acquire != NULL and "invalid adapter query_ref_acquire");
-			assert(pAdapter.query_ref_release != NULL and "invalid adapter query_ref_release");
 
-			pAdapter.query_new(&pHandle, pAdapter.dbh, stmt.c_str(), stmt.size());
-			return;
-		}
-
-		// failed
-		pHandle = nullptr;
-	}
-
-
-	DBI::Error QueryBuilder::execute()
+	DBI::Error PreparedStatement::execute()
 	{
 		if (pHandle)
+		{
+			assert(pAdapter.query_execute and "invalid query_perform");
 			return (DBI::Error) pAdapter.query_execute(pHandle, &pRowCount);
+		}
 
 		pRowCount = 0;
 		return DBI::errNoTransaction;
 	}
 
 
-	DBI::Error QueryBuilder::perform()
+	DBI::Error PreparedStatement::perform()
 	{
+		// reset the total number of rows
+		pRowCount = 0;
+
 		if (pHandle)
 		{
-			DBI::Error error = (DBI::Error) pAdapter.query_execute(pHandle, nullptr);
-			pAdapter.query_ref_release(pHandle);
+			assert(pAdapter.query_perform and "invalid query_perform");
+
+			// execute the query
+			DBI::Error error = (DBI::Error) pAdapter.query_perform(pHandle);
 			pHandle = nullptr;
-			pRowCount = 0;
 			return error;
 		}
-		pRowCount = 0;
-		return errNoTransaction;
+		return errNoQuery;
 	}
 
 

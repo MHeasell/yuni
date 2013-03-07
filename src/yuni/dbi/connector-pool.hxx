@@ -14,6 +14,24 @@ namespace DBI
 	}
 
 
+	inline Error ConnectorPool::open(Adapter::IAdapter* adapter, AnyString host)
+	{
+		Settings settings;
+		settings.host    = host;
+		return open(adapter, settings);
+	}
+
+
+	inline Error ConnectorPool::open(Adapter::IAdapter* adapter, AnyString host, AnyString dbname, AnyString user, AnyString password)
+	{
+		Settings settings;
+		settings.host     = host;
+		settings.database = dbname;
+		settings.username = user;
+		settings.password = password;
+		return open(adapter, settings);
+	}
+
 
 
 } // namespace DBI

@@ -44,6 +44,16 @@ namespace DBI
 		//@}
 
 
+		//! \name Connection
+		//@{
+		/*!
+		** \brief Open the connection
+		** \see status
+		*/
+		void open();
+		//@}
+
+
 		//! \name Transactions
 		//@{
 		//! Start a new transaction
@@ -60,10 +70,10 @@ namespace DBI
 	public:
 		//! Mutex, locked/released by transaction
 		Yuni::Mutex mutex;
+		//! Status of the connection
+		Yuni::DBI::Error status;
 		//! Adapter
 		::yn_dbi_adapter adapter;
-		//! Database opaque pointer
-		void* dbHandle;
 		//! The total number of nested transactions
 		uint nestedTransactionCount;
 		//! Channel settings

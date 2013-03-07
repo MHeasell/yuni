@@ -35,6 +35,7 @@ if(Yuni_FOUND)
 	add_subdirectory(threads)
 	add_subdirectory(messaging)
 	add_subdirectory(extra)
+	add_subdirectory(dbi)
 
 else()
 
