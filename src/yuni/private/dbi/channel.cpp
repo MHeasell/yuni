@@ -17,19 +17,24 @@ namespace DBI
 		settings(settings),
 		lastUsed(Yuni::DateTime::Now())
 	{
+		open();
 	}
 
 
 	Channel::~Channel()
 	{
+		MutexLocker locker(mutex);
+
 		if (nestedTransactionCount > 0)
 		{
 			std::cerr << "closing database channel but " << nestedTransactionCount
 				<< "transaction(s) remain" << std::endl;
 			assert(false and "closing database channel but some transactions remain");
 		}
-	}
 
+		if (adapter.dbh)
+			adapter.close(adapter.dbh);
+	}
 
 
 

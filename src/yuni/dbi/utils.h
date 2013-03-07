@@ -13,7 +13,7 @@ namespace DBI
 	/*!
 	** \brief Check whether a string is an identifier or not
 	*/
-	bool IsValidIdentifier(const AnyString& text);
+	bool IsValidIdentifier(AnyString text);
 
 
 

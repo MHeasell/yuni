@@ -81,7 +81,7 @@ namespace DBI
 		/*!
 		** \brief Create a new query
 		*/
-		QueryBuilder&& query(const AnyString& stmt);
+		PreparedStatement prepare(const AnyString& stmt);
 
 		/*!
 		** \brief Perform a query and discard the resultset
@@ -116,7 +116,7 @@ namespace DBI
 		//! \name Operators
 		//@{
 		//! operator (), equivalent to query()
-		QueryBuilder&& operator () (const AnyString& stmt);
+		PreparedStatement&& operator () (const AnyString& stmt);
 		//@}
 
 

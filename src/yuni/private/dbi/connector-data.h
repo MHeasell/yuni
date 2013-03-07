@@ -3,7 +3,7 @@
 
 # include "../../dbi/settings.h"
 # include "../../dbi/fwd.h"
-# include "../../dbi/adapter/entries.h"
+# include "../../dbi/adapter.h"
 # include "channel.h"
 
 
@@ -19,12 +19,13 @@ namespace DBI
 	class ConnectorData final
 	{
 	public:
-		ConnectorData();
-
+		//! Default constructor
+		ConnectorData(const Yuni::DBI::Settings& settings, Yuni::DBI::Adapter::IAdapter* adapter);
+		//! Destructor
 		~ConnectorData();
 
 		/*!
-		** \brief Open a communication channel to the remote database
+		** \brief Open a communication channel to the remote database (per thread)
 		*/
 		ChannelPtr openChannel();
 
@@ -34,7 +35,7 @@ namespace DBI
 		** \param[out] remainingCount The number of channels currently opened (after cleanup)
 		** \return The number of channels which have been closed
 		*/
-		uint closeTooOldChannels(uint& remainingCount);
+		uint closeTooOldChannels(uint idletime, uint& remainingCount);
 
 
 	public:
@@ -48,6 +49,13 @@ namespace DBI
 		//! All channels, ordered by a thread id
 		Channel::Table channels;
 
+		// delete the instance
+		Yuni::DBI::Adapter::IAdapter* instance;
+
+	private:
+		//! Instantiate a new channel
+		ChannelPtr createNewChannelWL(uint64 threadid);
+
 	}; // class ConnectorData
 
 
@@ -57,5 +65,7 @@ namespace DBI
 } // namespace DBI
 } // namespace Private
 } // namespace Yuni
+
+# include "connector-data.hxx"
 
 #endif // __YUNI_PRIVATE_DBI_CONNECTOR_DATA_H__

@@ -21,15 +21,9 @@ namespace DBI
 	}
 
 
-	inline QueryBuilder&& Transaction::query(const AnyString& stmt)
+	inline PreparedStatement&& Transaction::operator () (const AnyString& stmt)
 	{
-		return QueryBuilder(stmt);
-	}
-
-
-	inline QueryBuilder&& Transaction::operator () (const AnyString& stmt)
-	{
-		return QueryBuilder(stmt);
+		return prepare(stmt);
 	}
 
 

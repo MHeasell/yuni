@@ -15,7 +15,7 @@ namespace DBI
 	public:
 		enum
 		{
-			maxReconnectionAttempts = 60,
+			maxReconnectionAttempts = 30,
 			delayBetweenReconnection = 1000, // ms
 			idleTime = 60 // seconds
 		};
@@ -31,23 +31,20 @@ namespace DBI
 		//! Clear all settings
 		void clear();
 
+
 	public:
-		/*!
-		** \brief Adapter name (or driver filename)
-		**
-		** Example : sqlite, postgresql, ...
-		*/
-		String adapter;
-		//! host (empty means localhost)
+		//! host (empty means localhost) or filename
 		String host;
+		//! port (0 means default)
+		uint port;
 		//! username
-		String username;
+		ShortString128 username;
 		//! password
 		String password;
 		//! Database name
-		String database;
+		ShortString128 database;
 		//! schema to open (only if the database supports it)
-		String schema;
+		ShortString128 schema;
 
 		//! Maximum number of Attempts of reconnection before declaring the connexion dead (-1 infinite)
 		uint maxReconnectionAttempts;
@@ -65,5 +62,7 @@ namespace DBI
 
 } // namespace DBI
 } // namespace Yuni
+
+# include "settings.hxx"
 
 #endif // __YUNI_DBI_SETTINGS_H__
