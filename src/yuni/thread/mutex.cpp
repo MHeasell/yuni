@@ -64,6 +64,7 @@ namespace Yuni
 		# ifndef YUNI_NO_THREAD_SAFE
 		# ifdef YUNI_OS_WINDOWS
 		InitializeCriticalSectionAndSpinCount(&pSection, spinCount);
+		(void) rhs; // unused
 		# else
 		::pthread_mutexattr_init(&pAttr);
 		int type; // = PTHREAD_MUTEX_NORMAL;
