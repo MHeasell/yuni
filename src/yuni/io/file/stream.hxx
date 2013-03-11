@@ -138,8 +138,8 @@ namespace File
 	inline uint Stream::write(bool value, uint64 maxsize)
 	{
 		return value
-			? (uint) ::fwrite("true",  (4 < maxsize) ? 4 : maxsize, 1, pFd)
-			: (uint) ::fwrite("false", (5 < maxsize) ? 5 : maxsize, 1, pFd);
+			? (uint) ::fwrite("true",  (4 < maxsize) ? 4 : (size_t)maxsize, 1, pFd)
+			: (uint) ::fwrite("false", (5 < maxsize) ? 5 : (size_t)maxsize, 1, pFd);
 	}
 
 	inline uint Stream::write(char buffer)
@@ -156,7 +156,7 @@ namespace File
 	inline uint Stream::write(float value, uint64 maxsize)
 	{
 		ShortString64 string(value);
-		return (uint) ::fwrite(string.c_str(), 1, string.size() > maxsize ? maxsize : string.size(), pFd);
+		return (uint) ::fwrite(string.c_str(), 1, string.size() > maxsize ? (size_t)maxsize : string.size(), pFd);
 	}
 
 	inline uint Stream::write(double value)
@@ -168,7 +168,7 @@ namespace File
 	inline uint Stream::write(double value, uint64 maxsize)
 	{
 		ShortString128 string(value);
-		return (uint) ::fwrite(string.c_str(), 1, string.size() > maxsize ? maxsize : string.size(), pFd);
+		return (uint) ::fwrite(string.c_str(), 1, string.size() > maxsize ? (size_t)maxsize : string.size(), pFd);
 	}
 
 	inline uint Stream::write(sint16 value)
@@ -180,7 +180,7 @@ namespace File
 	inline uint Stream::write(sint16 value, uint64 maxsize)
 	{
 		ShortString32 string(value);
-		return (uint) ::fwrite(string.c_str(), 1, string.size() > maxsize ? maxsize : string.size(), pFd);
+		return (uint) ::fwrite(string.c_str(), 1, string.size() > maxsize ? (size_t)maxsize : string.size(), pFd);
 	}
 
 	inline uint Stream::write(sint32 value)
@@ -192,7 +192,7 @@ namespace File
 	inline uint Stream::write(sint32 value, uint64 maxsize)
 	{
 		ShortString32 string(value);
-		return (uint) ::fwrite(string.c_str(), 1, string.size() > maxsize ? maxsize : string.size(), pFd);
+		return (uint) ::fwrite(string.c_str(), 1, string.size() > maxsize ? (size_t)maxsize : string.size(), pFd);
 	}
 
 	inline uint Stream::write(sint64 value)
@@ -204,7 +204,7 @@ namespace File
 	inline uint Stream::write(sint64 value, uint64 maxsize)
 	{
 		ShortString32 string(value);
-		return (uint) ::fwrite(string.c_str(), 1, string.size() > maxsize ? maxsize : string.size(), pFd);
+		return (uint) ::fwrite(string.c_str(), 1, string.size() > maxsize ? (size_t)maxsize : string.size(), pFd);
 	}
 
 	inline uint Stream::write(uint16 value)
@@ -216,7 +216,7 @@ namespace File
 	inline uint Stream::write(uint16 value, uint64 maxsize)
 	{
 		ShortString32 string(value);
-		return (uint) ::fwrite(string.c_str(), 1, string.size() > maxsize ? maxsize : string.size(), pFd);
+		return (uint) ::fwrite(string.c_str(), 1, string.size() > maxsize ? (size_t)maxsize : string.size(), pFd);
 	}
 
 	inline uint Stream::write(uint32 value)
@@ -228,7 +228,7 @@ namespace File
 	inline uint Stream::write(uint32 value, uint64 maxsize)
 	{
 		ShortString32 string(value);
-		return (uint) ::fwrite(string.c_str(), 1, string.size() > maxsize ? maxsize : string.size(), pFd);
+		return (uint) ::fwrite(string.c_str(), 1, string.size() > maxsize ? (size_t)maxsize : string.size(), pFd);
 	}
 
 	inline uint Stream::write(uint64 value)
@@ -240,7 +240,7 @@ namespace File
 	inline uint Stream::write(uint64 value, uint64 maxsize)
 	{
 		ShortString32 string(value);
-		return (uint) ::fwrite(string.c_str(), 1, string.size() > maxsize ? maxsize : string.size(), pFd);
+		return (uint) ::fwrite(string.c_str(), 1, string.size() > maxsize ? (size_t)maxsize : string.size(), pFd);
 	}
 
 	template<class U>
@@ -262,7 +262,7 @@ namespace File
 	inline uint64 Stream::write(const U& buffer, uint64 maxsize)
 	{
 		String string(buffer);
-		return (uint64) ::fwrite(string.c_str(), 1, string.size() > maxsize ? maxsize : string.size(), pFd);
+		return (uint64) ::fwrite(string.c_str(), 1, string.size() > maxsize ? (size_t)maxsize : string.size(), pFd);
 	}
 
 

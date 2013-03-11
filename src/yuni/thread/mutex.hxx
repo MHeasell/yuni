@@ -25,6 +25,8 @@ namespace Yuni
 		# else
 		return (0 == ::pthread_mutex_trylock(&pLock));
 		# endif
+		# else
+		return false;
 		# endif
 	}
 
