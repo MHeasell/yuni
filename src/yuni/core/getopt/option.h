@@ -4,10 +4,6 @@
 # include "../string.h"
 # include <cassert>
 
-//! The maximum length for a long name of an option
-# define YUNI_GETOPT_LONGNAME_MAX_LENGTH  42
-
-
 
 
 namespace Yuni
@@ -22,7 +18,7 @@ namespace GetOptImpl
 
 
 	template<class T>
-	class Value
+	class Value final
 	{
 	public:
 		static bool Add(T& out, const char* c_str, const String::size_type len)
@@ -266,7 +262,8 @@ namespace GetOptImpl
 			pShortName('\0')
 		{}
 		IOption(const IOption& rhs) :
-			pShortName(rhs.pShortName), pLongName(rhs.pLongName),
+			pShortName(rhs.pShortName),
+			pLongName(rhs.pLongName),
 			pDescription(rhs.pDescription)
 		{}
 
@@ -274,20 +271,17 @@ namespace GetOptImpl
 			pShortName(s)
 		{}
 
-		template<class StringT>
-		IOption(char s, const StringT& name) :
-			pShortName(s), pLongName(name)
+		IOption(char s, const AnyString& name) :
+			pShortName(s),
+			pLongName(name)
 		{
-			assert("A long name of an option must not exceed `YUNI_GETOPT_LONGNAME_MAX_LENGTH` characters"
-				&& pLongName.size() <= YUNI_GETOPT_LONGNAME_MAX_LENGTH);
 		}
 
-		template<class StringT1, class StringT2>
-		IOption(char s, const StringT1& name, const StringT2& description) :
-			pShortName(s), pLongName(name), pDescription(description)
+		IOption(char s, const AnyString& name, const AnyString& description) :
+			pShortName(s),
+			pLongName(name),
+			pDescription(description)
 		{
-			assert("A long name of an option must not exceed `YUNI_GETOPT_LONGNAME_MAX_LENGTH` characters"
-				&& pLongName.size() <= YUNI_GETOPT_LONGNAME_MAX_LENGTH);
 		}
 
 		virtual ~IOption() {}
@@ -355,18 +349,15 @@ namespace GetOptImpl
 			IOption(c), pVariable(var)
 		{}
 
-		template<class StringT>
-		Option(T& var, const StringT& name) :
+		Option(T& var, const AnyString& name) :
 			IOption(name), pVariable(var)
 		{}
 
-		template<class StringT>
-		Option(T& var, char c, const StringT& name) :
+		Option(T& var, char c, const AnyString& name) :
 			IOption(c, name), pVariable(var)
 		{}
 
-		template<class S1, class S2>
-		Option(T& var, char s, const S1& name, const S2& description) :
+		Option(T& var, char s, const AnyString& name, const AnyString& description) :
 			IOption(s, name, description), pVariable(var)
 		{}
 
@@ -420,8 +411,7 @@ namespace GetOptImpl
 			IOption(rhs)
 		{}
 
-		template<class S>
-		Paragraph(const S& description) :
+		explicit Paragraph(const AnyString& description) :
 			IOption(' ', nullptr, description)
 		{}
 

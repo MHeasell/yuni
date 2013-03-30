@@ -31,8 +31,8 @@ namespace GetOpt
 	}
 
 
-	template<class U, class S>
-	inline void Parser::add(U& var, char shortname, const S& longname, bool visible)
+	template<class U>
+	inline void Parser::add(U& var, char shortname, const AnyString& longname, bool visible)
 	{
 		IOption* option = (visible)
 			? (IOption*) new Private::GetOptImpl::Option<U, true>(var, shortname, longname)
@@ -42,8 +42,8 @@ namespace GetOpt
 	}
 
 
-	template<class U, class S, class D>
-	inline void Parser::add(U& var, char shortname, const S& longname, const D& description, bool visible)
+	template<class U>
+	inline void Parser::add(U& var, char shortname, const AnyString& longname, const AnyString& description, bool visible)
 	{
 		IOption* option = (visible)
 			? (IOption*) new Private::GetOptImpl::Option<U, true>(var, shortname, longname, description)
@@ -54,8 +54,8 @@ namespace GetOpt
 
 
 
-	template<class U, class S>
-	inline void Parser::addFlag(U& var, char shortname, const S& longname, bool visible)
+	template<class U>
+	inline void Parser::addFlag(U& var, char shortname, const AnyString& longname, bool visible)
 	{
 		// The new option
 		IOption* option = (visible)
@@ -66,8 +66,8 @@ namespace GetOpt
 	}
 
 
-	template<class U, class S, class D>
-	void Parser::addFlag(U& var, char shortname, const S& longname, const D& description, bool visible)
+	template<class U>
+	void Parser::addFlag(U& var, char shortname, const AnyString& longname, const AnyString& description, bool visible)
 	{
 		// The new option
 		IOption* option = (visible)
@@ -87,11 +87,29 @@ namespace GetOpt
 	}
 
 
-	template<class U>
-	void Parser::addParagraph(const U& text)
+	inline void Parser::addParagraph(const AnyString& text)
 	{
 		pAllOptions.push_back(new Private::GetOptImpl::Paragraph(text));
 	}
+
+
+	inline uint Parser::errors() const
+	{
+		return pErrors;
+	}
+
+
+	inline bool Parser::ignoreUnknownArgs() const
+	{
+		return pIgnoreUnknownArgs;
+	}
+
+
+	inline void Parser::ignoreUnknownArgs(bool ignore)
+	{
+		pIgnoreUnknownArgs = ignore;
+	}
+
 
 
 
