@@ -1,11 +1,5 @@
-#ifndef __YUNI_CORE_GETOPT_PARSER_H__
-# define __YUNI_CORE_GETOPT_PARSER_H__
-
-# include "../../yuni.h"
-# include <map>
-# include "option.h"
-# include <string.h>
-# include "../validator/text/default.h"
+#ifndef __YUNI_CORE_GETOPT_PARSER_HXX__
+# define __YUNI_CORE_GETOPT_PARSER_HXX__
 
 
 namespace Yuni
@@ -13,46 +7,6 @@ namespace Yuni
 namespace GetOpt
 {
 
-	/*!
-	** \brief A command line options parser
-	*/
-	class Parser final
-	{
-	public:
-		//! \name Constructor & Destructor
-		//@{
-		/*!
-		** \brief Default constructor
-		*/
-		Parser();
-		/*!
-		** \brief Destructor
-		*/
-		~Parser();
-		//@}
-
-
-		//! \name Option management
-		//@{
-		/*!
-		** \brief Add an option
-		**
-		** \param[in] var The variable where the value(s) will be written
-		** \param shortname The short name of the option (a single char)
-		** \param visible True if the option is visible from the help usage
-		*/
-		template<class U>
-		void add(U& var, char shortname, bool visible = true);
-
-		/*!
-		** \brief Add an option
-		**
-		** \param[in] var The variable where the value(s) will be written
-		** \param shortname The short name of the option (a single char)
-		** \param longname The long name of the option
-		** \param visible True if the option is visible from the help usage
-		*/
-		template<class U>
 		void add(U& var, char shortname, const AnyString& longname, bool visible = true);
 
 		/*!
@@ -153,7 +107,7 @@ namespace GetOpt
 		/*!
 		** \brief The count of errors that have been encountered
 		*/
-		uint errors() const;
+		uint errors() const {return pErrors;}
 
 		//! Get if unknown args are ignored (not considered as errors)
 		bool ignoreUnknownArgs() const;
@@ -196,8 +150,6 @@ namespace GetOpt
 
 		//! Count of error
 		uint pErrors;
-		//! Flag to ignore (or not) unknown arguments
-		bool pIgnoreUnknownArgs;
 
 		// A friend
 		friend class Private::GetOptImpl::Context;

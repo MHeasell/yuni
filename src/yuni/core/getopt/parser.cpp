@@ -10,6 +10,9 @@
 #	define STD_CERR  std::cout
 # endif
 
+//! The maximum length for a long name of an option
+# define YUNI_GETOPT_LONGNAME_MAX_LENGTH  256
+
 
 
 namespace Yuni
@@ -20,7 +23,7 @@ namespace GetOptImpl
 {
 
 
-	class Context
+	class Context final
 	{
 	public:
 		//! typedef for IOption
@@ -62,7 +65,7 @@ namespace GetOptImpl
 		**
 		** \param parser The public parser
 		*/
-		Context(Parser& parser);
+		explicit Context(Parser& parser);
 		//@}
 
 
@@ -71,20 +74,13 @@ namespace GetOptImpl
 		*/
 		bool operator () (int argc, char* argv[]);
 
+
 	private:
-		/*!
-		** \brief An option has not been found
-		*/
+		//! An option has not been found
 		void optionIsUnknown(const char* name);
-
-		/*!
-		** \brief A additional parameter is missing for an option
-		*/
+		//! A additional parameter is missing for an option
 		void parameterIsMissing(const char* name);
-
-		/*!
-		** \brief Find the additional parameter and add it to the option
-		*/
+		//! Find the additional parameter and add it to the option
 		bool findNextParameter(IOption* option, int argc, char* argv[]);
 
 
@@ -102,7 +98,7 @@ namespace GetOptImpl
 		//! A temporary CString
 		const char* sub;
 		//! A temporary buffer
-		char buffer[YUNI_GETOPT_LONGNAME_MAX_LENGTH + 1];
+		CString<YUNI_GETOPT_LONGNAME_MAX_LENGTH + 2, false> buffer;
 
 	}; // class Context
 
@@ -118,15 +114,17 @@ namespace GetOptImpl
 			? ((argv[1] == '-') ? ttLongOption : ttShortOption)
 			: ttParameter;
 		# else
-		return (*argv == '-' || *argv == '/')
+		return (*argv == '-' or *argv == '/')
 			? ((argv[1] == '-') ? ttLongOption : ttShortOption)
 			: ttParameter;
 		# endif
 	}
 
 
-	inline Context::Context(Parser& parser)
-		:pParser(parser), pTokenIndex(1), pParameterIndex(1)
+	inline Context::Context(Parser& parser) :
+		pParser(parser),
+		pTokenIndex(1),
+		pParameterIndex(1)
 	{
 		pParser.pErrors = 0;
 	}
@@ -134,11 +132,14 @@ namespace GetOptImpl
 
 	bool Context::findNextParameter(IOption* option, int argc, char* argv[])
 	{
-		if (!option->requireAdditionalParameter())
+		assert(option != NULL);
+
+		if (not option->requireAdditionalParameter())
 		{
 			option->enableFlag();
 			return true;
 		}
+
 		while ((++pParameterIndex) < argc)
 		{
 			// We only want parameters
@@ -151,6 +152,7 @@ namespace GetOptImpl
 				return true;
 			}
 		}
+
 		// If not found, it is an error
 		++pParser.pErrors;
 		return false;
@@ -159,8 +161,11 @@ namespace GetOptImpl
 
 	void Context::optionIsUnknown(const char* name)
 	{
-		++pParser.pErrors;
-		STD_CERR << "Error: The option `" << name << "` is unknown" << std::endl;
+		if (not pParser.pIgnoreUnknownArgs)
+		{
+			++pParser.pErrors;
+			STD_CERR << "Error: The option `" << name << "` is unknown" << std::endl;
+		}
 	}
 
 
@@ -176,6 +181,7 @@ namespace GetOptImpl
 		while (pTokenIndex < argc)
 		{
 			arg = argv[pTokenIndex];
+
 			switch (GetTokenType(arg))
 			{
 				// The current argument seems to be a short name of an option
@@ -186,12 +192,12 @@ namespace GetOptImpl
 							OptionsOrderedByShortName::iterator i = pParser.pShortNames.find(*arg);
 							if (i != pParser.pShortNames.end())
 							{
-								if (!findNextParameter(i->second, argc, argv))
+								if (not findNextParameter(i->second, argc, argv))
 									std::cerr << "Error: The parameter is missing for `" << arg << "`" << std::endl;
 							}
 							else
 							{
-								if (*arg == 'h' || *arg == '?')
+								if (*arg == 'h' or *arg == '?')
 								{
 									pParser.helpUsage(argv[0]);
 									return false;
@@ -208,37 +214,36 @@ namespace GetOptImpl
 						++arg;
 						++arg;
 						if ('\0' == *arg) // End of options
-							return (!pParser.pErrors);
+							return (0 == pParser.pErrors);
+
 						if ((sub = strchr(arg, '=')))
 						{
-							const size_t size = static_cast<size_t>(sub - arg);
-							if (size < sizeof(buffer))
+							const uint size = static_cast<uint>(sub - arg);
+
+							if (size < YUNI_GETOPT_LONGNAME_MAX_LENGTH)
 							{
-								# ifdef YUNI_OS_MSVC
-								strncpy_s(buffer, sizeof(buffer), arg, size);
-								# else
-								strncpy(buffer, arg, size);
-								# endif
-								buffer[size] = '\0';
+								buffer.assign(arg, size);
 								arg += size;
 								++arg;
 
-								OptionsOrderedByLongName::iterator i = pParser.pLongNames.find(buffer);
+								OptionsOrderedByLongName::iterator i = pParser.pLongNames.find(buffer.c_str());
 								if (i != pParser.pLongNames.end())
+								{
 									i->second->addValue(arg, static_cast<String::size_type>(::strlen(arg)));
+								}
 								else
 								{
-									if (!::strcmp(buffer, "help"))
+									if (0 == ::strcmp(buffer.c_str(), "help"))
 									{
 										pParser.helpUsage(argv[0]);
 										return false;
 									}
-									optionIsUnknown(buffer);
+									optionIsUnknown(buffer.c_str());
 								}
 							}
 							else
 							{
-								std::cerr << "Error: name too long" << std::endl;
+								STD_CERR << "Error: name too long" << std::endl;
 								++pParser.pErrors;
 							}
 						}
@@ -247,12 +252,12 @@ namespace GetOptImpl
 							OptionsOrderedByLongName::iterator i = pParser.pLongNames.find(arg);
 							if (i != pParser.pLongNames.end())
 							{
-								if (!findNextParameter(i->second, argc, argv))
+								if (not findNextParameter(i->second, argc, argv))
 									parameterIsMissing(arg);
 							}
 							else
 							{
-								if (!::strcmp(arg, "help"))
+								if (0 == ::strcmp(arg, "help"))
 								{
 									pParser.helpUsage(argv[0]);
 									return false;
@@ -277,8 +282,10 @@ namespace GetOptImpl
 			}
 			++pTokenIndex;
 		}
-		return (!pParser.pErrors);
+
+		return (0 == pParser.pErrors);
 	}
+
 
 
 
@@ -293,15 +300,18 @@ namespace GetOptImpl
 
 
 
-namespace // anonymous
+
+namespace Yuni
+{
+namespace GetOpt
 {
 
-	const char* ExtractFilenameOnly(const char* argv)
+	static const char* ExtractFilenameOnly(const char* argv)
 	{
 		const char* result = argv;
 		while ('\0' != *argv)
 		{
-			if ('\\' == *argv || '/' == *argv)
+			if ('\\' == *argv or '/' == *argv)
 			{
 				result = argv;
 				++result;
@@ -312,30 +322,21 @@ namespace // anonymous
 	}
 
 
-} // anonymous namespace
 
-
-
-namespace Yuni
-{
-namespace GetOpt
-{
 
 	Parser::Parser() :
-		pRemains(NULL),
-		pErrors(0)
+		pRemains(nullptr),
+		pErrors(0),
+		pIgnoreUnknownArgs(false)
 	{}
 
 
 
 	Parser::~Parser()
 	{
-		delete pRemains;
-
-		if (!pAllOptions.empty())
+		if (not pAllOptions.empty())
 		{
-            // We should clear those maps before `pAllOptions` since they used references
-            // from it
+			// these containes use references from \p pAllOptions
             pShortNames.clear();
             pLongNames.clear();
 
@@ -343,12 +344,15 @@ namespace GetOpt
 			for (OptionList::iterator i = pAllOptions.begin(); i != end; ++i)
 				delete *i;
 		}
+
+		delete pRemains;
 	}
 
 	void Parser::clear()
 	{
-		if (!pAllOptions.empty())
+		if (not pAllOptions.empty())
 		{
+			// these containes use references from \p pAllOptions
 			pShortNames.clear();
 			pLongNames.clear();
 
@@ -357,8 +361,9 @@ namespace GetOpt
 				delete *i;
 			pAllOptions.clear();
 		}
+
 		delete pRemains;
-		pRemains = NULL;
+		pRemains = nullptr;
 	}
 
 
@@ -371,13 +376,15 @@ namespace GetOpt
 
 	void Parser::helpUsage(const char* argv0)
 	{
+		assert(argv0 != NULL); // just in case
+
 		std::cout << "Usage: " << ExtractFilenameOnly(argv0) << " [OPTION]...";
 		if (pRemains)
 			std::cout << " [FILE]...\n";
 		else
-			std::cout << "\n";
+			std::cout << '\n';
 
-		if (!pAllOptions.empty())
+		if (not pAllOptions.empty())
 		{
 			OptionList::const_iterator end = pAllOptions.end();
 			OptionList::const_iterator i = pAllOptions.begin();
@@ -385,7 +392,7 @@ namespace GetOpt
 			// Add a space if the first option is not a paragraph
 			// In this case the user would do what he wants
 			if (!dynamic_cast<const Private::GetOptImpl::Paragraph*>(*i))
-				std::cout << "\n";
+				std::cout << '\n';
 
 			for (; i != end; ++i)
 				(*i)->helpUsage(std::cout);
@@ -400,7 +407,7 @@ namespace GetOpt
 				Private::GetOptImpl::DisplayHelpForOption(std::cout, ' ', "help", "Display this help and exit");
 		}
 
-		std::cout << "\n";
+		std::cout << std::endl; // flush
 	}
 
 
@@ -410,7 +417,7 @@ namespace GetOpt
 		// In the list with all other options
 		pAllOptions.push_back(option);
 		// The short name
-		if (shortname != ' ' && shortname != '\0')
+		if (shortname != ' ' and shortname != '\0')
 			pShortNames[shortname] = option;
 	}
 
@@ -418,12 +425,12 @@ namespace GetOpt
 	void Parser::appendOption(IOption* option, char shortname)
 	{
 		const String& longname = option->longName();
-		if (!longname.empty())
+		if (not longname.empty())
 		{
 			// The long name of an option must not be equal to 1
 			// There is an ambiguity on Windows : /s : a long or short name ?
 			# ifndef NDEBUG
-			assert(longname.size() != 1 && "The long name of an option must be igreater than 1 (ambigous on Windows)");
+			assert(longname.size() != 1 and "The long name of an option must be igreater than 1 (ambigous on Windows)");
 			# else
 			if (longname.size() == 1) // ambigous on Windows, must not continue
 				return;
@@ -436,7 +443,7 @@ namespace GetOpt
 		pAllOptions.push_back(option);
 
 		// The short name
-		if (shortname != ' ' && shortname != '\0')
+		if (shortname != ' ' and shortname != '\0')
 			pShortNames[shortname] = option;
 	}
 
