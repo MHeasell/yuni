@@ -40,8 +40,26 @@ add_definitions("-DYUNI_SOURCE_TREE=\"${YUNI_SOURCE_TREE}\"")
 
 
 set(src
+	../../yuni/core/string/string.h
+	../../yuni/core/string/escape.h
+	../../yuni/core/string/escape.hxx
+	../../yuni/core/string/iterator.hxx
+	../../yuni/core/string/iterator.inc.hpp
+	../../yuni/core/string/operators.hxx
+	../../yuni/core/string/string.cpp
+	../../yuni/core/string/string.h
+	../../yuni/core/string/string.hxx
+	../../yuni/core/string/utf8char.h
+	../../yuni/core/string/utf8char.hxx
+	../../yuni/core/string/wstring.h
+	../../yuni/core/string/wstring.hxx
+
 	../../yuni/core/version/version.cpp
 	../../yuni/core/getopt/option.cpp ../../yuni/core/getopt/parser.cpp
+	../../yuni/core/getopt/option.cpp ../../yuni/core/getopt/parser.h
+	../../yuni/core/getopt/option.cpp ../../yuni/core/getopt/parser.hxx
+	../../yuni/core/getopt/option.cpp ../../yuni/core/getopt/option.h
+	../../yuni/core/getopt/option.cpp ../../yuni/core/getopt/option.cpp
 	../../yuni/io/constants.cpp
 	../../yuni/io/file/file.cpp
 	../../yuni/io/file/openmode.cpp

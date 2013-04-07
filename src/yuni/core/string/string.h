@@ -265,7 +265,7 @@ namespace Yuni
 		** \brief Constructor from another string
 		*/
 		template<uint SizeT, bool ExpT>
-		CString(const CString<SizeT,ExpT>& s);
+		CString(const CString<SizeT,ExpT>& string);
 
 		/*!
 		** \brief Constructor from a copy of a substring of 's'
@@ -333,9 +333,6 @@ namespace Yuni
 		//! Constructor with a null-terminated string
 		CString(const char* text);
 
-		//! Constructor with a default value
-		template<class U> explicit CString(const U& rhs);
-
 		//! Construct a string formed by a repetition of the character c, n times
 		CString(size_t n, char c);
 
@@ -344,6 +341,12 @@ namespace Yuni
 
 		//! Constructor from a nullptr
 		CString(const YuniNullPtr&);
+
+		//! Constructor with a default boolean
+		CString(bool value);
+
+		//! Constructor with a default value
+		template<class U> explicit CString(const U& rhs);
 
 		//! Destructor
 		~CString();

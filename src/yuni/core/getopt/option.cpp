@@ -13,63 +13,59 @@ namespace GetOptImpl
 {
 
 
-	namespace // anonymous
+	template<bool Decal, int LengthLimit>
+	static void PrintLongDescription(std::ostream& out, const String& description)
 	{
-
-		template<bool Decal, int LengthLimit>
-		static void PrintLongDescription(std::ostream& out, const String& description)
+		String::Size start = 0;
+		String::Size end = 0;
+		String::Size p = 0;
+		do
 		{
-			String::Size start = 0;
-			String::Size end = 0;
-			String::Size p = 0;
-			do
+			// Jump to the next separator
+			p = description.find_first_of(" .\r\n\t", p);
+
+			// No separator, aborting
+			if (p == String::npos)
+				break;
+
+			if (p - start < LengthLimit)
 			{
-				// Jump to the next separator
-				p = description.find_first_of(" .\r\n\t", p);
-
-				// No separator, aborting
-				if (p == String::npos)
-					break;
-
-				if (p - start < LengthLimit)
+				switch (description.at(p))
 				{
-					switch (description.at(p))
-					{
-						case '\n':
-							{
-								out.write(description.c_str() + start, static_cast<std::streamsize>(p - start));
-								out << '\n';
-								if (Decal)
-									out << YUNI_GETOPT_HELPUSAGE_30CHAR;
-								start = p + 1;
-								end = p + 1;
-								break;
-							}
-						default:
-							end = p;
-					}
-				}
-				else
-				{
-					if (!end)
+					case '\n':
+						{
+							out.write(description.c_str() + start, static_cast<std::streamsize>(p - start));
+							out << '\n';
+							if (Decal)
+								out << YUNI_GETOPT_HELPUSAGE_30CHAR;
+							start = p + 1;
+							end = p + 1;
+							break;
+						}
+					default:
 						end = p;
-					out.write(description.c_str() + start, static_cast<std::streamsize>(end - start));
-					out << '\n';
-					if (Decal)
-						out << YUNI_GETOPT_HELPUSAGE_30CHAR;
-					start = end + 1;
-					end = p + 1;
 				}
-				++p;
 			}
-			while (true);
-
-			// Display the remaining piece of string
-			if (start < description.size())
-				out << (description.c_str() + start);
+			else
+			{
+				if (!end)
+					end = p;
+				out.write(description.c_str() + start, static_cast<std::streamsize>(end - start));
+				out << '\n';
+				if (Decal)
+					out << YUNI_GETOPT_HELPUSAGE_30CHAR;
+				start = end + 1;
+				end = p + 1;
+			}
+			++p;
 		}
+		while (true);
 
-	} // anonymous namespace
+		// Display the remaining piece of string
+		if (start < description.size())
+			out << (description.c_str() + start);
+	}
+
 
 
 

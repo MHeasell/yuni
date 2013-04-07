@@ -39,10 +39,9 @@ namespace GetOpt
 		**
 		** \param[in] var The variable where the value(s) will be written
 		** \param shortname The short name of the option (a single char)
-		** \param visible True if the option is visible from the help usage
 		*/
 		template<class U>
-		void add(U& var, char shortname, bool visible = true);
+		void add(U& var, char shortname);
 
 		/*!
 		** \brief Add an option
@@ -50,10 +49,20 @@ namespace GetOpt
 		** \param[in] var The variable where the value(s) will be written
 		** \param shortname The short name of the option (a single char)
 		** \param longname The long name of the option
-		** \param visible True if the option is visible from the help usage
 		*/
 		template<class U>
-		void add(U& var, char shortname, const AnyString& longname, bool visible = true);
+		void add(U& var, char shortname, const AnyString& longname);
+
+		/*!
+		** \brief Add an option
+		**
+		** \param[in] var The variable where the value(s) will be written
+		** \param shortname The short name of the option (a single char)
+		** \param longname The long name of the option
+		** \param description The description of the option (used in the help usage)
+		*/
+		template<class U>
+		void add(U& var, char shortname, const AnyString& longname, const AnyString& description);
 
 		/*!
 		** \brief Add an option
@@ -65,17 +74,16 @@ namespace GetOpt
 		** \param visible True if the option is visible from the help usage
 		*/
 		template<class U>
-		void add(U& var, char shortname, const AnyString& longname, const AnyString& description, bool visible = true);
+		void add(U& var, char shortname, const AnyString& longname, const AnyString& description, bool visible);
 
 		/*!
 		** \brief Add an option that does not require an additional parameter
 		**
 		** \param[in] var The variable where the value(s) will be written
 		** \param shortname The short name of the option (a single char)
-		** \param visible True if the option is visible from the help usage
 		*/
 		template<class U>
-		void addFlag(U& var, char shortname, bool visible = true);
+		void addFlag(U& var, char shortname);
 
 		/*!
 		** \brief Add an option that does not require an additional parameter
@@ -83,10 +91,20 @@ namespace GetOpt
 		** \param[in] var The variable where the value(s) will be written
 		** \param shortname The short name of the option (a single char)
 		** \param longname The long name of the option
-		** \param visible True if the option is visible from the help usage
 		*/
 		template<class U>
-		void addFlag(U& var, char shortname, const AnyString& longname, bool visible = true);
+		void addFlag(U& var, char shortname, const AnyString& longname);
+
+		/*!
+		** \brief Add an option that does not require an additional parameter
+		**
+		** \param[in] var The variable where the value(s) will be written
+		** \param shortname The short name of the option (a single char)
+		** \param longname The long name of the option
+		** \param description The description of the option (used in the help usage)
+		*/
+		template<class U>
+		void addFlag(U& var, char shortname, const AnyString& longname, const AnyString& description);
 
 		/*!
 		** \brief Add an option that does not require an additional parameter
@@ -98,7 +116,7 @@ namespace GetOpt
 		** \param visible True if the option is visible from the help usage
 		*/
 		template<class U>
-		void addFlag(U& var, char shortname, const AnyString& longname, const AnyString& description, bool visible = true);
+		void addFlag(U& var, char shortname, const AnyString& longname, const AnyString& description, bool visible);
 
 		/*!
 		** \brief Remove all options
