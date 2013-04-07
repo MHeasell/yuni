@@ -336,10 +336,6 @@ namespace GetOpt
 	{
 		if (not pAllOptions.empty())
 		{
-			// these containes use references from \p pAllOptions
-            pShortNames.clear();
-            pLongNames.clear();
-
 			OptionList::iterator end = pAllOptions.end();
 			for (OptionList::iterator i = pAllOptions.begin(); i != end; ++i)
 				delete *i;
@@ -348,18 +344,25 @@ namespace GetOpt
 		delete pRemains;
 	}
 
+
 	void Parser::clear()
 	{
 		if (not pAllOptions.empty())
 		{
-			// these containes use references from \p pAllOptions
-			pShortNames.clear();
-			pLongNames.clear();
-
 			OptionList::iterator end = pAllOptions.end();
 			for (OptionList::iterator i = pAllOptions.begin(); i != end; ++i)
 				delete *i;
-			pAllOptions.clear();
+
+			// clear-and-minimize idiom
+			OptionsOrderedByShortName emptyShort;
+			OptionsOrderedByLongName  emptyLong;
+			OptionList emptyOptions;
+
+			emptyShort.swap(pShortNames);
+			emptyLong.swap(pLongNames);
+			emptyOptions.swap(pAllOptions);
+
+			// the whole content of these 3 containers will be destroyed here
 		}
 
 		delete pRemains;
@@ -378,9 +381,12 @@ namespace GetOpt
 	{
 		assert(argv0 != NULL); // just in case
 
-		std::cout << "Usage: " << ExtractFilenameOnly(argv0) << " [OPTION]...";
+		std::cout.write("Usage: ", 7);
+		std::cout << ExtractFilenameOnly(argv0);
+		std::cout.write(" [OPTION]...", 12);
+
 		if (pRemains)
-			std::cout << " [FILE]...\n";
+			std::cout.write(" [FILE]...\n", 11);
 		else
 			std::cout << '\n';
 
@@ -391,7 +397,7 @@ namespace GetOpt
 
 			// Add a space if the first option is not a paragraph
 			// In this case the user would do what he wants
-			if (!dynamic_cast<const Private::GetOptImpl::Paragraph*>(*i))
+			if (not dynamic_cast<const Private::GetOptImpl::Paragraph*>(*i))
 				std::cout << '\n';
 
 			for (; i != end; ++i)
