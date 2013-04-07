@@ -38,7 +38,7 @@ namespace Yuni
 	template<uint ChunkSizeT, bool ExpandableT>
 	inline bool CString<ChunkSizeT,ExpandableT>::IsSpace(int c)
 	{
-		return (c == ' ') || (static_cast<uint>(c) - '\t' < 5);
+		return (c == ' ') or (static_cast<uint>(c) - '\t' < 5);
 	}
 
 
@@ -168,7 +168,7 @@ namespace Yuni
 			Size length = s.size() - offset;
 			if (length > n)
 				length = n;
-			if (!adapter)
+			if (not adapter)
 				AncestorType::assign((const char* const) s.c_str() + offset, length);
 			else
 				adapt(s.c_str() + offset, length);
@@ -182,7 +182,7 @@ namespace Yuni
 	{
 		if (offset < s.size())
 		{
-			if (!adapter)
+			if (not adapter)
 				AncestorType::assign((const char* const) s.c_str() + offset, s.size() - offset);
 			else
 				adapt(s.c_str() + offset, s.size() - offset);
@@ -208,7 +208,7 @@ namespace Yuni
 			Size length = s.size() - offset;
 			if (length > n)
 				length = n;
-			if (!adapter)
+			if (not adapter)
 				AncestorType::assign((const char* const) s.c_str() + offset, length);
 			else
 				adapt(s.c_str() + offset, length);
@@ -222,7 +222,7 @@ namespace Yuni
 	{
 		if (offset < s.size())
 		{
-			if (!adapter)
+			if (not adapter)
 				AncestorType::assign((const char* const) s.c_str() + offset, s.size() - offset);
 			else
 				adapt(s.c_str() + offset, s.size() - offset);
@@ -234,7 +234,7 @@ namespace Yuni
 	inline
 	CString<ChunkSizeT,ExpandableT>::CString(const char* const cstring, Size blockSize)
 	{
-		if (!adapter)
+		if (not adapter)
 			AncestorType::assign(cstring, blockSize);
 		else
 			adapt(cstring, blockSize);
@@ -306,7 +306,7 @@ namespace Yuni
 	void CString<ChunkSizeT,ExpandableT>::assign(const U& u)
 	{
 		TraitsSelectorAssign<
-			(Traits::CString<U>::valid && Traits::Length<U>::valid),             // Standard CString ?
+			(Traits::CString<U>::valid and Traits::Length<U>::valid),             // Standard CString ?
 			(0 != CString<ChunkSizeT,ExpandableT>::adapter) // Adapter ?
 			>::
 			template Perform<U, CStringType>(u, *this);
@@ -319,7 +319,7 @@ namespace Yuni
 	void CString<ChunkSizeT,ExpandableT>::append(const U& u)
 	{
 		YUNI_STATIC_ASSERT(!adapter, CString_Adapter_ReadOnly);
-		TraitsSelectorAppend<Traits::CString<U>::valid && Traits::Length<U>::valid>::
+		TraitsSelectorAppend<Traits::CString<U>::valid and Traits::Length<U>::valid>::
 			template Perform<U, CStringType>(u, *this);
 	}
 
@@ -466,7 +466,7 @@ namespace Yuni
 
 		# ifndef NDEBUG
 		Size len = Traits::Length<StringT,Size>::Value(str);
-		assert(size + offset <= len && "Bound check error in CString::append(s, size, offset) !");
+		assert(size + offset <= len and "Bound check error in CString::append(s, size, offset) !");
 		# endif // NDEBUG
 		AncestorType::append(Traits::CString<StringT>::Perform(str) + offset, size);
 	}
@@ -583,7 +583,7 @@ namespace Yuni
 		Size maxLen, Size offset)
 	{
 		clear();
-		if (!maxLen || offset >= maxLen)
+		if (0 == maxLen or offset >= maxLen)
 			return;
 
 		// Preparing the copy
@@ -594,7 +594,7 @@ namespace Yuni
 		Size retPos(0);
 		for (Size i = offset; i < maxLen; ++i, ++retPos)
 		{
-			if ('\\' == str[i] && i + 1 != maxLen)
+			if ('\\' == str[i] and i + 1 != maxLen)
 			{
 				switch (str[i + 1])
 				{
@@ -624,7 +624,7 @@ namespace Yuni
 	template<uint ChunkSizeT, bool ExpandableT>
 	inline CString<ChunkSizeT,ExpandableT>&  CString<ChunkSizeT,ExpandableT>::clear()
 	{
-		if (!adapter)
+		if (not adapter)
 			AncestorType::clear();
 		else
 			AncestorType::size = 0;
@@ -775,14 +775,14 @@ namespace Yuni
 	typename CString<ChunkSizeT,ExpandableT>::Size
 	CString<ChunkSizeT,ExpandableT>::find(const char* const cstr, Size offset, Size len) const
 	{
-		if (cstr && len && len <= AncestorType::size)
+		if (cstr and len and len <= AncestorType::size)
 		{
 			Size end = AncestorType::size - len + 1;
 			for (Size i = offset; i < end; ++i)
 			{
 				if (AncestorType::data[i] == *cstr)
 				{
-					if (!::memcmp(AncestorType::data + i, cstr, len))
+					if (0 == ::memcmp(AncestorType::data + i, cstr, len))
 						return i;
 				}
 			}
@@ -853,7 +853,7 @@ namespace Yuni
 	CString<ChunkSizeT,ExpandableT>::ifind(const char* const cstr,
 		Size offset, Size len) const
 	{
-		if (cstr && len && len <= AncestorType::size)
+		if (cstr and len and len <= AncestorType::size)
 		{
 			Size end = AncestorType::size - len + 1;
 			for (Size i = offset; i < end; ++i)
@@ -931,7 +931,7 @@ namespace Yuni
 	typename CString<ChunkSizeT,ExpandableT>::Size
 	CString<ChunkSizeT,ExpandableT>::rfind(const char* const cstr, Size offset, Size len) const
 	{
-		if (len && len <= AncestorType::size && offset >= len)
+		if (len and len <= AncestorType::size and offset >= len)
 		{
 			Size i = (offset >= AncestorType::size) ? AncestorType::size : 1+offset;
 			i -= len - 1;
@@ -939,7 +939,7 @@ namespace Yuni
 			{
 				if (AncestorType::data[i] == *cstr)
 				{
-					if (!::memcmp(AncestorType::data + i, cstr, len))
+					if (0 == ::memcmp(AncestorType::data + i, cstr, len))
 						return i;
 				}
 			}
@@ -1012,7 +1012,7 @@ namespace Yuni
 	CString<ChunkSizeT,ExpandableT>::irfind(const char* const cstr,
 		Size offset, Size len) const
 	{
-		if (len && len <= AncestorType::size && offset >= len)
+		if (len and len <= AncestorType::size and offset >= len)
 		{
 			Size i = (offset >= AncestorType::size) ? AncestorType::size : 1+offset;
 			i -= len - 1;
@@ -1050,6 +1050,7 @@ namespace Yuni
 			// The string is actually a single POD item
 			if (1 == Traits::Length<StringT,Size>::fixedLength)
 				return irfind(Traits::CString<StringT>::Perform(s), offset, 1);
+
 			// Researching for the substring with a known length
 			return irfind(Traits::CString<StringT>::Perform(s), offset, Traits::Length<StringT,Size>::fixedLength);
 		}
@@ -1076,14 +1077,14 @@ namespace Yuni
 	bool
 	CString<ChunkSizeT,ExpandableT>::contains(const char* const cstr, Size len) const
 	{
-		if (cstr && len && len <= AncestorType::size)
+		if (cstr and len and len <= AncestorType::size)
 		{
 			Size end = AncestorType::size - len + 1;
 			for (Size i = 0; i != end; ++i)
 			{
 				if (AncestorType::data[i] == *cstr)
 				{
-					if (!::memcmp(AncestorType::data + i, cstr, len))
+					if (0 == ::memcmp(AncestorType::data + i, cstr, len))
 						return true;
 				}
 			}
@@ -1113,6 +1114,7 @@ namespace Yuni
 			// The string is actually a single POD item
 			if (1 == Traits::Length<StringT,Size>::fixedLength)
 				return contains(Traits::CString<StringT>::Perform(s), 1);
+
 			// Researching for the substring with a known length
 			return contains(Traits::CString<StringT>::Perform(s), Traits::Length<StringT,Size>::fixedLength);
 		}
@@ -1139,7 +1141,7 @@ namespace Yuni
 	bool
 	CString<ChunkSizeT,ExpandableT>::icontains(const char* const cstr, Size len) const
 	{
-		if (cstr && len && len <= AncestorType::size)
+		if (cstr and len and len <= AncestorType::size)
 		{
 			Size end = AncestorType::size - len + 1;
 			for (Size i = 0; i != end; ++i)
@@ -1176,6 +1178,7 @@ namespace Yuni
 			// The string is actually a single POD item
 			if (1 == Traits::Length<StringT,Size>::fixedLength)
 				return icontains(Traits::CString<StringT>::Perform(s), 1);
+
 			// Researching for the substring with a known length
 			return icontains(Traits::CString<StringT>::Perform(s), Traits::Length<StringT,Size>::fixedLength);
 		}
@@ -1204,7 +1207,7 @@ namespace Yuni
 	inline bool
 	CString<ChunkSizeT,ExpandableT>::startsWith(const char* const cstr, Size len) const
 	{
-		return (cstr && len && len <= AncestorType::size)
+		return (cstr and len and len <= AncestorType::size)
 			? (0 == ::memcmp(AncestorType::data, cstr, len))
 			: false;
 	}
@@ -1226,7 +1229,7 @@ namespace Yuni
 	inline bool
 	CString<ChunkSizeT,ExpandableT>::startsWith(char c) const
 	{
-		return (0 != AncestorType::size) && (AncestorType::data[0] == c);
+		return (0 != AncestorType::size) and (AncestorType::data[0] == c);
 	}
 
 
@@ -1234,7 +1237,7 @@ namespace Yuni
 	inline bool
 	CString<ChunkSizeT,ExpandableT>::istartsWith(const char* const cstr, Size len) const
 	{
-		if (cstr && len && len <= AncestorType::size)
+		if (cstr and len and len <= AncestorType::size)
 		{
 			for (uint i = 0; i != len; ++i)
 			{
@@ -1263,7 +1266,7 @@ namespace Yuni
 	inline bool
 	CString<ChunkSizeT,ExpandableT>::istartsWith(char c) const
 	{
-		return (0 != AncestorType::size) && (ToLower(AncestorType::data[0]) == ToLower(c));
+		return (0 != AncestorType::size) and (ToLower(AncestorType::data[0]) == ToLower(c));
 	}
 
 
@@ -1272,7 +1275,7 @@ namespace Yuni
 	inline bool
 	CString<ChunkSizeT,ExpandableT>::endsWith(const char* const cstr, Size len) const
 	{
-		return (cstr && len && len <= AncestorType::size)
+		return (cstr and len and len <= AncestorType::size)
 			? (0 == ::memcmp(AncestorType::data + (AncestorType::size - len), cstr, len))
 			: false;
 	}
@@ -1294,7 +1297,7 @@ namespace Yuni
 	inline bool
 	CString<ChunkSizeT,ExpandableT>::endsWith(char c) const
 	{
-		return (0 != AncestorType::size) && (AncestorType::data[AncestorType::size - 1] == c);
+		return (0 != AncestorType::size) and (AncestorType::data[AncestorType::size - 1] == c);
 	}
 
 
@@ -1302,7 +1305,7 @@ namespace Yuni
 	inline bool
 	CString<ChunkSizeT,ExpandableT>::iendsWith(const char* const cstr, Size len) const
 	{
-		if (cstr && len && len <= AncestorType::size)
+		if (cstr and len and len <= AncestorType::size)
 		{
 			uint offset = 0;
 			for (uint i = AncestorType::size - len; i != AncestorType::size; ++i, ++offset)
@@ -1332,7 +1335,7 @@ namespace Yuni
 	inline bool
 	CString<ChunkSizeT,ExpandableT>::iendsWith(char c) const
 	{
-		return (0 != AncestorType::size) && (ToLower(AncestorType::data[AncestorType::size - 1]) == ToLower(c));
+		return (0 != AncestorType::size) and (ToLower(AncestorType::data[AncestorType::size - 1]) == ToLower(c));
 	}
 
 
@@ -1355,7 +1358,7 @@ namespace Yuni
 	{
 		if (AncestorType::size != 0)
 		{
-			if (('/' == AncestorType::data[AncestorType::size - 1] || '\\' == AncestorType::data[AncestorType::size - 1]))
+			if (('/' == AncestorType::data[AncestorType::size - 1] or '\\' == AncestorType::data[AncestorType::size - 1]))
 				resize(AncestorType::size - 1);
 		}
 	}
@@ -1375,7 +1378,7 @@ namespace Yuni
 		else
 		{
 			AncestorType::size = 0;
-			if (zeroTerminated && AncestorType::capacity)
+			if (zeroTerminated and AncestorType::capacity)
 				Yuni::Private::CStringImpl::FinalZero<adapter>::Set(AncestorType::data, 0);
 		}
 	}
@@ -1400,17 +1403,16 @@ namespace Yuni
 
 	template<uint ChunkSizeT, bool ExpandableT>
 	uint
-	CString<ChunkSizeT,ExpandableT>::indexOf(Size offset,
-		const char* const cstr, Size len) const
+	CString<ChunkSizeT,ExpandableT>::indexOf(Size offset, const char* const cstr, Size len) const
 	{
-		if (cstr && len && len <= AncestorType::size)
+		if (cstr and len and len <= AncestorType::size)
 		{
 			Size end = AncestorType::size - len + 1;
 			for (; offset < end; ++offset)
 			{
 				if (AncestorType::data[offset] == *cstr)
 				{
-					if (!::memcmp(AncestorType::data + offset, cstr, len))
+					if (0 == ::memcmp(AncestorType::data + offset, cstr, len))
 						return offset;
 				}
 			}
@@ -1441,6 +1443,7 @@ namespace Yuni
 			// The string is actually a single POD item
 			if (1 == Traits::Length<StringT,Size>::fixedLength)
 				return indexOf(offset, Traits::CString<StringT>::Perform(s), 1);
+
 			// Researching for the substring with a known length
 			return indexOf(offset, Traits::CString<StringT>::Perform(s), Traits::Length<StringT,Size>::fixedLength);
 		}
@@ -1461,11 +1464,11 @@ namespace Yuni
 	inline typename CString<ChunkSizeT,ExpandableT>::Size
 	CString<ChunkSizeT,ExpandableT>::ifind_first_of(char c, Size offset) const
 	{
-		c = static_cast<char>(ToLower(c));
+		c = (char) ToLower(c);
 		for (Size i = offset; i < AncestorType::size; ++i)
 		{
 			// alias to the current character
-			if (c == static_cast<char>(ToLower(AncestorType::data[i])))
+			if (c == (char) ToLower(AncestorType::data[i]))
 				return i;
 		}
 		return npos;
@@ -1815,7 +1818,7 @@ namespace Yuni
 
 		uint count = 0;
 		Size lenfrom = Traits::Length<StringT1,Size>::Value(from);
-		if (lenfrom && offset < AncestorType::size)
+		if (lenfrom and offset < AncestorType::size)
 		{
 			Size lento = Traits::Length<StringT2,Size>::Value(to);
 			Size pos;
@@ -1848,7 +1851,7 @@ namespace Yuni
 
 		Size lenfrom = Traits::Length<StringT1,Size>::Value(from);
 		uint count = 0;
-		if (lenfrom && offset < AncestorType::size)
+		if (lenfrom and offset < AncestorType::size)
 		{
 			Size lento = Traits::Length<StringT2,Size>::Value(to);
 			Size pos;
@@ -1933,7 +1936,7 @@ namespace Yuni
 	{
 		YUNI_STATIC_ASSERT(!adapter, CString_Adapter_ReadOnly);
 		// Only valid if the offset is strictly less than the current size
-		if (offset < AncestorType::size && len)
+		if (offset < AncestorType::size and len)
 		{
 			// If the number of items to erase is greater than the current size
 			// then all characters after 'offset' are dead
@@ -2091,7 +2094,7 @@ namespace Yuni
 	CString<ChunkSizeT,ExpandableT>::overwrite(Size offset, const char* const cstr, Size size)
 	{
 		YUNI_STATIC_ASSERT(!adapter, CString_Adapter_ReadOnly);
-		if (offset < AncestorType::size && size)
+		if (offset < AncestorType::size and size)
 		{
 			if (offset + size > AncestorType::size)
 				YUNI_MEMCPY(AncestorType::data + offset, AncestorType::capacity, cstr, sizeof(Char) * (AncestorType::size - offset));
@@ -2318,7 +2321,7 @@ namespace Yuni
 		uint l;
 		while (i != AncestorType::size)
 		{
-			if (!(l = UTF8::Char::Size(AncestorType::data + i)))
+			if (0 == (l = UTF8::Char::Size(AncestorType::data + i)))
 				return false;
 			i += l;
 			if (i > AncestorType::size)
@@ -2558,7 +2561,7 @@ namespace Yuni
 		if (AncestorType::expandable)
 		{
 			// Dynamic cstr
-			if (!adapter)
+			if (not adapter)
 				AncestorType::reserve(len + 1 /*AncestorType::zeroTerminated*/);
 			AncestorType::size = len;
 		}
@@ -2571,7 +2574,7 @@ namespace Yuni
 				AncestorType::size = AncestorType::capacity;
 		}
 		// Zero-Terminated cstrs
-		if (!adapter && zeroTerminated)
+		if (not adapter and zeroTerminated)
 			Yuni::Private::CStringImpl::FinalZero<adapter>::Set(AncestorType::data, AncestorType::size);
 	}
 
@@ -2598,7 +2601,7 @@ namespace Yuni
 	void
 	CString<ChunkSizeT,ExpandableT>::trimRight(char c)
 	{
-		while (AncestorType::size > 0 && AncestorType::data[AncestorType::size - 1] == c)
+		while (AncestorType::size > 0 and AncestorType::data[AncestorType::size - 1] == c)
 			--AncestorType::size;
 		if (zeroTerminated)
 			Yuni::Private::CStringImpl::FinalZero<adapter>::Set(AncestorType::data, AncestorType::size);
@@ -2612,11 +2615,11 @@ namespace Yuni
 		if (AncestorType::size > 0)
 		{
 			Size offset = 0;
-			while (offset < AncestorType::size && AncestorType::data[offset] == c)
+			while (offset < AncestorType::size and AncestorType::data[offset] == c)
 				++offset;
 			if (offset)
 			{
-				if (!adapter)
+				if (not adapter)
 					erase(0, offset);
 				else
 				{
@@ -2636,7 +2639,7 @@ namespace Yuni
 		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CString_InvalidTypeForBuffer);
 
 		const uint ptrlen = Traits::Length<StringT, uint>::Value(whitespaces);
-		if (!ptrlen || empty())
+		if (0 == ptrlen or empty())
 			return;
 
 		const char* const ptr = Traits::CString<StringT>::Perform(whitespaces);
@@ -2658,7 +2661,7 @@ namespace Yuni
 		// Making sure that the string is zero-terminated if required
 		// The const_cast is only here to make it compile when the string
 		// is an adapter
-		if (!adapter && zeroTerminated)
+		if (not adapter and zeroTerminated)
 			Yuni::Private::CStringImpl::FinalZero<adapter>::Set(AncestorType::data, AncestorType::size);
 	}
 
@@ -2671,7 +2674,7 @@ namespace Yuni
 		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CString_InvalidTypeForBuffer);
 
 		const uint ptrlen = Traits::Length<StringT, uint>::Value(whitespaces);
-		if (!ptrlen || empty())
+		if (0 == ptrlen or empty())
 			return;
 
 		const char* const ptr = Traits::CString<StringT>::Perform(whitespaces);
@@ -2830,7 +2833,7 @@ namespace Yuni
 	{
 		YUNI_STATIC_ASSERT(!adapter, CString_Adapter_ReadOnly);
 		// Nothing to do if the format is empty
-		if (!format || '\0' == *format)
+		if (NULL == format or '\0' == *format)
 			return;
 
 		// There is no way to know by advance the size occupied by the formatted
@@ -2962,17 +2965,17 @@ namespace Yuni
 					segment.assign(AncestorType::data + indx, AncestorType::size - indx);
 					if (trimElements)
 						segment.trim();
-					if (not segment.empty() || keepEmptyElements)
+					if (not segment.empty() or keepEmptyElements)
 						out.push_back(segment.template to<UType>());
 					return;
 				}
 
-				if ((len = newIndx - indx) || keepEmptyElements)
+				if ((len = newIndx - indx) or keepEmptyElements)
 				{
 					segment.assign(AncestorType::data + indx, len);
 					if (trimElements)
 						segment.trim();
-					if (not segment.empty() || keepEmptyElements)
+					if (not segment.empty() or keepEmptyElements)
 						out.push_back(segment.template to<UType>());
 				}
 				indx = newIndx + 1;
@@ -3028,7 +3031,7 @@ namespace Yuni
 	CString<ChunkSizeT,ExpandableT>::duplicate(int n)
 	{
 		YUNI_STATIC_ASSERT(!adapter, CString_Adapter_ReadOnly);
-		if (n > 0 && AncestorType::size > 0)
+		if (n > 0 and AncestorType::size > 0)
 		{
 			if (AncestorType::size == 1)
 			{
@@ -3133,7 +3136,7 @@ namespace Yuni
 	inline typename CString<ChunkSizeT,ExpandableT>::ConstOperatorBracketReturnType // char&
 	CString<ChunkSizeT,ExpandableT>::operator [] (Size offset) const
 	{
-		assert(offset < AncestorType::size && "string, operator[] : index out of bounds");
+		assert(offset < AncestorType::size and "string, operator[] : index out of bounds");
 		return AncestorType::data[offset];
 	}
 
@@ -3142,7 +3145,7 @@ namespace Yuni
 	inline typename CString<ChunkSizeT,ExpandableT>::OperatorBracketReturnType // char&
 	CString<ChunkSizeT,ExpandableT>::operator [] (Size offset)
 	{
-		assert(offset < AncestorType::size && "string, operator[] : index out of bounds");
+		assert(offset < AncestorType::size and "string, operator[] : index out of bounds");
 		return AncestorType::data[offset];
 	}
 
@@ -3354,7 +3357,7 @@ namespace Yuni
 			key.append('[');
 			++left;
 			Size right = find(']', left);
-			if (right != npos && right != left)
+			if (right != npos and right != left)
 			{
 				value.append(*this, right - left, left);
 				value.trim();
@@ -3375,7 +3378,7 @@ namespace Yuni
 			{
 				if ('/' == AncestorType::data[equal])
 				{
-					if (equal + 1 < AncestorType::size && AncestorType::data[equal + 1] != '/')
+					if (equal + 1 < AncestorType::size and AncestorType::data[equal + 1] != '/')
 					{
 						++equal;
 						continue;
@@ -3399,8 +3402,13 @@ namespace Yuni
 		// Looking for the first interesting char
 		Size rv(equal);
 		++rv; // After the symbol `=`
-		while (rv < AncestorType::size && (AncestorType::data[rv] == ' ' || AncestorType::data[rv] == '\t' ||AncestorType::data[rv] == '\r' ||AncestorType::data[rv] == '\n'))
+
+		while (rv < AncestorType::size
+			and (AncestorType::data[rv] == ' ' or AncestorType::data[rv] == '\t' or AncestorType::data[rv] == '\r' or AncestorType::data[rv] == '\n'))
+		{
 			++rv;
+		}
+
 		if (rv < AncestorType::size) // Empty value
 		{
 			char c = AncestorType::data[rv];
@@ -3425,7 +3433,7 @@ namespace Yuni
 					}
 				case '/':
 					// Empty value if we have a comment otherwise '/' is a valid entry
-					if (rv + 1 >= AncestorType::size || AncestorType::data[rv + 1] == '/')
+					if (rv + 1 >= AncestorType::size or AncestorType::data[rv + 1] == '/')
 						break;
 				default:
 					{
