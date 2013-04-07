@@ -16,48 +16,50 @@ namespace GetOptImpl
 	template<bool Decal, int LengthLimit>
 	static void PrintLongDescription(std::ostream& out, const String& description)
 	{
-		String::Size start = 0;
-		String::Size end = 0;
-		String::Size p = 0;
+		uint start = 0;
+		uint end = 0;
+		uint offset = 0;
+
 		do
 		{
 			// Jump to the next separator
-			p = description.find_first_of(" .\r\n\t", p);
+			offset = description.find_first_of(" .\r\n\t", offset);
 
 			// No separator, aborting
-			if (p == String::npos)
+			if (String::npos == offset)
 				break;
 
-			if (p - start < LengthLimit)
+			if (offset - start < LengthLimit)
 			{
-				switch (description.at(p))
+				if ('\n' == description.at(offset))
 				{
-					case '\n':
-						{
-							out.write(description.c_str() + start, static_cast<std::streamsize>(p - start));
-							out << '\n';
-							if (Decal)
-								out << YUNI_GETOPT_HELPUSAGE_30CHAR;
-							start = p + 1;
-							end = p + 1;
-							break;
-						}
-					default:
-						end = p;
+					out.write(description.c_str() + start, (std::streamsize)(offset - start));
+					out << '\n';
+					if (Decal)
+						out.write(YUNI_GETOPT_HELPUSAGE_30CHAR, 30);
+
+					start = offset + 1;
+					end = offset + 1;
 				}
+				else
+					end = offset;
 			}
 			else
 			{
-				if (!end)
-					end = p;
-				out.write(description.c_str() + start, static_cast<std::streamsize>(end - start));
+				if (0 == end)
+					end = offset;
+
+				out.write(description.c_str() + start, (std::streamsize)(end - start));
 				out << '\n';
+
 				if (Decal)
-					out << YUNI_GETOPT_HELPUSAGE_30CHAR;
+					out.write(YUNI_GETOPT_HELPUSAGE_30CHAR, 30);
+
 				start = end + 1;
-				end = p + 1;
+				end = offset + 1;
 			}
-			++p;
+
+			++offset;
 		}
 		while (true);
 
@@ -78,17 +80,20 @@ namespace GetOptImpl
 		// Space
 		if ('\0' != shortName && ' ' != shortName)
 		{
-			out << "  -" << shortName;
+			out.write("  -", 3);
+			out << shortName;
+
 			if (longName.empty())
 			{
 				if (requireParameter)
-					out << " VALUE";
+					out.write(" VALUE", 6);
 			}
 			else
-				out << ", ";
+				out.write(", ", 2);
 		}
 		else
-			out << "      ";
+			out.write("      ", 6);
+
 		// Long name
 		if (longName.empty())
 		{
@@ -99,9 +104,11 @@ namespace GetOptImpl
 		}
 		else
 		{
-			out << "--" << longName;
+			out.write("--", 2);
+			out << longName;
 			if (requireParameter)
-				out << "=VALUE";
+				out.write("=VALUE", 6);
+
 			if (30 <= longName.size() + 6 /*-o,*/ + 2 /*--*/ + 1 /*space*/ + (requireParameter ? 6 : 0))
 				out << "\n                             ";
 			else
@@ -115,7 +122,8 @@ namespace GetOptImpl
 			out << description;
 		else
 			PrintLongDescription<true, 50>(out, description);
-		out << "\n";
+
+		out << '\n';
 	}
 
 
@@ -125,7 +133,8 @@ namespace GetOptImpl
 			out << text;
 		else
 			PrintLongDescription<false, 80>(out, text);
-		out << "\n";
+
+		out << '\n';
 	}
 
 

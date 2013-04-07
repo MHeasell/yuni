@@ -118,9 +118,7 @@ namespace GetOpt
 		template<class U>
 		void addFlag(U& var, char shortname, const AnyString& longname, const AnyString& description, bool visible);
 
-		/*!
-		** \brief Remove all options
-		*/
+		//! Remove all options
 		void clear();
 		//@}
 
@@ -129,6 +127,11 @@ namespace GetOpt
 		//@{
 		/*!
 		** \brief Set the target variable where remaining arguments will be written
+		**
+		** In this example, 'value2' and 'value4' will be considered as remaining arguments :
+		** \code
+		** ./myprogram -n value1 value2 -p value3 value4
+		** \endcode
 		*/
 		template<class U> void remainingArguments(U& var);
 		//@}
