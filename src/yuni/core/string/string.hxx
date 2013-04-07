@@ -114,6 +114,12 @@ namespace Yuni
 
 
 	template<uint ChunkSizeT, bool ExpandableT>
+	inline CString<ChunkSizeT,ExpandableT>::CString(bool value)
+	{
+		assign(value);
+	}
+
+	template<uint ChunkSizeT, bool ExpandableT>
 	template<uint SizeT, bool ExpT>
 	inline CString<ChunkSizeT,ExpandableT>::CString(const CString<SizeT, ExpT>& rhs)
 	{

@@ -299,15 +299,14 @@ namespace GetOptImpl
 
 		virtual bool requireAdditionalParameter() const = 0;
 
-		/*!
-		** \brief Get the short name of the option
-		*/
+		//! Get the short name of the option
 		char shortName() const {return pShortName;}
 
-		/*!
-		** \brief Get the long name of the option
-		*/
+		//! Get the long name of the option
 		const String& longName() const {return pLongName;}
+
+		//! Get the description of the option
+		const String& description() const {return pDescription;}
 
 		virtual void helpUsage(std::ostream& out) const = 0;
 
@@ -342,24 +341,30 @@ namespace GetOptImpl
 		//! \name Constructors & Destructor
 		//@{
 		Option(const Option& rhs) :
-			IOption(rhs), pVariable(rhs.pVariable)
+			IOption(rhs),
+			pVariable(rhs.pVariable)
 		{}
 
 		Option(T& var, char c) :
-			IOption(c), pVariable(var)
+			IOption(c),
+			pVariable(var)
 		{}
 
 		Option(T& var, const AnyString& name) :
-			IOption(name), pVariable(var)
+			IOption(name),
+			pVariable(var)
 		{}
 
 		Option(T& var, char c, const AnyString& name) :
-			IOption(c, name), pVariable(var)
+			IOption(c, name),
+			pVariable(var)
 		{}
 
 		Option(T& var, char s, const AnyString& name, const AnyString& description) :
-			IOption(s, name, description), pVariable(var)
-		{}
+			IOption(s, name, description),
+			pVariable(var)
+		{
+		}
 
 		//! Destructor
 		virtual ~Option() {}
@@ -429,7 +434,7 @@ namespace GetOptImpl
 		*/
 		virtual bool addValue(const char*, String::size_type) override
 		{
-			/* Do nothing - This is not an option */
+			// Does nothing - This is not an option
 			return false;
 		}
 
@@ -440,7 +445,7 @@ namespace GetOptImpl
 
 		virtual void enableFlag() override
 		{
-			// Do nothing
+			// Does nothing
 		}
 
 		virtual bool requireAdditionalParameter() const override {return false;}
