@@ -1,5 +1,6 @@
 
 #include "uri.private.h"
+#include <limits.h>
 
 
 namespace Yuni
@@ -10,14 +11,21 @@ namespace Uri
 {
 
 
-	Informations::Informations()
-		:port(0), isValid(false)
+	Informations::Informations() :
+		port(INT_MIN),
+		isValid(false)
 	{}
 
 
-	Informations::Informations(const Informations& rhs)
-		:scheme(rhs.scheme), user(rhs.user), password(rhs.password), server(rhs.server),
-		port(rhs.port), path(rhs.path), query(rhs.query), fragment(rhs.fragment),
+	Informations::Informations(const Informations& rhs) :
+		scheme(rhs.scheme),
+		user(rhs.user),
+		password(rhs.password),
+		server(rhs.server),
+		port(rhs.port),
+		path(rhs.path),
+		query(rhs.query),
+		fragment(rhs.fragment),
 		isValid(rhs.isValid)
 	{}
 
@@ -26,14 +34,13 @@ namespace Uri
 	{}
 
 
-
 	void Informations::clear()
 	{
 		scheme.clear();
 		server.clear();
 		user.clear();
 		password.clear();
-		port = 0;
+		port = INT_MIN;
 		path.clear();
 		query.clear();
 		fragment.clear();
@@ -54,44 +61,43 @@ namespace Uri
 	}
 
 
-	namespace
+	template<class U>
+	static void WriteStructInformationsToStream(const Informations& infos, U& s)
 	{
-		template<class U>
-		void WriteStructInformationsToStream(const Informations& infos, U& s)
+		if (infos.isValid)
 		{
-			if (infos.isValid)
-			{
-				if (!infos.scheme.empty())
-					s << infos.scheme << ":";
-				if (!infos.server.empty())
-				{
-					if (!infos.scheme.empty())
-						s << "//";
-					if (!infos.user.empty())
-					{
-						s << infos.user;
-						if (!infos.password.empty())
-							s << ":" << infos.password;
-						s << "@";
-					}
-					s << infos.server;
-					if (infos.port > 0)
-						s << ":" << infos.port;
-				}
-				else
-				{
-					if (!infos.scheme.empty() && "file" == infos.scheme)
-						s << "//";
-				}
-				s << infos.path;
-				if (!infos.query.empty())
-					s << "?" << infos.query;
-				if (!infos.fragment.empty())
-					s << "#" << infos.fragment;
-			}
-		}
+			if (not infos.scheme.empty())
+				s << infos.scheme << ':';
 
-	} // Anonymous namespace
+			if (not infos.server.empty())
+			{
+				if (not infos.scheme.empty())
+					s << "//";
+				if (not infos.user.empty())
+				{
+					s << infos.user;
+					if (not infos.password.empty())
+						s << ':' << infos.password;
+					s << "@";
+				}
+				s << infos.server;
+				if (infos.port > 0)
+					s << ':' << infos.port;
+			}
+			else
+			{
+				if (not infos.scheme.empty() and "file" == infos.scheme)
+					s << "//";
+			}
+
+			s << infos.path;
+			if (not infos.query.empty())
+				s << '?' << infos.query;
+			if (not infos.fragment.empty())
+				s << '#' << infos.fragment;
+		}
+	}
+
 
 
 	String Informations::toString() const
@@ -113,14 +119,14 @@ namespace Uri
 	}
 
 
-
 	bool Informations::isEqualsTo(const Informations& rhs) const
 	{
-		return isValid && rhs.isValid && scheme == rhs.scheme
-			&& path == rhs.path && server == rhs.server && port == rhs.port
-			&& query == rhs.query && fragment == rhs.fragment
-			&& user == rhs.user && password == rhs.password;
+		return isValid and rhs.isValid and scheme == rhs.scheme
+			 and path == rhs.path and server == rhs.server and port == rhs.port
+			 and query == rhs.query and fragment == rhs.fragment
+			 and user == rhs.user and password == rhs.password;
 	}
+
 
 
 
