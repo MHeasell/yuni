@@ -3,6 +3,7 @@
 
 # include "../../../yuni.h"
 # include "../../../thread/thread.h"
+# include <cassert>
 
 
 namespace Yuni
@@ -92,6 +93,7 @@ namespace Flow
 		*/
 		bool onNewCycle()
 		{
+			assert(pEventLoop);
 			pEventLoop->suspend(pTimeout);
 			return true;
 		}
