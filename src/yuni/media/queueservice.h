@@ -312,9 +312,6 @@ namespace Media
 		bool updateDispatched();
 
 	private:
-		//! Static to make sure only one manager is started
-		static Atomic::Int<32> sHasRunningInstance;
-
 		//! Has the manager been properly started ?
 		bool pReady;
 		//! Event loop for media events

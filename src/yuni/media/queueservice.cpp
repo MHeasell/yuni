@@ -1,6 +1,7 @@
 
 #include "queueservice.h"
 #include <cassert>
+#include "../core/atomic/bool.h"
 #include "../core/point3D.h"
 #include "../core/vector3D.h"
 #include "../thread/signal.h"
@@ -13,7 +14,8 @@ namespace Yuni
 namespace Media
 {
 
-	Atomic::Int<32> QueueService::sHasRunningInstance = 0;
+	//! Static to make sure only one manager is started
+	static Atomic::Bool sHasRunningInstance = 0;
 
 
 	QueueService::QueueService() :
@@ -35,9 +37,12 @@ namespace Media
 
 	bool QueueService::start()
 	{
+		if (sHasRunningInstance)
+			return false;
+
 		ThreadingPolicy::MutexLocker locker(*this);
 		// Do not initialize the manager twice
-		if (pReady || sHasRunningInstance)
+		if (pReady)
 			return false;
 
 		pMediaLoop.start();
@@ -282,6 +287,7 @@ namespace Media
 				return false;
 			Emitter::Ptr& emitter = it->second;
 
+			assert(!(!emitter) && "invalid emitter");
 			Media::Loop::RequestType callback;
 			callback.bind(emitter, &Emitter::attachSourceDispatched, source);
 			// Dispatching...

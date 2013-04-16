@@ -5,10 +5,12 @@
 # include "../core/event/loop.h"
 
 
+
 namespace Yuni
 {
 namespace Media
 {
+
 	//! Forward Declaration
 	class QueueService;
 
@@ -49,14 +51,14 @@ namespace Media
 
 		void endClose();
 
-	public:
+	private:
 		//! Media queue service corresponding to this loop
 		QueueService* pMediaService;
-
 		//! When closing we must not execute onLoop()
 		bool pClosing;
 
 	}; // class Loop
+
 
 
 
