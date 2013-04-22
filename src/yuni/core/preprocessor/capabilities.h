@@ -383,6 +383,25 @@
 
 
 
+/*!
+** \brief likely / unlikely
+**
+** \code
+** if (YUNI_LIKELY(x == 42))
+**     does something
+** else
+**     does something else
+** \endcode
+*/
+# ifdef YUNI_OS_GCC
+#	define YUNI_LIKELY(x)     __builtin_expect(!!(x), 1)
+#	define YUNI_UNLIKELY(x)   __builtin_expect(!!(x), 0)
+# else
+#	define YUNI_LIKELY(x)     (x)
+#	define YUNI_UNLIKELY(x)   (x)
+# endif
+
+
 
 
 
