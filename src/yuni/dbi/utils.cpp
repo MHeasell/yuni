@@ -10,18 +10,22 @@ namespace DBI
 
 	bool IsValidIdentifier(AnyString text)
 	{
+		// removing all blanks / spaces
 		text.trim();
-		if (text.empty() or text.size() > 256)
+
+		if (YUNI_UNLIKELY(text.empty() or text.size() > 256))
 			return false;
 
+		// checking each char individually
 		for (uint i = 0; i != text.size(); ++i)
 		{
 			char c = text[i];
-			if (not String::IsAlpha(c) and not String::IsDigit(c) and c != '_' and c != '.')
+			if (YUNI_UNLIKELY(not String::IsAlpha(c) and not String::IsDigit(c) and c != '_' and c != '.'))
 				return false;
 		}
 
-		if (text.first() == '.' or text.last() == '.')
+		// invalid start / end
+		if (YUNI_UNLIKELY(text.first() == '.' or text.last() == '.'))
 			return false;
 
 		return true;

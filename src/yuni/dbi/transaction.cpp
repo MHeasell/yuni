@@ -1,5 +1,5 @@
 
-#include "transaction.h"
+#include "connector-pool.h" // must be included instead of transaction.h for AutoCommit
 #include "connector-pool.h"
 #include "../private/dbi/connector-data.h"
 #include "../private/dbi/channel.h"
@@ -13,7 +13,16 @@ namespace Yuni
 namespace DBI
 {
 
-	Transaction::Transaction(Yuni::Private::DBI::ConnectorDataPtr& data)
+	Transaction::Transaction(Transaction&& other) :
+		pTxHandle(other.pTxHandle)
+	{
+		pChannel.swap(other.pChannel);
+		other.pTxHandle = nullHandle;
+	}
+
+
+	Transaction::Transaction(Yuni::Private::DBI::ConnectorDataPtr& data) :
+		pTxHandle(nullHandle)
 	{
 		// retrieving or opening a channel to the remote database
 		pChannel = data->openChannel();
@@ -25,7 +34,7 @@ namespace DBI
 
 	Transaction::Transaction(Yuni::Private::DBI::ChannelPtr& channel) :
 		pChannel(channel),
-		pTxHandle(0)
+		pTxHandle(nullHandle)
 	{
 		assert(!(!pChannel) and "null pointer to channel");
 		pChannel->mutex.lock();
@@ -38,7 +47,7 @@ namespace DBI
 		if (!(!pChannel))
 		{
 			// automatic rollback, if not already commited
-			if (pTxHandle)
+			if (pTxHandle != nullHandle)
 				pChannel->rollback(pTxHandle);
 
 			// allow concurrent access to the channel
@@ -51,7 +60,8 @@ namespace DBI
 	{
 		assert(!(!pChannel));
 
-		if (pTxHandle)
+		// rollback if any transaction were already taking place
+		if (pTxHandle != nullHandle)
 		{
 			assert(pChannel and "Invalid channel but valid tx handle");
 			pChannel->rollback(pTxHandle);
@@ -64,11 +74,10 @@ namespace DBI
 
 	DBI::Error Transaction::commit()
 	{
-		if (pTxHandle)
+		if (pTxHandle != nullHandle)
 		{
 			assert(pChannel and "Invalid channel but valid tx handle");
 			Error err = pChannel->commit(pTxHandle);
-
 			pTxHandle = nullHandle;
 			return err;
 		}
@@ -78,7 +87,7 @@ namespace DBI
 
 	DBI::Error Transaction::rollback()
 	{
-		if (pTxHandle)
+		if (pTxHandle != nullHandle)
 		{
 			assert(pChannel and "Invalid channel but valid tx handle");
 			Error err = pChannel->rollback(pTxHandle);
@@ -90,24 +99,23 @@ namespace DBI
 	}
 
 
-	PreparedStatement Transaction::prepare(const AnyString& stmt)
+	Cursor Transaction::prepare(const AnyString& stmt)
 	{
 		assert(!(!pChannel));
 
 		// the adapter
 		::yn_dbi_adapter& adapter = pChannel->adapter;
 
-		if (not pTxHandle)
+		if (YUNI_UNLIKELY(nullHandle == pTxHandle))
 		{
-			DBI::Error err = pChannel->begin(pTxHandle);
-			if (err != errNone)
-				return PreparedStatement(adapter, nullptr);
+			if (errNone != pChannel->begin(pTxHandle))
+				return Cursor(adapter, nullptr);
 		}
 
 		// query handle
 		void* handle = nullptr;
 
-		if (not stmt.empty() and adapter.dbh)
+		if (YUNI_LIKELY(not stmt.empty() and adapter.dbh))
 		{
 			assert(adapter.query_new != NULL  and "invalid adapter query_new");
 			assert(adapter.query_ref_acquire != NULL and "invalid adapter query_ref_acquire");
@@ -116,27 +124,38 @@ namespace DBI
 			adapter.query_new(&handle, adapter.dbh, stmt.c_str(), stmt.size());
 		}
 
-		return PreparedStatement(adapter, handle);
+		return Cursor(adapter, handle);
 	}
 
 
 	DBI::Error Transaction::perform(const AnyString& script)
 	{
 		assert(!(!pChannel));
-		if (not pTxHandle)
-		{
-			DBI::Error err = pChannel->begin(pTxHandle);
-			if (err != errNone)
-				return err;
-		}
 
-		return prepare(script).perform();
+		// the adapter
+		::yn_dbi_adapter& adapter = pChannel->adapter;
+		assert(adapter.query_exec != NULL);
+
+		if (YUNI_LIKELY(nullHandle != pTxHandle))
+		{
+			return (DBI::Error) adapter.query_exec(adapter.dbh, script.c_str(), script.size());
+		}
+		else
+		{
+			// start a new transaction
+			DBI::Error error = pChannel->begin(pTxHandle);
+
+			if (YUNI_LIKELY(error == errNone))
+				error = (DBI::Error) adapter.query_exec(adapter.dbh, script.c_str(), script.size());
+
+			return error;
+		}
 	}
 
 
 	DBI::Error Transaction::truncate(const AnyString& tablename)
 	{
-		if (not IsValidIdentifier(tablename))
+		if (YUNI_UNLIKELY(not IsValidIdentifier(tablename)))
 			return errInvalidIdentifier;
 
 		assert(!(!pChannel));
@@ -144,30 +163,40 @@ namespace DBI
 		// the adapter
 		::yn_dbi_adapter& adapter = pChannel->adapter;
 
-		if (adapter.truncate)
-			return (DBI::Error) adapter.truncate(tablename.c_str(), tablename.size());
-
-		// Fallback to a failsafe method
-		// -- stmt << "TRUNCATE " << tablename << ';';
-		String stmt;
-		stmt << "DELETE FROM " << tablename << ';';
-		return perform(stmt);
+		// The DBI interface should provide the most appropriate way for
+		// truncating a table (autoincrement / cascade...)
+		if (YUNI_LIKELY(adapter.truncate))
+		{
+			return (DBI::Error) adapter.truncate(adapter.dbh, tablename.c_str(), tablename.size());
+		}
+		else
+		{
+			// Fallback to a failsafe method
+			// -- stmt << "TRUNCATE " << tablename << ';';
+			// The SQL command Truncate is not supported by all databases. `DELETE FROM`
+			// is not  the most efficient way for truncating a table
+			// but it should work almost everywhere
+			String stmt;
+			stmt << "DELETE FROM " << tablename << ';';
+			return perform(stmt);
+		}
 	}
 
 
 	DBI::Error Transaction::vacuum()
 	{
+		assert(!(!pChannel));
 		// the adapter
 		::yn_dbi_adapter& adapter = pChannel->adapter;
 
-		if (adapter.vacuum)
+		if (YUNI_LIKELY(adapter.vacuum))
 		{
-			return (DBI::Error) adapter.vacuum();
+			return (DBI::Error) adapter.vacuum(adapter.dbh);
 		}
 		else
 		{
 			// Fallback to the standard SQL command
-			return perform("VACUUM;");
+			return perform("VACUUM");
 		}
 	}
 

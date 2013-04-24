@@ -14,12 +14,11 @@ Logs::Logger<> logs;
 static bool RunExample()
 {
 	// our connection pool
-	DBI::ConnectorPool connector;
+	DBI::ConnectorPool connectors;
 
 	// database location
-	String filename = "dbi-example.db";
-
-	auto error = connector.open(new DBI::Adapter::SQLite, filename);
+	logs.info() << "opening the database file";
+	auto error = connectors.open(new DBI::Adapter::SQLite(), "dbi-example.db");
 	if (error)
 	{
 		logs.error() << "impossible to establish a connection to the database";
@@ -27,27 +26,41 @@ static bool RunExample()
 	}
 
 	// begin a new transaction
-	auto tx = connector.begin();
+	auto tx = connectors.begin();
 
 	// create a new table if not already exists
-	tx.perform("CREATE TABLE example IF NOT EXISTS (x INTEGER PRIMARY KEY);");
+	logs.info() << "creating the table 'example'";
+	tx.perform("CREATE TABLE IF NOT EXISTS example (x INTEGER PRIMARY KEY);");
+
+	// truncate the table, if it already exists
+	logs.info() << "truncating the table";
+	tx.truncate("example");
 
 	// fill it with some values
-	tx.perform("INSERT INTO example (x) VALUES (42), (3), (-1);");
+	logs.info() << "inserting some data";
+	tx.perform("INSERT INTO example (x) VALUES (42), (3), (-1), (-10), (-3);");
 
-	auto stmt = tx.prepare("SELECT * FROM example ORDER BY x");
-	stmt.execute();
+	// iterating through a result set
+	{
+		uint rowindex = 0;
 
-	// iterate through all values
-	if (not stmt.each([&] ()
-	{
-		logs.info() << "row : x = " << 0;
-	}))
-	{
-		logs.error() << "the result set is empty";
+		logs.info();
+		logs.info() << "iterating through all values";
+		auto stmt = tx.prepare("SELECT * FROM example WHERE x > $1 ORDER BY x");
+		stmt.bind(0, -5); // x > -5
+		stmt.execute();
+
+		// iterate through all values
+		stmt.each([&] (DBI::Row& row) -> bool
+		{
+			sint64 x = row[0].asInt64();
+			logs.info() << "  :: resultset: in row " << (++rowindex) << ":  x = " << x;
+			return true; // continue
+		});
 	}
 
 	// commit changes
+	logs.info() << "commit";
 	if (DBI::errNone != (error = tx.commit()))
 	{
 		logs.error() << "commit failed";
@@ -59,7 +72,7 @@ static bool RunExample()
 
 
 
-int main(int, char**)
+int main()
 {
 	// Welcome !
 	logs.notice() << "Yuni DBI Example";

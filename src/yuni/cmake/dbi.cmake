@@ -35,11 +35,16 @@ set(SRC_DBI
 	dbi/transaction.h
 	dbi/transaction.hxx
 	dbi/transaction.cpp
+	dbi/auto-commit.h
+	dbi/row.h
+	dbi/row.hxx
+	dbi/column.h
+	dbi/column.hxx
 	dbi/settings.h
 	dbi/settings.hxx
-	dbi/query-builder.h
-	dbi/query-builder.hxx
-	dbi/query-builder.cpp
+	dbi/cursor.h
+	dbi/cursor.hxx
+	dbi/cursor.cpp
 	dbi/utils.h
 	dbi/utils.cpp
 

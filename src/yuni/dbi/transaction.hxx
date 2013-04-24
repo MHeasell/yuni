@@ -7,24 +7,12 @@ namespace Yuni
 namespace DBI
 {
 
-	inline Transaction::Transaction(Transaction&& other) :
-		pTxHandle(other.pTxhandle)
-	{
-		pChannel.swap(other.pChannel);
-		other.pTxHandle = nullHandle;
-	}
 
-
-	inline Transaction&& Transaction::savepoint()
-	{
-		return Transaction(pChannel);
-	}
-
-
-	inline PreparedStatement&& Transaction::operator () (const AnyString& stmt)
+	inline Cursor Transaction::operator () (const AnyString& stmt)
 	{
 		return prepare(stmt);
 	}
+
 
 
 

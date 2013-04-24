@@ -16,13 +16,12 @@ namespace Policy
 namespace Checking
 {
 
-
 	/*!
 	** \brief Do not make any check
 	** \ingroup Policies
 	*/
 	template<class T>
-	class None
+	class None final
 	{
 	public:
 		None() {}
@@ -48,7 +47,7 @@ namespace Checking
 	** by not defining onDefault.
 	*/
 	template<class T>
-	class NeverNull
+	class NeverNull final
 	{
 	public:
 		NeverNull() {}

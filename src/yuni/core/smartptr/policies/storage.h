@@ -19,8 +19,6 @@ namespace Policy
 namespace Storage
 {
 
-
-
 	/*!
 	** \brief Implementation of the default storage policy
 	** \ingroup Policies
@@ -28,7 +26,7 @@ namespace Storage
 	** \tparam T The data type
 	*/
 	template<class T>
-	class Pointer
+	class Pointer final
 	{
 	public:
 		//! The type stored
@@ -89,7 +87,7 @@ namespace Storage
 	** \tparam T The data type
 	*/
 	template<class T>
-	class Array
+	class Array final
 	{
 	public:
 		//! The type stored

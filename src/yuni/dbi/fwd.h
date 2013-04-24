@@ -9,10 +9,21 @@ namespace Yuni
 namespace DBI
 {
 
+	enum
+	{
+		//! Invalid transaction handle
+		nullHandle = 0
+	};
+
+
+
 	// Forward declarations
-	class Connector;
+	class ConnectorPool;
 	class Transaction;
 	class Query;
+	class AutoCommit;
+	class Row;
+	class Column;
 
 
 } // namespace DBI
