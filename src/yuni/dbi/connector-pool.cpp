@@ -11,7 +11,13 @@ namespace DBI
 
 	ConnectorPool::ConnectorPool(const ConnectorPool& rhs) :
 		pData(rhs.pData)
+	{}
+
+
+	ConnectorPool& ConnectorPool::operator = (const ConnectorPool& rhs)
 	{
+		pData = rhs.pData;
+		return *this;
 	}
 
 
@@ -32,53 +38,64 @@ namespace DBI
 		// close all existing connectionss if possible
 		close();
 
+		// the adapter must be set
 		if (not adapter)
-		{
-			delete adapter;
 			return errInvalidAdapter;
-		}
 
-		// new connector data
+		// creating the new connector data
 		auto* data = new Yuni::Private::DBI::ConnectorData(settings, adapter);
 
-		// attempt to open a new channel
+		// attempt to open a new channel to the remote database
+		// from the current thread in order to check the connection settings
+		auto channel = data->openChannel();
+
+		// should never happen, but we never know
+		assert(!(!channel) and "invalid channel");
+
+		// checking the channel status
+		MutexLocker locker(channel->mutex);
+		if (errNone == channel->status)
 		{
-			auto channel = data->openChannel();
-			// should never happen, but we never know
-			assert(!(!channel) and "invalid channel");
-			if (not channel)
-			{
-				delete data;
-				return errConnectionFailed;
-			}
+			// the channel has been successfully opened
 
-			// lock concurrent acces to the channel
-			MutexLocker locker(channel->mutex);
+			// retrieving all events
+			// we may have an inconsistency here in some heavily multithreaded applications
+			// but it should not matter
+			// (event is thread-safe of course)
+			data->onSQLError = onSQLError;
 
-			if (errNone != channel->status)
-			{
-				delete data;
-				return channel->status;
-			}
+			// installing the new connector data
+			pData = data;
+			return errNone;
 		}
-
-		// ok - installing the new connector data
-		Yuni::Private::DBI::ConnectorDataPtr smartdata(data);
-		pData.swap(smartdata);
-		return errNone;
+		else
+		{
+			// the channel could not be opened, aborting
+			delete data;
+			return channel->status;
+		}
 	}
 
 
 	void ConnectorPool::close()
 	{
+		// switching the connector data
 		Yuni::Private::DBI::ConnectorDataPtr data;
 		data.swap(pData);
+
 		if (!(!data))
 		{
-			// try to kill all possible connections which can be possibly closed
-			// (aka all connections which are no longer in use)
-			uint dummy;
-			data->closeTooOldChannels(0, dummy);
+			// The connector data may be shared by several instance of
+			// the class `ConnectorPool`. We should close the channels
+			// only if this is the last one
+			if (data.unique())
+			{
+				// try to close as many connections as possible.
+				// with a null idle time, the only remaining connections will be
+				// still in use, probably by another thread
+				uint dummy;
+				data->closeTooOldChannels(/*idletime:*/0, dummy);
+			}
 		}
 	}
 
@@ -104,12 +121,17 @@ namespace DBI
 		Yuni::Private::DBI::ConnectorDataPtr data = pData;
 		if (!(!data))
 		{
-			// idle time
+			// idle time, from the settings
 			uint idletime = data->settings.idleTime;
 
+			// stats
 			uint statsRemain = 0;
-			uint statsClosed = data->closeTooOldChannels(idletime, statsRemain);
+			uint statsClosed;
 
+			// closing idle connections
+			statsClosed = data->closeTooOldChannels(idletime, statsRemain);
+
+			// reporting
 			if (remainingCount)
 				*remainingCount = statsRemain;
 			if (closedCount)
@@ -117,6 +139,7 @@ namespace DBI
 		}
 		else
 		{
+			// no connector data, no connections
 			if (remainingCount)
 				*remainingCount = 0;
 			if (closedCount)
@@ -125,14 +148,19 @@ namespace DBI
 	}
 
 
-	void ConnectorPool::closeIdleConnections(uint maxIdleTime, uint* remainingCount, uint* closedCount)
+	void ConnectorPool::closeIdleConnections(uint idleTime, uint* remainingCount, uint* closedCount)
 	{
 		Yuni::Private::DBI::ConnectorDataPtr data = pData;
 		if (!(!data))
 		{
+			// stats
 			uint statsRemain = 0;
-			uint statsClosed = data->closeTooOldChannels(maxIdleTime, statsRemain);
+			uint statsClosed;
 
+			// closing idle connections
+			statsClosed = data->closeTooOldChannels(idleTime, statsRemain);
+
+			// reporting
 			if (remainingCount)
 				*remainingCount = statsRemain;
 			if (closedCount)
@@ -140,6 +168,7 @@ namespace DBI
 		}
 		else
 		{
+			// no connector data, no connections
 			if (remainingCount)
 				*remainingCount = 0;
 			if (closedCount)
@@ -153,5 +182,4 @@ namespace DBI
 
 } // namespace DBI
 } // namespace Yuni
-
 

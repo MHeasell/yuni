@@ -40,7 +40,7 @@ namespace Ownership
 	** \ingroup Policies
 	*/
 	template<class T>
-	class ReferenceCounted
+	class ReferenceCounted final
 	{
 	public:
 		enum
@@ -124,7 +124,7 @@ namespace Ownership
 	** \ingroup Policies
 	*/
 	template<class T>
-	class COMReferenceCounted
+	class COMReferenceCounted final
 	{
 	public:
 		enum
@@ -191,7 +191,7 @@ namespace Ownership
 	** \ingroup Policies
 	*/
 	template<class T>
-	class ReferenceCountedMT
+	class ReferenceCountedMT final
 	{
 	public:
 		enum
@@ -276,7 +276,7 @@ namespace Ownership
 	** \ingroup Policies
 	*/
 	template<class T>
-	class DestructiveCopy
+	class DestructiveCopy final
 	{
 	public:
 		enum
@@ -334,7 +334,7 @@ namespace Ownership
 	** \ingroup Policies
 	*/
 	template<class T>
-	class NoCopy
+	class NoCopy final
 	{
 	public:
 		enum

@@ -68,7 +68,7 @@ namespace Yuni
 	** String t = "こんにちは";
 	** const String::const_utf8iterator end = t.utf8end();
 	** for (String::const_utf8iterator i = t.utf8begin(); i != end; ++i)
-	** 	std::cout << "char at offset " << i.offset() << ": " << *i << std::endl;
+	**	std::cout << "char at offset " << i.offset() << ": " << *i << std::endl;
 	** \endcode
 	**
 	** Example for conversions :
@@ -82,10 +82,10 @@ namespace Yuni
 	** std::cout << "Conversion without check for int: " << i << std::endl;
 	** if (s.to(i))
 	** {
-	** 	std::cout << "Conversion with check for int: " << i << std::endl;
+	**	std::cout << "Conversion with check for int: " << i << std::endl;
 	** }
 	** else
-	** 	std::cout << "Conversion failed for int " << std::endl;
+	**	std::cout << "Conversion failed for int " << std::endl;
 	**
 	** Color::RGB<> rgb(142, 230, 12);
 	** s.clear() << "example for rgb = " << rgb;

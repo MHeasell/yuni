@@ -10,11 +10,18 @@ namespace Private
 namespace DBI
 {
 
+	enum
+	{
+		//! Null handle
+		nullHandle = 0 // Yuni::DBI::Transaction::nullHandle,
+	};
+
+
 	inline void Channel::open()
 	{
 		// The inner mutex must be locked here
 
-		if (not adapter.open or not adapter.close)
+		if (YUNI_UNLIKELY(not adapter.open or not adapter.close))
 		{
 			adapter.dbh = nullptr;
 			status = Yuni::DBI::errInvalidAdapter;
@@ -28,7 +35,7 @@ namespace DBI
 			}
 
 			// try to open a new communication channel
-			auto error = (Yuni::DBI::Error) adapter.open(&adapter.dbh,
+			auto error = (Error) adapter.open(&adapter.dbh,
 				settings.host.c_str(),      // host
 				settings.port,              // port
 				settings.username.c_str(),  // username
@@ -49,7 +56,7 @@ namespace DBI
 	}
 
 
-	inline Yuni::DBI::Error Channel::begin(uint& handle)
+	inline Error Channel::begin(uint& handle)
 	{
 		using namespace Yuni::DBI;
 
@@ -57,17 +64,22 @@ namespace DBI
 		{
 			// no connection to the remote database - retrying to connect
 			open();
+
 			if (status != errNone)
+			{
+				handle = nullHandle;
 				return status;
+			}
 		}
 
-		if (0 == nestedTransactionCount++)
+		if (YUNI_LIKELY(0 == nestedTransactionCount++))
 		{
 			// No transaction available - creating a new one
 			auto error = (Error) adapter.begin(adapter.dbh);
 			if (error != errNone)
 			{
 				--nestedTransactionCount;
+				handle = nullHandle;
 				return error;
 			}
 		}
@@ -80,6 +92,7 @@ namespace DBI
 			if (error != errNone)
 			{
 				--nestedTransactionCount;
+				handle = nullHandle;
 				return error;
 			}
 		}
@@ -91,49 +104,57 @@ namespace DBI
 	}
 
 
-	inline Yuni::DBI::Error Channel::rollback(uint handle)
+	inline Error Channel::rollback(uint handle)
 	{
 		assert(handle != 0 and "invalid handle");
 
-		if (handle != nestedTransactionCount)
+		if (YUNI_UNLIKELY(handle != nestedTransactionCount))
 		{
-			std::cerr << "\ninvalid transaction lifetime rollback" << std::endl;
 			assert(false && "invalid transaction lifetime rollback");
 			return Yuni::DBI::errInvalidNestedTransaction;
 		}
 
-		if (!--nestedTransactionCount)
+		if (YUNI_LIKELY(0 == --nestedTransactionCount))
 		{
 			// rollback the transaction
+			return (status = (Error) adapter.rollback(adapter.dbh));
 		}
 		else
 		{
 			// rollbacking a savepoint
+			ShortString64 spname("__yn__sp_");
+			spname <<  (nestedTransactionCount + 1);
+			return (status = (Error) adapter.rollback_savepoint(adapter.dbh, spname.c_str(), spname.size()));
 		}
-		return Yuni::DBI::errNone;
 	}
 
 
-	inline Yuni::DBI::Error Channel::commit(uint handle)
+	inline Error Channel::commit(uint handle)
 	{
 		assert(handle != 0 and "invalid handle");
 
-		if (handle != nestedTransactionCount)
+		if (YUNI_UNLIKELY(handle != nestedTransactionCount))
 		{
+			std::cout << "\nhandle : " << handle << " / " << nestedTransactionCount << std::endl;
+			std::cerr << "\ninvalid transaction lifetime rollback" << std::endl;
+
 			std::cerr << "\ninvalid transaction lifetime commit" << std::endl;
 			assert(false && "invalid transaction lifetime commit");
 			return Yuni::DBI::errInvalidNestedTransaction;
 		}
 
-		if (!--nestedTransactionCount)
+		if (YUNI_LIKELY(0 == --nestedTransactionCount))
 		{
 			// committing the transaction
+			return (status = (Error) adapter.commit(adapter.dbh));
 		}
 		else
 		{
 			// committing a savepoint
+			ShortString64 spname("__yn__sp_");
+			spname <<  (nestedTransactionCount + 1);
+			return (status = (Error) adapter.commit_savepoint(adapter.dbh, spname.c_str(), spname.size()));
 		}
-		return Yuni::DBI::errNone;
 	}
 
 

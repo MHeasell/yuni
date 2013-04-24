@@ -31,8 +31,8 @@ namespace Yuni
 	template<typename T, template <class> class OwspP, template <class> class ChckP,
 		class ConvP,
 		template <class> class StorP, template <class> class ConsP>
-	inline SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::SmartPtr(typename SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::ExplicitStoredType ptr)
-		:StoragePolicy(ptr)
+	inline SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::SmartPtr(typename SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::ExplicitStoredType ptr) :
+		StoragePolicy(ptr)
 	{
 		// Check if the checking policy allows the given value
 		CheckingPolicy::onInit(storagePointer(*this));
@@ -44,8 +44,8 @@ namespace Yuni
 	template<typename T, template <class> class OwspP, template <class> class ChckP,
 		class ConvP,
 		template <class> class StorP, template <class> class ConsP>
-	inline SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::SmartPtr(typename SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::ImplicitStoredType ptr)
-		:StoragePolicy(ptr)
+	inline SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::SmartPtr(typename SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::ImplicitStoredType ptr) :
+		StoragePolicy(ptr)
 	{
 		// Check if the checking policy allows the given value
 		CheckingPolicy::onInit(storagePointer(*this));
@@ -57,8 +57,8 @@ namespace Yuni
 	template<typename T, template <class> class OwspP, template <class> class ChckP,
 		class ConvP,
 		template <class> class StorP, template <class> class ConsP>
-	inline SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::SmartPtr(const NullPtr&)
-		:StoragePolicy(NULL)
+	inline SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::SmartPtr(const NullPtr&) :
+		StoragePolicy(NULL)
 	{
 		CheckingPolicy::onInit(storagePointer(*this));
 	}
@@ -86,8 +86,8 @@ namespace Yuni
 	template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
 		class ConvP1,
 		template <class> class StorP1, template <class> class ConsP1>
-	inline SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::SmartPtr(const SmartPtr<T1,OwspP1,ChckP1,ConvP1,StorP1,ConsP1>& rhs)
-		:StoragePolicy(rhs),
+	inline SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::SmartPtr(const SmartPtr<T1,OwspP1,ChckP1,ConvP1,StorP1,ConsP1>& rhs) :
+		StoragePolicy(rhs),
 		OwnershipPolicy(rhs),
 		CheckingPolicy(rhs),
 		ConversionPolicy(rhs)
@@ -104,8 +104,8 @@ namespace Yuni
 	template<typename T1, template <class> class OwspP1, template <class> class ChckP1,
 		class ConvP1,
 		template <class> class StorP1, template <class> class ConsP1>
-	inline SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::SmartPtr(SmartPtr<T1,OwspP1,ChckP1,ConvP1,StorP1,ConsP1>& rhs)
-		:StoragePolicy(rhs),
+	inline SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::SmartPtr(SmartPtr<T1,OwspP1,ChckP1,ConvP1,StorP1,ConsP1>& rhs) :
+		StoragePolicy(rhs),
 		OwnershipPolicy(rhs),
 		CheckingPolicy(rhs),
 		ConversionPolicy(rhs)
@@ -123,8 +123,8 @@ namespace Yuni
 		class ConvP1,
 		template <class> class StorP1, template <class> class ConsP1>
 	inline SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::SmartPtr(SmartPtr<T1,OwspP1,ChckP1,ConvP1,StorP1,ConsP1>& rhs,
-		const typename SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::DynamicCastArg&)
-		:StoragePolicy(rhs),
+		const typename SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::DynamicCastArg&) :
+		StoragePolicy(rhs),
 		OwnershipPolicy(rhs),
 		CheckingPolicy(rhs),
 		ConversionPolicy(rhs)
@@ -139,8 +139,8 @@ namespace Yuni
 	template<typename T, template <class> class OwspP, template <class> class ChckP,
 		class ConvP,
 		template <class> class StorP, template <class> class ConsP>
-	inline SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::SmartPtr(Static::MoveConstructor<SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP> > rhs)
-		:StoragePolicy(rhs),
+	inline SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP>::SmartPtr(Static::MoveConstructor<SmartPtr<T,OwspP,ChckP,ConvP,StorP,ConsP> > rhs) :
+		StoragePolicy(rhs),
 		OwnershipPolicy(rhs),
 		CheckingPolicy(rhs),
 		ConversionPolicy(rhs)

@@ -5,6 +5,7 @@
 # include "fwd.h"
 # include "settings.h"
 # include "adapter.h"
+# include "../core/event/event.h"
 
 
 
@@ -92,6 +93,11 @@ namespace DBI
 		** \brief Start a new transaction
 		*/
 		Transaction begin();
+
+		/*!
+		** \brief Start a new transaction which will be automatically commited
+		*/
+		AutoCommit autocommit();
 		//@}
 
 
@@ -121,12 +127,25 @@ namespace DBI
 		** Calling this method should not be necessary since there is worker thread
 		** dedicated to maintenance
 		**
-		** \param maxIdleTime The maximum idle time in seconds (override the value provided by the connection settings)
+		** \param idleTime The maximum idle time in seconds (override the value provided by the connection settings)
 		** \param[out] remainingCount the number of connections which remain active
 		** \param[out] closedCount The number of connection which have been closed
 		*/
-		void closeIdleConnections(uint maxIdleTime, uint* remainingCount = nullptr, uint* closedCount = nullptr);
+		void closeIdleConnections(uint idleTime, uint* remainingCount = nullptr, uint* closedCount = nullptr);
 		//@}
+
+
+		//! \name Operators
+		//@{
+		//! Operator =
+		ConnectorPool& operator = (const ConnectorPool& rhs);
+		//@}
+
+
+	public:
+		//! Event trigered when a SQL error occurs
+		// \important NOT IMPLEMENTED YET !!!
+		Event<void ()> onSQLError;
 
 
 	private:

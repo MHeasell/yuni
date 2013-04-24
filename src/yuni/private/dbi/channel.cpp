@@ -11,7 +11,7 @@ namespace DBI
 
 
 	Channel::Channel(const Yuni::DBI::Settings& settings, const ::yn_dbi_adapter& adapter) :
-		mutex(true), // recursive
+		mutex(/*recursive:*/ true),
 		adapter(adapter),
 		nestedTransactionCount(0),
 		settings(settings),
@@ -28,7 +28,7 @@ namespace DBI
 		if (nestedTransactionCount > 0)
 		{
 			std::cerr << "closing database channel but " << nestedTransactionCount
-				<< "transaction(s) remain" << std::endl;
+				<< " transaction(s) remain" << std::endl;
 			assert(false and "closing database channel but some transactions remain");
 		}
 

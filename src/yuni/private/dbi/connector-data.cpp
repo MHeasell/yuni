@@ -40,7 +40,7 @@ namespace DBI
 		Channel::Table::iterator it = channels.begin();
 		while (it != channels.end())
 		{
-			// the channel itself
+			// alias to the channel itself
 			Channel& channel = *(it->second);
 
 			// we will first check the idle time of the channel, before
@@ -71,6 +71,7 @@ namespace DBI
 					else
 					{
 						// currently in use
+						// this channel can not be closed
 					}
 
 				} // idle time check

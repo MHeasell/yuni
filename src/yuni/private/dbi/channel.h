@@ -23,6 +23,12 @@ namespace Private
 namespace DBI
 {
 
+	//! Error
+	typedef Yuni::DBI::Error  Error;
+
+
+
+
 	/*!
 	** \brief Single connection to a remote database
 	*/
@@ -57,13 +63,13 @@ namespace DBI
 		//! \name Transactions
 		//@{
 		//! Start a new transaction
-		Yuni::DBI::Error begin(uint& handle);
+		Error begin(uint& handle);
 
 		//! Try to commit the transaction
-		Yuni::DBI::Error commit(uint handle);
+		Error commit(uint handle);
 
 		//! Rollback a transaction
-		Yuni::DBI::Error rollback(uint handle);
+		Error rollback(uint handle);
 		//@}
 
 
@@ -71,7 +77,7 @@ namespace DBI
 		//! Mutex, locked/released by transaction
 		Yuni::Mutex mutex;
 		//! Status of the connection
-		Yuni::DBI::Error status;
+		Error status;
 		//! Adapter
 		::yn_dbi_adapter adapter;
 		//! The total number of nested transactions

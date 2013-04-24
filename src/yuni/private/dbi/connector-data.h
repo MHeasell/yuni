@@ -5,6 +5,7 @@
 # include "../../dbi/fwd.h"
 # include "../../dbi/adapter.h"
 # include "channel.h"
+# include "../../core/event/event.h"
 
 
 
@@ -32,6 +33,7 @@ namespace DBI
 		/*!
 		** \brief Close all old channels
 		**
+		** \param idletime Idle time (seconds)
 		** \param[out] remainingCount The number of channels currently opened (after cleanup)
 		** \return The number of channels which have been closed
 		*/
@@ -51,6 +53,10 @@ namespace DBI
 
 		// delete the instance
 		Yuni::DBI::Adapter::IAdapter* instance;
+
+		//! Event trigered when a SQL error occurs
+		Event<void ()> onSQLError;
+
 
 	private:
 		//! Instantiate a new channel

@@ -4,7 +4,7 @@
 # include <yuni/yuni.h>
 # include <yuni/core/noncopyable.h>
 # include "fwd.h"
-# include "query-builder.h"
+# include "cursor.h"
 # include "error.h"
 
 
@@ -32,13 +32,6 @@ namespace DBI
 	class Transaction final : private NonCopyable<Transaction>
 	{
 	public:
-		enum
-		{
-			//! Invalid transaction handle
-			nullHandle = 0
-		};
-
-	public:
 		//! \name Constructors & Destructor
 		//@{
 		/*!
@@ -63,11 +56,6 @@ namespace DBI
 		DBI::Error rollback();
 
 		/*!
-		** \brief Start a new nested transaction (savepoint)
-		*/
-		Transaction&& savepoint();
-
-		/*!
 		** \brief re-start with a new transaction
 		**
 		** If a transaction was already taking place, it will be rolled back
@@ -81,7 +69,7 @@ namespace DBI
 		/*!
 		** \brief Create a new query
 		*/
-		PreparedStatement prepare(const AnyString& stmt);
+		Cursor prepare(const AnyString& stmt);
 
 		/*!
 		** \brief Perform a query and discard the resultset
@@ -94,6 +82,10 @@ namespace DBI
 		//@{
 		/*!
 		** \brief Truncate a table
+		**
+		** The real SQL query is adapter-dependent.
+		** This method should be prefered instead of using the
+		** SQL query `truncate <tablename>`, which may not exist.
 		*/
 		DBI::Error truncate(const AnyString& tablename);
 
@@ -109,14 +101,14 @@ namespace DBI
 		//! \name Connector
 		//@{
 		//! Retrieve a connector from the current transaction
-//		Connector connector() const;
+		//Connector connector() const;
 		//@}
 
 
 		//! \name Operators
 		//@{
 		//! operator (), equivalent to query()
-		PreparedStatement&& operator () (const AnyString& stmt);
+		Cursor operator () (const AnyString& stmt);
 		//@}
 
 
@@ -142,5 +134,8 @@ namespace DBI
 
 } // namespace DBI
 } // namespace Yuni
+
+# include "auto-commit.h"
+# include "transaction.hxx"
 
 #endif // __YUNI_DBI_TRANSACTION_H__

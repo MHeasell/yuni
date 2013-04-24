@@ -33,6 +33,14 @@ namespace DBI
 	}
 
 
+	inline AutoCommit ConnectorPool::autocommit()
+	{
+		return AutoCommit(*this);
+	}
+
+
+
+
 
 } // namespace DBI
 } // namespace Yuni
