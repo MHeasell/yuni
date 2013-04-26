@@ -20,7 +20,7 @@ namespace Constness
 	** \ingroup Policies
 	*/
 	template<typename T>
-	struct DontPropagateConst final
+	struct DontPropagateConst
 	{
 		typedef T Type;
 	};
@@ -31,7 +31,7 @@ namespace Constness
 	** \ingroup Policies
 	*/
 	template<typename T>
-	struct PropagateConst final
+	struct PropagateConst
 	{
 		typedef const T Type;
 	};

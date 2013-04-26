@@ -26,7 +26,7 @@ namespace Storage
 	** \tparam T The data type
 	*/
 	template<class T>
-	class Pointer final
+	class Pointer
 	{
 	public:
 		//! The type stored
@@ -87,7 +87,7 @@ namespace Storage
 	** \tparam T The data type
 	*/
 	template<class T>
-	class Array final
+	class Array
 	{
 	public:
 		//! The type stored
