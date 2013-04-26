@@ -1,8 +1,8 @@
 #ifndef YUNI_CORE_SMARTPTR_INTRUSIVE_H__
 # define YUNI_CORE_SMARTPTR_INTRUSIVE_H__
 
-# include "../yuni.h"
-# include "../core/smartptr.h"
+# include "../../yuni.h"
+# include "smartptr.h"
 
 
 namespace Yuni
