@@ -87,7 +87,7 @@ namespace Yuni
 
 	template<class ChildT, template<class> class TP>
 	inline IIntrusiveSmartPtr<ChildT,TP>::IIntrusiveSmartPtr() :
-		pRefCount(0)
+		pRefCount()
 	{
 	}
 
@@ -101,7 +101,7 @@ namespace Yuni
 
 	template<class ChildT, template<class> class TP>
 	inline IIntrusiveSmartPtr<ChildT,TP>::IIntrusiveSmartPtr(const IIntrusiveSmartPtr<ChildT,TP>& rhs) :
-		pRefCount(0)
+		pRefCount()
 	{
 	}
 
@@ -132,19 +132,14 @@ namespace Yuni
 	template<class ChildT, template<class> class TP>
 	bool IIntrusiveSmartPtr<ChildT,TP>::release() const
 	{
-		assert(pRefCount > 0 && "IIntrusiveSmartPtr: Invalid call to the method release");
-		if (--pRefCount > 0)
-			return false;
-		// double check to avoid race conditions
 		// TODO check if there is not another way
 		{
-			typename ThreadingPolicy::MutexLocker locker(*this);
-			if (pRefCount > 0)
+			if (--pRefCount > 0)
 				return false;
 		}
 
 		// we will be released soon
-		onRelease();
+		static_cast<ChildT*>(const_cast<IIntrusiveSmartPtr<ChildT,TP>*>(this))->onRelease();
 		return true;
 	}
 
