@@ -21,7 +21,7 @@ namespace Checking
 	** \ingroup Policies
 	*/
 	template<class T>
-	class None final
+	class None
 	{
 	public:
 		None() {}
@@ -47,7 +47,7 @@ namespace Checking
 	** by not defining onDefault.
 	*/
 	template<class T>
-	class NeverNull final
+	class NeverNull
 	{
 	public:
 		NeverNull() {}

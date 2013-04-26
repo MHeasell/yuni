@@ -19,7 +19,7 @@ namespace Conversion
 	/*!
 	** \ingroup Policies
 	*/
-	struct Allow final
+	struct Allow
 	{
 		enum { allow = true };
 		static void swapPointer(Allow&) {}
@@ -29,7 +29,7 @@ namespace Conversion
 	/*!
 	** \ingroup Policies
 	*/
-	struct Disallow final
+	struct Disallow
 	{
 		//! Default constructor
 		Disallow() {}
