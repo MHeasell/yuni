@@ -14,7 +14,7 @@ namespace Yuni
 	** \tparam ChildT Child class type
 	** \tparam TP  Threading policy. Set by default for a single thread
 	*/
-	template<template<class> class TP = Yuni::Policy::SingleThreaded>
+	template<class ChildT, template<class> class TP = Yuni::Policy::SingleThreaded>
 	class  IIntrusiveSmartPtr : public TP<IIntrusiveSmartPtr<ChildT,TP> >
 	{
 	public:
