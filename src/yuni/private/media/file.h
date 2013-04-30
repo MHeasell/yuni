@@ -5,6 +5,7 @@
 # include "../../core/smartptr.h"
 # include "../../core/string.h"
 # include "stream.h"
+# include <cassert>
 
 
 namespace Yuni
@@ -13,7 +14,6 @@ namespace Private
 {
 namespace Media
 {
-
 
 	/*!
 	** \brief A media file contains one or several video and/or audio streams
@@ -55,10 +55,6 @@ namespace Media
 		template<StreamType TypeT>
 		typename Stream<TypeT>::Ptr addStream(uint index = 0);
 
-		//! Check that the given media type is the same as the static one
-		template<StreamType TypeT>
-		bool isSameType(MediaType type) const;
-
 		//! Get the proper cache depending on the media type (audio or video)
 		template<StreamType TypeT>
 		typename Stream<TypeT>::Map& getCache();
@@ -68,9 +64,9 @@ namespace Media
 		AVFormatContext* pFormat;
 
 		//! Video stream cache
-		Stream<stVideo>::Map pVStreams;
+		mutable Stream<stVideo>::Map pVStreams;
 		//! Audio stream cache
-		Stream<stAudio>::Map pAStreams;
+		mutable Stream<stAudio>::Map pAStreams;
 
 	private:
 		//! Friend declaration
@@ -78,6 +74,8 @@ namespace Media
 		friend class Stream;
 
 	}; // class File
+
+
 
 
 

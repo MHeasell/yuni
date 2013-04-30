@@ -372,16 +372,6 @@ namespace EventLoop
 
 	template<class ParentT, template<class> class FlowT, template<class> class StatsT,
 		bool DetachedT>
-	bool IEventLoop<ParentT,FlowT,StatsT,DetachedT>::onLoop()
-	{
-		// The impossible happened !
-		YUNI_STATIC_ASSERT(false, IEventLoop_TheParentMustImplementTheMethod_onLoop);
-		return false;
-	}
-
-
-	template<class ParentT, template<class> class FlowT, template<class> class StatsT,
-		bool DetachedT>
 	inline void
 	IEventLoop<ParentT,FlowT,StatsT,DetachedT>::suspend(uint timeout)
 	{
