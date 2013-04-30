@@ -3,6 +3,7 @@
 
 # include "../../yuni.h"
 # include "../../thread/policy.h"
+# include "../noncopyable.h"
 # include "policies/creation.h"
 # include "policies/lifetime.h"
 
@@ -32,7 +33,9 @@ namespace Yuni
 		template <class> class CreationT = Policy::Creation::EmptyConstructor,
 		template <class> class LifetimeT = Policy::Lifetime::Normal,
 		template <class> class ThreadingT = Policy::ClassLevelLockable>
-	class Singleton : public ThreadingT<Singleton<T, CreationT, LifetimeT, ThreadingT> >
+	class Singleton :
+		public ThreadingT<Singleton<T, CreationT, LifetimeT, ThreadingT> >,
+		private NonCopyable<Singleton<T, CreationT, LifetimeT, ThreadingT> >
 	{
 	public:
 		//! Stored singleton type
@@ -56,22 +59,12 @@ namespace Yuni
 
 	public:
 		/*!
-		** \brief Copy constructor will fail at compile time !
-		*/
-		Singleton(const Singleton&);
-
-		/*!
-		** \brief Assignment operator will fail at compile time !
-		*/
-		Singleton& operator = (const Singleton&);
-
-		/*!
-		** \brief Address-of operator will fail at compile time !
+		** \brief Address-of operator will fail at link time
 		*/
 		Singleton<T, CreationT, LifetimeT, ThreadingT>* operator & ();
 
 		/*!
-		** \brief Address-of operator will fail at compile time !
+		** \brief Address-of operator will fail at link time
 		*/
 		const Singleton* operator & () const;
 
