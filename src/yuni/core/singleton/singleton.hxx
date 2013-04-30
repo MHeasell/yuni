@@ -39,46 +39,6 @@ namespace Yuni
 		template <class> class CreationT,
 		template <class> class LifetimeT,
 		template <class> class ThreadingT>
-	Singleton<T, CreationT, LifetimeT, ThreadingT>::Singleton(const Singleton&)
-	{
-		YUNI_STATIC_ASSERT(false, COPY_OPERATOR_ON_SINGLETON_IS_FORBIDDEN);
-	}
-
-	template <typename T,
-		template <class> class CreationT,
-		template <class> class LifetimeT,
-		template <class> class ThreadingT>
-	Singleton<T, CreationT, LifetimeT, ThreadingT>&
-	Singleton<T, CreationT, LifetimeT, ThreadingT>::operator = (const Singleton&)
-	{
-		YUNI_STATIC_ASSERT(false, SINGLETON_ASSIGNMENT_IS_FORBIDDEN);
-	}
-
-	template <typename T,
-		template <class> class CreationT,
-		template <class> class LifetimeT,
-		template <class> class ThreadingT>
-	Singleton<T, CreationT, LifetimeT, ThreadingT>*
-	Singleton<T, CreationT, LifetimeT, ThreadingT>::operator & ()
-	{
-		YUNI_STATIC_ASSERT(false, ADDRESS_OF_OPERATOR_ON_SINGLETON_IS_FORBIDDEN);
-	}
-
-	template <typename T,
-		template <class> class CreationT,
-		template <class> class LifetimeT,
-		template <class> class ThreadingT>
-	const Singleton<T, CreationT, LifetimeT, ThreadingT>*
-	Singleton<T, CreationT, LifetimeT, ThreadingT>::operator & () const
-	{
-		YUNI_STATIC_ASSERT(false, ADDRESS_OF_OPERATOR_ON_SINGLETON_IS_FORBIDDEN);
-	}
-
-
-	template <typename T,
-		template <class> class CreationT,
-		template <class> class LifetimeT,
-		template <class> class ThreadingT>
 	typename Singleton<T, CreationT, LifetimeT, ThreadingT>::Reference
 	Singleton<T, CreationT, LifetimeT, ThreadingT>::Instance()
 	{

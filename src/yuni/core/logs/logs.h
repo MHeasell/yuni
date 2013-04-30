@@ -13,7 +13,7 @@
 # include "decorators/verbositylevel.h"
 # include "decorators/time.h"
 # include "decorators/message.h"
-# include "../static/assert.h"
+# include "../noncopyable.h"
 # include "buffer.h"
 
 
@@ -73,14 +73,15 @@ namespace Logs
 	** \tparam Decorators A static list of all decorators
 	*/
 	template<
-		class Handlers = StdCout<>,                            // List of all static handles
-		class Decorators = Time< VerbosityLevel<Message<> > >, // List of all static decorators
+		class Handlers = StdCout<>,                             // List of all static handles
+		class Decorators = Time< VerbosityLevel<Message<> > >,  // List of all static decorators
 		template<class> class TP = Policy::ObjectLevelLockableNotRecursive // The Threading Policy
 		>
 	class YUNI_DECL Logger :
-		public TP<Logger<Handlers,Decorators,TP> >, // inherits from the Threading Policy
-		public Decorators,                           // inherits from all decorators
-		public Handlers                              // inherits from all handlers
+		public TP<Logger<Handlers,Decorators,TP> >,             // inherits from the Threading Policy
+		public Decorators,                                      // inherits from all decorators
+		public Handlers,                                        // inherits from all handlers
+		private NonCopyable<Logger<Handlers, Decorators, TP> >  // noncopyable
 	{
 	public:
 		//! The full prototype of the logger
@@ -134,10 +135,6 @@ namespace Logs
 		** \brief Default Constructor
 		*/
 		Logger();
-		/*!
-		** \brief Copy constructor
-		*/
-		Logger(const Logger& rhs);
 		/*!
 		** \brief Destructor
 		*/

@@ -15,13 +15,6 @@ namespace Logs
 
 
 	template<class Handlers, class Decorators, template<class> class TP>
-	inline Logger<Handlers,Decorators,TP>::Logger(const Logger&)
-	{
-		YUNI_STATIC_ASSERT(false, ThisClassCannotBeCopied);
-	}
-
-
-	template<class Handlers, class Decorators, template<class> class TP>
 	inline Logger<Handlers,Decorators,TP>::~Logger()
 	{}
 
