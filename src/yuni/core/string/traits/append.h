@@ -21,12 +21,7 @@ namespace CString
 {
 
 	template<class CStringT, class C>
-	class Append
-	{
-	public:
-		// Unknown type
-		YUNI_STATIC_ASSERT(false, CString_AppendUnknownType);
-	};
+	class Append; // specialization required
 
 
 	// C*

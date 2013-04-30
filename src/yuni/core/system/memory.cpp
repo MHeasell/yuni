@@ -190,7 +190,7 @@ namespace Memory
 
 			// Analysing each line in /proc/meminfo, until the end-of-file or
 			// until we have read the 4 values that interrest us.
-			while (EOF != fgetline(fd, line, sizeof(line)))
+			while (EOF != fgetline(fd, line, (uint)sizeof(line)))
 			{
 				if (!strncmp("MemTotal:", line, 9))
 				{
@@ -245,7 +245,7 @@ namespace Memory
 
 	uint64 Total()
 	{
-#ifdef YUNI_OS_LINUX		
+#ifdef YUNI_OS_LINUX
 		// Directly using sysinfo (2), which should be faster than parsing /proc/meminfo
 		struct sysinfo s;
 		return (!sysinfo(&s)) ? (s.mem_unit * s.totalram) : (uint64) defaultTotal;

@@ -16,12 +16,12 @@
 
 
 
-#define __YN_STRINGIZE(X) #X
+# define __YN_STRINGIZE(X) #X
 
 /*!
 ** \brief Transform X into a string
 */
-#define YUNI_STRINGIZE(X)  __YN_STRINGIZE(X)
+# define YUNI_STRINGIZE(X)  __YN_STRINGIZE(X)
 
 /*!
 ** \brief Test if something is empty

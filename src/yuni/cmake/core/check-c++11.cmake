@@ -110,6 +110,14 @@ check_cxx_source_compiles("
 	int main() {Foo foo;return 0;}" YUNI_HAS_CPP_MOVE_CONSTRUCTOR)
 
 
+check_cxx_source_compiles("
+	int main()
+	{
+		static_assert(true, \"test\");
+		return 0;
+	}" YUNI_HAS_CPP_STATIC_ASSERT)
+
+
 # constexpr
 #if(YUNI_HAS_GCC_CPP0X_SUPPORT)
 #	set(CMAKE_REQUIRED_FLAGS_SAVE ${CMAKE_REQUIRED_FLAGS})

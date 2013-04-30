@@ -129,6 +129,9 @@
 /* C++11 move constructor */
 #cmakedefine YUNI_HAS_CPP_MOVE_CONSTRUCTOR
 
+/* C++11 static_assert */
+#cmakedefine YUNI_HAS_CPP_STATIC_ASSERT
+
 /* pthread pthread_getthreadid_np */
 #cmakedefine YUNI_HAS_PTHREAD_GETTHREADID_NP
 
