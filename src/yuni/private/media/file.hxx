@@ -8,6 +8,46 @@ namespace Private
 namespace Media
 {
 
+	namespace // anonymous
+	{
+
+		//! Check that the given media type is the same as the static one
+		template<StreamType TypeT>
+		struct IsSameType;
+
+		template<>
+		struct IsSameType<stVideo> final
+		{
+			static inline bool Check(File::MediaType type)
+			{
+				# if LIBAVFORMAT_VERSION_MAJOR < 53
+				return CODEC_TYPE_VIDEO == type;
+				# else
+				return AVMEDIA_TYPE_VIDEO == type;
+				# endif // LIBAVFORMAT_VERSION_MAJOR < 53
+			}
+		};
+
+		template<>
+		struct IsSameType<stAudio> final
+		{
+			static inline bool Check(File::MediaType type)
+			{
+				# if LIBAVFORMAT_VERSION_MAJOR < 53
+				return CODEC_TYPE_AUDIO == type;
+				# else
+				return AVMEDIA_TYPE_AUDIO == type;
+				# endif // LIBAVFORMAT_VERSION_MAJOR < 53
+			}
+		};
+
+
+	} // anonymous namespace
+
+
+
+
+
 
 	template<StreamType TypeT>
 	inline typename Stream<TypeT>::Ptr File::addStream(uint index)
@@ -15,10 +55,10 @@ namespace Media
 		typedef Stream<TypeT> MyStream;
 
 		// Loop on streams in the file
-		for (uint i = 0; i < pFormat->nb_streams; ++i)
+		for (uint i = 0; i != pFormat->nb_streams; ++i)
 		{
 			// Reject streams that are not the requested codec type
-			if (!isSameType<TypeT>(pFormat->streams[i]->codec->codec_type))
+			if (!IsSameType<TypeT>::Check(pFormat->streams[i]->codec->codec_type))
 				continue;
 
 			// Continue until we find the requested stream
@@ -109,38 +149,11 @@ namespace Media
 
 
 	template<>
-	inline bool File::isSameType<stVideo>(MediaType type) const
-	{
-		# if LIBAVFORMAT_VERSION_MAJOR < 53
-		return CODEC_TYPE_VIDEO == type;
-		# else
-		return AVMEDIA_TYPE_VIDEO == type;
-		# endif // LIBAVFORMAT_VERSION_MAJOR < 53
-	}
-
-	template<>
-	inline bool File::isSameType<stAudio>(MediaType type) const
-	{
-		# if LIBAVFORMAT_VERSION_MAJOR < 53
-		return CODEC_TYPE_AUDIO == type;
-		# else
-		return AVMEDIA_TYPE_AUDIO == type;
-		# endif // LIBAVFORMAT_VERSION_MAJOR < 53
-	}
-
-	template<StreamType TypeT>
-	inline bool File::isSameType(MediaType type) const
-	{
-		YUNI_STATIC_ASSERT(false, InvalidStreamType);
-		return false;
-	}
-
-
-	template<>
 	inline Stream<stVideo>::Map& File::getCache<stVideo>()
 	{
 		return pVStreams;
 	}
+
 
 	template<>
 	inline Stream<stAudio>::Map& File::getCache<stAudio>()
@@ -148,10 +161,11 @@ namespace Media
 		return pAStreams;
 	}
 
+
 	template<StreamType TypeT>
 	inline typename Stream<TypeT>::Map& File::getCache()
 	{
-		YUNI_STATIC_ASSERT(false, InvalidStreamType);
+		assert(false and "Invalid stream type");
 		return pVStreams;
 	}
 
