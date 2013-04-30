@@ -30,18 +30,18 @@ namespace Yuni
 	**
 	** static int Foo(int value)
 	** {
-	** 	std::cout << "Foo: " << value << std::endl;
-	** 	return 0;
+	**	std::cout << "Foo: " << value << std::endl;
+	**	return 0;
 	** }
 	**
 	** int main()
 	** {
-	** 	Yuni::Bind<int (int)> callback;
-	** 	callback.bind(&Foo);
-	** 	callback(42);
-	** 	callback(61);
-	** 	callback(-1)
-	** 	return 0;
+	**	Yuni::Bind<int (int)> callback;
+	**	callback.bind(&Foo);
+	**	callback(42);
+	**	callback(61);
+	**	callback(-1)
+	**	return 0;
 	** }
 	** \endcode
 	**
@@ -55,29 +55,29 @@ namespace Yuni
 	** public:
 	**	int bar(int value)
 	**	{
-	** 		std::cout << "Foo::bar  : " << value << std::endl;
-	** 		return 0;
+	**		std::cout << "Foo::bar  : " << value << std::endl;
+	**		return 0;
 	**	}
 	**	int bar2(int value)
 	**	{
-	** 		std::cout << "Foo::bar2 : " << value << std::endl;
-	** 		return 0;
+	**		std::cout << "Foo::bar2 : " << value << std::endl;
+	**		return 0;
 	**	}
 	** };
 	**
 	** int main()
 	** {
 	**	Foo foo;
-	** 	Yuni::Bind<int (int)> callback;
-	** 	callback.bind(foo, &Foo::bar);
-	** 	callback(42);
-	** 	callback(61);
-	** 	callback(-1)
-	** 	callback.bind(foo, &Foo::bar2);
-	** 	callback(42);
-	** 	callback(61);
-	** 	callback(-1)
-	** 	return 0;
+	**	Yuni::Bind<int (int)> callback;
+	**	callback.bind(foo, &Foo::bar);
+	**	callback(42);
+	**	callback(61);
+	**	callback(-1)
+	**	callback.bind(foo, &Foo::bar2);
+	**	callback(42);
+	**	callback(61);
+	**	callback(-1)
+	**	return 0;
 	** }
 	** \endcode
 	**
@@ -93,44 +93,7 @@ namespace Yuni
 	** \tparam P The prototype of the targetted function/member
 	*/
 	template<class P = void (), class Dummy = void>
-	class YUNI_DECL Bind final
-	{
-	public:
-		// This class can not be used like that. We must use one the specialization
-		// (see below).
-		// All definitions in this class are only here for the documentation
-		YUNI_STATIC_ASSERT(false, Bind_BadFunctionOrMemberSignature);
-
-	public:
-		//! \name Constructor & Destructor
-		//@{
-		/*!
-		** \brief Default Constructor
-		*/
-		Bind();
-		/*!
-		** \brief Copy constructor
-		**
-		** \param rhs Another bind object
-		*/
-		Bind(const Bind& rhs);
-		/*!
-		** \brief Copy constructor
-		**
-		** \param symbol Symbol from a dynamic library
-		*/
-		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		/*!
-		** \brief Destructor
-		*/
-		~Bind();
-		//@}
-
-	}; // class Bind<>
-
-
-
-
+	class YUNI_DECL Bind;
 
 
 

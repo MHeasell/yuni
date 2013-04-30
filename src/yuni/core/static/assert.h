@@ -22,45 +22,45 @@
 ** template<typename T>
 ** struct Dummy
 ** {
-** 	void foo()
-** 	{
-** 		YUNI_STATIC_ASSERT(false, TheImplementationIsMissing);
-** 	}
+**	void foo()
+**	{
+**		YUNI_STATIC_ASSERT(false, TheImplementationIsMissing);
+**	}
 ** };
 **
 ** template<>
 ** struct Dummy<int>
 ** {
-** 	void foo()
-** 	{
-** 		std::cout << "Called Dummy<int>::foo()" << std::endl;
-** 	}
+**	void foo()
+**	{
+**		std::cout << "Called Dummy<int>::foo()" << std::endl;
+**	}
 ** };
 **
 ** int main()
 ** {
-** 	// As the static assert is within a method and not the class itself,
-** 	// it is possible to instanciate the class in all cases.
-** 	// But this is not true for the method `foo()`.
+**	// As the static assert is within a method and not the class itself,
+**	// it is possible to instanciate the class in all cases.
+**	// But this is not true for the method `foo()`.
 **
-** 	Dummy<int> dummy0;
-** 	// The following statement will compile
-** 	dummy0.foo();
+**	Dummy<int> dummy0;
+**	// The following statement will compile
+**	dummy0.foo();
 **
-** 	Dummy<uint> dummy1;
-** 	// But this one will fail
-** 	dummy1.foo();
+**	Dummy<uint> dummy1;
+**	// But this one will fail
+**	dummy1.foo();
 **
-** 	// Error with gcc 3.x :
-** 	// ./main.cpp: In member function `void Dummy<T>::foo() [with T = uint]':
-** 	//	./main.cpp:36:   instantiated from here
-** 	//	./main.cpp:11: error: creating array with size zero (` Assert_TheImplementationIsMissing')
+**	// Error with gcc 3.x :
+**	// ./main.cpp: In member function `void Dummy<T>::foo() [with T = uint]':
+**	//	./main.cpp:36:   instantiated from here
+**	//	./main.cpp:11: error: creating array with size zero (` Assert_TheImplementationIsMissing')
 **
-** 	// Error with gcc 4.x :
-** 	// ./main.cpp: In member function ‘void Dummy<T>::foo() [with T = uint]’:
-** 	//	./main.cpp:36:   instantiated from here
-** 	//	./main.cpp:11: error: creating array with negative size (‘(StaticAssert_TheImplementationIsMissing::._67)-0x000000001’)
-** 	return 0;
+**	// Error with gcc 4.x :
+**	// ./main.cpp: In member function ‘void Dummy<T>::foo() [with T = uint]’:
+**	//	./main.cpp:36:   instantiated from here
+**	//	./main.cpp:11: error: creating array with negative size (‘(StaticAssert_TheImplementationIsMissing::._67)-0x000000001’)
+**	return 0;
 ** }
 ** \endcode
 **
@@ -72,12 +72,15 @@
 ** \param X An expression
 ** \param ID An unique ID for the scope
 */
-# define YUNI_STATIC_ASSERT(X,ID)  \
+# ifdef YUNI_HAS_CPP_STATIC_ASSERT
+#	define YUNI_STATIC_ASSERT(X, ID)   static_assert((X), #ID)
+# else
+#	define YUNI_STATIC_ASSERT(X, ID)  \
 		struct StaticAssert_##ID { \
 			enum { Assert_##ID = Yuni::Static::Assert<(0 != (X))>::result }; \
 		}; \
 		typedef char invokeStaticAssert_##ID[StaticAssert_##ID::Assert_##ID]
-
+# endif
 
 
 
