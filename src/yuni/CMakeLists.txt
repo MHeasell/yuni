@@ -174,3 +174,11 @@ if("${YUNI_CMAKE_ERROR}" GREATER 0)
 	message(FATAL_ERROR  "Aborting.")
 endif()
 
+
+file("WRITE" "${CMAKE_CURRENT_BINARY_DIR}/../compiler-flags-debug-cxx"   "${CMAKE_CXX_FLAGS_DEBUG}")
+file("WRITE" "${CMAKE_CURRENT_BINARY_DIR}/../compiler-flags-release-cxx" "${CMAKE_CXX_FLAGS_RELEASE}")
+file("WRITE" "${CMAKE_CURRENT_BINARY_DIR}/../compiler-flags-debug-cc"    "${CMAKE_C_FLAGS_DEBUG}")
+file("WRITE" "${CMAKE_CURRENT_BINARY_DIR}/../compiler-flags-release-cc"  "${CMAKE_C_FLAGS_RELEASE}")
+
+
+
