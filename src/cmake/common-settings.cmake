@@ -51,7 +51,14 @@ if(NOT MSVC)
 endif()
 
 set(YUNI_COMMON_GCC_OPTIONS  "${YUNI_COMMON_GCC_OPTIONS} -Wmissing-noreturn -Wcast-align  -Wfloat-equal -Wundef")
-set(YUNI_COMMON_GCC_OPTIONS  "${YUNI_COMMON_GCC_OPTIONS} -D_REENTRANT -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64")
+set(YUNI_COMMON_GCC_OPTIONS  "${YUNI_COMMON_GCC_OPTIONS} -D_REENTRANT -DXUSE_MTSAFE_API")
+set(YUNI_COMMON_GCC_OPTIONS  "${YUNI_COMMON_GCC_OPTIONS} -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64")
+
+
+set(COMMON_MSVC_FLAGS "/W3 /MP4 /Zi")
+set(COMMON_MSVC_FLAGS "${COMMON_MSVC_FLAGS} /DREENTRANT /D_LARGEFILE_SOURCE /D_LARGEFILE64_SOURCE /D_FILE_OFFSET_BITS=64")
+
+
 
 # Common options for GCC on Unixes (mingw excluded)
 # fPIC seems a good choice in most cases
@@ -105,6 +112,20 @@ endif()
 
 
 
+
+# Unicode on Windows
+if(WIN32 OR WIN64)
+	add_definitions("-DUNICODE")
+	add_definitions("-D_UNICODE")
+	add_definitions("-D__UNICODE")
+endif()
+
+# Thread safety
+add_definitions("-D_REENTRANT -DXUSE_MTSAFE_API")
+
+
+
+
 if(NOT WIN32)
 	set(CMAKE_CXX_FLAGS_RELEASE         "${YUNI_COMMON_GCC_OPTIONS_UNIX} ${YUNI_HAS_COMPILER_OPTIMIZATION_LEVEL_4} -fomit-frame-pointer -fstrict-aliasing -momit-leaf-frame-pointer -fno-tree-pre -falign-loops -mfpmath=sse -msse -msse2 -Wuninitialized")
 	set(CMAKE_CXX_FLAGS_RELWITHDEBINFO  "${YUNI_COMMON_GCC_OPTIONS_UNIX} ${YUNI_HAS_COMPILER_OPTIMIZATION_LEVEL_4} -fomit-frame-pointer -mfpmath=sse -msse -msse2")
@@ -126,13 +147,34 @@ if(MINGW)
 endif()
 
 if(MSVC)
-	set(CMAKE_CXX_FLAGS_RELEASE         "/EHsc /Ox /Ob2 /Ot /O2 /Oy /MD /GS- /Gy /arch:SSE2")
-	set(CMAKE_CXX_FLAGS_DEBUG           "/EHsc /Od /GR /GS /RTC1 /RTCc /Ob1 /Ot /MDd /W3")
-	set(CMAKE_CXX_FLAGS_RELWITHDEBINFO  "/EHsc /Ox /Ob2 /Ot /O2 /Oy /MDd /GS- /Gy")
+	set(CMAKE_C_FLAGS_DEBUG   "${COMMON_MSVC_FLAGS} /MDd /GR /Ot /Od /EHsc /RTC1")
+	set(CMAKE_CXX_FLAGS_DEBUG "${COMMON_MSVC_FLAGS} /MDd /GR /Ot /Od /EHsc /RTC1 /fp:except /RTCc")
 
-	set(CMAKE_C_FLAGS_RELEASE           "/EHsc /Ox /Ob2 /Ot /O2 /Oy /MD /GS- /Gy /arch:SSE2")
-	set(CMAKE_C_FLAGS_DEBUG             "/EHsc /Od /GR /GS /RTC1 /RTCc /Ob1 /Ot /MDd /W3")
-	set(CMAKE_C_FLAGS_RELWITHDEBINFO    "/EHsc /Ox /Ob2 /Ot /O2 /Oy /MDd /GS- /Gy")
+	set(MSVC_RELEASE_FLAGS)
+
+	# O2x: optimization
+	set(MSVC_RELEASE_FLAGS "${MSVC_RELEASE_FLAGS} /O2")
+	# Prefer speed instead of size
+	set(MSVC_RELEASE_FLAGS "${MSVC_RELEASE_FLAGS} /Ot")
+	# Omit frame pointer
+	set(MSVC_RELEASE_FLAGS "${MSVC_RELEASE_FLAGS} /Oy")
+	# Any suitable inlining
+	set(MSVC_RELEASE_FLAGS "${MSVC_RELEASE_FLAGS} /Ob2")
+	# Fiber-safe optimizations
+	set(MSVC_RELEASE_FLAGS "${MSVC_RELEASE_FLAGS} /GT")
+	# whole program / requires "Link time code generation"
+	#set(MSVC_RELEASE_FLAGS "${MSVC_RELEASE_FLAGS} /GL")
+	# No buffer security check
+	set(MSVC_RELEASE_FLAGS "${MSVC_RELEASE_FLAGS} /GS-")
+	# SSE2
+	set(MSVC_RELEASE_FLAGS "${MSVC_RELEASE_FLAGS} /arch:SSE2")
+	# Intrinsic functions
+	set(MSVC_RELEASE_FLAGS "${MSVC_RELEASE_FLAGS} /Oi")
+	# Multithreaded DLL
+	set(MSVC_RELEASE_FLAGS "${MSVC_RELEASE_FLAGS} /MD")
+
+	set(CMAKE_C_FLAGS_RELEASE    "${CMAKE_C_FLAGS_RELEASE} ${MSVC_RELEASE_FLAGS}")
+	set(CMAKE_CXX_FLAGS_RELEASE  "${CMAKE_CXX_FLAGS_RELEASE} ${MSVC_RELEASE_FLAGS}")
 endif()
 
 
