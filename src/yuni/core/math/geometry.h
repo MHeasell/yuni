@@ -25,6 +25,18 @@ namespace Geometry
 
 
 	/*!
+	** \brief Does a line segment intersect a plane ?
+	**
+	** \param startPoint Start of the segment
+	** \param endPoint End of the segment
+	** \param planePoint Any point in the plane
+	** \param planeNormal Normal vector of the plane
+	*/
+	template<typename T>
+	static bool SegmentIntersectsPlane(const Point3D<T>& startPoint, const Point3D<T>& endPoint,
+		const Point3D<T>& planePoint, const Vector3D<T>& planeNormal);
+
+	/*!
 	** \brief Projection point of a point on a line
 	**
 	** \param point The point to project

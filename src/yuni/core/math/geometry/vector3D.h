@@ -160,7 +160,7 @@ namespace Yuni
 		bool null() const;
 
 		/*!
-		** \brief Get if the vector is null
+		** \brief Get if the vector is a unit vector (magnitude = 1)
 		*/
 		bool unit() const;
 

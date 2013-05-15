@@ -12,10 +12,10 @@ namespace Geometry
 		const Vector3D<T>& lineDirection, const Point3D<T>& planePoint,
 		const Vector3D<T>& planeNormal)
 	{
-		T dotProduct = DotProduct(planeNormal, lineDirection);
+		T dotProduct = Vector3D<T>::DotProduct(planeNormal, lineDirection);
 		assert(Math::Abs(dotProduct) < YUNI_EPSILON);
 		// Vector connecting the two origin points from line to plane
-		Vector3D<T> lineToPlane(planePoint.x - linePoint.x, planePoint.y - linePoint.y, planePoint.z - linePoint.z);
+		Vector3D<T> lineToPlane(linePoint, planePoint);
 		T factor = DotProduct(lineToPlane, planeNormal) / dotProduct;
 		// Scale the direction by the found value
 		Vector3D<T> direction(lineDirection);
@@ -24,6 +24,23 @@ namespace Geometry
 		Point3D<T> result(linePoint);
 		result.translate(direction.x, direction.y, direction.z);
 		return result;
+	}
+
+
+	template<typename T>
+	inline bool SegmentIntersectsPlane(const Point3D<T>& startPoint, const Point3D<T>& endPoint,
+		const Point3D<T>& planePoint, const Vector3D<T>& planeNormal)
+	{
+		Vector3D<T> planeToStart(planePoint, startPoint);
+		Vector3D<T> planeToEnd(planePoint, endPoint);
+
+		T startDot = Vector3D<T>::DotProduct(planeToStart, planeNormal);
+		T endDot = Vector3D<T>::DotProduct(planeToEnd, planeNormal);
+		// The two ends of the segment are on different sides of the plane if :
+		// 1. either of the dot products is null (one of the points is in the plane) OR
+		// 2. the signs of the dot products are opposite.
+		return Math::Zero(startDot) || Math::Zero(endDot) ||
+			(startDot > 0) != (endDot > 0);
 	}
 
 
