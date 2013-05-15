@@ -394,6 +394,39 @@ namespace IO
 
 
 
+	template<class StringT>
+	static inline void CanonicalizeImpl(StringT& out, const AnyString& in, const AnyString& rootpath)
+	{
+		if (IsAbsolute(in))
+		{
+			Normalize(out, in);
+		}
+		else
+		{
+			String tmp;
+			if (rootpath.empty())
+				MakeAbsolute(tmp, in);
+			else
+				MakeAbsolute(tmp, in, rootpath);
+			Normalize(out, tmp);
+		}
+	}
+
+
+	void Canonicalize(String& out, const AnyString& in, const AnyString& rootpath)
+	{
+		CanonicalizeImpl(out, in, rootpath);
+	}
+
+
+	void Canonicalize(Clob& out, const AnyString& in, const AnyString& rootpath)
+	{
+		CanonicalizeImpl(out, in, rootpath);
+	}
+
+
+
+
 
 } // namespace IO
 } // namespace Yuni
