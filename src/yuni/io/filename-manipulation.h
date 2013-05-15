@@ -211,7 +211,7 @@ namespace IO
 
 
 	/*!
-	** \brief Normalize a filename
+	** \brief Simplifies a path by removing navigation elements such as "." and ".." to produce a direct, well-formed path
 	**
 	** The input can be a Windows-style or a Unix-style path, with mixed slashes and anti-slashes.
 	** This routine removes dot segments (`.` and `..`) from a given filename (when
@@ -229,7 +229,7 @@ namespace IO
 
 
 	/*!
-	** \brief Normalize a filename
+	** \brief Simplifies a path by removing navigation elements such as "." and ".." to produce a direct, well-formed path
 	**
 	** The input can be a Windows-style or a Unix-style path, with mixed slashes and anti-slashes.
 	** This routine removes dot segments (`.` and `..`) from a given filename (when
@@ -246,6 +246,25 @@ namespace IO
 	void Normalize(Clob& out, const AnyString& in, bool replaceSlashes = true);
 
 
+	/*!
+	** \brief Make the path absolute, and simplifies it by removing navigation elements such as "." and ".."
+	**
+	** \see Normalize()
+	** \param[out] out        A string (any class compliant to std::string) where to write the result
+	** \param      in         A path/filename to normalize
+	** \param      rootpath   A root path to take to make the path absolute (current directory if empty)
+	*/
+	void Canonicalize(String& out, const AnyString& in, const AnyString& rootpath = nullptr);
+
+	/*!
+	** \brief Make the path absolute, and simplifies it by removing navigation elements such as "." and ".."
+	**
+	** \see Normalize()
+	** \param[out] out        A string (any class compliant to std::string) where to write the result
+	** \param      in         A path/filename to normalize
+	** \param      rootpath   A root path to take to make the path absolute (current directory if empty)
+	*/
+	void Canonicalize(Clob& out, const AnyString& in, const AnyString& rootpath = nullptr);
 
 
 
