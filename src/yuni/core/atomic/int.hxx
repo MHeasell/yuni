@@ -7,7 +7,6 @@ namespace Yuni
 namespace Atomic
 {
 
-
 	template<int Size, template<class> class TP>
 	inline Int<Size,TP>::Int() :
 		# if YUNI_ATOMIC_MUST_USE_MUTEX != 1
@@ -61,16 +60,17 @@ namespace Atomic
 
 	template<int Size, template<class> class TP>
 	template<int Size2, template<class> class TP2>
-	inline Int<Size,TP>::Int(const Int<Size2,TP2>& v)
-		# if YUNI_ATOMIC_MUST_USE_MUTEX == 1
-		:TP<Int<Size,TP> >()
+	inline Int<Size,TP>::Int(const Int<Size2,TP2>& v) :
+		# if YUNI_ATOMIC_MUST_USE_MUTEX != 1
+		pValue()
+		# else
+		TP<Int<Size,TP> >(), pValue()
 		# endif
 	{
-		# if YUNI_ATOMIC_MUST_USE_MUTEX == 1
-		typename ThreadingPolicy::MutexLocker locker(*this);
-		typename ThreadingPolicy::MutexLocker locker2(v);
-		# endif
-		pValue = (ScalarType)v.pValue;
+		if (threadSafe)
+			Private::AtomicImpl::Operator<size,TP>::Increment(*this, (ScalarType) v.pValue);
+		else
+			pValue = (ScalarType)v.pValue;
 	}
 
 
@@ -120,14 +120,17 @@ namespace Atomic
 	template<int Size, template<class> class TP>
 	inline bool Int<Size,TP>::operator ! () const
 	{
-		return !pValue;
+		return (0 == pValue);
 	}
 
 
 	template<int Size, template<class> class TP>
 	inline Int<Size,TP>& Int<Size,TP>::operator = (const ScalarType v)
 	{
-		pValue = v;
+		if (threadSafe)
+			Private::AtomicImpl::Operator<size,TP>::Set(*this, v);
+		else
+			pValue = v;
 		return *this;
 	}
 
@@ -151,6 +154,16 @@ namespace Atomic
 		else
 			pValue -= v;
 		return *this;
+	}
+
+
+	template<int Size, template<class> class TP>
+	inline void Int<Size,TP>::zero()
+	{
+		if (threadSafe)
+			Private::AtomicImpl::Operator<size,TP>::Zero(*this);
+		else
+			pValue = 0;
 	}
 
 

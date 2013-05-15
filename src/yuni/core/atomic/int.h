@@ -109,6 +109,13 @@ namespace Atomic
 		//@}
 
 
+		//! \name Convenient routines
+		//@{
+		//! Reset to zero
+		void zero();
+		//@}
+
+
 		//! \name Operators
 		//@{
 		//! Pre increment operator
