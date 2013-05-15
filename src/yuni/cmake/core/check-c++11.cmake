@@ -118,6 +118,15 @@ check_cxx_source_compiles("
 	}" YUNI_HAS_CPP_STATIC_ASSERT)
 
 
+check_cxx_source_compiles("
+	#include <atomic>
+	int main() {
+		std::atomic_int_fast32_t afint32;
+		std::atomic_int_fast64_t afint64;
+		return 0;
+	}" YUNI_HAS_STD_ATOMIC)
+
+
 # constexpr
 #if(YUNI_HAS_GCC_CPP0X_SUPPORT)
 #	set(CMAKE_REQUIRED_FLAGS_SAVE ${CMAKE_REQUIRED_FLAGS})
