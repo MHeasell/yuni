@@ -153,6 +153,14 @@ namespace Atomic
 
 
 
+	//! Convenient typedef for atomic int32
+	typedef Atomic::Int<32>  Int32;
+
+	//! Convenient typedef for atomic int64
+	typedef Atomic::Int<64>  Int64;
+
+
+
 
 } // namespace Atomic
 } // namespace Yuni
