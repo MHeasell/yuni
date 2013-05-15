@@ -95,7 +95,7 @@ namespace AtomicImpl
 
 
 	// bool
-	template<> struct TypeFromSize<1>
+	template<> struct TypeFromSize<1> final
 	{
 		// We should use a signed 32 bits integer for boolean
 		enum { size = 32 };
@@ -103,7 +103,7 @@ namespace AtomicImpl
 	};
 
 	// Int16
-	template<> struct TypeFromSize<16>
+	template<> struct TypeFromSize<16> final
 	{
 		// On OS X, there are only routines for int32_t and int64_t
 		// With MinGW, it simply does not exist
@@ -113,14 +113,14 @@ namespace AtomicImpl
 	};
 
 	// Int32
-	template<> struct TypeFromSize<32>
+	template<> struct TypeFromSize<32> final
 	{
 		enum { size = 32 };
 		typedef sint32 Type;
 	};
 
 	// Int64
-	template<> struct TypeFromSize<64>
+	template<> struct TypeFromSize<64> final
 	{
 		enum { size = 64 };
 		typedef sint64 Type;
@@ -135,7 +135,7 @@ namespace AtomicImpl
 
 
 	template<template<class> class TP>
-	struct Operator<32, TP>
+	struct Operator<32, TP> final
 	{
 		static typename Yuni::Atomic::Int<32,TP>::Type Increment(Yuni::Atomic::Int<32,TP>& t)
 		{
@@ -201,7 +201,7 @@ namespace AtomicImpl
 			return InterlockedExchange((LONG*)&t.pValue, (LONG)(t.pValue - value));
 			# else
 			#	ifdef YUNI_OS_MAC
-			return ::OSAtomicAdd32Barrier(&t.pValue, -value);
+			return ::OSAtomicAdd32Barrier(-value, &t.pValue);
 			#	else
 			#		if YUNI_ATOMIC_MUST_USE_MUTEX == 1
 			typename Yuni::Atomic::Int<32,TP>::ThreadingPolicy::MutexLocker locker(t);
@@ -213,12 +213,56 @@ namespace AtomicImpl
 			# endif
 		}
 
+		static void Zero(Yuni::Atomic::Int<64,TP>& t)
+		{
+			# ifdef YUNI_OS_WINDOWS
+			::InterlockedExchange32((LONG*)&t.pValue, 0);
+			# else
+			#	ifdef YUNI_OS_MAC
+			::OSAtomicAnd32Barrier(0, &t.pValue);
+			#	else
+			#		if YUNI_ATOMIC_MUST_USE_MUTEX == 1
+			typename Yuni::Atomic::Int<32,TP>::ThreadingPolicy::MutexLocker locker(t);
+			t.pValue = 0;
+			#		else
+			__sync_and_and_fetch(&t.pValue, 0);
+			#		endif
+			#	endif
+			# endif
+		}
+
+		static void Set(Yuni::Atomic::Int<32,TP>& t, sint32 newvalue)
+		{
+			# ifdef YUNI_OS_WINDOWS
+			#	ifdef YUNI_OS_MINGW32
+			YUNI_STATIC_ASSERT(false, AtomicOperator_NotImplementedWithMinGW);
+			#	else
+			::InterlockedExchange32((LONG*)&t.pValue, newvalue);
+			#   endif
+			# else
+			#	ifdef YUNI_OS_MAC
+			__sync_synchronize();
+			t.pValue = newvalue;
+			#	else
+			#		if YUNI_ATOMIC_MUST_USE_MUTEX == 1
+			typename Yuni::Atomic::Int<32,TP>::ThreadingPolicy::MutexLocker locker(t);
+			t.pValue = newvalue;
+			#		else
+			__sync_synchronize();
+			t.pValue = newvalue;
+			#		endif
+			#	endif
+			# endif
+		}
+
 	}; // class Operator<32, TP>
 
 
 
+
+
 	template<template<class> class TP>
-	struct Operator<64, TP>
+	struct Operator<64, TP> final
 	{
 		static typename Yuni::Atomic::Int<64,TP>::Type Increment(Yuni::Atomic::Int<64,TP>& t)
 		{
@@ -296,7 +340,7 @@ namespace AtomicImpl
 			#   endif
 			# else
 			#	ifdef YUNI_OS_MAC
-			return ::OSAtomicAdd64Barrier(&t.pValue, -value);
+			return ::OSAtomicAdd64Barrier(-value, &t.pValue);
 			#	else
 			#		if YUNI_ATOMIC_MUST_USE_MUTEX == 1
 			typename Yuni::Atomic::Int<64,TP>::ThreadingPolicy::MutexLocker locker(t);
@@ -308,7 +352,53 @@ namespace AtomicImpl
 			# endif
 		}
 
-	}; // class Operator<32, TP>
+		static void Zero(Yuni::Atomic::Int<64,TP>& t)
+		{
+			# ifdef YUNI_OS_WINDOWS
+			#	ifdef YUNI_OS_MINGW32
+			YUNI_STATIC_ASSERT(false, AtomicOperator_NotImplementedWithMinGW);
+			#	else
+			::InterlockedExchange64((LONGLONG*)&t.pValue, 0);
+			#   endif
+			# else
+			#	ifdef YUNI_OS_MAC
+			::OSAtomicAnd64Barrier(0, &t.pValue);
+			#	else
+			#		if YUNI_ATOMIC_MUST_USE_MUTEX == 1
+			typename Yuni::Atomic::Int<64,TP>::ThreadingPolicy::MutexLocker locker(t);
+			t.pValue = 0;
+			#		else
+			__sync_and_and_fetch(&t.pValue, 0);
+			#		endif
+			#	endif
+			# endif
+		}
+
+		static void Set(Yuni::Atomic::Int<64,TP>& t, sint64 newvalue)
+		{
+			# ifdef YUNI_OS_WINDOWS
+			#	ifdef YUNI_OS_MINGW32
+			YUNI_STATIC_ASSERT(false, AtomicOperator_NotImplementedWithMinGW);
+			#	else
+			::InterlockedExchange64((LONGLONG*)&t.pValue, newvalue);
+			#   endif
+			# else
+			#	ifdef YUNI_OS_MAC
+			__sync_synchronize();
+			t.pValue = newvalue;
+			#	else
+			#		if YUNI_ATOMIC_MUST_USE_MUTEX == 1
+			typename Yuni::Atomic::Int<64,TP>::ThreadingPolicy::MutexLocker locker(t);
+			t.pValue = newvalue;
+			#		else
+			__sync_synchronize();
+			t.pValue = newvalue;
+			#		endif
+			#	endif
+			# endif
+		}
+
+	}; // class Operator<64, TP>
 
 
 
