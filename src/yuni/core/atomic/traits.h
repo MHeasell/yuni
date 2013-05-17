@@ -131,11 +131,11 @@ namespace AtomicImpl
 
 	// Thread-safe operations
 	template<int Size, template<class> class TP>
-	struct Operator {};
+	struct Operator
 
 
-	template<template<class> class TP>
-	struct Operator<32, TP> final
+	// template<template<class> class TP>
+	// struct Operator<32, TP> final
 	{
 		static typename Yuni::Atomic::Int<32,TP>::Type Increment(Yuni::Atomic::Int<32,TP>& t)
 		{
@@ -213,10 +213,10 @@ namespace AtomicImpl
 			# endif
 		}
 
-		static void Zero(Yuni::Atomic::Int<64,TP>& t)
+		static void Zero(Yuni::Atomic::Int<32,TP>& t)
 		{
 			# ifdef YUNI_OS_WINDOWS
-			::InterlockedExchange32((LONG*)&t.pValue, 0);
+			::InterlockedExchange((LONG*)&t.pValue, 0);
 			# else
 			#	ifdef YUNI_OS_MAC
 			::OSAtomicAnd32Barrier(0, &t.pValue);
@@ -234,11 +234,7 @@ namespace AtomicImpl
 		static void Set(Yuni::Atomic::Int<32,TP>& t, sint32 newvalue)
 		{
 			# ifdef YUNI_OS_WINDOWS
-			#	ifdef YUNI_OS_MINGW32
-			YUNI_STATIC_ASSERT(false, AtomicOperator_NotImplementedWithMinGW);
-			#	else
-			::InterlockedExchange32((LONG*)&t.pValue, newvalue);
-			#   endif
+			::InterlockedExchange((LONG*)&t.pValue, newvalue);
 			# else
 			#	ifdef YUNI_OS_MAC
 			__sync_synchronize();
