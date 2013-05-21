@@ -30,7 +30,7 @@ namespace IO
 			const String::Vector::const_iterator end = prefixes.end();
 			for (String::Vector::const_iterator i = prefixes.begin(); i != end; ++i)
 			{
-				if (!(*i) || (text).startsWith(*i))
+				if (!(*i) or (text).startsWith(*i))
 					return true;
 			}
 			return false;
@@ -41,7 +41,7 @@ namespace IO
 
 
 		template<class OutT>
-		class LookupHelper
+		class LookupHelper final
 		{
 		public:
 			enum
@@ -174,15 +174,16 @@ namespace IO
 
 	SearchPath::~SearchPath()
 	{
-		// do nothing
+		// does nothing
 	}
 
 
 	bool SearchPath::find(String& out, const AnyString& filename) const
 	{
 		out.clear();
-		if (!filename)
+		if (filename.empty())
 			return false;
+
 		if (pCacheLookup)
 		{
 			CacheStore::const_iterator i = pCache.find((pCacheQuery = filename));
@@ -200,8 +201,9 @@ namespace IO
 	bool SearchPath::find(String::Vector& out, const AnyString& filename) const
 	{
 		out.clear();
-		if (!filename)
+		if (filename.empty())
 			return false;
+
 		if (pCacheLookup)
 		{
 			CacheStore::const_iterator i = pCache.find((pCacheQuery = filename));
@@ -219,8 +221,9 @@ namespace IO
 	bool SearchPath::find(String::List& out, const AnyString& filename) const
 	{
 		out.clear();
-		if (!filename)
+		if (filename.empty())
 			return false;
+
 		if (pCacheLookup)
 		{
 			CacheStore::const_iterator i = pCache.find((pCacheQuery = filename));

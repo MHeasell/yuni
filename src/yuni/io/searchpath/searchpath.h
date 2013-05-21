@@ -41,7 +41,7 @@ namespace IO
 	**
 	** \note The cache lookup is disabled by default
 	*/
-	class YUNI_DECL SearchPath
+	class YUNI_DECL SearchPath final
 	{
 	public:
 		//! \name Constructor & Destructor
