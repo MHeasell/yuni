@@ -59,72 +59,44 @@ namespace UTF8
 		};
 
 	public:
-		Char() :
-			pValue(0)
-		{}
-		Char(const Char& rhs) :
-			pValue(rhs.pValue)
-		{}
-		explicit Char(char c) :
-			pValue((uint) c)
-		{}
+		//! \name Constructors
+		//@{
+		//! Default Constructor
+		Char();
+		//! Copy constructor
+		Char(const Char& rhs);
+		//! Constructor from a mere char
+		explicit Char(char c);
+		//@}
+
 
 		/*!
 		** \brief The size of the UTF8 character, in bytes
 		*/
 		uint size() const;
 
-		uint32 value() const {return pValue;}
+		uint32 value() const;
 
 		template<class StreamT> void write(StreamT& out) const;
 
-		void reset()
-		{
-			pValue  = 0;
-		}
+		void reset();
 
-		Char& operator = (const Char& rhs)
-		{
-			pValue = rhs.pValue;
-			return *this;
-		}
+		Char& operator = (const Char& rhs);
 
-		Char& operator = (char c)
-		{
-			pValue  = (uint32) c;
-			return *this;
-		}
+		Char& operator = (char c);
 
-		Char& operator = (uchar c)
-		{
-			pValue  = (uint32) c;
-			return *this;
-		}
+		Char& operator = (uchar c);
 
-		bool operator == (char c) const
-		{
-			return (pValue < 0x80 && static_cast<char>(pValue) == c);
-		}
+		bool operator == (char c) const;
 
-		bool operator != (char c) const
-		{
-			return !(*this == c);
-		}
+		bool operator != (char c) const;
 
-		bool operator == (uchar c) const
-		{
-			return (pValue < 0x80 && static_cast<uchar>(pValue) == c);
-		}
+		bool operator == (uchar c) const;
 
-		bool operator != (uchar c) const
-		{
-			return !(*this == c);
-		}
+		bool operator != (uchar c) const;
 
-		operator char () const
-		{
-			return (pValue < 0x80) ? static_cast<char>(pValue) : '\0';
-		}
+		operator char () const;
+
 
 	private:
 		//! The UTF-8 character
