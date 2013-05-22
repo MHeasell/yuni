@@ -8,6 +8,84 @@ namespace Yuni
 namespace UTF8
 {
 
+	inline Char::Char() :
+		pValue()
+	{}
+
+
+	inline Char::Char(const Char& rhs) :
+		pValue(rhs.pValue)
+	{}
+
+
+	inline Char::Char(char c) :
+		pValue((uint) c)
+	{}
+
+
+	inline uint32 Char::value() const
+	{
+		return pValue;
+	}
+
+
+	inline void Char::reset()
+	{
+		pValue  = 0;
+	}
+
+
+	inline Char& Char::operator = (const Char& rhs)
+	{
+		pValue = rhs.pValue;
+		return *this;
+	}
+
+
+	inline Char& Char::operator = (char c)
+	{
+		pValue  = (uint32) c;
+		return *this;
+	}
+
+
+	inline Char& Char::operator = (uchar c)
+	{
+		pValue  = (uint32) c;
+		return *this;
+	}
+
+
+	inline bool Char::operator == (char c) const
+	{
+		return (pValue < 0x80 && static_cast<char>(pValue) == c);
+	}
+
+
+	inline bool Char::operator != (char c) const
+	{
+		return !(*this == c);
+	}
+
+
+	inline bool Char::operator == (uchar c) const
+	{
+		return (pValue < 0x80 && static_cast<uchar>(pValue) == c);
+	}
+
+
+	inline bool Char::operator != (uchar c) const
+	{
+		return !(*this == c);
+	}
+
+
+	inline Char::operator char () const
+	{
+		return (pValue < 0x80) ? static_cast<char>(pValue) : '\0';
+	}
+
+
 	inline uchar Char::Mask8Bits(const void* p)
 	{
 		return static_cast<uchar>(0xFF & *(static_cast<const char*>(p)));
@@ -70,7 +148,9 @@ namespace UTF8
 	void Char::write(StreamT& out) const
 	{
 		if (pValue < 0x80)
+		{
 			out.put(static_cast<char>(static_cast<uchar>(pValue)));
+		}
 		else
 		{
 			if (pValue < 0x800)
@@ -87,7 +167,8 @@ namespace UTF8
 					out.put(static_cast<char>(static_cast<uchar>((pValue & 0x3f)        | 0x80)));
 				}
 				else
-				{                                // four bytes
+				{
+					// four bytes
 					out.put(static_cast<char>(static_cast<uchar>((pValue >> 18)         | 0xf0)));
 					out.put(static_cast<char>(static_cast<uchar>(((pValue >> 12)& 0x3f) | 0x80)));
 					out.put(static_cast<char>(static_cast<uchar>(((pValue >> 6) & 0x3f) | 0x80)));
