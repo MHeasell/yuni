@@ -231,8 +231,8 @@ namespace AtomicImpl
 			# endif
 		}
 
-		template<typename T>
-		static void Set(T& t, sint32 newvalue)
+		template<int Size>
+		static void Set(Yuni::Atomic::Int<Size, TP>& t, sint32 newvalue)
 		{
 			# ifdef YUNI_OS_WINDOWS
 			::InterlockedExchange((LONG*)&t.pValue, newvalue);
