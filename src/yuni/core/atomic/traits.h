@@ -131,11 +131,11 @@ namespace AtomicImpl
 
 	// Thread-safe operations
 	template<int Size, template<class> class TP>
-	struct Operator
+	struct Operator {};
 
 
-	// template<template<class> class TP>
-	// struct Operator<32, TP> final
+	template<template<class> class TP>
+	struct Operator<32, TP> final
 	{
 		static typename Yuni::Atomic::Int<32,TP>::Type Increment(Yuni::Atomic::Int<32,TP>& t)
 		{
@@ -231,7 +231,8 @@ namespace AtomicImpl
 			# endif
 		}
 
-		static void Set(Yuni::Atomic::Int<32,TP>& t, sint32 newvalue)
+		template<typename T>
+		static void Set(T& t, sint32 newvalue)
 		{
 			# ifdef YUNI_OS_WINDOWS
 			::InterlockedExchange((LONG*)&t.pValue, newvalue);
