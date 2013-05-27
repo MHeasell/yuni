@@ -52,7 +52,7 @@ namespace AtomicImpl
 
 
 	template<int ThreadSafe, class C>
-	struct ThreadingPolicy
+	struct ThreadingPolicy final
 	{
 		# if YUNI_ATOMIC_MUST_USE_MUTEX == 1
 		// If the class must be thread-safe, we have to provide a lock
@@ -71,7 +71,7 @@ namespace AtomicImpl
 
 
 	template<int ThreadSafe, class T>
-	struct Volatile
+	struct Volatile final
 	{
 		# if YUNI_ATOMIC_MUST_USE_MUTEX == 1
 		// We have to use our own mutex, we don't care of the volatile keyword
@@ -91,7 +91,7 @@ namespace AtomicImpl
 
 
 	template<int Size>
-	struct TypeFromSize {};
+	struct TypeFromSize final {};
 
 
 	// bool
@@ -131,7 +131,7 @@ namespace AtomicImpl
 
 	// Thread-safe operations
 	template<int Size, template<class> class TP>
-	struct Operator {};
+	struct Operator final {};
 
 
 	template<template<class> class TP>
