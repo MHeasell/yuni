@@ -32,7 +32,7 @@ namespace Display
 	static void addResolutions(DISPLAY_DEVICEW& device, SmartPtr<OrderedResolutions> res)
 	{
 		DEVMODEW devMode;
-		devMode.dmSize = sizeof(devMode);
+		devMode.dmSize = (WORD)sizeof(devMode);
 		devMode.dmDriverExtra = 32;
 
 		for (uint i = 0; EnumDisplaySettingsW(device.DeviceName, i, &devMode); ++i)
@@ -48,7 +48,7 @@ namespace Display
 	static void refreshForWindows(MonitorsFound& lst)
 	{
 		DISPLAY_DEVICEW displayDevice;
-		displayDevice.cb = sizeof(DISPLAY_DEVICEW);
+		displayDevice.cb = (DWORD)sizeof(DISPLAY_DEVICEW);
 		// Loop on all display devices
 		for (uint countDevices = 0; EnumDisplayDevicesW(NULL, countDevices, (DISPLAY_DEVICEW*)&displayDevice, 0); ++countDevices)
 		{
@@ -56,7 +56,7 @@ namespace Display
 			if (!(displayDevice.StateFlags & DISPLAY_DEVICE_MIRRORING_DRIVER) && (displayDevice.StateFlags & DISPLAY_DEVICE_ATTACHED_TO_DESKTOP))
 			{
 				DISPLAY_DEVICEW monitorDisplayDevice;
-				monitorDisplayDevice.cb = sizeof(DISPLAY_DEVICEW);
+				monitorDisplayDevice.cb = (DWORD)sizeof(DISPLAY_DEVICEW);
 				// A second call is necessary to get the monitor name associated with the display
 				EnumDisplayDevicesW(displayDevice.DeviceName, 0, (DISPLAY_DEVICEW*)&monitorDisplayDevice, 0);
 				bool mainDisplay = (0 != (displayDevice.StateFlags & DISPLAY_DEVICE_PRIMARY_DEVICE));
