@@ -8,7 +8,7 @@ namespace Yuni
 	template<class StringT>
 	inline UUID::UUID(const StringT& string)
 	{
-		if (!assign(string))
+		if (not assign(string))
 			clear();
 	}
 
@@ -16,34 +16,6 @@ namespace Yuni
 	inline bool UUID::operator ! () const
 	{
 		return null();
-	}
-
-
-	template<class StringT>
-	bool UUID::assign(const StringT& string)
-	{
-		// YUNI_STATIC_ASSERT(Extension::IntoCString<StringT>::valid, InvalidString);
-		const char* cstr = Traits::CString<StringT>::Perform(string);
-		const uint length = Traits::Length<StringT,uint>::Value(string);
-
-		if (length >= 36)
-		{
-			if (Extension::IntoCString<StringT>::zeroTerminated)
-			{
-				if (initializeFromCString(cstr))
-					return true;
-			}
-			else
-			{
-				char buffer[64]; // 8 Byte Stack Alignment
-				for (uint i = 0; i != 64; ++i)
-					buffer[i] = cstr[i];
-				buffer[36] = '\0';
-				if (initializeFromCString(buffer))
-					return true;
-			}
-		}
-		return false;
 	}
 
 
