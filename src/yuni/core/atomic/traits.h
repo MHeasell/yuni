@@ -2,9 +2,6 @@
 # define __YUNI_CORE_ATOMIC_TRAITS_H__
 
 # include "../static/if.h"
-# ifdef YUNI_OS_MAC
-#	include <libkern/OSAtomic.h>
-# endif
 # ifdef YUNI_OS_WINDOWS
 #	include "../system/windows.hdr.h"
 # endif
@@ -142,15 +139,11 @@ namespace AtomicImpl
 			# ifdef YUNI_OS_WINDOWS
 			return ::InterlockedIncrement((LONG*)&t.pValue);
 			# else
-			#	ifdef YUNI_OS_MAC
-			return ::OSAtomicIncrement32Barrier(&t.pValue);
-			#	else
-			#		if YUNI_ATOMIC_MUST_USE_MUTEX == 1
+			#	if YUNI_ATOMIC_MUST_USE_MUTEX == 1
 			typename Yuni::Atomic::Int<32,TP>::ThreadingPolicy::MutexLocker locker(t);
 			return (++t.pValue);
-			#		else
+			#	else
 			return __sync_add_and_fetch(&t.pValue, 1);
-			#		endif
 			#	endif
 			# endif
 		}
@@ -160,15 +153,11 @@ namespace AtomicImpl
 			# ifdef YUNI_OS_WINDOWS
 			return InterlockedExchange((LONG*)&t.pValue, (LONG)(t.pValue + value));
 			# else
-			#	ifdef YUNI_OS_MAC
-			return ::OSAtomicAdd32Barrier(value, &t.pValue);
-			#	else
-			#		if YUNI_ATOMIC_MUST_USE_MUTEX == 1
+			#	if YUNI_ATOMIC_MUST_USE_MUTEX == 1
 			typename Yuni::Atomic::Int<32,TP>::ThreadingPolicy::MutexLocker locker(t);
 			return (t.pValue += value);
-			#		else
+			#	else
 			return __sync_add_and_fetch(&t.pValue, value);
-			#		endif
 			#	endif
 			# endif
 		}
@@ -182,15 +171,11 @@ namespace AtomicImpl
 			return _InterlockedDecrement((LONG*)&t.pValue);
 			#   endif
 			# else
-			#	ifdef YUNI_OS_MAC
-			return ::OSAtomicDecrement32Barrier(&t.pValue);
-			#	else
-			#		if YUNI_ATOMIC_MUST_USE_MUTEX == 1
+			#	if YUNI_ATOMIC_MUST_USE_MUTEX == 1
 			typename Yuni::Atomic::Int<32,TP>::ThreadingPolicy::MutexLocker locker(t);
 			return (--t.pValue);
-			#		else
+			#	else
 			return __sync_add_and_fetch(&t.pValue, -1);
-			#		endif
 			#	endif
 			# endif
 		}
@@ -200,15 +185,11 @@ namespace AtomicImpl
 			# ifdef YUNI_OS_WINDOWS
 			return InterlockedExchange((LONG*)&t.pValue, (LONG)(t.pValue - value));
 			# else
-			#	ifdef YUNI_OS_MAC
-			return ::OSAtomicAdd32Barrier(-value, &t.pValue);
-			#	else
-			#		if YUNI_ATOMIC_MUST_USE_MUTEX == 1
+			#	if YUNI_ATOMIC_MUST_USE_MUTEX == 1
 			typename Yuni::Atomic::Int<32,TP>::ThreadingPolicy::MutexLocker locker(t);
 			return (t.pValue -= value);
-			#		else
+			#	else
 			return __sync_add_and_fetch(&t.pValue, -value);
-			#		endif
 			#	endif
 			# endif
 		}
@@ -218,15 +199,11 @@ namespace AtomicImpl
 			# ifdef YUNI_OS_WINDOWS
 			::InterlockedExchange((LONG*)&t.pValue, 0);
 			# else
-			#	ifdef YUNI_OS_MAC
-			::OSAtomicAnd32Barrier(0, &t.pValue);
-			#	else
-			#		if YUNI_ATOMIC_MUST_USE_MUTEX == 1
+			#	if YUNI_ATOMIC_MUST_USE_MUTEX == 1
 			typename Yuni::Atomic::Int<32,TP>::ThreadingPolicy::MutexLocker locker(t);
 			t.pValue = 0;
-			#		else
+			#	else
 			__sync_and_and_fetch(&t.pValue, 0);
-			#		endif
 			#	endif
 			# endif
 		}
@@ -237,17 +214,12 @@ namespace AtomicImpl
 			# ifdef YUNI_OS_WINDOWS
 			::InterlockedExchange((LONG*)&t.pValue, newvalue);
 			# else
-			#	ifdef YUNI_OS_MAC
-			__sync_synchronize();
-			t.pValue = newvalue;
-			#	else
-			#		if YUNI_ATOMIC_MUST_USE_MUTEX == 1
+			#	if YUNI_ATOMIC_MUST_USE_MUTEX == 1
 			typename Yuni::Atomic::Int<32,TP>::ThreadingPolicy::MutexLocker locker(t);
 			t.pValue = newvalue;
-			#		else
+			#	else
 			__sync_synchronize();
 			t.pValue = newvalue;
-			#		endif
 			#	endif
 			# endif
 		}
@@ -270,15 +242,11 @@ namespace AtomicImpl
 			return _InterlockedIncrement64((LONGLONG*)&t.pValue);
 			#	endif
 			# else
-			#	ifdef YUNI_OS_MAC
-			return ::OSAtomicIncrement64Barrier(&t.pValue);
-			#	else
-			#		if YUNI_ATOMIC_MUST_USE_MUTEX == 1
+			#	if YUNI_ATOMIC_MUST_USE_MUTEX == 1
 			typename Yuni::Atomic::Int<64,TP>::ThreadingPolicy::MutexLocker locker(t);
 			return (++t.pValue);
-			#		else
+			#	else
 			return __sync_add_and_fetch(&t.pValue, 1);
-			#		endif
 			#	endif
 			# endif
 		}
@@ -292,15 +260,11 @@ namespace AtomicImpl
 			return InterlockedExchange64((LONGLONG*)&t.pValue, (LONGLONG)(t.pValue + value));
 			#   endif
 			# else
-			#	ifdef YUNI_OS_MAC
-			return ::OSAtomicAdd64Barrier(value, &t.pValue);
-			#	else
-			#		if YUNI_ATOMIC_MUST_USE_MUTEX == 1
+			#	if YUNI_ATOMIC_MUST_USE_MUTEX == 1
 			typename Yuni::Atomic::Int<64,TP>::ThreadingPolicy::MutexLocker locker(t);
 			return (t.pValue += value);
-			#		else
+			#	else
 			return __sync_add_and_fetch(&t.pValue, value);
-			#		endif
 			#	endif
 			# endif
 		}
@@ -314,15 +278,11 @@ namespace AtomicImpl
 			return _InterlockedDecrement64((LONGLONG*)&t.pValue);
 			#	endif
 			# else
-			#	ifdef YUNI_OS_MAC
-			return ::OSAtomicDecrement64Barrier(&t.pValue);
-			#	else
-			#		if YUNI_ATOMIC_MUST_USE_MUTEX == 1
+			#	if YUNI_ATOMIC_MUST_USE_MUTEX == 1
 			typename Yuni::Atomic::Int<64,TP>::ThreadingPolicy::MutexLocker locker(t);
 			return (--t.pValue);
-			#		else
+			#	else
 			return __sync_add_and_fetch(&t.pValue, -1);
-			#		endif
 			#	endif
 			# endif
 		}
@@ -336,15 +296,11 @@ namespace AtomicImpl
 			return InterlockedExchange64((LONGLONG*)&t.pValue, (LONGLONG)(t.pValue - value));
 			#   endif
 			# else
-			#	ifdef YUNI_OS_MAC
-			return ::OSAtomicAdd64Barrier(-value, &t.pValue);
-			#	else
-			#		if YUNI_ATOMIC_MUST_USE_MUTEX == 1
+			#	if YUNI_ATOMIC_MUST_USE_MUTEX == 1
 			typename Yuni::Atomic::Int<64,TP>::ThreadingPolicy::MutexLocker locker(t);
 			return (t.pValue -= value);
-			#		else
+			#	else
 			return __sync_add_and_fetch(&t.pValue, -value);
-			#		endif
 			#	endif
 			# endif
 		}
@@ -358,15 +314,11 @@ namespace AtomicImpl
 			::InterlockedExchange64((LONGLONG*)&t.pValue, 0);
 			#   endif
 			# else
-			#	ifdef YUNI_OS_MAC
-			::OSAtomicAnd64Barrier(0, &t.pValue);
-			#	else
-			#		if YUNI_ATOMIC_MUST_USE_MUTEX == 1
+			#	if YUNI_ATOMIC_MUST_USE_MUTEX == 1
 			typename Yuni::Atomic::Int<64,TP>::ThreadingPolicy::MutexLocker locker(t);
 			t.pValue = 0;
-			#		else
+			#	else
 			__sync_and_and_fetch(&t.pValue, 0);
-			#		endif
 			#	endif
 			# endif
 		}
@@ -380,17 +332,12 @@ namespace AtomicImpl
 			::InterlockedExchange64((LONGLONG*)&t.pValue, newvalue);
 			#   endif
 			# else
-			#	ifdef YUNI_OS_MAC
-			__sync_synchronize();
-			t.pValue = newvalue;
-			#	else
-			#		if YUNI_ATOMIC_MUST_USE_MUTEX == 1
+			#	if YUNI_ATOMIC_MUST_USE_MUTEX == 1
 			typename Yuni::Atomic::Int<64,TP>::ThreadingPolicy::MutexLocker locker(t);
 			t.pValue = newvalue;
-			#		else
+			#	else
 			__sync_synchronize();
 			t.pValue = newvalue;
-			#		endif
 			#	endif
 			# endif
 		}
