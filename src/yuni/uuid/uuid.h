@@ -103,8 +103,13 @@ namespace Yuni
 		**
 		** Contrary to the operator =, the internal value will remain untouched
 		** if the conversion failed.
+		**
+		** \code
+		** UUID uuid;
+		** uuid.assign(" C32b24FE-71AE-440D-a473-56355415BDB1");
+		** \endcode
 		*/
-		template<class StringT> bool assign(const StringT& string);
+		bool assign(AnyString string);
 		//@}
 
 

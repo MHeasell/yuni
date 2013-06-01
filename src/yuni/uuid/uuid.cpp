@@ -15,7 +15,7 @@ namespace Yuni
 
 	void UUID::generate()
 	{
-		assert(sizeof(StorageType) == 16 && "Invalid storage size for uuid");
+		assert(sizeof(StorageType) == 16 and "Invalid storage size for uuid");
 
 		# ifndef YUNI_OS_WINDOWS
 		assert(sizeof(uuid_t) == 16);
@@ -29,7 +29,7 @@ namespace Yuni
 
 	void UUID::writeToCString(char cstring[42]) const
 	{
-		assert(cstring && "invalid pointer");
+		assert(cstring and "invalid pointer");
 		# ifndef YUNI_OS_WINDOWS
 		uuid_unparse(pValue.cstring, cstring);
 		# else
@@ -65,19 +65,36 @@ namespace Yuni
 	{
 		# ifndef YUNI_OS_WINDOWS
 		// Why uuid_parse takes a char* and not a const char* ??
-		return !uuid_parse(const_cast<char*>(cstring), pValue.cstring);
+		return (0 == uuid_parse(const_cast<char*>(cstring), pValue.cstring));
 		# else
 		// Stop complaining, the Windows implementation is way worse.
 		char* cstring_noconst = const_cast<char*>(cstring);
 		uchar* cstring_unsigned = (uchar*)(cstring_noconst);
-		return RPC_S_OK == ::UuidFromStringA(cstring_unsigned, (::GUID*)pValue.cstring);
+		return (RPC_S_OK == ::UuidFromStringA(cstring_unsigned, (::GUID*)pValue.cstring));
 		# endif
+	}
+
+
+	bool UUID::assign(AnyString string)
+	{
+		// remove useless whitespaces
+		string.trim();
+
+		if (string.size() >= 36)
+		{
+			char buffer[64]; // 8 Byte Stack Alignment
+			::memcpy(buffer, string.c_str(), 36 * sizeof(char));
+			buffer[36] = '\0';
+			return initializeFromCString(buffer);
+		}
+		return false;
 	}
 
 
 	bool UUID::null() const
 	{
-		return !pValue.n32[0] && !pValue.n32[1] && !pValue.n32[2] && !pValue.n32[3];
+		return (0 == pValue.n32[0]) and (0 == pValue.n32[1]) and (0 == pValue.n32[2])
+			and (0 == pValue.n32[3]);
 	}
 
 
@@ -130,33 +147,35 @@ namespace Yuni
 
 	bool UUID::operator == (const UUID& rhs) const
 	{
-		return (pValue.n32[0] == rhs.pValue.n32[0])
-			&& (pValue.n32[1] == rhs.pValue.n32[1])
-			&& (pValue.n32[2] == rhs.pValue.n32[2])
-			&& (pValue.n32[3] == rhs.pValue.n32[3]);
+		return  (pValue.n32[0] == rhs.pValue.n32[0])
+			and (pValue.n32[1] == rhs.pValue.n32[1])
+			and (pValue.n32[2] == rhs.pValue.n32[2])
+			and (pValue.n32[3] == rhs.pValue.n32[3]);
 	}
 
 
 	bool UUID::operator != (const UUID& rhs) const
 	{
 		return (pValue.n32[0] != rhs.pValue.n32[0])
-			|| (pValue.n32[1] != rhs.pValue.n32[1])
-			|| (pValue.n32[2] != rhs.pValue.n32[2])
-			|| (pValue.n32[3] != rhs.pValue.n32[3]);
+			or (pValue.n32[1] != rhs.pValue.n32[1])
+			or (pValue.n32[2] != rhs.pValue.n32[2])
+			or (pValue.n32[3] != rhs.pValue.n32[3]);
 	}
 
 
 	bool UUID::operator < (const UUID& rhs) const
 	{
-		return pValue.n32[3] < rhs.pValue.n32[3]
-			&& pValue.n32[2] < rhs.pValue.n32[2]
-			&& pValue.n32[1] < rhs.pValue.n32[1]
-			&& pValue.n32[0] < rhs.pValue.n32[0];
+		return  pValue.n32[3] < rhs.pValue.n32[3]
+			and pValue.n32[2] < rhs.pValue.n32[2]
+			and pValue.n32[1] < rhs.pValue.n32[1]
+			and pValue.n32[0] < rhs.pValue.n32[0];
 	}
 
 
 
 } // namespace Yuni
+
+
 
 
 
