@@ -10,6 +10,7 @@ LIBYUNI_CONFIG_DEPENDENCY("ui" "net")
 
 add_definitions("-DYUNI_MODULE_UI")
 
+DEVPACK_IMPORT_FREETYPE()
 
 list(APPEND SRC_UI
 	ui/local/queueservice.h
