@@ -5,10 +5,10 @@
 #
 macro(DEVPACK_IMPORT_FFMPEG)
 	if(WIN64)
-		DEVPACK_IMPORT("ffmpeg" "git6cb2085" "1" "windows" "x86_64" "all" "all" "all")
+		DEVPACK_IMPORT("ffmpeg" "gitf97e28e" "1" "windows" "x86_64" "all" "all" "all")
 	else()
 		if (WIN32)
-			DEVPACK_IMPORT("ffmpeg" "git6cb2085" "1" "windows" "i386" "all" "all" "all")
+			DEVPACK_IMPORT("ffmpeg" "gitf97e28e" "1" "windows" "i386" "all" "all" "all")
 		else()
 			DEVPACK_IMPORT("ffmpeg" "1.1.1" "1" "all" "all" "${DEVPACK_COMPILER}" "all")
 		endif()
@@ -42,6 +42,45 @@ macro(DEVPACK_IMPORT_OPENAL)
 	list(APPEND YUNI_INCLUDE   "${OPENAL_INCLUDE_DIR}")
 endmacro()
 
+
+#
+# FreeType
+#
+macro(DEVPACK_IMPORT_FREETYPE)
+	set(FREETYPE_INCLUDE_DIR)
+	set(FREETYPE_LIBRARY)
+	if (WIN32 OR WIN64)
+		if (WIN64)
+			DEVPACK_IMPORT("freetype" "2.4.12" "1" "windows" "x86_64" "all" "all")
+		else()
+			YERROR("No freetype devpack for Windows 32-bit !")
+		endif()
+		set(FREETYPE_INCLUDE_DIR)
+		set(FREETYPE_LIBRARY)
+	else()
+		if (NOT APPLE)
+			execute_process(COMMAND freetype-config --cflags
+				RESULT_VARIABLE config_error OUTPUT_VARIABLE freetype_cflags
+				OUTPUT_STRIP_TRAILING_WHITESPACE)
+			if (NOT config_error)
+				set(FREETYPE_FOUND TRUE)
+				string(REPLACE " " ";" freetype_cflags "${freetype_cflags}")
+				foreach(it ${freetype_cflags})
+					if(it)
+						string(REPLACE "-I" "" stripped "${it}")
+						list(APPEND FREETYPE_INCLUDE_DIR ${stripped})
+					endif()
+				endforeach()
+				execute_process(COMMAND freetype-config --libs
+					RESULT_VARIABLE config_error OUTPUT_VARIABLE freetype_libs
+					OUTPUT_STRIP_TRAILING_WHITESPACE)
+				set(FREETYPE_LIBRARY ${freetype_libs})
+			endif()
+		endif()
+	endif()
+	list(APPEND YUNI_STATIC_UI "${FREETYPE_LIBRARY}")
+	list(APPEND YUNI_INCLUDE "${FREETYPE_INCLUDE_DIR}")
+endmacro()
 
 
 #
