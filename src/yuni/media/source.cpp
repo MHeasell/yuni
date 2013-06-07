@@ -96,6 +96,7 @@ namespace Media
 		// Audio
 		if (hasAudio())
 		{
+			// Update time progression in the current buffer
 			::alGetSourcef(source, AL_SEC_OFFSET, &pSecondsCurrent);
 			// Check if a buffer has finished playing
 			ALint processed = 0;
@@ -105,6 +106,7 @@ namespace Media
 
 			// A buffer has finished playing, unqueue it
 			ALuint buffer = Private::Media::OpenAL::UnqueueBufferFromSource(source);
+			// Reset current buffer time
 			pSecondsCurrent = 0.0f;
 			int bufferSize;
 			int bits;

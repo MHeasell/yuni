@@ -242,7 +242,7 @@ namespace Media
 	{
 		YUNI_STATIC_ASSERT(IsAudio, NotAccessibleInVideo);
 		assert(pCodec);
-		return pCodec->sample_rate;
+		return pCodec->sample_rate / pCodec->channels;
 	}
 
 
