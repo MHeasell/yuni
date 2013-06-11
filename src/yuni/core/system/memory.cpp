@@ -45,7 +45,7 @@ namespace Memory
 	{
 		// see http://msdn.microsoft.com/en-us/library/aa366589(VS.85).aspx
 		MEMORYSTATUSEX statex;
-		statex.dwLength = sizeof(statex);
+		statex.dwLength = (DWORD) sizeof(statex);
 		return (GlobalMemoryStatusEx(&statex)) ? (uint64)statex.ullTotalPhys
 			: (uint64)defaultTotal;
 	}
@@ -55,7 +55,7 @@ namespace Memory
 	{
 		// see http://msdn.microsoft.com/en-us/library/aa366589(VS.85).aspx
 		MEMORYSTATUSEX statex;
-		statex.dwLength = sizeof(statex);
+		statex.dwLength = (DWORD) sizeof(statex);
 		return (GlobalMemoryStatusEx(&statex)) ? (uint64)statex.ullAvailPhys
 			: (uint64)defaultAvailable;
 	}
@@ -65,7 +65,7 @@ namespace Memory
 	{
 		// see http://msdn.microsoft.com/en-us/library/aa366589(VS.85).aspx
 		MEMORYSTATUSEX statex;
-		statex.dwLength = sizeof(statex);
+		statex.dwLength = (DWORD) sizeof(statex);
 
 		if (GlobalMemoryStatusEx(&statex))
 		{
