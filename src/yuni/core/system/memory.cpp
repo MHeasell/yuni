@@ -91,7 +91,7 @@ namespace Memory
 	/*!
 	** \brief Read a line from a file
 	*/
-	static int fgetline(FILE* fp, char* s, int maxlen)
+	static inline int fgetline(FILE* fp, char* s, int maxlen)
 	{
 		int i = 0;
 		char c;

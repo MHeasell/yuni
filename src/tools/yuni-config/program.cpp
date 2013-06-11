@@ -11,12 +11,19 @@ namespace Yuni
 {
 
 
-	LibConfigProgram::LibConfigProgram()
-		:pExitStatus(0), pOptVersion(false), pOptList(false), pOptListOnlyVersions(false),
-		pOptNoDefaultPath(false), pOptModuleList(false),
+	LibConfigProgram::LibConfigProgram() :
+		pExitStatus(0),
+		pOptVersion(false),
+		pOptList(false),
+		pOptListOnlyVersions(false),
+		pOptNoDefaultPath(false),
+		pOptModuleList(false),
 		pOptDefaultPathList(false),
-		pOptCxxFlags(false), pOptLibFlags(false), pOptPrintCompilerByDefault(false),
-		pOptPrintErrors(false), pOptPrintModulesDeps(false),
+		pOptCxxFlags(false),
+		pOptLibFlags(false),
+		pOptPrintCompilerByDefault(false),
+		pOptPrintErrors(false),
+		pOptPrintModulesDeps(false),
 		pOptDebug(false),
 		pOptCompiler(YUNI_LIBCONFIG_DEFAULT_COMPILER)
 	{
@@ -28,14 +35,14 @@ namespace Yuni
 	int LibConfigProgram::execute(int argc, char** argv)
 	{
 		// Parse the command line
-		if (!parseCommandLine(argc, argv))
+		if (not parseCommandLine(argc, argv))
 			return pExitStatus;
 
 		// Find the root path
 		findRootPath(argv[0]);
 
 		// Display information if asked
-		if (!displayInformations())
+		if (not displayInformations())
 			return pExitStatus;
 
 		// Expand name for each modules
@@ -367,11 +374,11 @@ namespace Yuni
 			if (not isCoreModule(*i) && version.modules.end() == std::find(version.modules.begin(), version.modules.end(), *i))
 			{
 				pExitStatus = 3;
-				if (pOptPrintErrors)
-					std::cout << "Error: The module '" << *i << "' is required but not available\n";
+				//if (pOptPrintErrors)
+				std::cerr << "Error: The module '" << *i << "' is required but not available\n";
 			}
 		}
-		return (!pExitStatus);
+		return (0 == pExitStatus);
 	}
 
 
