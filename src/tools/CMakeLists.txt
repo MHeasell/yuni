@@ -5,6 +5,6 @@ if(NOT YUNI_AUTO_COMPILE_YUNI_CONFIG)
 endif(NOT YUNI_AUTO_COMPILE_YUNI_CONFIG)
 
 if(YUNI_MODULE_DOCUMENTATION)
-	add_subdirectory(yuni-docmake)
+	#add_subdirectory(yuni-docmake)
 endif()
 
