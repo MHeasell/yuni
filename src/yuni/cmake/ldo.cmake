@@ -5,7 +5,7 @@ YMESSAGE_MODULE("Live Distributed Objects  (EXPERIMENTAL, FOR ADVANCED USERS ONL
 LIBYUNI_CONFIG_LIB("both" "ldo" "yuni-static-ldo")
 
 LIBYUNI_CONFIG_DEPENDENCY("ldo" "core") # core is required
-LIBYUNI_CONFIG_DEPENDENCY("ldo" "net-server") # core is required
+LIBYUNI_CONFIG_DEPENDENCY("ldo" "messaging") # core is required
 LIBYUNI_CONFIG_DEPENDENCY("ldo" "net") # core is required
 
 

@@ -5,12 +5,17 @@ LIBYUNI_CONFIG_LIB("both" "ui"      "yuni-static-ui-core")
 
 LIBYUNI_CONFIG_DEPENDENCY("ui" "core") # core is required
 LIBYUNI_CONFIG_DEPENDENCY("ui" "ldo")
-LIBYUNI_CONFIG_DEPENDENCY("ui" "net-server")
+LIBYUNI_CONFIG_DEPENDENCY("ui" "messaging")
 LIBYUNI_CONFIG_DEPENDENCY("ui" "net")
 
 add_definitions("-DYUNI_MODULE_UI")
 
 DEVPACK_IMPORT_FREETYPE()
+
+LIBYUNI_CONFIG_INCLUDE_PATH("both" "ui" "${YUNI_EXT_FREETYPE_INCLUDE}")
+LIBYUNI_CONFIG_LIB_PATH("both" "ui" "${YUNI_EXT_FREETYPE_LIB_PATH}")
+LIBYUNI_CONFIG_LIB("both" "ui" "${YUNI_EXT_FREETYPE_LIB}")
+
 
 list(APPEND SRC_UI
 	ui/local/queueservice.h
