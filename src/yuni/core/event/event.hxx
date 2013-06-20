@@ -11,7 +11,7 @@ namespace Yuni
 
 
 	template<typename P>
-	inline Event<P>::Event(const Event<P>& rhs)
+	inline Event<P>::Event(const Event<P>& /*rhs*/)
 	{}
 
 
@@ -39,7 +39,7 @@ namespace Yuni
 	template<typename P>
 	void Event<P>::clearWL()
 	{
-		if (!AncestorType::pBindList.empty())
+		if (not AncestorType::pBindList.empty())
 		{
 			// We will inform all bound objects that we are no longer linked.
 			IEvent* baseThis = dynamic_cast<IEvent*>(this);
@@ -63,7 +63,7 @@ namespace Yuni
 	template<typename P>
 	inline void Event<P>::clear()
 	{
-		if (!AncestorType::pEmpty)
+		if (not AncestorType::pEmpty)
 		{
 			typename ThreadingPolicy::MutexLocker locker(*this);
 			// In this case, the flag `empty` must be set first, to avoid concurrent
@@ -76,7 +76,7 @@ namespace Yuni
 
 
 	template<typename P>
-	void Event<P>::connect(typename BindType::FunctionType pointer)
+	inline void Event<P>::connect(typename BindType::FunctionType pointer)
 	{
 		Bind<P> b;
 		b.bind(pointer);
@@ -224,7 +224,6 @@ namespace Yuni
 	{
 		return (AncestorType::pEmpty);
 	}
-
 
 
 

@@ -35,7 +35,7 @@ namespace Display
 			return 16;
 		if (CFStringCompare(pixEnc, CFSTR(IO8BitIndexedPixels), kCFCompareCaseInsensitive) == kCFCompareEqualTo)
 			return 8;
-		
+
 		return 0; // default and invalid value
 	}
 
@@ -98,12 +98,13 @@ namespace Display
 		va_end(argList);
 
 		data = CFStringCreateExternalRepresentation(NULL, resultString, CFStringGetSystemEncoding(), '?');
-
 		if (data != NULL)
 		{
-			char buffer[51];
-			uint len = snprintf(buffer, 50, "%.*s", (int)CFDataGetLength(data), CFDataGetBytePtr(data));
-			out.append(buffer, len);
+			char buffer[128];
+			int len = snprintf(buffer, 128, "%.*s", (int)CFDataGetLength(data), CFDataGetBytePtr(data));
+			if (len > 0)
+				out.append(buffer, (uint)len);
+
 			CFRelease(data);
 		}
 
@@ -155,8 +156,8 @@ namespace Display
 
 				if (count)
 				{
-					CFTypeRef* keys   = (CFTypeRef*) ::malloc(count * sizeof(CFTypeRef));
-					CFTypeRef* values = (CFTypeRef*) ::malloc(count * sizeof(CFTypeRef));
+					CFTypeRef* keys   = (CFTypeRef*) ::malloc((uint) count * sizeof(CFTypeRef));
+					CFTypeRef* values = (CFTypeRef*) ::malloc((uint) count * sizeof(CFTypeRef));
 					CFDictionaryGetKeysAndValues(names, (const void**) keys, (const void**) values);
 
 					DictionaryValueToString(monitorProductName, CFSTR("%@"), values[0]);

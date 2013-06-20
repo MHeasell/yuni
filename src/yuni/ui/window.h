@@ -62,24 +62,16 @@ namespace UI
 
 		//! \name Methods
 		//@{
-		/*!
-		** \brief Show the window
-		*/
+		//! Show the window
 		void show();
 
-		/*!
-		** \brief Hide the window
-		*/
+		//! Hide the window
 		void hide();
 
-		/*!
-		** \brief Close the window, release everything
-		*/
+		//! Close the window, release everything
 		void close();
 
-		/*!
-		** \brief Get whether the window is in the process of closing
-		*/
+		//! Get whether the window is in the process of closing
 		bool closing() const;
 		//@}
 

@@ -140,13 +140,13 @@ namespace Yuni
 
 	private:
 		// \see IEventObserverBase::boundEventIncrementReference()
-		virtual void boundEventIncrementReference(IEvent* evt) const;
+		virtual void boundEventIncrementReference(IEvent* evt) const override;
 
 		// \see IEventObserverBase::boundEventDecrementReference()
-		virtual void boundEventDecrementReference(IEvent* evt) const;
+		virtual void boundEventDecrementReference(IEvent* evt) const override;
 
 		// \see IEventObserverBase::boundEventRemoveFromTable()
-		virtual void boundEventRemoveFromTable(IEvent* evt) const;
+		virtual void boundEventRemoveFromTable(IEvent* evt) const override;
 
 	private:
 		/*!

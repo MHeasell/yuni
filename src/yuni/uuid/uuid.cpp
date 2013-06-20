@@ -172,6 +172,18 @@ namespace Yuni
 	}
 
 
+	size_t UUID::hash() const
+	{
+		// TODO This hash may not be suitable for hashing guids,
+		std::size_t r = 0;
+		const char* p = pValue.signedcstring;
+		for (uint i = 0; i != 16; ++i)
+			r = (uint)(p[i]) + (r << 6) + (r << 16) - r;
+
+		return r;
+	}
+
+
 
 } // namespace Yuni
 
@@ -187,6 +199,4 @@ std::ostream& operator << (std::ostream& out, const Yuni::UUID& rhs)
 	out.write(cstring, 36);
 	return out;
 }
-
-
 

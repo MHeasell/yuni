@@ -360,7 +360,7 @@ namespace REST
 			context.method = mhandler.name;
 			context.schema = mhandler.schema;
 			context.httpStatus = 200;
-			context.remotePort = reqinfo.remote_port;
+			context.remotePort = (uint)reqinfo.remote_port;
 			// response
 			Marshal::Object response;
 
