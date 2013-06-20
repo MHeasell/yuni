@@ -9,16 +9,7 @@ namespace UI
 
 
 	template<class StringT>
-	inline Window::Window(const StringT& title)
-		:pTitle(title), pClosing(false)
-	{
-		pClass = "window";
-	}
-
-
-	template<class StringT>
-	inline Window::Window(const StringT& title, float width, float height)
-		:IControlContainer(width, height),
+	inline Window::Window(const StringT& title) :
 		pTitle(title),
 		pClosing(false)
 	{
@@ -27,10 +18,19 @@ namespace UI
 
 
 	template<class StringT>
-	inline Window::Window(const StringT& newTitle, float x, float y, float width,
-		float height)
-		:IControlContainer(x, y, width, height),
+	inline Window::Window(const StringT& title, float width, float height) :
+		IControlContainer(width, height),
 		pTitle(title),
+		pClosing(false)
+	{
+		pClass = "window";
+	}
+
+
+	template<class StringT>
+	inline Window::Window(const StringT& newTitle, float x, float y, float width, float height) :
+		IControlContainer(x, y, width, height),
+		pTitle(newTitle),
 		pClosing(false)
 	{
 		pClass = "window";

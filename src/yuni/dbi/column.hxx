@@ -14,6 +14,7 @@ namespace DBI
 		pColumnIndex(colindx)
 	{}
 
+
 	inline Column::Column(const Column& rhs) :
 		pAdapter(rhs.pAdapter),
 		pHandle(rhs.pHandle),
@@ -21,17 +22,19 @@ namespace DBI
 	{}
 
 
-	inline bool Column::null()
+	inline bool Column::null() const
 	{
 		return (0 != pAdapter.column_is_null(pHandle, pColumnIndex));
 	}
 
-	inline String Column::asString()
+
+	inline String Column::asString() const
 	{
 		uint length;
 		const char* text = pAdapter.column_to_cstring(pHandle, pColumnIndex, &length);
 		return String(text, length);
 	}
+
 
 	template<class StringT>
 	inline void Column::appendToString(StringT& string)
@@ -42,22 +45,25 @@ namespace DBI
 	}
 
 
-	inline bool Column::asBool()
+	inline bool Column::asBool() const
 	{
 		return (0 != pAdapter.column_to_int32(pHandle, pColumnIndex));
 	}
 
-	inline double Column::asDouble()
+
+	inline double Column::asDouble() const
 	{
 		return pAdapter.column_to_double(pHandle, pColumnIndex);
 	}
 
-	inline sint32 Column::asInt()
+
+	inline sint32 Column::asInt() const
 	{
 		return pAdapter.column_to_int32(pHandle, pColumnIndex);
 	}
 
-	inline sint64 Column::asInt64()
+
+	inline sint64 Column::asInt64() const
 	{
 		return pAdapter.column_to_int64(pHandle, pColumnIndex);
 	}
@@ -66,44 +72,42 @@ namespace DBI
 
 
 	template<class T>
-	inline T Column::as()
+	inline T Column::as() const
 	{
 		const String& text = asString();
 		return text.to<T>();
 	}
 
 
-	template<> inline String Column::as<String>()
+	template<> inline String Column::as<String>() const
 	{
 		return asString();
 	}
 
-	template<> inline bool Column::as<bool>()
+	template<> inline bool Column::as<bool>() const
 	{
 		return asBool();
 	}
 
-	template<> inline double Column::as<double>()
+	template<> inline double Column::as<double>() const
 	{
 		return asDouble();
 	}
 
-	template<> inline float Column::as<float>()
+	template<> inline float Column::as<float>() const
 	{
 		return (float) asDouble();
 	}
 
-	template<> inline sint32 Column::as<sint32>()
+	template<> inline sint32 Column::as<sint32>() const
 	{
 		return asInt();
 	}
 
-	template<> inline sint64 Column::as<sint64>()
+	template<> inline sint64 Column::as<sint64>() const
 	{
 		return asInt64();
 	}
-
-
 
 
 

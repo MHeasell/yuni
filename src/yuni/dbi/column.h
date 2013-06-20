@@ -21,22 +21,22 @@ namespace DBI
 
 
 		//! Get if the value is null
-		bool null();
+		bool null() const;
 
 		//! Convert the value of the column as bool
-		bool asBool();
+		bool asBool() const;
 
 		//! Convert the value of the column as int32
-		sint32 asInt();
+		sint32 asInt() const;
 
 		//! Convert the value of the column as int64
-		sint64 asInt64();
+		sint64 asInt64() const;
 
 		//! Convert the value of the column as a double
-		double asDouble();
+		double asDouble() const;
 
 		//! Convert the value of the column as a string
-		String asString();
+		String asString() const;
 
 		/*!
 		** \brief Convert the value of the column into a specific type
@@ -44,7 +44,7 @@ namespace DBI
 		** If the convertion is not a standard one, the conversion from
 		** a string to this type will be used.
 		*/
-		template<class T> T as();
+		template<class T> T as() const;
 
 		/*!
 		** \brief Append the value of the column to an existing string

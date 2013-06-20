@@ -22,24 +22,10 @@ namespace Yuni
 	template<class StringT>
 	UUID& UUID::operator = (const StringT& string)
 	{
-		if (!assign(string))
+		if (not assign(string))
 			clear();
 		return *this;
 	}
-
-
-	inline size_t UUID::hash() const
-	{
-		// TODO This hash may not be suitable for hashing guids,
-		std::size_t r = 0;
-		const char* p = pValue.signedcstring;
-		for (uint i = 0; i != 16; ++i)
-		{
-			r = p[i] + (r << 6) + (r << 16) - r;
-		}
-		return r;
-	}
-
 
 
 } // namespace Yuni
@@ -57,7 +43,7 @@ namespace Private
 namespace UUID
 {
 
-	class Helper
+	class Helper final
 	{
 	public:
 		static void WriteToCString(char* cstr, const Yuni::UUID& uuid)
@@ -85,7 +71,7 @@ namespace CString
 {
 
 	template<class CStringT>
-	class Append<CStringT, Yuni::UUID>
+	class Append<CStringT, Yuni::UUID> final
 	{
 	public:
 		static void Perform(CStringT& s, const Yuni::UUID& rhs)
@@ -102,7 +88,7 @@ namespace CString
 
 
 	template<>
-	class Into<Yuni::UUID>
+	class Into<Yuni::UUID> final
 	{
 	public:
 		typedef Yuni::UUID TargetType;
@@ -127,11 +113,7 @@ namespace CString
 } // namespace Yuni
 
 
-
-
-
 // ostream
 std::ostream& operator << (std::ostream& out, const Yuni::UUID& rhs);
-
 
 #endif // __YUNI_UUID_UUID_HXX__

@@ -9,7 +9,6 @@
 namespace Yuni
 {
 
-
 	/*!
 	** \brief Generic Iterator
 	*/
@@ -39,7 +38,6 @@ namespace Yuni
 		typedef typename Static::If<ConstT, const value_type&, value_type&>::Type reference;
 		//! Const reference
 		typedef const value_type& const_reference;
-
 		enum
 		{
 			//! A non-zero value for const qualifier
@@ -176,9 +174,8 @@ namespace Yuni
 
 
 
-
-
 # include "iterator.hxx"
+
 
 
 

@@ -37,17 +37,17 @@ struct yn_dbi_adapter
 	//! Release a query
 	void (*query_ref_release)(void* qh);
 	//! Bind a string
-	yn_dbierr (*bind_str)(void* qh, int index, const char* str, uint length);
+	yn_dbierr (*bind_str)(void* qh, uint index, const char* str, uint length);
 	//! Bind a bool
-	yn_dbierr (*bind_bool)(void* qh, int index, int value);
+	yn_dbierr (*bind_bool)(void* qh, uint index, int value);
 	//! Bind a sint32
-	yn_dbierr (*bind_int32)(void* qh, int index, yint32 value);
+	yn_dbierr (*bind_int32)(void* qh, uint index, yint32 value);
 	//! Bind a sint64
-	yn_dbierr (*bind_int64)(void* qh, int index, yint64 value);
+	yn_dbierr (*bind_int64)(void* qh, uint index, yint64 value);
 	//! Bind a double
-	yn_dbierr (*bind_double)(void* qh, int index, double value);
+	yn_dbierr (*bind_double)(void* qh, uint index, double value);
 	//! Bind a null value
-	yn_dbierr (*bind_null)(void* qh, int index);
+	yn_dbierr (*bind_null)(void* qh, uint index);
 
 	//! Execute a query
 	yn_dbierr (*query_execute)(void* qh);

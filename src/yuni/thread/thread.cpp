@@ -191,8 +191,10 @@ namespace Thread
 		pThreadIDValid(false),
 		# endif
 		# endif
-		pStarted(false),
-		pShouldStop(true)
+		pStarted(false)
+		# ifndef YUNI_NO_THREAD_SAFE
+		,pShouldStop(true)
+		# endif
 	{
 		// does nothing, only variable initialization
 	}

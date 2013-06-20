@@ -6,42 +6,42 @@ namespace Yuni
 {
 
 	template<class ModelT, bool ConstT>
-	inline IIterator<ModelT,ConstT>::IIterator()
-		:AncestorType()
+	inline IIterator<ModelT,ConstT>::IIterator() :
+		AncestorType()
 	{}
 
 
 	template<class ModelT, bool ConstT>
 	template<class M, bool C>
-	inline IIterator<ModelT,ConstT>::IIterator(const IIterator<M,C>& rhs)
-		:AncestorType(static_cast<const typename IIterator<M,C>::AncestorType&>(rhs))
+	inline IIterator<ModelT,ConstT>::IIterator(const IIterator<M,C>& rhs) :
+		AncestorType(static_cast<const typename IIterator<M,C>::AncestorType&>(rhs))
 	{}
 
 
 	template<class ModelT, bool ConstT>
-	inline IIterator<ModelT,ConstT>::IIterator(const IIterator<ModelT,ConstT>& rhs)
-		:AncestorType(static_cast<const AncestorType&>(rhs))
+	inline IIterator<ModelT,ConstT>::IIterator(const IIterator<ModelT,ConstT>& rhs) :
+		AncestorType(static_cast<const AncestorType&>(rhs))
 	{}
 
 
 	template<class ModelT, bool ConstT>
 	template<class U1>
-	inline IIterator<ModelT,ConstT>::IIterator(const U1& u1)
-		:AncestorType(u1)
+	inline IIterator<ModelT,ConstT>::IIterator(const U1& u1) :
+		AncestorType(u1)
 	{}
 
 
 	template<class ModelT, bool ConstT>
 	template<class U1, class U2>
-	inline IIterator<ModelT,ConstT>::IIterator(const U1& u1, const U2& u2)
-		:AncestorType(u1, u2)
+	inline IIterator<ModelT,ConstT>::IIterator(const U1& u1, const U2& u2) :
+		AncestorType(u1, u2)
 	{}
 
 
 	template<class ModelT, bool ConstT>
 	template<class U1, class U2, class U3>
-	inline IIterator<ModelT,ConstT>::IIterator(const U1& u1, const U2& u2, const U3& u3)
-		:AncestorType(u1, u2, u3)
+	inline IIterator<ModelT,ConstT>::IIterator(const U1& u1, const U2& u2, const U3& u3) :
+		AncestorType(u1, u2, u3)
 	{}
 
 
@@ -78,7 +78,9 @@ namespace Yuni
 	inline void IIterator<ModelT,ConstT>::advance(typename IIterator<ModelT,ConstT>::difference_type n)
 	{
 		if (n > 0)
+		{
 			AncestorType::forward(n);
+		}
 		else
 		{
 			if (n != 0)
@@ -135,6 +137,7 @@ namespace Yuni
 		return *this;
 	}
 
+
 	template<class ModelT, bool ConstT>
 	inline IIterator<ModelT,ConstT>&  IIterator<ModelT,ConstT>::operator -- ()
 	{
@@ -151,6 +154,7 @@ namespace Yuni
 		return copy;
 	}
 
+
 	template<class ModelT, bool ConstT>
 	inline IIterator<ModelT,ConstT>  IIterator<ModelT,ConstT>::operator -- (int)
 	{
@@ -166,6 +170,7 @@ namespace Yuni
 		AncestorType::forward(n);
 		return *this;
 	}
+
 
 	template<class ModelT, bool ConstT>
 	inline IIterator<ModelT,ConstT>&  IIterator<ModelT,ConstT>::operator -= (typename IIterator<ModelT,ConstT>::difference_type n)

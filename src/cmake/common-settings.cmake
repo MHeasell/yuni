@@ -41,18 +41,19 @@ include("${CurrentFolder}/DetectInstructionsSets.cmake")
 
 
 # Common options to all GCC-based compilers
-set(YUNI_COMMON_GCC_OPTIONS  "-Woverloaded-virtual -Wall -Wextra -Wunused-parameter -Wconversion")
+set(YUNI_COMMON_CC_OPTIONS   "-Wall -Wextra -Wunused-parameter -Wconversion")
+set(YUNI_COMMON_CXX_OPTIONS  "-Woverloaded-virtual")
 if(NOT MSVC)
 	check_cxx_compiler_flag("-Wunused-but-set-variable -Wunused-but-set-parameter"
 		YUNI_HAS_GCC_UNUSED_BUT_PARAM)
 	if (YUNI_HAS_GCC_UNUSED_BUT_PARAM)
-		set(YUNI_COMMON_GCC_OPTIONS  "${YUNI_COMMON_GCC_OPTIONS} -Wunused-but-set-variable -Wunused-but-set-parameter")
+		set(YUNI_COMMON_CC_OPTIONS  "${YUNI_COMMON_CC_OPTIONS} -Wunused-but-set-variable -Wunused-but-set-parameter")
 	endif (YUNI_HAS_GCC_UNUSED_BUT_PARAM)
 endif()
 
-set(YUNI_COMMON_GCC_OPTIONS  "${YUNI_COMMON_GCC_OPTIONS} -Wmissing-noreturn -Wcast-align  -Wfloat-equal -Wundef")
-set(YUNI_COMMON_GCC_OPTIONS  "${YUNI_COMMON_GCC_OPTIONS} -D_REENTRANT -DXUSE_MTSAFE_API")
-set(YUNI_COMMON_GCC_OPTIONS  "${YUNI_COMMON_GCC_OPTIONS} -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64")
+set(YUNI_COMMON_CC_OPTIONS  "${YUNI_COMMON_CC_OPTIONS} -Wmissing-noreturn -Wcast-align  -Wfloat-equal -Wundef")
+set(YUNI_COMMON_CC_OPTIONS  "${YUNI_COMMON_CC_OPTIONS} -D_REENTRANT -DXUSE_MTSAFE_API")
+set(YUNI_COMMON_CC_OPTIONS  "${YUNI_COMMON_CC_OPTIONS} -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64")
 
 
 set(COMMON_MSVC_FLAGS "/W3 /MP4 /Zi")
@@ -62,7 +63,7 @@ set(COMMON_MSVC_FLAGS "${COMMON_MSVC_FLAGS} /DREENTRANT /D_LARGEFILE_SOURCE /D_L
 
 # Common options for GCC on Unixes (mingw excluded)
 # fPIC seems a good choice in most cases
-set(YUNI_COMMON_GCC_OPTIONS_UNIX  "${YUNI_COMMON_GCC_OPTIONS} -fPIC")
+set(YUNI_COMMON_CC_OPTIONS_UNIX   "${YUNI_COMMON_CC_OPTIONS} -fPIC")
 
 include(CheckCXXCompilerFlag)
 if(NOT MSVC)
@@ -77,16 +78,14 @@ if(NOT MSVC)
 	endif()
 
 	if (YUNI_HAS_CPP11_SUPPORT)
-		set(YUNI_COMMON_GCC_OPTIONS  "${YUNI_COMMON_GCC_OPTIONS} -std=c++11")
-		set(YUNI_COMMON_GCC_OPTIONS_UNIX  "${YUNI_COMMON_GCC_OPTIONS_UNIX} -std=c++11 -Wconversion")
+		set(YUNI_COMMON_CXX_OPTIONS  "${YUNI_COMMON_CXX_OPTIONS} -std=c++11")
 	else()
 		if (YUNI_HAS_GCC_CPP0X_SUPPORT)
-			set(YUNI_COMMON_GCC_OPTIONS  "${YUNI_COMMON_GCC_OPTIONS} -std=c++0x")
-			set(YUNI_COMMON_GCC_OPTIONS_UNIX  "${YUNI_COMMON_GCC_OPTIONS_UNIX} -std=c++0x -Wconversion")
+			set(YUNI_COMMON_CXX_OPTIONS  "${YUNI_COMMON_CXX_OPTIONS} -std=c++0x")
 		endif()
 	endif()
 	if (YUNI_HAS_LIB_CPP11_SUPPORT)
-		set(YUNI_COMMON_GCC_OPTIONS_UNIX  "${YUNI_COMMON_GCC_OPTIONS_UNIX} -stdlib=libc++")
+		set(YUNI_COMMON_CXX_OPTIONS  "${YUNI_COMMON_CXX_OPTIONS} -stdlib=libc++")
 	endif()
 endif()
 if (NOT MSVC AND NOT CLANG)
@@ -99,7 +98,7 @@ endif()
 if (APPLE)
 	# http://lists.cs.uiuc.edu/pipermail/cfe-dev/2011-January/012999.html
 	# Temporary workaround for compiling with Clang on OS X
-	set(YUNI_COMMON_GCC_OPTIONS_UNIX  "${YUNI_COMMON_GCC_OPTIONS_UNIX} -U__STRICT_ANSI__")
+	set(YUNI_COMMON_CC_OPTIONS_UNIX  "${YUNI_COMMON_CC_OPTIONS_UNIX} -U__STRICT_ANSI__")
 endif()
 
 set(COMPILER_OPTIMIZATION_LEVEL "")
@@ -127,23 +126,23 @@ add_definitions("-D_REENTRANT -DXUSE_MTSAFE_API")
 
 
 if(NOT WIN32)
-	set(CMAKE_CXX_FLAGS_RELEASE         "${YUNI_COMMON_GCC_OPTIONS_UNIX} ${YUNI_HAS_COMPILER_OPTIMIZATION_LEVEL_4} -fomit-frame-pointer -fstrict-aliasing -momit-leaf-frame-pointer -fno-tree-pre -falign-loops -mfpmath=sse -msse -msse2 -Wuninitialized")
-	set(CMAKE_CXX_FLAGS_RELWITHDEBINFO  "${YUNI_COMMON_GCC_OPTIONS_UNIX} ${YUNI_HAS_COMPILER_OPTIMIZATION_LEVEL_4} -fomit-frame-pointer -mfpmath=sse -msse -msse2")
-	set(CMAKE_CXX_FLAGS_DEBUG           "${YUNI_COMMON_GCC_OPTIONS_UNIX} -g")
+	set(CMAKE_CXX_FLAGS_RELEASE         "${YUNI_COMMON_CC_OPTIONS_UNIX} ${YUNI_COMMON_CXX_OPTIONS} ${YUNI_HAS_COMPILER_OPTIMIZATION_LEVEL_4} -fomit-frame-pointer -fstrict-aliasing -momit-leaf-frame-pointer -fno-tree-pre -falign-loops -mfpmath=sse -msse -msse2 -Wuninitialized")
+	set(CMAKE_CXX_FLAGS_RELWITHDEBINFO  "${YUNI_COMMON_CC_OPTIONS_UNIX} ${YUNI_COMMON_CXX_OPTIONS} ${YUNI_HAS_COMPILER_OPTIMIZATION_LEVEL_4} -fomit-frame-pointer -mfpmath=sse -msse -msse2")
+	set(CMAKE_CXX_FLAGS_DEBUG           "${YUNI_COMMON_CC_OPTIONS_UNIX} ${YUNI_COMMON_CXX_OPTIONS} -g")
 
-	set(CMAKE_C_FLAGS_RELEASE         "${YUNI_COMMON_GCC_OPTIONS_UNIX} ${YUNI_HAS_COMPILER_OPTIMIZATION_LEVEL_4} -fomit-frame-pointer -fstrict-aliasing -momit-leaf-frame-pointer -fno-tree-pre -falign-loops -mfpmath=sse -msse -msse2 -Wuninitialized")
-	set(CMAKE_C_FLAGS_RELWITHDEBINFO  "${YUNI_COMMON_GCC_OPTIONS_UNIX} ${YUNI_HAS_COMPILER_OPTIMIZATION_LEVEL_4} -fomit-frame-pointer -mfpmath=sse -msse -msse2")
-	set(CMAKE_C_FLAGS_DEBUG           "${YUNI_COMMON_GCC_OPTIONS_UNIX} -g")
+	set(CMAKE_C_FLAGS_RELEASE         "${YUNI_COMMON_CC_OPTIONS_UNIX} ${YUNI_HAS_COMPILER_OPTIMIZATION_LEVEL_4} -fomit-frame-pointer -fstrict-aliasing -momit-leaf-frame-pointer -fno-tree-pre -falign-loops -mfpmath=sse -msse -msse2 -Wuninitialized")
+	set(CMAKE_C_FLAGS_RELWITHDEBINFO  "${YUNI_COMMON_CC_OPTIONS_UNIX} ${YUNI_HAS_COMPILER_OPTIMIZATION_LEVEL_4} -fomit-frame-pointer -mfpmath=sse -msse -msse2")
+	set(CMAKE_C_FLAGS_DEBUG           "${YUNI_COMMON_CC_OPTIONS_UNIX} -g")
 endif()
 
 if(MINGW)
-	set(CMAKE_CXX_FLAGS_RELEASE         "${YUNI_COMMON_GCC_OPTIONS} ${YUNI_HAS_COMPILER_OPTIMIZATION_LEVEL_4} -fomit-frame-pointer -fstrict-aliasing -momit-leaf-frame-pointer -fno-tree-pre -falign-loops -mthreads -Wuninitialized")
-	set(CMAKE_CXX_FLAGS_RELWITHDEBINFO  "${YUNI_COMMON_GCC_OPTIONS} -mthreads")
-	set(CMAKE_CXX_FLAGS_DEBUG           "${YUNI_COMMON_GCC_OPTIONS} -mthreads")
+	set(CMAKE_CXX_FLAGS_RELEASE         "${YUNI_COMMON_CC_OPTIONS} ${YUNI_COMMON_CXX_OPTIONS} ${YUNI_HAS_COMPILER_OPTIMIZATION_LEVEL_4} -fomit-frame-pointer -fstrict-aliasing -momit-leaf-frame-pointer -fno-tree-pre -falign-loops -mthreads -Wuninitialized")
+	set(CMAKE_CXX_FLAGS_RELWITHDEBINFO  "${YUNI_COMMON_CC_OPTIONS} ${YUNI_COMMON_CXX_OPTIONS} -mthreads")
+	set(CMAKE_CXX_FLAGS_DEBUG           "${YUNI_COMMON_CC_OPTIONS} ${YUNI_COMMON_CXX_OPTIONS} -mthreads")
 
-	set(CMAKE_C_FLAGS_RELEASE         "${YUNI_COMMON_GCC_OPTIONS} ${YUNI_HAS_COMPILER_OPTIMIZATION_LEVEL_4} -fomit-frame-pointer -fstrict-aliasing -momit-leaf-frame-pointer -fno-tree-pre -falign-loops -mthreads -Wuninitialized")
-	set(CMAKE_C_FLAGS_RELWITHDEBINFO  "${YUNI_COMMON_GCC_OPTIONS} -mthreads")
-	set(CMAKE_C_FLAGS_DEBUG           "${YUNI_COMMON_GCC_OPTIONS} -mthreads")
+	set(CMAKE_C_FLAGS_RELEASE         "${YUNI_COMMON_CC_OPTIONS} ${YUNI_HAS_COMPILER_OPTIMIZATION_LEVEL_4} -fomit-frame-pointer -fstrict-aliasing -momit-leaf-frame-pointer -fno-tree-pre -falign-loops -mthreads -Wuninitialized")
+	set(CMAKE_C_FLAGS_RELWITHDEBINFO  "${YUNI_COMMON_CC_OPTIONS} -mthreads")
+	set(CMAKE_C_FLAGS_DEBUG           "${YUNI_COMMON_CC_OPTIONS} -mthreads")
 endif()
 
 if(MSVC)
@@ -173,8 +172,8 @@ if(MSVC)
 	# Multithreaded DLL
 	set(MSVC_RELEASE_FLAGS "${MSVC_RELEASE_FLAGS} /MD")
 
-	set(CMAKE_C_FLAGS_RELEASE    "${CMAKE_C_FLAGS_RELEASE} ${MSVC_RELEASE_FLAGS}")
 	set(CMAKE_CXX_FLAGS_RELEASE  "${CMAKE_CXX_FLAGS_RELEASE} ${MSVC_RELEASE_FLAGS}")
+	set(CMAKE_C_FLAGS_RELEASE    "${CMAKE_C_FLAGS_RELEASE} ${MSVC_RELEASE_FLAGS}")
 endif()
 
 
@@ -190,7 +189,7 @@ if(APPLE)
 endif()
 if (YUNI_HAS_COMPILER_DEBUG_INFORMATION)
 	set(CMAKE_CXX_FLAGS_DEBUG           "${CMAKE_CXX_FLAGS_DEBUG} -g")
-	set(CMAKE_C_FLAGS_DEBUG             "${CMAKE_CXX_FLAGS_DEBUG} -g")
+	set(CMAKE_C_FLAGS_DEBUG             "${CMAKE_C_FLAGS_DEBUG} -g")
 endif()
 if (YUNI_HAS_GCC_FLAG_GGDB)
 	set(CMAKE_CXX_FLAGS_DEBUG           "${CMAKE_CXX_FLAGS_DEBUG} -ggdb")

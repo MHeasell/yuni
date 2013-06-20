@@ -85,8 +85,8 @@ namespace Adapter
 
 			columns[i].type = type;
 			columns[i].size =(type == SQLITE_BLOB or type == SQLITE_TEXT)
-				? ::sqlite3_column_bytes(statement, (int) i)
-				: 0;
+				? (uint) ::sqlite3_column_bytes(statement, (int) i)
+				: 0u;
 		}
 	}
 
@@ -188,7 +188,7 @@ namespace Adapter
 		//std::cout << "debug: sqlite exec: " << AnyString(stmt, length) << std::endl;
 
 		sqlite3_stmt* cursor = nullptr;
-		int error = ::sqlite3_prepare_v2((::sqlite3*) dbh, stmt, length, &cursor, nullptr);
+		int error = ::sqlite3_prepare_v2((::sqlite3*) dbh, stmt, (int)length, &cursor, nullptr);
 
 		if (YUNI_LIKELY(error == SQLITE_OK))
 		{
@@ -290,7 +290,7 @@ namespace Adapter
 
 		sqlite3_stmt* cursor = nullptr;
 		bool hasRow =
-			(SQLITE_OK == ::sqlite3_prepare_v2((::sqlite3*) dbh, select.c_str(), select.size(), &cursor, nullptr)
+			(SQLITE_OK == ::sqlite3_prepare_v2((::sqlite3*) dbh, select.c_str(), (int)select.size(), &cursor, nullptr)
 			and (SQLITE_ROW == ::sqlite3_step(cursor)));
 		::sqlite3_finalize(cursor);
 
@@ -361,7 +361,7 @@ namespace Adapter
 		assert(qh != NULL);
 
 		sqlite3_stmt* cursor;
-		int error = ::sqlite3_prepare_v2((::sqlite3*) dbh, stmt, length, &cursor, nullptr);
+		int error = ::sqlite3_prepare_v2((::sqlite3*) dbh, stmt, (int)length, &cursor, nullptr);
 
 		if (YUNI_LIKELY(error == SQLITE_OK))
 		{
@@ -414,42 +414,42 @@ namespace Adapter
 	}
 
 
-	static yn_dbierr ynsqliteBindStr(void* qh, int index, const char* str, uint length)
+	static yn_dbierr ynsqliteBindStr(void* qh, uint index, const char* str, uint length)
 	{
 		assert(qh != NULL);
-		int error = ::sqlite3_bind_text(((SQLiteQuery*) qh)->statement, index + 1, str, length, 0);
+		int error = ::sqlite3_bind_text(((SQLiteQuery*) qh)->statement, (int)(index + 1), str, (int)length, 0);
 		return ynsqliteError(error);
 	}
 
 
-	static yn_dbierr ynsqliteBindInt32(void* qh, int index, yint32 value)
+	static yn_dbierr ynsqliteBindInt32(void* qh, uint index, yint32 value)
 	{
 		assert(qh != NULL);
-		int error = ::sqlite3_bind_int(((SQLiteQuery*) qh)->statement, index + 1, value);
+		int error = ::sqlite3_bind_int(((SQLiteQuery*) qh)->statement, (int)(index + 1), value);
 		return ynsqliteError(error);
 	}
 
 
-	static yn_dbierr ynsqliteBindInt64(void* qh, int index, yint64 value)
+	static yn_dbierr ynsqliteBindInt64(void* qh, uint index, yint64 value)
 	{
 		assert(qh != NULL);
-		int error = ::sqlite3_bind_int64(((SQLiteQuery*) qh)->statement, index + 1, value);
+		int error = ::sqlite3_bind_int64(((SQLiteQuery*) qh)->statement, (int)(index + 1), value);
 		return ynsqliteError(error);
 	}
 
 
-	static yn_dbierr ynsqliteBindBool(void* qh, int index, int value)
+	static yn_dbierr ynsqliteBindBool(void* qh, uint index, int value)
 	{
 		assert(qh != NULL);
-		int error = ::sqlite3_bind_int(((SQLiteQuery*) qh)->statement, index + 1, (int) value);
+		int error = ::sqlite3_bind_int(((SQLiteQuery*) qh)->statement, (int)(index + 1), (int) value);
 		return ynsqliteError(error);
 	}
 
 
-	static yn_dbierr ynsqliteBindDouble(void* qh, int index, double value)
+	static yn_dbierr ynsqliteBindDouble(void* qh, uint index, double value)
 	{
 		assert(qh != NULL);
-		int error = ::sqlite3_bind_double(((SQLiteQuery*) qh)->statement, index + 1, value);
+		int error = ::sqlite3_bind_double(((SQLiteQuery*) qh)->statement, (int)(index + 1), value);
 		return ynsqliteError(error);
 	}
 

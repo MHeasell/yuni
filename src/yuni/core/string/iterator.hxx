@@ -57,7 +57,7 @@ namespace Yuni
 	inline typename CString<ChunkSizeT,ExpandableT>::iterator
 	CString<ChunkSizeT,ExpandableT>::begin()
 	{
-		return iterator(*this, 0);
+		return iterator(*this, 0u);
 	}
 
 
@@ -65,13 +65,12 @@ namespace Yuni
 	inline typename CString<ChunkSizeT,ExpandableT>::const_iterator
 	CString<ChunkSizeT,ExpandableT>::begin() const
 	{
-		return const_iterator(*this, 0);
+		return const_iterator(*this, 0u);
 	}
+
 
 
 
 } // namespace Yuni
 
 #endif // __YUNI_CORE_STRING_ITERATOR_HXX__
-
-

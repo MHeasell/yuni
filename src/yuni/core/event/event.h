@@ -38,8 +38,9 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		class PointerToMember final
 		{
+		public:
 			//! Mere type for C
 			typedef typename BindType::template PointerToMember<C>::Class Class;
 			//! Type for a pointer-to-member
@@ -184,7 +185,7 @@ namespace Yuni
 		**
 		** \param pointer Pointer-to-object (can be null)
 		*/
-		/* virtual */ void unregisterObserver(const IEventObserverBase* pointer);
+		void unregisterObserver(const IEventObserverBase* pointer) override;
 
 	private:
 		//! Disconnect all callbacks (without lock)

@@ -230,7 +230,7 @@ namespace File
 
 		// retrieve the file size in bytes
 		f.seekFromEndOfFile(0);
-		uint64 filesize = f.tell();
+		uint64 filesize = (uint64) f.tell();
 
 		if (filesize == 0)
 		{
@@ -261,6 +261,7 @@ namespace File
 			# endif
 			return errNone;
 		}
+
 		if (filesize > hardlimit or filesize > (uint) -10)
 			return errMemoryLimit;
 

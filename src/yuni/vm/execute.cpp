@@ -52,7 +52,7 @@ namespace VM
 		// Converting each instructions into a list of goto jump
 		void** jumps;
 		{
-			const uint count = instructionCount;
+			uint count = instructionCount;
 			if (!count)
 				return 0;
 			jumps = (void**)::malloc(sizeof(void**) * (count + 1));
@@ -88,7 +88,7 @@ namespace VM
 		// implementations of all instructions
 		j_intrinsic:
 			{
-				const uint params = operands[op++];
+				uint params = (uint) operands[op++];
 				// FIXME
 				op += params;
 				NEXT;
@@ -96,34 +96,34 @@ namespace VM
 
 		j_add:
 			{
-				const uint ret = operands[op++];
-				const uint r1  = operands[op++];
-				const uint r2  = operands[op++];
+				uint ret = (uint) operands[op++];
+				uint r1  = (uint) operands[op++];
+				uint r2  = (uint) operands[op++];
 				*((sint64*)(data.gpr) + ret) = (sint64)(data.gpr[r1]) + (sint64)(data.gpr[r2]);
 				NEXT;
 			}
 		j_addu:
 			{
-				const uint ret = operands[op++];
-				const uint r1  = operands[op++];
-				const uint r2  = operands[op++];
+				uint ret = (uint) operands[op++];
+				uint r1  = (uint) operands[op++];
+				uint r2  = (uint) operands[op++];
 				data.gpr[ret] = data.gpr[r1] + data.gpr[r2];
 				NEXT;
 			}
 		j_addi:
 			{
-				const uint ret = operands[op++];
-				const uint r1  = operands[op++];
-				const sint64 i         = *((sint64*)(operands + op));
+				uint ret = (uint) operands[op++];
+				uint r1  = (uint) operands[op++];
+				const sint64 i = *((sint64*)(operands + op));
 				op += 8;
 				*((sint64*)(data.gpr) + ret) = (sint64)(data.gpr[r1]) + i;
 				NEXT;
 			}
 		j_addui:
 			{
-				const uint ret = operands[op++];
-				const uint r1  = operands[op++];
-				const uint64 i         = *((uint64*)(operands + op));
+				uint ret = (uint) operands[op++];
+				uint r1  = (uint) operands[op++];
+				uint64 i = *((uint64*)(operands + op));
 				op += 8;
 				data.gpr[ret] = data.gpr[r1] + i;
 				NEXT;
@@ -135,7 +135,7 @@ namespace VM
 			}
 		j_exitcode:
 			{
-				const uint r1 = operands[op++];
+				uint r1 = (uint) operands[op++];
 				data.exitCode = (int) data.gpr[r1];
 				NEXT;
 			}
