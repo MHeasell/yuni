@@ -351,7 +351,7 @@ namespace GetOptImpl
 		{}
 
 		Option(T& var, const AnyString& name) :
-			IOption(name),
+			IOption('\0', name),
 			pVariable(var)
 		{}
 

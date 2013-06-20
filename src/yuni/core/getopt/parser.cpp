@@ -91,8 +91,6 @@ namespace GetOptImpl
 		int pTokenIndex;
 		//! Position in the list of arguments for parameters
 		int pParameterIndex;
-		//! The option found
-		IOption* option;
 		//! The current argument
 		const char* arg;
 		//! A temporary CString
