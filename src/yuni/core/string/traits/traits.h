@@ -36,13 +36,13 @@ namespace CStringImpl
 	template<bool AdapterT>
 	struct FinalZero
 	{
-		YUNI_ALWAYS_INLINE static void Set(const char*, uint) {}
+		static inline void Set(const char*, uint) {}
 	};
 
 	template<>
 	struct FinalZero<false>
 	{
-		YUNI_ALWAYS_INLINE static void Set(char* buffer, uint offset)
+		static inline void Set(char* buffer, uint offset)
 		{
 			buffer[offset] = '\0';
 		}
@@ -108,7 +108,7 @@ namespace CStringImpl
 			chunkSize = ChunkSizeT,
 			zeroTerminated = 1, //(ZeroTerminatedT ? 1 : 0),
 			expandable = 1,
-			adapter  = (!chunkSize && expandable && !zeroTerminated),
+			adapter  = (!chunkSize && expandable && !(uint) zeroTerminated),
 		};
 
 	public:
@@ -138,12 +138,12 @@ namespace CStringImpl
 		Size assignWithoutChecking(const C* const block, const Size blockSize)
 		{
 			// Making sure that we have enough space
-			reserve(blockSize + zeroTerminated);
+			reserve(blockSize + (uint) zeroTerminated);
 			// Raw copy
-			YUNI_MEMCPY(const_cast<char*>(data), capacity, block, sizeof(C) * blockSize);
+			YUNI_MEMCPY(const_cast<char*>(data), (uint) capacity, block, sizeof(C) * blockSize);
 			// New size
 			size = blockSize;
-			if (zeroTerminated)
+			if ((uint) zeroTerminated)
 				(const_cast<char*>(data))[size] = C();
 			return blockSize;
 		}
@@ -152,12 +152,12 @@ namespace CStringImpl
 		Size appendWithoutChecking(const C* const block, const Size blockSize)
 		{
 			// Making sure that we have enough space
-			reserve(size + blockSize + zeroTerminated);
+			reserve(size + blockSize + (uint) zeroTerminated);
 			// Raw copy
-			YUNI_MEMCPY(const_cast<char*>(data) + size * sizeof(C), capacity, block, blockSize * sizeof(C));
+			YUNI_MEMCPY(const_cast<char*>(data) + size * sizeof(C), (uint) capacity, block, blockSize * sizeof(C));
 			// New size
 			size += blockSize;
-			if (zeroTerminated)
+			if ((uint) zeroTerminated)
 				(const_cast<char*>(data))[size] = C();
 			return blockSize;
 		}
@@ -165,12 +165,12 @@ namespace CStringImpl
 		Size assignWithoutChecking(const C c)
 		{
 			// Making sure that we have enough space
-			reserve(1 + zeroTerminated);
+			reserve(1 + (uint) zeroTerminated);
 			// Raw copy
 			(const_cast<char*>(data))[0] = c;
 			// New size
 			size = 1;
-			if (zeroTerminated)
+			if ((uint) zeroTerminated)
 				(const_cast<char*>(data))[1] = C();
 			return 1;
 		}
@@ -179,12 +179,12 @@ namespace CStringImpl
 		Size appendWithoutChecking(const C c)
 		{
 			// Making sure that we have enough space
-			reserve(size + 1 + zeroTerminated);
+			reserve(size + 1 + (uint) zeroTerminated);
 			// Raw copy
 			(const_cast<char*>(data))[size] = c;
 			// New size
 			++size;
-			if (zeroTerminated)
+			if ((uint) zeroTerminated)
 				(const_cast<char*>(data))[size] = C();
 			return 1;
 		}
@@ -206,7 +206,7 @@ namespace CStringImpl
 
 		void put(const C rhs);
 
-		void reserve(Size minCapacity);
+		void reserve(Size mincapacity);
 
 		void insert(Size offset, const C* const buffer, const Size len);
 
@@ -246,20 +246,20 @@ namespace CStringImpl
 			size(0)
 		{
 			// The buffer must be properly initialized
-			if (zeroTerminated)
+			if ((uint) zeroTerminated)
 				data[0] = C();
 		}
 
 		Data(const Data& rhs) :
 			size(rhs.size)
 		{
-			YUNI_MEMCPY(data, capacity, rhs.data, sizeof(C) * (size + zeroTerminated));
+			YUNI_MEMCPY(data, (uint) capacity, rhs.data, sizeof(C) * (size + (uint) zeroTerminated));
 		}
 
 		void clear()
 		{
 			size = 0;
-			if (zeroTerminated)
+			if ((uint) zeroTerminated)
 				data[0] = C();
 		}
 
@@ -295,38 +295,41 @@ namespace CStringImpl
 
 		void insert(Size offset, const C* const buffer, Size len)
 		{
-			if (offset + len >= capacity)
+			if (offset + len >= (uint) capacity)
 			{
 				// The new buffer will take the whole space
-				YUNI_MEMCPY(data + sizeof(C) * (offset), capacity - offset, buffer, sizeof(C) * (capacity - offset));
-				size = capacity;
-				if (zeroTerminated)
-					data[capacity] = C();
+				YUNI_MEMCPY(data + sizeof(C) * (offset), (uint) capacity - offset, buffer,
+					sizeof(C) * ((uint) capacity - offset));
+				size = (uint) capacity;
+				if ((uint) zeroTerminated)
+					data[(uint) capacity] = C();
 				return;
 			}
-			if (size + len <= capacity)
+			if (size + len <= (uint) capacity)
 			{
 				// Move the existing block of data
-				(void)::memmove(data + sizeof(C) * (offset + len), data + sizeof(C) * (offset), sizeof(C) * (size - offset));
+				(void)::memmove(data + sizeof(C) * (offset + len), data + sizeof(C) * (offset),
+					sizeof(C) * (size - offset));
 				// Copying the given buffer
-				YUNI_MEMCPY (data + sizeof(C) * (offset), capacity, buffer, sizeof(C) * len);
+				YUNI_MEMCPY (data + sizeof(C) * (offset), (uint) capacity, buffer, sizeof(C) * len);
 				// Updating the size
 				size += len;
 				// zero-terminated
-				if (zeroTerminated)
+				if ((uint) zeroTerminated)
 					data[size] = C();
 			}
 			else
 			{
 				// Move the existing block of data
-				(void)::memmove(data + sizeof(C) * (offset + len), data + sizeof(C) * (offset), sizeof(C) * (capacity - offset - len));
+				(void)::memmove(data + sizeof(C) * (offset + len), data + sizeof(C) * (offset),
+					sizeof(C) * ((uint) capacity - offset - len));
 				// Copying the given buffer
-				YUNI_MEMCPY(data + sizeof(C) * (offset), capacity, buffer, sizeof(C) * len);
+				YUNI_MEMCPY(data + sizeof(C) * (offset), (uint) capacity, buffer, sizeof(C) * len);
 				// Updating the size
-				size = capacity;
+				size = (uint) capacity;
 				// zero-terminated
-				if (zeroTerminated)
-					data[capacity] = C();
+				if ((uint) zeroTerminated)
+					data[(uint) capacity] = C();
 			}
 		}
 
@@ -338,12 +341,12 @@ namespace CStringImpl
 	protected:
 		Size size;
 		/*!
-		** \brief Static buffer, fixed capacity
+		** \brief Static buffer, fixed (uint) capacity
 		**
 		** We always add +1 to allow standard routine write a final 0, and we
 		** may need it for zero-terminated strings any way.
 		*/
-		C data[capacity + 1];
+		C data[(uint) capacity + 1];
 
 		// Friend
 		template<uint SizeT, bool ExpT> friend class Yuni::CString;
