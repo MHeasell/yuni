@@ -320,6 +320,11 @@
 #			define YUNI_DECL             __declspec(dllimport)
 #			define YUNI_EXPIMP_TEMPLATE  extern
 #		endif
+#	else
+#		ifdef YUNI_OS_GCC
+#			define YUNI_DECL             __attribute__((__visibility__("default")))
+#			define YUNI_EXPIMP_TEMPLATE  extern
+#		endif
 #	endif
 # endif
 /* Fallback to empty */
