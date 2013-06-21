@@ -78,13 +78,13 @@ namespace CStringImpl
 				// From this point, the value can not be null
 
 				// A temporary buffer to store the result
-				char buffer[bufferCapacity];
+				char buffer[(uint)bufferCapacity];
 				// A pointer to the current char (at the end of the buffer)
-				char* p = buffer + (bufferCapacity - 1);
+				char* p = buffer + ((uint)bufferCapacity - 1);
 				// Char count
 				uint nbChar = 0;
 
-				if (strictlyPositiveByContract || value > 0)
+				if ((uint) strictlyPositiveByContract or value > 0)
 				{
 					// The given variable is strictly positive, by contract or by value
 					// note: The do..while structure has better performances in
