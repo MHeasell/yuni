@@ -59,8 +59,6 @@ namespace Yuni
 		# endif
 
 		//! Un ordered dictionary table
-		typedef std::set<KeyT> Set;
-		//! Un ordered dictionary table
 		typedef std::set<KeyT> Ordered;
 
 	}; // struct Set
