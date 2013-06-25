@@ -49,6 +49,18 @@ check_cxx_source_compiles("
 	int main() {return 0;}" YUNI_HAS_STL_HASH)
 
 
+check_cxx_source_compiles("
+	#include <unordered_map>
+
+	int main() {std::unordered_map<int, int> map;return 0;}" YUNI_HAS_STL_UNORDERED_MAP)
+
+check_cxx_source_compiles("
+	#include <unordered_set>
+
+	int main() {std::unordered_set<int> map;return 0;}" YUNI_HAS_STL_UNORDERED_SET)
+
+
+
 if (MSVC)
 	# MSVC __forceinline
 	check_cxx_source_compiles("

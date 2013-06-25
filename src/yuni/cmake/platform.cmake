@@ -114,6 +114,12 @@
 /* C++11 std::hash */
 #cmakedefine YUNI_HAS_STL_HASH
 
+/* C++11 std::unordered_map */
+#cmakedefine YUNI_HAS_STL_UNORDERED_MAP
+
+/* C++11 std::unordered_set */
+#cmakedefine YUNI_HAS_STL_UNORDERED_SET
+
 /* C++ gcc always inline */
 #cmakedefine YUNI_HAS_GCC_ALWAYS_INLINE
 
