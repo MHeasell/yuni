@@ -6,7 +6,7 @@
 
 typedef Yuni::Thread::Array<Yuni::Private::Messaging::Worker>  Workers;
 
-typedef Yuni::Messaging::Transport::ITransport::Hash  TransportList;
+typedef Yuni::Messaging::Transport::ITransport::Map  TransportList;
 
 
 

@@ -1,5 +1,5 @@
-#ifndef __YUNI_CORE_STRING_OPERATORS_H__
-# define __YUNI_CORE_STRING_OPERATORS_H__
+#ifndef __YUNI_CORE_STRING_OPERATORS_HXX__
+# define __YUNI_CORE_STRING_OPERATORS_HXX__
 
 
 
@@ -231,7 +231,7 @@ namespace std
 	template<uint SizeT, bool ExpT>
 	struct YUNI_DECL hash<Yuni::CString<SizeT, ExpT> >
 	{
-		size_t operator() (const Yuni::CString<SizeT, ExpT>& string) const
+		inline size_t operator() (const Yuni::CString<SizeT, ExpT>& string) const
 		{
 			return string.hash();
 		}
@@ -241,4 +241,4 @@ namespace std
 
 # endif // YUNI_HAS_STL_HASH
 
-#endif // __YUNI_CORE_STRING_OPERATORS_H__
+#endif // __YUNI_CORE_STRING_OPERATORS_HXX__

@@ -40,9 +40,11 @@ namespace Transport
 	public:
 		//! The most suitable smart pointer for the class
 		typedef SmartPtr<ITransport>  Ptr;
-		//!
-		//! Set
+
+		//! Hash
 		typedef Dictionary<Net::HostAddressPort, Ptr>::Hash Hash;
+		//! Map
+		typedef Dictionary<Net::HostAddressPort, Ptr>::Ordered Map; // TODO: remove this typdef
 
 	public:
 		//! \name Constructor & Destructor

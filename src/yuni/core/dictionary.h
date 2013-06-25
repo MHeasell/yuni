@@ -5,16 +5,28 @@
 # include "string.h"
 # include <map>
 # include <set>
+# ifdef YUNI_HAS_STL_UNORDERED_MAP
+#	include <unordered_map>
+# endif
+# ifdef YUNI_HAS_STL_UNORDERED_SET
+#	include <unordered_set>
+# endif
+
 
 
 namespace Yuni
 {
 
 	template<class KeyT, class ValueT>
-	struct Dictionary
+	class Dictionary final
 	{
+	public:
 		//! Un unordered dictionary table
+		# ifndef YUNI_HAS_STL_UNORDERED_MAP
 		typedef std::map<KeyT, ValueT> Hash;
+		# else
+		typedef std::unordered_map<KeyT, ValueT> Hash;
+		# endif
 
 		//! Un ordered dictionary table
 		typedef std::map<KeyT, ValueT> Ordered;
@@ -24,11 +36,15 @@ namespace Yuni
 
 
 	template<class KeyT>
-	struct Set
+	class Set final
 	{
 	public:
 		//! Un unordered set table
+		# ifndef YUNI_HAS_STL_UNORDERED_MAP
 		typedef std::set<KeyT> Hash;
+		# else
+		typedef std::unordered_set<KeyT> Hash;
+		# endif
 
 		//! Un ordered dictionary table
 		typedef std::set<KeyT> Ordered;
