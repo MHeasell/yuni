@@ -7,94 +7,114 @@ LIBYUNI_CONFIG_DEPENDENCY("ui" "core") # core is required
 LIBYUNI_CONFIG_DEPENDENCY("ui" "ldo")
 LIBYUNI_CONFIG_DEPENDENCY("ui" "messaging")
 LIBYUNI_CONFIG_DEPENDENCY("ui" "net")
+LIBYUNI_CONFIG_DEPENDENCY("ui" "opengl")
+
 
 add_definitions("-DYUNI_MODULE_UI")
 
 DEVPACK_IMPORT_FREETYPE()
 
+include_directories("${YUNI_EXT_FREETYPE_INCLUDE}")
 LIBYUNI_CONFIG_INCLUDE_PATH("both" "ui" "${YUNI_EXT_FREETYPE_INCLUDE}")
 LIBYUNI_CONFIG_LIB_PATH("both" "ui" "${YUNI_EXT_FREETYPE_LIB_PATH}")
 LIBYUNI_CONFIG_LIB("both" "ui" "${YUNI_EXT_FREETYPE_LIB}")
 
-
 list(APPEND SRC_UI
-	ui/local/queueservice.h
-	ui/local/window
-	ui/local/window/types.h
-	ui/local/window/window.h
-	ui/local/window/window.hxx
-	ui/local/window/window.cpp
-	ui/local/window.h
+	ui/eventpropagation.h
+	ui/font.h
+	ui/ftfont.cpp
+	ui/ftfont.h
+	ui/pictureoverlay.cpp
+	ui/pictureoverlay.h
+	ui/pictureoverlay.hxx
+	ui/renderwindow.cpp
+	ui/renderwindow.h
+	ui/textoverlay.cpp
+	ui/textoverlay.h
+	ui/textoverlay.hxx
+	ui/theme.cpp
+	ui/theme.h
+	ui/theme.hxx
+	ui/windowfactory.cpp
+	ui/windowfactory.h
 
-	ui/application.h
-	ui/application.hxx
-	ui/application.cpp
-	ui/component.h
-	ui/component.hxx
-	ui/component.cpp
-	ui/desktop.h
-	ui/desktop.hxx
-	ui/desktop.cpp
-	ui/id.h
-	ui/id.cpp
-	ui/fwd.h
-
-	# Window
-	ui/window.h
-	ui/window.hxx
-	ui/window.cpp
-
-	# Standard Components
-	ui/control.h
-	ui/control/control.h
-	ui/control/control.hxx
-	ui/control/control.cpp
-	ui/control/controlcontainer.h
-	ui/control/controlcontainer.hxx
-	ui/control/controlcontainer.cpp
-	# Button
-	ui/control/button.h
-	ui/control/button.hxx
+	# Components
 	ui/control/button.cpp
+	ui/control/button.h
+	ui/control/control.cpp
+	ui/control/control.h
+	ui/control/checkbox.cpp
+	ui/control/checkbox.h
+	ui/control/window.cpp
+	ui/control/window.h
 
-	# Local components
-	ui/local/controls/surface.h
-	ui/local/controls/glsurface.h
+	# Input
+	ui/input/key.h
+	ui/input/keyboard.h
+	ui/input/mouse.cpp
+	ui/input/mouse.h
+	ui/input/winmouse.h
 
-	# Adapter stuff
-	ui/local/adapter/forrepresentation.h
-	ui/local/adapter/forrepresentation.cpp
-	ui/local/adapter/localforrepresentation.h
-	ui/local/adapter/localforrepresentation.cpp
-	ui/adapter/forvirtual.h
-	ui/adapter/forvirtual.cpp
-	ui/adapter/localforvirtual.h
-	ui/adapter/localforvirtual.cpp
+	# 3D scene-specific
+	ui/scene/camera.cpp
+	ui/scene/camera.h
+	ui/scene/camera.hxx
+
+	# Image loading
+	ui/stb_image.cpp
+	ui/stb_image.h
 )
 
+list(APPEND SRC_UI_GL
+	# OpenGL-specific
+	ui/gl/framebuffer.cpp
+	ui/gl/framebuffer.h
+	ui/gl/framebuffer.hxx
+	ui/gl/glerror.h
+	ui/gl/glwindow.cpp
+	ui/gl/glwindow.h
+	ui/gl/material.cpp
+	ui/gl/material.h
+	ui/gl/material.hxx
+	ui/gl/materialsurface.cpp
+	ui/gl/materialsurface.h
+	ui/gl/shader.cpp
+	ui/gl/shader.h
+	ui/gl/shadermanager.cpp
+	ui/gl/shadermanager.h
+	ui/gl/shaderprogram.cpp
+	ui/gl/shaderprogram.h
+	ui/gl/shaderprogram.hxx
+	ui/gl/texture.cpp
+	ui/gl/texture.h
+	ui/gl/vertex.h
+	ui/gl/vertex.hxx
+	ui/gl/vertexpadding.h
+	ui/gl/vertexpolicies.h
+	ui/gl/view.cpp
+	ui/gl/view.h
+)
 
-
-
-#
-# System-dependent
-#
-if (WIN32 OR WIN64)
-	list(APPEND SRC_UI ui/local/window/wingdi.h ui/local/window/wingdi.cpp)
-	if (YUNI_HAS_OPENGL)
-		list(APPEND SRC_UI ui/local/controls/wglsurface.h ui/local/controls/wglsurface.cpp)
-	endif ()
-else ()
-	if (APPLE)
-		#list(APPEND SRC_UI ui/local/window/cocoa.h ui/local/window/cocoa.cpp)
+if (YUNI_HAS_OPENGL)
+   list(APPEND SRC_UI "${SRC_UI_GL}")
+	#
+	# System-dependent
+	#
+	if (WIN32 OR WIN64)
+		list(APPEND SRC_UI ui/gl/wglwindow.h ui/gl/wglwindow.cpp)
 	else ()
-		if (UNIX)
-			list(APPEND SRC_UI ui/local/window/x11.h ui/local/window/x11.cpp)
-			if (YUNI_HAS_OPENGL)
-				list (APPEND SRC_UI ui/local/controls/glxsurface.h ui/local/controls/glxsurface.cpp)
+		if (APPLE)
+			#list(APPEND SRC_UI ui/gl/aglwindow.h ui/gl/aglwindow.cpp)
+		else ()
+			if (UNIX)
+				list (APPEND SRC_UI ui/gl/glxwindow.h ui/gl/glxwindow.hxx ui/gl/glxwindow.cpp)
 			endif ()
 		endif ()
 	endif ()
-endif ()
+else()
+   YERROR("UI module currently requires OpenGL to work !")
+endif()
 
-add_library(yuni-static-ui-core STATIC ${SRC_UI})
+add_library(yuni-static-ui-core STATIC ${YUNI_EXT_FREETYPE_INCLUDE} ${SRC_UI})
+target_link_libraries(yuni-static-ui-core ${YUNI_EXT_FREETYPE_LIB})
 
