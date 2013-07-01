@@ -1,142 +1,245 @@
-
 #include "control.h"
-#include "controlcontainer.h"
-
 
 namespace Yuni
 {
 namespace UI
 {
 
-	IControl::IControl() :
-		pParent(nullptr),
-		pDepth(0)
-	{}
 
-
-	IControl::IControl(IControl::Ptr newParent) :
-		pParent(nullptr)
+	IControl* IControl::getControlAt(int x, int y)
 	{
-		parentWL(newParent);
+		// Invisible controls don't answer to events
+		if (!pVisible)
+			return nullptr;
+		// If the point is outside the control, return null
+		if (x < pPosition.x || y < pPosition.y ||
+			x > pPosition.x + pSize.x ||
+			y > pPosition.y + pSize.y)
+			return nullptr;
+
+		// If no child contains the point, return this control
+		IControl* result = this;
+
+		// Try to find a child that contains the point
+		int relativeX = x - pPosition.x;
+		int relativeY = y - pPosition.y;
+		Vector::iterator end = pChildren.end();
+		for (Vector::iterator it = pChildren.begin(); it != end; ++it)
+		{
+			// Recursive call
+			IControl* child = (*it)->getControlAt(relativeX, relativeY);
+			if (child)
+			{
+				result = child;
+				break;
+			}
+		}
+		return result;
 	}
 
-
-	IControl::IControl(float width, float height) :
-		IComponent(width, height),
-		pParent(nullptr),
-		pDepth(0)
-	{}
-
-
-	IControl::IControl(IControl::Ptr newParent, float width, float height) :
-		IComponent(width, height),
-		pParent(nullptr),
-		pDepth(0)
+	void IControl::getControlStackAt(int x, int y, std::vector<IControl*>& stack)
 	{
-		parentWL(newParent);
-	}
-
-
-	IControl::IControl(float x, float y, float width, float height) :
-		IComponent(x, y, width, height),
-		pParent(nullptr),
-		pDepth(0)
-	{}
-
-
-	IControl::IControl(IControl::Ptr newParent, float x, float y, float width, float height) :
-		IComponent(x, y, width, height),
-		pParent(nullptr)
-	{
-		parentWL(newParent);
-	}
-
-
-	IControl::~IControl()
-	{
-		ThreadingPolicy::MutexLocker lock(*this);
-		// We are dying, tell the parent we cannot be his child anymore
-		if (pParent)
-			(*pParent) -= pLocalID;
-	}
-
-
-	void IControl::parentWL(const IControl::Ptr& newParent)
-	{
-		IControl* newParentAsControl = Ptr::WeakPointer(newParent);
-		IControlContainer* newParentAsContainer = dynamic_cast<IControlContainer*>(newParentAsControl);
-		if (newParentAsContainer != newParentAsControl || pParent == newParentAsContainer)
+		// Invisible controls don't answer to events
+		if (!pVisible)
+			return;
+		// If the point is outside the control, return null
+		if (x < pPosition.x || y < pPosition.y ||
+			x > pPosition.x + pSize.x ||
+			y > pPosition.y + pSize.y)
 			return;
 
-		// If we already had a parent, tell him we do not want to be his child anymore
-		if (pParent)
-			(*pParent) -= pLocalID;
+		// Push this control in the stack
+		stack.push_back(this);
 
-		if (!newParent)
+		// Try to find a child that contains the point
+		int relativeX = x - pPosition.x;
+		int relativeY = y - pPosition.y;
+		Vector::iterator end = pChildren.end();
+		for (Vector::iterator it = pChildren.begin(); it != end; ++it)
 		{
-			pParent = nullptr;
-			pDepth = 0;
-		}
-		else
-		{
-			pParent = newParentAsContainer;
-			pDepth  = 1 + pParent->depth();
-			(*pParent) += this;
+			// Recursive call
+			(*it)->getControlStackAt(relativeX, relativeY, stack);
 		}
 	}
 
-
-	void IControl::updateComponentWL(const IComponent::ID& componentID) const
+	void IControl::show(bool visible)
 	{
-		// If the tree is not rooted in a window / application
-		// there is no local representation to update, so give up.
-		if (pParent)
-			pParent->updateComponentWL(componentID);
+		if (visible == pVisible)
+			return;
+		pVisible = visible;
+		// Propagate visibility to children
+		for (auto& child : pChildren)
+			child->show(visible);
 	}
 
 
-	void IControl::update() const
+	bool IControl::modified() const
 	{
-		ThreadingPolicy::MutexLocker lock(*this);
-		updateComponentWL(pLocalID);
+		if (pModified)
+			return true;
+
+		// Ask children for modifications
+		for (const auto& child : pChildren)
+			if (child->modified())
+				return true;
+
+		return false;
 	}
 
 
-	IControl::Ptr IControl::parent() const
+	EventPropagation IControl::doMouseMove(int x, int y)
 	{
-		return (IControl*)pParent;
+		std::vector<IControl*> stack;
+		getControlStackAt(x, y, stack);
+		EventPropagation finalProp = epContinue;
+		while (!stack.empty())
+		{
+			IControl* child = stack.back();
+			stack.pop_back();
+			EventPropagation prop = child->onMouseMove(child, x, y);
+			if (epStop == prop)
+				return epStop;
+			else if (prop > finalProp)
+				finalProp = prop;
+			prop = onMouseMove(this, x, y);
+			if (epStop == prop)
+				return epStop;
+			else if (prop > finalProp)
+				finalProp = prop;
+		}
+		return finalProp;
+	}
+
+	EventPropagation IControl::doMouseDown(Input::IMouse::Button btn, int x, int y)
+	{
+		std::vector<IControl*> stack;
+		getControlStackAt(x, y, stack);
+		EventPropagation finalProp = epContinue;
+		while (!stack.empty())
+		{
+			IControl* child = stack.back();
+			stack.pop_back();
+			EventPropagation prop = child->onMouseDown(child, btn, x, y);
+			if (epStop == prop)
+				return epStop;
+			else if (prop > finalProp)
+				finalProp = prop;
+			prop = onMouseMove(this, x, y);
+			if (epStop == prop)
+				return epStop;
+			else if (prop > finalProp)
+				finalProp = prop;
+		}
+		return finalProp;
+	}
+
+	EventPropagation IControl::doMouseUp(Input::IMouse::Button btn, int x, int y)
+	{
+		std::vector<IControl*> stack;
+		getControlStackAt(x, y, stack);
+		EventPropagation finalProp = epContinue;
+		while (!stack.empty())
+		{
+			IControl* child = stack.back();
+			stack.pop_back();
+			EventPropagation prop = child->onMouseUp(child, btn, x, y);
+			if (epStop == prop)
+				return epStop;
+			else if (prop > finalProp)
+				finalProp = prop;
+			prop = onMouseMove(this, x, y);
+			if (epStop == prop)
+				return epStop;
+			else if (prop > finalProp)
+				finalProp = prop;
+		}
+		return finalProp;
+	}
+
+	EventPropagation IControl::doMouseDblClick(Input::IMouse::Button btn, int x, int y)
+	{
+		std::vector<IControl*> stack;
+		getControlStackAt(x, y, stack);
+		EventPropagation finalProp = epContinue;
+		while (!stack.empty())
+		{
+			IControl* child = stack.back();
+			stack.pop_back();
+			EventPropagation prop = child->onMouseDblClick(child, btn, x, y);
+			if (epStop == prop)
+				return epStop;
+			else if (prop > finalProp)
+				finalProp = prop;
+			prop = onMouseMove(this, x, y);
+			if (epStop == prop)
+				return epStop;
+			else if (prop > finalProp)
+				finalProp = prop;
+		}
+		return finalProp;
+	}
+
+	EventPropagation IControl::doMouseScroll(float delta, int x, int y)
+	{
+		std::vector<IControl*> stack;
+		getControlStackAt(x, y, stack);
+		EventPropagation finalProp = epContinue;
+		while (!stack.empty())
+		{
+			IControl* child = stack.back();
+			stack.pop_back();
+			EventPropagation prop = child->onMouseScroll(child, delta);
+			if (epStop == prop)
+				return epStop;
+			else if (prop > finalProp)
+				finalProp = prop;
+			prop = onMouseMove(this, x, y);
+			if (epStop == prop)
+				return epStop;
+			else if (prop > finalProp)
+				finalProp = prop;
+		}
+		return finalProp;
 	}
 
 
-	IControl::Map IControl::children() const
+	EventPropagation IControl::doMouseHover(int x, int y)
 	{
-		ThreadingPolicy::MutexLocker lock(*this);
-		return pChildren;
+		std::vector<IControl*> stack;
+		getControlStackAt(x, y, stack);
+		EventPropagation finalProp = epContinue;
+		while (!stack.empty())
+		{
+			IControl* child = stack.back();
+			stack.pop_back();
+			EventPropagation prop = child->onMouseHover(child, x, y);
+			if (epStop == prop)
+				return epStop;
+			else if (prop > finalProp)
+				finalProp = prop;
+			prop = onMouseMove(this, x, y);
+			if (epStop == prop)
+				return epStop;
+			else if (prop > finalProp)
+				finalProp = prop;
+		}
+		return finalProp;
 	}
 
 
-	bool IControl::hasParent() const
+	EventPropagation IControl::doKeyDown(Input::Key key)
 	{
-		ThreadingPolicy::MutexLocker lock(*this);
-		return NULL != pParent;
+		// TODO : the managing control should be the top-most one
+		return onKeyDown(this, key);
 	}
 
 
-	uint IControl::depth() const
+	EventPropagation IControl::doKeyUp(Input::Key key)
 	{
-		ThreadingPolicy::MutexLocker lock(*this);
-		return pDepth;
+		// TODO : the managing control should be the top-most one
+		return onKeyUp(this, key);
 	}
-
-
-	inline void IControl::parent(IControl::Ptr newParent)
-	{
-		ThreadingPolicy::MutexLocker lock(*this);
-		parentWL(newParent);
-	}
-
 
 
 } // namespace UI
 } // namespace Yuni
-

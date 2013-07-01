@@ -1,0 +1,156 @@
+
+#include <yuni/yuni.h>
+#include <yuni/io/file.h>
+#include <yuni/private/graphics/opengl/glew/glew.h>
+#include <cassert>
+#include "shader.h"
+#include "glerror.h"
+
+
+namespace Yuni
+{
+namespace Gfx3D
+{
+
+
+	VertexShader::VertexShader()
+	{}
+
+
+	VertexShader::VertexShader(const AnyString& filePath)
+	{
+		loadFromFile(filePath);
+	}
+
+
+	VertexShader::~VertexShader()
+	{
+		if (pID >= 0)
+			::glDeleteShader(pID);
+	}
+
+
+	bool VertexShader::loadFromFile(const AnyString& filePath)
+	{
+		String data;
+		if (IO::errNone != IO::File::LoadFromFile(data, filePath))
+		{
+#if defined(DEBUG) && !defined(NDEBUG)
+			Yuni::Logs::Logger<> logs;
+			logs.error() << "Failed to load shader \"" << filePath << "\" !";
+#endif
+			return false;
+		}
+		return loadFromMemory(data);
+	}
+
+
+	bool VertexShader::loadFromMemory(const AnyString& source)
+	{
+		if (pID < 0)
+			pID = ::glCreateShader(GL_VERTEX_SHADER);
+		const char* data = source.data();
+		::glShaderSource(pID, 1, &data, nullptr);
+		::glCompileShader(pID);
+		return GLTestError("VertexShader::loadFromMemory");
+	}
+
+
+
+
+
+
+
+	FragmentShader::FragmentShader()
+	{}
+
+
+	FragmentShader::FragmentShader(const AnyString& filePath)
+	{
+		loadFromFile(filePath);
+	}
+
+
+	FragmentShader::~FragmentShader()
+	{
+		if (pID >= 0)
+			::glDeleteShader(pID);
+	}
+
+
+	bool FragmentShader::loadFromFile(const AnyString& filePath)
+	{
+		String data;
+		if (IO::errNone != IO::File::LoadFromFile(data, filePath))
+		{
+#if defined(DEBUG) && !defined(NDEBUG)
+
+			Yuni::Logs::Logger<> logs;
+			logs.error() << "Failed to load shader \"" << filePath << "\" !";
+#endif
+			return false;
+		}
+		return loadFromMemory(data);
+	}
+
+
+	bool FragmentShader::loadFromMemory(const AnyString& source)
+	{
+		if (pID < 0)
+			pID = ::glCreateShader(GL_FRAGMENT_SHADER);
+		const char* data = source.data();
+		::glShaderSource(pID, 1, &data, nullptr);
+		::glCompileShader(pID);
+		return GLTestError("FragmentShader::loadFromMemory");
+	}
+
+
+
+
+	ComputeShader::ComputeShader()
+	{}
+
+
+	ComputeShader::ComputeShader(const AnyString& filePath)
+	{
+		loadFromFile(filePath);
+	}
+
+
+	ComputeShader::~ComputeShader()
+	{
+		if (pID >= 0)
+			::glDeleteShader(pID);
+	}
+
+
+	bool ComputeShader::loadFromFile(const AnyString& filePath)
+	{
+		String data;
+		if (IO::errNone != IO::File::LoadFromFile(data, filePath))
+		{
+#if defined(DEBUG) && !defined(NDEBUG)
+
+			Yuni::Logs::Logger<> logs;
+			logs.error() << "Failed to load shader \"" << filePath << "\" !";
+#endif
+			return false;
+		}
+		return loadFromMemory(data);
+	}
+
+
+	bool ComputeShader::loadFromMemory(const AnyString& source)
+	{
+		if (pID < 0)
+			pID = ::glCreateShader(GL_COMPUTE_SHADER);
+		const char* data = source.data();
+		::glShaderSource(pID, 1, &data, nullptr);
+		::glCompileShader(pID);
+		return GLTestError("ComputeShader::loadFromMemory");
+	}
+
+
+
+} // namespace Gfx3D
+} // namespace Yuni
