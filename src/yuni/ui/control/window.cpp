@@ -1,4 +1,4 @@
-# include "button.h"
+# include "window.h"
 # include "../theme.h"
 
 namespace Yuni
@@ -9,7 +9,7 @@ namespace Control
 {
 
 	/*
-	void Button::draw(DrawingSurface::Ptr& surface, bool root)
+	void Window::draw(DrawingSurface::Ptr& surface, bool root)
 	{
 		if (!pVisible)
 			return;
@@ -17,14 +17,14 @@ namespace Control
 		auto themeptr = Theme::Current();
 		auto& theme = *themeptr;
 		Point2D<> pos(pPosition);
-		// If the button is the root control, use absolute coordinates
+		// If the window is the root control, use absolute coordinates
 		if (root)
 			pos(0, 0);
-		surface->drawRectangle(theme.borderColor, theme.buttonColor,
+		surface->drawRectangle(theme.borderColor, theme.windowColor,
 			pos.x, pos.y, pSize.x, pSize.y, theme.borderWidth);
 		surface->beginRectangleClipping(pos.x, pos.y, pSize.x, pSize.y);
-		surface->drawTextInRect(pText, theme.font, theme.textColor, pos.x, pos.y,
-			pSize.x, pSize.y);
+		// Draw the children
+		drawChildren(surface);
 		surface->endClipping();
 		pModified = false;
 	}

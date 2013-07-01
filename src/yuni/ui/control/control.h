@@ -1,181 +1,181 @@
-#ifndef __YUNI_UI_CONTROL_CONTROL_H__
-# define __YUNI_UI_CONTROL_CONTROL_H__
+#ifndef __YUNI_UI_CONTROL_H__
+# define __YUNI_UI_CONTROL_H__
 
 # include "../../yuni.h"
-# include <vector>
-# include <map>
-# include "../fwd.h"
-# include "../../thread/policy.h"
 # include "../../core/smartptr.h"
-# include "../component.h"
-
+# include "../../core/point2D.h"
+# include <vector>
+//# include "drawingsurface.h"
+# include "../input/key.h"
+# include "../input/mouse.h"
+# include "../eventpropagation.h"
 
 namespace Yuni
 {
 namespace UI
 {
 
-	/*!
-	** \brief Base class for all UI controls (viewable components)
-	*/
-	class IControl : public IComponent
+	//! Forward declaration
+	class View;
+
+
+	//! A UI control is a part of 2D overlay that reacts to certain events
+	class IControl
 	{
 	public:
-		//! Smart pointer
-		typedef IComponent::SmartPtrInfo<IControl>::Type Ptr;
-		//! Vector of controls
-		typedef std::vector<Ptr> Vector;
-		//! Map of controls
-		typedef std::map<IComponent::ID, Ptr> Map;
-		//! Sorted (by depth in UI tree) map of controls
-		typedef std::map<size_t, Map> DepthSortedMap;
-
-		//! Threading Policy
-		typedef IComponent::ThreadingPolicy ThreadingPolicy;
-
+		typedef SmartPtr<IControl>  Ptr;
+		typedef std::vector<Ptr>  Vector;
 
 	public:
-		//! \name Constructor & Destructor
-		//@{
-		/*!
-		** \brief Empty constructor
-		*/
-		IControl();
+		Yuni::Bind<EventPropagation (IControl* sender, int x, int y)>  onMouseMove;
+		Yuni::Bind<EventPropagation (IControl* sender, Input::IMouse::Button btn, int x, int y)>  onMouseDown;
+		Yuni::Bind<EventPropagation (IControl* sender, Input::IMouse::Button btn, int x, int y)>  onMouseUp;
+		Yuni::Bind<EventPropagation (IControl* sender, Input::IMouse::Button btn, int x, int y)>  onMouseDblClick;
+		Yuni::Bind<EventPropagation (IControl* sender, float delta)>  onMouseScroll;
+		Yuni::Bind<EventPropagation (IControl* sender, int x, int y)>  onMouseHover;
+		Yuni::Bind<EventPropagation (IControl* sender, Input::Key)>  onKeyDown;
+		Yuni::Bind<EventPropagation (IControl* sender, Input::Key)>  onKeyUp;
 
-		/*!
-		** \brief Constructor with parent
-		*/
-		IControl(IControl::Ptr parent);
+	public:
+		IControl():
+			pPosition(0, 0),
+			pSize(20u, 20u),
+			pVisible(true),
+			pModified(true),
+			pReadOnly(false),
+			pEnabled(true)
+		{}
 
-		/*!
-		** \brief Constructor with dimensions
-		*/
-		IControl(float width, float height);
+		IControl(int x, int y, uint width, uint height):
+			pPosition(x, y),
+			pSize(width, height),
+			pVisible(true),
+			pModified(true),
+			pReadOnly(false),
+			pEnabled(true)
+		{}
 
-		/*!
-		** \brief Constructor with dimensions and parent
-		*/
-		IControl(IControl::Ptr parent, float width, float height);
+		IControl(const Point2D<int>& position, const Point2D<uint>& size):
+			pPosition(position),
+			pSize(size),
+			pVisible(true),
+			pModified(true),
+			pReadOnly(false),
+			pEnabled(true)
+		{}
 
-		/*!
-		** \brief Full constructor
-		*/
-		IControl(float x, float y, float width, float height);
+		virtual ~IControl() {}
 
-		/*!
-		** \brief Full constructor with parent
-		*/
-		IControl(IControl::Ptr parent, float x, float y, float width, float height);
+		int x() const { return pPosition.x; }
 
-		/*!
-		** \brief Full constructor
-		*/
-		template<typename T>
-		IControl(Point2D<T>& pos, float width, float height);
+		int y() const { return pPosition.y; }
 
-		/*!
-		** \brief Full constructor with parent
-		*/
-		template<class T>
-		IControl(IControl::Ptr parent, const Point2D<T>& pos, float width, float height);
+		uint width() const { return pSize.x; }
 
-		//! Virtual destructor
-		virtual ~IControl();
-		//@}
+		uint height() const { return pSize.y; }
 
+		//! Cursor used when hovering the control
+		// const Cursor& cursor() const;
+		// void cursor(const Cursor& c);
 
-		/*!
-		** \brief Ask the control to update its local representation
-		**
-		** A control will notify its representation to update itself using the latest
-		** modifications made to the control.
-		** This method should be used as follows :
-		** \code
-		** void modifyButton(Yuni::UI::Button::Ptr btn, const Yuni::String& text, bool visible)
-		** {
-		**		btn->caption = text;
-		**		btn->visible = visible;
-		**		btn->update();
-		** }
-		** \endcode
-		*/
-		void update() const;
+		void moveTo(int x, int y)
+		{
+			pPosition(x, y);
+		}
 
-		//! Get the parent
-		IControl::Ptr parent() const;
+		void moveBy(int x, int y)
+		{
+			pPosition.x += x;
+			pPosition.y += y;
+		}
 
-		//! Set the parent
-		void parent(IControl::Ptr newParent);
+		void moveTo(const Point2D<int>& position)
+		{
+			pPosition(position);
+		}
 
-		//! Get the children
-		IControl::Map children() const;
+		void resize(uint width, uint height)
+		{
+			pSize(width, height);
+		}
 
-		//! Is there a parent ?
-		bool hasParent() const;
+		void resize(const Point2D<uint>& size)
+		{
+			pSize(size);
+		}
 
-		//! Depth in the UI tree, 0 if root.
-		uint depth() const;
+		//! Get whether the control is currently enabled
+		bool enabled() const { return pEnabled; }
 
-		//! Catch the focus
-		virtual void focus() {}
+		//! Get the visibility of the control
+		bool visible() const { return pVisible; }
+		//! Set the visibility of the control
+		void show() { show(true); }
+		void hide() { show(false); }
+		void show(bool visible);
 
-		//! Enable / disable the control
-		void enabled(bool e);
-		//! Get if the control is enabled
-		bool enabled() const;
+		//! Draw the control
+		//		virtual void draw(DrawingSurface::Ptr& surface, bool root) = 0;
 
-		// Set visibility of the control
-		void visible(bool e);
-		//! Get if the control is visible
-		bool visible() const;
+		//! Recursively search for the deepest child control containing the given point
+		IControl* getControlAt(int x, int y);
 
-	protected:
-		//! Set the parent (without locking)
-		virtual void parentWL(const IControl::Ptr& newParent);
-		//! Detach from the tree
-		virtual void detachWL();
-		//! Add a child
-		virtual void addChildWL(const IControl::Ptr& child);
-		//! Remove a child
-		virtual bool removeChildWL(const IControl::Ptr& child);
+		//! Add child controls
+		void addChild(const IControl::Ptr& child) { pChildren.push_back(child); }
+		void addChild(IControl* child) { pChildren.push_back(child); }
 
-		/*!
-		** \brief Update the given component's local representation
-		**
-		** The process will propagate the update notification to the UI root.
-		*/
-		virtual void updateComponentWL(const IComponent::ID& componentID) const;
+		//! Invalidate the control (force redraw)
+		void invalidate()
+		{
+			pModified = true;
+		}
+		//! Is the control or any of its children modified ?
+		bool modified() const;
 
 	protected:
-		/*!
-		** \brief Parent control. Null by default
-		**
-		** A normal pointer is used here, because the reference count is held by the
-		** object itself and it would bring a circular reference if the smart pointer
-		** were used.
-		*/
-		IControlContainer* pParent;
+		//! Recursively search for the controls containing the given point, return them stacked
+		void getControlStackAt(int x, int y, std::vector<IControl*>& stack);
 
-		/*!
-		** \brief Children controls
-		**
-		** Always empty for controls that are not control containers.
-		*/
-		IControl::Map pChildren;
+		//! Draw the child controls
+		// void drawChildren(DrawingSurface::Ptr& surface)
+		// {
+		// 	for (auto& child : pChildren)
+		// 		child->draw(surface, false);
+		// }
 
-		//! Depth in the UI tree : 0 if no parent, parent level + 1 otherwise
-		uint pDepth;
+		EventPropagation doMouseMove(int x, int y);
+		EventPropagation doMouseDown(Input::IMouse::Button btn, int x, int y);
+		EventPropagation doMouseUp(Input::IMouse::Button btn, int x, int y);
+		EventPropagation doMouseDblClick(Input::IMouse::Button btn, int x, int y);
+		EventPropagation doMouseScroll(float delta, int x, int y);
+		EventPropagation doMouseHover(int x, int y);
+		EventPropagation doKeyDown(Input::Key);
+		EventPropagation doKeyUp(Input::Key);
+
+	protected:
+		Point2D<int> pPosition;
+
+		Point2D<uint> pSize;
+
+		bool pVisible;
+
+		bool pModified;
+
+		bool pReadOnly;
+
+		bool pEnabled;
+
+		//! Child controls
+		Vector pChildren;
+
+		//! The render window will dispatch events to the private handlers
+		friend class Yuni::UI::View;
 
 	}; // class IControl
-
-
 
 
 
 } // namespace UI
 } // namespace Yuni
 
-# include "controlcontainer.h"
-# include "control.hxx"
-
-#endif // __YUNI_UI_CONTROL_CONTROL_H__
+#endif // __YUNI_UI_CONTROL_H__

@@ -2,121 +2,66 @@
 # define __YUNI_UI_CONTROL_BUTTON_H__
 
 # include "../../yuni.h"
-# include "../../thread/policy.h"
-# include "../../core/string.h"
 # include "control.h"
-
-
+# include "../font.h"
 
 namespace Yuni
 {
 namespace UI
 {
+namespace Control
+{
 
-	/*!
-	** \brief Base class for all UI controls (viewable components)
-	*/
-	class Button : public IControl
+
+	//! A button is a clickable control that triggers an event
+	class Button: public IControl
 	{
 	public:
-   		//! Smart pointer
-		typedef IComponent::SmartPtrInfo<Button>::Type Ptr;
-		//! Vector of controls
-		typedef std::vector<Ptr> Vector;
-		//! Threading Policy
-		typedef IComponent::ThreadingPolicy ThreadingPolicy;
+		//! Type of bind for the button callback
+		typedef Yuni::Bind<void (void)>  Callback;
 
 	public:
-		//! \name Constructor & Destructor
-		//@{
-		/*!
-		** \brief Empty constructor
-		*/
-		Button();
+		Button(int x, int y, uint width, uint height):
+			IControl(x, y, width, height)
+		{}
 
-		/*!
-		** \brief Constructor with parent
-		*/
-		Button(const IControl::Ptr& parent);
-
-		/*!
-		** \brief Constructor with caption
-		*/
-		template<class StringT>
-		explicit Button(const StringT& caption);
-
-		/*!
-		** \brief Constructor with parent and caption
-		*/
-		template<class StringT>
-		Button(const IControl::Ptr& parent, const StringT& caption);
-
-		/*!
-		** \brief Constructor with dimensions
-		*/
-		template<class StringT>
-		Button(const StringT& caption, float width, float height);
-
-		/*!
-		** \brief Constructor with parent and dimensions
-		*/
-		template<class StringT>
-		Button(const IControl::Ptr& parent, const StringT& caption, float width, float height);
-
-		/*!
-		** \brief Full constructor
-		*/
-		template<class StringT>
-		Button(const StringT& caption, float x, float y, float width, float height);
-
-		/*!
-		** \brief Full constructor with parent
-		*/
-		template<class StringT>
-		Button(const IControl::Ptr& parent, const StringT& caption, float x, float y,
-			float width, float height);
-
-		/*!
-		** \brief Full constructor
-		*/
-		template<class StringT, class T>
-		Button(const StringT& caption, Point2D<T>& pos, float width, float height);
-
-		/*!
-		** \brief Full constructor with parent
-		*/
-		template<class StringT, class T>
-		Button(const IControl::Ptr& parent, const StringT& caption, Point2D<T>& pos,
-			float width, float height);
+		Button(const Point2D<>& position, const Point2D<>& size):
+			IControl(position, size)
+		{}
 
 		//! Virtual destructor
-		virtual ~Button();
-		//@}
+		virtual ~Button() {}
 
+		const String& text() const { return pText; }
+		void text(const AnyString& text) { pText = text; invalidate(); }
 
-		//! \name Caption
-		//@{
-		//! Get the caption of the button
-		String caption() const;
-		//! Set the caption
-		template<class StringT> void caption(const StringT& value);
-		//@}
+		//! Launch a click event
+		void click() const { pOnClick(); }
 
+		//! Bind the onClick event
+		template<class FuncT>
+		void onClick(const FuncT& function) { pOnClick.bind(function); }
 
-	protected:
-		//! Text caption on the button
-		String pCaption;
+		//! Bind the onClick event
+		template<class ClassT, class MethodT>
+		void onClick(const ClassT& object, const MethodT& method) { pOnClick.bind(object, method); }
+
+		//! Draw the button on the surface
+		//		virtual void draw(DrawingSurface::Ptr& surface, bool root);
+
+	private:
+		Callback pOnClick;
+
+		String pText;
+
+		String pHoverText;
 
 	}; // class Button
 
 
 
-
-
-
+} // namespace Control
 } // namespace UI
 } // namespace Yuni
-
-# include "button.hxx"
 
 #endif // __YUNI_UI_CONTROL_BUTTON_H__
