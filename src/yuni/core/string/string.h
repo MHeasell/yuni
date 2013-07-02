@@ -1971,9 +1971,13 @@ namespace Yuni
 
 		//! The operator `==`
 		bool operator == (const AnyString& rhs) const;
+		//! The operator `==`
+		bool operator == (char rhs) const;
 
 		//! The operator `!=`
 		bool operator != (const AnyString& rhs) const;
+		//! The operator `!=`
+		bool operator != (char rhs) const;
 
 		//! The operator `!`  (if (!s) ... - equivalent to if (s.empty()))
 		bool operator ! () const;

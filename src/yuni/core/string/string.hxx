@@ -3152,14 +3152,6 @@ namespace Yuni
 
 	template<uint ChunkSizeT, bool ExpandableT>
 	inline bool
-	CString<ChunkSizeT,ExpandableT>::operator != (const AnyString& rhs) const
-	{
-		return not equals(rhs);
-	}
-
-
-	template<uint ChunkSizeT, bool ExpandableT>
-	inline bool
 	CString<ChunkSizeT,ExpandableT>::operator ! () const
 	{
 		return !AncestorType::size;
@@ -3206,7 +3198,6 @@ namespace Yuni
 	}
 
 
-
 	template<uint ChunkSizeT, bool ExpandableT>
 	inline bool
 	CString<ChunkSizeT,ExpandableT>::operator < (const AnyString& rhs) const
@@ -3246,6 +3237,32 @@ namespace Yuni
 	{
 		return equals(rhs);
 	}
+
+
+	template<uint ChunkSizeT, bool ExpandableT>
+	inline bool
+	CString<ChunkSizeT,ExpandableT>::operator == (char rhs) const
+	{
+		return (AncestorType::size == 1) and (AncestorType::data[0] == rhs);
+	}
+
+
+	template<uint ChunkSizeT, bool ExpandableT>
+	inline bool
+	CString<ChunkSizeT,ExpandableT>::operator != (const AnyString& rhs) const
+	{
+		return not equals(rhs);
+	}
+
+
+	template<uint ChunkSizeT, bool ExpandableT>
+	inline bool
+	CString<ChunkSizeT,ExpandableT>::operator != (char rhs) const
+	{
+		return not (*this == rhs);
+	}
+
+
 
 
 
