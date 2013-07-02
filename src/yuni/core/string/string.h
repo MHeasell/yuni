@@ -1960,22 +1960,20 @@ namespace Yuni
 		template<class U> CString& operator = (const U& rhs);
 
 		//! The operator `<`
-		template<class StringT> bool operator <  (const StringT& rhs) const;
+		bool operator <  (const AnyString& rhs) const;
 		//! The operator `>`
-		template<class StringT> bool operator >  (const StringT& rhs) const;
+		bool operator >  (const AnyString& rhs) const;
 
 		//! The operator `<=`
-		template<class StringT> bool operator <= (const StringT& rhs) const;
+		bool operator <= (const AnyString& rhs) const;
 		//! The operator `>=`
-		template<class StringT> bool operator >= (const StringT& rhs) const;
+		bool operator >= (const AnyString& rhs) const;
 
 		//! The operator `==`
-		bool operator == (const CString& rhs) const;
-		//! The operator `==`
-		template<class StringT> bool operator == (const StringT& rhs) const;
+		bool operator == (const AnyString& rhs) const;
 
 		//! The operator `!=`
-		template<class StringT> bool operator != (const StringT& rhs) const;
+		bool operator != (const AnyString& rhs) const;
 
 		//! The operator `!`  (if (!s) ... - equivalent to if (s.empty()))
 		bool operator ! () const;
