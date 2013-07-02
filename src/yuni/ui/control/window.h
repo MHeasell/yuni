@@ -1,7 +1,7 @@
 #ifndef __YUNI_UI_CONTROL_WINDOW_H__
 # define __YUNI_UI_CONTROL_WINDOW_H__
 
-# include <yuni/yuni.h>
+# include "../../yuni.h"
 # include "control.h"
 //# include "drawingsurface.h"
 

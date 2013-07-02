@@ -1,9 +1,9 @@
 #ifndef __YUNI_UI_THEME_H__
 # define __YUNI_UI_THEME_H__
 
-# include <yuni/yuni.h>
-# include <yuni/core/color/rgba.h>
-# include <yuni/core/smartptr.h>
+# include "../yuni.h"
+# include "../core/color/rgba.h"
+# include "../core/smartptr.h"
 # include "ftfont.h"
 
 

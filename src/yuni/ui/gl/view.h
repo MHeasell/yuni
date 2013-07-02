@@ -114,7 +114,7 @@ namespace UI
 		EventPropagation doKeyUp(Input::Key key);
 
 		//! Get the top-most control at given coordinates. (Mainly useful for clicking)
-		IControl* getControlAt(float x, float y);
+		IControl* getControlAt(int x, int y);
 
 		/*!
 		** \brief Draw the view
