@@ -1,6 +1,7 @@
 #ifndef __YUNI_UI_GLWINDOW_H__
 # define __YUNI_UI_GLWINDOW_H__
 
+# include "../../yuni.h"
 # include "../renderwindow.h"
 
 
@@ -15,10 +16,12 @@ namespace UI
 	class GLWindow: public RenderWindow
 	{
 	public:
+		//! Constructor
 		GLWindow(const AnyString& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen):
 			RenderWindow(title, width, height, bitDepth, fullScreen),
 			pHasFSAA(false)
 		{}
+		//! Virtual destructor
 		virtual ~GLWindow() {}
 
 	protected:

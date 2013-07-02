@@ -2,8 +2,8 @@
 #ifndef __YUNI_UI_WINDOW_FACTORY__
 # define __YUNI_UI_WINDOW_FACTORY__
 
-# include <yuni/yuni.h>
-# include <yuni/core/string.h>
+# include "../yuni.h"
+# include "../core/string.h"
 
 namespace Yuni
 {

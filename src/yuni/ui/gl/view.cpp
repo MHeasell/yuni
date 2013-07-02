@@ -16,9 +16,9 @@ namespace UI
 		pWidth(w),
 		pHeight(h > 0 ? h : 1), // Forbid null height to avoid divide by 0
 		pZ(z),
+		pVisible(visible),
 		pTextShaders(nullptr),
-		pPictureShaders(nullptr),
-		pVisible(visible)
+		pPictureShaders(nullptr)
 	{}
 
 
@@ -245,7 +245,7 @@ namespace UI
 	}
 
 
-	IControl* View::getControlAt(float x, float y)
+	IControl* View::getControlAt(int x, int y)
 	{
 		if (!pControl)
 			return nullptr;

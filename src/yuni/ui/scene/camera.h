@@ -1,11 +1,11 @@
 #ifndef __YUNI_GFX3D_CAMERA_H__
 # define __YUNI_GFX3D_CAMERA_H__
 
-# include <yuni/yuni.h>
-# include <yuni/core/smartptr.h>
-# include <yuni/core/point3D.h>
-# include <yuni/core/vector3D.h>
-# include <yuni/core/quaternion.h>
+# include "../../yuni.h"
+# include "../../core/smartptr.h"
+# include "../../core/point3D.h"
+# include "../../core/vector3D.h"
+# include "../../core/quaternion.h"
 
 namespace Yuni
 {

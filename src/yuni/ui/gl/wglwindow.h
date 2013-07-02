@@ -100,7 +100,7 @@ namespace UI
 		static uint WindowCount();
 
 		//! Convert a Windows VK_* code to the equivalent Yuni code
-		static Yuni::Input::Key ConvertInputKey(unsigned int keyCode);
+		static Yuni::Input::Key ConvertInputKey(WPARAM keyCode);
 
 		//! Enable full screen mode, use primary monitor with desktop resolution
 		bool enableFullScreen();

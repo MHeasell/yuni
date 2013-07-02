@@ -1,7 +1,7 @@
 #ifndef __YUNI_UI_INPUT_WINMOUSE_H__
 # define __YUNI_UI_INPUT_WINMOUSE_H__
 
-# include <yuni/core/system/windows.hdr.h>
+# include "../../core/system/windows.hdr.h"
 # include "mouse.h"
 
 namespace Yuni

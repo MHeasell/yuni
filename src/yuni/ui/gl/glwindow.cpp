@@ -1,8 +1,6 @@
 
-#include <yuni/yuni.h>
-#include <yuni/core/system/windows.hdr.h>
-#include <yuni/core/logs.h>
-#include <yuni/private/graphics/opengl/glew/glew.h>
+#include "../../core/logs.h"
+#include "../../private/graphics/opengl/glew/glew.h"
 #include <iostream>
 #include "glwindow.h"
 #include "texture.h"
@@ -28,9 +26,11 @@ namespace UI
 		::glEnable(GL_CULL_FACE);
 
 		// Display OpenGL version
+#ifndef NDEBUG
 		Yuni::Logs::Logger<> logs;
 		const uint8* version = ::glGetString(GL_VERSION);
 		logs.notice() << "OpenGL " << (const char*)version;
+#endif
 
 		// Init GLEW
 		GLenum error = ::glewInit();

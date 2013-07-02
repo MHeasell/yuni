@@ -179,7 +179,7 @@ namespace UI
 	} // namespace anonymous
 
 
-	inline Yuni::Input::Key WGLWindow::ConvertInputKey(unsigned int keyCode)
+	inline Yuni::Input::Key WGLWindow::ConvertInputKey(WPARAM keyCode)
 	{
 		if (keyCode > 0xA5)
 			return Input::Key::Invalid;
@@ -222,7 +222,7 @@ namespace UI
 
 	uint WGLWindow::WindowCount()
 	{
-		return sWindowList.size();
+		return (uint)sWindowList.size();
 	}
 
 
@@ -474,13 +474,13 @@ namespace UI
 		::HMONITOR hMonitor = ::MonitorFromWindow(pHWnd, MONITOR_DEFAULTTOPRIMARY);
 		::MONITORINFOEX monitorInfo;
 		::memset(&monitorInfo, 0, sizeof(::MONITORINFOEX));
-		monitorInfo.cbSize = sizeof(::MONITORINFOEX);
+		monitorInfo.cbSize = (DWORD)sizeof(::MONITORINFOEX);
 		::GetMonitorInfo(hMonitor, &monitorInfo);
 
 		// Device Mode
 		::DEVMODE deviceMode;
 		::memset(&deviceMode, 0, sizeof(deviceMode));
-		deviceMode.dmSize = sizeof(deviceMode);
+		deviceMode.dmSize = (WORD)sizeof(deviceMode);
 		bool found;
 		for (int i = 0; !found && ::EnumDisplaySettings(monitorInfo.szDevice, i, &deviceMode); ++i)
 			found = (deviceMode.dmPelsWidth == (DWORD)pResWidth) &&
@@ -554,7 +554,7 @@ namespace UI
 		::HMONITOR hMonitor = ::MonitorFromWindow(pHWnd, MONITOR_DEFAULTTOPRIMARY);
 		::MONITORINFOEX monitorInfo;
 		::memset(&monitorInfo, 0, sizeof(::MONITORINFOEX));
-		monitorInfo.cbSize = sizeof(::MONITORINFOEX);
+		monitorInfo.cbSize = (DWORD)sizeof(::MONITORINFOEX);
 		::GetMonitorInfo(hMonitor, &monitorInfo);
 
 		// Restore the display resolution
@@ -625,7 +625,7 @@ namespace UI
 		const ::PIXELFORMATDESCRIPTOR pfd =
 			{
 				// Size
-				sizeof (::PIXELFORMATDESCRIPTOR),
+				(WORD)sizeof (::PIXELFORMATDESCRIPTOR),
 				// Version
 				1,
 				// Flags

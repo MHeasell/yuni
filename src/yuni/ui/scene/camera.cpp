@@ -1,5 +1,5 @@
 
-#include <yuni/core/math/trigonometric.h>
+#include "../../core/math/trigonometric.h"
 #include "camera.h"
 
 namespace Yuni
