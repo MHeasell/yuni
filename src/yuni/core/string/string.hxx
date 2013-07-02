@@ -3151,11 +3151,10 @@ namespace Yuni
 
 
 	template<uint ChunkSizeT, bool ExpandableT>
-	template<class StringT>
 	inline bool
-	CString<ChunkSizeT,ExpandableT>::operator != (const StringT& rhs) const
+	CString<ChunkSizeT,ExpandableT>::operator != (const AnyString& rhs) const
 	{
-		return !(*this == rhs);
+		return not equals(rhs);
 	}
 
 
@@ -3209,71 +3208,45 @@ namespace Yuni
 
 
 	template<uint ChunkSizeT, bool ExpandableT>
-	template<class StringT>
 	inline bool
-	CString<ChunkSizeT,ExpandableT>::operator < (const StringT& rhs) const
+	CString<ChunkSizeT,ExpandableT>::operator < (const AnyString& rhs) const
 	{
-		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CString_InvalidTypeForBuffer);
-		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  CString_InvalidTypeForBufferSize);
-
 		return Yuni::Private::CStringImpl::Compare(AncestorType::data, AncestorType::size,
-			Traits::CString<StringT>::Perform(rhs), Traits::Length<StringT,Size>::Value(rhs)) < 0;
+			rhs.c_str(), rhs.size()) < 0;
 	}
 
 	template<uint ChunkSizeT, bool ExpandableT>
-	template<class StringT>
 	inline bool
-	CString<ChunkSizeT,ExpandableT>::operator > (const StringT& rhs) const
+	CString<ChunkSizeT,ExpandableT>::operator > (const AnyString& rhs) const
 	{
-		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CString_InvalidTypeForBuffer);
-		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  CString_InvalidTypeForBufferSize);
-
 		return Yuni::Private::CStringImpl::Compare(AncestorType::data, AncestorType::size,
-			Traits::CString<StringT>::Perform(rhs), Traits::Length<StringT,Size>::Value(rhs)) > 0;
+			rhs.c_str(), rhs.size()) > 0;
 	}
 
 	template<uint ChunkSizeT, bool ExpandableT>
-	template<class StringT>
 	inline bool
-	CString<ChunkSizeT,ExpandableT>::operator <= (const StringT& rhs) const
+	CString<ChunkSizeT,ExpandableT>::operator <= (const AnyString& rhs) const
 	{
-		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CString_InvalidTypeForBuffer);
-		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  CString_InvalidTypeForBufferSize);
-
 		return Yuni::Private::CStringImpl::Compare(AncestorType::data, AncestorType::size,
-			Traits::CString<StringT>::Perform(rhs), Traits::Length<StringT,Size>::Value(rhs)) <= 0;
+			rhs.c_str(), rhs.size()) <= 0;
 	}
 
 	template<uint ChunkSizeT, bool ExpandableT>
-	template<class StringT>
 	inline bool
-	CString<ChunkSizeT,ExpandableT>::operator >= (const StringT& rhs) const
+	CString<ChunkSizeT,ExpandableT>::operator >= (const AnyString& rhs) const
 	{
-		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CString_InvalidTypeForBuffer);
-		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  CString_InvalidTypeForBufferSize);
-
 		return Yuni::Private::CStringImpl::Compare(AncestorType::data, AncestorType::size,
-			Traits::CString<StringT>::Perform(rhs), Traits::Length<StringT,Size>::Value(rhs)) >= 0;
+			rhs.c_str(), rhs.size()) >= 0;
 	}
 
 
 	template<uint ChunkSizeT, bool ExpandableT>
-	template<class StringT>
 	inline bool
-	CString<ChunkSizeT,ExpandableT>::operator == (const StringT& rhs) const
+	CString<ChunkSizeT,ExpandableT>::operator == (const AnyString& rhs) const
 	{
-		YUNI_STATIC_ASSERT(Traits::CString<StringT>::valid, CString_InvalidTypeForBuffer);
-		YUNI_STATIC_ASSERT(Traits::Length<StringT>::valid,  CString_InvalidTypeForBufferSize);
 		return equals(rhs);
 	}
 
-
-	template<uint ChunkSizeT, bool ExpandableT>
-	inline bool
-	CString<ChunkSizeT,ExpandableT>::operator == (const CString& rhs) const
-	{
-		return equals(rhs);
-	}
 
 
 	template<uint ChunkSizeT, bool ExpandableT>
@@ -3289,8 +3262,7 @@ namespace Yuni
 	inline void
 	CString<ChunkSizeT,ExpandableT>::adapt(const char* cstring, Size length)
 	{
-		Yuni::Private::CStringImpl::AdapterAssign<CStringType, adapter>::Perform(*this,
-			cstring, length);
+		Yuni::Private::CStringImpl::AdapterAssign<CStringType, adapter>::Perform(*this, cstring, length);
 	}
 
 
