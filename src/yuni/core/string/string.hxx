@@ -3466,14 +3466,15 @@ namespace Yuni
 				if (len)
 				{
 					word.assign(AncestorType::data + offset, len);
-					predicate(word);
+					if (not predicate(word))
+						return;
 				}
 			}
 			else
 			{
 				word.adapt(AncestorType::data + offset, AncestorType::size - offset);
 				predicate(word);
-				break;
+				return;
 			}
 
 			offset = newIndx + 1;
