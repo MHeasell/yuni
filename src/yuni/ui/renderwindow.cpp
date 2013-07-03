@@ -150,6 +150,8 @@ namespace UI
 
 	void RenderWindow::drawView(const UUID& id) const
 	{
+		if (wsMinimized == pState)
+			return;
 		View::List::const_iterator end = pViewList.end();
 		for (View::List::const_iterator it = pViewList.begin(); end != it; ++it)
 		{
@@ -164,12 +166,16 @@ namespace UI
 
 	void RenderWindow::drawView(const View::Ptr& view) const
 	{
+		if (wsMinimized == pState)
+			return;
 		view->draw();
 	}
 
 
 	void RenderWindow::drawAllViews() const
 	{
+		if (wsMinimized == pState)
+			return;
 		// Activate the frame buffer
 		pFB.activate();
 		// Draw the views
