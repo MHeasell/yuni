@@ -1836,19 +1836,21 @@ namespace Yuni
 		**
 		** \code
 		** String t = "a, b, c";
-		** t.words(" ,\t\r\n", [&] (const AnyString& word)
+		** t.words(" ,\t\r\n", [&] (const AnyString& word) -> bool
 		** {
 		**	std::cout << word << std::endl; // 3 elements
+		**	return true; // continue to the next token
 		** });
 		** \endcode
 		**
 		** Dealing with empty words :
 		** \code
 		** String t = "a, b,, d";
-		** t.words(",", [&] (AnyString& word)
+		** t.words(",", [&] (AnyString& word) -> bool
 		** {
 		**	word.trim();
 		**	std::cout << word << std::endl; // 4 elements
+		**	return true; // continue to the next token
 		** });
 		** \endcode
 		*/
