@@ -293,7 +293,7 @@ namespace CString
 			{ \
 				const char* p = AutoDetectBaseNumber::Value(s.c_str(), s.size(), base); \
 				out = (IntoType)::CONVERT(p, &pend, base); \
-				return (NULL != pend && '\0' == *pend); \
+				return NULL != pend && (pend - p == s.size()); \
 			} \
 		} \
 		\

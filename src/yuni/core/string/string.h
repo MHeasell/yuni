@@ -1855,7 +1855,7 @@ namespace Yuni
 		** \endcode
 		*/
 		template<class StringT, class PredicateT>
-		void words(const StringT& separators, const PredicateT& predicate) const;
+		bool words(const StringT& separators, const PredicateT& predicate) const;
 
 		/*!
 		** \brief Split a string into several segments
