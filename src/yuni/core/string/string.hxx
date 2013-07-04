@@ -3443,11 +3443,11 @@ namespace Yuni
 
 	template<uint ChunkSizeT, bool ExpandableT>
 	template<class StringT, class PredicateT>
-	void
+	bool
 	CString<ChunkSizeT,ExpandableT>::words(const StringT& separators, const PredicateT& predicate) const
 	{
 		if (0 == AncestorType::size)
-			return;
+			return true;
 
 		// Indexes
 		Size offset = 0;
@@ -3467,19 +3467,20 @@ namespace Yuni
 				{
 					word.assign(AncestorType::data + offset, len);
 					if (not predicate(word))
-						return;
+						return false;
 				}
 			}
 			else
 			{
 				word.adapt(AncestorType::data + offset, AncestorType::size - offset);
-				predicate(word);
-				return;
+				return predicate(word);
 			}
 
 			offset = newIndx + 1;
 		}
 		while (true);
+
+		return true;
 	}
 
 
