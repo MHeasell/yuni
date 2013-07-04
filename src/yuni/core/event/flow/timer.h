@@ -45,7 +45,7 @@ namespace Flow
 			{
 				// Hard limit when not in detached mode.
 				// When not in detached mode, there is no cancellation point
-				// so it is impossible to properly the loop if the timeout is too high
+				// so it is impossible to properly stop the loop if the timeout is too high
 				if (t > 10000)
 					t = 10000;
 			}

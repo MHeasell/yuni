@@ -49,9 +49,9 @@ namespace EventLoop
 	** \tparam ParentT The parent class (CRTP)
 	** \tparam FlowT The flow policy
 	** \tparam StatsT The statistics policy
-	** \tparam DetechedT A non-zero value to use a separate thread than the calling
+	** \tparam DetachedT A non-zero value to use a separate thread than the calling
 	**   one for running the event loop.
-	**   This value should always be true for code safety unless that you want to
+	**   This value should always be true for code safety unless if you want to
 	**   execute the event loop from the calling thread (e.g. the main thread).
 	**   In this case, you _have_ to take care about blocking system calls that
 	**   would prevent the loop to stop.
