@@ -1,8 +1,8 @@
 #ifndef __YUNI_GFX3D_SHADERPROGRAM_HXX__
 # define __YUNI_GFX3D_SHADERPROGRAM_HXX__
 
-# include <yuni/private/graphics/opengl/glew/glew.h>
-# include <yuni/core/static/assert.h>
+# include "../..//private/graphics/opengl/glew/glew.h"
+# include "../../core/static/assert.h"
 # include "glerror.h"
 
 namespace Yuni
@@ -221,6 +221,19 @@ namespace Gfx3D
 				assert(false && "Invalid number of components : must be 1-4.");
 		}
 	}
+
+
+	inline void ShaderProgram::bindImage(const AnyString& name, const Texture::Ptr& texture,
+		Vertex<>::Attribute value) const
+	{
+		GLClearError();
+		::glBindTexture(GL_TEXTURE_2D, texture->id());
+		::glBindImageTexture(0, texture->id(), 0, GL_FALSE, 0, GL_WRITE_ONLY, GL_RGBA8);
+		if (!GLTestError("ShaderProgram::bindImage, glBindImageTexture"))
+			return;
+		bindUniform(name, value);
+	}
+
 
 
 	inline const String& ShaderProgram::errorMessage() const

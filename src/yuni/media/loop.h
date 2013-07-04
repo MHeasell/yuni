@@ -39,8 +39,8 @@ namespace Media
 		*/
 		Loop(QueueService* queueService);
 
-		//! Virtual destructor
-		virtual ~Loop() { stop(); }
+		//! Destructor (not virtual, this is static inheritance)
+		~Loop() { stop(); }
 
 		/*!
 		** \brief Redefinition of the onLoop() callback

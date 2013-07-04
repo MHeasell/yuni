@@ -1,9 +1,10 @@
 #ifndef __YUNI_GFX3D_SHADERPROGRAM_H__
 # define __YUNI_GFX3D_SHADERPROGRAM_H__
 
-# include <yuni/yuni.h>
-# include <yuni/core/smartptr.h>
+# include "../../yuni.h"
+# include "../../core/smartptr.h"
 # include "shader.h"
+# include "texture.h"
 # include "vertex.h"
 
 namespace Yuni
@@ -92,6 +93,10 @@ namespace Gfx3D
 		void bindUniformArray(const AnyString& name, uint count, uint components, const int* array) const;
 		void bindUniformArray(const AnyString& name, uint count, uint components, const uint* array) const;
 		void bindUniformArray(const AnyString& name, uint count, uint components, const float* array) const;
+
+		//! Bind a texture as an image for compute shader use
+		void bindImage(const AnyString& name, const Texture::Ptr& texture,
+			Vertex<>::Attribute value) const;
 
 	private:
 		//! ID of the shader program
