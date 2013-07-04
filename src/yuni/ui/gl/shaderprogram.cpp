@@ -11,7 +11,8 @@ namespace Gfx3D
 		pID(::glCreateProgram()),
 		pLinked(false),
 		pVertexShader(vShader),
-		pFragmentShader(fShader)
+		pFragmentShader(fShader),
+		pComputeShader(nullptr)
 	{}
 
 
@@ -42,6 +43,11 @@ namespace Gfx3D
 			::glDetachShader(pID, pFragmentShader->pID);
 			pFragmentShader = nullptr;
 		}
+		if (pComputeShader)
+		{
+			::glDetachShader(pID, pComputeShader->pID);
+			pComputeShader = nullptr;
+		}
 		::glDeleteProgram(pID);
 	}
 
@@ -53,9 +59,10 @@ namespace Gfx3D
 		// If not yet linked, do it on-the-fly
 		if (!pLinked)
 		{
-			// Make sure we have at least one of the two shaders
+			// Make sure we have at least one of the three shaders
 			if ((!pVertexShader || !pVertexShader->pID) &&
-				(!pFragmentShader || !pFragmentShader->pID))
+				(!pFragmentShader || !pFragmentShader->pID) &&
+				(!pComputeShader || !pComputeShader->pID))
 				return false;
 
 			if (pVertexShader && pVertexShader->pID)
