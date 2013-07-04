@@ -147,7 +147,7 @@ namespace Gfx3D
 		const char* data = source.data();
 		::glShaderSource(pID, 1, &data, nullptr);
 		::glCompileShader(pID);
-		return GLTestError("ComputeShader::loadFromMemory");
+		return GLTestError("ComputeShader::loadFromMemory, glCompileShader");
 	}
 
 
