@@ -3490,7 +3490,7 @@ namespace Yuni
 	{
 		size_t hash = 0;
 		for (uint i = 0; i != AncestorType::size; ++i)
-			hash = AncestorType::data[i] + (hash << 6) + (hash << 16) - hash;
+			hash = (uint)AncestorType::data[i] + (hash << 6) + (hash << 16) - hash;
 
 		return hash;
 	}
