@@ -13,8 +13,8 @@ namespace UI
 			return nullptr;
 		// If the point is outside the control, return null
 		if (x < pPosition.x || y < pPosition.y ||
-			x > pPosition.x + pSize.x ||
-			y > pPosition.y + pSize.y)
+			x > pPosition.x + (int)pSize.x ||
+			y > pPosition.y + (int)pSize.y)
 			return nullptr;
 
 		// If no child contains the point, return this control
@@ -44,8 +44,8 @@ namespace UI
 			return;
 		// If the point is outside the control, return null
 		if (x < pPosition.x || y < pPosition.y ||
-			x > pPosition.x + pSize.x ||
-			y > pPosition.y + pSize.y)
+			x > pPosition.x + (int)pSize.x ||
+			y > pPosition.y + (int)pSize.y)
 			return;
 
 		// Push this control in the stack
