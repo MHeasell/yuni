@@ -46,7 +46,10 @@ namespace UI
 		View(uint x, uint y, uint w, uint h, uint8 z = 127, bool visible = true);
 
 		//! Destructor
-		~View();
+		virtual ~View();
+
+		//! Necessary shaders for overlay
+		bool initShaders();
 
 		//! Identifier of the view
 		const UUID& id() const { return pID; }
@@ -104,7 +107,7 @@ namespace UI
 		IControl::Ptr rootControl() { return pControl; }
 
 		EventPropagation doMouseMove(int x, int y);
-		EventPropagation doMouseDown(Input::IMouse::Button btn, int x, int y);
+		virtual EventPropagation doMouseDown(Input::IMouse::Button btn, int x, int y);
 		EventPropagation doMouseUp(Input::IMouse::Button btn, int x, int y);
 		EventPropagation doMouseDblClick(Input::IMouse::Button btn, int x, int y);
 		EventPropagation doMouseScroll(float delta, int x, int y);
@@ -121,9 +124,9 @@ namespace UI
 		**
 		** \note If you see nothing in this view, make sure the camera is set and the view is visible
 		*/
-		void draw() const;
+		virtual void draw() const;
 
-	private:
+	protected:
 		//! Draw a text overlay
 		void drawOverlay(TextOverlay& text) const;
 
@@ -136,7 +139,7 @@ namespace UI
 		//! Draw all 2D elements : overlays and UI
 		void draw2D() const;
 
-	private:
+	protected:
 		//! ID of the view
 		UUID pID;
 

@@ -397,7 +397,7 @@ namespace CString
 				# else
 				out = (float)strtof(cstr, &pend);
 				# endif
-				return (pend && '\0' == *pend);
+				return (pend && pend - cstr == s.size());
 			}
 			out = 0.f;
 			return true;
