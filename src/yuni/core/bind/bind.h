@@ -116,7 +116,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 0 argument (Specialization)
 	*/
 	template<class R>
-	class Bind<R (), void> final
+	class YUNI_DECL Bind<R (), void> final
 	{
 	public:
 		//! The Bind Type
@@ -134,7 +134,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -165,7 +165,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(),I>::Type Type;
@@ -175,7 +175,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -197,7 +197,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(U),I>::Type Type;
@@ -467,7 +467,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 0 argument (Specialization)
 	*/
 	template<class R>
-	class Bind<R (*)(), void> final
+	class YUNI_DECL Bind<R (*)(), void> final
 	{
 	public:
 		//! The Bind Type
@@ -485,7 +485,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -516,7 +516,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(),I>::Type Type;
@@ -526,7 +526,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -548,7 +548,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(U),I>::Type Type;
@@ -818,7 +818,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 0 argument (Specialization)
 	*/
 	template<class ClassT, class R>
-	class Bind<R (ClassT::*)(), ClassT> final
+	class YUNI_DECL Bind<R (ClassT::*)(), ClassT> final
 	{
 	public:
 		//! The Bind Type
@@ -836,7 +836,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -867,7 +867,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(),I>::Type Type;
@@ -877,7 +877,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -899,7 +899,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(U),I>::Type Type;
@@ -1169,7 +1169,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 1 argument (Specialization)
 	*/
 	template<class R, class A0>
-	class Bind<R (A0), void> final
+	class YUNI_DECL Bind<R (A0), void> final
 	{
 	public:
 		//! The Bind Type
@@ -1187,7 +1187,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -1218,7 +1218,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0),I>::Type Type;
@@ -1228,7 +1228,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -1250,7 +1250,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, U),I>::Type Type;
@@ -1520,7 +1520,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 1 argument (Specialization)
 	*/
 	template<class R, class A0>
-	class Bind<R (*)(A0), void> final
+	class YUNI_DECL Bind<R (*)(A0), void> final
 	{
 	public:
 		//! The Bind Type
@@ -1538,7 +1538,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -1569,7 +1569,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0),I>::Type Type;
@@ -1579,7 +1579,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -1601,7 +1601,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, U),I>::Type Type;
@@ -1871,7 +1871,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 1 argument (Specialization)
 	*/
 	template<class ClassT, class R, class A0>
-	class Bind<R (ClassT::*)(A0), ClassT> final
+	class YUNI_DECL Bind<R (ClassT::*)(A0), ClassT> final
 	{
 	public:
 		//! The Bind Type
@@ -1889,7 +1889,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -1920,7 +1920,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0),I>::Type Type;
@@ -1930,7 +1930,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -1952,7 +1952,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, U),I>::Type Type;
@@ -2222,7 +2222,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 2 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1>
-	class Bind<R (A0, A1), void> final
+	class YUNI_DECL Bind<R (A0, A1), void> final
 	{
 	public:
 		//! The Bind Type
@@ -2240,7 +2240,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -2271,7 +2271,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1),I>::Type Type;
@@ -2281,7 +2281,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -2303,7 +2303,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, U),I>::Type Type;
@@ -2573,7 +2573,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 2 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1>
-	class Bind<R (*)(A0, A1), void> final
+	class YUNI_DECL Bind<R (*)(A0, A1), void> final
 	{
 	public:
 		//! The Bind Type
@@ -2591,7 +2591,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -2622,7 +2622,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1),I>::Type Type;
@@ -2632,7 +2632,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -2654,7 +2654,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, U),I>::Type Type;
@@ -2924,7 +2924,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 2 arguments (Specialization)
 	*/
 	template<class ClassT, class R, class A0, class A1>
-	class Bind<R (ClassT::*)(A0, A1), ClassT> final
+	class YUNI_DECL Bind<R (ClassT::*)(A0, A1), ClassT> final
 	{
 	public:
 		//! The Bind Type
@@ -2942,7 +2942,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -2973,7 +2973,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1),I>::Type Type;
@@ -2983,7 +2983,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -3005,7 +3005,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, U),I>::Type Type;
@@ -3275,7 +3275,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 3 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2>
-	class Bind<R (A0, A1, A2), void> final
+	class YUNI_DECL Bind<R (A0, A1, A2), void> final
 	{
 	public:
 		//! The Bind Type
@@ -3293,7 +3293,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -3324,7 +3324,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2),I>::Type Type;
@@ -3334,7 +3334,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -3356,7 +3356,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, U),I>::Type Type;
@@ -3626,7 +3626,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 3 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2>
-	class Bind<R (*)(A0, A1, A2), void> final
+	class YUNI_DECL Bind<R (*)(A0, A1, A2), void> final
 	{
 	public:
 		//! The Bind Type
@@ -3644,7 +3644,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -3675,7 +3675,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2),I>::Type Type;
@@ -3685,7 +3685,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -3707,7 +3707,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, U),I>::Type Type;
@@ -3977,7 +3977,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 3 arguments (Specialization)
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2>
-	class Bind<R (ClassT::*)(A0, A1, A2), ClassT> final
+	class YUNI_DECL Bind<R (ClassT::*)(A0, A1, A2), ClassT> final
 	{
 	public:
 		//! The Bind Type
@@ -3995,7 +3995,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -4026,7 +4026,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2),I>::Type Type;
@@ -4036,7 +4036,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -4058,7 +4058,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, U),I>::Type Type;
@@ -4328,7 +4328,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 4 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3>
-	class Bind<R (A0, A1, A2, A3), void> final
+	class YUNI_DECL Bind<R (A0, A1, A2, A3), void> final
 	{
 	public:
 		//! The Bind Type
@@ -4346,7 +4346,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -4377,7 +4377,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3),I>::Type Type;
@@ -4387,7 +4387,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -4409,7 +4409,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, U),I>::Type Type;
@@ -4679,7 +4679,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 4 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3>
-	class Bind<R (*)(A0, A1, A2, A3), void> final
+	class YUNI_DECL Bind<R (*)(A0, A1, A2, A3), void> final
 	{
 	public:
 		//! The Bind Type
@@ -4697,7 +4697,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -4728,7 +4728,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3),I>::Type Type;
@@ -4738,7 +4738,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -4760,7 +4760,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, U),I>::Type Type;
@@ -5030,7 +5030,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 4 arguments (Specialization)
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3>
-	class Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT> final
+	class YUNI_DECL Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT> final
 	{
 	public:
 		//! The Bind Type
@@ -5048,7 +5048,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -5079,7 +5079,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3),I>::Type Type;
@@ -5089,7 +5089,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -5111,7 +5111,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, U),I>::Type Type;
@@ -5381,7 +5381,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 5 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4>
-	class Bind<R (A0, A1, A2, A3, A4), void> final
+	class YUNI_DECL Bind<R (A0, A1, A2, A3, A4), void> final
 	{
 	public:
 		//! The Bind Type
@@ -5399,7 +5399,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -5430,7 +5430,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4),I>::Type Type;
@@ -5440,7 +5440,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -5462,7 +5462,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, U),I>::Type Type;
@@ -5732,7 +5732,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 5 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4>
-	class Bind<R (*)(A0, A1, A2, A3, A4), void> final
+	class YUNI_DECL Bind<R (*)(A0, A1, A2, A3, A4), void> final
 	{
 	public:
 		//! The Bind Type
@@ -5750,7 +5750,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -5781,7 +5781,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4),I>::Type Type;
@@ -5791,7 +5791,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -5813,7 +5813,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, U),I>::Type Type;
@@ -6083,7 +6083,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 5 arguments (Specialization)
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
-	class Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT> final
+	class YUNI_DECL Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT> final
 	{
 	public:
 		//! The Bind Type
@@ -6101,7 +6101,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -6132,7 +6132,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4),I>::Type Type;
@@ -6142,7 +6142,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -6164,7 +6164,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, U),I>::Type Type;
@@ -6434,7 +6434,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 6 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	class Bind<R (A0, A1, A2, A3, A4, A5), void> final
+	class YUNI_DECL Bind<R (A0, A1, A2, A3, A4, A5), void> final
 	{
 	public:
 		//! The Bind Type
@@ -6452,7 +6452,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -6483,7 +6483,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5),I>::Type Type;
@@ -6493,7 +6493,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -6515,7 +6515,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, U),I>::Type Type;
@@ -6785,7 +6785,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 6 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	class Bind<R (*)(A0, A1, A2, A3, A4, A5), void> final
+	class YUNI_DECL Bind<R (*)(A0, A1, A2, A3, A4, A5), void> final
 	{
 	public:
 		//! The Bind Type
@@ -6803,7 +6803,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -6834,7 +6834,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5),I>::Type Type;
@@ -6844,7 +6844,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -6866,7 +6866,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, U),I>::Type Type;
@@ -7136,7 +7136,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 6 arguments (Specialization)
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	class Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT> final
+	class YUNI_DECL Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT> final
 	{
 	public:
 		//! The Bind Type
@@ -7154,7 +7154,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -7185,7 +7185,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5),I>::Type Type;
@@ -7195,7 +7195,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -7217,7 +7217,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, U),I>::Type Type;
@@ -7487,7 +7487,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 7 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	class Bind<R (A0, A1, A2, A3, A4, A5, A6), void> final
+	class YUNI_DECL Bind<R (A0, A1, A2, A3, A4, A5, A6), void> final
 	{
 	public:
 		//! The Bind Type
@@ -7505,7 +7505,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -7536,7 +7536,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6),I>::Type Type;
@@ -7546,7 +7546,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -7568,7 +7568,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, U),I>::Type Type;
@@ -7838,7 +7838,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 7 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	class Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void> final
+	class YUNI_DECL Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void> final
 	{
 	public:
 		//! The Bind Type
@@ -7856,7 +7856,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -7887,7 +7887,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6),I>::Type Type;
@@ -7897,7 +7897,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -7919,7 +7919,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, U),I>::Type Type;
@@ -8189,7 +8189,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 7 arguments (Specialization)
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	class Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT> final
+	class YUNI_DECL Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT> final
 	{
 	public:
 		//! The Bind Type
@@ -8207,7 +8207,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -8238,7 +8238,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6),I>::Type Type;
@@ -8248,7 +8248,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -8270,7 +8270,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, U),I>::Type Type;
@@ -8540,7 +8540,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 8 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	class Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void> final
+	class YUNI_DECL Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void> final
 	{
 	public:
 		//! The Bind Type
@@ -8558,7 +8558,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -8589,7 +8589,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7),I>::Type Type;
@@ -8599,7 +8599,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -8621,7 +8621,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, U),I>::Type Type;
@@ -8891,7 +8891,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 8 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	class Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void> final
+	class YUNI_DECL Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void> final
 	{
 	public:
 		//! The Bind Type
@@ -8909,7 +8909,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -8940,7 +8940,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7),I>::Type Type;
@@ -8950,7 +8950,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -8972,7 +8972,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, U),I>::Type Type;
@@ -9242,7 +9242,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 8 arguments (Specialization)
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	class Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT> final
+	class YUNI_DECL Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT> final
 	{
 	public:
 		//! The Bind Type
@@ -9260,7 +9260,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -9291,7 +9291,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7),I>::Type Type;
@@ -9301,7 +9301,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -9323,7 +9323,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, U),I>::Type Type;
@@ -9593,7 +9593,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 9 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	class Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void> final
+	class YUNI_DECL Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void> final
 	{
 	public:
 		//! The Bind Type
@@ -9611,7 +9611,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -9642,7 +9642,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8),I>::Type Type;
@@ -9652,7 +9652,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -9674,7 +9674,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, U),I>::Type Type;
@@ -9944,7 +9944,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 9 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	class Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void> final
+	class YUNI_DECL Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void> final
 	{
 	public:
 		//! The Bind Type
@@ -9962,7 +9962,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -9993,7 +9993,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8),I>::Type Type;
@@ -10003,7 +10003,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -10025,7 +10025,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, U),I>::Type Type;
@@ -10295,7 +10295,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 9 arguments (Specialization)
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	class Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT> final
+	class YUNI_DECL Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT> final
 	{
 	public:
 		//! The Bind Type
@@ -10313,7 +10313,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -10344,7 +10344,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8),I>::Type Type;
@@ -10354,7 +10354,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -10376,7 +10376,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, U),I>::Type Type;
@@ -10646,7 +10646,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 10 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	class Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void> final
+	class YUNI_DECL Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void> final
 	{
 	public:
 		//! The Bind Type
@@ -10664,7 +10664,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -10695,7 +10695,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9),I>::Type Type;
@@ -10705,7 +10705,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -10727,7 +10727,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U),I>::Type Type;
@@ -10997,7 +10997,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 10 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	class Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void> final
+	class YUNI_DECL Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void> final
 	{
 	public:
 		//! The Bind Type
@@ -11015,7 +11015,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -11046,7 +11046,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9),I>::Type Type;
@@ -11056,7 +11056,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -11078,7 +11078,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U),I>::Type Type;
@@ -11348,7 +11348,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 10 arguments (Specialization)
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	class Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT> final
+	class YUNI_DECL Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT> final
 	{
 	public:
 		//! The Bind Type
@@ -11366,7 +11366,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -11397,7 +11397,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9),I>::Type Type;
@@ -11407,7 +11407,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -11429,7 +11429,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, U),I>::Type Type;
@@ -11699,7 +11699,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 11 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	class Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void> final
+	class YUNI_DECL Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void> final
 	{
 	public:
 		//! The Bind Type
@@ -11717,7 +11717,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -11748,7 +11748,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10),I>::Type Type;
@@ -11758,7 +11758,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -11780,7 +11780,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U),I>::Type Type;
@@ -12050,7 +12050,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 11 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	class Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void> final
+	class YUNI_DECL Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void> final
 	{
 	public:
 		//! The Bind Type
@@ -12068,7 +12068,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -12099,7 +12099,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10),I>::Type Type;
@@ -12109,7 +12109,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -12131,7 +12131,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U),I>::Type Type;
@@ -12401,7 +12401,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 11 arguments (Specialization)
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	class Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT> final
+	class YUNI_DECL Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT> final
 	{
 	public:
 		//! The Bind Type
@@ -12419,7 +12419,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -12450,7 +12450,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10),I>::Type Type;
@@ -12460,7 +12460,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -12482,7 +12482,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, U),I>::Type Type;
@@ -12752,7 +12752,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 12 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	class Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void> final
+	class YUNI_DECL Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void> final
 	{
 	public:
 		//! The Bind Type
@@ -12770,7 +12770,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -12801,7 +12801,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11),I>::Type Type;
@@ -12811,7 +12811,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -12833,7 +12833,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U),I>::Type Type;
@@ -13103,7 +13103,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 12 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	class Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void> final
+	class YUNI_DECL Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void> final
 	{
 	public:
 		//! The Bind Type
@@ -13121,7 +13121,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -13152,7 +13152,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11),I>::Type Type;
@@ -13162,7 +13162,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -13184,7 +13184,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U),I>::Type Type;
@@ -13454,7 +13454,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 12 arguments (Specialization)
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	class Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT> final
+	class YUNI_DECL Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT> final
 	{
 	public:
 		//! The Bind Type
@@ -13472,7 +13472,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -13503,7 +13503,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11),I>::Type Type;
@@ -13513,7 +13513,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -13535,7 +13535,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, U),I>::Type Type;
@@ -13805,7 +13805,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 13 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	class Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void> final
+	class YUNI_DECL Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void> final
 	{
 	public:
 		//! The Bind Type
@@ -13823,7 +13823,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -13854,7 +13854,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12),I>::Type Type;
@@ -13864,7 +13864,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -13886,7 +13886,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U),I>::Type Type;
@@ -14156,7 +14156,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 13 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	class Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void> final
+	class YUNI_DECL Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void> final
 	{
 	public:
 		//! The Bind Type
@@ -14174,7 +14174,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -14205,7 +14205,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12),I>::Type Type;
@@ -14215,7 +14215,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -14237,7 +14237,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U),I>::Type Type;
@@ -14507,7 +14507,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 13 arguments (Specialization)
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	class Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT> final
+	class YUNI_DECL Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT> final
 	{
 	public:
 		//! The Bind Type
@@ -14525,7 +14525,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -14556,7 +14556,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12),I>::Type Type;
@@ -14566,7 +14566,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -14588,7 +14588,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, U),I>::Type Type;
@@ -14858,7 +14858,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 14 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	class Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void> final
+	class YUNI_DECL Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void> final
 	{
 	public:
 		//! The Bind Type
@@ -14876,7 +14876,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -14907,7 +14907,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13),I>::Type Type;
@@ -14917,7 +14917,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -14939,7 +14939,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U),I>::Type Type;
@@ -15209,7 +15209,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 14 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	class Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void> final
+	class YUNI_DECL Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void> final
 	{
 	public:
 		//! The Bind Type
@@ -15227,7 +15227,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -15258,7 +15258,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13),I>::Type Type;
@@ -15268,7 +15268,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -15290,7 +15290,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U),I>::Type Type;
@@ -15560,7 +15560,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 14 arguments (Specialization)
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	class Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT> final
+	class YUNI_DECL Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT> final
 	{
 	public:
 		//! The Bind Type
@@ -15578,7 +15578,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -15609,7 +15609,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13),I>::Type Type;
@@ -15619,7 +15619,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -15641,7 +15641,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, U),I>::Type Type;
@@ -15911,7 +15911,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 15 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	class Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void> final
+	class YUNI_DECL Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void> final
 	{
 	public:
 		//! The Bind Type
@@ -15929,7 +15929,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -15960,7 +15960,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14),I>::Type Type;
@@ -15970,7 +15970,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -15992,7 +15992,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U),I>::Type Type;
@@ -16262,7 +16262,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 15 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	class Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void> final
+	class YUNI_DECL Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void> final
 	{
 	public:
 		//! The Bind Type
@@ -16280,7 +16280,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -16311,7 +16311,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14),I>::Type Type;
@@ -16321,7 +16321,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -16343,7 +16343,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U),I>::Type Type;
@@ -16613,7 +16613,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 15 arguments (Specialization)
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	class Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT> final
+	class YUNI_DECL Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT> final
 	{
 	public:
 		//! The Bind Type
@@ -16631,7 +16631,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -16662,7 +16662,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14),I>::Type Type;
@@ -16672,7 +16672,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -16694,7 +16694,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, U),I>::Type Type;
@@ -16964,7 +16964,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 16 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	class Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void> final
+	class YUNI_DECL Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void> final
 	{
 	public:
 		//! The Bind Type
@@ -16982,7 +16982,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -17013,7 +17013,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15),I>::Type Type;
@@ -17023,7 +17023,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -17045,7 +17045,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U),I>::Type Type;
@@ -17315,7 +17315,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 16 arguments (Specialization)
 	*/
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	class Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void> final
+	class YUNI_DECL Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void> final
 	{
 	public:
 		//! The Bind Type
@@ -17333,7 +17333,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -17364,7 +17364,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15),I>::Type Type;
@@ -17374,7 +17374,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -17396,7 +17396,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U),I>::Type Type;
@@ -17666,7 +17666,7 @@ namespace Yuni
 	** \brief Bind to a function/member with 16 arguments (Specialization)
 	*/
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	class Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT> final
+	class YUNI_DECL Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT> final
 	{
 	public:
 		//! The Bind Type
@@ -17684,7 +17684,7 @@ namespace Yuni
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -17715,7 +17715,7 @@ namespace Yuni
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15),I>::Type Type;
@@ -17725,7 +17725,7 @@ namespace Yuni
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -17747,7 +17747,7 @@ namespace Yuni
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, U),I>::Type Type;

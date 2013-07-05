@@ -8,7 +8,7 @@
 		** \tparam C Any class
 		*/
 		template<class C>
-		struct PointerToMember
+		struct PointerToMember final
 		{
 			//! Mere type for C
 			typedef typename Static::Remove::All<C>::Type Class;
@@ -39,7 +39,7 @@
 		** \tparam I Index of the argument (zero-based)
 		*/
 		template<int I>
-		struct Argument
+		struct Argument final
 		{
 			//! Type of the argument at position I (zero-based)
 			typedef typename Private::BindImpl::Argument<R(<%=generator.list(i)%>),I>::Type Type;
@@ -49,7 +49,7 @@
 		** \brief Types when an additional user data is present
 		*/
 		template<class U>
-		struct WithUserData
+		struct WithUserData final
 		{
 			//! The most suitable type as a parameter
 			typedef typename Private::BindImpl::Parameter<U>::Type ParameterType;
@@ -71,7 +71,7 @@
 			** \tparam I Index of the argument (zero-based)
 			*/
 			template<int I>
-			struct Argument
+			struct Argument final
 			{
 				//! Type of the argument at position I
 				typedef typename Private::BindImpl::Argument<R(<%=generator.list(i,'A', "", ", ")%>U),I>::Type Type;
