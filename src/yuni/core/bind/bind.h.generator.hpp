@@ -120,7 +120,7 @@ namespace Yuni
 	** \brief Bind to a function/member with <%=generator.xArgumentsToStr(i)%> (Specialization)
 	*/
 	template<<%=tmpl[0]%>>
-	class Bind<<%=tmpl[1]%>, <%=tmpl[2]%>> final
+	class YUNI_DECL Bind<<%=tmpl[1]%>, <%=tmpl[2]%>> final
 	{
 	public:
 		//! The Bind Type
