@@ -252,6 +252,9 @@ namespace UI
 		//! Set a view active
 		bool activeView(const View::Ptr& view);
 
+		//! Attach an existing view to this window
+		void attachView(const View::Ptr& view);
+
 		//! Draw one view
 		void drawView(const UUID& id) const;
 

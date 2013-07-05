@@ -62,16 +62,8 @@ namespace UI
 	View::Ptr RenderWindow::createView(int x, int y, uint w, uint h, uint8 z)
 	{
 		View::Ptr newView = new View(x, y, w, h, z);
-		View::List::iterator end = pViewList.end();
-		for (View::List::iterator it = pViewList.begin(); end != it; ++it)
-		{
-			if ((*it)->z() > z)
-			{
-				pViewList.insert(it, 1, newView);
-				return newView;
-			}
-		}
-		pViewList.push_back(newView);
+		newView->initShaders();
+		attachView(newView);
 		return newView;
 	}
 
@@ -145,6 +137,22 @@ namespace UI
 			}
 		}
 		return false;
+	}
+
+
+	void RenderWindow::attachView(const View::Ptr& view)
+	{
+		uint8 z = view->z();
+		View::List::iterator end = pViewList.end();
+		for (View::List::iterator it = pViewList.begin(); end != it; ++it)
+		{
+			if ((*it)->z() > z)
+			{
+				pViewList.insert(it, 1, view);
+				return;
+			}
+		}
+		pViewList.push_back(view);
 	}
 
 

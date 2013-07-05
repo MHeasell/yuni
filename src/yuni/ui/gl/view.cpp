@@ -26,11 +26,8 @@ namespace UI
 	{}
 
 
-	void View::draw() const
+	bool View::initShaders()
 	{
-		if (!pVisible)
-			return;
-
 		// Shaders are created here temporarily, because creation in the constructor requires
 		// a GL context that the first created view does not have yet
 		if (!pTextShaders && !pPictureShaders)
@@ -43,7 +40,7 @@ namespace UI
 			if (!pTextShaders->load())
 			{
 				std::cerr << pTextShaders->errorMessage();
-				return;
+				return false;
 			}
 			pTextShaders->activate();
 			pTextShaders->deactivate();
@@ -55,16 +52,26 @@ namespace UI
 			if (!pPictureShaders->load())
 			{
 				std::cerr << pPictureShaders->errorMessage();
-				return;
+				return false;
 			}
 			pPictureShaders->activate();
 			pPictureShaders->bindUniform("Texture0", Gfx3D::Vertex<>::vaTexture0);
 			pPictureShaders->deactivate();
 		}
+		return true;
+	}
+
+
+	void View::draw() const
+	{
+		if (!pVisible)
+			return;
+
 
 		// Clear depth buffer
 		::glClear(GL_DEPTH_BUFFER_BIT);
 
+		/*
 		if (!(!pCamera))
 		{
 			// Reset The Current Viewport
@@ -83,33 +90,34 @@ namespace UI
 			::glLoadIdentity();
 
 			// Apply the camera rotation
-			// const Yuni::Vector3D<>& camRot = pCamera->rotation();
-			// ::glRotatef(360.0f - camRot.x, 1.0f, 0.0f, 0.0f);
-			// ::glRotatef(360.0f - camRot.y, 0.0f, 1.0f, 0.0f);
-			// ::glRotatef(360.0f - camRot.z, 0.0f, 0.0f, 1.0f);
+			const Yuni::Vector3D<>& camRot = pCamera->rotation();
+			::glRotatef(360.0f - camRot.x, 1.0f, 0.0f, 0.0f);
+			::glRotatef(360.0f - camRot.y, 0.0f, 1.0f, 0.0f);
+			::glRotatef(360.0f - camRot.z, 0.0f, 0.0f, 1.0f);
 
 
-			// Draw the skybox
-			// if (!(!pScene))
-			// {
-			// 	const Yuni::Point3D<>& camPos = pCamera->position();
-			// 	const Yuni::Vector3D<>& camView = pCamera->direction();
-			// 	const Yuni::Vector3D<>& camUp = pCamera->up();
-			// 	// Look at
-			// 	::gluLookAt(camPos.x, camPos.y, camPos.z,
-			// 		camView.x + camPos.x, camView.y + camPos.y, camView.z + camPos.z,
-			// 		camUp.z, camUp.y, camUp.z);
+			Draw the skybox
+			if (!(!pScene))
+			{
+				const Yuni::Point3D<>& camPos = pCamera->position();
+				const Yuni::Vector3D<>& camView = pCamera->direction();
+				const Yuni::Vector3D<>& camUp = pCamera->up();
+				// Look at
+				::gluLookAt(camPos.x, camPos.y, camPos.z,
+					camView.x + camPos.x, camView.y + camPos.y, camView.z + camPos.z,
+					camUp.z, camUp.y, camUp.z);
 
-			// 	::glTranslatef(camPos.x, camPos.y, camPos.z);
+				::glTranslatef(camPos.x, camPos.y, camPos.z);
 
-			// 	pScene->drawSky();
+				pScene->drawSky();
 
-			// 	// Apply the camera translation
-			// 	::glTranslatef(-camPos.x, -camPos.y, -camPos.z);
+				// Apply the camera translation
+				::glTranslatef(-camPos.x, -camPos.y, -camPos.z);
 
-			// 	pScene->draw();
-			// }
+				pScene->draw();
+			}
 		}
+		*/
 
 		draw2D();
 	}
