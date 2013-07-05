@@ -23,10 +23,14 @@ namespace Gfx3D
 	public:
 		//! ID type
 		typedef uint  ID;
+		enum
+		{
+			invalidID = (uint) -1,
+		};
 
 	public:
 		//! Constructor
-		IShader(): pID(-1)
+		IShader(): pID((uint) -1)
 		{}
 		//! Virtual destructor
 		virtual ~IShader() {}
@@ -38,13 +42,13 @@ namespace Gfx3D
 		virtual bool loadFromMemory(const AnyString& source) = 0;
 
 		//! Is the shader valid ?
-		bool valid() const { return pID >= 0; }
+		bool valid() const { return pID != (uint) -1; }
 
 		//! Get the ID
-		ID id() const { return pID; }
+		uint id() const { return pID; }
 
 	protected:
-		int pID;
+		uint pID;
 
 		//! Friend declaration : ShaderProgram
 		friend class ShaderProgram;
@@ -55,7 +59,7 @@ namespace Gfx3D
 	/*!
 	** \brief Vertex shader loading
 	*/
-	class VertexShader: public IShader
+	class VertexShader final : public IShader
 	{
 	public:
 		// Smart pointer
@@ -66,13 +70,13 @@ namespace Gfx3D
 
 	public:
 		//! Constructor
-		VertexShader();
+		VertexShader() {}
 		VertexShader(const AnyString& filePath);
 		//! Virtual destructor
 		virtual ~VertexShader();
 
-		virtual bool loadFromFile(const AnyString& filePath);
-		virtual bool loadFromMemory(const AnyString& source);
+		virtual bool loadFromFile(const AnyString& filePath) override;
+		virtual bool loadFromMemory(const AnyString& source) override;
 
 	}; // class VertexShader
 
@@ -80,7 +84,7 @@ namespace Gfx3D
 	/*!
 	** \brief Fragment shader loading
 	*/
-	class FragmentShader: public IShader
+	class FragmentShader final : public IShader
 	{
 	public:
 		// Smart pointer
@@ -91,13 +95,13 @@ namespace Gfx3D
 
 	public:
 		//! Constructor
-		FragmentShader();
+		FragmentShader() {}
 		FragmentShader(const AnyString& filePath);
 		//! Virtual destructor
 		virtual ~FragmentShader();
 
-		virtual bool loadFromFile(const AnyString& filePath);
-		virtual bool loadFromMemory(const AnyString& source);
+		virtual bool loadFromFile(const AnyString& filePath) override;
+		virtual bool loadFromMemory(const AnyString& source) override;
 
 	}; // class FragmentShader
 
@@ -105,7 +109,7 @@ namespace Gfx3D
 	/*!
 	** \brief Compute shader loading
 	*/
-	class ComputeShader: public IShader
+	class ComputeShader final : public IShader
 	{
 	public:
 		// Smart pointer
@@ -113,15 +117,19 @@ namespace Gfx3D
 
 	public:
 		//! Constructor
-		ComputeShader();
+		ComputeShader() {}
 		ComputeShader(const AnyString& filePath);
 		//! Virtual destructor
 		virtual ~ComputeShader();
 
-		virtual bool loadFromFile(const AnyString& filePath);
-		virtual bool loadFromMemory(const AnyString& source);
+		virtual bool loadFromFile(const AnyString& filePath) override;
+		virtual bool loadFromMemory(const AnyString& source) override;
 
 	}; // class ComputeShader
+
+
+
+
 
 
 } // namespace Gfx3D

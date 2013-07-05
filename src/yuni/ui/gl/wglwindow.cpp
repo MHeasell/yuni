@@ -1,5 +1,4 @@
 #include <yuni/yuni.h>
-#include <yuni/core/logs.h>
 #include <yuni/core/string.h>
 #include <yuni/core/string/wstring.h>
 #include <yuni/private/graphics/opengl/glew/glew.h>
@@ -209,7 +208,7 @@ namespace UI
 	void WGLWindow::RegisterWindow(HWND handle, WGLWindow* window)
 	{
 		// If handle is already in the list, it will be overwritten
-		if (nullptr != handle && window)
+		if (nullptr != handle and window)
 			sWindowList[handle] = window;
 	}
 
@@ -230,7 +229,7 @@ namespace UI
 	{
 		WGLWindow* window = Yuni::UI::WGLWindow::FindWindow(handle);
 
-		if (!window || !::IsWindowVisible(handle))
+		if (!window or !::IsWindowVisible(handle))
 			return ::DefWindowProc(handle, uMsg, wParam, lParam);
 
 		switch (uMsg)
@@ -455,9 +454,9 @@ namespace UI
 		wc.lpszClassName = L"OpenGL";
 
 		// Attempt to register the Window Class only when we have no window yet
-		if (!WindowCount() && !::RegisterClassW(&wc))
+		if (!WindowCount() and !::RegisterClassW(&wc))
 		{
-			logs.error() << "Window init error : Failed to register the window class.";
+			std::cerr << "Window init error : Failed to register the window class." << std::endl;
 			return false;
 		}
 
@@ -481,12 +480,16 @@ namespace UI
 		::DEVMODE deviceMode;
 		::memset(&deviceMode, 0, sizeof(deviceMode));
 		deviceMode.dmSize = (WORD)sizeof(deviceMode);
+
 		bool found;
-		for (int i = 0; !found && ::EnumDisplaySettings(monitorInfo.szDevice, i, &deviceMode); ++i)
+		for (int i = 0; not found and ::EnumDisplaySettings(monitorInfo.szDevice, i, &deviceMode); ++i)
+		{
 			found = (deviceMode.dmPelsWidth == (DWORD)pResWidth) &&
 				(deviceMode.dmPelsHeight == (DWORD)pResHeight) &&
 				(deviceMode.dmBitsPerPel == (DWORD)pBitDepth);
-		if (!found)
+		}
+
+		if (not found)
 		{
 			::ShowWindow(pHWnd, SW_SHOW);
 			return false;
@@ -501,26 +504,26 @@ namespace UI
 		if (ret != DISP_CHANGE_SUCCESSFUL)
 		{
 			// If the mode fails, use Windowed Mode.
-			logs.error() << "Window init error : The requested full-screen mode is not supported !";
+			std::cerr << "Window init error : The requested full-screen mode is not supported !" << std::endl;
 			switch (ret)
 			{
 				case DISP_CHANGE_BADFLAGS:
-					logs.error() << "!! An invalid set of flags was passed in.";
+					std::cerr << "!! An invalid set of flags was passed in." << std::endl;
 					break;
 				case DISP_CHANGE_BADMODE:
-					logs.error() << "!! The graphics mode is not supported. ";
+					std::cerr << "!! The graphics mode is not supported. " << std::endl;
 					break;
 				case DISP_CHANGE_BADPARAM:
-					logs.error() << "!! An invalid parameter was passed in. This can include an invalid flag or combination of flags. ";
+					std::cerr << "!! An invalid parameter was passed in. This can include an invalid flag or combination of flags. " << std::endl;
 					break;
 				case DISP_CHANGE_FAILED:
-					logs.error() << "!! The display driver failed the specified graphics mode. ";
+					std::cerr << "!! The display driver failed the specified graphics mode. " << std::endl;
 					break;
 				case DISP_CHANGE_NOTUPDATED:
-					logs.error() << "!! Windows NT/2000/XP: Unable to write settings to the registry. ";
+					std::cerr << "!! Windows NT/2000/XP: Unable to write settings to the registry. " << std::endl;
 					break;
 				case DISP_CHANGE_RESTART:
-					logs.error() << "!! The computer must be restarted in order for the graphics mode to work. ";
+					std::cerr << "!! The computer must be restarted in order for the graphics mode to work. " << std::endl;
 					break;
 			};
 
@@ -605,8 +608,8 @@ namespace UI
 			windowRect.right - windowRect.left, windowRect.bottom - windowRect.top, // Dimensions
 			nullptr, nullptr, pHInstance, nullptr)))
 		{
-			logs.error() << "Window init error : Window creation failed !";
-			logs.error() << "Error : \"" << GetLastError() << "\"";
+			std::cerr << "Window init error : Window creation failed !" << std::endl;
+			std::cerr << "Error : \"" << GetLastError() << "\"" << std::endl;
 			kill();
 			return false;
 		}
@@ -617,7 +620,7 @@ namespace UI
 		// Get the Device Context
 		if (!(pHDC = ::GetDC(pHWnd)))
 		{
-			logs.error() << "Window init error : Can't create a Device Context !";
+			std::cerr << "Window init error : Can't create a Device Context !" << std::endl;
 			kill();
 			return false;
 		}
@@ -663,9 +666,9 @@ namespace UI
 			return false;
 
 		// Create a Rendering Context if necessary
-		if ((!pHRC || !keepContext) && !(pHRC = ::wglCreateContext(pHDC)))
+		if ((!pHRC or !keepContext) and !(pHRC = ::wglCreateContext(pHDC)))
 		{
-			logs.error() << "Window init error : Can't create a GL rendering context !";
+			std::cerr << "Window init error : Can't create a GL rendering context !" << std::endl;
 			kill();
 			return false;
 		}
@@ -673,13 +676,13 @@ namespace UI
 		// Activate the Rendering Context
 		if (!::wglMakeCurrent(pHDC, pHRC))
 		{
-			logs.error() << "Window init error : Can't activate the GL rendering context !";
+			std::cerr << "Window init error : Can't activate the GL rendering context !" << std::endl;
 			kill();
 			return false;
 		}
 
 		// Get the pixel format, try multisampling if asked for
-		if (!pHasFSAA || !initMultisamplePixelFormat(pfd))
+		if (!pHasFSAA or !initMultisamplePixelFormat(pfd))
 		{
 			pHasFSAA = false;
 			if (!initDefaultPixelFormat(pfd))
@@ -699,7 +702,7 @@ namespace UI
 		// Initialize our newly created GL window
 		if (!GLWindow::initialize())
 		{
-			logs.error() << "OpenGL Initialization Failed !";
+			std::cerr << "OpenGL Initialization Failed !" << std::endl;
 			kill();
 			return false;
 		}
@@ -716,11 +719,11 @@ namespace UI
 
 	bool WGLWindow::initDefaultPixelFormat(const PIXELFORMATDESCRIPTOR& pfd)
 	{
-		unsigned int pixelFormat;
+		uint pixelFormat;
 		// Did Windows find a matching pixel format?
 		if (!(pixelFormat = ::ChoosePixelFormat(pHDC, &pfd)))
 		{
-			logs.error() << "Window init error : Cannot find a suitable Pixel Format !";
+			std::cerr << "Window init error : Cannot find a suitable Pixel Format !" << std::endl;
 			kill();
 			return false;
 		}
@@ -728,7 +731,7 @@ namespace UI
 		// Are we able to set the pixel format?
 		if (!::SetPixelFormat(pHDC, pixelFormat, &pfd))
 		{
-			logs.error() << "Window init error : Failed to set the Pixel Format !";
+			std::cerr << "Window init error : Failed to set the Pixel Format !" << std::endl;
 			kill();
 			return false;
 		}
@@ -741,7 +744,7 @@ namespace UI
 		// Make sure we have multisampling support
 		if (!::wglewIsSupported("WGL_ARB_multisample"))
 		{
-			logs.error() << "Window init error : Multisampling is not available, falling back to standard pixel format !";
+			std::cerr << "Window init error : Multisampling is not available, falling back to standard pixel format !" << std::endl;
 			return false;
 		}
 
@@ -774,9 +777,11 @@ namespace UI
 		// Check if we can get a Pixel Format for 4 samples
 		bool valid = wglChoosePixelFormatARB(pHDC, iAttributes, fAttributes, 1, &pixelFormat, &numFormats);
 		// Check that the call succeeded and our format count is greater than 1
-		if (valid && numFormats >= 1)
+		if (valid and numFormats >= 1)
 		{
-			logs.info() << "4x FSAA activated !";
+			# ifndef NDEBUG
+			std::cout << "4x FSAA activated !" << std::endl;
+			# endif
 			return true;
 		}
 
@@ -784,14 +789,16 @@ namespace UI
 		iAttributes[19] = 2;
 		valid = wglChoosePixelFormatARB(pHDC, iAttributes, fAttributes, 1, &pixelFormat, &numFormats);
 		// Check that the call succeeded and our format count is greater than 1
-		if (valid && numFormats >= 1)
+		if (valid and numFormats >= 1)
 		{
-			logs.warning() << "Window init : Failed to set up 4-sample multisampling, falling back to 2-sample.";
-			logs.info() << "2x FSAA activated !";
+			std::cerr << "Window init : Failed to set up 4-sample multisampling, falling back to 2-sample." << std::endl;
+			# ifndef NDEBUG
+			std::cout << "2x FSAA activated !" << std::endl;
+			# endif
 			return true;
 		}
 
-		logs.error() << "Window init error : Failed to set up multisampling !";
+		std::cerr << "Window init error : Failed to set up multisampling !" << std::endl;
 		return false;
 	}
 
@@ -804,18 +811,14 @@ namespace UI
 		if (hIcon)
 			::SendMessage(pHWnd, WM_SETICON, ICON_BIG, (LPARAM)hIcon);
 		else
-		{
-			logs.error() << "Error : Could not load large icon : \"" << path << "\"";
-		}
+			std::cerr << "Error : Could not load large icon : \"" << path << "\"" << std::endl;
 
 		// Load 16x16 icon (window title bar and task bar)
 		const HICON hIconSmall = (HICON)::LoadImage(nullptr, wstr.c_str(), IMAGE_ICON, 16, 16, LR_LOADFROMFILE);
 		if (hIconSmall)
 			::SendMessage(pHWnd, WM_SETICON, ICON_SMALL, (LPARAM)hIconSmall);
 		else
-		{
-			logs.error() << "Error : Could not load small icon : \"" << path << "\"";
-		}
+			std::cerr << "Error : Could not load small icon : \"" << path << "\"" << std::endl;
 	}
 
 
@@ -915,13 +918,13 @@ namespace UI
 		}
 
 		// Release the DC And RC contexts
-		if (pHRC && !::wglMakeCurrent(nullptr, nullptr))
-			logs.error() << "GL closing error : Could not disable current context !";
+		if (pHRC and !::wglMakeCurrent(nullptr, nullptr))
+			std::cerr << "GL closing error : Could not disable current context !" << std::endl;
 
 		// Release the DC
-		if (pHDC && !ReleaseDC(pHWnd, pHDC))
+		if (pHDC and !ReleaseDC(pHWnd, pHDC))
 		{
-			logs.error() << "Window closing error : Device Context release failed.";
+			std::cerr << "Window closing error : Device Context release failed." << std::endl;
 			pHDC = nullptr;
 		}
 
@@ -929,9 +932,9 @@ namespace UI
 		UnregisterWindow(pHWnd);
 
 		// Destroy the window
-		if (pHWnd && !DestroyWindow(pHWnd))
+		if (pHWnd and !DestroyWindow(pHWnd))
 		{
-			logs.error() << "Window closing error : Could not destroy window !";
+			std::cerr << "Window closing error : Could not destroy window !" << std::endl;
 			pHWnd = nullptr;
 		}
 	}
@@ -944,16 +947,16 @@ namespace UI
 		GLWindow::kill();
 
 		// Delete the RC
-		if (pHRC && !::wglDeleteContext(pHRC))
+		if (pHRC and !::wglDeleteContext(pHRC))
 		{
-			logs.error() << "Window closing error : Rendering Context release failed !";
+			std::cerr << "Window closing error : Rendering Context release failed !" << std::endl;
 			pHRC = nullptr;
 		}
 
 		// Unregister Window Class only when on the last window
-		if (WindowCount() == 1 && !UnregisterClass(L"OpenGL", pHInstance))
+		if (WindowCount() == 1 and not UnregisterClass(L"OpenGL", pHInstance))
 		{
-			logs.error() << "Window closing error : Could not unregister Window Class !";
+			std::cerr << "Window closing error : Could not unregister Window Class !" << std::endl;
 			pHInstance = nullptr;
 		}
 
@@ -962,8 +965,8 @@ namespace UI
 	}
 
 
-	RenderWindow* WindowFactory::CreateGLWindow(const AnyString& title, unsigned int width,
-		unsigned int height, unsigned int bits, bool fullScreen)
+	RenderWindow* WindowFactory::CreateGLWindow(const AnyString& title, uint width,
+		uint height, uint bits, bool fullScreen)
 	{
 		RenderWindow* wnd = new WGLWindow(title, width, height, bits, fullScreen);
 		if (!wnd->initialize())
@@ -974,6 +977,8 @@ namespace UI
 		}
 		return wnd;
 	}
+
+
 
 
 } // namespace UI

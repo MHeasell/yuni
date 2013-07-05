@@ -24,7 +24,7 @@ namespace UI
 
 	public:
 		//! Constructor
-		WGLWindow(const AnyString& title, unsigned int width, unsigned int height, unsigned int bitDepth, bool fullScreen):
+		WGLWindow(const AnyString& title, uint width, uint height, uint bitDepth, bool fullScreen):
 			GLWindow(title, width, height, bitDepth, fullScreen)
 		{
 			pMouse = new Input::WinMouse();
