@@ -27,7 +27,7 @@ namespace Creation
 	** \tparam T The data type
 	*/
 	template <class T>
-	class EmptyConstructor
+	class EmptyConstructor final
 	{
 	public:
 		//! Creation of the data
@@ -36,6 +36,8 @@ namespace Creation
 		//! Destruction of the data
 		template<class U> static void Destroy(U* data) { delete data; }
 	};
+
+
 
 
 

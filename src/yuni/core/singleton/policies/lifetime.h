@@ -27,7 +27,7 @@ namespace Lifetime
 	** \ingroup Policies
 	*/
 	template<class T>
-	class Normal
+	class Normal final
 	{
 	public:
 		/*!
@@ -48,7 +48,7 @@ namespace Lifetime
 	** \ingroup Policies
 	*/
 	template<class T>
-	class Phoenix
+	class Phoenix final
 	{
 	public:
 		/*!
@@ -71,7 +71,7 @@ namespace Lifetime
 	** Among singletons with the same longevity, last in first out order is ensured
 	*/
 	template<class T>
-	class WithLongevity
+	class WithLongevit final
 	{
 	public:
 		/*!
@@ -91,7 +91,7 @@ namespace Private
 
 
 	template<class T>
-	static void SetLongevity(T* pInstance, uint longevity)
+	static void SetLongevity(T* /*pInstance*/, uint /*longevity*/)
 	{
 
 	}

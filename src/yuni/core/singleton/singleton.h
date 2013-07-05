@@ -76,24 +76,14 @@ namespace Yuni
 		Singleton();
 
 	private:
-		/*!
-		** Destroy the stored instance
-		*/
+		//! Destroy the stored instance
 		static void DestroyInstance();
 
-
 	private:
-		/*!
-		** \brief Unique instance of the class
-		*/
+		//! Unique instance of the class
 		static VolatilePtr pInstance;
-
-		/*!
-		** \brief Has the instance already been destroyed once ?
-		*/
+		//! Has the instance already been destroyed once ?
 		static bool pDestroyed;
-
-		template<class U> friend class CreationT;
 
 	}; // class Singleton
 
