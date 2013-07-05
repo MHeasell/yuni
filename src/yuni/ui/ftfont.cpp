@@ -145,7 +145,7 @@ namespace UI
 			pFace(nullptr),
 			pValid(false)
 		{
-			if (not FT(() or ::FT_New_Face(FT(), faceName.c_str(), 0, &pFace) or !pFace)
+			if (not FT() or ::FT_New_Face(FT(), faceName.c_str(), 0, &pFace) or  not pFace)
 			{
 				std::cerr << "Could not open font \"" << pFace << "\" !" << std::endl;
 				return;
@@ -168,7 +168,7 @@ namespace UI
 		//! Get a glyph
 		Glyph::Ptr getGlyph(unsigned long charCode) const
 		{
-			if (not pValid()
+			if (not pValid)
 				return nullptr;
 
 			// Search in the cache
@@ -193,7 +193,7 @@ namespace UI
 		{
 			x = 0;
 			y = 0;
-			if (not pValid( or !FT_HAS_KERNING(pFace))
+			if (not pValid or !FT_HAS_KERNING(pFace))
 				return;
 			FT_Vector kerning;
 			if (::FT_Get_Kerning(pFace, leftGlyph, rightGlyph, FT_KERNING_DEFAULT, &kerning))
@@ -248,7 +248,7 @@ namespace UI
 
 	void FTFont::draw(const AnyString& text, Gfx3D::Texture::Ptr& texture, bool useKerning) const
 	{
-		if (not valid(())
+		if (not valid())
 			return;
 
 		uint width = 0u;
