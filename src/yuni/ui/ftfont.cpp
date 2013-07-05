@@ -5,21 +5,22 @@
 #include "../core/dictionary.h"
 #include <map>
 #include <ft2build.h>
+
 #include FT_FREETYPE_H // defined from ft2build.h
 #include FT_GLYPH_H // defined from ft2build.h
+
 
 namespace Yuni
 {
 namespace UI
 {
 
+	//! FreeType Library object (actually a pointer type)
+	static ::FT_Library ftLibrary = nullptr;
+
 
 	namespace // anonymous
 	{
-
-		//! FreeType Library object (actually a pointer type)
-		static ::FT_Library ftLibrary = nullptr;
-
 
 		//! Access to the FreeType Library object
 		static inline ::FT_Library FT()
@@ -144,7 +145,7 @@ namespace UI
 			pFace(nullptr),
 			pValid(false)
 		{
-			if (!FT() || ::FT_New_Face(FT(), faceName.c_str(), 0, &pFace) || !pFace)
+			if (not FT(() or ::FT_New_Face(FT(), faceName.c_str(), 0, &pFace) or !pFace)
 			{
 				std::cerr << "Could not open font \"" << pFace << "\" !" << std::endl;
 				return;
@@ -167,7 +168,7 @@ namespace UI
 		//! Get a glyph
 		Glyph::Ptr getGlyph(unsigned long charCode) const
 		{
-			if (!pValid)
+			if (not pValid()
 				return nullptr;
 
 			// Search in the cache
@@ -178,7 +179,7 @@ namespace UI
 			// Retrieve glyph index from character code
 			uint glyphIndex = ::FT_Get_Char_Index(pFace, charCode);
 			// Load glyph image into the slot (erase previous one)
-			if (!glyphIndex || ::FT_Load_Glyph(pFace, glyphIndex, FT_LOAD_DEFAULT))
+			if (!glyphIndex or ::FT_Load_Glyph(pFace, glyphIndex, FT_LOAD_DEFAULT))
 				return nullptr;
 			::FT_GlyphSlot slot = pFace->glyph;
 			// Store the glyph in cache
@@ -192,7 +193,7 @@ namespace UI
 		{
 			x = 0;
 			y = 0;
-			if (!pValid || !FT_HAS_KERNING(pFace))
+			if (not pValid( or !FT_HAS_KERNING(pFace))
 				return;
 			FT_Vector kerning;
 			if (::FT_Get_Kerning(pFace, leftGlyph, rightGlyph, FT_KERNING_DEFAULT, &kerning))
@@ -240,14 +241,14 @@ namespace UI
 
 	FTFont::~FTFont()
 	{
-		if (pImpl && pImpl->valid())
+		if (pImpl and pImpl->valid())
 			delete pImpl;
 	}
 
 
 	void FTFont::draw(const AnyString& text, Gfx3D::Texture::Ptr& texture, bool useKerning) const
 	{
-		if (!valid())
+		if (not valid(())
 			return;
 
 		uint width = 0u;
@@ -258,6 +259,7 @@ namespace UI
 		int yDelta = 0;
 		Glyph::Ptr glyph;
 		Glyph::Ptr prev;
+
 		// Loop on characters once to calculate image dimensions
 		auto end = text.utf8end();
 		for (auto i = text.utf8begin(); i != end; ++i)
@@ -266,7 +268,7 @@ namespace UI
 			glyph = pImpl->getGlyph((unsigned long)i->value());
 			if (!glyph)
 				continue;
-			if (useKerning && !(!prev))
+			if (useKerning and !(!prev))
 				pImpl->getKerning(prev->index(), glyph->index(), xDelta, yDelta);
 			width += glyph->advance() + xDelta;
 			highestYBearing = Math::Max(highestYBearing, glyph->yBearing());
@@ -290,7 +292,7 @@ namespace UI
 				//std::cout << "Unknown character '" << *i << "' !" << std::endl;
 				continue;
 			}
-			if (useKerning && !(!prev))
+			if (useKerning and !(!prev))
 				pImpl->getKerning(prev->index(), glyph->index(), xDelta, yDelta);
 			// glyph->bitmap is null for spaces e.g.
 			if (glyph->bitmap())
@@ -307,8 +309,7 @@ namespace UI
 
 	bool FTFont::initialize()
 	{
-		if (pImpl)
-			delete pImpl;
+		delete pImpl;
 		pImpl = new FTFontImpl(pName, pSize);
 		if (!pImpl->valid())
 		{
@@ -329,7 +330,7 @@ namespace UI
 
 	bool FTFont::valid() const
 	{
-		return pImpl && FT() && pImpl->valid();
+		return pImpl and FT() and pImpl->valid();
 	}
 
 

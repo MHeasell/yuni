@@ -20,13 +20,20 @@ namespace Gfx3D
 		pID(::glCreateProgram()),
 		pLinked(false)
 	{
-		VertexShader::Ptr vShader = new VertexShader();
-		if (!vShader->loadFromFile(vShaderPath))
+		VertexShader* vShader = new VertexShader();
+		if (not vShader->loadFromFile(vShaderPath))
+		{
+			delete vShader;
 			return;
+		}
 		pVertexShader = vShader;
-		FragmentShader::Ptr fShader = new FragmentShader();
-		if (!fShader->loadFromFile(fShaderPath))
+
+		FragmentShader* fShader = new FragmentShader();
+		if (not fShader->loadFromFile(fShaderPath))
+		{
+			delete fShader;
 			return;
+		}
 		pFragmentShader = fShader;
 	}
 
@@ -57,27 +64,29 @@ namespace Gfx3D
 		GLClearError();
 		pError.clear();
 		// If not yet linked, do it on-the-fly
-		if (!pLinked)
+		if (not pLinked)
 		{
 			// Make sure we have at least one of the three shaders
-			if ((!pVertexShader || !pVertexShader->pID) &&
-				(!pFragmentShader || !pFragmentShader->pID) &&
-				(!pComputeShader || !pComputeShader->pID))
+			if ((!pVertexShader or !pVertexShader->pID)
+				and (!pFragmentShader or !pFragmentShader->pID)
+				and (!pComputeShader or !pComputeShader->pID))
+			{
 				return false;
+			}
 
-			if (pVertexShader && pVertexShader->pID)
+			if (pVertexShader and pVertexShader->pID)
 			{
 				::glAttachShader(pID, pVertexShader->pID);
 				GLTestError("ShaderProgram::load, glAttachShader, attaching vertex shader");
 			}
 
-			if (pFragmentShader && pFragmentShader->pID)
+			if (pFragmentShader and pFragmentShader->pID)
 			{
 				::glAttachShader(pID, pFragmentShader->pID);
 				GLTestError("ShaderProgram::load, glAttachShader, attaching fragment shader");
 			}
 
-			if (pComputeShader && pComputeShader->pID)
+			if (pComputeShader and pComputeShader->pID)
 			{
 				::glAttachShader(pID, pComputeShader->pID);
 				GLTestError("ShaderProgram::load, glAttachShader, attaching compute shader");

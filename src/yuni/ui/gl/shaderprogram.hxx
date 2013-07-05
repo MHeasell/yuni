@@ -5,6 +5,7 @@
 # include "../../core/static/assert.h"
 # include "glerror.h"
 
+
 namespace Yuni
 {
 namespace Gfx3D
@@ -49,7 +50,7 @@ namespace Gfx3D
 	{
 		GLClearError();
 		GLint location = ::glGetUniformLocation(pID, name.c_str());
-		if (!GLTestError("ShaderProgram::bindUniform, glGetUniformLocation"))
+		if (not GLTestError("ShaderProgram::bindUniform, glGetUniformLocation"))
 			return;
 		::glUniform1i(location, value);
 		GLTestError("ShaderProgram::bindUniform, glUniform1i");
@@ -59,7 +60,7 @@ namespace Gfx3D
 	{
 		GLClearError();
 		GLint location = ::glGetUniformLocation(pID, name.c_str());
-		if (!GLTestError("ShaderProgram::bindUniform, glGetUniformLocation"))
+		if (not GLTestError("ShaderProgram::bindUniform, glGetUniformLocation"))
 			return;
 		::glUniform1f(location, value);
 	}
@@ -68,7 +69,7 @@ namespace Gfx3D
 	{
 		GLClearError();
 		GLint location = ::glGetUniformLocation(pID, name.c_str());
-		if (!GLTestError("ShaderProgram::bindUniform, glGetUniformLocation"))
+		if (not GLTestError("ShaderProgram::bindUniform, glGetUniformLocation"))
 			return;
 		::glUniform1ui(location, value);
 	}
@@ -86,7 +87,7 @@ namespace Gfx3D
 	{
 		GLClearError();
 		GLint location = ::glGetUniformLocation(pID, name.c_str());
-		if (!GLTestError("ShaderProgram::bindUniform, glGetUniformLocation"))
+		if (not GLTestError("ShaderProgram::bindUniform, glGetUniformLocation"))
 			return;
 		::glUniform3i(location, value.x, value.y, value.z);
 	}
@@ -96,7 +97,7 @@ namespace Gfx3D
 	{
 		GLClearError();
 		GLint location = ::glGetUniformLocation(pID, name.c_str());
-		if (!GLTestError("ShaderProgram::bindUniform, glGetUniformLocation"))
+		if (not GLTestError("ShaderProgram::bindUniform, glGetUniformLocation"))
 			return;
 		::glUniform3f(location, value.x, value.y, value.z);
 	}
@@ -106,7 +107,7 @@ namespace Gfx3D
 	{
 		GLClearError();
 		GLint location = ::glGetUniformLocation(pID, name.c_str());
-		if (!GLTestError("ShaderProgram::bindUniform, glGetUniformLocation"))
+		if (not GLTestError("ShaderProgram::bindUniform, glGetUniformLocation"))
 			return;
 		::glUniform3ui(location, value.x, value.y, value.z);
 	}
@@ -116,7 +117,7 @@ namespace Gfx3D
 	{
 		GLClearError();
 		GLint location = ::glGetUniformLocation(pID, name.c_str());
-		if (!GLTestError("ShaderProgram::bindUniform, glGetUniformLocation"))
+		if (not GLTestError("ShaderProgram::bindUniform, glGetUniformLocation"))
 			return;
 		::glUniform3f(location, value.red, value.green, value.blue);
 	}
@@ -126,7 +127,7 @@ namespace Gfx3D
 	{
 		GLClearError();
 		GLint location = ::glGetUniformLocation(pID, name.c_str());
-		if (!GLTestError("ShaderProgram::bindUniform, glGetUniformLocation"))
+		if (not GLTestError("ShaderProgram::bindUniform, glGetUniformLocation"))
 			return;
 		::glUniform4f(location, value.red, value.green, value.blue, value.alpha);
 	}
@@ -136,7 +137,7 @@ namespace Gfx3D
 	{
 		GLClearError();
 		GLint location = ::glGetUniformLocation(pID, name.c_str());
-		if (!GLTestError("ShaderProgram::bindUniform, glGetUniformLocation"))
+		if (not GLTestError("ShaderProgram::bindUniform, glGetUniformLocation"))
 			return;
 		::glUniform4f(location, v1, v2, v3, v4);
 	}
@@ -147,78 +148,80 @@ namespace Gfx3D
 	{
 		GLClearError();
 		GLint location = ::glGetUniformLocation(pID, name.c_str());
-		if (!GLTestError("ShaderProgram::bindUniformArray, glGetUniformLocation"))
+		if (not GLTestError("ShaderProgram::bindUniformArray, glGetUniformLocation"))
 			return;
 		switch (components)
 		{
 			case 1:
-				::glUniform1iv(location, count, array);
+				::glUniform1iv(location, (int) count, array);
 				break;
 			case 2:
-				::glUniform2iv(location, count, array);
+				::glUniform2iv(location, (int) count, array);
 				break;
 			case 3:
-				::glUniform3iv(location, count, array);
+				::glUniform3iv(location, (int) count, array);
 				break;
 			case 4:
-				::glUniform4iv(location, count, array);
+				::glUniform4iv(location, (int) count, array);
 				break;
 			default:
-				assert(false && "Invalid number of components : must be 1-4.");
+				assert(false and "Invalid number of components : must be 1-4.");
 		}
 	}
+
 
 	inline void ShaderProgram::bindUniformArray(const AnyString& name, uint count, uint components,
 		const float* array) const
 	{
 		GLClearError();
 		GLint location = ::glGetUniformLocation(pID, name.c_str());
-		if (!GLTestError("ShaderProgram::bindUniformArray, glGetUniformLocation"))
+		if (not GLTestError("ShaderProgram::bindUniformArray, glGetUniformLocation"))
 			return;
 
 		switch (components)
 		{
 			case 1:
-				::glUniform1fv(location, count, array);
+				::glUniform1fv(location, (int) count, array);
 				break;
 			case 2:
-				::glUniform2fv(location, count, array);
+				::glUniform2fv(location, (int) count, array);
 				break;
 			case 3:
-				::glUniform3fv(location, count, array);
+				::glUniform3fv(location, (int) count, array);
 				break;
 			case 4:
-				::glUniform4fv(location, count, array);
+				::glUniform4fv(location, (int) count, array);
 				break;
 			default:
-				assert(false && "Invalid number of components : must be 1-4.");
+				assert(false and "Invalid number of components : must be 1-4.");
 		}
 	}
+
 
 	inline void ShaderProgram::bindUniformArray(const AnyString& name, uint count, uint components,
 		const uint* array) const
 	{
-		assert(components >= 1 && components <= 4 && "Invalid number of components : must be 1-4.");
+		assert(components >= 1 and components <= 4 and "Invalid number of components : must be 1-4.");
 		GLClearError();
 		GLint location = ::glGetUniformLocation(pID, name.c_str());
-		if (!GLTestError("ShaderProgram::bindUniformArray, glGetUniformLocation"))
+		if (not GLTestError("ShaderProgram::bindUniformArray, glGetUniformLocation"))
 			return;
 		switch (components)
 		{
 			case 1:
-				::glUniform1uiv(location, count, array);
+				::glUniform1uiv(location, (int) count, array);
 				break;
 			case 2:
-				::glUniform2uiv(location, count, array);
+				::glUniform2uiv(location, (int) count, array);
 				break;
 			case 3:
-				::glUniform3uiv(location, count, array);
+				::glUniform3uiv(location, (int) count, array);
 				break;
 			case 4:
-				::glUniform4uiv(location, count, array);
+				::glUniform4uiv(location, (int) count, array);
 				break;
 			default:
-				assert(false && "Invalid number of components : must be 1-4.");
+				assert(false and "Invalid number of components : must be 1-4.");
 		}
 	}
 
@@ -229,11 +232,10 @@ namespace Gfx3D
 		GLClearError();
 		::glBindTexture(GL_TEXTURE_2D, texture->id());
 		::glBindImageTexture(0, texture->id(), 0, GL_FALSE, 0, GL_WRITE_ONLY, GL_RGBA8);
-		if (!GLTestError("ShaderProgram::bindImage, glBindImageTexture"))
+		if (not GLTestError("ShaderProgram::bindImage, glBindImageTexture"))
 			return;
 		bindUniform(name, value);
 	}
-
 
 
 	inline const String& ShaderProgram::errorMessage() const
@@ -276,6 +278,8 @@ namespace Gfx3D
 	{
 		return pComputeShader;
 	}
+
+
 
 
 

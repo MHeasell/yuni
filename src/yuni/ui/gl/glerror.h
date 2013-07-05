@@ -13,17 +13,17 @@ namespace Gfx3D
 
 	inline void GLClearError()
 	{
-# if !defined(NDEBUG)
+		# ifndef NDEBUG
 		::glGetError();
-# endif // DEBUG
+		# endif // DEBUG
 	}
 
 
 	inline bool GLTestError(const AnyString& location)
 	{
-# if !defined(NDEBUG)
+		# ifndef NDEBUG
 
-		GLint err = ::glGetError();
+		GLenum err = ::glGetError();
 		if (err == GL_NO_ERROR)
 			return true;
 
@@ -55,11 +55,11 @@ namespace Gfx3D
 			default:
 				errorText = "Unknown GL error";
 		}
-		Yuni::Logs::Logger<> logs;
-		logs.error() << errorText << " in " << location;
+
+		std::cerr << errorText << " in " << location;
 		return false;
 
-# endif // !NDEBUG
+		# endif // !NDEBUG
 		return true;
 	}
 
