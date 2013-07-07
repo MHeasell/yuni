@@ -36,6 +36,7 @@ if(Yuni_FOUND)
 	add_subdirectory(messaging)
 	add_subdirectory(extra)
 	add_subdirectory(dbi)
+	add_subdirectory(parser)
 
 else()
 

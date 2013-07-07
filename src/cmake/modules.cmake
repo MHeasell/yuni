@@ -13,6 +13,7 @@ if (WIN32 OR WIN64)
 	set(YUNICOMPONENT_NET               "yuni_net")
 	set(YUNICOMPONENT_MESSAGING         "yuni_messaging")
 	set(YUNICOMPONENT_DBI               "yuni_dbi")
+	set(YUNICOMPONENT_PARSER            "yuni_parser")
 else()
 	set(YUNICOMPONENT_CORE              "yuni-core")
 	set(YUNICOMPONENT_ALGORITHMS        "yuni-algorithms")
@@ -23,7 +24,8 @@ else()
 	set(YUNICOMPONENT_NET               "yuni-net")
 	set(YUNICOMPONENT_MESSAGING         "yuni-messaging")
 	set(YUNICOMPONENT_DBI               "yuni-dbi")
-endif()
+	set(YUNICOMPONENT_PARSER            "yuni-parser")
+endif ()
 
 
 
@@ -78,10 +80,14 @@ set(YUNI_MODULE_EXTRA_UUID                false)
 # Doc
 set(YUNI_MODULE_DOCUMENTATION             false)
 
-
+# Parser Generator 
+set(YUNI_MODULE_PARSER                    false)
 
 # Tests
 set(YUNI_TESTS   false)
+
+
+
 
 
 
@@ -110,6 +116,7 @@ set(YUNI_MODULE_LIST
 	# extra
 		uuid
 	docs
+	parser
 	)
 
 
@@ -118,7 +125,7 @@ set(YUNI_MODULE_LIST
 #
 # --- Command lines options ---
 #
-if(MODULES)
+if (MODULES)
 	set(KeywordError false)
 	string(REPLACE "," ";" MODULES "${MODULES}")
 	string(REPLACE " " ";" MODULES "${MODULES}")
@@ -128,19 +135,19 @@ if(MODULES)
 		set(KeywordIsKnown false)
 
 		# core
-		if("${it}" STREQUAL "core")
+		if ("${it}" STREQUAL "core")
 			set(YUNI_MODULE_CORE true)
 			set(KeywordIsKnown true)
-		endif()
+		endif ()
 		# -core
-		if("${it}" STREQUAL "-core")
+		if ("${it}" STREQUAL "-core")
 			set(KeywordIsKnown true)
 			YMESSAGE("[!!] Module: Impossible to disable the core module")
 			set(KeywordError true)
-		endif()
+		endif ()
 
 		# all
-		if("${it}" STREQUAL "all")
+		if ("${it}" STREQUAL "all")
 			set(YUNI_MODULE_CORE true)
 			#set(YUNI_MODULE_VFS true)
 			set(YUNI_MODULE_DEVICES true)
@@ -157,253 +164,265 @@ if(MODULES)
 			set(YUNI_MODULE_DOCUMENTATION true)
 			set(YUNI_MODULE_MARSHAL true)
 			set(YUNI_MODULE_DBI true)
+			set(YUNI_MODULE_PARSER true)
 			set(YUNI_TESTS true)
 			set(KeywordIsKnown true)
-		endif()
+		endif ()
 
 		# vfs
-		#if("${it}" STREQUAL "vfs")
+		#if ("${it}" STREQUAL "vfs")
 		#	set(YUNI_MODULE_VFS true)
 		#	set(KeywordIsKnown true)
-		#endif()
+		#endif ()
 		# -vfs
-		#if("${it}" STREQUAL "-vfs")
+		#if ("${it}" STREQUAL "-vfs")
 		#	set(YUNI_MODULE_VFS false)
 		#	set(KeywordIsKnown true)
-		#endif()
+		#endif ()
 
 		# vfs-local
-		#if("${it}" STREQUAL "vfs-local")
+		#if ("${it}" STREQUAL "vfs-local")
 		#	set(YUNI_MODULE_VFS true)
 		#	set(YUNI_MODULE_VFS_LOCAL true)
 		#	set(KeywordIsKnown true)
-		#endif()
+		#endif ()
 		# -vfs
-		#if("${it}" STREQUAL "-vfs-local")
+		#if ("${it}" STREQUAL "-vfs-local")
 		#	set(YUNI_MODULE_VFS_LOCAL false)
 		#	set(KeywordIsKnown true)
-		#endif()
+		#endif ()
 
 		# vm
-		if("${it}" STREQUAL "vm")
+		if ("${it}" STREQUAL "vm")
 			set(YUNI_MODULE_VM true)
 			set(KeywordIsKnown true)
-		endif()
+		endif ()
 		# -vm
-		if("${it}" STREQUAL "-vm")
+		if ("${it}" STREQUAL "-vm")
 			set(YUNI_MODULE_VM false)
 			set(KeywordIsKnown true)
-		endif()
+		endif ()
 
 		# dbi
-		if("${it}" STREQUAL "dbi")
+		if ("${it}" STREQUAL "dbi")
 			set(YUNI_MODULE_DBI true)
 			set(KeywordIsKnown true)
-		endif()
+		endif ()
 		# -dbi
-		if("${it}" STREQUAL "-dbi")
+		if ("${it}" STREQUAL "-dbi")
 			set(YUNI_MODULE_DBI false)
 			set(KeywordIsKnown true)
-		endif()
+		endif ()
 
 		# dbi-sqlite
-		if("${it}" STREQUAL "dbi-sqlite")
+		if ("${it}" STREQUAL "dbi-sqlite")
 			set(YUNI_MODULE_DBI_SQLITE true)
 			set(KeywordIsKnown true)
-		endif()
+		endif ()
 		# -dbi-sqlite
-		if("${it}" STREQUAL "-dbi-sqlite")
+		if ("${it}" STREQUAL "-dbi-sqlite")
 			set(YUNI_MODULE_DBI_SQLITE false)
 			set(KeywordIsKnown true)
-		endif()
+		endif ()
 
 		# marshal
-		if("${it}" STREQUAL "marshal")
+		if ("${it}" STREQUAL "marshal")
 			set(YUNI_MODULE_MARSHAL true)
 			set(KeywordIsKnown true)
-		endif()
+		endif ()
 		# -marshal
-		if("${it}" STREQUAL "-marshal")
+		if ("${it}" STREQUAL "-marshal")
 			set(YUNI_MODULE_MARSHAL false)
 			set(KeywordIsKnown true)
-		endif()
+		endif ()
 
 		# messaging
-		if("${it}" STREQUAL "messaging")
+		if ("${it}" STREQUAL "messaging")
 			set(YUNI_MODULE_MESSAGING true)
 			set(KeywordIsKnown true)
-		endif()
+		endif ()
 		# -messaging
-		if("${it}" STREQUAL "-messaging")
+		if ("${it}" STREQUAL "-messaging")
 			set(YUNI_MODULE_MESSAGING false)
 			set(KeywordIsKnown true)
-		endif()
+		endif ()
 
 		# ldo
-		if("${it}" STREQUAL "ldo")
+		if ("${it}" STREQUAL "ldo")
 			set(YUNI_MODULE_LDO true)
 			set(KeywordIsKnown true)
-		endif()
+		endif ()
 		# -ldo
-		if("${it}" STREQUAL "-ldo")
+		if ("${it}" STREQUAL "-ldo")
 			set(YUNI_MODULE_LDO false)
 			set(KeywordIsKnown true)
-		endif()
+		endif ()
 
 		# algorithms
-		if("${it}" STREQUAL "algorithms")
+		if ("${it}" STREQUAL "algorithms")
 			set(YUNI_MODULE_ALGORITHMS true)
 			set(KeywordIsKnown true)
-		endif()
+		endif ()
 		# -algorithms
-		if("${it}" STREQUAL "-algorithms")
+		if ("${it}" STREQUAL "-algorithms")
 			set(YUNI_MODULE_ALGORITHMS false)
 			set(KeywordIsKnown true)
-		endif()
+		endif ()
 
 
 		# display
-		if("${it}" STREQUAL "display")
+		if ("${it}" STREQUAL "display")
 			set(YUNI_MODULE_DEVICE_DISPLAY true)
 			set(KeywordIsKnown true)
-		endif()
+		endif ()
 		# -display
-		if("${it}" STREQUAL "-display")
+		if ("${it}" STREQUAL "-display")
 			set(YUNI_MODULE_DEVICE_DISPLAY false)
 			set(KeywordIsKnown true)
-		endif()
+		endif ()
 
 		# keyboard
-		if("${it}" STREQUAL "keyboard")
+		if ("${it}" STREQUAL "keyboard")
 			set(YUNI_MODULE_DEVICE_KEYBOARD true)
 			set(KeywordIsKnown true)
-		endif()
+		endif ()
 		# -keyboard
-		if("${it}" STREQUAL "-keyboard")
+		if ("${it}" STREQUAL "-keyboard")
 			set(YUNI_MODULE_DEVICE_KEYBOARD false)
 			set(KeywordIsKnown true)
-		endif()
+		endif ()
 
 		# mouse
-		if("${it}" STREQUAL "mouse")
+		if ("${it}" STREQUAL "mouse")
 			set(YUNI_MODULE_DEVICE_MOUSE true)
 			set(KeywordIsKnown true)
-		endif()
+		endif ()
 		# -mouse
-		if("${it}" STREQUAL "-mouse")
+		if ("${it}" STREQUAL "-mouse")
 			set(YUNI_MODULE_DEVICE_MOUSE false)
 			set(KeywordIsKnown true)
-		endif()
+		endif ()
 
 		# devices
-		if("${it}" STREQUAL "devices")
+		if ("${it}" STREQUAL "devices")
 			set(YUNI_MODULE_DEVICES true)
 			set(KeywordIsKnown true)
-		endif()
+		endif ()
 		# -devices
-		if("${it}" STREQUAL "-devices")
+		if ("${it}" STREQUAL "-devices")
 			set(YUNI_MODULE_DEVICES false)
 			set(KeywordIsKnown true)
-		endif()
+		endif ()
 
 
 		# net
-		if("${it}" STREQUAL "net")
+		if ("${it}" STREQUAL "net")
 			set(YUNI_MODULE_NET true)
 			set(KeywordIsKnown true)
-		endif()
+		endif ()
 		# -net
-		if("${it}" STREQUAL "-net")
+		if ("${it}" STREQUAL "-net")
 			set(YUNI_MODULE_NET false)
 			set(KeywordIsKnown true)
-		endif()
+		endif ()
 
 		# media
-		if("${it}" STREQUAL "media")
+		if ("${it}" STREQUAL "media")
 			set(KeywordIsKnown true)
 			set(YUNI_MODULE_MEDIA true)
-		endif()
+		endif ()
 		# -media
-		if("${it}" STREQUAL "-media")
+		if ("${it}" STREQUAL "-media")
 			set(KeywordIsKnown true)
 			set(YUNI_MODULE_MEDIA false)
-		endif()
+		endif ()
 
 
 		# Tests
-		if("${it}" STREQUAL "tests")
+		if ("${it}" STREQUAL "tests")
 			set(KeywordIsKnown true)
 			set(YUNI_TESTS true)
-		endif()
+		endif ()
 		# -tests
-		if("${it}" STREQUAL "-tests")
+		if ("${it}" STREQUAL "-tests")
 			set(KeywordIsKnown true)
 			set(YUNI_TESTS false)
-		endif()
+		endif ()
 
 		# graphics (Graphic renderers)
-		if("${it}" STREQUAL "graphics")
+		if ("${it}" STREQUAL "graphics")
 			set(KeywordIsKnown true)
 			set(YUNI_MODULE_GRAPHICS true)
-		endif()
+		endif ()
 		# -graphics
-		if("${it}" STREQUAL "-graphics")
+		if ("${it}" STREQUAL "-graphics")
 			set(KeywordIsKnown true)
 			set(YUNI_MODULE_GRAPHICS false)
-		endif()
+		endif ()
 
 		# OpenGL renderer
-		if("${it}" STREQUAL "opengl")
+		if ("${it}" STREQUAL "opengl")
 			set(KeywordIsKnown true)
 			set(YUNI_MODULE_OPENGL true)
-		endif()
+		endif ()
 		# -opengl
-		if("${it}" STREQUAL "-opengl")
+		if ("${it}" STREQUAL "-opengl")
 			set(KeywordIsKnown true)
 			set(YUNI_MODULE_OPENGL false)
-		endif()
+		endif ()
 
 		# ui (User Interface)
-		if("${it}" STREQUAL "ui")
+		if ("${it}" STREQUAL "ui")
 			set(KeywordIsKnown true)
 			set(YUNI_MODULE_UI true)
-		endif()
+		endif ()
 		# -ui
-		if("${it}" STREQUAL "-ui")
+		if ("${it}" STREQUAL "-ui")
 			set(KeywordIsKnown true)
 			set(YUNI_MODULE_UI false)
-		endif()
+		endif ()
 
 		# uuid
-		if("${it}" STREQUAL "uuid")
+		if ("${it}" STREQUAL "uuid")
 			set(KeywordIsKnown true)
 			set(YUNI_MODULE_EXTRA_UUID true)
-		endif()
+		endif ()
 		# -uuid
-		if("${it}" STREQUAL "-uuid")
+		if ("${it}" STREQUAL "-uuid")
 			set(KeywordIsKnown true)
 			set(YUNI_MODULE_EXTRA_UUID false)
-		endif()
+		endif ()
+
+		# parser
+		if ("${it}" STREQUAL "parser")
+			set(KeywordIsKnown true)
+			set(YUNI_MODULE_PARSER true)
+		endif ()
+		# -parser
+		if ("${it}" STREQUAL "-parser")
+			set(KeywordIsKnown true)
+			set(YUNI_MODULE_PARSER false)
+		endif ()
 
 		# docs
-		if("${it}" STREQUAL "docs" OR "${it}" STREQUAL "doc")
+		if ("${it}" STREQUAL "docs" OR "${it}" STREQUAL "doc")
 			set(KeywordIsKnown true)
 			set(YUNI_MODULE_DOCUMENTATION true)
-		endif()
+		endif ()
 		# -docs
-		if("${it}" STREQUAL "-doc" OR "${it}" STREQUAL "-docs")
+		if ("${it}" STREQUAL "-doc" OR "${it}" STREQUAL "-docs")
 			set(KeywordIsKnown true)
 			set(YUNI_MODULE_DOCUMENTATION false)
-		endif()
+		endif ()
 
-		if(NOT KeywordIsKnown)
+		if (NOT KeywordIsKnown)
 			YMESSAGE("[!!] Unknown module from command line: `${it}` (ignored)")
 			set(KeywordError true)
-		endif()
+		endif ()
 
 	endforeach()
 
-	if(KeywordError)
+	if (KeywordError)
 		YMESSAGE("")
 		YMESSAGE("Errors on modules. Here is the list of all available modules :")
 		YMESSAGE("(+ : Enable the module,  - disable the module)")
@@ -437,35 +456,36 @@ if(MODULES)
 		YMESSAGE("    -/+uuid        : UUID (default: disabled)")
 		YMESSAGE("    -/+marshal     : The Marshal module (for Object serialization, default: disabled)")
 		YMESSAGE("    -/+algorithms  : Standard algorithms")
+		YMESSAGE("    -/+parser      : Parser Generator")
 		YMESSAGE("")
 		message(FATAL_ERROR "Errors on module names")
-	endif()
-endif()
+	endif ()
+endif ()
 
 
 #
 # Dependencies
 #
-if(YUNI_MODULE_OPENGL)
+if (YUNI_MODULE_OPENGL)
 	set(YUNI_MODULE_GRAPHICS true)
-endif()
-if(YUNI_MODULE_UI)
+endif ()
+if (YUNI_MODULE_UI)
 	set(YUNI_MODULE_DEVICES true)
 	set(YUNI_MODULE_DEVICE_DISPLAY true)
-endif()
-if(YUNI_MODULE_LDO)
+endif ()
+if (YUNI_MODULE_LDO)
 	set(YUNI_MODULE_NET true)
-endif()
+endif ()
 if (YUNI_MODULE_MESSAGING)
 	set(YUNI_MODULE_NET true)
 	set(YUNI_MODULE_MARSHAL true)
-endif()
+endif ()
 if (YUNI_MODULE_DBI_SQLITE)
 	set(YUNI_MODULE_DBI true)
-endif()
+endif ()
 if (YUNI_MODULE_DBI)
 	set(YUNI_MODULE_DBI_SQLITE true)
-endif()
+endif ()
 
 
 
@@ -479,77 +499,81 @@ endif()
 
 set(YUNI_MODULE_AVAILABLE)
 
-if(YUNI_MODULE_ALGORITHMS)
+if (YUNI_MODULE_ALGORITHMS)
 	list(APPEND YUNI_MODULE_AVAILABLE algorithms)
-endif()
+endif ()
 
 if (YUNI_MODULE_DBI)
 	list(APPEND YUNI_MODULE_AVAILABLE dbi)
 	if (YUNI_MODULE_DBI_SQLITE)
 		list(APPEND YUNI_MODULE_AVAILABLE dbi-sqlite)
-	endif()
-endif()
+	endif ()
+endif ()
 
 if (YUNI_MODULE_DEVICES)
 	list(APPEND YUNI_MODULE_AVAILABLE devices)
-	if(YUNI_MODULE_DEVICE_DISPLAY)
+	if (YUNI_MODULE_DEVICE_DISPLAY)
 		list(APPEND YUNI_MODULE_AVAILABLE display)
-	endif()
-	if(YUNI_MODULE_DEVICE_MOUSE)
+	endif ()
+	if (YUNI_MODULE_DEVICE_MOUSE)
 		list(APPEND YUNI_MODULE_AVAILABLE mouse)
-	endif()
-	if(YUNI_MODULE_DEVICE_KEYBOARD)
+	endif ()
+	if (YUNI_MODULE_DEVICE_KEYBOARD)
 		list(APPEND YUNI_MODULE_AVAILABLE keyboard)
-	endif()
-endif()
+	endif ()
+endif ()
 
-if(YUNI_MODULE_VFS)
+if (YUNI_MODULE_VFS)
 	list(APPEND YUNI_MODULE_AVAILABLE vfs)
-	if(YUNI_MODULE_VFS_FILE)
+	if (YUNI_MODULE_VFS_FILE)
 		list(APPEND YUNI_MODULE_AVAILABLE vfs-local)
-	endif()
-endif()
+	endif ()
+endif ()
 
-if(YUNI_MODULE_VM)
+if (YUNI_MODULE_VM)
 	list(APPEND YUNI_MODULE_AVAILABLE vm)
-endif()
+endif ()
 
-if(YUNI_MODULE_MARSHAL)
+if (YUNI_MODULE_MARSHAL)
 	list(APPEND YUNI_MODULE_AVAILABLE marshal)
-endif()
+endif ()
 
-if(YUNI_MODULE_NET)
+if (YUNI_MODULE_NET)
 	list(APPEND YUNI_MODULE_AVAILABLE net)
-endif()
+endif ()
 
-if(YUNI_MODULE_MESSAGING)
+if (YUNI_MODULE_MESSAGING)
 	list(APPEND YUNI_MODULE_AVAILABLE messaging)
-endif()
+endif ()
 
-if(YUNI_MODULE_LDO)
+if (YUNI_MODULE_LDO)
 	list(APPEND YUNI_MODULE_AVAILABLE ldo)
-endif()
+endif ()
 
-if(YUNI_MODULE_MEDIA)
+if (YUNI_MODULE_MEDIA)
 	list(APPEND YUNI_MODULE_AVAILABLE media)
-endif()
+endif ()
 
-if(YUNI_MODULE_GRAPHICS)
+if (YUNI_MODULE_GRAPHICS)
 	list(APPEND YUNI_MODULE_AVAILABLE graphics)
 	if (YUNI_MODULE_OPENGL)
 		list(APPEND YUNI_MODULE_AVAILABLE opengl)
-	endif()
-endif()
+	endif ()
+endif ()
 
-if(YUNI_MODULE_UI)
+if (YUNI_MODULE_UI)
 	list(APPEND YUNI_MODULE_AVAILABLE ui)
-endif()
+endif ()
 
-if(YUNI_MODULE_DOCUMENTATION)
+if (YUNI_MODULE_DOCUMENTATION)
 	list(APPEND YUNI_MODULE_AVAILABLE docs)
-endif()
+endif ()
 
-if(YUNI_MODULE_EXTRA_UUID)
+if (YUNI_MODULE_EXTRA_UUID)
 	list(APPEND YUNI_MODULE_AVAILABLE uuid)
-endif()
+endif ()
+
+if (YUNI_MODULE_PARSER)
+	list(APPEND YUNI_MODULE_AVAILABLE parser)
+endif ()
 
