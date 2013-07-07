@@ -144,6 +144,11 @@ if(YUNI_MODULE_EXTRA_UUID)
 endif()
 
 
+if(YUNI_MODULE_PARSER)
+	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/parser.cmake")
+endif()
+
+
 
 if(YUNI_TESTS)
 	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/test.cmake")
