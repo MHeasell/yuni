@@ -55,7 +55,9 @@ namespace UTF8
 		enum
 		{
 			//! The maximum valid code point
-			codePointMax = (uint32) 0x0010ffffu
+			codePointMax = (uint32) 0x0010ffffu,
+			//! Ascii maximum value
+			asciiLimit = 0x80,
 		};
 
 	public:
@@ -66,7 +68,7 @@ namespace UTF8
 		//! Copy constructor
 		Char(const Char& rhs);
 		//! Constructor from a mere char
-		explicit Char(char c);
+		explicit Char(uint c);
 		//@}
 
 
@@ -81,21 +83,39 @@ namespace UTF8
 
 		void reset();
 
+		//! Get if the character is a simple ascii
+		bool isAscii() const;
+
+
+		//! \name Operators
+		//@{
 		Char& operator = (const Char& rhs);
+		Char& operator = (uint value);
 
-		Char& operator = (char c);
+		bool operator == (uint value) const;
+		bool operator == (const Char& ch) const;
 
-		Char& operator = (uchar c);
+		bool operator != (uint value) const;
+		bool operator != (const Char& ch) const;
 
-		bool operator == (char c) const;
+		bool operator < (uint value) const;
+		bool operator < (const Char& ch) const;
 
-		bool operator != (char c) const;
+		bool operator <= (uint value) const;
+		bool operator <= (const Char& ch) const;
 
-		bool operator == (uchar c) const;
+		bool operator > (uint value) const;
+		bool operator > (const Char& ch) const;
 
-		bool operator != (uchar c) const;
+		bool operator >= (uint value) const;
+		bool operator >= (const Char& ch) const;
 
+		//! Cast into char
 		operator char () const;
+
+		//! Cast into unsigned char
+		operator uchar () const;
+		//@}
 
 
 	private:
