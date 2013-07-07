@@ -51,9 +51,9 @@ namespace Yuni
 	** uri.defaultPathIfEmpty(); // Ensure the path is not empty
 	** switch (uri.protocol())
 	** {
-	** 		case Net::Protocol::http  : ...; break; // Deals with the HTTP protocol
-	** 		case Net::Protocol::ftp   : ...; break; // Deals with the FTP protocol
-	** 		default: ...; // Unsupported protocol
+	**		case Net::Protocol::http  : ...; break; // Deals with the HTTP protocol
+	**		case Net::Protocol::ftp   : ...; break; // Deals with the FTP protocol
+	**		default: ...; // Unsupported protocol
 	** }
 	** \endcode
 	**

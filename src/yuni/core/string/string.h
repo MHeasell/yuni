@@ -160,7 +160,7 @@ namespace Yuni
 			//! A non-zero value if the string can be expanded
 			expandable     = AncestorType::expandable,
 			//! True if the string is a string adapter (only read-only operations are allowed)
-			adapter        = (!chunkSize and expandable),
+			adapter        = (0 == chunkSize and expandable),
 		};
 		//! char Case
 		enum charCase
@@ -172,7 +172,7 @@ namespace Yuni
 		};
 
 		//! Self, which can be written
-		typedef typename Static::If<adapter or (!expandable and chunkSize > 512),
+		typedef typename Static::If<adapter or (0 == expandable and chunkSize > 512),
 			CString<>, CStringType>::RetTrue  WritableType;
 
 		//! Operator [] return type
