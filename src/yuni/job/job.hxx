@@ -15,19 +15,19 @@ namespace Job
 
 	inline bool IJob::idle() const
 	{
-		return ((pState & stateIdle) ? true : false);
+		return (0 != (pState & stateIdle));
 	}
 
 
 	inline bool IJob::waiting() const
 	{
-		return ((pState & stateWaiting) ? true : false);
+		return (0 != (pState & stateWaiting));
 	}
 
 
 	inline bool IJob::running() const
 	{
-		return ((pState & stateRunning) ? true : false);
+		return (0 != (pState & stateRunning));
 	}
 
 
@@ -59,14 +59,14 @@ namespace Job
 	inline bool IJob::finished() const
 	{
 		// The state must be at the very end
-		return (pProgression >= 100 && pState == stateIdle);
+		return (pProgression >= 100 and pState == stateIdle);
 	}
 
 
 	inline bool IJob::shouldAbort() const
 	{
-		assert(pThread != NULL && "Job: The pointer to the attached thread must not be NULL");
-		return (pCanceling || pThread->shouldAbort());
+		assert(pThread != NULL and "Job: The pointer to the attached thread must not be NULL");
+		return (pCanceling or pThread->shouldAbort());
 	}
 
 
@@ -85,8 +85,7 @@ namespace Job
 	}
 
 
-	template<class StringT>
-	inline void IJob::nameWL(const StringT& newName)
+	inline void IJob::nameWL(const AnyString& newName)
 	{
 		pName = newName;
 	}

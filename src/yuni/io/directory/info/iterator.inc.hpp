@@ -208,7 +208,7 @@ public:
 			template<class ModelT>
 			bool equals(const ModelT& model) const
 			{
-				return (!pData && !model.pData);
+				return (not pData and not model.pData);
 			}
 
 			const String& operator * ()

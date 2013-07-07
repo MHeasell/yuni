@@ -157,7 +157,7 @@ namespace Yuni
 	template<typename T>
 	inline bool Vector3D<T>::null() const
 	{
-		return Math::Zero(x) && Math::Zero(y) && Math::Zero(z);
+		return Math::Zero(x) and Math::Zero(y) and Math::Zero(z);
 	}
 
 
@@ -249,7 +249,7 @@ namespace Yuni
 		T value = DotProduct(p1, p2) / (p1.magnitude() * p2.magnitude());
 		bool colinear = (value > (1. - YUNI_EPSILON));
 		if (ignoreDirection)
-			colinear = colinear || (value < YUNI_EPSILON - 1.);
+			colinear = colinear or (value < YUNI_EPSILON - 1.);
 		return colinear;
 	}
 

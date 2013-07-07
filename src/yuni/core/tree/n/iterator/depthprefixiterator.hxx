@@ -101,7 +101,7 @@ namespace Tree
 			return;
 		}
 		// Climb back the parents until we find siblings
-		while (pNode->parent() && !pNode->parent()->nextSibling())
+		while (pNode->parent() and not pNode->parent()->nextSibling())
 			pNode = pNode->parent();
 		// If there is still no sibling, it means we reached
 		// the right-most sibling of the root, which means we have finished.

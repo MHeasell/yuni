@@ -41,7 +41,7 @@ namespace Yuni
 
 	inline bool Version::isEqualTo(const Version& rhs) const
 	{
-		return (rhs.hi == hi) && (rhs.lo == lo) && (rhs.revision == revision);
+		return (rhs.hi == hi) and (rhs.lo == lo) and (rhs.revision == revision);
 	}
 
 
@@ -53,7 +53,7 @@ namespace Yuni
 
 	inline bool Version::operator <= (const Version& rhs) const
 	{
-		return isEqualTo(rhs) || isLessThan(rhs);
+		return isEqualTo(rhs) or isLessThan(rhs);
 	}
 
 
@@ -65,7 +65,7 @@ namespace Yuni
 
 	inline bool Version::operator >= (const Version& rhs) const
 	{
-		return isEqualTo(rhs) || isGreaterThan(rhs);
+		return isEqualTo(rhs) or isGreaterThan(rhs);
 	}
 
 

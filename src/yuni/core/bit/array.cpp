@@ -24,13 +24,13 @@ namespace Bit
 				const uchar c = static_cast<uchar>(pBuffer[i]);
 
 				// trivial cases
-				if (ValueT && c == 0xFF)
+				if (ValueT and c == 0xFF)
 				{
 					uint p = i * 8;
 					p = (p < offset) ? offset : p;
 					return (p < pCount) ? p : npos;
 				}
-				if (!ValueT && c == 0)
+				if (!ValueT and c == 0)
 				{
 					uint p = i * 8;
 					p = (p < offset) ? offset : p;

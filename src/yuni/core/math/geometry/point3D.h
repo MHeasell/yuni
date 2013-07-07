@@ -138,7 +138,7 @@ namespace Yuni
 		*/
 		template<typename U, typename V>
 		bool closeTo(const Point3D<U>& rhs, const V delta) const
-		{ return Math::Abs(x-rhs.x) < delta && Math::Abs(y-rhs.y) < delta && Math::Abs(z-rhs.z) < delta; }
+		{ return Math::Abs(x-rhs.x) < delta and Math::Abs(y-rhs.y) < delta and Math::Abs(z-rhs.z) < delta; }
 
 		/*!
 		** \brief Get if the point is close to another point
@@ -150,7 +150,7 @@ namespace Yuni
 		*/
 		template<typename U, typename V, typename W, typename D>
 		bool closeTo(const U x1, const V y1, const W z1, const D delta) const
-		{ return Math::Abs(x-x1) < delta && Math::Abs(y-y1) < delta && Math::Abs(z-z1) < delta; }
+		{ return Math::Abs(x-x1) < delta and Math::Abs(y-y1) < delta and Math::Abs(z-z1) < delta; }
 
 
 		//! \name Operators
@@ -206,7 +206,7 @@ namespace Yuni
 		** \return True if the two points are equal
 		*/
 		template<typename U> bool operator == (const Point3D<U>& rhs) const
-		{ return Math::Equals<T>(rhs.x, x) && Math::Equals<T>(rhs.y, y) && Math::Equals<T>(rhs.z, z); }
+		{ return Math::Equals<T>(rhs.x, x) and Math::Equals<T>(rhs.y, y) and Math::Equals<T>(rhs.z, z); }
 
 		/*!
 		** \brief Comparison operator (non equal with)
@@ -282,7 +282,7 @@ namespace Yuni
 		template<typename U>
 		bool operator > (const Point3D<U>& p) const
 		{
-			return x > (T)p.x || y > (T)p.y || z > (T)p.z;
+			return x > (T)p.x or y > (T)p.y or z > (T)p.z;
 		}
 
 		/*!
@@ -313,7 +313,7 @@ namespace Yuni
 				case 2:
 					return z;
 				default:
-					assert(false && "Index out of bounds !");
+					assert(false and "Index out of bounds !");
 			}
 		}
 

@@ -44,7 +44,7 @@ namespace IO
 
 		for (; i != input.size(); ++i)
 		{
-			if (input[i] == '/' || input[i] == '\\')
+			if (input[i] == '/' or input[i] == '\\')
 			{
 				slashes = 1;
 				start = ++i;
@@ -69,7 +69,7 @@ namespace IO
 
 		for (; i < input.size(); ++i)
 		{
-			if (input[i] == '/' || input[i] == '\\')
+			if (input[i] == '/' or input[i] == '\\')
 				++slashes;
 		}
 
@@ -89,7 +89,7 @@ namespace IO
 		// Performing checks only if the first slash is near by the begining.
 		if (start < 4)
 		{
-			if (input[1] == ':' && input.size() >= 2 && (input[2] == '\\' || input[2] == '/'))
+			if (input[1] == ':' and input.size() >= 2 and (input[2] == '\\' or input[2] == '/'))
 			{
 				// We have an Windows-style path, and it is absolute
 				isAbsolute = true;
@@ -97,7 +97,7 @@ namespace IO
 			else
 			{
 				// We have an Unix-style path
-				if (input[0] == '/' || input[0] == '\\')
+				if (input[0] == '/' or input[0] == '\\')
 					isAbsolute = true;
 			}
 		}
@@ -130,7 +130,7 @@ namespace IO
 		for (i = start; i < input.size(); ++i)
 		{
 			// Detecting the end of a segment
-			if (input[i] == '/' || input[i] == '\\')
+			if (input[i] == '/' or input[i] == '\\')
 			{
 				switch (i - cursor)
 				{
@@ -150,7 +150,7 @@ namespace IO
 					case 2:
 						{
 							// double dot segments
-							if (input[cursor] == '.' && input[cursor + 1] == '.')
+							if (input[cursor] == '.' and input[cursor + 1] == '.')
 							{
 								if (isAbsolute)
 								{
@@ -186,9 +186,9 @@ namespace IO
 		}
 
 		// Special case : The last segment is a double dot segment
-		if (cursor < input.size() && input.size() - cursor == 2)
+		if (cursor < input.size() and input.size() - cursor == 2)
 		{
-			if (input[cursor] == '.' && input[cursor + 1] == '.')
+			if (input[cursor] == '.' and input[cursor + 1] == '.')
 			{
 				if (isAbsolute)
 				{
@@ -221,7 +221,7 @@ namespace IO
 		// We know for sure that it can not be a double dot segment
 		if (cursor < input.size())
 		{
-			if (!(input.size() - cursor == 1 && input[cursor] == '.'))
+			if (!(input.size() - cursor == 1 and input[cursor] == '.'))
 				out.append(input.c_str() + cursor, input.size() - cursor);
 		}
 		// Removing the trailing slash
@@ -259,11 +259,11 @@ namespace IO
 		{
 			// UNIX Style
 			char c = filename[0];
-			if (c == '/' || c == '\\')
+			if (c == '/' or c == '\\')
 				return true;
 
 			// Windows Style
-			if (filename.size() >= 2 && filename[1] == ':')
+			if (filename.size() >= 2 and filename[1] == ':')
 			{
 				if (String::IsAlpha(c))
 				{
@@ -271,7 +271,7 @@ namespace IO
 						return true;
 					// obviously strictly greater than 2 (see >= 2 before)
 					char d = filename[2];
-					if (d == '\\' || d == '/')
+					if (d == '\\' or d == '/')
 						return true;
 				}
 			}

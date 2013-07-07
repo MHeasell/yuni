@@ -39,7 +39,7 @@ namespace Directory
 
 
 
-	class DirInfo : private Yuni::NonCopyable<DirInfo>
+	class DirInfo final : private Yuni::NonCopyable<DirInfo>
 	{
 	public:
 		DirInfo() :
@@ -116,7 +116,7 @@ namespace Directory
 				// Avoid `.` and `..`
 				if (*(pent->d_name) == '.')
 				{
-					if ((pent->d_name[1] == '.' && pent->d_name[2] == '\0') || (pent->d_name[1] == '\0'))
+					if ((pent->d_name[1] == '.' and pent->d_name[2] == '\0') or (pent->d_name[1] == '\0'))
 						continue;
 				}
 
@@ -159,7 +159,7 @@ namespace Directory
 				return false;
 			do
 			{
-				if (callNext && 0 != _wfindnexti64(h, &data))
+				if (callNext and 0 != _wfindnexti64(h, &data))
 				{
 					size = 0;
 					modified = 0;
@@ -170,7 +170,7 @@ namespace Directory
 				// Avoid `.` and `..`
 				if (*(data.name) == L'.')
 				{
-					if ((data.name[1] == L'.' && data.name[2] == L'\0') || (data.name[1] == L'\0'))
+					if ((data.name[1] == L'.' and data.name[2] == L'\0') or (data.name[1] == L'\0'))
 						continue;
 				}
 
@@ -184,10 +184,10 @@ namespace Directory
 				filename.clear();
 				filename << parent << '\\' << name;
 
-				if ((data.attrib & _A_SUBDIR))
+				if (0 != (data.attrib & _A_SUBDIR))
 				{
 					if (0 != (flags & Yuni::IO::Directory::Info::itFolder)
-						|| (0 != (flags & Yuni::IO::Directory::Info::itRecursive)))
+						or (0 != (flags & Yuni::IO::Directory::Info::itRecursive)))
 					{
 						isFolder = true;
 						size = 0;
@@ -241,7 +241,7 @@ namespace Directory
 	};
 
 
-	class IteratorData
+	class IteratorData final
 	{
 	public:
 		IteratorData()
@@ -266,7 +266,6 @@ namespace Directory
 			# else
 			dirinfo.front().open();
 			# endif
-
 		}
 
 		void pop()
@@ -277,7 +276,7 @@ namespace Directory
 		bool next()
 		{
 			// Entering the sub-folder if required
-			if (dirinfo.front().isFolder && (0 != (Yuni::IO::Directory::Info::itRecursive & flags)))
+			if (dirinfo.front().isFolder and (0 != (Yuni::IO::Directory::Info::itRecursive & flags)))
 			{
 				// Starting a new state
 				push(dirinfo.front().filename);
@@ -299,8 +298,8 @@ namespace Directory
 				{
 					// We must loop when we have to recursively find all files
 					if ((0 == (Yuni::IO::Directory::Info::itFolder & flags))
-						&& dirinfo.front().isFolder
-						&& (0 != (Yuni::IO::Directory::Info::itRecursive & flags)))
+						and dirinfo.front().isFolder
+						and (0 != (Yuni::IO::Directory::Info::itRecursive & flags)))
 					{
 						// Starting a new state
 						push(dirinfo.front().filename);

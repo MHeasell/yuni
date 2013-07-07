@@ -30,7 +30,7 @@ namespace UI
 	{
 		// Shaders are created here temporarily, because creation in the constructor requires
 		// a GL context that the first created view does not have yet
-		if (!pTextShaders && !pPictureShaders)
+		if (!pTextShaders and !pPictureShaders)
 		{
 			auto& shaderManager = Gfx3D::ShaderManager::Instance();
 			pTextShaders = shaderManager.get("data/shaders/minimal.vert", "data/shaders/text.frag");
@@ -157,7 +157,7 @@ namespace UI
 
 		// Create a drawing surface for control rendering that has the size of the root control
 		/*
-		if (!(!pControl) && pControl->visible())
+		if (!(!pControl) and pControl->visible())
 		{
 			if (!pUISurface)
 			{
@@ -173,7 +173,7 @@ namespace UI
 				pUISurface->commit();
 			}
 
-			if (pPictureShaders && pPictureShaders->valid())
+			if (pPictureShaders and pPictureShaders->valid())
 			{
 				pPictureShaders->activate();
 				drawPicture(pUISurface->texture(), pControl->x(), pControl->y(),

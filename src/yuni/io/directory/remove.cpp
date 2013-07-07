@@ -53,7 +53,7 @@ namespace Directory
 					{
 						if (S_ISDIR(st.st_mode))
 						{
-							if (strcmp(".", (ep->d_name)) != 0 && strcmp("..", (ep->d_name)) != 0)
+							if (strcmp(".", (ep->d_name)) != 0 and strcmp("..", (ep->d_name)) != 0)
 							{
 								RmDirRecursiveInternal(buffer.c_str());
 								::rmdir(buffer.c_str());
@@ -101,7 +101,7 @@ namespace Directory
 					// Dots folders are meaningless (`.` and `..`)
 					if (filedata.cFileName[0] == L'.')
 					{
-						if (!wcscmp(filedata.cFileName, L".") || !wcscmp(filedata.cFileName, L".."))
+						if (!wcscmp(filedata.cFileName, L".") or !wcscmp(filedata.cFileName, L".."))
 							continue;
 					}
 
@@ -115,7 +115,7 @@ namespace Directory
 						#else
 						int written = swprintf_s(filename, maxLen, L"%s\\%s", path, filedata.cFileName);
 						#endif // YUNI_OS_MINGW
-						if (written <= 0 || written == maxLen)
+						if (written <= 0 or written == maxLen)
 						{
 							FindClose(handle);
 							delete[] filename;

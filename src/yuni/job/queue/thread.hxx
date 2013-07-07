@@ -34,7 +34,7 @@ namespace Jobs
 	bool QueueThread<SchedulerT>::onExecute()
 	{
 		// assert
-		assert(this != NULL && "Queue: Thread: Oo `this' is null !?");
+		assert(this != NULL and "Queue: Thread: Oo `this' is null !?");
 
 		// Notify the scheduler that this thread begins its work
 		pScheduler.schedulerIncrementWorkerCount();

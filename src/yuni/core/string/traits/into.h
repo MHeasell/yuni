@@ -207,14 +207,14 @@ namespace CString
 				{
 					if (count == 1)
 					{
-						return ('1' == s[0] || 'Y' == s[0] || 'y' == s[0] || 'O' == s[0]
-							||  'o' == s[0] || 't' == s[0] || 'T' == s[0]);
+						return ('1' == s[0] or 'Y' == s[0] or 'y' == s[0] or 'O' == s[0]
+							||  'o' == s[0] or 't' == s[0] or 'T' == s[0]);
 					}
 
 					char buffer[5] = {0,0,0,0,0};
 					for (uint i = 0; i != count; ++i)
 						buffer[i] = static_cast<char>(::tolower(s[i]));
-					return (!::strcmp("true", buffer) || !::strcmp("on", buffer) || !::strcmp("yes", buffer));
+					return (!::strcmp("true", buffer) or !::strcmp("on", buffer) or !::strcmp("yes", buffer));
 				}
 			}
 			return false;
@@ -238,7 +238,7 @@ namespace CString
 					}
 				case '0' :
 					{
-						if (length > 2 && (s[1] == 'x' || s[1] == 'X'))
+						if (length > 2 and (s[1] == 'x' or s[1] == 'X'))
 						{
 							base = 16;
 							return s + 2;
@@ -265,7 +265,7 @@ namespace CString
 		\
 		template<class StringT> static bool Perform(const StringT& s, IntoType& out) \
 		{ \
-			if (!s) \
+			if (s.empty()) \
 			{ \
 				out = IntoType(); \
 				return true; \
@@ -273,7 +273,7 @@ namespace CString
 			char* pend; \
 			int base; \
 			char buffer[bufferSize]; \
-			if (!StringT::zeroTerminated) \
+			if (not StringT::zeroTerminated) \
 			{ \
 				if (s.size() < bufferSize) \
 				{ \
@@ -287,19 +287,19 @@ namespace CString
 				} \
 				const char* p = AutoDetectBaseNumber::Value(buffer, s.size(), base); \
 				out = (IntoType)::CONVERT(p, &pend, base); \
-				return (NULL != pend && '\0' == *pend); \
+				return (NULL != pend and '\0' == *pend); \
 			} \
 			else \
 			{ \
 				const char* p = AutoDetectBaseNumber::Value(s.c_str(), s.size(), base); \
 				out = (IntoType)::CONVERT(p, &pend, base); \
-				return NULL != pend && (pend - p == s.size()); \
+				return NULL != pend and (pend - p == s.size()); \
 			} \
 		} \
 		\
 		template<class StringT> static IntoType Perform(const StringT& s) \
 		{ \
-			if (!s) \
+			if (s.empty()) \
 				return IntoType(); \
 			char* pend; \
 			int base; \
@@ -397,7 +397,7 @@ namespace CString
 				# else
 				out = (float)strtof(cstr, &pend);
 				# endif
-				return (pend && pend - cstr == s.size());
+				return (pend and pend - cstr == s.size());
 			}
 			out = 0.f;
 			return true;
@@ -474,7 +474,7 @@ namespace CString
 					cstr = s.c_str();
 
 				out = (double)::strtod(cstr, &pend);
-				return (NULL != pend && '\0' == *pend);
+				return (NULL != pend and '\0' == *pend);
 			}
 			out = 0.;
 			return true;

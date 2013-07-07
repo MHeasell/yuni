@@ -96,7 +96,7 @@ namespace Job
 		**
 		** This is a convenient (and faster) replacement for the following code :
 		** \code
-		** (state() == stateIdle && progression() == 100)
+		** (state() == stateIdle and progression() == 100)
 		** \endcode
 		*/
 		bool finished() const;
@@ -182,7 +182,7 @@ namespace Job
 		** \brief Set the name of the job without locking
 		** \warning This method should only be used from the constructor
 		*/
-		template<class StringT> void nameWL(const StringT& newName);
+		void nameWL(const AnyString& newName);
 
 
 	private:

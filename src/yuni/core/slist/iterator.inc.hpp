@@ -46,7 +46,7 @@ public:
 	*/
 	void forward(difference_type n)
 	{
-		while (n-- > 0 && pCurrent)
+		while (n-- > 0 and pCurrent)
 			pCurrent = pCurrent->next;
 	}
 
@@ -58,7 +58,7 @@ public:
 		Item* iter1 = pCurrent;
 		Item* iter2 = rhs.pCurrent;
 		difference_type distance = 0;
-		while (iter2 != pCurrent && iter1 != rhs.pCurrent)
+		while (iter2 != pCurrent and iter1 != rhs.pCurrent)
 		{
 			++iter1;
 			++iter2;

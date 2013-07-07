@@ -77,7 +77,7 @@ namespace REST
 
 	Net::Error  Server::run()
 	{
-		assert(pData && "internal error");
+		assert(pData and "internal error");
 
 		// Get the attached thread
 		pData->thread = pAttachedThread;
@@ -96,7 +96,7 @@ namespace REST
 
 	void Server::stop()
 	{
-		assert(pData && "internal error");
+		assert(pData and "internal error");
 		// notifying that we should stop as soon as possible
 		if (pData->signal.valid())
 		{

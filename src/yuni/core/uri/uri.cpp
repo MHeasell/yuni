@@ -13,7 +13,7 @@ namespace Yuni
 	namespace // anonymous
 	{
 
-		class BuildSession
+		class BuildSession final
 		{
 		public:
 			BuildSession(Private::Uri::Informations& inf, String& string) :
@@ -464,7 +464,7 @@ namespace Yuni
 			{
 				case '@': // We may deal with a password and the server was actually a user name
 					{
-						if (infos.user.empty() && infos.password.empty())
+						if (infos.user.empty() and infos.password.empty())
 						{
 							// Oups... Actually it was not a port but a password...
 							infos.user = infos.server;

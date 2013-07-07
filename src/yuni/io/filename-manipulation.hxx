@@ -43,7 +43,7 @@ namespace IO
 			: path.find_last_of(IO::Constant<char>::AllSeparators);
 		AnyString::size_type n = path.find_last_of('.');
 
-		if (AnyString::npos == n && AnyString::npos == pos)
+		if (AnyString::npos == n and AnyString::npos == pos)
 		{
 			out = path;
 			return;
@@ -53,7 +53,7 @@ namespace IO
 			out.clear();
 			return;
 		}
-		if (n == AnyString::npos && n > pos + 1)
+		if (n == AnyString::npos and n > pos + 1)
 		{
 			if (AnyString::npos == pos)
 			{
@@ -88,7 +88,7 @@ namespace IO
 				{
 					case '.':
 						{
-							if (!dot)
+							if (not dot)
 							{
 								if (++i >= (uint) filename.size())
 									return true;

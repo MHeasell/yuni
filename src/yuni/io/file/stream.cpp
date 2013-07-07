@@ -98,7 +98,7 @@ namespace File
 		// state, not all operating systems do that.
 		// So we have to do it by ourselves with open and fdopen.
 		/*int flag = O_CLOEXEC;
-		if (0 != (mode & OpenMode::read) && 0 != (mode & OpenMode::write))
+		if (0 != (mode & OpenMode::read) and 0 != (mode & OpenMode::write))
 			flag |= O_RDWR;
 		else if (0 != (mode & OpenMode::read))
 			flag |= O_RDONLY;
@@ -207,7 +207,7 @@ namespace File
 
 
 
-	# if !defined(YUNI_HAS_POSIX_FALLOCATE) && !defined(YUNI_OS_MAC)
+	# if !defined(YUNI_HAS_POSIX_FALLOCATE) and !defined(YUNI_OS_MAC)
 
 	static bool TruncateFileDefault(Stream& file, uint64 size)
 	{

@@ -11,23 +11,23 @@ namespace Job
 
 	IJob::IJob() :
 		pState(stateIdle),
-		pProgression(0),
-		pCanceling(0),
-		pThread(NULL)
+		pProgression(),
+		pCanceling(),
+		pThread(nullptr)
 	{}
 
 
 	IJob::~IJob()
 	{
-		assert(this != NULL && "IJob: Destructor: Oo `this' is null !?");
-		assert(pThread == NULL && "A job can not be attached to a thread when destroyed");
+		assert(this != NULL and "IJob: Destructor: Oo `this' is null !?");
+		assert(pThread == NULL and "A job can not be attached to a thread when destroyed");
 	}
 
 
 	bool IJob::suspend(uint delay) const
 	{
 		// This method must only be called from a thread
-		assert(pThread && "Job: The pointer to the attached thread must not be NULL");
+		assert(pThread and "Job: The pointer to the attached thread must not be NULL");
 
 		// We can suspend the job only if it is running
 		if (pState == stateRunning)
@@ -38,7 +38,7 @@ namespace Job
 			// Sleeping for a while...
 			bool r = pThread->suspend(delay);
 			// The state may have changed while we were sleeping
-			return (pCanceling || r);
+			return (pCanceling or r);
 		}
 		return true;
 	}
@@ -74,6 +74,7 @@ namespace Job
 		ThreadingPolicy::MutexLocker locker(*this);
 		pName = newname;
 	}
+
 
 
 

@@ -84,11 +84,11 @@ namespace UI
 				pViewList.erase(it);
 				found = true;
 			}
-			else if (!lowestView || lowestView->z() > (*it)->z())
+			else if (!lowestView or lowestView->z() > (*it)->z())
 				lowestView = *it;
 		}
 		// If we are deleting the active view, the lowest view becomes the new active view
-		if (found && pActiveView->id() == id)
+		if (found and pActiveView->id() == id)
 			pActiveView = lowestView;
 		return found;
 	}

@@ -17,7 +17,7 @@ namespace Yuni
 	template<class ChildT, template<class> class TP>
 	inline IIntrusiveSmartPtr<ChildT,TP>::~IIntrusiveSmartPtr()
 	{
-		assert(pRefCount == 0 && "Destroying smart ptr object with a non-zero reference count");
+		assert(pRefCount == 0 and "Destroying smart ptr object with a non-zero reference count");
 	}
 
 
@@ -54,7 +54,7 @@ namespace Yuni
 	template<class ChildT, template<class> class TP>
 	bool IIntrusiveSmartPtr<ChildT,TP>::release() const
 	{
-		assert(pRefCount > 0 && "IIntrusiveSmartPtr: Invalid call to the method release");
+		assert(pRefCount > 0 and "IIntrusiveSmartPtr: Invalid call to the method release");
 		if (--pRefCount > 0)
 			return false;
 		// double check to avoid race conditions
@@ -95,7 +95,7 @@ namespace Yuni
 	template<class ChildT, template<class> class TP>
 	inline IIntrusiveSmartPtr<ChildT,TP>::~IIntrusiveSmartPtr()
 	{
-		assert(pRefCount == 0 && "Destroying smart ptr object with a non-zero reference count");
+		assert(pRefCount == 0 and "Destroying smart ptr object with a non-zero reference count");
 	}
 
 

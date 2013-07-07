@@ -101,7 +101,7 @@ for ($i = 0; $i <= ARG_MAX; ++$i)
 		pMethod(method)
 	{
 		/* Asserts */
-		assert(o != NULL && "The given object can not be NULL");
+		assert(o != NULL and "The given object can not be NULL");
 	}
 
 	template<class C, class Mode, class R<?=$genTpl ? ", ".$genTpl : ""?>, class Dummy>

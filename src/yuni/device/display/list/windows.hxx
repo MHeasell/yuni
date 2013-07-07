@@ -23,7 +23,7 @@ namespace Display
 		newID.resize(((uint) sizeRequired) - 1);
 
 		uint i;
-		for (i = 0; i < lst.size() && lst[i].first->guid() != newID; ++i)
+		for (i = 0; i < lst.size() and lst[i].first->guid() != newID; ++i)
 			;
 		return (i >= lst.size()) ? NULL : &lst[i];
 	}
@@ -53,7 +53,7 @@ namespace Display
 		for (uint countDevices = 0; EnumDisplayDevicesW(NULL, countDevices, (DISPLAY_DEVICEW*)&displayDevice, 0); ++countDevices)
 		{
 			// Ignore mirrored displays
-			if (!(displayDevice.StateFlags & DISPLAY_DEVICE_MIRRORING_DRIVER) && (displayDevice.StateFlags & DISPLAY_DEVICE_ATTACHED_TO_DESKTOP))
+			if (not (displayDevice.StateFlags & DISPLAY_DEVICE_MIRRORING_DRIVER) and (displayDevice.StateFlags & DISPLAY_DEVICE_ATTACHED_TO_DESKTOP))
 			{
 				DISPLAY_DEVICEW monitorDisplayDevice;
 				monitorDisplayDevice.cb = (DWORD)sizeof(DISPLAY_DEVICEW);

@@ -92,7 +92,7 @@ namespace Marshal
 						if (value.dictionary->count(key) == 0)
 							return (*value.dictionary)[key];
 						++index;
-						assert(index < (uint) -1 && "infinite loop");
+						assert(index < (uint) -1 and "infinite loop");
 					}
 					while (true);
 				}

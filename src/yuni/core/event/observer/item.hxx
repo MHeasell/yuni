@@ -13,7 +13,7 @@ namespace Event
 		:pObserver(o), pMethod(method)
 	{
 		/* Asserts */
-		assert(o != NULL && "The given object can not be NULL");
+		assert(o != NULL and "The given object can not be NULL");
 	}
 
 	template<class C, class Mode, class R, class Dummy>
@@ -43,7 +43,7 @@ namespace Event
 		:pObserver(o), pMethod(method)
 	{
 		/* Asserts */
-		assert(o != NULL && "The given object can not be NULL");
+		assert(o != NULL and "The given object can not be NULL");
 	}
 
 	template<class C, class Mode, class R, typename A0, class Dummy>
@@ -73,7 +73,7 @@ namespace Event
 		:pObserver(o), pMethod(method)
 	{
 		/* Asserts */
-		assert(o != NULL && "The given object can not be NULL");
+		assert(o != NULL and "The given object can not be NULL");
 	}
 
 	template<class C, class Mode, class R, typename A0, typename A1, class Dummy>
@@ -103,7 +103,7 @@ namespace Event
 		:pObserver(o), pMethod(method)
 	{
 		/* Asserts */
-		assert(o != NULL && "The given object can not be NULL");
+		assert(o != NULL and "The given object can not be NULL");
 	}
 
 	template<class C, class Mode, class R, typename A0, typename A1, typename A2, class Dummy>
@@ -133,7 +133,7 @@ namespace Event
 		:pObserver(o), pMethod(method)
 	{
 		/* Asserts */
-		assert(o != NULL && "The given object can not be NULL");
+		assert(o != NULL and "The given object can not be NULL");
 	}
 
 	template<class C, class Mode, class R, typename A0, typename A1, typename A2, typename A3, class Dummy>
@@ -163,7 +163,7 @@ namespace Event
 		:pObserver(o), pMethod(method)
 	{
 		/* Asserts */
-		assert(o != NULL && "The given object can not be NULL");
+		assert(o != NULL and "The given object can not be NULL");
 	}
 
 	template<class C, class Mode, class R, typename A0, typename A1, typename A2, typename A3, typename A4, class Dummy>
@@ -193,7 +193,7 @@ namespace Event
 		:pObserver(o), pMethod(method)
 	{
 		/* Asserts */
-		assert(o != NULL && "The given object can not be NULL");
+		assert(o != NULL and "The given object can not be NULL");
 	}
 
 	template<class C, class Mode, class R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, class Dummy>
@@ -223,7 +223,7 @@ namespace Event
 		:pObserver(o), pMethod(method)
 	{
 		/* Asserts */
-		assert(o != NULL && "The given object can not be NULL");
+		assert(o != NULL and "The given object can not be NULL");
 	}
 
 	template<class C, class Mode, class R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, class Dummy>
@@ -253,7 +253,7 @@ namespace Event
 		:pObserver(o), pMethod(method)
 	{
 		/* Asserts */
-		assert(o != NULL && "The given object can not be NULL");
+		assert(o != NULL and "The given object can not be NULL");
 	}
 
 	template<class C, class Mode, class R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, class Dummy>
@@ -283,7 +283,7 @@ namespace Event
 		:pObserver(o), pMethod(method)
 	{
 		/* Asserts */
-		assert(o != NULL && "The given object can not be NULL");
+		assert(o != NULL and "The given object can not be NULL");
 	}
 
 	template<class C, class Mode, class R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, class Dummy>
@@ -313,7 +313,7 @@ namespace Event
 		:pObserver(o), pMethod(method)
 	{
 		/* Asserts */
-		assert(o != NULL && "The given object can not be NULL");
+		assert(o != NULL and "The given object can not be NULL");
 	}
 
 	template<class C, class Mode, class R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, class Dummy>
@@ -343,7 +343,7 @@ namespace Event
 		:pObserver(o), pMethod(method)
 	{
 		/* Asserts */
-		assert(o != NULL && "The given object can not be NULL");
+		assert(o != NULL and "The given object can not be NULL");
 	}
 
 	template<class C, class Mode, class R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, class Dummy>
@@ -373,7 +373,7 @@ namespace Event
 		:pObserver(o), pMethod(method)
 	{
 		/* Asserts */
-		assert(o != NULL && "The given object can not be NULL");
+		assert(o != NULL and "The given object can not be NULL");
 	}
 
 	template<class C, class Mode, class R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, class Dummy>
@@ -403,7 +403,7 @@ namespace Event
 		:pObserver(o), pMethod(method)
 	{
 		/* Asserts */
-		assert(o != NULL && "The given object can not be NULL");
+		assert(o != NULL and "The given object can not be NULL");
 	}
 
 	template<class C, class Mode, class R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, class Dummy>
@@ -433,7 +433,7 @@ namespace Event
 		:pObserver(o), pMethod(method)
 	{
 		/* Asserts */
-		assert(o != NULL && "The given object can not be NULL");
+		assert(o != NULL and "The given object can not be NULL");
 	}
 
 	template<class C, class Mode, class R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13, class Dummy>
@@ -463,7 +463,7 @@ namespace Event
 		:pObserver(o), pMethod(method)
 	{
 		/* Asserts */
-		assert(o != NULL && "The given object can not be NULL");
+		assert(o != NULL and "The given object can not be NULL");
 	}
 
 	template<class C, class Mode, class R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13, typename A14, class Dummy>
@@ -493,7 +493,7 @@ namespace Event
 		:pObserver(o), pMethod(method)
 	{
 		/* Asserts */
-		assert(o != NULL && "The given object can not be NULL");
+		assert(o != NULL and "The given object can not be NULL");
 	}
 
 	template<class C, class Mode, class R, typename A0, typename A1, typename A2, typename A3, typename A4, typename A5, typename A6, typename A7, typename A8, typename A9, typename A10, typename A11, typename A12, typename A13, typename A14, typename A15, class Dummy>

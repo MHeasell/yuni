@@ -21,7 +21,7 @@ namespace Yuni
 		// The derived class must remove the boumd events itself
 		// to prevent race data and a corrupt vtable
 		assert((NULL == pBoundEventTable)
-			&& "IEventObserver: The derived class must call `destroyBoundEvents()` by itself to prevent a corrupt vtable when destroying the object");
+			and "IEventObserver: The derived class must call `destroyBoundEvents()` by itself to prevent a corrupt vtable when destroying the object");
 	}
 
 
@@ -40,7 +40,7 @@ namespace Yuni
 	void IEventObserver<Derived,TP>::boundEventDecrementReference(IEvent* evt) const
 	{
 		typename ThreadingPolicy::MutexLocker locker(*this);
-		if (pBoundEventTable && !pBoundEventTable->empty())
+		if (pBoundEventTable and not pBoundEventTable->empty())
 		{
 			IEvent::Map::iterator i = pBoundEventTable->find(evt);
 			if (i != pBoundEventTable->end())
@@ -58,12 +58,12 @@ namespace Yuni
 			}
 			else
 			{
-				assert(false && "Impossible to find IEvent");
+				assert(false and "Impossible to find IEvent");
 			}
 		}
 		else
 		{
-			assert(false && "The table is empty");
+			assert(false and "The table is empty");
 		}
 	}
 
@@ -72,15 +72,17 @@ namespace Yuni
 	void IEventObserver<Derived,TP>::boundEventRemoveFromTable(IEvent* evt) const
 	{
 		typename ThreadingPolicy::MutexLocker locker(*this);
-		if (pBoundEventTable && !pBoundEventTable->empty())
+		if (pBoundEventTable and not pBoundEventTable->empty())
 		{
 			IEvent::Map::iterator i = pBoundEventTable->find(evt);
 			if (i != pBoundEventTable->end())
+			{
 				pBoundEventTable->erase(i);
+			}
 			else
 			{
 				# ifndef NDEBUG
-				assert(0 && " -- Impossible to find the IEvent ");
+				assert(0 and " -- Impossible to find the IEvent ");
 				# endif
 			}
 		}
@@ -95,7 +97,7 @@ namespace Yuni
 		typename ThreadingPolicy::MutexLocker locker(*this);
 		if (pBoundEventTable)
 		{
-			if (!pBoundEventTable->empty())
+			if (not pBoundEventTable->empty())
 			{
 				// Unlinking this observer to all events
 				IEvent::Map::iterator end = pBoundEventTable->end();

@@ -116,27 +116,27 @@ namespace Yuni
 
 	inline bool Uri::schemeIsFile() const
 	{
-		return (pInfos.scheme.empty() && !pInfos.path.empty()) || "file" == pInfos.scheme;
+		return (pInfos.scheme.empty() and not pInfos.path.empty()) or "file" == pInfos.scheme;
 	}
 
 	inline bool Uri::schemeIsHTTP() const
 	{
-		return !pInfos.scheme.empty() && ("http" == pInfos.scheme || "https" == pInfos.scheme);
+		return not pInfos.scheme.empty() and ("http" == pInfos.scheme or "https" == pInfos.scheme);
 	}
 
 	inline bool Uri::schemeIsFTP() const
 	{
-		return !pInfos.scheme.empty() && "ftp" == pInfos.scheme;
+		return not pInfos.scheme.empty() and "ftp" == pInfos.scheme;
 	}
 
 	inline bool Uri::schemeIsSSH() const
 	{
-		return !pInfos.scheme.empty() && "ssh" == pInfos.scheme;
+		return not pInfos.scheme.empty() and "ssh" == pInfos.scheme;
 	}
 
 	inline bool Uri::schemeIsLDAP() const
 	{
-		return !pInfos.scheme.empty() && "ldap" == pInfos.scheme;
+		return not pInfos.scheme.empty() and "ldap" == pInfos.scheme;
 	}
 
 

@@ -13,9 +13,9 @@ namespace DateTime
 	Timestamp Now()
 	{
 		# ifdef YUNI_OS_MSVC
-		return (sint64) ::_time64(NULL);
+		return (sint64) ::_time64(nullptr);
 		# else
-		return (sint64) ::time(NULL);
+		return (sint64) ::time(nullptr);
 		# endif
 	}
 
@@ -34,7 +34,7 @@ namespace DateTime
 
 	static inline uint FormatString(char* buffer, uint size, const char* format, sint64 timestamp)
 	{
-		assert(format && '\0' != *format && "invalid format");
+		assert(format and '\0' != *format and "invalid format");
 
 		uint written;
 
@@ -64,13 +64,13 @@ namespace DateTime
 		#	endif
 		# endif
 
-		return (written && written < size) ? written : 0;
+		return (written and written < size) ? written : 0;
 	}
 
 
 	char* FormatTimestampToString(const AnyString& format, sint64 timestamp)
 	{
-		assert(not format.empty() && "this routine must not be called if the format is empty");
+		assert(not format.empty() and "this routine must not be called if the format is empty");
 
 		if (timestamp <= 0)
 		{
@@ -84,7 +84,7 @@ namespace DateTime
 		// trying to guess the future size of the formatted string to reduce memory allocation
 		uint size = format.size();
 		// valgrind / assert...
-		assert(format.c_str()[format.size()] == '\0' && "format must be zero-terminated");
+		assert(format.c_str()[format.size()] == '\0' and "format must be zero-terminated");
 		size += 128; // arbitrary value
 
 		char* buffer = nullptr;

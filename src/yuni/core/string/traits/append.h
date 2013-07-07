@@ -58,7 +58,7 @@ namespace CString
 		typedef typename CStringT::Type C;
 		static void Perform(CStringT& s, const C rhs[N])
 		{
-			if (N > 0 && rhs)
+			if (N > 0 and rhs)
 			{
 				// The calculation with `N` is required to properly handle
 				// both a zero-terminated buffer and a simple array

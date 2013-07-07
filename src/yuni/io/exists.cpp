@@ -29,13 +29,13 @@ namespace IO
 
 	Yuni::IO::NodeType TypeOf(const AnyString& filename)
 	{
-		if (!filename)
+		if (filename.empty())
 			return Yuni::IO::typeUnknown;
 
 		# ifdef YUNI_OS_WINDOWS
 		const char* p = filename.c_str();
 		unsigned int len = filename.size();
-		if (p[len - 1] == '\\' || p[len - 1] == '/')
+		if (p[len - 1] == '\\' or p[len - 1] == '/')
 		{
 			if (!--len)
 			{
@@ -49,7 +49,7 @@ namespace IO
 		}
 
 		// Driver letters
-		if (len == 2 && p[1] == ':')
+		if (len == 2 and p[1] == ':')
 			return Yuni::IO::typeFolder;
 
 		String  norm;

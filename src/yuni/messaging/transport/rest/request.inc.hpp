@@ -306,7 +306,7 @@ namespace REST
 			// The method from mongoose directly return a pointer from within
 			// the mg_connection struct, thus it can not fail.
 			const mg_request_info& reqinfo = *mg_get_request_info(conn);
-			assert(reqinfo.user_data != NULL && "invalid user data");
+			assert(reqinfo.user_data != NULL and "invalid user data");
 
 			// retrieving the request method first
 			// and directly aborting if invalid

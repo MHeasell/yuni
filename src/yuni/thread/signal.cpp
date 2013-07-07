@@ -25,7 +25,7 @@ namespace Thread
 		#ifndef YUNI_NO_THREAD_SAFE
 		# ifdef YUNI_OS_WINDOWS
 		// Making sure that our pseudo HANDLE type is valid
-		assert(sizeof(HANDLE) >= sizeof(void*) && "Invalid type for Signal::pHandle");
+		assert(sizeof(HANDLE) >= sizeof(void*) and "Invalid type for Signal::pHandle");
 
 		pHandle = (void*) CreateEvent(
 			NULL,     // default security attributes
@@ -47,7 +47,7 @@ namespace Thread
 		#ifndef YUNI_NO_THREAD_SAFE
 		# ifdef YUNI_OS_WINDOWS
 		// Making sure that our pseudo HANDLE type is valid
-		assert(sizeof(HANDLE) >= sizeof(void*) && "Invalid type for Signal::pHandle");
+		assert(sizeof(HANDLE) >= sizeof(void*) and "Invalid type for Signal::pHandle");
 
 		pHandle = (void*) CreateEvent(
 			NULL,     // default security attributes
@@ -81,7 +81,7 @@ namespace Thread
 	{
 		#ifndef YUNI_NO_THREAD_SAFE
 		# ifdef YUNI_OS_WINDOWS
-		return (pHandle && ResetEvent(pHandle));
+		return (pHandle and ResetEvent(pHandle));
 		# else
 
 		::pthread_mutex_lock(&pMutex);
@@ -154,7 +154,7 @@ namespace Thread
 		struct timespec t;
 
 		// Set the timespec t at [timeout] milliseconds in the future.
-		assert(timeout < 2147483648u && "Invalid range for timeout (Signal::wait(timeout))");
+		assert(timeout < 2147483648u and "Invalid range for timeout (Signal::wait(timeout))");
 		YUNI_SYSTEM_GETTIMEOFDAY(&now, NULL);
 		t.tv_nsec  =  (long)   (now.tv_usec * 1000 + (((int) timeout % 1000) * 1000000));
 		t.tv_sec   =  (time_t) (now.tv_sec + timeout / 1000 + (t.tv_nsec / 1000000000L));
@@ -171,8 +171,8 @@ namespace Thread
 			// Avoid spurious wakeups (see wait() above for explanations)
 			error = ::pthread_cond_timedwait(&pCondition, &pMutex, &t);
 		}
-		while (!pSignalled        // Condition not verified
-			and error != ETIMEDOUT // We have not timedout
+		while (not pSignalled       // Condition not verified
+			and error != ETIMEDOUT  // We have not timedout
 			and error != EINVAL);   // When t is in the past, we got EINVAL. We consider this as a timeout.
 
 		bool result = (pSignalled != false);

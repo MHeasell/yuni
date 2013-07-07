@@ -150,12 +150,12 @@ namespace Memory
 		// Hugepagesize:     2048 kB
 
 		// Trimming the string from the begining
-		while (*line == ' ' && *line != '\0')
+		while (*line == ' ' and *line != '\0')
 			++line;
 		const char* first = line;
 
 		// Looking for the end of the number
-		while (*line != ' ' && *line != '\0')
+		while (*line != ' ' and *line != '\0')
 			++line;
 		// Tagging the end of the number
 		*line = '\0';

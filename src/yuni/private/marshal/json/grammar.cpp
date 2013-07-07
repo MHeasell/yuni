@@ -21,7 +21,7 @@ namespace JSON
 {
 
 
-	static void EmptyNodeCallbackEnter(ASTNode& node, const ASTNode::List&, void*)
+	static inline void EmptyNodeCallbackEnter(ASTNode& node, const ASTNode::List&, void*)
 	{
 		# ifndef NDEBUG
 		std::cout << "   [!!] node enter: uncaught symbol " << node.symbolName << "  (enum: "
@@ -29,7 +29,7 @@ namespace JSON
 		# endif
 	}
 
-	static void EmptyNodeCallbackLeave(ASTNode& node, const ASTNode::List&, void*)
+	static inline void EmptyNodeCallbackLeave(ASTNode& node, const ASTNode::List&, void*)
 	{
 		# ifndef NDEBUG
 		std::cout << "   [!!] node leave: uncaught symbol " << node.symbolName << "  (enum: "
@@ -151,23 +151,23 @@ namespace JSON
 		if (content.size() > 1)
 		{
 			// UTF-16 Big endian
-			if ((unsigned char) content[0] == 0xFE && ((unsigned char) content[1]) == 0xFF)
+			if ((unsigned char) content[0] == 0xFE and ((unsigned char) content[1]) == 0xFF)
 			{
-				if (content.size() > 3 && !content[2] && !content[3])
+				if (content.size() > 3 and !content[2] and !content[3])
 					notifyError(errBOM, nullptr, "UTF-32 Little Endian encoding detected. ASCII/UTF-8 required", cursor.line, cursor.column);
 				else
 					notifyError(errBOM, nullptr, "UTF-16 Big Endian encoding detected. ASCII/UTF-8 required", cursor.line, cursor.column);
 				return false;
 			}
 			// UTF-16 Little endian
-			if ((unsigned char) content[0] == 0xFF && ((unsigned char) content[1]) == 0xFE)
+			if ((unsigned char) content[0] == 0xFF and ((unsigned char) content[1]) == 0xFE)
 			{
 				notifyError(errBOM, nullptr, "UTF-16 Little Endian encoding detected. ASCII/UTF-8 required", cursor.line, cursor.column);
 				return false;
 			}
 			// UTF-8 Little endian
-			if ((unsigned char) content[0] == 0xEF && ((unsigned char) content[1]) == 0xBB
-				&& content.size() > 2 && ((unsigned char) content[2]) == 0xBF)
+			if ((unsigned char) content[0] == 0xEF and ((unsigned char) content[1]) == 0xBB
+				and content.size() > 2 and ((unsigned char) content[2]) == 0xBF)
 			{
 				// Slipping the byte-order mark
 				content.consume(3); // eat 3 bytes
@@ -176,8 +176,8 @@ namespace JSON
 			}
 			if (content.size() > 3)
 			{
-				if (!content[0] && !content[1] && ((unsigned char) content[2]) == 0xFE
-					&& ((unsigned char) content[3]) == 0xFF)
+				if (!content[0] and !content[1] and ((unsigned char) content[2]) == 0xFE
+					and ((unsigned char) content[3]) == 0xFF)
 				{
 					notifyError(errBOM, nullptr, "UTF-32 Big Endian encoding detected. ASCII/UTF-8 required", cursor.line, cursor.column);
 					return false;
@@ -259,7 +259,7 @@ namespace JSON
 		if (cursor.bytes >= content.size())
 			return;
 
-		assert(not content.empty() && "should never reach this code if content is empty");
+		assert(not content.empty() and "should never reach this code if content is empty");
 		enum
 		{
 			marginLeft = 30,
@@ -280,7 +280,7 @@ namespace JSON
 			previousLinefeed = 0;
 
 		// removing unwanted tabs at the begining
-		while (previousLinefeed < content.size() && (content[previousLinefeed] == '\t' || content[previousLinefeed] == ' '))
+		while (previousLinefeed < content.size() and (content[previousLinefeed] == '\t' or content[previousLinefeed] == ' '))
 			++previousLinefeed;
 
 		if (previousLinefeed >= content.size()) // double check
@@ -371,7 +371,7 @@ namespace JSON
 			if (data.offset > 0)
 			{
 				--data.offset;
-				if (content[data.offset] == '/' && data.offset > 0)
+				if (content[data.offset] == '/' and data.offset > 0)
 					--data.offset;
 			}
 		}
@@ -590,8 +590,8 @@ namespace JSON
 		uint rule = entry.nextState;
 
 		if (trim.reductions
-			&& grammar.productions.table[rule].symbolCount == 1
-			&& grammar.symbols.table[grammar.productions.table[rule].symbols[0]].kind == Private::JSON::Symbols::kdNonTerminal)
+			and grammar.productions.table[rule].symbolCount == 1
+			and grammar.symbols.table[grammar.productions.table[rule].symbols[0]].kind == Private::JSON::Symbols::kdNonTerminal)
 		{
 			// pop the rule from the queue
 			Stack* pop = state.queue;
@@ -636,7 +636,7 @@ namespace JSON
 			for (uint i = symbolCount; i != 0; --i)
 			{
 				Stack* pop = state.queue;
-				assert(pop && "invalid stack");
+				assert(pop and "invalid stack");
 				state.queue = pop->next;
 				pop->next = nullptr;
 
@@ -784,7 +784,7 @@ namespace JSON
 				continue;
 			}
 
-			if (kind == Private::JSON::Symbols::kdTerminal || kind == Private::JSON::Symbols::kdEnd)
+			if (kind == Private::JSON::Symbols::kdTerminal or kind == Private::JSON::Symbols::kdEnd)
 			{
 				// Parse the current token
 				Private::JSON::LALR::ActionType action = parseToken(*current);
@@ -847,7 +847,7 @@ namespace JSON
 
 				if (kind == Private::JSON::Symbols::kdCommentEnd)
 				{
-					assert(false && "what are we doing here ?");
+					assert(false and "what are we doing here ?");
 					error(errLexical, current);
 					delete current;
 					return false;
@@ -860,7 +860,7 @@ namespace JSON
 		}
 		while (true);
 
-		assert(false && "what are we doing here ?");
+		assert(false and "what are we doing here ?");
 		return false;
 	}
 
@@ -983,7 +983,7 @@ namespace JSON
 				stack.push_back(ASTNode());
 				ASTNode& astnode = stack.back();
 				astnode.copyFromToken(nextToken);
-				astnode.unused = (astnode.nonTerminal && !astnode.childrenCount);
+				astnode.unused = (astnode.nonTerminal and 0 == astnode.childrenCount);
 
 				astnode.depth = node.depth + 1;
 				++node.childIndex;

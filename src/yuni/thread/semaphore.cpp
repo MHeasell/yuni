@@ -29,7 +29,7 @@ namespace Yuni
 	{
 		if (readers == 0) // can not be null
 			readers = 1;
-		assert(readers < 1024 * 1024 && "the number of readers seems quite high...");
+		assert(readers < 1024 * 1024 and "the number of readers seems quite high...");
 
 		# ifndef YUNI_NO_THREAD_SAFE
 
@@ -39,7 +39,7 @@ namespace Yuni
 		if (not pSemaphore)
 		{
 			std::cerr << "impossible to create a new unamed semaphore" << std::endl;
-			assert(false && "impossible to initialize a semaphore");
+			assert(false and "impossible to initialize a semaphore");
 			exit(-1);
 		}
 
@@ -64,7 +64,7 @@ namespace Yuni
 		if ((::sem_t*)pSemaphore == SEM_FAILED)
 		{
 			std::cerr << "impossible to create a new semaphore called " << name << std::endl;
-			assert(false && "impossible to initialize a semaphore");
+			assert(false and "impossible to initialize a semaphore");
 			exit(-1);
 		}
 
@@ -79,19 +79,19 @@ namespace Yuni
 				case EINVAL:
 					{
 						std::cerr << "`readers` exceeds SEM_VALUE_MAX (=" << (uint) (SEM_VALUE_MAX) << std::endl;
-						assert(false && "impossible to initialize a semaphore: `readers` exceeds SEM_VALUE_MAX");
+						assert(false and "impossible to initialize a semaphore: `readers` exceeds SEM_VALUE_MAX");
 						break;
 					}
 				case ENOSYS:
 					{
 						std::cerr << "the system does not support process-shared semaphores\n";
-						assert(false && "impossible to initialize a semaphore: the system does not support process-shared semaphores)");
+						assert(false and "impossible to initialize a semaphore: the system does not support process-shared semaphores)");
 						break;
 					}
 				default:
 					{
 						std::cerr << "impossible to initialize a semaphore\n";
-						assert(false && "impossible to initialize a semaphore");
+						assert(false and "impossible to initialize a semaphore");
 					}
 			}
 			exit(-1);
@@ -116,7 +116,7 @@ namespace Yuni
 		if (0 != sem_destroy(& pSemaphore))
 		{
 			std::cerr << "impossible to destroy a semaphore\n";
-			assert(false && "impossible to destroy a semaphore");
+			assert(false and "impossible to destroy a semaphore");
 			exit(-1);
 		}
 		#	endif

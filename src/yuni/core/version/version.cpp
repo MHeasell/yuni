@@ -72,7 +72,7 @@ namespace Yuni
 
 	bool Version::null() const
 	{
-		return (hi == 0 && lo == 0 && revision == 0);
+		return (hi == 0 and lo == 0 and revision == 0);
 	}
 
 

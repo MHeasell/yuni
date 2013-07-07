@@ -437,7 +437,7 @@ namespace Core
 		printBeginWL(out, level);
 		out << "\n";
 
-		if (recursive && pChildrenCount)
+		if (recursive and pChildrenCount)
 		{
 			const iterator end;
 			for (iterator i = begin(); i != end; ++i)
@@ -503,7 +503,7 @@ namespace Core
 		typename ThreadingPolicy::MutexLocker locker(*this);
 
 		// We check in a first time if we are not already at the end
-		if (pParent && pNextSibling)
+		if (pParent and pNextSibling)
 		{
 			// Locking the parent
 			typename ThreadingPolicy::MutexLocker locker(pParent);
@@ -524,7 +524,7 @@ namespace Core
 		typename ThreadingPolicy::MutexLocker locker(*this);
 
 		// We check in a first time if we are not already at the end
-		if (pParent && pPreviousSibling)
+		if (pParent and pPreviousSibling)
 		{
 			// Locking the parent
 			typename ThreadingPolicy::MutexLocker locker(pParent);
