@@ -8,7 +8,7 @@ namespace Bit
 {
 
 	template<class T>
-	uint Count(T data)
+	inline uint Count(T data)
 	{
 		uint c = 0;
 		while (data)
