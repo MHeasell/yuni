@@ -18,8 +18,8 @@ namespace UTF8
 	{}
 
 
-	inline Char::Char(char c) :
-		pValue((uint) c)
+	inline Char::Char(uint c) :
+		pValue(c)
 	{}
 
 
@@ -42,47 +42,46 @@ namespace UTF8
 	}
 
 
-	inline Char& Char::operator = (char c)
+	inline Char& Char::operator = (uint value)
 	{
-		pValue  = (uint32) c;
+		pValue = (uint32) value;
 		return *this;
 	}
 
 
-	inline Char& Char::operator = (uchar c)
+	inline bool Char::operator == (const Char& ch) const
 	{
-		pValue  = (uint32) c;
-		return *this;
+		return pValue == ch.pValue;
 	}
 
 
-	inline bool Char::operator == (char c) const
+	inline bool Char::operator == (uint value) const
 	{
-		return (pValue < 0x80 && static_cast<char>(pValue) == c);
+		return pValue == value;
 	}
 
 
-	inline bool Char::operator != (char c) const
+	inline bool Char::operator != (uint value) const
 	{
-		return !(*this == c);
+		return pValue != value;
 	}
 
 
-	inline bool Char::operator == (uchar c) const
+	inline bool Char::operator != (const Char& ch) const
 	{
-		return (pValue < 0x80 && static_cast<uchar>(pValue) == c);
-	}
-
-
-	inline bool Char::operator != (uchar c) const
-	{
-		return !(*this == c);
+		return pValue != ch.pValue;
 	}
 
 
 	inline Char::operator char () const
 	{
 		return (pValue < 0x80) ? static_cast<char>(pValue) : '\0';
+	}
+
+
+	inline Char::operator unsigned char () const
+	{
+		return (pValue < 0x80) ? static_cast<unsigned char>(pValue) : '\0';
 	}
 
 
@@ -179,10 +178,86 @@ namespace UTF8
 	}
 
 
+	inline bool Char::isAscii() const
+	{
+		return pValue < (uint) asciiLimit;
+	}
+
+
+	inline bool Char::operator < (uint value) const
+	{
+		return pValue < value;
+	}
+
+
+	inline bool Char::operator <= (uint value) const
+	{
+		return pValue <= value;
+	}
+
+
+	inline bool Char::operator > (uint value) const
+	{
+		return pValue > value;
+	}
+
+
+	inline bool Char::operator >= (uint value) const
+	{
+		return pValue >= value;
+	}
+
+
+
+
+	inline bool Char::operator < (const Char& ch) const
+	{
+		return pValue < ch.pValue;
+	}
+
+
+	inline bool Char::operator <= (const Char& ch) const
+	{
+		return pValue <= ch.pValue;
+	}
+
+
+	inline bool Char::operator > (const Char& ch) const
+	{
+		return pValue > ch.pValue;
+	}
+
+
+	inline bool Char::operator >= (const Char& ch) const
+	{
+		return pValue >= ch.pValue;
+	}
+
 
 
 
 } // namespace UTF8
 } // namespace Yuni
+
+
+
+
+# ifdef YUNI_HAS_STL_HASH
+
+namespace std
+{
+	template<>
+	struct YUNI_DECL hash<Yuni::UTF8::Char> final
+	{
+		inline size_t operator() (const Yuni::UTF8::Char& ch) const
+		{
+			return ch.value();
+		}
+	};
+
+} // namespace std
+
+# endif // YUNI_HAS_STL_HASH
+
 
 #endif // __YUNI_CORE_STRING_STRING_UTF8_CHAR_HXX__

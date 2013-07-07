@@ -45,7 +45,6 @@ namespace Yuni
 	{}
 
 
-
 	template<class ModelT, bool ConstT>
 	inline void IIterator<ModelT,ConstT>::forward()
 	{
@@ -192,7 +191,7 @@ namespace Yuni
 	template<class M, bool C>
 	inline bool  IIterator<ModelT,ConstT>::operator != (const IIterator<M,C>& rhs) const
 	{
-		return ! AncestorType::equals(static_cast<const typename IIterator<M,C>::AncestorType&>(rhs));
+		return not AncestorType::equals(static_cast<const typename IIterator<M,C>::AncestorType&>(rhs));
 	}
 
 
@@ -211,6 +210,7 @@ namespace Yuni
 		AncestorType::reset(static_cast<const AncestorType&>(rhs));
 		return *this;
 	}
+
 
 
 
