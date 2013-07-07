@@ -123,7 +123,7 @@ namespace Yuni
 		*/
 		template<typename U, typename V>
 		bool closeTo(const Point2D<U>& rhs, const V delta) const
-		{ return Math::Abs((U)x-rhs.x) < delta && Math::Abs((U)y-rhs.y) < delta; }
+		{ return Math::Abs((U)x-rhs.x) < delta and Math::Abs((U)y-rhs.y) < delta; }
 
 		/*!
 		** \brief Get if the point is close to another point
@@ -134,7 +134,7 @@ namespace Yuni
 		*/
 		template<typename U, typename V>
 		bool closeTo(const U x1, const U y1, const V delta) const
-		{ return Math::Abs((U)x-x1) < delta && Math::Abs((U)y-y1) < delta; }
+		{ return Math::Abs((U)x-x1) < delta and Math::Abs((U)y-y1) < delta; }
 
 
 
@@ -185,7 +185,7 @@ namespace Yuni
 		** \return True if the two points are equal
 		*/
 		template<typename U> bool operator == (const Point2D<U>& rhs) const
-		{ return (T)rhs.x == x && (T)rhs.y == y; }
+		{ return (T)rhs.x == x and (T)rhs.y == y; }
 
 		/*!
 		** \brief Comparison operator (non equal with)
@@ -220,7 +220,7 @@ namespace Yuni
 				case 1:
 					return y;
 				default:
-					assert(false && "Index out of bounds !");
+					assert(false and "Index out of bounds !");
 			}
 		}
 		//} Operators

@@ -110,7 +110,7 @@ namespace DBI
 
 		if (YUNI_UNLIKELY(handle != nestedTransactionCount))
 		{
-			assert(false && "invalid transaction lifetime rollback");
+			assert(false and "invalid transaction lifetime rollback");
 			return Yuni::DBI::errInvalidNestedTransaction;
 		}
 
@@ -139,7 +139,7 @@ namespace DBI
 			std::cerr << "\ninvalid transaction lifetime rollback" << std::endl;
 
 			std::cerr << "\ninvalid transaction lifetime commit" << std::endl;
-			assert(false && "invalid transaction lifetime commit");
+			assert(false and "invalid transaction lifetime commit");
 			return Yuni::DBI::errInvalidNestedTransaction;
 		}
 

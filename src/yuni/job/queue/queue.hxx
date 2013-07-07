@@ -67,7 +67,7 @@ namespace Job
 	template<class SchedulerT>
 	inline bool QueueService<SchedulerT>::restart(uint timeout)
 	{
-		return (SchedulerPolicy::schedulerStop(timeout) && SchedulerPolicy::schedulerStart());
+		return (SchedulerPolicy::schedulerStop(timeout) and SchedulerPolicy::schedulerStart());
 	}
 
 
@@ -97,7 +97,7 @@ namespace Job
 			virtual bool onInterval(uint) override
 			{
 				// Checking if the scheduler still has workers
-				if (pRoom.empty() && pScheduler.idle())
+				if (pRoom.empty() and pScheduler.idle())
 				{
 					pStatus = true;
 					// We can stop now

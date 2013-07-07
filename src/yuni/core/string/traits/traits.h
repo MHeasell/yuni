@@ -108,7 +108,7 @@ namespace CStringImpl
 			chunkSize = ChunkSizeT,
 			zeroTerminated = 1, //(ZeroTerminatedT ? 1 : 0),
 			expandable = 1,
-			adapter  = (!chunkSize && expandable && !(uint) zeroTerminated),
+			adapter  = (!chunkSize and expandable and !(uint) zeroTerminated),
 		};
 
 	public:
@@ -192,7 +192,7 @@ namespace CStringImpl
 
 		Size assign(const C* const block, const Size blockSize)
 		{
-			if (block && blockSize)
+			if (block and blockSize)
 				return assignWithoutChecking(block, blockSize);
 			clear();
 			return 0;
@@ -201,7 +201,7 @@ namespace CStringImpl
 
 		Size append(const C* const block, const Size blockSize)
 		{
-			return (block && blockSize) ? appendWithoutChecking(block, blockSize) : 0;
+			return (block and blockSize) ? appendWithoutChecking(block, blockSize) : 0;
 		}
 
 		void put(const C rhs);
@@ -274,7 +274,7 @@ namespace CStringImpl
 
 		Size assign(const C* const block, const Size blockSize)
 		{
-			if (block && blockSize)
+			if (block and blockSize)
 				return assignWithoutChecking(block, blockSize);
 			clear();
 			return 0;
@@ -282,7 +282,7 @@ namespace CStringImpl
 
 		Size append(const C* const block, const Size blockSize)
 		{
-			return (block && blockSize) ? appendWithoutChecking(block, blockSize) : 0;
+			return (block and blockSize) ? appendWithoutChecking(block, blockSize) : 0;
 		}
 
 		void put(const C rhs);

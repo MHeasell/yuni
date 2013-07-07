@@ -76,7 +76,7 @@ namespace Thread
 	extern "C"  YUNI_THREAD_FNC_RETURN  threadCallbackExecute(void* arg)
 	{
 		// assert, for the debugger
-		assert(arg && "Yuni Thread Internal: invalid argument (pthread callback)");
+		assert(arg and "Yuni Thread Internal: invalid argument (pthread callback)");
 		if (!arg)
 			return 0;
 
@@ -84,7 +84,7 @@ namespace Thread
 		Yuni::Thread::IThread& thread = *((Yuni::Thread::IThread *) arg);
 		# ifndef NDEBUG
 		thread.pInnerFlagMutex.lock();
-		assert(not thread.pStarted && "Yuni Thread: The thread is already started");
+		assert(not thread.pStarted and "Yuni Thread: The thread is already started");
 		thread.pInnerFlagMutex.unlock();
 		# endif
 
@@ -113,7 +113,7 @@ namespace Thread
 				// check if the thread should stop as soon as possible
 				{
 					Yuni::MutexLocker flagLocker(thread.pInnerFlagMutex);
-					if (thread.pShouldStop ||  not thread.pStarted)
+					if (thread.pShouldStop or  not thread.pStarted)
 						break;
 				}
 
@@ -128,7 +128,7 @@ namespace Thread
 					Yuni::MutexLocker flagLocker(thread.pInnerFlagMutex);
 					// The signal must be reset for future use
 					// However for thread-safety issues, we have to lock the thread itself
-					if (thread.pShouldStop || not thread.pStarted)
+					if (thread.pShouldStop or not thread.pStarted)
 						break;
 				}
 
@@ -211,7 +211,7 @@ namespace Thread
 		// (or if these methods call another virtual methods of the current object)
 		# ifndef NDEBUG
 		pInnerFlagMutex.lock();
-		assert(pStarted == false &&
+		assert(pStarted == false and
 			"A thread must be stopped before being destroyed to avoid corrupted vtable. Please call stop() before");
 		pInnerFlagMutex.unlock();
 		# endif
@@ -295,7 +295,7 @@ namespace Thread
 
 	Error IThread::stop(uint timeout)
 	{
-		assert(timeout < INVALID_TIMEOUT && "Invalid range for timeout, IThread::stop");
+		assert(timeout < INVALID_TIMEOUT and "Invalid range for timeout, IThread::stop");
 		(void) timeout; // unused
 		return errNone;
 	}
@@ -307,7 +307,7 @@ namespace Thread
 	# ifndef YUNI_NO_THREAD_SAFE
 	Error IThread::stop(uint timeout)
 	{
-		assert(timeout < INVALID_TIMEOUT && "Invalid range for timeout, IThread::stop");
+		assert(timeout < INVALID_TIMEOUT and "Invalid range for timeout, IThread::stop");
 
 		ThreadingPolicy::MutexLocker locker(*this);
 		return stopWL(timeout);
@@ -394,7 +394,7 @@ namespace Thread
 
 	Error IThread::wait(uint milliseconds)
 	{
-		assert(milliseconds < INVALID_TIMEOUT && "Invalid range for timeout, IThread::wait");
+		assert(milliseconds < INVALID_TIMEOUT and "Invalid range for timeout, IThread::wait");
 
 		# ifndef YUNI_NO_THREAD_SAFE
 		{
@@ -432,7 +432,7 @@ namespace Thread
 		// The thread may have to stop
 		{
 			Yuni::MutexLocker flagLocker(pInnerFlagMutex);
-			if (pShouldStop || not pStarted)
+			if (pShouldStop or not pStarted)
 				return true;
 		}
 
@@ -445,7 +445,7 @@ namespace Thread
 		}
 
 		Yuni::MutexLocker flagLocker(pInnerFlagMutex);
-		return (pShouldStop || not pStarted);
+		return (pShouldStop or not pStarted);
 
 		# else // YUNI_NO_THREAD_SAFE
 		(void) delay; // unused
@@ -471,7 +471,7 @@ namespace Thread
 
 	Error IThread::restart(uint timeout)
 	{
-		assert(timeout < INVALID_TIMEOUT && "Invalid range for timeout, IThread::restart");
+		assert(timeout < INVALID_TIMEOUT and "Invalid range for timeout, IThread::restart");
 
 		Error status = stop(timeout);
 		return (status != errNone) ? status : start();

@@ -38,7 +38,7 @@ namespace Yuni
 	template<class T>
 	inline Variant Variant::New<T>::Instance()
 	{
-		assert(false && "Variant<T>::New : not implemented");
+		assert(false and "Variant<T>::New : not implemented");
 		return Variant();
 	}
 
@@ -351,7 +351,7 @@ namespace Yuni
 	inline void Variant::deepCopyIfNonUnique()
 	{
 		// pValue must not null
-		if (/*!(!pValue) &&*/ not pShareContent && not pData->unique())
+		if (/*!(!pValue) &&*/ not pShareContent and not pData->unique())
 		{
 			Private::Variant::IDataHolder* pointer = Private::Variant::IDataHolder::Ptr::WeakPointer(pData);
 			pData = pointer->clone();

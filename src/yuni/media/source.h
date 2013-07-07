@@ -65,13 +65,13 @@ namespace Media
 		}
 
 		//! Has either valid audio, valid video, or both.
-		bool valid() const { return hasAudio() || hasVideo(); }
+		bool valid() const { return hasAudio() or hasVideo(); }
 
 		//! Has a valid audio stream
-		bool hasAudio() const { return nullptr != pAStream && pAStream->valid(); }
+		bool hasAudio() const { return nullptr != pAStream and pAStream->valid(); }
 
 		//! Has a valid video stream
-		bool hasVideo() const { return nullptr != pVStream && pVStream->valid(); }
+		bool hasVideo() const { return nullptr != pVStream and pVStream->valid(); }
 
 		//! Get the duration of the stream, 0 if not set
 		uint duration() const;

@@ -30,8 +30,8 @@ namespace Display
 
 	inline bool Resolution::operator == (const Resolution& rhs) const
 	{
-		return rhs.pWidth == pWidth && rhs.pHeight == pHeight
-			&& rhs.pBitsPerPixel == pBitsPerPixel;
+		return rhs.pWidth == pWidth and rhs.pHeight == pHeight
+			and rhs.pBitsPerPixel == pBitsPerPixel;
 	}
 
 
@@ -43,15 +43,15 @@ namespace Display
 
 	inline bool Resolution::operator <= (const Resolution& rhs) const
 	{
-		return pWidth <= rhs.pWidth && pHeight <= rhs.pHeight
-			&& pBitsPerPixel <= rhs.pBitsPerPixel;
+		return pWidth <= rhs.pWidth and pHeight <= rhs.pHeight
+			and pBitsPerPixel <= rhs.pBitsPerPixel;
 	}
 
 
 	inline bool Resolution::operator >= (const Resolution& rhs) const
 	{
-		return pWidth >= rhs.pWidth && pHeight >= rhs.pHeight
-			&& pBitsPerPixel >= rhs.pBitsPerPixel;
+		return pWidth >= rhs.pWidth and pHeight >= rhs.pHeight
+			and pBitsPerPixel >= rhs.pBitsPerPixel;
 	}
 
 

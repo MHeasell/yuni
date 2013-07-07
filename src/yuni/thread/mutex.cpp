@@ -43,13 +43,13 @@ namespace Yuni
 			case EBUSY:
 			{
 				std::cerr << "\nattempt to destroy a mutex while it is locked or referenced\n";
-				assert(false && "attempt to destroy a mutex while it is locked or referenced");
+				assert(false and "attempt to destroy a mutex while it is locked or referenced");
 				break;
 			}
 			default:
 			{
 				std::cerr << "\nfailed to destroy a mutex\n";
-				assert(false && "\nfailed to destroy a mutex\n");
+				assert(false and "\nfailed to destroy a mutex\n");
 				break;
 			}
 		}
@@ -72,7 +72,7 @@ namespace Yuni
 		{
 			if (PTHREAD_MUTEX_RECURSIVE == type)
 			{
-				# if defined(YUNI_OS_DARWIN) || defined(YUNI_OS_FREEBSD) || defined(YUNI_OS_SOLARIS) || defined(YUNI_OS_SUNOS) || defined(YUNI_OS_HAIKU) || defined(YUNI_OS_CYGWIN)
+				# if defined(YUNI_OS_DARWIN) or defined(YUNI_OS_FREEBSD) or defined(YUNI_OS_SOLARIS) or defined(YUNI_OS_SUNOS) or defined(YUNI_OS_HAIKU) or defined(YUNI_OS_CYGWIN)
 				::pthread_mutexattr_settype(&pAttr, PTHREAD_MUTEX_RECURSIVE);
 				# else
 				::pthread_mutexattr_settype(&pAttr, PTHREAD_MUTEX_RECURSIVE_NP);
@@ -110,7 +110,7 @@ namespace Yuni
 		::pthread_mutexattr_init(&pAttr);
 		if (recursive)
 		{
-			# if defined(YUNI_OS_DARWIN) || defined(YUNI_OS_FREEBSD) || defined(YUNI_OS_SOLARIS) || defined(YUNI_OS_SUNOS) || defined(YUNI_OS_HAIKU) || defined(YUNI_OS_CYGWIN)
+			# if defined(YUNI_OS_DARWIN) or defined(YUNI_OS_FREEBSD) or defined(YUNI_OS_SOLARIS) or defined(YUNI_OS_SUNOS) or defined(YUNI_OS_HAIKU) or defined(YUNI_OS_CYGWIN)
 			::pthread_mutexattr_settype(&pAttr, PTHREAD_MUTEX_RECURSIVE);
 			# else
 			::pthread_mutexattr_settype(&pAttr, PTHREAD_MUTEX_RECURSIVE_NP);

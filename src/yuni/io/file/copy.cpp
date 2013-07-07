@@ -1,6 +1,6 @@
 
 #include "../file.h"
-#if defined(YUNI_OS_LINUX) && defined(YUNI_HAS_SYS_SENDFILE_H)
+#if defined(YUNI_OS_LINUX) and defined(YUNI_HAS_SYS_SENDFILE_H)
 # include <sys/sendfile.h>
 #endif
 #include <sys/stat.h>
@@ -19,7 +19,7 @@ namespace File
 
 	Error Copy(const AnyString& from, const AnyString& to, bool overwrite)
 	{
-		if (!overwrite && IO::Exists(to))
+		if (!overwrite and IO::Exists(to))
 			return errOverwriteNotAllowed;
 
 		// Open the source file
@@ -33,13 +33,13 @@ namespace File
 
 		enum { size = 8192 };
 
-		# if defined(YUNI_OS_LINUX) && defined(YUNI_HAS_SYS_SENDFILE_H)
+		# if defined(YUNI_OS_LINUX) and defined(YUNI_HAS_SYS_SENDFILE_H)
 		int fdIN  = fileno(fromFile. nativeHandle());
 		int fdOUT = fileno(toFile.   nativeHandle());
 
 		// Trying sendfile first
 		struct stat st;
-		if (!fstat(fdIN, &st))
+		if (0 == fstat(fdIN, &st))
 		{
 			off_t offset = 0;
 			if (sendfile(fdOUT, fdIN, &offset, (size_t) st.st_size) >= 0)

@@ -95,7 +95,7 @@ namespace Process
 			Yuni::Process::ProcessEnvironment::Ptr envptr = pProcess.pEnv;
 			if (not envptr)
 			{
-				assert(false && "Launching a new process with an invalid thread environment");
+				assert(false and "Launching a new process with an invalid thread environment");
 				return false; // should never happen
 			}
 			Yuni::Process::ProcessEnvironment& env = *envptr;
@@ -121,7 +121,7 @@ namespace Process
 			// pipe(pData.infd)
 			// The parent is going to read from (cerr)
 			// pipe(pData.errd)
-			if (/*input*/pipe(pData.outfd) || /*output*/pipe(pData.infd) || pipe(pData.errd))
+			if (/*input*/pipe(pData.outfd) or /*output*/pipe(pData.infd) or pipe(pData.errd))
 			{
 				switch (errno)
 				{
@@ -212,7 +212,7 @@ namespace Process
 
 			# else
 
-			assert(false && "not implemented on Windows");
+			assert(false and "not implemented on Windows");
 			env.mutex.unlock();
 			return false;
 			# endif
@@ -274,7 +274,7 @@ namespace Process
 		// prevent against invalid code
 		if (pEndTime == 0)
 		{
-			assert(false && "endTime is invalid");
+			assert(false and "endTime is invalid");
 			pEndTime = Yuni::DateTime::Now();
 		}
 
@@ -436,7 +436,7 @@ namespace Process
 		int ca = close(pData.infd[0]);
 		int cb = close(pData.errd[0]);
 		int cc = close(pData.outfd[1]);
-		if (ca || cb || cc)
+		if (ca or cb or cc)
 			std::cerr << "close file descriptor failed\n";
 
 		// release the buffer
@@ -545,7 +545,7 @@ namespace Yuni
 			// checking environment
 			{
 				MutexLocker locker(env.mutex);
-				if (not env.running || not env.thread)
+				if (not env.running or not env.thread)
 				{
 					if (duration)
 						*duration = env.duration;
@@ -607,7 +607,7 @@ namespace Yuni
 		bool perform(uint timeout)
 		{
 			# ifndef NDEBUG
-			assert(!pAlreadyLaunched && "internal execute error");
+			assert(!pAlreadyLaunched and "internal execute error");
 			pAlreadyLaunched = true;
 			# endif
 
@@ -725,7 +725,7 @@ namespace Yuni
 					}
 					else
 					{
-						if (c == '\'' || c == '"')
+						if (c == '\'' or c == '"')
 						{
 							if (not escape)
 							{
@@ -737,7 +737,7 @@ namespace Yuni
 						}
 						if (withinString == '\0')
 						{
-							if (c == ' ' || c == '\t' || c == '\r' || c == '\n')
+							if (c == ' ' or c == '\t' or c == '\r' or c == '\n')
 								break;
 						}
 					}
@@ -748,7 +748,7 @@ namespace Yuni
 				if (next > offset)
 				{
 					AnyString arg;
-					if (next - offset > 1 && cmd[next - 1] == cmd[offset] && (cmd[offset] == '"' || cmd[offset] == '\''))
+					if (next - offset > 1 and cmd[next - 1] == cmd[offset] and (cmd[offset] == '"' or cmd[offset] == '\''))
 						arg.adapt(cmd.c_str() + offset + 1, next - offset - 2);
 					else
 						arg.adapt(cmd.c_str() + offset, next - offset);

@@ -24,7 +24,7 @@ namespace Color
 				lowerBound = Yuni::Private::Color::DefaultValues<T>::lowerBound,
 			};
 			// new value
-			const CalculationType v = ((int)RGBType::upperBound == (int)upperBound && (int)RGBType::lowerBound == (int)lowerBound)
+			const CalculationType v = ((int)RGBType::upperBound == (int)upperBound and (int)RGBType::lowerBound == (int)lowerBound)
 				? static_cast<CalculationType>(value)
 				: static_cast<CalculationType>(value) * RGBType::upperBound / upperBound;
 			// assignment
@@ -41,13 +41,13 @@ namespace Color
 				lowerBound = Yuni::Private::Color::DefaultValues<T>::lowerBound,
 			};
 			// new value
-			const CalculationType v = ((int)RGBType::upperBound == (int)upperBound && (int)RGBType::lowerBound == (int)lowerBound)
+			const CalculationType v = ((int)RGBType::upperBound == (int)upperBound and (int)RGBType::lowerBound == (int)lowerBound)
 				? static_cast<CalculationType>(value)
 				: static_cast<CalculationType>(value) * RGBType::upperBound / upperBound;
 
 			return color.red   == v
-				&& color.green == v
-				&& color.blue  == v;
+				and color.green == v
+				and color.blue  == v;
 		}
 
 		template<bool PlusT>
@@ -59,7 +59,7 @@ namespace Color
 				lowerBound = Yuni::Private::Color::DefaultValues<T>::lowerBound,
 			};
 			// new value
-			const CalculationType v = ((int)RGBType::upperBound == (int)upperBound && (int)RGBType::lowerBound == (int)lowerBound)
+			const CalculationType v = ((int)RGBType::upperBound == (int)upperBound and (int)RGBType::lowerBound == (int)lowerBound)
 				? static_cast<CalculationType>(value)
 				: static_cast<CalculationType>(value) * RGBType::upperBound / upperBound;
 			// assignment
@@ -89,7 +89,7 @@ namespace Color
 		{
 
 			if ((int)Yuni::Color::RGB<U>::upperBound == (int)Yuni::Color::RGB<V>::upperBound
-				&& (int)Yuni::Color::RGB<U>::lowerBound == (int)Yuni::Color::RGB<V>::lowerBound)
+				and (int)Yuni::Color::RGB<U>::lowerBound == (int)Yuni::Color::RGB<V>::lowerBound)
 			{
 				color.red   = static_cast<U>(value.red);
 				color.green = static_cast<U>(value.green);
@@ -106,19 +106,19 @@ namespace Color
 		static inline bool IsEqual(Yuni::Color::RGB<U>& color, const Yuni::Color::RGB<V>& value)
 		{
 			if ((int)Yuni::Color::RGB<U>::upperBound == (int)Yuni::Color::RGB<V>::upperBound
-				&& (int)Yuni::Color::RGB<U>::lowerBound == (int)Yuni::Color::RGB<V>::lowerBound)
+				and (int)Yuni::Color::RGB<U>::lowerBound == (int)Yuni::Color::RGB<V>::lowerBound)
 			{
 				return
 					color.red      == static_cast<U>(value.red)
-					&& color.green == static_cast<U>(value.green)
-					&& color.blue  == static_cast<U>(value.blue);
+					and color.green == static_cast<U>(value.green)
+					and color.blue  == static_cast<U>(value.blue);
 			}
 			else
 			{
 				return
 					color.red      == static_cast<U>(static_cast<CalculationType>(value.red)   * Yuni::Color::RGB<U>::upperBound / Yuni::Color::RGB<V>::upperBound)
-					&& color.green == static_cast<U>(static_cast<CalculationType>(value.green) * Yuni::Color::RGB<U>::upperBound / Yuni::Color::RGB<V>::upperBound)
-					&& color.blue  == static_cast<U>(static_cast<CalculationType>(value.blue)  * Yuni::Color::RGB<U>::upperBound / Yuni::Color::RGB<V>::upperBound);
+					and color.green == static_cast<U>(static_cast<CalculationType>(value.green) * Yuni::Color::RGB<U>::upperBound / Yuni::Color::RGB<V>::upperBound)
+					and color.blue  == static_cast<U>(static_cast<CalculationType>(value.blue)  * Yuni::Color::RGB<U>::upperBound / Yuni::Color::RGB<V>::upperBound);
 			}
 		}
 
@@ -126,7 +126,7 @@ namespace Color
 		static inline void Increase(Yuni::Color::RGB<U>& color, const Yuni::Color::RGB<V>& value)
 		{
 			if ((int)Yuni::Color::RGB<U>::upperBound == (int)Yuni::Color::RGB<V>::upperBound
-				&& (int)Yuni::Color::RGB<U>::lowerBound == (int)Yuni::Color::RGB<V>::lowerBound)
+				and (int)Yuni::Color::RGB<U>::lowerBound == (int)Yuni::Color::RGB<V>::lowerBound)
 			{
 				if (PlusT)
 				{
@@ -182,7 +182,7 @@ namespace Color
 		static inline void Assign(Yuni::Color::RGB<U>& color, const Yuni::Color::RGBA<V>& value)
 		{
 			if ((int)Yuni::Color::RGB<U>::upperBound == (int)Yuni::Color::RGBA<V>::upperBound
-				&& (int)Yuni::Color::RGB<U>::lowerBound == (int)Yuni::Color::RGBA<V>::lowerBound)
+				and (int)Yuni::Color::RGB<U>::lowerBound == (int)Yuni::Color::RGBA<V>::lowerBound)
 			{
 				color.red   = static_cast<U>(value.red);
 				color.green = static_cast<U>(value.green);
@@ -199,21 +199,21 @@ namespace Color
 		static inline bool IsEqual(Yuni::Color::RGB<U>& color, const Yuni::Color::RGBA<V>& value)
 		{
 			if ((int)Yuni::Color::RGB<U>::upperBound == (int)Yuni::Color::RGBA<V>::upperBound
-				&& (int)Yuni::Color::RGB<U>::lowerBound == (int)Yuni::Color::RGBA<V>::lowerBound)
+				and (int)Yuni::Color::RGB<U>::lowerBound == (int)Yuni::Color::RGBA<V>::lowerBound)
 			{
 				return
 					value.alpha    == Yuni::Color::RGBA<V>::upperBound
-					&& color.red   == static_cast<U>(value.red)
-					&& color.green == static_cast<U>(value.green)
-					&& color.blue  == static_cast<U>(value.blue);
+					and color.red   == static_cast<U>(value.red)
+					and color.green == static_cast<U>(value.green)
+					and color.blue  == static_cast<U>(value.blue);
 			}
 			else
 			{
 				return
 					value.alpha    == Yuni::Color::RGBA<V>::upperBound
-					&& color.red   == static_cast<U>(static_cast<CalculationType>(value.red)   * Yuni::Color::RGB<U>::upperBound / Yuni::Color::RGBA<V>::upperBound)
-					&& color.green == static_cast<U>(static_cast<CalculationType>(value.green) * Yuni::Color::RGB<U>::upperBound / Yuni::Color::RGBA<V>::upperBound)
-					&& color.blue  == static_cast<U>(static_cast<CalculationType>(value.blue)  * Yuni::Color::RGB<U>::upperBound / Yuni::Color::RGBA<V>::upperBound);
+					and color.red   == static_cast<U>(static_cast<CalculationType>(value.red)   * Yuni::Color::RGB<U>::upperBound / Yuni::Color::RGBA<V>::upperBound)
+					and color.green == static_cast<U>(static_cast<CalculationType>(value.green) * Yuni::Color::RGB<U>::upperBound / Yuni::Color::RGBA<V>::upperBound)
+					and color.blue  == static_cast<U>(static_cast<CalculationType>(value.blue)  * Yuni::Color::RGB<U>::upperBound / Yuni::Color::RGBA<V>::upperBound);
 			}
 		}
 
@@ -221,7 +221,7 @@ namespace Color
 		static inline void Increase(Yuni::Color::RGB<U>& color, const Yuni::Color::RGBA<V>& value)
 		{
 			if ((int)Yuni::Color::RGB<U>::upperBound == (int)Yuni::Color::RGBA<V>::upperBound
-				&& (int)Yuni::Color::RGB<U>::lowerBound == (int)Yuni::Color::RGBA<V>::lowerBound)
+				and (int)Yuni::Color::RGB<U>::lowerBound == (int)Yuni::Color::RGBA<V>::lowerBound)
 			{
 				if (PlusT)
 				{
@@ -349,9 +349,9 @@ namespace Color
 	inline bool RGB<T>::valid() const
 	{
 		return
-			(   red   >= static_cast<T>(lowerBound) && red   <= static_cast<T>(upperBound))
-			&& (green >= static_cast<T>(lowerBound) && green <= static_cast<T>(upperBound))
-			&& (blue  >= static_cast<T>(lowerBound) && blue  <= static_cast<T>(upperBound));
+			(    red   >= static_cast<T>(lowerBound) and red   <= static_cast<T>(upperBound))
+			and (green >= static_cast<T>(lowerBound) and green <= static_cast<T>(upperBound))
+			and (blue  >= static_cast<T>(lowerBound) and blue  <= static_cast<T>(upperBound));
 	}
 
 
@@ -435,7 +435,7 @@ namespace Color
 			case 2:
 				return blue;
 			default:
-				assert(false && "Index out of bounds !");
+				assert(false and "Index out of bounds !");
 		}
 	}
 
@@ -522,17 +522,17 @@ namespace CString
 				return true;
 			}
 			// trimming
-			if (*i != 'r' || ++i == end || *i != 'g' || ++i == end || *i != 'b' || ++i == end)
+			if (*i != 'r' or ++i == end or *i != 'g' or ++i == end or *i != 'b' or ++i == end)
 				return false;
 			bool hasAlpha = (*i == 'a');
-			if (hasAlpha && ++i == end)
+			if (hasAlpha and ++i == end)
 				return false;
 			if (*i != '(')
 			{
-				if (not i.findFirstNonSpace(end.offset()) || *i != '(')
+				if (not i.findFirstNonSpace(end.offset()) or *i != '(')
 					return false;
 			}
-			if (++i == end || !i.findFirstNonSpace(end.offset()))
+			if (++i == end or !i.findFirstNonSpace(end.offset()))
 			{
 				out = nullptr; // empty string
 				return true;
@@ -549,7 +549,7 @@ namespace CString
 			if (!i.find(',', end.offset()))
 				return false;
 			tmp.assign(j, i);
-			if (!tmp.to(channel) || ++i == end || !i.findFirstNonSpace(end.offset()))
+			if (!tmp.to(channel) or ++i == end or !i.findFirstNonSpace(end.offset()))
 				return false;
 			out.red = Math::MinMaxEx<T>(channel, static_cast<T>(lowerBound), static_cast<T>(upperBound));
 
@@ -558,7 +558,7 @@ namespace CString
 			if (!i.find(',', end.offset()))
 				return false;
 			tmp.assign(j, i);
-			if (!tmp.to(channel) || ++i == end || !i.findFirstNonSpace(end.offset()))
+			if (!tmp.to(channel) or ++i == end or !i.findFirstNonSpace(end.offset()))
 				return false;
 			out.green = Math::MinMaxEx<T>(channel, static_cast<T>(lowerBound), static_cast<T>(upperBound));
 
@@ -569,7 +569,7 @@ namespace CString
 				if (!i.find(',', end.offset()))
 					return false;
 				tmp.assign(j, i);
-				if (!tmp.to(channel) || ++i == end || !i.findFirstNonSpace(end.offset()))
+				if (!tmp.to(channel) or ++i == end or !i.findFirstNonSpace(end.offset()))
 					return false;
 				out.blue = Math::MinMaxEx<T>(channel, static_cast<T>(lowerBound), static_cast<T>(upperBound));
 

@@ -40,7 +40,7 @@ namespace Directory
 		for (; i.valid(); ++i)
 		{
 			// Removing the folder
-			result = IO::Directory::Remove(*i) && result;
+			result = IO::Directory::Remove(*i) and result;
 		}
 		return result;
 	}

@@ -88,7 +88,7 @@ namespace Directory
 		if (IO::IsRelative(folder))
 		{
 			IO::Directory::Current::Get(s);
-			if (!s.empty() && s.last() != '/' && s.last() != '\\')
+			if (!s.empty() and s.last() != '/' and s.last() != '\\')
 				s += IO::Separator;
 		}
 		s += folder;
@@ -105,9 +105,9 @@ namespace Directory
 		IO::Normalize(*item, s);
 
 		// Remove the last slash
-		if (item->last() == '/' || item->last() == '\\')
+		if (item->last() == '/' or item->last() == '\\')
 		{
-			if (!(*item == "/" || (item->size() == 3 && (*item)[1] == ':')))
+			if (!(*item == "/" or (item->size() == 3 and (*item)[1] == ':')))
 				item->removeLast();
 		}
 		pRootFolder.push_back(item);

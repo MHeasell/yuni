@@ -45,11 +45,11 @@ namespace File
 
 		const char* const p = filename.c_str();
 
-		if (p[len - 1] == '\\' || p[len - 1] == '/')
+		if (p[len - 1] == '\\' or p[len - 1] == '/')
 			--len;
 
 		// Driver letters
-		if (len == 2 && p[1] == ':')
+		if (len == 2 and p[1] == ':')
 		{
 			value = 0u;
 			return true;
@@ -89,7 +89,7 @@ namespace File
 	bool Size(const AnyString& filename, uint64& value)
 	{
 		struct stat results;
-		if (not filename.empty() && stat(filename.c_str(), &results) == 0)
+		if (not filename.empty() and stat(filename.c_str(), &results) == 0)
 		{
 			value = (uint64) results.st_size;
 			return true;
@@ -107,7 +107,7 @@ namespace File
 		// DeleteFile is actually a macro and will be replaced by DeleteFileW
 		// with Visual Studio. Consequently we can not use the word DeleteFile.....
 
-		if (!filename)
+		if (filename.empty())
 			return Yuni::IO::errUnknown;
 
 		# ifndef YUNI_OS_WINDOWS
@@ -121,11 +121,11 @@ namespace File
 		const char* const p = filename.c_str();
 		uint len = filename.size();
 
-		if (p[len - 1] == '\\' || p[len - 1] == '/')
+		if (p[len - 1] == '\\' or p[len - 1] == '/')
 			--len;
 
 		// Driver letters
-		if (len == 2 && p[1] == ':')
+		if (len == 2 and p[1] == ':')
 			return Yuni::IO::errBadFilename;
 
 		String  norm;

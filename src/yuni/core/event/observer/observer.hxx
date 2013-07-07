@@ -21,7 +21,7 @@ namespace Event
 		// The derived parent class must call the method `destroyingObserver()`
 		// from its destructor
 		assert((pCanObserve == false)
-			&& "All ancestor of the class `Yuni::Observer` must call destroyingObserver() in their destructor");
+			and "All ancestor of the class `Yuni::Observer` must call destroyingObserver() in their destructor");
 	}
 
 
@@ -34,7 +34,7 @@ namespace Event
 		// Prevent against further connection attempts
 		pCanObserve = false;
 		// Disconnecting from all events
-		if (!pEvents.empty())
+		if (not pEvents.empty())
 		{
 			IEvent::List::iterator end = pEvents.end();
 			for (IEvent::List::iterator i = pEvents.begin(); i != end; ++i)
@@ -50,7 +50,7 @@ namespace Event
 	{
 		// Disconnecting from all events
 		typename ThreadingPolicy::MutexLocker locker(*this);
-		if (!pEvents.empty())
+		if (not pEvents.empty())
 		{
 			IEvent::List::iterator end = pEvents.end();
 			for (IEvent::List::iterator i = pEvents.begin(); i != end; ++i)
@@ -68,7 +68,7 @@ namespace Event
 			// Lock
 			typename ThreadingPolicy::MutexLocker locker(*this);
 			// Disconnecting from the event
-			if (!pEvents.empty() && IEvent::RemoveFromList(pEvents, event))
+			if (not pEvents.empty() and IEvent::RemoveFromList(pEvents, event))
 				event->internalDetachObserver(this);
 		}
 	}
@@ -79,7 +79,7 @@ namespace Event
 	Observer<D,TP>::internalAttachEvent(IEvent* evt)
 	{
 		typename ThreadingPolicy::MutexLocker locker(*this);
-		if (pCanObserve && !IEvent::Exists(pEvents, evt))
+		if (pCanObserve and !IEvent::Exists(pEvents, evt))
 			pEvents.push_back(evt);
 	}
 
@@ -91,6 +91,7 @@ namespace Event
 		typename ThreadingPolicy::MutexLocker locker(*this);
 		IEvent::RemoveFromList(pEvents, evt);
 	}
+
 
 
 

@@ -119,7 +119,7 @@ namespace Variant
 		//! Method invokation, with 1 parameter
 		virtual IDataHolder* invoke(const String& name, IDataHolder* a1)
 		{
-			if (name == "add" || name == "append")
+			if (name == "add" or name == "append")
 			{
 				if (a1)
 					pValue.push_back(a1);
@@ -146,7 +146,7 @@ namespace Variant
 		virtual void loopbackMultiply(IDataHolder&) const {}
 		virtual void loopbackSub(IDataHolder&) const {}
 		virtual void loopbackDiv(IDataHolder&) const {}
-		virtual bool loopbackIsEquals(IDataHolder&) const {assert(false && "not implemented");return false;};
+		virtual bool loopbackIsEquals(IDataHolder&) const {assert(false and "not implemented");return false;};
 
 	private:
 		//! The real data element.

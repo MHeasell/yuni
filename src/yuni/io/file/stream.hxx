@@ -306,20 +306,20 @@ namespace File
 	inline uint64
 	Stream::read(CString<CSizeT, ExpT>& buffer, uint64 size)
 	{
-		assert(pFd && "File not opened");
+		assert(pFd and "File not opened");
 		assert(size <= uint64(2 * 1024) * 1024 * 1024);
 		if (!size)
 			return 0;
 
 		// special case for static strings
-		if (!buffer.expandable && size > buffer.chunkSize)
+		if (!buffer.expandable and size > buffer.chunkSize)
 			size = buffer.chunkSize;
 
 		// Resizing the buffer
 		buffer.resize((uint) size);
 
 		// Assert to prevent SegV
-		assert(buffer.capacity() != 0 && "When reading a file, the buffer must have reserved some space");
+		assert(buffer.capacity() != 0 and "When reading a file, the buffer must have reserved some space");
 
 		typedef CString<CSizeT, ExpT> StringType;
 		typedef typename StringType::Char C;
@@ -342,7 +342,7 @@ namespace File
 		// Resizing the buffer
 		buffer.reserve(buffer.chunkSize);
 		// Assert to prevent SegV
-		assert(buffer.capacity() != 0 && "When reading a file, the buffer must have reserved some space");
+		assert(buffer.capacity() != 0 and "When reading a file, the buffer must have reserved some space");
 
 		typedef CString<ChunkSizeT, ExpandableT> StringType;
 		typedef typename StringType::Char C;
@@ -371,6 +371,7 @@ namespace File
 	{
 		return pFd;
 	}
+
 
 
 

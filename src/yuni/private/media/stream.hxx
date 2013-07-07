@@ -32,9 +32,9 @@ namespace Media
 		// Try to find the codec for the given codec ID, and open it
 		AVCodec* codec = ::avcodec_find_decoder(pCodec->codec_id);
 		# if LIBAVFORMAT_VERSION_MAJOR < 53
-		if (!codec || ::avcodec_open(pCodec, codec) < 0)
+		if (!codec or ::avcodec_open(pCodec, codec) < 0)
 		# else
-		if (!codec || ::avcodec_open2(pCodec, codec, NULL) < 0)
+		if (!codec or ::avcodec_open2(pCodec, codec, NULL) < 0)
 		# endif // LIBAVFORMAT_VERSION_MAJOR < 53
 		{
 			pCodec = nullptr;
@@ -126,7 +126,7 @@ namespace Media
 				// If the frame is finished (should be in one shot)
 				if (frameFinished)
 				{
-					if (AV_NOPTS_VALUE == (uint64)packet->dts && pFrame->opaque
+					if (AV_NOPTS_VALUE == (uint64)packet->dts and pFrame->opaque
 						&& AV_NOPTS_VALUE != *(uint64*)pFrame->opaque)
 						pCrtPts = *(uint64*)pFrame->opaque;
 					else if (AV_NOPTS_VALUE != (uint64)packet->dts)

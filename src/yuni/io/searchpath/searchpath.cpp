@@ -13,7 +13,7 @@ namespace IO
 	namespace // anonymous
 	{
 
-		static bool ValidateExtension(const String::Vector& extensions, const String& extension)
+		static inline bool ValidateExtension(const String::Vector& extensions, const String& extension)
 		{
 			const String::Vector::const_iterator end = extensions.end();
 			for (String::Vector::const_iterator i = extensions.begin(); i != end; ++i)
@@ -25,12 +25,12 @@ namespace IO
 		}
 
 
-		static bool ValidatePrefix(const String::Vector& prefixes, const String& text)
+		static inline bool ValidatePrefix(const String::Vector& prefixes, const String& text)
 		{
 			const String::Vector::const_iterator end = prefixes.end();
 			for (String::Vector::const_iterator i = prefixes.begin(); i != end; ++i)
 			{
-				if (!(*i) or (text).startsWith(*i))
+				if (not (*i) or (text).startsWith(*i))
 					return true;
 			}
 			return false;
@@ -261,13 +261,13 @@ namespace IO
 					for (IO::Directory::Info::recursive_iterator it = info.recursive_begin(); it != itend; ++it)
 					{
 						// Checking for the prefix
-						if (!prefixes.empty() && !ValidatePrefix(prefixes, *it))
+						if (not prefixes.empty() and not ValidatePrefix(prefixes, *it))
 							continue;
 						// Checking for the extension
-						if (!extensions.empty())
+						if (not extensions.empty())
 						{
 							ExtractExtension(extension, *it);
-							if (!ValidateExtension(extensions, extension))
+							if (not ValidateExtension(extensions, extension))
 								continue;
 						}
 						callback(*it, it.filename());
@@ -285,13 +285,13 @@ namespace IO
 					for (IO::Directory::Info::iterator it = info.begin(); it != itend; ++it)
 					{
 						// Checking for the prefix
-						if (!prefixes.empty() && !ValidatePrefix(prefixes, *it))
+						if (not prefixes.empty() and not ValidatePrefix(prefixes, *it))
 							continue;
 						// Checking for the extension
-						if (!extensions.empty())
+						if (not extensions.empty())
 						{
 							ExtractExtension(extension, *it);
-							if (!ValidateExtension(extensions, extension))
+							if (not ValidateExtension(extensions, extension))
 								continue;
 						}
 						callback(*it, it.filename());
@@ -312,13 +312,13 @@ namespace IO
 					for (IO::Directory::Info::recursive_file_iterator it = info.recursive_file_begin(); it != itend; ++it)
 					{
 						// Checking for the prefix
-						if (!prefixes.empty() && !ValidatePrefix(prefixes, *it))
+						if (not prefixes.empty() and not ValidatePrefix(prefixes, *it))
 							continue;
 						// Checking for the extension
-						if (!extensions.empty())
+						if (not extensions.empty())
 						{
 							ExtractExtension(extension, *it);
-							if (!ValidateExtension(extensions, extension))
+							if (not ValidateExtension(extensions, extension))
 								continue;
 						}
 						callback(*it, it.filename());
@@ -336,13 +336,13 @@ namespace IO
 					for (IO::Directory::Info::file_iterator it = info.file_begin(); it != itend; ++it)
 					{
 						// Checking for the prefix
-						if (!prefixes.empty() && !ValidatePrefix(prefixes, *it))
+						if (not prefixes.empty() and not ValidatePrefix(prefixes, *it))
 							continue;
 						// Checking for the extension
-						if (!extensions.empty())
+						if (not extensions.empty())
 						{
 							ExtractExtension(extension, *it);
-							if (!ValidateExtension(extensions, extension))
+							if (not ValidateExtension(extensions, extension))
 								continue;
 						}
 						callback(*it, it.filename());

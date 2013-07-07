@@ -36,7 +36,7 @@ namespace Environment
 
 		# ifdef YUNI_HAS_STDLIB_H
 		const char* e = ::getenv(name.c_str());
-		if (e && '\0' != *e)
+		if (e and '\0' != *e)
 		{
 			out += e;
 			return true;

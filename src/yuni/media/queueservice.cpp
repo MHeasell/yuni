@@ -71,7 +71,7 @@ namespace Media
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 		// Do not stop the manager if it was not properly started
-		if (!pReady)
+		if (not pReady)
 			return;
 
 		pMediaLoop.beginClose();
@@ -100,7 +100,7 @@ namespace Media
 
 	bool QueueService::initDispatched(InitData& data)
 	{
-		data.ready = Private::Media::AV::Init() && Private::Media::OpenAL::Init();
+		data.ready = Private::Media::AV::Init() and Private::Media::OpenAL::Init();
 		// The variable must be considered as destroyed as soon as the method
 		// 'notify()' is called
 		bool ready = data.ready;
@@ -113,7 +113,7 @@ namespace Media
 	{
 		// Try to open the file
 		Private::Media::File* file = new Private::Media::File(filePath);
-		if (!file->valid())
+		if (not file->valid())
 		{
 			delete file;
 			return false;
@@ -126,7 +126,7 @@ namespace Media
 		{
 			// Try to get an audio stream from it
 			aStream = file->getStream<Private::Media::stAudio>();
-			if ((!aStream || !aStream->valid()) && strict)
+			if ((!aStream or !aStream->valid()) and strict)
 			{
 				delete file;
 				return false;
@@ -137,7 +137,7 @@ namespace Media
 		{
 			// Try to get a video stream from it
 			vStream = file->getStream<Private::Media::stVideo>();
-			if ((!vStream || !vStream->valid()) && strict)
+			if ((!vStream or !vStream->valid()) and strict)
 			{
 				delete file;
 				return false;
@@ -146,7 +146,7 @@ namespace Media
 
 		// At that point, if we have no valid stream, we should fail,
 		// even on the non-strict case.
-		if ((!vStream || !vStream->valid()) && (!aStream || !aStream->valid()))
+		if ((!vStream or !vStream->valid()) and (not aStream or !aStream->valid()))
 		{
 			delete file;
 			return false;
@@ -207,7 +207,7 @@ namespace Media
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 
-		if (!pQueueService->pReady)
+		if (not pQueueService->pReady)
 			return false;
 
 		// Create the emitter and add it
@@ -227,12 +227,12 @@ namespace Media
 		const AnyString& sourceName)
 	{
 		Source::Ptr source = pLibrary->get(sourceName);
-		if (!source)
+		if (not source)
 			return false;
 
 		ThreadingPolicy::MutexLocker locker(*this);
 		{
-			if (!pQueueService->pReady)
+			if (not pQueueService->pReady)
 				return false;
 
 			Emitter::Map::iterator it = pEmitters.find(emitterName);
@@ -251,16 +251,16 @@ namespace Media
 
 	bool QueueService::Emitters::attach(Emitter::Ptr& emitter, const AnyString& sourceName)
 	{
-		if (!emitter || !sourceName)
+		if (not emitter or !sourceName)
 			return false;
 
 		Source::Ptr source = pLibrary->get(sourceName);
-		if (!source)
+		if (not source)
 			return false;
 
 		ThreadingPolicy::MutexLocker locker(*this);
 		{
-			if (!pQueueService->pReady)
+			if (not pQueueService->pReady)
 				return false;
 
 			Media::Loop::RequestType callback;
@@ -274,12 +274,12 @@ namespace Media
 
 	bool QueueService::Emitters::attach(const AnyString& emitterName, Source::Ptr source)
 	{
-		if (!source)
+		if (not source)
 			return false;
 
 		ThreadingPolicy::MutexLocker locker(*this);
 		{
-			if (!pQueueService->pReady)
+			if (not pQueueService->pReady)
 				return false;
 
 			Emitter::Map::iterator it = pEmitters.find(emitterName);
@@ -287,7 +287,7 @@ namespace Media
 				return false;
 			Emitter::Ptr& emitter = it->second;
 
-			assert(!(!emitter) && "invalid emitter");
+			assert(!(!emitter) and "invalid emitter");
 			Media::Loop::RequestType callback;
 			callback.bind(emitter, &Emitter::attachSourceDispatched, source);
 			// Dispatching...
@@ -299,12 +299,12 @@ namespace Media
 
 	bool QueueService::Emitters::attach(Emitter::Ptr& emitter, Source::Ptr source)
 	{
-		if (!emitter || !source)
+		if (not emitter or not source)
 			return false;
 
 		ThreadingPolicy::MutexLocker locker(*this);
 		{
-			if (!pQueueService->pReady)
+			if (not pQueueService->pReady)
 				return false;
 
 			Media::Loop::RequestType callback;
@@ -324,7 +324,7 @@ namespace Media
 
 	void QueueService::Emitters::detach(Emitter::Ptr emitter)
 	{
-		if (!emitter)
+		if (not emitter)
 			return;
 
 		Media::Loop::RequestType callback;
@@ -372,7 +372,7 @@ namespace Media
 
 	bool QueueService::Emitters::playing(Emitter::Ptr emitter)
 	{
-		if (!emitter)
+		if (not emitter)
 			return false;
 		return emitter->playing();
 	}
@@ -386,7 +386,7 @@ namespace Media
 
 	bool QueueService::Emitters::paused(Emitter::Ptr emitter)
 	{
-		if (!emitter)
+		if (not emitter)
 			return false;
 		return emitter->paused();
 	}
@@ -394,7 +394,7 @@ namespace Media
 
 	bool QueueService::Emitters::play(Emitter::Ptr emitter)
 	{
-		if (!emitter)
+		if (not emitter)
 			return false;
 		Media::Loop::RequestType callback;
  		callback.bind(emitter, &Emitter::playSourceDispatched);
@@ -406,7 +406,7 @@ namespace Media
 
 	bool QueueService::Emitters::pause(Emitter::Ptr emitter)
 	{
-		if (!emitter)
+		if (not emitter)
 			return false;
 		Media::Loop::RequestType callback;
  		callback.bind(emitter, &Emitter::pauseSourceDispatched);
@@ -418,7 +418,7 @@ namespace Media
 
 	bool QueueService::Emitters::stop(const Emitter::Ptr& emitter)
 	{
-		if (!emitter)
+		if (not emitter)
 			return false;
 		Media::Loop::RequestType callback;
  		callback.bind(emitter, &Emitter::stopSourceDispatched);
@@ -467,7 +467,7 @@ namespace Media
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 
-		if (!pQueueService->pReady)
+		if (not pQueueService->pReady)
 			return false;
 
 		// Create the source, store it in the map
@@ -476,7 +476,7 @@ namespace Media
 		// Yuni::Bind<bool()> callback;
 		// callback.bind(pQueueService, &QueueService::loadSourceDispatched, filePath);
 		// pQueueService->pMediaLoop.dispatch(callback);
-		if (!pQueueService->loadSource(filePath, true, true, false))
+		if (not pQueueService->loadSource(filePath, true, true, false))
 		{
 			pSources.erase(filePath);
 			return false;
@@ -488,7 +488,7 @@ namespace Media
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 
-		if (!pQueueService->pReady)
+		if (not pQueueService->pReady)
 			return false;
 
 		// Create the source, store it in the map
@@ -497,7 +497,7 @@ namespace Media
 		// Yuni::Bind<bool()> callback;
 		// callback.bind(pQueueService, &QueueService::loadSourceDispatched, filePath);
 		// pQueueService->pMediaLoop.dispatch(callback);
-		if (!pQueueService->loadSource(filePath, false, true, true))
+		if (not pQueueService->loadSource(filePath, false, true, true))
 		{
 			pSources.erase(filePath);
 			return false;
@@ -510,7 +510,7 @@ namespace Media
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 
-		if (!pQueueService->pReady)
+		if (not pQueueService->pReady)
 			return false;
 
 		// Create the source, store it in the map
@@ -519,7 +519,7 @@ namespace Media
 		// Yuni::Bind<bool()> callback;
 		// callback.bind(pQueueService, &QueueService::loadSourceDispatched, filePath);
 		// pQueueService->pMediaLoop.dispatch(callback);
-		if (!pQueueService->loadSource(filePath, true, false, true))
+		if (not pQueueService->loadSource(filePath, true, false, true))
 		{
 			pSources.erase(filePath);
 			return false;
@@ -533,7 +533,7 @@ namespace Media
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
 
-		if (!pQueueService->pReady)
+		if (not pQueueService->pReady)
 			return false;
 
 		Source::Map::iterator it = pSources.find(name);
@@ -558,11 +558,11 @@ namespace Media
 	unsigned int QueueService::Library::duration(const AnyString& name)
 	{
 		Source::Ptr source = get(name);
-		if (!source)
+		if (not source)
 			return 0;
 
 		ThreadingPolicy::MutexLocker locker(*this);
-		if (!pQueueService->pReady)
+		if (not pQueueService->pReady)
 			return 0;
 		return source->duration();
 	}
@@ -571,11 +571,11 @@ namespace Media
 	float QueueService::Library::elapsedTime(const AnyString& name)
 	{
 		Source::Ptr source = get(name);
-		if (!source)
+		if (not source)
 			return 0;
 
 		ThreadingPolicy::MutexLocker locker(*this);
-		if (!pQueueService->pReady)
+		if (not pQueueService->pReady)
 			return 0;
 		return source->elapsedTime();
 	}
@@ -584,7 +584,7 @@ namespace Media
 	bool QueueService::running() const
 	{
 		ThreadingPolicy::MutexLocker locker(*this);
-		return pReady && pMediaLoop.running();
+		return pReady and pMediaLoop.running();
 	}
 
 

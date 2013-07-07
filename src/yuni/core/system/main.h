@@ -28,13 +28,13 @@
 		arg  = cmdLine; \
 		while (arg[0] != 0) \
 		{ \
-			while (arg[0] != 0 && arg[0] == ' ') \
+			while (arg[0] != 0 and arg[0] == ' ') \
 				++arg; \
 			\
 			if (arg[0] != 0) \
 			{ \
 				++argc; \
-				while (arg[0] != 0 && arg[0] != ' ') \
+				while (arg[0] != 0 and arg[0] != ' ') \
 					++arg; \
 			} \
 		} \
@@ -45,14 +45,14 @@
 		index = 1; \
 		while (arg[0] != 0) \
 		{ \
-			while (arg[0] != 0 && arg[0] == ' ') \
+			while (arg[0] != 0 and arg[0] == ' ') \
 				++arg; \
 			\
 			if (arg[0] != 0) \
 			{ \
 				argv[index] = arg; \
 				++index; \
-				while (arg[0] != 0 && arg[0] != ' ') \
+				while (arg[0] != 0 and arg[0] != ' ') \
 					++arg; \
 				\
 				if (arg[0] != 0) \

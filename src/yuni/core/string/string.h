@@ -160,7 +160,7 @@ namespace Yuni
 			//! A non-zero value if the string can be expanded
 			expandable     = AncestorType::expandable,
 			//! True if the string is a string adapter (only read-only operations are allowed)
-			adapter        = (!chunkSize && expandable),
+			adapter        = (!chunkSize and expandable),
 		};
 		//! char Case
 		enum charCase
@@ -172,7 +172,7 @@ namespace Yuni
 		};
 
 		//! Self, which can be written
-		typedef typename Static::If<adapter || (!expandable && chunkSize > 512),
+		typedef typename Static::If<adapter or (!expandable and chunkSize > 512),
 			CString<>, CStringType>::RetTrue  WritableType;
 
 		//! Operator [] return type
@@ -181,7 +181,7 @@ namespace Yuni
 		typedef typename Static::If<!adapter, const char&, char>::Type ConstOperatorBracketReturnType;
 
 		// Checking for a minimal chunk size
-		YUNI_STATIC_ASSERT(adapter || chunkSize > 3, CString_MinimalChunkSizeRequired);
+		YUNI_STATIC_ASSERT(adapter or chunkSize > 3, CString_MinimalChunkSizeRequired);
 
 	public:
 		//! \name CString comparison
@@ -1268,7 +1268,7 @@ namespace Yuni
 		** Pseudo-code:
 		** \code
 		** Yuni::String s("/some/path/");
-		** if ('\\' == s.last() || '/' == s.last())
+		** if ('\\' == s.last() or '/' == s.last())
 		** 	s.removeLast();
 		** std::cout << s << std::endl;  // -> /some/path
 		** \endcode
@@ -2065,9 +2065,9 @@ namespace Traits
 		enum
 		{
 			//! A non-zero value if the type 'U' is a valid string representation
-			yes = (Traits::CString<U>::valid && Traits::Length<U>::valid),
+			yes = (Traits::CString<U>::valid and Traits::Length<U>::valid),
 			//! A non-zero value if the type 'U' is _not_ a valid string representation
-			no  = (not Traits::CString<U>::valid && not Traits::Length<U>::valid),
+			no  = (not Traits::CString<U>::valid and not Traits::Length<U>::valid),
 		};
 	};
 

@@ -112,7 +112,7 @@ namespace Yuni
 		{
 			Bind<P> b;
 			b.bind(o, method);
-			assert(b.isDescendantOfIEventObserverBase() && "Invalid class C. The calling class must inherit from Event::Observer<CRTP, ThreadingPolicy>");
+			assert(b.isDescendantOfIEventObserverBase() and "Invalid class C. The calling class must inherit from Event::Observer<CRTP, ThreadingPolicy>");
 
 			// Locking
 			typename ThreadingPolicy::MutexLocker locker(*this);
@@ -133,7 +133,7 @@ namespace Yuni
 		{
 			Bind<P> b;
 			b.bind(o, method);
-			assert(b.isDescendantOfIEventObserverBase() && "Invalid class C");
+			assert(b.isDescendantOfIEventObserverBase() and "Invalid class C");
 
 			// locking
 			typename ThreadingPolicy::MutexLocker locker(*this);

@@ -30,7 +30,7 @@ namespace Directory
 
 		while (*t != L'\0')
 		{
-			if ((*t == L'\\' || *t == L'/') && (*(t-1) != ':'))
+			if ((*t == L'\\' or *t == L'/') and (*(t-1) != ':'))
 			{
 				*t = L'\0';
 				if (!CreateDirectoryW(wstr.c_str(), nullptr))
@@ -68,15 +68,15 @@ namespace Directory
 
 		do
 		{
-			if ('\\' == *pt || '/' == *pt || '\0' == *pt)
+			if ('\\' == *pt or '/' == *pt or '\0' == *pt)
 			{
 				tmp = *pt;
 				*pt = '\0';
-				if ('\0' != buffer[0] && '\0' != buffer[1] && '\0' != buffer[2])
+				if ('\0' != buffer[0] and '\0' != buffer[1] and '\0' != buffer[2])
 				{
 					if (mkdir(buffer, static_cast<mode_t>(mode)) < 0)
 					{
-						if (errno != EEXIST && errno != EISDIR && errno != ENOSYS)
+						if (errno != EEXIST and errno != EISDIR and errno != ENOSYS)
 						{
 							delete[] buffer;
 							return false;
@@ -104,7 +104,7 @@ namespace Directory
 
 	bool Create(const AnyString& path, uint mode)
 	{
-		if (not path.empty() && not Yuni::IO::Exists(path))
+		if (not path.empty() and not Yuni::IO::Exists(path))
 		{
 			# ifdef YUNI_OS_WINDOWS
 			// `mode` is not used on Windows

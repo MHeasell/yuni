@@ -27,7 +27,7 @@ namespace Yuni
 
 	void Variant::assign(uint32 rhs)
 	{
-		if (pShareContent && !(!pData))
+		if (pShareContent and !(!pData))
 			pData->assign(rhs);
 		else
 			pData = new Private::Variant::Data<uint32>(rhs);
@@ -36,7 +36,7 @@ namespace Yuni
 
 	void Variant::assign(sint32 rhs)
 	{
-		if (pShareContent && !(!pData))
+		if (pShareContent and !(!pData))
 			pData->assign(rhs);
 		else
 			pData = new Private::Variant::Data<sint32>(rhs);
@@ -45,7 +45,7 @@ namespace Yuni
 
 	void Variant::assign(uint64 rhs)
 	{
-		if (pShareContent && !(!pData))
+		if (pShareContent and !(!pData))
 			pData->assign(rhs);
 		else
 			pData = new Private::Variant::Data<uint64>(rhs);
@@ -54,7 +54,7 @@ namespace Yuni
 
 	void Variant::assign(sint64 rhs)
 	{
-		if (pShareContent && !(!pData))
+		if (pShareContent and !(!pData))
 			pData->assign(rhs);
 		else
 			pData = new Private::Variant::Data<sint64>(rhs);
@@ -63,7 +63,7 @@ namespace Yuni
 
 	void Variant::assign(char rhs)
 	{
-		if (pShareContent && !(!pData))
+		if (pShareContent and !(!pData))
 			pData->assign(rhs);
 		else
 			pData = new Private::Variant::Data<char>(rhs);
@@ -72,7 +72,7 @@ namespace Yuni
 
 	void Variant::assign(bool rhs)
 	{
-		if (pShareContent && !(!pData))
+		if (pShareContent and !(!pData))
 			pData->assign(rhs);
 		else
 			pData = new Private::Variant::Data<bool>(rhs);
@@ -81,7 +81,7 @@ namespace Yuni
 
 	void Variant::assign(double rhs)
 	{
-		if (pShareContent && !(!pData))
+		if (pShareContent and !(!pData))
 			pData->assign(rhs);
 		else
 			pData = new Private::Variant::Data<double>(rhs);
@@ -90,7 +90,7 @@ namespace Yuni
 
 	void Variant::assign(const String& rhs)
 	{
-		if (pShareContent && !(!pData))
+		if (pShareContent and !(!pData))
 			pData->assign(rhs);
 		else
 			pData = new Private::Variant::Data<String>(rhs);
@@ -99,7 +99,7 @@ namespace Yuni
 
 	void Variant::assign(const Variant& rhs)
 	{
-		if (pShareContent && !rhs.isnil())
+		if (pShareContent and !rhs.isnil())
 		{
 			pData->loopbackAssign(*rhs.pData);
 		}
@@ -158,7 +158,7 @@ namespace Yuni
 
 	void Variant::sub(const Variant& value)
 	{
-		if (!(!pData) && !(!value.pData))
+		if (!(!pData) and !(!value.pData))
 		{
 			deepCopyIfNonUnique();
 			value.pData->loopbackSub(*pData);
@@ -168,7 +168,7 @@ namespace Yuni
 
 	void Variant::mult(const Variant& value)
 	{
-		if (!(!pData) && !(!value.pData))
+		if (!(!pData) and !(!value.pData))
 		{
 			deepCopyIfNonUnique();
 			value.pData->loopbackMultiply(*pData);
@@ -178,7 +178,7 @@ namespace Yuni
 
 	void Variant::div(const Variant& value)
 	{
-		if (!(!pData) && !(!value.pData))
+		if (!(!pData) and !(!value.pData))
 		{
 			deepCopyIfNonUnique();
 			value.pData->loopbackDiv(*pData);
@@ -195,10 +195,11 @@ namespace Yuni
 
 	bool Variant::operator == (const Variant& rhs) const
 	{
-		if (!pData)
+		if (not pData)
 			return rhs.isnil();
 		if (rhs.isnil())
 			return false;
+
 		return pData->loopbackIsEquals(*rhs.pData);
 	}
 
@@ -219,7 +220,7 @@ namespace Yuni
 
 	const Variant Variant::operator [] (uint index) const
 	{
-		return !pData ? nullptr : Variant(pData->at(index), true);
+		return not pData ? nullptr : Variant(pData->at(index), true);
 	}
 
 

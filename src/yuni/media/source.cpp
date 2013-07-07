@@ -48,7 +48,7 @@ namespace Media
 
 	bool Source::prepareDispatched(uint source)
 	{
-		if (!pAStream && !pVStream)
+		if (!pAStream and !pVStream)
 			return false;
 
 		// Audio
@@ -133,13 +133,13 @@ namespace Media
 		// Video
 		if (hasVideo())
 		{
-			// if (hasAudio() && Private::Media::OpenAL::IsSourcePlaying(source))
+			// if (hasAudio() and Private::Media::OpenAL::IsSourcePlaying(source))
 			// {
 			// 	std::cout << "Video and audio sync !" << std::endl;
 			// 	// Try to sync with audio
 			// 	ALfloat elapsed;
 			// 	::alGetSourcef(source, AL_SEC_OFFSET, &elapsed);
-			// 	while (!pFrames.empty() && elapsed > pFrames.front()->timestamp())
+			// 	while (!pFrames.empty() and elapsed > pFrames.front()->timestamp())
 			// 	{
 			// 		pFrames.pop_front();
 			// 		if (pFrames.empty())
@@ -163,7 +163,7 @@ namespace Media
 
 	bool Source::destroyDispatched(Thread::Signal* signal)
 	{
-		if (!pAStream && !pVStream)
+		if (!pAStream and !pVStream)
 			return false;
 
 		pFrames.clear();

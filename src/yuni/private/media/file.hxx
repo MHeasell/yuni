@@ -114,7 +114,7 @@ namespace Media
 				vIt->second->pPackets.push_back(packet);
 
 				// Return if this stream is what we needed a packet for
-				if (TypeT == stVideo && vIt->second->index() == stream->index())
+				if (TypeT == stVideo and vIt->second->index() == stream->index())
 					return packet;
 
 				// Packet was stored, get another one
@@ -131,7 +131,7 @@ namespace Media
 					aIt->second->pPackets.push_back(packet);
 
 					// Return if this stream is what we needed a packet for
-					if (TypeT == stAudio && aIt->second->index() == stream->index())
+					if (TypeT == stAudio and aIt->second->index() == stream->index())
 						return packet;
 
 					// Packet was stored, get another one

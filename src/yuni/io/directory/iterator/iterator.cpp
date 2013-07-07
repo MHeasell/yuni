@@ -53,7 +53,7 @@ namespace Iterator
 		{
 			# ifndef YUNI_NO_THREAD_SAFE
 			// Checking from time to time if the thread should stop
-			if (thread && ++opts.counter == pollingInterval) // arbitrary value
+			if (thread and ++opts.counter == pollingInterval) // arbitrary value
 			{
 				// reset counter
 				opts.counter = 0;
@@ -65,7 +65,7 @@ namespace Iterator
 			// Avoid `.` and `..`
 			if (*(pent->d_name) == '.')
 			{
-				if ((pent->d_name[1] == '.' && pent->d_name[2] == '\0') || (pent->d_name[1] == '\0'))
+				if ((pent->d_name[1] == '.' and pent->d_name[2] == '\0') or (pent->d_name[1] == '\0'))
 					continue;
 			}
 
@@ -166,7 +166,7 @@ namespace Iterator
 		{
 			// Checking from time to time if the thread should stop
 			# ifndef YUNI_NO_THREAD_SAFE
-			if (thread && ++opts.counter == pollingInterval) // arbitrary value
+			if (thread and ++opts.counter == pollingInterval) // arbitrary value
 			{
 				// reset counter
 				opts.counter = 0;
@@ -178,7 +178,7 @@ namespace Iterator
 			// Avoid `.` and `..`
 			if (data.cFileName[0] == L'.')
 			{
-				if ((data.cFileName[1] == L'.' && data.cFileName[2] == L'\0') || (data.cFileName[1] == L'\0'))
+				if ((data.cFileName[1] == L'.' and data.cFileName[2] == L'\0') or (data.cFileName[1] == L'\0'))
 					continue;
 			}
 
@@ -273,7 +273,7 @@ namespace Iterator
 				const String& path = *(*i);
 
 				// This routine can only be called if the parameter is not empty
-				if (path.empty() || !options.self->onStart(path))
+				if (path.empty() or !options.self->onStart(path))
 					continue;
 
 				// Making sure that the counter is properly initialized
@@ -286,7 +286,7 @@ namespace Iterator
 				# endif
 
 				# ifndef YUNI_NO_THREAD_SAFE
-				if ((result == Yuni::IO::flowAbort) || (thread && thread->suspend()))
+				if ((result == Yuni::IO::flowAbort) or (thread and thread->suspend()))
 				# else
 				if ((result == Yuni::IO::flowAbort))
 				# endif

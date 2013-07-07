@@ -56,8 +56,8 @@ namespace Media
 
 	bool Frame::valid() const
 	{
-		return pImpl->frame && pImpl->frame->linesize[0] > 0 &&
-			pImpl->frame->linesize[1] > 0 && pImpl->frame->linesize[2] > 0;
+		return pImpl->frame and pImpl->frame->linesize[0] > 0
+			and pImpl->frame->linesize[1] > 0 and pImpl->frame->linesize[2] > 0;
 	}
 
 
@@ -135,6 +135,9 @@ namespace Media
 	{
 		pImpl->frame = reinterpret_cast< ::AVFrame*>(data);
 	}
+
+
+
 
 
 } // namespace Media
