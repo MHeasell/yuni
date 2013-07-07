@@ -77,7 +77,7 @@ namespace Lifetime
 		/*!
 		** \brief Track various longevities in a priority list
 		*/
-		static void ScheduleDestruction(DestructionFunction callback) { }
+		static void ScheduleDestruction(DestructionFunction /*callback*/) { }
 
 		/*!
 		** \brief Throw if longevities were not given properly
