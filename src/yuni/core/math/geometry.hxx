@@ -44,6 +44,81 @@ namespace Geometry
 	}
 
 
+	// http://geomalgorithms.com/a06-_intersect-2.html
+	template<typename T>
+	inline bool SegmentIntersectsTriangle(const Point3D<T>& segmentStart, const Point3D<T>& segmentEnd,
+		const Point3D<T>& p1, const Point3D<T>& p2, const Point3D<T>& p3)
+	{
+		Vector3D<T> u(p1, p2);
+		Vector3D<T> v(p1, p3);
+		Vector3D<T> normal = Vector3D<T>::CrossProduct(u, v);
+		Vector3D<T> ray(segmentStart, segmentEnd);
+		Vector3D<T> w0(p1, segmentStart);
+		T a = -Vector3D<T>::DotProduct(normal, w0);
+		T b = Vector3D<T>::DotProduct(normal, ray);
+		if (Math::Zero(b))
+			return a == 0;
+		T r = a / b;
+		if (r < 0 || r > 1)
+			return false;
+		Point3D<T> intersection(segmentStart);
+		ray *= r;
+		intersection.x += ray.x;
+		intersection.y += ray.y;
+		intersection.z += ray.z;
+
+		T udotv = Vector3D<T>::DotProduct(u, v);
+		T udotu = Vector3D<T>::DotProduct(u, u);
+		T vdotv = Vector3D<T>::DotProduct(v, v);
+		Vector3D<T> w(p1, intersection);
+		T wdotu = Vector3D<T>::DotProduct(w, u);
+		T wdotv = Vector3D<T>::DotProduct(w, v);
+		T denominator = (udotv * udotv - udotu * vdotv);
+		T s = (udotv * wdotv - vdotv * wdotu) / denominator;
+		if (s < 0 || s > 1)
+			return false;
+		T t = (udotv * wdotu - udotu * wdotv) / denominator;
+		if (t < 0 || s + t > 1)
+			return false;
+		return true;
+	}
+
+
+	template<typename T>
+	inline bool SegmentIntersectsQuad(const Point3D<T>& segmentStart, const Point3D<T>& segmentEnd,
+		const Point3D<T>& p1, const Point3D<T>& p2,
+		const Point3D<T>& p3, const Point3D<T>& p4)
+	{
+		Vector3D<T> normal = Vector3D<T>::CrossProduct(p1, p2, p3);
+		if (!SegmentIntersectsPlane(segmentStart, segmentEnd, p1, normal))
+			return false;
+		return SegmentIntersectsTriangle(segmentStart, segmentEnd, p1, p2, p3) ||
+			SegmentIntersectsTriangle(segmentStart, segmentEnd, p1, p3, p4);
+	}
+
+
+	template<typename T>
+	inline bool SegmentIntersectsSphere(const Point3D<T>& startPoint, const Point3D<T>& endPoint,
+		const Point3D<T>& center, T radius)
+	{
+		Vector3D<T> lineDirection(startPoint, endPoint);
+		// Project the center of the sphere on the line
+		Point3D<T> projection = PointToLineProjection(center, startPoint, lineDirection);
+		// Check point ordering along the line : projection must be between start and end
+		if (projection.x < startPoint.x and projection.x < endPoint.x or
+			projection.x > startPoint.x and projection.x > endPoint.x)
+			return false;
+		if (projection.y < startPoint.y and projection.y < endPoint.y or
+			projection.y > startPoint.y and projection.y > endPoint.y)
+			return false;
+		if (projection.z < startPoint.z and projection.z < endPoint.z or
+			projection.z > startPoint.z and projection.z > endPoint.z)
+			return false;
+		// Now check that the projection is inside the sphere : OO' <= r
+		return Vector3D<T>(center, projection).squareMagnitude() <= radius * radius;
+	}
+
+
 	template<typename T>
 	inline Point3D<T> PointToLineProjection(const Point3D<T>& point,
 		const Point3D<T>& linePoint, const Vector3D<T>& lineDirection)

@@ -244,6 +244,14 @@ namespace Yuni
 
 
 	template<typename T>
+	template<class U, class V, class W>
+	inline Vector3D<T> Vector3D<T>::CrossProduct(const Point3D<U>& p1, const Point3D<V>& p2, const Point3D<W>& p3)
+	{
+		return CrossProduct(Vector3D(p1, p2), Vector3D(p1, p3));
+	}
+
+
+	template<typename T>
 	inline bool Vector3D<T>::AreColinear(const Vector3D& p1, const Vector3D& p2, bool ignoreDirection)
 	{
 		T value = DotProduct(p1, p2) / (p1.magnitude() * p2.magnitude());

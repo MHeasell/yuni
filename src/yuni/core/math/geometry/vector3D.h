@@ -50,7 +50,7 @@ namespace Yuni
 		**
 		** \param p1 The first vector
 		** \param p2 The second vector
-		** \return The magnitude of the addition of the 2 vectors
+		** \return The dot product between the 2 vectors
 		*/
 		static T DotProduct(const Vector3D& p1, const Vector3D& p2);
 
@@ -61,6 +61,17 @@ namespace Yuni
 		** \param p2 The second vector
 		*/
 		static Vector3D CrossProduct(const Vector3D& p1, const Vector3D& p2);
+
+		/*!
+		** \brief Compute the cross product from three points (plane normal)
+		**
+		** \param p1 The first point
+		** \param p2 The second point
+		** \param p3 The third point
+		*/
+		template<class U, class V, class W>
+		static Vector3D CrossProduct(const Point3D<U>& p1, const Point3D<V>& p2, const Point3D<W>& p3);
+
 
 		/*!
 		** \brief Calculate whether two vectors are colinear
