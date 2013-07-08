@@ -81,7 +81,7 @@ namespace UTF8
 
 	inline Char::operator unsigned char () const
 	{
-		return (pValue < 0x80) ? static_cast<unsigned char>(pValue) : '\0';
+		return (pValue < 0x80) ? static_cast<uchar>(pValue) : (uchar)'\0';
 	}
 
 
