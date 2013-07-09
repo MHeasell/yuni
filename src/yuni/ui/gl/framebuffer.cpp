@@ -9,9 +9,9 @@ namespace Gfx3D
 	bool FrameBuffer::initialize()
 	{
 		// Screen texture 1
-		pTexture = Texture::New(pSize.x, pSize.y, 4 /* RGBA */, nullptr, false);
+		pTexture = Texture::New(pSize.x, pSize.y, 4 /* RGBA */, Texture::Uint32, nullptr, false);
 		// Screen texture 2
-		pBackTexture = Texture::New(pSize.x, pSize.y, 4 /* RGBA */, nullptr, false);
+		pBackTexture = Texture::New(pSize.x, pSize.y, 4 /* RGBA */, Texture::Uint32, nullptr, false);
 		::glBindTexture(GL_TEXTURE_2D, 0);
 
 		// Depth buffer

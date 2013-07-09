@@ -16,7 +16,7 @@ namespace UI
 			pModified = false;
 			pPrevText = pText;
 			if (!pTexture)
-				pTexture = Gfx3D::Texture::New(1, 1, 1, nullptr, false);
+				pTexture = Gfx3D::Texture::New(1, 1, 1, Gfx3D::Texture::UInt8, nullptr, false);
 			if (pText.empty())
 				pTexture->clear();
 			else
