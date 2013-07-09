@@ -21,7 +21,7 @@ namespace Gfx3D
 		assert(shaders && shaders->valid());
 		if (!White)
 		{
-			White = Texture::New(2, 2, 4, nullptr, false);
+			White = Texture::New(2, 2, 4, Texture::UInt8, nullptr, false);
 			White->clearToWhite();
 		}
 
