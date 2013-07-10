@@ -27,6 +27,14 @@ namespace Gfx3D
 		typedef int  ID;
 
 	public:
+		//! Type of usage for this framebuffer
+		enum Usage
+		{
+			fbDraw,
+			fbRead
+		};
+
+	public:
 		/*!
 		** \brief Constructor
 		*/
@@ -45,7 +53,7 @@ namespace Gfx3D
 		/*!
 		** \brief Initialize the frame buffer
 		*/
-		bool initialize(Texture::DataType type = Texture::UInt8);
+		bool initialize(Usage usage, Texture::DataType type = Texture::UInt8);
 
 		//! Activate the framebuffer
 		void activate() const;

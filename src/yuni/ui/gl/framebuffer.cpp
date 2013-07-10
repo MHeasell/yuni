@@ -6,7 +6,7 @@ namespace Gfx3D
 {
 
 
-	bool FrameBuffer::initialize(Texture::DataType type)
+	bool FrameBuffer::initialize(Usage usage, Texture::DataType type)
 	{
 		// Screen texture 1
 		pTexture = Texture::New(pSize.x, pSize.y, 4 /* RGBA */, type, nullptr, false);
@@ -18,20 +18,30 @@ namespace Gfx3D
 		uint id;
 		::glGenRenderbuffers(1, &id);
 		::glBindRenderbuffer(GL_RENDERBUFFER, id);
-		::glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, pSize.x, pSize.y);
+		::glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, pSize.x, pSize.y);
 		::glBindRenderbuffer(GL_RENDERBUFFER, 0);
 		pDepth = id;
 
 		// Framebuffer to link everything together
+		GLenum frameBufferUsage = GL_DRAW_FRAMEBUFFER;
+		switch (usage)
+		{
+			case fbDraw:
+				frameBufferUsage = GL_DRAW_FRAMEBUFFER;
+				break;
+			case fbRead:
+				frameBufferUsage = GL_READ_FRAMEBUFFER;
+				break;
+		}
 		::glGenFramebuffers(1, &id);
-		::glBindFramebuffer(GL_FRAMEBUFFER, id);
-		::glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, pTexture->id(), 0);
-		::glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, pDepth);
-		::glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		::glBindFramebuffer(frameBufferUsage, id);
+		::glFramebufferTexture2D(frameBufferUsage, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, pTexture->id(), 0);
+		::glFramebufferRenderbuffer(frameBufferUsage, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, pDepth);
+		::glBindFramebuffer(frameBufferUsage, 0);
 		pID = id;
 
 		GLenum status;
-		if ((status = ::glCheckFramebufferStatus(GL_FRAMEBUFFER)) != GL_FRAMEBUFFER_COMPLETE)
+		if ((status = ::glCheckFramebufferStatus(frameBufferUsage)) != GL_FRAMEBUFFER_COMPLETE)
 		{
 			std::cerr << "Framebuffer failed to load: error " << status << std::endl;
 			pTexture = nullptr;
