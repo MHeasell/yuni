@@ -1,9 +1,9 @@
 #ifndef __YUNI_GFX3D_FRAMEBUFFER_H__
 # define __YUNI_GFX3D_FRAMEBUFFER_H__
 
-# include <yuni/yuni.h>
-# include <yuni/core/smartptr.h>
-# include <yuni/core/point2D.h>
+# include "../../yuni.h"
+# include "../../core/smartptr.h"
+# include "../../core/point2D.h"
 # include "texture.h"
 
 namespace Yuni
@@ -45,7 +45,7 @@ namespace Gfx3D
 		/*!
 		** \brief Initialize the frame buffer
 		*/
-		bool initialize();
+		bool initialize(Texture::DataType type = Texture::UInt8);
 
 		//! Activate the framebuffer
 		void activate() const;

@@ -69,7 +69,7 @@ namespace Gfx3D
 				return GL_UNSIGNED_SHORT;
 			case Texture::Int16:
 				return GL_SHORT;
-			case Texture::Uint32:
+			case Texture::UInt32:
 				return GL_UNSIGNED_INT;
 			case Texture::Int32:
 				return GL_INT;

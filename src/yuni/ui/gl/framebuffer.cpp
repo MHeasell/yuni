@@ -6,12 +6,12 @@ namespace Gfx3D
 {
 
 
-	bool FrameBuffer::initialize()
+	bool FrameBuffer::initialize(Texture::DataType type)
 	{
 		// Screen texture 1
-		pTexture = Texture::New(pSize.x, pSize.y, 4 /* RGBA */, Texture::Uint32, nullptr, false);
+		pTexture = Texture::New(pSize.x, pSize.y, 4 /* RGBA */, type, nullptr, false);
 		// Screen texture 2
-		pBackTexture = Texture::New(pSize.x, pSize.y, 4 /* RGBA */, Texture::Uint32, nullptr, false);
+		pBackTexture = Texture::New(pSize.x, pSize.y, 4 /* RGBA */, type, nullptr, false);
 		::glBindTexture(GL_TEXTURE_2D, 0);
 
 		// Depth buffer
