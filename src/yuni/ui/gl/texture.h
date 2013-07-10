@@ -22,7 +22,7 @@ namespace Gfx3D
 			Int8,
 			UInt16,
 			Int16,
-			Uint32,
+			UInt32,
 			Int32,
 			Float,
 		};
