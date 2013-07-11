@@ -8,7 +8,7 @@
 # include "../scene/camera.h"
 # include "../control/control.h"
 # include "../eventpropagation.h"
-//# include "../scene/scene.h"
+# include "drawingsurface.h"
 # include "shaderprogram.h"
 # include "../textoverlay.h"
 # include "../pictureoverlay.h"
@@ -186,7 +186,7 @@ namespace UI
 		mutable Gfx3D::ShaderProgram::Ptr pPictureShaders;
 
 		//! Drawing surface for UI controls
-		// mutable DrawingSurface::Ptr pUISurface;
+		mutable DrawingSurface::Ptr pUISurface;
 
 	}; // class View
 

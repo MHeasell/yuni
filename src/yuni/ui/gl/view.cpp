@@ -155,8 +155,7 @@ namespace UI
 		for (TextOverlay::Vector::const_iterator it = pTexts.begin(); endT != it; ++it)
 			drawOverlay(**it);
 
-		// Create a drawing surface for control rendering that has the size of the root control
-		/*
+		// Render the control tree
 		if (!(!pControl) and pControl->visible())
 		{
 			if (!pUISurface)
@@ -168,6 +167,7 @@ namespace UI
 			}
 			else if (pControl->modified())
 			{
+				pUISurface->resize(pControl->width(), pControl->height());
 				pUISurface->begin();
 				pControl->draw(pUISurface, true);
 				pUISurface->commit();
@@ -181,7 +181,6 @@ namespace UI
 				pPictureShaders->deactivate();
 			}
 		}
-		*/
 
 		// Reset matrices
 		::glMatrixMode(GL_PROJECTION);
@@ -206,7 +205,8 @@ namespace UI
 
 	void View::drawOverlay(const PictureOverlay& picture) const
 	{
-		picture.draw(pPictureShaders);
+		//picture.draw(pPictureShaders);
+		drawPicture(picture.texture(), picture.x(), picture.y(), picture.width(), picture.height());
 	}
 
 

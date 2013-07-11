@@ -51,7 +51,7 @@ namespace Control
 		void onChanged(const ClassT& object, const MethodT& method) { pOnChanged.bind(object, method); }
 
 		//! Draw the checkbox on the surface
-		//		virtual void draw(DrawingSurface::Ptr& surface, bool root);
+		virtual void draw(DrawingSurface::Ptr& surface, bool root);
 
 	private:
 		Callback pOnChanged;
