@@ -48,8 +48,8 @@ namespace Media
 		{
 			IsVideo = TypeT == stVideo,
 			IsAudio = TypeT == stAudio
+		};
 
-		}; // enum anonymous
 
 	public:
 		//! Smart pointer

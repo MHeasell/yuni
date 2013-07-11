@@ -49,13 +49,12 @@ namespace Media
 	template<StreamType TypeT>
 	Stream<TypeT>::~Stream()
 	{
-		if (pCodec && pCodec->codec)
+		if (pCodec and pCodec->codec)
 		{
 			//::avcodec_close(pCodec);
 			pCodec = nullptr;
 		}
-		if (pFrame)
-			::av_free(pFrame);
+		::av_free(pFrame);
 	}
 
 
@@ -94,14 +93,16 @@ namespace Media
 			}
 		}
 		else
+		{
 			// Should not happen, but this is a security.
 			::avcodec_get_frame_defaults(pFrame);
-
+		}
 
 		int bytesRead = 0;
 		int frameFinished = 0;
-		AVPacket* packet;
-		while (!frameFinished)
+		AVPacket* packet = nullptr;
+
+		while (not frameFinished)
 		{
 			// Get next packet
 			packet = nextPacket();
@@ -153,19 +154,22 @@ namespace Media
 
 				// If the frame is finished (should be in one shot)
 				if (frameFinished)
-				{
 					break;
-				}
 			}
 
 			// Free packet before looping
 			::av_free_packet(packet);
 			delete packet;
+			packet = nullptr;
 		}
 
 		// Free packet before quitting
-		::av_free_packet(packet);
-		delete packet;
+		if (packet)
+		{
+			::av_free_packet(packet);
+			delete packet;
+		}
+
 		return bytesRead;
 	}
 
@@ -175,13 +179,19 @@ namespace Media
 	{
 		//YUNI_STATIC_ASSERT(IsVideo, nextFrameNotAccessibleInAudio);
 		if (IsVideo)
+		{
 			readFrame();
+		}
 		else // IsAudio
+		{
 			//readAudioFrame();
 			readFrame();
+		}
+
 		// TODO : Give the real frame index
-		Frame::Ptr frame = new Frame(0u, pCrtPts);
+		Frame* frame = new Frame(0u, pCrtPts);
 		frame->setData(pFrame);
+		delete frame;
 		pFrame = nullptr;
 		return frame;
 	}
@@ -231,8 +241,20 @@ namespace Media
 	{
 		YUNI_STATIC_ASSERT(IsVideo, NotAccessibleInAudio);
 		assert(pCodec);
-		float variable = (float)pFormat->streams[pIndex]->avg_frame_rate.num / pFormat->streams[pIndex]->avg_frame_rate.den;
-		float constant = (float)pCodec->time_base.den / (pCodec->time_base.num * pCodec->ticks_per_frame);
+		assert(pFormat);
+		assert(pFormat->streams[pIndex]);
+
+		float avgFrameRateDen = pFormat->streams[pIndex]->avg_frame_rate.den;
+		if (avgFrameRateDen <= 0)
+			return 0;
+
+		float variable = (float) pFormat->streams[pIndex]->avg_frame_rate.num / avgFrameRateDen;
+
+		float ticks = pCodec->time_base.num * pCodec->ticks_per_frame;
+		if (ticks <= 0)
+			return 0;
+		float constant = (float) pCodec->time_base.den / (ticks);
+
 		return Math::Min(variable, constant);
 	}
 
@@ -242,7 +264,7 @@ namespace Media
 	{
 		YUNI_STATIC_ASSERT(IsAudio, NotAccessibleInVideo);
 		assert(pCodec);
-		return pCodec->sample_rate / pCodec->channels;
+		return (pCodec->channels > 0) ? (pCodec->sample_rate / pCodec->channels) : 0;
 	}
 
 
@@ -270,6 +292,8 @@ namespace Media
 	{
 		return TypeT;
 	}
+
+
 
 
 
