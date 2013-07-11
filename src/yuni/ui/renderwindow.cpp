@@ -32,6 +32,7 @@ namespace UI
 	RenderWindow::~RenderWindow()
 	{
 		pRefreshFunc.unbind();
+		pResizeFunc.unbind();
 		delete pMouse;
 	}
 
@@ -39,6 +40,7 @@ namespace UI
 	void RenderWindow::kill()
 	{
 		pRefreshFunc.unbind();
+		pResizeFunc.unbind();
 		pActiveView = nullptr;
 		pViewList.clear();
 		pDefaultFont = nullptr;
