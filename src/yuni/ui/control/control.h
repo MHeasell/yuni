@@ -5,7 +5,7 @@
 # include "../../core/smartptr.h"
 # include "../../core/point2D.h"
 # include <vector>
-//# include "drawingsurface.h"
+# include "../gl/drawingsurface.h"
 # include "../input/key.h"
 # include "../input/mouse.h"
 # include "../eventpropagation.h"
@@ -97,11 +97,13 @@ namespace UI
 		void resize(uint width, uint height)
 		{
 			pSize(width, height);
+			invalidate();
 		}
 
 		void resize(const Point2D<uint>& size)
 		{
 			pSize(size);
+			invalidate();
 		}
 
 		//! Get whether the control is currently enabled
@@ -115,7 +117,7 @@ namespace UI
 		void show(bool visible);
 
 		//! Draw the control
-		//		virtual void draw(DrawingSurface::Ptr& surface, bool root) = 0;
+		virtual void draw(DrawingSurface::Ptr& surface, bool root) = 0;
 
 		//! Recursively search for the deepest child control containing the given point
 		IControl* getControlAt(int x, int y);
@@ -137,11 +139,11 @@ namespace UI
 		void getControlStackAt(int x, int y, std::vector<IControl*>& stack);
 
 		//! Draw the child controls
-		// void drawChildren(DrawingSurface::Ptr& surface)
-		// {
-		// 	for (auto& child : pChildren)
-		// 		child->draw(surface, false);
-		// }
+		void drawChildren(DrawingSurface::Ptr& surface)
+		{
+			for (auto& child : pChildren)
+				child->draw(surface, false);
+		}
 
 		EventPropagation doMouseMove(int x, int y);
 		EventPropagation doMouseDown(Input::IMouse::Button btn, int x, int y);

@@ -47,7 +47,7 @@ namespace Control
 		void onClick(const ClassT& object, const MethodT& method) { pOnClick.bind(object, method); }
 
 		//! Draw the button on the surface
-		//		virtual void draw(DrawingSurface::Ptr& surface, bool root);
+		virtual void draw(DrawingSurface::Ptr& surface, bool root);
 
 	private:
 		Callback pOnClick;

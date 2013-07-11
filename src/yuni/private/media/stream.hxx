@@ -49,9 +49,9 @@ namespace Media
 	template<StreamType TypeT>
 	Stream<TypeT>::~Stream()
 	{
-		if (pCodec)
+		if (pCodec && pCodec->codec)
 		{
-			::avcodec_close(pCodec);
+			//::avcodec_close(pCodec);
 			pCodec = nullptr;
 		}
 		if (pFrame)

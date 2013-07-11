@@ -69,6 +69,8 @@ list(APPEND SRC_UI
 
 list(APPEND SRC_UI_GL
 	# OpenGL-specific
+	ui/gl/drawingsurface.cpp
+	ui/gl/drawingsurface.h
 	ui/gl/framebuffer.cpp
 	ui/gl/framebuffer.h
 	ui/gl/framebuffer.hxx

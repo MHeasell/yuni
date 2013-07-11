@@ -8,7 +8,7 @@ namespace UI
 namespace Control
 {
 
-	/*
+
 	void CheckBox::draw(DrawingSurface::Ptr& surface, bool root)
 	{
 		if (!pVisible)
@@ -16,7 +16,7 @@ namespace Control
 
 		auto themeptr = Theme::Current();
 		auto& theme = *themeptr;
-		Point2D<> pos(pPosition);
+		Point2D<int> pos(pPosition);
 		// If the button is the root control, use absolute coordinates
 		if (root)
 			pos(0, 0);
@@ -38,7 +38,7 @@ namespace Control
 			pos.x + theme.checkBoxSize + theme.margin, pos.y);
 		pModified = false;
 	}
-	*/
+
 
 
 } // namespace Control
