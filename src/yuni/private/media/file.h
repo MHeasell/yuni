@@ -48,7 +48,8 @@ namespace Media
 		uint duration() const;
 
 		//! Is the file valid for reading ?
-		bool valid() const { return nullptr != pFormat; }
+		bool valid() const;
+
 
 	private:
 		//! Add a stream of the given media type at given index
@@ -59,6 +60,7 @@ namespace Media
 		template<StreamType TypeT>
 		typename Stream<TypeT>::Map& getCache();
 
+
 	private:
 		//! File format and streams
 		AVFormatContext* pFormat;
@@ -68,10 +70,8 @@ namespace Media
 		//! Audio stream cache
 		mutable Stream<stAudio>::Map pAStreams;
 
-	private:
 		//! Friend declaration
-		template<StreamType>
-		friend class Stream;
+		template<StreamType> friend class Stream;
 
 	}; // class File
 
