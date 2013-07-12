@@ -43,6 +43,9 @@ namespace Media
 		::alcMakeContextCurrent(nullptr);
 		::alcDestroyContext(context);
 		::alcCloseDevice(device);
+		#ifndef NDEBUG
+		std::cout << "Finished closing OpenAL." << std::endl;
+		#endif
 		return true;
 	}
 
