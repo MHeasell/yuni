@@ -54,6 +54,7 @@ namespace Media
 			//::avcodec_close(pCodec);
 			pCodec = nullptr;
 		}
+		if (pFrame)
 		::av_free(pFrame);
 	}
 
@@ -190,8 +191,10 @@ namespace Media
 
 		// TODO : Give the real frame index
 		Frame* frame = new Frame(0u, pCrtPts);
+		// Our Frame object takes custody of the AVFrame
+		// and will take care of its deletion
 		frame->setData(pFrame);
-		delete frame;
+		// Reset the current frame
 		pFrame = nullptr;
 		return frame;
 	}
