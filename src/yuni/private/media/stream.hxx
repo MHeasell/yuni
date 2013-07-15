@@ -128,10 +128,10 @@ namespace Media
 				// If the frame is finished (should be in one shot)
 				if (frameFinished)
 				{
-					if (AV_NOPTS_VALUE == (uint64)packet->dts and pFrame->opaque
-						&& AV_NOPTS_VALUE != *(uint64*)pFrame->opaque)
+					if ((uint64)AV_NOPTS_VALUE == (uint64)packet->dts and pFrame->opaque
+						&& (uint64)AV_NOPTS_VALUE != *(uint64*)pFrame->opaque)
 						pCrtPts = *(uint64*)pFrame->opaque;
-					else if (AV_NOPTS_VALUE != (uint64)packet->dts)
+					else if ((uint64)AV_NOPTS_VALUE != (uint64)packet->dts)
 						pCrtPts = packet->dts;
 					else
 						pCrtPts = 0.0;
