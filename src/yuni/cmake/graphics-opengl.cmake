@@ -27,7 +27,7 @@ set(YUNI_HAS_OPENGL  OPENGL_FOUND)
 if (YUNI_HAS_OPENGL)
 	# yuni-config
 	LIBYUNI_CONFIG_INCLUDE_PATH("both" "opengl" "${OPENGL_INCLUDE_DIR}")
-	LIBYUNI_CONFIG_LIB("both" "opengl" "${OPENGL_LIBRARY}")
+	LIBYUNI_CONFIG_LIB_RAW_COMMAND("both" "opengl" "${OPENGL_LIBRARY}")
 	if (APPLE)
 		# Frameworks
 		LIBYUNI_CONFIG_FRAMEWORK("both" "opengl" OpenGL)
