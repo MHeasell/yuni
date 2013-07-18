@@ -5,13 +5,32 @@ namespace Yuni
 namespace Gfx3D
 {
 
+	static GLenum UsageToGLUsage(FrameBuffer::Usage usage)
+	{
+		switch (usage)
+		{
+			case FrameBuffer::fbDraw:
+			case FrameBuffer::fbPingPong:
+				return GL_DRAW_FRAMEBUFFER;
+				break;
+			case FrameBuffer::fbRead:
+				return GL_READ_FRAMEBUFFER;
+				break;
+		}
+		return GL_DRAW_FRAMEBUFFER;
+	}
+
 
 	bool FrameBuffer::initialize(Usage usage, Texture::DataType type)
 	{
+		pUsage = usage;
 		// Screen texture 1
 		pTexture = Texture::New(pSize.x, pSize.y, 4 /* RGBA */, type, nullptr, false);
 		// Screen texture 2
-		pBackTexture = Texture::New(pSize.x, pSize.y, 4 /* RGBA */, type, nullptr, false);
+		if (fbPingPong == pUsage)
+		{
+			pBackTexture = Texture::New(pSize.x, pSize.y, 4 /* RGBA */, type, nullptr, false);
+		}
 		::glBindTexture(GL_TEXTURE_2D, 0);
 
 		// Depth buffer
@@ -22,17 +41,9 @@ namespace Gfx3D
 		::glBindRenderbuffer(GL_RENDERBUFFER, 0);
 		pDepth = id;
 
+		GLenum frameBufferUsage = UsageToGLUsage(pUsage);
+
 		// Framebuffer to link everything together
-		GLenum frameBufferUsage = GL_DRAW_FRAMEBUFFER;
-		switch (usage)
-		{
-			case fbDraw:
-				frameBufferUsage = GL_DRAW_FRAMEBUFFER;
-				break;
-			case fbRead:
-				frameBufferUsage = GL_READ_FRAMEBUFFER;
-				break;
-		}
 		::glGenFramebuffers(1, &id);
 		::glBindFramebuffer(frameBufferUsage, id);
 		::glFramebufferTexture2D(frameBufferUsage, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, pTexture->id(), 0);
@@ -54,6 +65,24 @@ namespace Gfx3D
 
 		return true;
 	}
+
+
+	void FrameBuffer::activate() const
+	{
+		if (!valid())
+			return;
+		::glBindFramebuffer(UsageToGLUsage(pUsage), pID);
+		GLTestError("glBindFrameBuffer() binding");
+	}
+
+
+	void FrameBuffer::deactivate() const
+	{
+		// Unbind
+		::glBindFramebuffer(UsageToGLUsage(pUsage), 0);
+		GLTestError("glBindFrameBuffer() unbinding");
+	}
+
 
 
 	void FrameBuffer::resize(uint width, uint height)

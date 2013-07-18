@@ -76,7 +76,7 @@ namespace UI
 		** This should be overridden and must be called with RenderWindow::initialize().
 		** It cannot be const because if init fails, we may have to switch to fallback values.
 		*/
-		virtual bool initialize() { return pFB.initialize(Gfx3D::FrameBuffer::fbDraw); }
+		virtual bool initialize() { return pFB.initialize(Gfx3D::FrameBuffer::fbPingPong); }
 
 		/*!
 		** \brief Kill the window, release everything
