@@ -31,6 +31,7 @@ namespace Gfx3D
 		enum Usage
 		{
 			fbDraw,
+			fbPingPong,
 			fbRead
 		};
 
@@ -101,6 +102,9 @@ namespace Gfx3D
 
 		//! Buffer size
 		Point2D<uint> pSize;
+
+		//! Usage of the framebuffer
+		Usage pUsage;
 
 	}; // class FrameBuffer
 

@@ -98,7 +98,7 @@ namespace UI
 		assert(pImpl->clippings.empty() && "DrawingSurface commit : Too few endClipping() calls, stack is not empty !");
 		::glPopAttrib();
 		pImpl->fb.deactivate();
-		::glBindFramebuffer(GL_FRAMEBUFFER, pImpl->previousFB);
+		::glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 1/*pImpl->previousFB*/);
 	}
 
 
