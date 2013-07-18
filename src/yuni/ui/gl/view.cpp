@@ -175,10 +175,8 @@ namespace UI
 
 			if (pPictureShaders and pPictureShaders->valid())
 			{
-				pPictureShaders->activate();
 				drawPicture(pUISurface->texture(), pControl->x(), pControl->y(),
 					pControl->width(), pControl->height());
-				pPictureShaders->deactivate();
 			}
 		}
 
@@ -205,8 +203,8 @@ namespace UI
 
 	void View::drawOverlay(const PictureOverlay& picture) const
 	{
-		//picture.draw(pPictureShaders);
-		drawPicture(picture.texture(), picture.x(), picture.y(), picture.width(), picture.height());
+		picture.draw(pPictureShaders);
+		//drawPicture(picture.texture(), picture.x(), picture.y(), picture.width(), picture.height());
 	}
 
 
@@ -215,8 +213,11 @@ namespace UI
 		if (!texture)
 			return;
 
+		pPictureShaders->activate();
+		::glActiveTexture(GL_TEXTURE0);
 		// Bind the texture
 		::glBindTexture(GL_TEXTURE_2D, texture->id());
+		pPictureShaders->bindUniform("Texture0", Yuni::Gfx3D::Vertex<>::vaTexture0);
 
 		// Set texture coordinates
 		const float texCoord[] =
@@ -250,6 +251,7 @@ namespace UI
 
 		// Unbind the texture
 		::glBindTexture(GL_TEXTURE_2D, 0);
+		pPictureShaders->deactivate();
 	}
 
 
