@@ -2,6 +2,7 @@
 # include "../../io/file.h"
 # include "../../private/graphics/opengl/glew/glew.h"
 # include "framebuffer.h"
+# include "shadermanager.h"
 # include <stack>
 # include "vase_rend_draft_2.h"
 
@@ -40,7 +41,11 @@ namespace UI
 		//! Frame buffer to render to
 		Gfx3D::FrameBuffer fb;
 
+		//! Store previous frame-buffer value to restore it after drawing
 		GLint previousFB;
+
+		//! Shader program used to draw in the drawing surface
+		Gfx3D::ShaderProgram::Ptr shader;
 
 	}; // class DrawingSurfaceImpl
 
@@ -52,6 +57,18 @@ namespace UI
 		fb(width, height)
 	{
 		fb.initialize(Gfx3D::FrameBuffer::fbDraw);
+		shader = Gfx3D::ShaderManager::Instance().get("data/shaders/transformonly.vert", "data/shaders/uniformcolor.frag");
+		if (!shader)
+		{
+			std::cerr << "Shader loading or compilation error ! " << std::endl;
+			shader = nullptr;
+		}
+		shader->bindAttribute("attrVertex", Yuni::Gfx3D::Vertex<>::vaPosition);
+		if (!shader->load())
+		{
+			std::cerr << "Shader program link failed : " << shader->errorMessage() << std::endl;
+			shader = nullptr;
+		}
 	}
 
 
@@ -79,12 +96,31 @@ namespace UI
 	void DrawingSurface::begin()
 	{
 		assert(!pImpl->locked && "DrawingSurface error : Cannot begin drawing on a locked surface !");
+		assert(pImpl->shader->valid() && "Shaders were not properly loaded, cannot continue !");
+
 		pImpl->locked = true;
 
+		// Set view matrices for 2D overlay display
+		::glMatrixMode(GL_PROJECTION);
+		::glPushMatrix();
+		::glLoadIdentity();
+		// Window coordinates : [0,0] at top-left, [width,height] at bottom-right
+		::gluOrtho2D(0.0f, pImpl->size.x, pImpl->size.y, 0.0f);
+
+		::glMatrixMode(GL_MODELVIEW);
+		::glPushMatrix();
+		::glLoadIdentity();
+
+		// Store the previous framebuffer value
 		::glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &pImpl->previousFB);
+		// Bind framebuffer
 		pImpl->fb.activate();
+		// Bind shaders
+		pImpl->shader->activate();
+
+		// Clip on drawing surface
 		::glPushAttrib(GL_ENABLE_BIT);
-		//::glEnable(GL_SCISSOR_TEST);
+		::glEnable(GL_SCISSOR_TEST);
 		beginRectangleClipping(0, 0, pImpl->size.x, pImpl->size.y);
 		clear();
 	}
@@ -97,6 +133,7 @@ namespace UI
 		pImpl->locked = false;
 		assert(pImpl->clippings.empty() && "DrawingSurface commit : Too few endClipping() calls, stack is not empty !");
 		::glPopAttrib();
+		pImpl->shader->deactivate();
 		pImpl->fb.deactivate();
 		::glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 1/*pImpl->previousFB*/);
 	}
@@ -121,7 +158,6 @@ namespace UI
 
 	void DrawingSurface::resize(uint width, uint height)
 	{
-		assert(pImpl->locked && "DrawingSurface error : Cannot resize an unlocked surface !");
 		auto& size = pImpl->size;
 		if (width == size.x && height == size.y)
 			return;
@@ -163,6 +199,7 @@ namespace UI
 		assert(pImpl->locked && "DrawingSurface error : Cannot draw to an unlocked surface !");
 
 		// Draw the back as a quad with the proper color
+		/*
 		::glBegin(GL_QUADS);
 		::glColor4f(backColor.red, backColor.green, backColor.blue, backColor.alpha);
 		::glVertex2f(x, y);
@@ -172,8 +209,24 @@ namespace UI
 		::glEnd();
 
 		::glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+		*/
+		pImpl->shader->bindUniform("Color", backColor);
+		const float vertices[] =
+			{
+				(float)x, (float)(y + height),
+				(float)x, (float)y,
+				(float)(x + width), (float)y,
+				(float)x, (float)(y + height),
+				(float)(x + width), (float)y,
+				(float)(x + width), (float)(y + height)
+			};
+		::glEnableVertexAttribArray(Gfx3D::Vertex<>::vaPosition);
+		::glVertexAttribPointer(Gfx3D::Vertex<>::vaPosition, 2, GL_FLOAT, 0, 0, vertices);
+		// Draw
+		::glDrawArrays(GL_TRIANGLES, 0, 6);
+		::glDisableVertexAttribArray(Gfx3D::Vertex<>::vaPosition);
 
-
+		pImpl->shader->bindUniform("Color", frontColor);
 		// Top line
 		line((double)x, (double)y, (double)(x + width), (double)y, (float)lineWidth,
 			frontColor.red, frontColor.green, frontColor.blue, frontColor.alpha, .0f, .0f, true);
@@ -186,6 +239,7 @@ namespace UI
 		// Right line
 		line((double)(x + width), (double)y, (double)(x + width), (double)(y + height), (float)lineWidth,
 			frontColor.red, frontColor.green, frontColor.blue, frontColor.alpha, .0f, .0f, true);
+
 	}
 
 
