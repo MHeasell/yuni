@@ -265,7 +265,7 @@ namespace UI
 		// Bottom line
 		line((double)x, (double)(y + height - lineWidth),
 			(double)(x + width), (double)(y + height - lineWidth), lineWidth,
-			 frontColor.red, frontColor.green, frontColor.blue frontColor.alpha, .0f, .0f, true);
+			 frontColor.red, frontColor.green, frontColor.blue, frontColor.alpha, .0f, .0f, true);
 		// Left line
 		line((double)x, (double)y, (double)x, (double)(y + height), lineWidth,
 			frontColor.red, frontColor.green, frontColor.blue, frontColor.alpha, .0f, .0f, true);
