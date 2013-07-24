@@ -67,16 +67,15 @@ namespace UI
 		if (!pVisible)
 			return;
 
-
 		// Clear depth buffer
 		::glClear(GL_DEPTH_BUFFER_BIT);
+
+		// Reset The Current Viewport
+		::glViewport(pX, pY, pWidth, pHeight);
 
 		/*
 		if (!(!pCamera))
 		{
-			// Reset The Current Viewport
-			::glViewport(pX, pY, pWidth, pHeight);
-
 			// Select the Projection Matrix
 			::glMatrixMode(GL_PROJECTION);
 			// Reset the Projection Matrix

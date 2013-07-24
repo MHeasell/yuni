@@ -20,7 +20,7 @@ namespace UI
 		borderColor(0.1882f, 0.3490f, 0.451f), // (48, 89, 115)
 		borderColorDisabled(0.1882f, 0.3490f, 0.451f), // (102, 100, 126)
 		margin(10),
-		borderWidth(3),
+		borderWidth(1.2f),
 		menuHeight(20),
 		checkBoxSize(15)
 	{}

@@ -1,6 +1,6 @@
 
 #include "renderwindow.h"
-
+#include "../core/foreach.h"
 
 namespace Yuni
 {
@@ -278,7 +278,7 @@ namespace UI
 	void RenderWindow::doMouseDown(Input::IMouse::Button btn)
 	{
 		EventPropagation propagate = epContinue;
-		for (const View::Ptr& view : pViewList)
+		YUNI_REVERSE_FOREACH(auto view, pViewList)
 		{
 			propagate = view->doMouseDown(btn, pMouse->pos().x, pMouse->pos().y);
 			if (epFinishView <= propagate)
@@ -290,7 +290,7 @@ namespace UI
 	void RenderWindow::doMouseUp(Input::IMouse::Button btn)
 	{
 		EventPropagation propagate = epContinue;
-		for (const View::Ptr& view : pViewList)
+		YUNI_REVERSE_FOREACH(auto view, pViewList)
 		{
 			propagate = view->doMouseUp(btn, pMouse->pos().x, pMouse->pos().y);
 			if (epFinishView <= propagate)
@@ -302,7 +302,7 @@ namespace UI
 	void RenderWindow::doMouseDblClick(Input::IMouse::Button btn)
 	{
 		EventPropagation propagate = epContinue;
-		for (const View::Ptr& view : pViewList)
+		YUNI_REVERSE_FOREACH(auto view, pViewList)
 		{
 			propagate = view->doMouseDblClick(btn, pMouse->pos().x, pMouse->pos().y);
 			if (epFinishView <= propagate)
@@ -314,7 +314,7 @@ namespace UI
 	void RenderWindow::doMouseScroll(float delta)
 	{
 		EventPropagation propagate = epContinue;
-		for (const View::Ptr& view : pViewList)
+		YUNI_REVERSE_FOREACH(auto view, pViewList)
 		{
 			propagate = view->doMouseScroll(delta, pMouse->pos().x, pMouse->pos().y);
 			if (epFinishView <= propagate)
@@ -326,7 +326,7 @@ namespace UI
 	void RenderWindow::doMouseHover(int x, int y)
 	{
 		EventPropagation propagate = epContinue;
-		for (const View::Ptr& view : pViewList)
+		YUNI_REVERSE_FOREACH(auto view, pViewList)
 		{
 			propagate = view->doMouseHover(x, y);
 			if (epFinishView <= propagate)
@@ -339,7 +339,7 @@ namespace UI
 	void RenderWindow::doKeyDown(Input::Key key)
 	{
 		EventPropagation propagate = epContinue;
-		for (const View::Ptr& view : pViewList)
+		YUNI_REVERSE_FOREACH(auto view, pViewList)
 		{
 			propagate = view->doKeyDown(key);
 			if (epFinishView <= propagate)
@@ -352,7 +352,7 @@ namespace UI
 	void RenderWindow::doKeyUp(Input::Key key)
 	{
 		EventPropagation propagate = epContinue;
-		for (const View::Ptr& view : pViewList)
+		YUNI_REVERSE_FOREACH(auto view, pViewList)
 		{
 			propagate = view->doKeyUp(key);
 			if (epFinishView <= propagate)

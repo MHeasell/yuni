@@ -124,7 +124,7 @@ namespace UI
 				return epStop;
 			else if (prop > finalProp)
 				finalProp = prop;
-			prop = onMouseMove(this, x, y);
+			prop = onMouseDown(this, btn, x, y);
 			if (epStop == prop)
 				return epStop;
 			else if (prop > finalProp)
@@ -147,7 +147,7 @@ namespace UI
 				return epStop;
 			else if (prop > finalProp)
 				finalProp = prop;
-			prop = onMouseMove(this, x, y);
+			prop = onMouseUp(this, btn, x, y);
 			if (epStop == prop)
 				return epStop;
 			else if (prop > finalProp)
@@ -170,7 +170,7 @@ namespace UI
 				return epStop;
 			else if (prop > finalProp)
 				finalProp = prop;
-			prop = onMouseMove(this, x, y);
+			prop = onMouseDblClick(this, btn, x, y);
 			if (epStop == prop)
 				return epStop;
 			else if (prop > finalProp)
@@ -193,7 +193,7 @@ namespace UI
 				return epStop;
 			else if (prop > finalProp)
 				finalProp = prop;
-			prop = onMouseMove(this, x, y);
+			prop = onMouseScroll(this, delta);
 			if (epStop == prop)
 				return epStop;
 			else if (prop > finalProp)
@@ -217,7 +217,7 @@ namespace UI
 				return epStop;
 			else if (prop > finalProp)
 				finalProp = prop;
-			prop = onMouseMove(this, x, y);
+			prop = onMouseHover(this, x, y);
 			if (epStop == prop)
 				return epStop;
 			else if (prop > finalProp)
