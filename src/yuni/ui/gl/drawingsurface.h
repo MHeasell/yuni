@@ -60,11 +60,11 @@ namespace UI
 
 		//! Draw text on the surface
 		void drawLine(const Color::RGBA<float>& color, int startX, int startY, int endX, int endY,
-			uint lineWidth);
+			float lineWidth);
 
 		//! Draw a rectangle on the surface
 		void drawRectangle(const Color::RGBA<float>& frontColor, const Color::RGBA<float>& backColor,
-			int x, int y, uint width, uint height, uint lineWidth);
+			int x, int y, uint width, uint height, float lineWidth);
 
 		//! Activate clipping inside a rectangle
 		void beginRectangleClipping(int x, int y, uint width, uint height);
