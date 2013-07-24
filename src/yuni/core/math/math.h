@@ -229,7 +229,7 @@ namespace Math
 	/*!
 	** \brief Get the square root value
 	**
-	** The standard dquare root function, without any check on the input
+	** The standard square root function, without any check on the input
 	*/
 	template<class U> U SquareRootNoCheck(U x);
 
