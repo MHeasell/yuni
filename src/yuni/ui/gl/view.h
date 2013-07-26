@@ -124,7 +124,7 @@ namespace UI
 		**
 		** \note If you see nothing in this view, make sure the camera is set and the view is visible
 		*/
-		virtual void draw() const;
+		virtual void draw(uint msMultiplier) const;
 
 	protected:
 		//! Draw a text overlay

@@ -10,6 +10,7 @@
 # include "input/keyboard.h"
 # include "input/mouse.h"
 # include "font.h"
+# include "multisampling.h"
 # include "gl/posteffect.h"
 # include "gl/framebuffer.h"
 # include "gl/view.h"
@@ -46,16 +47,6 @@ namespace UI
 			wsMaximized
 
 		}; // enum WindowState
-
-		//! Type of multisampling applied
-		enum MultiSamplingType
-		{
-			msNone,
-			ms2x,
-			ms4x
-
-		}; // enum MultiSampling
-
 
 	public:
 		//! \name Constructors & Destructor
@@ -200,7 +191,7 @@ namespace UI
 		bool minimized() const { return wsMinimized == pState; }
 
 		//! Change the type of multisampling applied
-		void multiSampling(MultiSamplingType samplingType);
+		void multiSampling(MultiSampling::Type samplingType);
 
 		//! Does the window have Full Screen AntiAliasing / MultiSampling ? (OS-specific)
 		virtual bool antiAliasing() const = 0;
@@ -312,7 +303,7 @@ namespace UI
 		bool pFullScreen;
 
 		//! Type of multisampling applied
-		MultiSamplingType pMultiSampling;
+		MultiSampling::Type pMultiSampling;
 
 		//! Is the window maximized ? Minimized ?
 		WindowState pState;
