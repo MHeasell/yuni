@@ -15,9 +15,11 @@ namespace Gfx3D
 				break;
 			case FrameBuffer::fbRead:
 				return GL_READ_FRAMEBUFFER;
+			case FrameBuffer::fbReadDraw:
+				return GL_FRAMEBUFFER;
 				break;
 		}
-		return GL_DRAW_FRAMEBUFFER;
+		return GL_FRAMEBUFFER;
 	}
 
 
@@ -47,7 +49,9 @@ namespace Gfx3D
 		::glGenFramebuffers(1, &id);
 		::glBindFramebuffer(frameBufferUsage, id);
 		::glFramebufferTexture2D(frameBufferUsage, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, pTexture->id(), 0);
+		GLTestError("glFramebufferTexture2D frame buffer color attachment");
 		::glFramebufferRenderbuffer(frameBufferUsage, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, pDepth);
+		GLTestError("glFramebufferRenderbuffer depth buffer attachment");
 		::glBindFramebuffer(frameBufferUsage, 0);
 		pID = id;
 

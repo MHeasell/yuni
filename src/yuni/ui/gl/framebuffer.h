@@ -32,7 +32,8 @@ namespace Gfx3D
 		{
 			fbDraw,
 			fbPingPong,
-			fbRead
+			fbRead,
+			fbReadDraw
 		};
 
 	public:
