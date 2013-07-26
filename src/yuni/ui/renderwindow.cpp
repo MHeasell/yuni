@@ -20,7 +20,7 @@ namespace UI
 		pFB(width, height),
 		pPostEffects(0),
 		pFullScreen(fullScreen),
-		pMultiSampling(msNone),
+		pMultiSampling(MultiSampling::msNone),
 		pState(fullScreen ? wsMaximized : wsNormal),
 		pRefreshFunc(0)
 	{
@@ -167,7 +167,7 @@ namespace UI
 		{
 			if (id == (*it)->id())
 			{
-				(*it)->draw();
+				(*it)->draw(MultiSampling::Multiplier(pMultiSampling));
 				break;
 			}
 		}
@@ -178,7 +178,7 @@ namespace UI
 	{
 		if (wsMinimized == pState)
 			return;
-		view->draw();
+		view->draw(MultiSampling::Multiplier(pMultiSampling));
 	}
 
 
@@ -190,7 +190,7 @@ namespace UI
 		pFB.activate();
 		// Draw the views
 		for (const View::Ptr& view : pViewList)
-			view->draw();
+			view->draw(MultiSampling::Multiplier(pMultiSampling));
 		static bool init = false;
 		if (!init)
 		{
@@ -242,22 +242,12 @@ namespace UI
 	}
 
 
-	void RenderWindow::multiSampling(MultiSamplingType samplingType)
+	void RenderWindow::multiSampling(MultiSampling::Type samplingType)
 	{
 		if (samplingType != pMultiSampling)
 		{
-			switch (samplingType)
-			{
-				case msNone:
-					pFB.resize(pWidth, pHeight);
-					break;
-				case ms2x:
-					pFB.resize(pWidth * 2, pHeight * 2);
-					break;
-				case ms4x:
-					pFB.resize(pWidth * 4, pHeight * 4);
-					break;
-			}
+			uint ms = MultiSampling::Multiplier(samplingType);
+			pFB.resize(pWidth * ms, pHeight * ms);
 			pMultiSampling = samplingType;
 		}
 	}
@@ -266,7 +256,7 @@ namespace UI
 	void RenderWindow::doMouseMove(int x, int y)
 	{
 		EventPropagation propagate = epContinue;
-		for (const View::Ptr& view : pViewList)
+		YUNI_REVERSE_FOREACH(auto view, pViewList)
 		{
 			propagate = view->doMouseMove(x, y);
 			if (epFinishView <= propagate)

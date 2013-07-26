@@ -62,7 +62,7 @@ namespace UI
 	}
 
 
-	void View::draw() const
+	void View::draw(uint /*msMultiplier*/) const
 	{
 		if (!pVisible)
 			return;

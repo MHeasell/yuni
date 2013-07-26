@@ -26,6 +26,7 @@ list(APPEND SRC_UI
 	ui/font.h
 	ui/ftfont.cpp
 	ui/ftfont.h
+	ui/multisampling.h
 	ui/pictureoverlay.cpp
 	ui/pictureoverlay.h
 	ui/pictureoverlay.hxx
