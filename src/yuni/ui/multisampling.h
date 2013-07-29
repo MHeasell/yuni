@@ -6,14 +6,14 @@ namespace UI
 {
 
 
-	//! Multisampling is a full screen anti-aliasing system that rests on multiplying rendering size
+	//! Multisampling is a full screen anti-aliasing algorithm
 	class MultiSampling
 	{
 	public:
 		//! Available types
 		enum Type
 		{
-			//! No multi-sampling
+			//! No multi-sampling (1x)
 			msNone,
 
 			//! 2x multi-sampling
@@ -23,7 +23,10 @@ namespace UI
 			ms4x,
 
 			//! 8x multi-sampling
-			ms8x
+			ms8x,
+
+			//! 16x multi-sampling
+			ms16x
 
 		}; // enum Type
 
@@ -41,8 +44,27 @@ namespace UI
 					return 4;
 				case ms8x:
 					return 8;
+				case ms16x:
+					return 16;
 			}
 			return 1;
+		}
+
+		//! Get the sampling type from a given multiplier
+		static Type TypeFromMultiplier(uint multiplier)
+		{
+			switch (multiplier)
+			{
+				case 2:
+					return ms2x;
+				case 4:
+					return ms4x;
+				case 8:
+					return ms8x;
+				case 16:
+					return ms16x;
+			}
+			return msNone;
 		}
 
 	}; // class MultiSampling

@@ -75,7 +75,12 @@ namespace UI
 		void moveBy(int x, int y) { pX += x; pY += y; }
 
 		//! Resize the view
-		void resize(uint width, uint height) { pWidth = width; pHeight = height > 0 ? height : 1; }
+		void resize(uint width, uint height)
+		{
+			assert(height > 0 && "Resizing view to a null or negative height !");
+			pWidth = width;
+			pHeight = height > 0 ? height : 1;
+		}
 
 		//! Get the visibility of the view : the view must have a camera to be visible !
 		bool visible() const { return pVisible && !(!pCamera); }

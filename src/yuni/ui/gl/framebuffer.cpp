@@ -27,6 +27,7 @@ namespace Gfx3D
 	{
 		pUsage = usage;
 		// Screen texture 1
+		//pTexture = Texture::NewMS(pSize.x, pSize.y, 4 /* RGBA */, type, 16, nullptr);
 		pTexture = Texture::New(pSize.x, pSize.y, 4 /* RGBA */, type, nullptr, false);
 		// Screen texture 2
 		if (fbPingPong == pUsage)

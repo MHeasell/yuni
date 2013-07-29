@@ -190,17 +190,12 @@ namespace UI
 		//! State of the window : normal, minimized, maximized
 		bool minimized() const { return wsMinimized == pState; }
 
+		//! Do we currently have any kind of multisampling on ?
+		bool multiSampling() const { return MultiSampling::msNone != pMultiSampling; }
 		//! Change the type of multisampling applied
-		void multiSampling(MultiSampling::Type samplingType);
-
-		//! Does the window have Full Screen AntiAliasing / MultiSampling ? (OS-specific)
-		virtual bool antiAliasing() const = 0;
-		/*!
-		** \brief Should Full Screen AntiAliasing / MultiSampling be enabled ? (OS-specific)
-		**
-		** Changing this value may kill and re-create the window.
-		*/
-		virtual void antiAliasing(bool enable) = 0;
+		virtual void multiSampling(MultiSampling::Type samplingType);
+		//! Get the current multisampling multiplier, 1 if no multisampling
+		uint samplingMultiplier() const { return MultiSampling::Multiplier(pMultiSampling); }
 
 		//! Enable / Disable full screen (OS-specific)
 		virtual void fullScreen(bool enable) = 0;
