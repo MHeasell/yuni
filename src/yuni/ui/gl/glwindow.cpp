@@ -13,15 +13,13 @@ namespace UI
 	bool GLWindow::initialize()
 	{
 		// Black background
-		::glClearColor(0.0f, 0.0f, 0.0f, 0.5f);
+		::glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		// Depth Buffer setup
 		::glClearDepth(1.0f);
 		// Enables Depth Testing
 		::glEnable(GL_DEPTH_TEST);
 		// The type of Depth Testing to do
 		::glDepthFunc(GL_LEQUAL);
-		// Really nice perspective calculations
-		::glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 		// Enable back-face culling
 		::glEnable(GL_CULL_FACE);
 

@@ -304,6 +304,27 @@ namespace Gfx3D
 	}
 
 
+	Texture::Ptr Texture::NewMS(uint width, uint height, uint colorDepth,
+		DataType type, uint samples, const uint8* data)
+	{
+		assert(width > 0 && "Creating texture with width=0 !");
+		assert(height > 0 && "Creating texture with height=0 !");
+		ID id;
+
+		// Allocate a texture name
+		::glGenTextures(1, &id);
+
+		// Select our current texture
+		::glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, id);
+
+		GLenum format = DepthToGLEnum(colorDepth);
+		GLenum formatInt = DepthToGLEnumInternal(colorDepth);
+		GLenum dataType = DataTypeToGLEnum(type);
+		::glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, samples, formatInt, width, height, false);
+
+		return new Texture(id, width, height, colorDepth, type);
+	}
+
 
 	Texture::Texture(ID id, uint width, uint height, uint colorDepth, DataType type):
 		pID(id),

@@ -167,7 +167,7 @@ namespace UI
 		{
 			if (id == (*it)->id())
 			{
-				(*it)->draw(MultiSampling::Multiplier(pMultiSampling));
+				(*it)->draw(1);
 				break;
 			}
 		}
@@ -178,7 +178,7 @@ namespace UI
 	{
 		if (wsMinimized == pState)
 			return;
-		view->draw(MultiSampling::Multiplier(pMultiSampling));
+		view->draw(1);
 	}
 
 
@@ -190,7 +190,7 @@ namespace UI
 		pFB.activate();
 		// Draw the views
 		for (const View::Ptr& view : pViewList)
-			view->draw(MultiSampling::Multiplier(pMultiSampling));
+			view->draw(1);
 		static bool init = false;
 		if (!init)
 		{
@@ -246,8 +246,10 @@ namespace UI
 	{
 		if (samplingType != pMultiSampling)
 		{
-			uint ms = MultiSampling::Multiplier(samplingType);
+		/*
+			uint ms = samplingMultiplier();
 			pFB.resize(pWidth * ms, pHeight * ms);
+		*/
 			pMultiSampling = samplingType;
 		}
 	}

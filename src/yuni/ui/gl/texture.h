@@ -54,6 +54,10 @@ namespace Gfx3D
 		static Texture::Ptr New3D(uint width, uint height, uint depth, uint colorDepth,
 			DataType type = UInt8, const uint8* data = nullptr, bool mipmaps = true);
 
+		//! Create a new 2D multisample texture
+		static Texture::Ptr NewMS(uint width, uint height, uint colorDepth,
+			DataType type = UInt8, uint samples = 1, const uint8* data = nullptr);
+
 		//! Load texture from file
 		static Texture::Ptr LoadFromFile(const AnyString& filePath);
 
