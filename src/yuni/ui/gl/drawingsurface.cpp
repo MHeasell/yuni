@@ -263,15 +263,15 @@ namespace UI
 		line((double)x, (double)y, (double)(x + width), (double)y, lineWidth,
 			frontColor.red, frontColor.green, frontColor.blue, frontColor.alpha, .0f, .0f, true);
 		// Bottom line
-		line((double)x, (double)(y + height - lineWidth),
-			(double)(x + width), (double)(y + height - lineWidth), lineWidth,
+		line((double)x, (double)(y + height) - lineWidth,
+			(double)(x + width), (double)(y + height) - lineWidth, lineWidth,
 			 frontColor.red, frontColor.green, frontColor.blue, frontColor.alpha, .0f, .0f, true);
 		// Left line
 		line((double)x, (double)y, (double)x, (double)(y + height), lineWidth,
 			frontColor.red, frontColor.green, frontColor.blue, frontColor.alpha, .0f, .0f, true);
 		// Right line
-		line((double)(x + width - lineWidth), (double)y,
-			 (double)(x + width - lineWidth), (double)(y + height), lineWidth,
+		line((double)(x + width) - lineWidth, (double)y,
+			(double)(x + width) - lineWidth, (double)(y + height), lineWidth,
 			frontColor.red, frontColor.green, frontColor.blue, frontColor.alpha, .0f, .0f, true);
 
 		pImpl->baseShader->activate();

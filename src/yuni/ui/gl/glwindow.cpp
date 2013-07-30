@@ -69,7 +69,8 @@ namespace UI
 
 	void GLWindow::drawFullWindowQuad(const Gfx3D::Texture::Ptr& texture) const
 	{
-		::glBindTexture(GL_TEXTURE_2D, texture->id());
+		auto textureType = multiSampling() ? GL_TEXTURE_2D_MULTISAMPLE : GL_TEXTURE_2D;
+		::glBindTexture(textureType, texture->id());
 
 		::glPushAttrib(GL_DEPTH_BUFFER_BIT | GL_ENABLE_BIT);
 		::glDisable(GL_DEPTH_TEST);
@@ -105,7 +106,7 @@ namespace UI
 		::glPopAttrib();
 		//::glCullFace(GL_BACK);
 
-		::glBindTexture(GL_TEXTURE_2D, 0);
+		::glBindTexture(textureType, 0);
 	}
 
 

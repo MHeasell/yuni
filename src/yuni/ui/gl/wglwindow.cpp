@@ -674,7 +674,7 @@ namespace UI
 			};
 
 		// Try MSAA init
-		if (pHasMSAASupport)
+		if (pHasMSAASupport && pMultiSampling != MultiSampling::msNone)
 		{
 			if (!initMultisamplePixelFormat(pfd, true))
 			{
@@ -718,7 +718,8 @@ namespace UI
 			return false;
 		}
 
-		if (!pHasMSAASupport && initMultisamplePixelFormat(pfd, false))
+		if (!pHasMSAASupport && pMultiSampling != MultiSampling::msNone &&
+			initMultisamplePixelFormat(pfd, false))
 		{
 			pHasMSAASupport = true;
 			closeWindowForReinit();
