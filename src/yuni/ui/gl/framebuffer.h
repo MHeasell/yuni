@@ -4,6 +4,7 @@
 # include "../../yuni.h"
 # include "../../core/smartptr.h"
 # include "../../core/point2D.h"
+# include "../multisampling.h"
 # include "texture.h"
 
 namespace Yuni
@@ -55,7 +56,7 @@ namespace Gfx3D
 		/*!
 		** \brief Initialize the frame buffer
 		*/
-		bool initialize(Usage usage, Texture::DataType type = Texture::UInt8);
+		bool initialize(Usage usage, UI::MultiSampling::Type msType = UI::MultiSampling::msNone, Texture::DataType type = Texture::UInt8);
 
 		//! Activate the framebuffer
 		void activate() const;

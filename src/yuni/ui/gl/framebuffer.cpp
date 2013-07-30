@@ -23,18 +23,30 @@ namespace Gfx3D
 	}
 
 
-	bool FrameBuffer::initialize(Usage usage, Texture::DataType type)
+	bool FrameBuffer::initialize(Usage usage, UI::MultiSampling::Type msType, Texture::DataType type)
 	{
 		pUsage = usage;
-		// Screen texture 1
-		//pTexture = Texture::NewMS(pSize.x, pSize.y, 4 /* RGBA */, type, 16, nullptr);
-		pTexture = Texture::New(pSize.x, pSize.y, 4 /* RGBA */, type, nullptr, false);
-		// Screen texture 2
-		if (fbPingPong == pUsage)
+		if (UI::MultiSampling::msNone == msType)
 		{
-			pBackTexture = Texture::New(pSize.x, pSize.y, 4 /* RGBA */, type, nullptr, false);
+			// Screen texture 1
+			pTexture = Texture::New(pSize.x, pSize.y, 4 /* RGBA */, type, nullptr, false);
+			if (fbPingPong == pUsage)
+				// Screen texture 2
+				pBackTexture = Texture::New(pSize.x, pSize.y, 4 /* RGBA */, type, nullptr, false);
 		}
-		::glBindTexture(GL_TEXTURE_2D, 0);
+		else
+		{
+			uint samples = UI::MultiSampling::Multiplier(msType);
+			// Screen texture 1
+			pTexture = Texture::NewMS(pSize.x, pSize.y, 4 /* RGBA */, type, samples, nullptr);
+			if (fbPingPong == pUsage)
+				// Screen texture 2
+				pBackTexture = Texture::NewMS(pSize.x, pSize.y, 4 /* RGBA */, type, samples, nullptr);
+		}
+
+		auto textureType = UI::MultiSampling::msNone == msType ? GL_TEXTURE_2D : GL_TEXTURE_2D_MULTISAMPLE;
+		// Unbind
+		::glBindTexture(textureType, 0);
 
 		// Depth buffer
 		uint id;
@@ -49,7 +61,7 @@ namespace Gfx3D
 		// Framebuffer to link everything together
 		::glGenFramebuffers(1, &id);
 		::glBindFramebuffer(frameBufferUsage, id);
-		::glFramebufferTexture2D(frameBufferUsage, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, pTexture->id(), 0);
+		::glFramebufferTexture2D(frameBufferUsage, GL_COLOR_ATTACHMENT0, textureType, pTexture->id(), 0);
 		GLTestError("glFramebufferTexture2D frame buffer color attachment");
 		::glFramebufferRenderbuffer(frameBufferUsage, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, pDepth);
 		GLTestError("glFramebufferRenderbuffer depth buffer attachment");
