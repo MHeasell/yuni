@@ -25,6 +25,8 @@
 ** else
 **	std::cout << "got nothing" << std::endl;
 ** \endcode
+**
+** \note C++11 is required (auto keyword)
 */
 # define YUNI_FOREACH(var, container) \
 		for (bool YUNI_JOIN(yn_continue_, __LINE__) = true; YUNI_JOIN(yn_continue_, __LINE__); ) \
