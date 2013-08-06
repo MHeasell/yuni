@@ -317,9 +317,9 @@ namespace Gfx3D
 		// Select our current texture
 		::glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, id);
 
-		GLenum format = DepthToGLEnum(colorDepth);
+		// GLenum format = DepthToGLEnum(colorDepth);
 		GLenum formatInt = DepthToGLEnumInternal(colorDepth);
-		GLenum dataType = DataTypeToGLEnum(type);
+		// GLenum dataType = DataTypeToGLEnum(type);
 		::glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, samples, formatInt, width, height, false);
 
 		return new Texture(id, width, height, colorDepth, type);
@@ -414,7 +414,7 @@ namespace Gfx3D
 
 	void Texture::clearToWhite()
 	{
-		std::vector<uint8> data(pWidth * pHeight * 4, 1);
+		std::vector<uint8> data(pWidth * pHeight * 4, 255);
 		update(0, 0, pWidth, pHeight, pDepth, &data[0]);
 	}
 
