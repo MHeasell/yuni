@@ -822,20 +822,21 @@ namespace UI
 			return false;
 		}
 
-		if (!set)
-			return true;
-
-		// Are we able to set the pixel format?
-		if (!::SetPixelFormat(pHDC, pixelFormat, &pfd))
+		if (set)
 		{
-			std::cerr << "Window init error : Failed to set the Pixel Format !" << std::endl;
-			kill();
-			return false;
+			// Are we able to set the pixel format?
+			if (!::SetPixelFormat(pHDC, pixelFormat, &pfd))
+			{
+				std::cerr << "Window init error : Failed to set the Pixel Format !" << std::endl;
+				kill();
+				return false;
+			}
+
+			# ifndef NDEBUG
+			std::cout << msMultiplier << "x MSAA activated !" << std::endl;
+			# endif
 		}
 
-		# ifndef NDEBUG
-		std::cout << msMultiplier << "x FSAA activated !" << std::endl;
-		# endif
 		return true;
 	}
 
