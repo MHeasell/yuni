@@ -33,11 +33,10 @@ namespace UI
 
 		// Set shaders
 		shader->activate();
-		pMaterial->activate(shader);
-		::glActiveTexture(GL_TEXTURE1);
+		::glActiveTexture(GL_TEXTURE0);
 		::glBindTexture(GL_TEXTURE_2D, pTexture->id());
 		shader->bindUniform("Texture1", Yuni::Gfx3D::Vertex<>::vaTexture1);
-		::glActiveTexture(GL_TEXTURE0);
+		pMaterial->activate(shader, 1);
 
 		// Set texture coordinates
 		const float texCoord[] =
@@ -69,10 +68,10 @@ namespace UI
 		// Clean-up
 		::glDisableVertexAttribArray(Gfx3D::Vertex<>::vaPosition);
 		::glDisableVertexAttribArray(Gfx3D::Vertex<>::vaTextureCoord);
-		::glBindTexture(GL_TEXTURE_2D, 0);
 		::glActiveTexture(GL_TEXTURE1);
 		::glBindTexture(GL_TEXTURE_2D, 0);
 		::glActiveTexture(GL_TEXTURE0);
+		::glBindTexture(GL_TEXTURE_2D, 0);
 		shader->deactivate();
 	}
 
