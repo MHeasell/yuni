@@ -27,9 +27,13 @@ namespace Gfx3D
 
 		shaders->bindUniform(pUniformName, pColor.red, pColor.green, pColor.blue, pColor.alpha);
 		// Bind the white
-		::glActiveTexture(GL_TEXTURE0 + index);
-		::glBindTexture(GL_TEXTURE_2D, White->id());
-		shaders->bindUniform(String("Texture") << index, Yuni::Gfx3D::Vertex<>::vaTexture0 + index);
+		if (index >= 0)
+		{
+			::glActiveTexture(GL_TEXTURE0 + index);
+			::glBindTexture(GL_TEXTURE_2D, White->id());
+			shaders->bindUniform(String("Texture") << index, Yuni::Gfx3D::Vertex<>::vaTexture0 + index);
+			::glActiveTexture(GL_TEXTURE0);
+		}
 	}
 
 
@@ -38,6 +42,11 @@ namespace Gfx3D
 	{
 		assert(shaders && shaders->valid());
 
+		if (index < 0)
+			return;
+
+		if (index == 0)
+			shaders->bindUniform("MaterialDiffuse", 1.0f, 1.0f, 1.0f, 1.0f);
 		::glActiveTexture(GL_TEXTURE0 + index);
 		if (!pTexture)
 		{
@@ -49,6 +58,7 @@ namespace Gfx3D
 		else
 			::glBindTexture(GL_TEXTURE_2D, pTexture->id());
 		shaders->bindUniform(String("Texture") << index, Yuni::Gfx3D::Vertex<>::vaTexture0 + index);
+		::glActiveTexture(GL_TEXTURE0);
 	}
 
 
