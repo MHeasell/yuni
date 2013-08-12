@@ -48,9 +48,8 @@ namespace Gfx3D
 
 	inline void ShaderProgram::bindUniform(const AnyString& name, int value) const
 	{
-		GLClearError();
-		GLint location = ::glGetUniformLocation(pID, name.c_str());
-		if (not GLTestError("ShaderProgram::bindUniform, glGetUniformLocation"))
+		GLint location = getUniformLocation(name);
+		if (location < 0)
 			return;
 		::glUniform1i(location, value);
 		GLTestError("ShaderProgram::bindUniform, glUniform1i");
@@ -58,18 +57,16 @@ namespace Gfx3D
 
 	inline void ShaderProgram::bindUniform(const AnyString& name, float value) const
 	{
-		GLClearError();
-		GLint location = ::glGetUniformLocation(pID, name.c_str());
-		if (not GLTestError("ShaderProgram::bindUniform, glGetUniformLocation"))
+		GLint location = getUniformLocation(name);
+		if (location < 0)
 			return;
 		::glUniform1f(location, value);
 	}
 
 	inline void ShaderProgram::bindUniform(const AnyString& name, uint value) const
 	{
-		GLClearError();
-		GLint location = ::glGetUniformLocation(pID, name.c_str());
-		if (not GLTestError("ShaderProgram::bindUniform, glGetUniformLocation"))
+		GLint location = getUniformLocation(name);
+		if (location < 0)
 			return;
 		::glUniform1ui(location, value);
 	}
@@ -85,9 +82,8 @@ namespace Gfx3D
 
 	inline void ShaderProgram::bindUniform(const AnyString& name, const Vector3D<int>& value) const
 	{
-		GLClearError();
-		GLint location = ::glGetUniformLocation(pID, name.c_str());
-		if (not GLTestError("ShaderProgram::bindUniform, glGetUniformLocation"))
+		GLint location = getUniformLocation(name);
+		if (location < 0)
 			return;
 		::glUniform3i(location, value.x, value.y, value.z);
 	}
@@ -95,9 +91,8 @@ namespace Gfx3D
 
 	inline void ShaderProgram::bindUniform(const AnyString& name, const Vector3D<float>& value) const
 	{
-		GLClearError();
-		GLint location = ::glGetUniformLocation(pID, name.c_str());
-		if (not GLTestError("ShaderProgram::bindUniform, glGetUniformLocation"))
+		GLint location = getUniformLocation(name);
+		if (location < 0)
 			return;
 		::glUniform3f(location, value.x, value.y, value.z);
 	}
@@ -105,9 +100,8 @@ namespace Gfx3D
 
 	inline void ShaderProgram::bindUniform(const AnyString& name, const Vector3D<uint>& value) const
 	{
-		GLClearError();
-		GLint location = ::glGetUniformLocation(pID, name.c_str());
-		if (not GLTestError("ShaderProgram::bindUniform, glGetUniformLocation"))
+		GLint location = getUniformLocation(name);
+		if (location < 0)
 			return;
 		::glUniform3ui(location, value.x, value.y, value.z);
 	}
@@ -115,9 +109,8 @@ namespace Gfx3D
 
 	inline void ShaderProgram::bindUniform(const AnyString& name, const Color::RGB<float>& value) const
 	{
-		GLClearError();
-		GLint location = ::glGetUniformLocation(pID, name.c_str());
-		if (not GLTestError("ShaderProgram::bindUniform, glGetUniformLocation"))
+		GLint location = getUniformLocation(name);
+		if (location < 0)
 			return;
 		::glUniform3f(location, value.red, value.green, value.blue);
 	}
@@ -125,9 +118,8 @@ namespace Gfx3D
 
 	inline void ShaderProgram::bindUniform(const AnyString& name, const Color::RGBA<float>& value) const
 	{
-		GLClearError();
-		GLint location = ::glGetUniformLocation(pID, name.c_str());
-		if (not GLTestError("ShaderProgram::bindUniform, glGetUniformLocation"))
+		GLint location = getUniformLocation(name);
+		if (location < 0)
 			return;
 		::glUniform4f(location, value.red, value.green, value.blue, value.alpha);
 	}
@@ -135,9 +127,8 @@ namespace Gfx3D
 
 	inline void ShaderProgram::bindUniform(const AnyString& name, float v1, float v2, float v3, float v4) const
 	{
-		GLClearError();
-		GLint location = ::glGetUniformLocation(pID, name.c_str());
-		if (not GLTestError("ShaderProgram::bindUniform, glGetUniformLocation"))
+		GLint location = getUniformLocation(name);
+		if (location < 0)
 			return;
 		::glUniform4f(location, v1, v2, v3, v4);
 	}
@@ -146,9 +137,8 @@ namespace Gfx3D
 	inline void ShaderProgram::bindUniformArray(const AnyString& name, uint count, uint components,
 		const int* array) const
 	{
-		GLClearError();
-		GLint location = ::glGetUniformLocation(pID, name.c_str());
-		if (not GLTestError("ShaderProgram::bindUniformArray, glGetUniformLocation"))
+		GLint location = getUniformLocation(name);
+		if (location < 0)
 			return;
 		switch (components)
 		{
@@ -173,9 +163,8 @@ namespace Gfx3D
 	inline void ShaderProgram::bindUniformArray(const AnyString& name, uint count, uint components,
 		const float* array) const
 	{
-		GLClearError();
-		GLint location = ::glGetUniformLocation(pID, name.c_str());
-		if (not GLTestError("ShaderProgram::bindUniformArray, glGetUniformLocation"))
+		GLint location = getUniformLocation(name);
+		if (location < 0)
 			return;
 
 		switch (components)
@@ -202,9 +191,8 @@ namespace Gfx3D
 		const uint* array) const
 	{
 		assert(components >= 1 and components <= 4 and "Invalid number of components : must be 1-4.");
-		GLClearError();
-		GLint location = ::glGetUniformLocation(pID, name.c_str());
-		if (not GLTestError("ShaderProgram::bindUniformArray, glGetUniformLocation"))
+		GLint location = getUniformLocation(name);
+		if (location < 0)
 			return;
 		switch (components)
 		{
@@ -235,6 +223,21 @@ namespace Gfx3D
 		if (not GLTestError("ShaderProgram::bindImage, glBindImageTexture"))
 			return;
 		bindUniform(name, value);
+	}
+
+
+	inline int ShaderProgram::getUniformLocation(const AnyString& name) const
+	{
+		GLClearError();
+		auto it = pUniformCache.find(name);
+		if (pUniformCache.end() != it)
+			return it->second;
+
+		GLint location = ::glGetUniformLocation(pID, name.c_str());
+		if (not GLTestError("ShaderProgram::bindUniform, glGetUniformLocation"))
+			return -1;
+		pUniformCache[name] = location;
+		return location;
 	}
 
 
