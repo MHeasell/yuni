@@ -6,6 +6,7 @@
 # include "shader.h"
 # include "texture.h"
 # include "vertex.h"
+# include <map>
 
 namespace Yuni
 {
@@ -21,6 +22,9 @@ namespace Gfx3D
 	public:
 		//! Smart pointer
 		typedef SmartPtr<ShaderProgram>  Ptr;
+
+		//! Cache for name locations in the shader program
+		typedef std::map<String, int>  LocationCache;
 
 	public:
 		//! Constructor
@@ -99,6 +103,10 @@ namespace Gfx3D
 			Vertex<>::Attribute value) const;
 
 	private:
+		//! Get the location of a uniform in the shader
+		int getUniformLocation(const AnyString& name) const;
+
+	private:
 		//! ID of the shader program
 		mutable uint pID;
 
@@ -116,6 +124,9 @@ namespace Gfx3D
 
 		//! Error string storage
 		String pError;
+
+		//! Cache for uniform locations
+		mutable LocationCache pUniformCache;
 
 	}; // class ShaderProgram
 
