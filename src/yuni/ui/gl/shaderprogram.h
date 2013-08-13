@@ -107,10 +107,6 @@ namespace Gfx3D
 			Vertex<>::Attribute value) const;
 
 	private:
-		//! Get the location of a uniform in the shader
-		int getUniformLocation(const AnyString& name) const;
-
-	private:
 		//! ID of the shader program
 		mutable uint pID;
 		//! Is the program already linked ?

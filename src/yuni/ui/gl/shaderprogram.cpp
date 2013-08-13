@@ -8,14 +8,14 @@ namespace Yuni
 namespace Gfx3D
 {
 
-	static inline int GetUniformLocation(ShaderProgram::LocationCache& cache, const AnyString& name)
+	static inline int GetUniformLocation(uint id, ShaderProgram::LocationCache& cache, const AnyString& name)
 	{
 		GLClearError();
 		ShaderProgram::LocationCache::const_iterator it = cache.find(name);
 		if (cache.end() != it)
 			return it->second;
 
-		int location = ::glGetUniformLocation(pID, name.c_str());
+		int location = ::glGetUniformLocation(id, name.c_str());
 		if (not GLTestError("ShaderProgram::bindUniform, glGetUniformLocation"))
 			return -1;
 
@@ -174,7 +174,7 @@ namespace Gfx3D
 
 	void ShaderProgram::bindUniform(const AnyString& name, int value) const
 	{
-		GLint location = GetUniformLocation(pUniformCache, name);
+		GLint location = GetUniformLocation(pID, pUniformCache, name);
 		if (location >= 0)
 		{
 			::glUniform1i(location, value);
@@ -184,14 +184,14 @@ namespace Gfx3D
 
 	void ShaderProgram::bindUniform(const AnyString& name, float value) const
 	{
-		GLint location = GetUniformLocation(pUniformCache, name);
+		GLint location = GetUniformLocation(pID, pUniformCache, name);
 		if (location >= 0)
 			::glUniform1f(location, value);
 	}
 
 	void ShaderProgram::bindUniform(const AnyString& name, uint value) const
 	{
-		GLint location = GetUniformLocation(pUniformCache, name);
+		GLint location = GetUniformLocation(pID, pUniformCache, name);
 		if (location >= 0)
 			::glUniform1ui(location, value);
 	}
@@ -199,7 +199,7 @@ namespace Gfx3D
 
 	void ShaderProgram::bindUniform(const AnyString& name, const Vector3D<int>& value) const
 	{
-		GLint location = GetUniformLocation(pUniformCache, name);
+		GLint location = GetUniformLocation(pID, pUniformCache, name);
 		if (location >= 0)
 			::glUniform3i(location, value.x, value.y, value.z);
 	}
@@ -207,7 +207,7 @@ namespace Gfx3D
 
 	void ShaderProgram::bindUniform(const AnyString& name, const Vector3D<float>& value) const
 	{
-		GLint location = GetUniformLocation(pUniformCache, name);
+		GLint location = GetUniformLocation(pID, pUniformCache, name);
 		if (location >= 0)
 			::glUniform3f(location, value.x, value.y, value.z);
 	}
@@ -215,7 +215,7 @@ namespace Gfx3D
 
 	void ShaderProgram::bindUniform(const AnyString& name, const Vector3D<uint>& value) const
 	{
-		GLint location = GetUniformLocation(pUniformCache, name);
+		GLint location = GetUniformLocation(pID, pUniformCache, name);
 		if (location >= 0)
 			::glUniform3ui(location, value.x, value.y, value.z);
 	}
@@ -223,7 +223,7 @@ namespace Gfx3D
 
 	void ShaderProgram::bindUniform(const AnyString& name, const Color::RGB<float>& value) const
 	{
-		GLint location = GetUniformLocation(pUniformCache, name);
+		GLint location = GetUniformLocation(pID, pUniformCache, name);
 		if (location >= 0)
 			return;
 		::glUniform3f(location, value.red, value.green, value.blue);
@@ -232,7 +232,7 @@ namespace Gfx3D
 
 	void ShaderProgram::bindUniform(const AnyString& name, const Color::RGBA<float>& value) const
 	{
-		GLint location = GetUniformLocation(pUniformCache, name);
+		GLint location = GetUniformLocation(pID, pUniformCache, name);
 		if (location >= 0)
 			::glUniform4f(location, value.red, value.green, value.blue, value.alpha);
 	}
@@ -240,7 +240,7 @@ namespace Gfx3D
 
 	void ShaderProgram::bindUniform(const AnyString& name, float v1, float v2, float v3, float v4) const
 	{
-		GLint location = GetUniformLocation(pUniformCache, name);
+		GLint location = GetUniformLocation(pID, pUniformCache, name);
 		if (location >= 0)
 			::glUniform4f(location, v1, v2, v3, v4);
 	}
@@ -249,7 +249,7 @@ namespace Gfx3D
 	void ShaderProgram::bindUniformArray(const AnyString& name, uint count, uint components,
 		const int* array) const
 	{
-		GLint location = GetUniformLocation(pUniformCache, name);
+		GLint location = GetUniformLocation(pID, pUniformCache, name);
 		if (location < 0)
 			return;
 		switch (components)
@@ -275,7 +275,7 @@ namespace Gfx3D
 	void ShaderProgram::bindUniformArray(const AnyString& name, uint count, uint components,
 		const float* array) const
 	{
-		GLint location = GetUniformLocation(pUniformCache, name);
+		GLint location = GetUniformLocation(pID, pUniformCache, name);
 		if (location < 0)
 			return;
 
@@ -303,7 +303,7 @@ namespace Gfx3D
 		const uint* array) const
 	{
 		assert(components >= 1 and components <= 4 and "Invalid number of components : must be 1-4.");
-		GLint location = GetUniformLocation(pUniformCache, name);
+		GLint location = GetUniformLocation(pID, pUniformCache, name);
 		if (location < 0)
 			return;
 
