@@ -161,14 +161,14 @@ namespace UI
 			{
 				pUISurface = new DrawingSurface(pControl->width(), pControl->height());
 				pUISurface->begin();
-				pControl->draw(pUISurface, true);
+				pControl->draw(pUISurface);
 				pUISurface->commit();
 			}
 			else if (pControl->modified())
 			{
 				pUISurface->resize(pControl->width(), pControl->height());
 				pUISurface->begin();
-				pControl->draw(pUISurface, true);
+				pControl->draw(pUISurface);
 				pUISurface->commit();
 			}
 

@@ -117,7 +117,7 @@ namespace UI
 		void show(bool visible);
 
 		//! Draw the control
-		virtual void draw(DrawingSurface::Ptr& surface, bool root) = 0;
+		virtual void draw(DrawingSurface::Ptr& surface, bool root = true) = 0;
 
 		//! Recursively search for the deepest child control containing the given point
 		IControl* getControlAt(int x, int y);
