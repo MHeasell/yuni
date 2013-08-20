@@ -85,8 +85,6 @@ namespace UI
 		::glPushMatrix();
 		::glLoadIdentity();
 
-		// TexCoord calls are useless when 2D shaders are activated
-		// but they are used when no post-processing effect is present
 		::glBegin(GL_QUADS);
 		::glTexCoord2f(0.0f, 1.0f);
 		::glVertex2f(-1.0f, -1.0f);
@@ -97,6 +95,36 @@ namespace UI
 		::glTexCoord2f(0.0f, 0.0f);
 		::glVertex2f(-1.0f, 1.0f);
 		::glEnd();
+
+		/*
+		// Texture coordinates are useless when 2D shaders are activated
+		// but they are used when no post-processing effect is present
+		const float texCoord[] =
+			{
+				0.0f, 0.0f,
+				0.0f, 1.0f,
+				1.0f, 1.0f,
+				0.0f, 0.0f,
+				1.0f, 1.0f,
+				1.0f, 0.0f
+			};
+		::glEnableVertexAttribArray(Gfx3D::Vertex<>::vaTextureCoord);
+		::glVertexAttribPointer(Gfx3D::Vertex<>::vaTextureCoord, 2, GL_FLOAT, 0, 0, texCoord);
+		// Set vertex positions
+		const float vertices[] =
+			{
+				-1.0f, 1.0f,
+				-1.0f, -1.0f,
+				1.0f, -1.0f,
+				-1.0f, 1.0f,
+				1.0f, -1.0f,
+				1.0f, 1.0f
+			};
+		::glEnableVertexAttribArray(Gfx3D::Vertex<>::vaPosition);
+		::glVertexAttribPointer(Gfx3D::Vertex<>::vaPosition, 2, GL_FLOAT, 0, 0, vertices);
+		// Draw
+		::glDrawArrays(GL_TRIANGLES, 0, 6);
+		*/
 
 		::glMatrixMode(GL_PROJECTION);
 		::glPopMatrix();

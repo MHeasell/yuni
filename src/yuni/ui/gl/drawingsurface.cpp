@@ -146,9 +146,12 @@ namespace UI
 		pImpl->baseShader->activate();
 
 		// Clip on drawing surface
-		::glPushAttrib(GL_ENABLE_BIT);
-		::glEnable(GL_SCISSOR_TEST);
+		::glPushAttrib(GL_ENABLE_BIT | GL_VIEWPORT_BIT);
+		//::glEnable(GL_SCISSOR_TEST);
 		::glEnable(GL_BLEND);
+
+		::glViewport(0, 0, pImpl->size.x, pImpl->size.y);
+
 		clear();
 	}
 
@@ -264,11 +267,11 @@ namespace UI
 			frontColor.red, frontColor.green, frontColor.blue, frontColor.alpha, .0f, .0f, true);
 		// Bottom line
 		line((double)x, (double)(y + height) - lineWidth,
-			(double)(x + width), (double)(y + height) - lineWidth, lineWidth,
-			 frontColor.red, frontColor.green, frontColor.blue, frontColor.alpha, .0f, .0f, true);
+		 	(double)(x + width), (double)(y + height) - lineWidth, lineWidth,
+		 	 frontColor.red, frontColor.green, frontColor.blue, frontColor.alpha, .0f, .0f, true);
 		// Left line
 		line((double)x, (double)y, (double)x, (double)(y + height), lineWidth,
-			frontColor.red, frontColor.green, frontColor.blue, frontColor.alpha, .0f, .0f, true);
+		 	frontColor.red, frontColor.green, frontColor.blue, frontColor.alpha, .0f, .0f, true);
 		// Right line
 		line((double)(x + width) - lineWidth, (double)y,
 			(double)(x + width) - lineWidth, (double)(y + height), lineWidth,

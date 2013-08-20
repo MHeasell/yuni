@@ -84,20 +84,20 @@ namespace UI
 
 		float A = alphablend ? Br : 1.0f;
 
-		double f = w - static_cast<int>(w);
+		float f = w - static_cast<int>(w);
 
 		//determine parameters t,R
 		double t;
 		double R;
-		if (w >= 0.0 && w < 1.0)
+		if (w >= 0.0f && w < 1.0f)
 		{
 			t = 0.05;
 			R = 0.48 + 0.32 * f;
 			if (not alphablend)
 			{
-				Cr += 0.88 * (1 - f);
-				Cg += 0.88 * (1 - f);
-				Cb += 0.88 * (1 - f);
+				Cr += 0.88f * (1.0f - f);
+				Cg += 0.88f * (1.0f - f);
+				Cb += 0.88f * (1.0f - f);
 				if (Cr > 1.0)
 					Cr = 1.0;
 				if (Cg > 1.0)
@@ -110,34 +110,34 @@ namespace UI
 				A *= f;
 			}
 		}
-		else if (w >= 1.0 && w < 2.0)
+		else if (w >= 1.0f && w < 2.0f)
 		{
 			t = 0.05 + f * 0.33;
 			R = 0.768 + 0.312 * f;
 		}
-		else if (w >= 2.0 && w < 3.0)
+		else if (w >= 2.0f && w < 3.0f)
 		{
 			t = 0.38 + f * 0.58;
 			R = 1.08;
 		}
-		else if (w >= 3.0 && w < 4.0)
+		else if (w >= 3.0f && w < 4.0f)
 		{
 			t = 0.96 + f * 0.48;
 			R = 1.08;
 		}
-		else if (w >= 4.0 && w < 5.0)
+		else if (w >= 4.0f && w < 5.0f)
 		{
 			t = 1.44 + f * 0.46;
 			R = 1.08;
 		}
-		else if (w >= 5.0 && w < 6.0)
+		else if (w >= 5.0f && w < 6.0f)
 		{
 			t = 1.9 + f * 0.6;
 			R = 1.08;
 		}
-		else if (w >= 6.0)
+		else if (w >= 6.0f)
 		{
-			double ff = w - 6.0;
+			float ff = w - 6.0f;
 			t = 2.5 + ff * 0.50;
 			R = 1.08;
 		}
@@ -159,7 +159,7 @@ namespace UI
 			Ry = 0;
 			if (w > 0.0 && w < 1.0)
 				tx *= 8;
-			else if (w == 1.0)
+			else if (Math::Equals(w, 1.0f))
 				tx *= 10;
 		}
 		else if (Math::Abs(dy) < ALW)
@@ -171,7 +171,7 @@ namespace UI
 			Ry = R;
 			if (w > 0.0 && w < 1.0)
 				ty *= 8;
-			else if (w == 1.0)
+			else if (Math::Equals(w, 1.0f))
 				ty *= 10;
 		}
 		else
