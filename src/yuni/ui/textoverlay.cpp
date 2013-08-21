@@ -25,7 +25,7 @@ namespace UI
 	}
 
 
-	void TextOverlay::draw(const Gfx3D::ShaderProgram::Ptr& shader) const
+	void TextOverlay::draw(const Gfx3D::ShaderProgram::Ptr& shader, bool flip) const
 	{
 		if (!shader || !shader->valid() || !pTexture)
 			return;
@@ -39,18 +39,36 @@ namespace UI
 		pMaterial->activate(shader, 1);
 
 		// Set texture coordinates
-		const float texCoord[] =
-			{
-				0.0f, 1.0f,
-				0.0f, 0.0f,
-				1.0f, 0.0f,
-				0.0f, 1.0f,
-				1.0f, 0.0f,
-				1.0f, 1.0f
-			};
 		::glEnableVertexAttribArray(Gfx3D::Vertex<>::vaTextureCoord);
-		::glVertexAttribPointer(Gfx3D::Vertex<>::vaTextureCoord, 2, GL_FLOAT, 0, 0, texCoord);
+		if (flip)
+		{
+			const float texCoord[] =
+				{
+					0.0f, 0.0f,
+					0.0f, 1.0f,
+					1.0f, 1.0f,
+					0.0f, 0.0f,
+					1.0f, 1.0f,
+					1.0f, 0.0f
+				};
+			::glVertexAttribPointer(Gfx3D::Vertex<>::vaTextureCoord, 2, GL_FLOAT, 0, 0, texCoord);
+		}
+		else
+		{
+			const float texCoord[] =
+				{
+					0.0f, 1.0f,
+					0.0f, 0.0f,
+					1.0f, 0.0f,
+					0.0f, 1.0f,
+					1.0f, 0.0f,
+					1.0f, 1.0f
+				};
+			::glVertexAttribPointer(Gfx3D::Vertex<>::vaTextureCoord, 2, GL_FLOAT, 0, 0, texCoord);
+		}
+
 		// Set vertex positions
+		::glEnableVertexAttribArray(Gfx3D::Vertex<>::vaPosition);
 		const float vertices[] =
 			{
 				(float)pX, (float)(pY + height()),
@@ -60,7 +78,6 @@ namespace UI
 				(float)(pX + width()), (float)pY,
 				(float)(pX + width()), (float)(pY + height())
 			};
-		::glEnableVertexAttribArray(Gfx3D::Vertex<>::vaPosition);
 		::glVertexAttribPointer(Gfx3D::Vertex<>::vaPosition, 2, GL_FLOAT, 0, 0, vertices);
 		// Draw
 		::glDrawArrays(GL_TRIANGLES, 0, 6);

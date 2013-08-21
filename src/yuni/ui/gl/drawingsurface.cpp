@@ -4,6 +4,7 @@
 # include "framebuffer.h"
 # include "shadermanager.h"
 # include "linerenderer.h"
+# include "../textoverlay.h"
 # include <vector>
 
 namespace Yuni
@@ -50,6 +51,12 @@ namespace UI
 		//! Shader program used to draw everything else in the drawing surface
 		Gfx3D::ShaderProgram::Ptr baseShader;
 
+		//! Shader program used to draw text
+		Gfx3D::ShaderProgram::Ptr textShader;
+
+		//! A texture overlay used for text rendering, reused for all kinds of text
+		TextOverlay text;
+
 	}; // class DrawingSurfaceImpl
 
 
@@ -95,6 +102,26 @@ namespace UI
 				lineShader = nullptr;
 			}
 		}
+
+		textShader = Gfx3D::ShaderManager::Instance().get("data/shaders/minimal.vert", "data/shaders/text.frag");
+		if (!textShader)
+		{
+			std::cerr << "Shader loading or compilation for line drawing failed !" << std::endl;
+			textShader = nullptr;
+			return;
+		}
+		else
+		{
+			textShader->bindAttribute("attrVertex", Gfx3D::Vertex<>::vaPosition);
+			textShader->bindAttribute("attrColor", Gfx3D::Vertex<>::vaColor);
+			if (!lineShader->load())
+			{
+				std::cerr << "Shader program link for text drawing failed !" << std::endl
+						  << textShader->errorMessage() << std::endl;
+				textShader = nullptr;
+			}
+		}
+
 	}
 
 
@@ -147,7 +174,7 @@ namespace UI
 
 		// Clip on drawing surface
 		::glPushAttrib(GL_ENABLE_BIT | GL_VIEWPORT_BIT);
-		//::glEnable(GL_SCISSOR_TEST);
+		::glEnable(GL_SCISSOR_TEST);
 		::glEnable(GL_BLEND);
 
 		::glViewport(0, 0, pImpl->size.x, pImpl->size.y);
@@ -159,7 +186,6 @@ namespace UI
 	void DrawingSurface::commit()
 	{
 		assert(pImpl->locked && "DrawingSurface error : Cannot commit on an unlocked surface ! (try calling the begin() function)");
-		//endClipping();
 		assert(pImpl->clippings.empty() && "DrawingSurface commit : Too few endClipping() calls, stack is not empty !");
 		pImpl->locked = false;
 
@@ -192,6 +218,7 @@ namespace UI
 	void DrawingSurface::clear()
 	{
 		assert(pImpl->locked && "DrawingSurface error : Cannot clear an unlocked surface !");
+		// Clear to full transparent
 		::glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		::glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
@@ -207,21 +234,64 @@ namespace UI
 	}
 
 
-	void DrawingSurface::drawText(const String& text, const Font::Ptr& font,
+	void DrawingSurface::drawText(const String& text, const FTFont::Ptr& font,
 		const Color::RGBA<float>& color, int x, int y)
 	{
 		assert(pImpl->locked && "DrawingSurface error : Cannot draw to an unlocked surface !");
-		// TODO
+
+		if (text.empty())
+			return;
+
+		auto& overlay = pImpl->text;
+		overlay.clear() << text;
+		overlay.font(font);
+		overlay.color(color);
+		overlay.move(x, y);
+
+		// Update
+		overlay.update();
+		if (!overlay.width() || !overlay.height())
+			return;
+		// Draw
+		overlay.draw(pImpl->textShader, true);
+		// Restore base shader
+		pImpl->baseShader->activate();
 	}
 
 
-	void DrawingSurface::drawTextInRect(const String& text, const Font::Ptr& font,
-		const Color::RGBA<float>& color, int x, int y, uint width, uint height)
+	void DrawingSurface::drawTextInRect(const String& text, const FTFont::Ptr& font,
+		const Color::RGBA<float>& color, int x, int y, uint width, uint height, bool clip)
 	{
 		assert(pImpl->locked && "DrawingSurface error : Cannot draw to an unlocked surface !");
-		beginRectangleClipping(x, y, width, height);
-		drawText(text, font, color, x, y);
-		endClipping();
+
+		if (text.empty() || !width || !height)
+			return;
+
+		if (clip)
+			beginRectangleClipping(x, y, width, height);
+
+		auto& overlay = pImpl->text;
+		overlay.clear() << text;
+		overlay.font(font);
+		overlay.color(color);
+		// Update to get the correct necessary size
+		overlay.update();
+
+		if (!overlay.width() || !overlay.height())
+			return;
+		int middleX = width / 2;
+		int middleY = height / 2;
+		// Moving does not require to call update() again
+		overlay.move(x + middleX - overlay.width() / 2, y + middleY - overlay.height() / 2);
+
+		// Draw
+		overlay.draw(pImpl->textShader, true);
+
+		// Restore base shader
+		pImpl->baseShader->activate();
+
+		if (clip)
+			endClipping();
 	}
 
 
@@ -229,12 +299,19 @@ namespace UI
 		int endX, int endY, float lineWidth)
 	{
 		assert(pImpl->locked && "DrawingSurface error : Cannot draw to an unlocked surface !");
-		::glEnableClientState(GL_VERTEX_ARRAY);
-		::glEnableClientState(GL_COLOR_ARRAY);
+
 		line((double)startX, (double)startY, (double)endX, (double)endY, lineWidth,
-			 color.red, color.green, color.blue, color.alpha, 0, 0, true);
-		::glDisableClientState(GL_VERTEX_ARRAY);
-		::glDisableClientState(GL_COLOR_ARRAY);
+			 color.red, color.green, color.blue, color.alpha, 0, 0, 0, 0, true);
+	}
+
+	void DrawingSurface::drawLine(const Color::RGBA<float>& color, const Color::RGBA<float>& bgColor,
+		int startX, int startY, int endX, int endY, float lineWidth)
+	{
+		assert(pImpl->locked && "DrawingSurface error : Cannot draw to an unlocked surface !");
+
+		line((double)startX, (double)startY, (double)endX, (double)endY, lineWidth,
+			 color.red, color.green, color.blue, color.alpha,
+			 bgColor.red, bgColor.green, bgColor.blue, bgColor.alpha, true);
 	}
 
 
@@ -264,18 +341,22 @@ namespace UI
 
 		// Top line
 		line((double)x, (double)y, (double)(x + width), (double)y, lineWidth,
-			frontColor.red, frontColor.green, frontColor.blue, frontColor.alpha, .0f, .0f, true);
+			frontColor.red, frontColor.green, frontColor.blue, frontColor.alpha,
+			backColor.red, backColor.green, backColor.blue, backColor.alpha, true);
 		// Bottom line
 		line((double)x, (double)(y + height) - lineWidth,
 		 	(double)(x + width), (double)(y + height) - lineWidth, lineWidth,
-		 	 frontColor.red, frontColor.green, frontColor.blue, frontColor.alpha, .0f, .0f, true);
+			frontColor.red, frontColor.green, frontColor.blue, frontColor.alpha,
+			backColor.red, backColor.green, backColor.blue, backColor.alpha, true);
 		// Left line
 		line((double)x, (double)y, (double)x, (double)(y + height), lineWidth,
-		 	frontColor.red, frontColor.green, frontColor.blue, frontColor.alpha, .0f, .0f, true);
+			frontColor.red, frontColor.green, frontColor.blue, frontColor.alpha,
+			backColor.red, backColor.green, backColor.blue, backColor.alpha, true);
 		// Right line
 		line((double)(x + width) - lineWidth, (double)y,
 			(double)(x + width) - lineWidth, (double)(y + height), lineWidth,
-			frontColor.red, frontColor.green, frontColor.blue, frontColor.alpha, .0f, .0f, true);
+			frontColor.red, frontColor.green, frontColor.blue, frontColor.alpha,
+			backColor.red, backColor.green, backColor.blue, backColor.alpha, true);
 
 		pImpl->baseShader->activate();
 	}
@@ -284,6 +365,7 @@ namespace UI
 	void DrawingSurface::beginRectangleClipping(int x, int y, uint width, uint height)
 	{
 		assert(pImpl->locked && "DrawingSurface error : Cannot manage clipping on an unlocked surface !");
+		std::cout << "Scissoring at " << x << "," << y << " with a " << width << "x" << height << " box" << std::endl;
 		::glScissor(x, y, width, height);
 		pImpl->clippings.push_back(DrawingSurfaceImpl::ClipCoord(Point2D<int>(x, y), Point2D<int>(width, height)));
 	}
@@ -297,6 +379,8 @@ namespace UI
 		{
 			// Reapply previous clipping
 			const auto& coord = pImpl->clippings.back();
+			std::cout << "Restoring scissoring at " << coord.first.x << "," << coord.first.y
+					  << " with a " << coord.second.x << "x" << coord.second.y << " box" << std::endl;
 			::glScissor(coord.first.x, coord.first.y, coord.second.x, coord.second.y);
 		}
 	}

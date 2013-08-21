@@ -23,7 +23,7 @@ namespace Control
 		surface->drawRectangle(theme.borderColor, theme.buttonColor,
 			pos.x, pos.y, pSize.x, pSize.y, theme.borderWidth);
 		surface->drawTextInRect(pText, theme.font, theme.textColor, pos.x, pos.y,
-			pSize.x, pSize.y);
+			pSize.x, pSize.y, false);
 		pModified = false;
 	}
 
