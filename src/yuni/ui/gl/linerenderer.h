@@ -71,8 +71,8 @@ namespace UI
 	*/
 	void line( double x1, double y1, double x2, double y2, //coordinates of the line
 			   float w,			//width/thickness of the line in pixel
-			   float Cr, float Cg, float Cb,	//RGB color components
-			   float Br, float Bg, float Bb,	//color of background when alphablend=false,
+			   float Cr, float Cg, float Cb, float Ca,	//RGBA color components
+			   float Br, float Bg, float Bb, float Ba,	//color of background,
 			   //  Br=alpha of color when alphablend=true
 			   bool alphablend)		//use alpha blend or not
 	{
@@ -82,7 +82,8 @@ namespace UI
 		::glEnableVertexAttribArray(Gfx3D::Vertex<>::vaPosition);
 		::glEnableVertexAttribArray(Gfx3D::Vertex<>::vaColor);
 
-		float A = alphablend ? Br : 1.0f;
+		//float A = alphablend ? Br : 1.0f;
+		float A = Ca;
 
 		float f = w - static_cast<int>(w);
 
@@ -247,7 +248,6 @@ namespace UI
 			x2+tx+Rx, y2+ty+Ry
 		};
 		::glVertexAttribPointer(Gfx3D::Vertex<>::vaPosition, 2, GL_FLOAT, false, 0, line_vertex);
-		//::glVertexPointer(2, GL_FLOAT, 0, line_vertex);
 
 		if (not alphablend)
 		{
@@ -263,7 +263,6 @@ namespace UI
 				Br,Bg,Bb
 			};
 			::glVertexAttribPointer(Gfx3D::Vertex<>::vaColor, 3, GL_FLOAT, false, 0, line_color);
-			//::glColorPointer(3, GL_FLOAT, 0, line_color);
 		}
 		else
 		{
@@ -279,7 +278,6 @@ namespace UI
 				Cr,Cg,Cb,0
 			};
 			::glVertexAttribPointer(Gfx3D::Vertex<>::vaColor, 4, GL_FLOAT, false, 0, line_color);
-			//::glColorPointer(4, GL_FLOAT, 0, line_color);
 		}
 
 		if ((Math::Abs(dx) < ALW || Math::Abs(dy) < ALW) && w <= 1.0)

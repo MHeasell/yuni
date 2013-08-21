@@ -51,7 +51,7 @@ namespace UI
 		void update();
 
 		//! Draw the text using the given shader
-		void draw(const Gfx3D::ShaderProgram::Ptr& shader) const;
+		void draw(const Gfx3D::ShaderProgram::Ptr& shader, bool flip = false) const;
 
 		//! Clear the text
 		String& clear();

@@ -6,7 +6,7 @@
 # include "../../core/color/rgba.h"
 # include "../../core/point2D.h"
 # include <cassert>
-# include "../font.h"
+# include "../ftfont.h"
 # include "texture.h"
 
 namespace Yuni
@@ -51,16 +51,20 @@ namespace UI
 		void resize(uint width, uint height);
 
 		//! Draw text on the surface
-		void drawText(const String& text, const Font::Ptr& font, const Color::RGBA<float>& color,
+		void drawText(const String& text, const FTFont::Ptr& font, const Color::RGBA<float>& color,
 			int x, int y);
 
 		//! Draw text on the surface, centered and clipped in a rectangle
-		void drawTextInRect(const String& text, const Font::Ptr& font,
-			const Color::RGBA<float>& color, int x, int y, uint width, uint height);
+		void drawTextInRect(const String& text, const FTFont::Ptr& font,
+			const Color::RGBA<float>& color, int x, int y, uint width, uint height, bool clip = true);
 
-		//! Draw text on the surface
+		//! Draw an anti-aliased line on the surface
 		void drawLine(const Color::RGBA<float>& color, int startX, int startY, int endX, int endY,
 			float lineWidth);
+
+		//! Draw a line anti-aliased with a given background color
+		void drawLine(const Color::RGBA<float>& color, const Color::RGBA<float>& bgColor,
+			int startX, int startY, int endX, int endY, float lineWidth);
 
 		//! Draw a rectangle on the surface
 		void drawRectangle(const Color::RGBA<float>& frontColor, const Color::RGBA<float>& backColor,
