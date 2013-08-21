@@ -1838,7 +1838,7 @@ namespace Yuni
 		** String t = "a, b, c";
 		** t.words(" ,\t\r\n", [&] (const AnyString& word) -> bool
 		** {
-		**	std::cout << word << std::endl; // 3 elements
+		**	std::cout << word << std::endl; // 3 elements : 'a', 'b' and 'c'
 		**	return true; // continue to the next token
 		** });
 		** \endcode
@@ -1849,7 +1849,7 @@ namespace Yuni
 		** t.words(",", [&] (AnyString& word) -> bool
 		** {
 		**	word.trim();
-		**	std::cout << word << std::endl; // 4 elements
+		**	std::cout << word << std::endl; // 4 elements : 'a', ' b', '' and ' d' (without the trim)
 		**	return true; // continue to the next token
 		** });
 		** \endcode
