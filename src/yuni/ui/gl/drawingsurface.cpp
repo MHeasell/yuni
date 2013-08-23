@@ -253,7 +253,7 @@ namespace UI
 		if (!overlay.width() || !overlay.height())
 			return;
 		// Draw
-		overlay.draw(pImpl->textShader, true);
+		overlay.draw(pImpl->textShader);
 		// Restore base shader
 		pImpl->baseShader->activate();
 	}
@@ -285,7 +285,7 @@ namespace UI
 		overlay.move(x + middleX - overlay.width() / 2, y + middleY - overlay.height() / 2);
 
 		// Draw
-		overlay.draw(pImpl->textShader, true);
+		overlay.draw(pImpl->textShader);
 
 		// Restore base shader
 		pImpl->baseShader->activate();

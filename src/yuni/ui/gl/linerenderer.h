@@ -249,36 +249,48 @@ namespace UI
 		};
 		::glVertexAttribPointer(Gfx3D::Vertex<>::vaPosition, 2, GL_FLOAT, false, 0, line_vertex);
 
-		if (not alphablend)
+		// if (not alphablend)
+		// {
+		// 	float line_color[] =
+		// 	{
+		// 		Br,Bg,Bb,
+		// 		Br,Bg,Bb,
+		// 		Cr,Cg,Cb,
+		// 		Cr,Cg,Cb,
+		// 		Cr,Cg,Cb,
+		// 		Cr,Cg,Cb,
+		// 		Br,Bg,Bb,
+		// 		Br,Bg,Bb
+		// 	};
+		// 	::glVertexAttribPointer(Gfx3D::Vertex<>::vaColor, 3, GL_FLOAT, false, 0, line_color);
+		// }
+		// else
+		// {
+		// 	float line_color[] =
+		// 	{
+		// 		Cr,Cg,Cb,0,
+		// 		Cr,Cg,Cb,0,
+		// 		Cr,Cg,Cb,A,
+		// 		Cr,Cg,Cb,A,
+		// 		Cr,Cg,Cb,A,
+		// 		Cr,Cg,Cb,A,
+		// 		Cr,Cg,Cb,0,
+		// 		Cr,Cg,Cb,0
+		// 	};
+		// 	::glVertexAttribPointer(Gfx3D::Vertex<>::vaColor, 4, GL_FLOAT, false, 0, line_color);
+		// }
+		float line_color[] =
 		{
-			float line_color[] =
-			{
-				Br,Bg,Bb,
-				Br,Bg,Bb,
-				Cr,Cg,Cb,
-				Cr,Cg,Cb,
-				Cr,Cg,Cb,
-				Cr,Cg,Cb,
-				Br,Bg,Bb,
-				Br,Bg,Bb
-			};
-			::glVertexAttribPointer(Gfx3D::Vertex<>::vaColor, 3, GL_FLOAT, false, 0, line_color);
-		}
-		else
-		{
-			float line_color[] =
-			{
-				Cr,Cg,Cb,0,
-				Cr,Cg,Cb,0,
-				Cr,Cg,Cb,A,
-				Cr,Cg,Cb,A,
-				Cr,Cg,Cb,A,
-				Cr,Cg,Cb,A,
-				Cr,Cg,Cb,0,
-				Cr,Cg,Cb,0
-			};
-			::glVertexAttribPointer(Gfx3D::Vertex<>::vaColor, 4, GL_FLOAT, false, 0, line_color);
-		}
+			Br,Bg,Bb,Ba,
+			Br,Bg,Bb,Ba,
+			Cr,Cg,Cb,Ca,
+			Cr,Cg,Cb,Ca,
+			Cr,Cg,Cb,Ca,
+			Cr,Cg,Cb,Ca,
+			Br,Bg,Bb,Ba,
+			Br,Bg,Bb,Ba
+		};
+		::glVertexAttribPointer(Gfx3D::Vertex<>::vaColor, 4, GL_FLOAT, false, 0, line_color);
 
 		if ((Math::Abs(dx) < ALW || Math::Abs(dy) < ALW) && w <= 1.0)
 		{

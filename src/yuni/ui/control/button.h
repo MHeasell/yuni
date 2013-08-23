@@ -25,7 +25,7 @@ namespace Control
 			IControl(x, y, width, height)
 		{}
 
-		Button(const Point2D<>& position, const Point2D<>& size):
+		Button(const Point2D<>& position, const Point2D<uint>& size):
 			IControl(position, size)
 		{}
 
