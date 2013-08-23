@@ -11,7 +11,7 @@ namespace UI
 
 	Theme::Theme():
 		font(new FTFont("data/fonts/OpenSans-Light.ttf", 12)),
-		textColor(1.0f, 0.0f, 0.0f),
+		textColor(1.0f, 0.0f, 0.0f, 1.0f),
  		windowColor(0.2274f, 0.3804f, 0.5412f, 0.8f), // (58, 97, 138) 80% alpha
 		buttonColor(0.2863f, 0.5451f, 0.651f), // (73, 139, 166)
 		buttonColorDisabled(0.2863f, 0.5451f, 0.651f), // (103, 120, 139)

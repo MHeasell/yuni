@@ -89,6 +89,7 @@ namespace UI
 
 	EventPropagation IControl::doMouseMove(int x, int y)
 	{
+		// Get the stack of controls under the (x,y) point
 		std::vector<IControl*> stack;
 		getControlStackAt(x, y, stack);
 		EventPropagation finalProp = epContinue;
@@ -96,17 +97,23 @@ namespace UI
 		{
 			IControl* child = stack.back();
 			stack.pop_back();
+			// Allow the control to react to the event before the callback
+			child->mouseMove(x, y);
+			// Event callback
 			EventPropagation prop = child->onMouseMove(child, x, y);
 			if (epStop == prop)
 				return epStop;
 			else if (prop > finalProp)
 				finalProp = prop;
-			prop = onMouseMove(this, x, y);
-			if (epStop == prop)
-				return epStop;
-			else if (prop > finalProp)
-				finalProp = prop;
 		}
+		// Allow the control to react to the event before the callback
+		mouseMove(x, y);
+		// Event callback on the root control
+		EventPropagation prop = onMouseMove(this, x, y);
+		if (epStop == prop)
+			return epStop;
+		else if (prop > finalProp)
+			finalProp = prop;
 		return finalProp;
 	}
 
@@ -119,17 +126,19 @@ namespace UI
 		{
 			IControl* child = stack.back();
 			stack.pop_back();
+			child->mouseDown(btn, x, y);
 			EventPropagation prop = child->onMouseDown(child, btn, x, y);
 			if (epStop == prop)
 				return epStop;
 			else if (prop > finalProp)
 				finalProp = prop;
-			prop = onMouseDown(this, btn, x, y);
-			if (epStop == prop)
-				return epStop;
-			else if (prop > finalProp)
-				finalProp = prop;
 		}
+		mouseDown(btn, x, y);
+		EventPropagation prop = onMouseDown(this, btn, x, y);
+		if (epStop == prop)
+			return epStop;
+		else if (prop > finalProp)
+			finalProp = prop;
 		return finalProp;
 	}
 
@@ -142,17 +151,19 @@ namespace UI
 		{
 			IControl* child = stack.back();
 			stack.pop_back();
+			child->mouseUp(btn, x, y);
 			EventPropagation prop = child->onMouseUp(child, btn, x, y);
 			if (epStop == prop)
 				return epStop;
 			else if (prop > finalProp)
 				finalProp = prop;
-			prop = onMouseUp(this, btn, x, y);
-			if (epStop == prop)
-				return epStop;
-			else if (prop > finalProp)
-				finalProp = prop;
 		}
+		mouseUp(btn, x, y);
+		EventPropagation prop = onMouseUp(this, btn, x, y);
+		if (epStop == prop)
+			return epStop;
+		else if (prop > finalProp)
+			finalProp = prop;
 		return finalProp;
 	}
 

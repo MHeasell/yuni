@@ -175,7 +175,7 @@ namespace UI
 			if (pPictureShaders and pPictureShaders->valid())
 			{
 				drawPicture(pUISurface->texture(), pControl->x(), pControl->y(),
-					pControl->width(), pControl->height());
+					pControl->width(), pControl->height(), true);
 			}
 		}
 
@@ -207,7 +207,7 @@ namespace UI
 	}
 
 
-	void View::drawPicture(const Gfx3D::Texture::Ptr& texture, int x, int y, unsigned int width, unsigned int height) const
+	void View::drawPicture(const Gfx3D::Texture::Ptr& texture, int x, int y, unsigned int width, unsigned int height, bool flip) const
 	{
 		if (!texture)
 			return;
@@ -219,18 +219,36 @@ namespace UI
 		pPictureShaders->bindUniform("Texture0", Yuni::Gfx3D::Vertex<>::vaTexture0);
 
 		// Set texture coordinates
-		const float texCoord[] =
-			{
-				0.0f, 1.0f,
-				0.0f, 0.0f,
-				1.0f, 0.0f,
-				0.0f, 1.0f,
-				1.0f, 0.0f,
-				1.0f, 1.0f
-			};
 		::glEnableVertexAttribArray(Gfx3D::Vertex<>::vaTextureCoord);
-		::glVertexAttribPointer(Gfx3D::Vertex<>::vaTextureCoord, 2, GL_FLOAT, 0, 0, texCoord);
+		if (flip)
+		{
+			const float texCoord[] =
+				{
+					0.0f, 0.0f,
+					0.0f, 1.0f,
+					1.0f, 1.0f,
+					0.0f, 0.0f,
+					1.0f, 1.0f,
+					1.0f, 0.0f
+				};
+			::glVertexAttribPointer(Gfx3D::Vertex<>::vaTextureCoord, 2, GL_FLOAT, 0, 0, texCoord);
+		}
+		else
+		{
+			const float texCoord[] =
+				{
+					0.0f, 1.0f,
+					0.0f, 0.0f,
+					1.0f, 0.0f,
+					0.0f, 1.0f,
+					1.0f, 0.0f,
+					1.0f, 1.0f
+				};
+			::glVertexAttribPointer(Gfx3D::Vertex<>::vaTextureCoord, 2, GL_FLOAT, 0, 0, texCoord);
+		}
+
 		// Set vertices
+		::glEnableVertexAttribArray(Gfx3D::Vertex<>::vaPosition);
 		const float vertices[] =
 			{
 				(float)x, (float)(y + height),
@@ -240,8 +258,8 @@ namespace UI
 				(float)(x + width), (float)y,
 				(float)(x + width), (float)(y + height)
 			};
-		::glEnableVertexAttribArray(Gfx3D::Vertex<>::vaPosition);
 		::glVertexAttribPointer(Gfx3D::Vertex<>::vaPosition, 2, GL_FLOAT, 0, 0, vertices);
+
 		// Draw
 		::glDrawArrays(GL_TRIANGLES, 0, 6);
 		// Clean up

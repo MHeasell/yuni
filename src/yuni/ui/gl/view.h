@@ -139,7 +139,8 @@ namespace UI
 		void drawOverlay(const PictureOverlay& text) const;
 
 		//! Draw a texture at the given coordinates (in pixels)
-		void drawPicture(const Gfx3D::Texture::Ptr& texture, int x, int y, unsigned int width, unsigned int height) const;
+		void drawPicture(const Gfx3D::Texture::Ptr& texture, int x, int y, unsigned int width,
+			unsigned int height, bool flip = false) const;
 
 		//! Draw all 2D elements : overlays and UI
 		void draw2D() const;

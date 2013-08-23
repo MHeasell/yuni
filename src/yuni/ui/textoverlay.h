@@ -51,7 +51,7 @@ namespace UI
 		void update();
 
 		//! Draw the text using the given shader
-		void draw(const Gfx3D::ShaderProgram::Ptr& shader, bool flip = false) const;
+		void draw(const Gfx3D::ShaderProgram::Ptr& shader) const;
 
 		//! Clear the text
 		String& clear();
@@ -115,7 +115,7 @@ namespace UI
 		//! Font to use
 		FTFont::Ptr pFont;
 
-		//! Color to use
+		//! Text color
 		Color::RGBA<float> pColor;
 
 		//! Material

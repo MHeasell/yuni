@@ -28,10 +28,10 @@ namespace Control
 		// Draw the cross if the box is checked
 		if (pChecked)
 		{
-			surface->drawLine(theme.borderColor, pos.x, pos.y,
+			surface->drawLine(theme.borderColor, theme.buttonColor, pos.x, pos.y,
 				pos.x + theme.checkBoxSize, pos.y + theme.checkBoxSize, theme.borderWidth);
-			surface->drawLine(theme.borderColor, pos.x + theme.checkBoxSize, pos.y,
-				pos.x, pos.y + theme.checkBoxSize, theme.borderWidth);
+			surface->drawLine(theme.borderColor, theme.buttonColor, pos.x + theme.checkBoxSize,
+				pos.y, pos.x, pos.y + theme.checkBoxSize, theme.borderWidth);
 		}
 		// Draw the label
 		surface->drawText(pText, theme.font, theme.textColor,
