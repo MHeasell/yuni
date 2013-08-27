@@ -926,6 +926,9 @@ namespace UI
 
 	bool WGLWindow::loop()
 	{
+		if (!pHWnd || !pHRC)
+			return false;
+
 		MSG msg;
 		if (::PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
 		{
@@ -958,8 +961,8 @@ namespace UI
 		if (pHDC and !ReleaseDC(pHWnd, pHDC))
 		{
 			std::cerr << "Window closing error : Device Context release failed." << std::endl;
-			pHDC = nullptr;
 		}
+		pHDC = nullptr;
 
 		// Remove reference to the window at the last possible moment
 		UnregisterWindow(pHWnd);
@@ -968,8 +971,8 @@ namespace UI
 		if (pHWnd and !DestroyWindow(pHWnd))
 		{
 			std::cerr << "Window closing error : Could not destroy window !" << std::endl;
-			pHWnd = nullptr;
 		}
+		pHWnd = nullptr;
 	}
 
 
@@ -983,8 +986,8 @@ namespace UI
 		if (pHRC and !::wglDeleteContext(pHRC))
 		{
 			std::cerr << "Window closing error : Rendering Context release failed !" << std::endl;
-			pHRC = nullptr;
 		}
+		pHRC = nullptr;
 	}
 
 
