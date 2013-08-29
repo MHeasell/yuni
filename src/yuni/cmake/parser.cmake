@@ -16,12 +16,10 @@ source_group("Parser\\Private" FILES ${SRC_PRIVATE_PARSER})
 
 
 set(SRC_PARSER
-	parser/charset.h
-	parser/charset.hxx
-	parser/charsets.h
-	parser/charsets.cpp
-	parser/charsets.hxx
-	parser/grammar.h
+	parser/generator/rule/list.h
+	parser/generator/rule/rule.h
+	parser/generator/rule/rule.hxx
+	parser/generator/variable.h
 )
 source_group("Parser" FILES ${SRC_PARSER})
 
