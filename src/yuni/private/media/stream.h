@@ -103,6 +103,9 @@ namespace Media
 		*/
 		Frame::Ptr nextFrame();
 
+		//! Rewind the stream
+		void rewind();
+
 		/*!
 		** \brief Is the stream ready for decoding ?
 		**
