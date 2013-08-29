@@ -20,6 +20,7 @@ namespace Control
 		// If the button is the root control, use absolute coordinates
 		if (root)
 			pos(0, 0);
+		surface->beginRectangleClipping(pos.x, pos.y, theme.checkBoxSize, theme.checkBoxSize);
 		// Draw the check box
 		surface->drawRectangle(theme.borderColor, theme.buttonColor,
 			pos.x, pos.y, theme.checkBoxSize, theme.checkBoxSize, theme.borderWidth);
@@ -33,6 +34,7 @@ namespace Control
 			surface->drawLine(theme.borderColor, theme.buttonColor, pos.x + theme.checkBoxSize,
 				pos.y, pos.x, pos.y + theme.checkBoxSize, theme.borderWidth);
 		}
+		surface->endClipping();
 		// Draw the label
 		surface->drawText(pText, theme.font, theme.textColor,
 			pos.x + theme.checkBoxSize + theme.margin, pos.y);

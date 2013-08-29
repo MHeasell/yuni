@@ -20,9 +20,9 @@ namespace Control
 		// If the window is the root control, use absolute coordinates
 		if (root)
 			pos(0, 0);
+		surface->beginRectangleClipping(pos.x, pos.y, pSize.x, pSize.y);
 		surface->drawRectangle(theme.borderColor, theme.windowColor,
 			pos.x, pos.y, pSize.x, pSize.y, theme.borderWidth);
-		surface->beginRectangleClipping(pos.x, pos.y, pSize.x, pSize.y);
 		// Draw the children
 		drawChildren(surface);
 		surface->endClipping();

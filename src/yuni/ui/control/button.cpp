@@ -20,10 +20,12 @@ namespace Control
 		// If the button is the root control, use absolute coordinates
 		if (root)
 			pos(0, 0);
+		surface->beginRectangleClipping(pos.x, pos.y, pSize.x, pSize.y);
 		surface->drawRectangle(theme.borderColor, theme.buttonColor,
 			pos.x, pos.y, pSize.x, pSize.y, theme.borderWidth);
 		surface->drawTextInRect(pText, theme.font, theme.textColor, pos.x, pos.y,
-			pSize.x, pSize.y, false);
+			pSize.x, pSize.y);
+		surface->endClipping();
 		pModified = false;
 	}
 
