@@ -55,7 +55,7 @@ namespace Media
 			pCodec = nullptr;
 		}
 		if (pFrame)
-		::av_free(pFrame);
+			::av_free(pFrame);
 	}
 
 
@@ -199,6 +199,14 @@ namespace Media
 		return frame;
 	}
 
+
+	template<StreamType TypeT>
+	inline void Stream<TypeT>::rewind()
+	{
+		if (pFrame)
+			::av_free(pFrame);
+		::av_seek_frame(pFormat, pIndex, 0, 0);
+	}
 
 	template<StreamType TypeT>
 	inline uint Stream<TypeT>::index() const

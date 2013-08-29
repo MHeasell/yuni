@@ -67,6 +67,16 @@ namespace Media
 	}
 
 
+	void File::rewind()
+	{
+		assert(pFormat and "invalid format");
+
+		for (auto stream : pVStreams)
+			stream.second->rewind();
+		for (auto stream : pAStreams)
+			stream.second->rewind();
+	}
+
 
 
 

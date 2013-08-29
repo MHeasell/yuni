@@ -50,6 +50,9 @@ namespace Media
 		//! Is the file valid for reading ?
 		bool valid() const;
 
+		//! Rewind the file
+		void rewind();
+
 
 	private:
 		//! Add a stream of the given media type at given index
