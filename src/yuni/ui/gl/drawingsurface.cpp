@@ -260,15 +260,12 @@ namespace UI
 
 
 	void DrawingSurface::drawTextInRect(const String& text, const FTFont::Ptr& font,
-		const Color::RGBA<float>& color, int x, int y, uint width, uint height, bool clip)
+		const Color::RGBA<float>& color, int x, int y, uint width, uint height)
 	{
 		assert(pImpl->locked && "DrawingSurface error : Cannot draw to an unlocked surface !");
 
 		if (text.empty() || !width || !height)
 			return;
-
-		if (clip)
-			beginRectangleClipping(x, y, width, height);
 
 		auto& overlay = pImpl->text;
 		overlay.clear() << text;
@@ -289,9 +286,6 @@ namespace UI
 
 		// Restore base shader
 		pImpl->baseShader->activate();
-
-		if (clip)
-			endClipping();
 	}
 
 
@@ -337,6 +331,9 @@ namespace UI
 		::glDrawArrays(GL_TRIANGLES, 0, 6);
 		::glDisableVertexAttribArray(Gfx3D::Vertex<>::vaPosition);
 
+		if (Math::Zero(lineWidth))
+			return;
+
 		pImpl->lineShader->activate();
 
 		// Top line
@@ -362,12 +359,21 @@ namespace UI
 	}
 
 
+	void DrawingSurface::fill(const Color::RGBA<float>& color)
+	{
+		::glClearColor(color.red, color.green, color.blue, color.alpha);
+		::glClear(GL_COLOR_BUFFER_BIT);
+	}
+
+
 	void DrawingSurface::beginRectangleClipping(int x, int y, uint width, uint height)
 	{
 		assert(pImpl->locked && "DrawingSurface error : Cannot manage clipping on an unlocked surface !");
-		std::cout << "Scissoring at " << x << "," << y << " with a " << width << "x" << height << " box" << std::endl;
-		::glScissor(x, y, width, height);
-		pImpl->clippings.push_back(DrawingSurfaceImpl::ClipCoord(Point2D<int>(x, y), Point2D<int>(width, height)));
+		std::cout << "Scissoring at " << x << "," << pImpl->size.y
+				  << " with a " << width << "x" << height << " box" << std::endl;
+		::glScissor(x, pImpl->size.y - height - y, width, height);
+		pImpl->clippings.push_back(DrawingSurfaceImpl::ClipCoord(
+			Point2D<int>(x, pImpl->size.y - height - y), Point2D<int>(width, height)));
 	}
 
 

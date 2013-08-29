@@ -54,9 +54,9 @@ namespace UI
 		void drawText(const String& text, const FTFont::Ptr& font, const Color::RGBA<float>& color,
 			int x, int y);
 
-		//! Draw text on the surface, centered and clipped in a rectangle
+		//! Draw text on the surface, centered in a rectangle
 		void drawTextInRect(const String& text, const FTFont::Ptr& font,
-			const Color::RGBA<float>& color, int x, int y, uint width, uint height, bool clip = true);
+			const Color::RGBA<float>& color, int x, int y, uint width, uint height);
 
 		//! Draw an anti-aliased line on the surface
 		void drawLine(const Color::RGBA<float>& color, int startX, int startY, int endX, int endY,
@@ -69,6 +69,9 @@ namespace UI
 		//! Draw a rectangle on the surface
 		void drawRectangle(const Color::RGBA<float>& frontColor, const Color::RGBA<float>& backColor,
 			int x, int y, uint width, uint height, float lineWidth);
+
+		//! Fill with a color. Use clipping to control the filled area
+		void fill(const Color::RGBA<float>& color);
 
 		//! Activate clipping inside a rectangle
 		void beginRectangleClipping(int x, int y, uint width, uint height);
