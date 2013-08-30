@@ -22,7 +22,7 @@ namespace Control
 			pos(0, 0);
 		surface->beginRectangleClipping(pos.x, pos.y, theme.checkBoxSize, theme.checkBoxSize);
 		// Draw the check box
-		surface->drawRectangle(theme.borderColor, theme.buttonColor,
+		surface->drawFilledRectangle(theme.borderColor, theme.buttonColor,
 			pos.x, pos.y, theme.checkBoxSize, theme.checkBoxSize, theme.borderWidth);
 		// Dimension our control around the box only, not the label, for mouse event handling.
 		pSize(theme.checkBoxSize, theme.checkBoxSize);
