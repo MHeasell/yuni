@@ -314,23 +314,6 @@ namespace UI
 	{
 		assert(pImpl->locked && "DrawingSurface error : Cannot draw to an unlocked surface !");
 
-		// Draw the back as a quad with the proper color
-		pImpl->baseShader->bindUniform("Color", backColor);
-		const float vertices[] =
-			{
-				(float)x, (float)(y + height),
-				(float)x, (float)y,
-				(float)(x + width), (float)y,
-				(float)x, (float)(y + height),
-				(float)(x + width), (float)y,
-				(float)(x + width), (float)(y + height)
-			};
-		::glEnableVertexAttribArray(Gfx3D::Vertex<>::vaPosition);
-		::glVertexAttribPointer(Gfx3D::Vertex<>::vaPosition, 2, GL_FLOAT, false, 0, vertices);
-		// Draw
-		::glDrawArrays(GL_TRIANGLES, 0, 6);
-		::glDisableVertexAttribArray(Gfx3D::Vertex<>::vaPosition);
-
 		if (Math::Zero(lineWidth))
 			return;
 
@@ -359,6 +342,30 @@ namespace UI
 	}
 
 
+	void DrawingSurface::drawFilledRectangle(const Color::RGBA<float>& frontColor,
+		const Color::RGBA<float>& backColor, int x, int y, uint width, uint height, float lineWidth)
+	{
+		// Draw the back as a quad with the proper color
+		pImpl->baseShader->bindUniform("Color", backColor);
+		const float vertices[] =
+			{
+				(float)x, (float)(y + height),
+				(float)x, (float)y,
+				(float)(x + width), (float)y,
+				(float)x, (float)(y + height),
+				(float)(x + width), (float)y,
+				(float)(x + width), (float)(y + height)
+			};
+		::glEnableVertexAttribArray(Gfx3D::Vertex<>::vaPosition);
+		::glVertexAttribPointer(Gfx3D::Vertex<>::vaPosition, 2, GL_FLOAT, false, 0, vertices);
+		// Draw
+		::glDrawArrays(GL_TRIANGLES, 0, 6);
+		::glDisableVertexAttribArray(Gfx3D::Vertex<>::vaPosition);
+
+		drawRectangle(frontColor, backColor, x, y, width, height, lineWidth);
+	}
+
+
 	void DrawingSurface::fill(const Color::RGBA<float>& color)
 	{
 		::glClearColor(color.red, color.green, color.blue, color.alpha);
@@ -369,8 +376,6 @@ namespace UI
 	void DrawingSurface::beginRectangleClipping(int x, int y, uint width, uint height)
 	{
 		assert(pImpl->locked && "DrawingSurface error : Cannot manage clipping on an unlocked surface !");
-		std::cout << "Scissoring at " << x << "," << pImpl->size.y
-				  << " with a " << width << "x" << height << " box" << std::endl;
 		::glScissor(x, pImpl->size.y - height - y, width, height);
 		pImpl->clippings.push_back(DrawingSurfaceImpl::ClipCoord(
 			Point2D<int>(x, pImpl->size.y - height - y), Point2D<int>(width, height)));
@@ -385,8 +390,6 @@ namespace UI
 		{
 			// Reapply previous clipping
 			const auto& coord = pImpl->clippings.back();
-			std::cout << "Restoring scissoring at " << coord.first.x << "," << coord.first.y
-					  << " with a " << coord.second.x << "x" << coord.second.y << " box" << std::endl;
 			::glScissor(coord.first.x, coord.first.y, coord.second.x, coord.second.y);
 		}
 	}

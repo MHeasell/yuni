@@ -66,9 +66,15 @@ namespace UI
 		void drawLine(const Color::RGBA<float>& color, const Color::RGBA<float>& bgColor,
 			int startX, int startY, int endX, int endY, float lineWidth);
 
-		//! Draw a rectangle on the surface
-		void drawRectangle(const Color::RGBA<float>& frontColor, const Color::RGBA<float>& backColor,
-			int x, int y, uint width, uint height, float lineWidth);
+		//! Draw an empty rectangle (borders only)
+		void drawRectangle(const Color::RGBA<float>& frontColor,
+			const Color::RGBA<float>& backColor, int x, int y, uint width, uint height,
+			float lineWidth);
+
+		//! Draw a rectangle filled with a background color on the surface
+		void drawFilledRectangle(const Color::RGBA<float>& frontColor,
+			const Color::RGBA<float>& backColor, int x, int y, uint width, uint height,
+			float lineWidth);
 
 		//! Fill with a color. Use clipping to control the filled area
 		void fill(const Color::RGBA<float>& color);

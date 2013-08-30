@@ -89,6 +89,9 @@ namespace UI
 
 	EventPropagation IControl::doMouseMove(int x, int y)
 	{
+		if (!pVisible)
+			return epContinue;
+
 		// Get the stack of controls under the (x,y) point
 		std::vector<IControl*> stack;
 		getControlStackAt(x, y, stack);
@@ -119,6 +122,9 @@ namespace UI
 
 	EventPropagation IControl::doMouseDown(Input::IMouse::Button btn, int x, int y)
 	{
+		if (!pVisible)
+			return epContinue;
+
 		std::vector<IControl*> stack;
 		getControlStackAt(x, y, stack);
 		EventPropagation finalProp = epContinue;
@@ -144,6 +150,9 @@ namespace UI
 
 	EventPropagation IControl::doMouseUp(Input::IMouse::Button btn, int x, int y)
 	{
+		if (!pVisible)
+			return epContinue;
+
 		std::vector<IControl*> stack;
 		getControlStackAt(x, y, stack);
 		EventPropagation finalProp = epContinue;
@@ -169,6 +178,9 @@ namespace UI
 
 	EventPropagation IControl::doMouseDblClick(Input::IMouse::Button btn, int x, int y)
 	{
+		if (!pVisible)
+			return epContinue;
+
 		std::vector<IControl*> stack;
 		getControlStackAt(x, y, stack);
 		EventPropagation finalProp = epContinue;
@@ -192,6 +204,9 @@ namespace UI
 
 	EventPropagation IControl::doMouseScroll(float delta, int x, int y)
 	{
+		if (!pVisible)
+			return epContinue;
+
 		std::vector<IControl*> stack;
 		getControlStackAt(x, y, stack);
 		EventPropagation finalProp = epContinue;
@@ -216,6 +231,9 @@ namespace UI
 
 	EventPropagation IControl::doMouseHover(int x, int y)
 	{
+		if (!pVisible)
+			return epContinue;
+
 		std::vector<IControl*> stack;
 		getControlStackAt(x, y, stack);
 		EventPropagation finalProp = epContinue;

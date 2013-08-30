@@ -21,7 +21,7 @@ namespace Control
 		if (root)
 			pos(0, 0);
 		surface->beginRectangleClipping(pos.x, pos.y, pSize.x, pSize.y);
-		surface->drawRectangle(theme.borderColor, theme.windowColor,
+		surface->drawFilledRectangle(theme.borderColor, theme.windowColor,
 			pos.x, pos.y, pSize.x, pSize.y, theme.borderWidth);
 		// Draw the children
 		drawChildren(surface);
