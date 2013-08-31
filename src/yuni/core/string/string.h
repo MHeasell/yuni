@@ -1297,7 +1297,7 @@ namespace Yuni
 		/*!
 		** \brief Removes all items equal to one of those in 'u' from the end of the string
 		*/
-		void trimRight(const AnyString& whitespaces);
+		void trimRight(const AnyString& whitespaces = " \t\r\n");
 
 		/*!
 		** \brief Remove all items equal to 'c' from the end of the string
@@ -1308,7 +1308,7 @@ namespace Yuni
 		** \brief Removes all items equal to one of those in 'u' from the beginning
 		**   of the string
 		*/
-		void trimLeft(const AnyString& whitespaces);
+		void trimLeft(const AnyString& whitespaces = " \t\r\n");
 		/*!
 		** \brief Remove all items equal to 'c' from the beginning of the string
 		*/
