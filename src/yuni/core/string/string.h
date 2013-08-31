@@ -1292,12 +1292,12 @@ namespace Yuni
 		** \brief Removes all items equal to one of those in 'whitespaces' from the
 		**   end of the string
 		*/
-		template<class StringT> void trim(const StringT& whitespaces);
+		void trim(const AnyString& whitespaces);
 
 		/*!
 		** \brief Removes all items equal to one of those in 'u' from the end of the string
 		*/
-		template<class StringT> void trimRight(const StringT& whitespaces);
+		void trimRight(const AnyString& whitespaces);
 
 		/*!
 		** \brief Remove all items equal to 'c' from the end of the string
@@ -1308,7 +1308,7 @@ namespace Yuni
 		** \brief Removes all items equal to one of those in 'u' from the beginning
 		**   of the string
 		*/
-		template<class StringT> void trimLeft(const StringT& whitespaces);
+		void trimLeft(const AnyString& whitespaces);
 		/*!
 		** \brief Remove all items equal to 'c' from the beginning of the string
 		*/
@@ -1354,8 +1354,7 @@ namespace Yuni
 		** \param to   The string to replace with
 		** \return The number  the number of replacements performed
 		*/
-		template<class StringT1, class StringT2>
-		uint replace(const StringT1& from, const StringT2& to);
+		uint replace(const AnyString& from, const AnyString& to);
 
 		/*!
 		** \brief Replace all occurrences of a string by another one
@@ -1365,8 +1364,7 @@ namespace Yuni
 		** \param to   The string to replace with
 		** \return The number  the number of replacements performed
 		*/
-		template<class StringT1, class StringT2>
-		uint replace(Size offset, const StringT1& from, const StringT2& to);
+		uint replace(Size offset, const AnyString& from, const AnyString& to);
 
 		/*!
 		** \brief Replace all occurrences of a given char by another one
@@ -1413,8 +1411,7 @@ namespace Yuni
 		** \param to   The string to replace with
 		** \return The number  the number of replacements performed
 		*/
-		template<class StringT1, class StringT2>
-		uint ireplace(const StringT1& from, const StringT2& to);
+		uint ireplace(const AnyString& from, const AnyString& to);
 
 		/*!
 		** \brief Replace all occurrences of a string by another one (case insensitive)
@@ -1424,8 +1421,7 @@ namespace Yuni
 		** \param to   The string to replace with
 		** \return The number  the number of replacements performed
 		*/
-		template<class StringT1, class StringT2>
-		uint ireplace(Size offset, const StringT1& from, const StringT2& to);
+		uint ireplace(Size offset, const AnyString& from, const AnyString& to);
 
 		/*!
 		** \brief Remove the 'n' first characters
