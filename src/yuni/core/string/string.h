@@ -1450,14 +1450,14 @@ namespace Yuni
 		**
 		** This method is equivalent to the operator '=='
 		*/
-		template<class StringT> bool equals(const StringT& rhs) const;
+		bool equals(const AnyString& rhs) const;
 
 		/*!
 		** \brief Get if the string is equals to another one (ignoring case)
 		**
 		** This method is equivalent to the operator '=='
 		*/
-		template<class StringT> bool equalsInsensitive(const StringT& rhs) const;
+		bool equalsInsensitive(const AnyString& rhs) const;
 
 		/*!
 		** \brief Compare the string with another one
@@ -1466,7 +1466,7 @@ namespace Yuni
 		** \return An integer greater than, equal to, or less than 0, according as the string is greater than,
 		**   equal to, or less than the given string
 		*/
-		template<class StringT> int compare(const StringT& rhs) const;
+		int compare(const AnyString& rhs) const;
 
 		/*!
 		** \brief Compare the string with another one (ignoring the case)
@@ -1475,7 +1475,7 @@ namespace Yuni
 		** \return An integer greater than, equal to, or less than 0, according as the string is greater than,
 		**   equal to, or less than the given string
 		*/
-		template<class StringT> int compareInsensitive(const StringT& rhs) const;
+		int compareInsensitive(const AnyString& rhs) const;
 		//@}
 
 
@@ -1523,15 +1523,15 @@ namespace Yuni
 		** std::cout << "All chars: ";
 		** do
 		** {
-		** 	if (offset)
-		** 		std::cout << ", ";
-		** 	if (UTF8::errNone != t.utf8next<false>(offset, c))
-		** 	{
-		** 		std::cout << "<EOF>\n";
-		** 		break;
-		** 	}
+		**	if (offset)
+		**		std::cout << ", ";
+		**	if (UTF8::errNone != t.utf8next<false>(offset, c))
+		**	{
+		**		std::cout << "<EOF>\n";
+		**		break;
+		**	}
 		**
-		** 	std::cout << c;
+		**	std::cout << c;
 		** }
 		** while (true);
 		** \endcode
@@ -1605,7 +1605,7 @@ namespace Yuni
 		** \param pattern The pattern to use to fill the new content
 		** \see fill()
 		*/
-		template<class StringT> void resize(Size len, const StringT& pattern);
+		void resize(Size len, const AnyString& pattern);
 
 		/*!
 		** \brief Releases any memory not required to store the character data
@@ -1765,7 +1765,7 @@ namespace Yuni
 		** \param format The format, reprensented by a zero-terminated string
 		** \return Always *this
 		*/
-		template<class StringT> CString& format(const StringT& format, ...);
+		CString& format(const AnyString& format, ...);
 
 		/*!
 		** \brief Append formatted string
@@ -1774,7 +1774,7 @@ namespace Yuni
 		** \param format The format, represented by a zero-terminated string
 		** \return Always *this
 		*/
-		template<class StringT> CString& appendFormat(const StringT& format, ...);
+		CString& appendFormat(const AnyString& format, ...);
 
 		/*!
 		** \brief Append a formatted string to the end of the current string
@@ -1850,8 +1850,8 @@ namespace Yuni
 		** });
 		** \endcode
 		*/
-		template<class StringT, class PredicateT>
-		bool words(const StringT& separators, const PredicateT& predicate) const;
+		template<class PredicateT>
+		bool words(const AnyString& separators, const PredicateT& predicate) const;
 
 		/*!
 		** \brief Split a string into several segments
@@ -1864,7 +1864,7 @@ namespace Yuni
 		** \endcode
 		**
 		** \warning Performance Tip: For better performances, the method \p words
-		**   will suit better
+		**   would suit better
 		**
 		** \param[out] out All segments that have been found
 		** \param sep Sequence of chars considered as a separator
