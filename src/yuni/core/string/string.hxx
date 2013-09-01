@@ -243,10 +243,10 @@ namespace Yuni
 
 
 
-	namespace
+	namespace // anonymous
 	{
 		template<bool ValidT, bool AdapterT>
-		struct TraitsSelectorAssign
+		struct TraitsSelectorAssign final
 		{
 			template<class U, class CStringT>
 			static inline void Perform(const U& u, CStringT& string)
@@ -255,7 +255,7 @@ namespace Yuni
 			};
 		};
 
-		template<> struct TraitsSelectorAssign<true, true>
+		template<> struct TraitsSelectorAssign<true, true> final
 		{
 			template<class U, class CStringT>
 			static inline void Perform(const U& u, CStringT& string)
@@ -265,7 +265,7 @@ namespace Yuni
 		};
 
 
-		template<bool AdapterT> struct TraitsSelectorAssign<false, AdapterT>
+		template<bool AdapterT> struct TraitsSelectorAssign<false, AdapterT> final
 		{
 			template<class U, class CStringT>
 			static inline void Perform(const U& u, CStringT& string)
@@ -277,7 +277,7 @@ namespace Yuni
 		};
 
 		template<bool ValidT>
-		struct TraitsSelectorAppend
+		struct TraitsSelectorAppend final
 		{
 			template<class U, class CStringT>
 			static inline void Perform(const U& u, CStringT& string)
@@ -286,7 +286,7 @@ namespace Yuni
 			};
 		};
 
-		template<> struct TraitsSelectorAppend<false>
+		template<> struct TraitsSelectorAppend<false> final
 		{
 			template<class U, class CStringT>
 			static inline void Perform(const U& u, CStringT& string)
@@ -295,6 +295,48 @@ namespace Yuni
 				Yuni::Extension::CString::Append<CStringT, UType>::Perform(string, u);
 			}
 		};
+
+
+		template<class T>
+		struct AppendIterator final
+		{
+			template<class StringT, class IteratorT, class IteratorT2>
+			static void Perform(StringT& s, const IteratorT& begin, const IteratorT2& end)
+			{
+				for (IteratorT i = begin; i != end; ++i)
+					s << *i;
+			}
+
+			template<class StringT, class IteratorT, class IteratorT2, class SeparatorT>
+			static void Perform(StringT& s, const IteratorT& begin, const IteratorT2& end, const SeparatorT& separator)
+			{
+				if (begin != end)
+				{
+					s << *begin;
+					IteratorT i = begin;
+					++i;
+					for (; i != end; ++i)
+						s << separator << *i;
+				}
+			}
+
+			template<class StringT, class IteratorT, class IteratorT2, class SeparatorT, class EnclosureT>
+			static void Perform(StringT& s, const IteratorT& begin, const IteratorT2& end, const SeparatorT& separator,
+				const EnclosureT& enclosure)
+			{
+				if (begin != end)
+				{
+					s << enclosure << *begin << enclosure;
+					IteratorT i = begin;
+					++i;
+					for (; i != end; ++i)
+						s << separator << enclosure << *i << enclosure;
+				}
+			}
+
+		}; // class AppendIterator
+
+
 
 	} // anonymous namespace
 
@@ -323,46 +365,6 @@ namespace Yuni
 			template Perform<U, CStringType>(u, *this);
 	}
 
-
-
-	template<class T>
-	struct AppendIterator
-	{
-		template<class StringT, class IteratorT, class IteratorT2>
-		static void Perform(StringT& s, const IteratorT& begin, const IteratorT2& end)
-		{
-			for (IteratorT i = begin; i != end; ++i)
-				s << *i;
-		}
-
-		template<class StringT, class IteratorT, class IteratorT2, class SeparatorT>
-		static void Perform(StringT& s, const IteratorT& begin, const IteratorT2& end, const SeparatorT& separator)
-		{
-			if (begin != end)
-			{
-				s << *begin;
-				IteratorT i = begin;
-				++i;
-				for (; i != end; ++i)
-					s << separator << *i;
-			}
-		}
-
-		template<class StringT, class IteratorT, class IteratorT2, class SeparatorT, class EnclosureT>
-		static void Perform(StringT& s, const IteratorT& begin, const IteratorT2& end, const SeparatorT& separator,
-			const EnclosureT& enclosure)
-		{
-			if (begin != end)
-			{
-				s << enclosure << *begin << enclosure;
-				IteratorT i = begin;
-				++i;
-				for (; i != end; ++i)
-					s << separator << enclosure << *i << enclosure;
-			}
-		}
-
-	}; // class AppendIterator
 
 
 
