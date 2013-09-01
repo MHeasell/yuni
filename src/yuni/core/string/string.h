@@ -1295,20 +1295,27 @@ namespace Yuni
 		void trim(const AnyString& whitespaces);
 
 		/*!
+		** \brief Removes all items equal to a space from the end of the string
+		*/
+		void trimRight();
+		/*!
 		** \brief Removes all items equal to one of those in 'u' from the end of the string
 		*/
-		void trimRight(const AnyString& whitespaces = " \t\r\n");
-
+		void trimRight(const AnyString& whitespaces);
 		/*!
 		** \brief Remove all items equal to 'c' from the end of the string
 		*/
 		void trimRight(char c);
 
 		/*!
+		** \brief Removes all items equal to a space from the beginning of the string
+		*/
+		void trimLeft();
+		/*!
 		** \brief Removes all items equal to one of those in 'u' from the beginning
 		**   of the string
 		*/
-		void trimLeft(const AnyString& whitespaces = " \t\r\n");
+		void trimLeft(const AnyString& whitespaces);
 		/*!
 		** \brief Remove all items equal to 'c' from the beginning of the string
 		*/
