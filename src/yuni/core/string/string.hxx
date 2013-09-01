@@ -2594,6 +2594,22 @@ namespace Yuni
 
 
 	template<uint ChunkSizeT, bool ExpandableT>
+	inline void
+	CString<ChunkSizeT,ExpandableT>::trimLeft()
+	{
+		trimLeft(" \t\r\n");
+	}
+
+
+	template<uint ChunkSizeT, bool ExpandableT>
+	inline void
+	CString<ChunkSizeT,ExpandableT>::trimRight()
+	{
+		trimRight(" \t\r\n");
+	}
+
+
+	template<uint ChunkSizeT, bool ExpandableT>
 	void
 	CString<ChunkSizeT,ExpandableT>::trimLeft(char c)
 	{
@@ -2690,8 +2706,8 @@ namespace Yuni
 		// It seems more interesting to trim from the end first, to reduce the size
 		// of the cstr as soon as possible and to reduce the amount of data to move
 		// if a region must be removed by trimLeft.
-		trimRight(" \t\r\n");
-		trimLeft(" \t\r\n");
+		trimRight();
+		trimLeft();
 	}
 
 
