@@ -41,6 +41,10 @@
 # include "traits/vnsprintf.h"
 # include "traits/into.h"
 
+# ifdef YUNI_HAS_CPP_MOVE
+# include <utility>
+# endif
+
 
 
 namespace Yuni
