@@ -82,7 +82,11 @@ namespace Yuni
 		b.bind(pointer);
 
 		typename ThreadingPolicy::MutexLocker locker(*this);
+		# ifdef YUNI_HAS_CPP_MOVE
+		AncestorType::pBindList.push_back(std::move(b));
+		# else
 		AncestorType::pBindList.push_back(b);
+		# endif
 		AncestorType::pEmpty = false;
 	}
 
@@ -97,8 +101,12 @@ namespace Yuni
 
 		// locking
 		typename ThreadingPolicy::MutexLocker locker(*this);
-		// list
+		# ifdef YUNI_HAS_CPP_MOVE
+		AncestorType::pBindList.push_back(std::move(b));
+		# else
 		AncestorType::pBindList.push_back(b);
+		# endif
+
 		AncestorType::pEmpty = false;
 		// unlocking
 	}
@@ -117,7 +125,12 @@ namespace Yuni
 			// Locking
 			typename ThreadingPolicy::MutexLocker locker(*this);
 			// list + increment ref counter
+			# ifdef YUNI_HAS_CPP_MOVE
+			AncestorType::pBindList.push_back(std::move(b));
+			# else
 			AncestorType::pBindList.push_back(b);
+			# endif
+
 			(dynamic_cast<const IEventObserverBase*>(o))->boundEventIncrementReference(dynamic_cast<IEvent*>(this));
 			AncestorType::pEmpty = false;
 			// Unlocking
@@ -138,7 +151,12 @@ namespace Yuni
 			// locking
 			typename ThreadingPolicy::MutexLocker locker(*this);
 			// list + increment ref counter
+			# ifdef YUNI_HAS_CPP_MOVE
+			AncestorType::pBindList.push_back(std::move(b));
+			# else
 			AncestorType::pBindList.push_back(b);
+			# endif
+
 			(dynamic_cast<const IEventObserverBase*>(o))->boundEventIncrementReference(dynamic_cast<IEvent*>(this));
 			AncestorType::pEmpty = false;
 			// unlocking
