@@ -63,6 +63,8 @@ namespace Thread
 			//! The default time interval (in milliseconds)
 			defaultInterval = 1000,
 		};
+		//! The most suitable smart pointer for the class
+		typedef SmartPtr<Timer> Ptr;
 
 	public:
 		//! \name Constructor & Destructor
