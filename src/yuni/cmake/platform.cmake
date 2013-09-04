@@ -132,8 +132,11 @@
 /* C++11 keyword final */
 #cmakedefine YUNI_HAS_CPP_KEYWORD_FINAL
 
-/* C++11 move constructor */
-#cmakedefine YUNI_HAS_CPP_MOVE_CONSTRUCTOR
+/* C++11 move operator */
+#cmakedefine YUNI_HAS_CPP_MOVE
+
+/* C++11 lambda */
+#cmakedefine YUNI_HAS_CPP_LAMBDA
 
 /* C++11 static_assert */
 #cmakedefine YUNI_HAS_CPP_STATIC_ASSERT
