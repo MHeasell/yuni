@@ -2,7 +2,6 @@
 #include <yuni/yuni.h>
 #include <yuni/thread/every.h>
 #include <yuni/core/system/suspend.h>
-#include <iostream>
 
 using namespace Yuni;
 
