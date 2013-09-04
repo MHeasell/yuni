@@ -218,13 +218,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)());
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)());
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)());
 		# endif
 		//! Destructor
 		~Bind();
@@ -577,13 +578,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)());
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)());
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)());
 		# endif
 		//! Destructor
 		~Bind();
@@ -936,13 +938,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)());
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)());
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)());
 		# endif
 		//! Destructor
 		~Bind();
@@ -1295,13 +1298,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0));
 		# endif
 		//! Destructor
 		~Bind();
@@ -1654,13 +1658,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0));
 		# endif
 		//! Destructor
 		~Bind();
@@ -2013,13 +2018,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0));
 		# endif
 		//! Destructor
 		~Bind();
@@ -2372,13 +2378,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1));
 		# endif
 		//! Destructor
 		~Bind();
@@ -2731,13 +2738,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1));
 		# endif
 		//! Destructor
 		~Bind();
@@ -3090,13 +3098,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1));
 		# endif
 		//! Destructor
 		~Bind();
@@ -3449,13 +3458,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2));
 		# endif
 		//! Destructor
 		~Bind();
@@ -3808,13 +3818,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2));
 		# endif
 		//! Destructor
 		~Bind();
@@ -4167,13 +4178,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2));
 		# endif
 		//! Destructor
 		~Bind();
@@ -4526,13 +4538,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3));
 		# endif
 		//! Destructor
 		~Bind();
@@ -4885,13 +4898,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3));
 		# endif
 		//! Destructor
 		~Bind();
@@ -5244,13 +5258,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3));
 		# endif
 		//! Destructor
 		~Bind();
@@ -5603,13 +5618,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3, A4));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3, A4));
 		# endif
 		//! Destructor
 		~Bind();
@@ -5962,13 +5978,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3, A4));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3, A4));
 		# endif
 		//! Destructor
 		~Bind();
@@ -6321,13 +6338,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3, A4));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3, A4));
 		# endif
 		//! Destructor
 		~Bind();
@@ -6680,13 +6698,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5));
 		# endif
 		//! Destructor
 		~Bind();
@@ -7039,13 +7058,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5));
 		# endif
 		//! Destructor
 		~Bind();
@@ -7398,13 +7418,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5));
 		# endif
 		//! Destructor
 		~Bind();
@@ -7757,13 +7778,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6));
 		# endif
 		//! Destructor
 		~Bind();
@@ -8116,13 +8138,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6));
 		# endif
 		//! Destructor
 		~Bind();
@@ -8475,13 +8498,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6));
 		# endif
 		//! Destructor
 		~Bind();
@@ -8834,13 +8858,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7));
 		# endif
 		//! Destructor
 		~Bind();
@@ -9193,13 +9218,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7));
 		# endif
 		//! Destructor
 		~Bind();
@@ -9552,13 +9578,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7));
 		# endif
 		//! Destructor
 		~Bind();
@@ -9911,13 +9938,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8));
 		# endif
 		//! Destructor
 		~Bind();
@@ -10270,13 +10298,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8));
 		# endif
 		//! Destructor
 		~Bind();
@@ -10629,13 +10658,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8));
 		# endif
 		//! Destructor
 		~Bind();
@@ -10988,13 +11018,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9));
 		# endif
 		//! Destructor
 		~Bind();
@@ -11347,13 +11378,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9));
 		# endif
 		//! Destructor
 		~Bind();
@@ -11706,13 +11738,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9));
 		# endif
 		//! Destructor
 		~Bind();
@@ -12065,13 +12098,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10));
 		# endif
 		//! Destructor
 		~Bind();
@@ -12424,13 +12458,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10));
 		# endif
 		//! Destructor
 		~Bind();
@@ -12783,13 +12818,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10));
 		# endif
 		//! Destructor
 		~Bind();
@@ -13142,13 +13178,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11));
 		# endif
 		//! Destructor
 		~Bind();
@@ -13501,13 +13538,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11));
 		# endif
 		//! Destructor
 		~Bind();
@@ -13860,13 +13898,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11));
 		# endif
 		//! Destructor
 		~Bind();
@@ -14219,13 +14258,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12));
 		# endif
 		//! Destructor
 		~Bind();
@@ -14578,13 +14618,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12));
 		# endif
 		//! Destructor
 		~Bind();
@@ -14937,13 +14978,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12));
 		# endif
 		//! Destructor
 		~Bind();
@@ -15296,13 +15338,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13));
 		# endif
 		//! Destructor
 		~Bind();
@@ -15655,13 +15698,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13));
 		# endif
 		//! Destructor
 		~Bind();
@@ -16014,13 +16058,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13));
 		# endif
 		//! Destructor
 		~Bind();
@@ -16373,13 +16418,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14));
 		# endif
 		//! Destructor
 		~Bind();
@@ -16732,13 +16778,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14));
 		# endif
 		//! Destructor
 		~Bind();
@@ -17091,13 +17138,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14));
 		# endif
 		//! Destructor
 		~Bind();
@@ -17450,13 +17498,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15));
 		# endif
 		//! Destructor
 		~Bind();
@@ -17809,13 +17858,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15));
 		# endif
 		//! Destructor
 		~Bind();
@@ -18168,13 +18218,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15));
 		# endif
 		//! Destructor
 		~Bind();

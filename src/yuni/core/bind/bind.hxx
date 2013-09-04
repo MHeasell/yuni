@@ -31,7 +31,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class R>
-	inline Bind<R (), void>::Bind(Bind<R (), void>&& rhs)
+	inline Bind<R (), void>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -52,7 +52,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R ()>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class R>
@@ -60,6 +61,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -471,7 +474,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class R>
-	inline Bind<R (*)(), void>::Bind(Bind<R (*)(), void>&& rhs)
+	inline Bind<R (*)(), void>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -492,7 +495,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R ()>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class R>
@@ -500,6 +504,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -911,7 +917,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class ClassT, class R>
-	inline Bind<R (ClassT::*)(), ClassT>::Bind(Bind<R (ClassT::*)(), ClassT>&& rhs)
+	inline Bind<R (ClassT::*)(), ClassT>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -932,7 +938,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R ()>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class ClassT, class R>
@@ -940,6 +947,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -1351,7 +1360,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class R, class A0>
-	inline Bind<R (A0), void>::Bind(Bind<R (A0), void>&& rhs)
+	inline Bind<R (A0), void>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -1372,7 +1381,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class R, class A0>
@@ -1380,6 +1390,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -1791,7 +1803,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class R, class A0>
-	inline Bind<R (*)(A0), void>::Bind(Bind<R (*)(A0), void>&& rhs)
+	inline Bind<R (*)(A0), void>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -1812,7 +1824,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class R, class A0>
@@ -1820,6 +1833,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -2231,7 +2246,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class ClassT, class R, class A0>
-	inline Bind<R (ClassT::*)(A0), ClassT>::Bind(Bind<R (ClassT::*)(A0), ClassT>&& rhs)
+	inline Bind<R (ClassT::*)(A0), ClassT>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -2252,7 +2267,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class ClassT, class R, class A0>
@@ -2260,6 +2276,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -2671,7 +2689,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class R, class A0, class A1>
-	inline Bind<R (A0, A1), void>::Bind(Bind<R (A0, A1), void>&& rhs)
+	inline Bind<R (A0, A1), void>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -2692,7 +2710,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class R, class A0, class A1>
@@ -2700,6 +2719,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -3112,7 +3133,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class R, class A0, class A1>
-	inline Bind<R (*)(A0, A1), void>::Bind(Bind<R (*)(A0, A1), void>&& rhs)
+	inline Bind<R (*)(A0, A1), void>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -3133,7 +3154,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class R, class A0, class A1>
@@ -3141,6 +3163,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -3553,7 +3577,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class ClassT, class R, class A0, class A1>
-	inline Bind<R (ClassT::*)(A0, A1), ClassT>::Bind(Bind<R (ClassT::*)(A0, A1), ClassT>&& rhs)
+	inline Bind<R (ClassT::*)(A0, A1), ClassT>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -3574,7 +3598,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class ClassT, class R, class A0, class A1>
@@ -3582,6 +3607,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -3994,7 +4021,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class R, class A0, class A1, class A2>
-	inline Bind<R (A0, A1, A2), void>::Bind(Bind<R (A0, A1, A2), void>&& rhs)
+	inline Bind<R (A0, A1, A2), void>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -4015,7 +4042,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class R, class A0, class A1, class A2>
@@ -4023,6 +4051,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -4435,7 +4465,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class R, class A0, class A1, class A2>
-	inline Bind<R (*)(A0, A1, A2), void>::Bind(Bind<R (*)(A0, A1, A2), void>&& rhs)
+	inline Bind<R (*)(A0, A1, A2), void>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -4456,7 +4486,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class R, class A0, class A1, class A2>
@@ -4464,6 +4495,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -4876,7 +4909,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class ClassT, class R, class A0, class A1, class A2>
-	inline Bind<R (ClassT::*)(A0, A1, A2), ClassT>::Bind(Bind<R (ClassT::*)(A0, A1, A2), ClassT>&& rhs)
+	inline Bind<R (ClassT::*)(A0, A1, A2), ClassT>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -4897,7 +4930,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class ClassT, class R, class A0, class A1, class A2>
@@ -4905,6 +4939,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -5317,7 +5353,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class R, class A0, class A1, class A2, class A3>
-	inline Bind<R (A0, A1, A2, A3), void>::Bind(Bind<R (A0, A1, A2, A3), void>&& rhs)
+	inline Bind<R (A0, A1, A2, A3), void>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -5338,7 +5374,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3>
@@ -5346,6 +5383,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -5759,7 +5798,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class R, class A0, class A1, class A2, class A3>
-	inline Bind<R (*)(A0, A1, A2, A3), void>::Bind(Bind<R (*)(A0, A1, A2, A3), void>&& rhs)
+	inline Bind<R (*)(A0, A1, A2, A3), void>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -5780,7 +5819,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3>
@@ -5788,6 +5828,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -6201,7 +6243,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::Bind(Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>&& rhs)
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -6222,7 +6264,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class ClassT, class R, class A0, class A1, class A2, class A3>
@@ -6230,6 +6273,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -6643,7 +6688,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4>
-	inline Bind<R (A0, A1, A2, A3, A4), void>::Bind(Bind<R (A0, A1, A2, A3, A4), void>&& rhs)
+	inline Bind<R (A0, A1, A2, A3, A4), void>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -6664,7 +6709,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3, class A4>
@@ -6672,6 +6718,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -7085,7 +7133,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4>
-	inline Bind<R (*)(A0, A1, A2, A3, A4), void>::Bind(Bind<R (*)(A0, A1, A2, A3, A4), void>&& rhs)
+	inline Bind<R (*)(A0, A1, A2, A3, A4), void>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -7106,7 +7154,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3, class A4>
@@ -7114,6 +7163,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -7527,7 +7578,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::Bind(Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>&& rhs)
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -7548,7 +7599,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4>
@@ -7556,6 +7608,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -7969,7 +8023,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	inline Bind<R (A0, A1, A2, A3, A4, A5), void>::Bind(Bind<R (A0, A1, A2, A3, A4, A5), void>&& rhs)
+	inline Bind<R (A0, A1, A2, A3, A4, A5), void>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -7990,7 +8044,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
@@ -7998,6 +8053,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -8412,7 +8469,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::Bind(Bind<R (*)(A0, A1, A2, A3, A4, A5), void>&& rhs)
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -8433,7 +8490,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5>
@@ -8441,6 +8499,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -8855,7 +8915,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::Bind(Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>&& rhs)
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -8876,7 +8936,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5>
@@ -8884,6 +8945,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -9298,7 +9361,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::Bind(Bind<R (A0, A1, A2, A3, A4, A5, A6), void>&& rhs)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -9319,7 +9382,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
@@ -9327,6 +9391,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -9741,7 +9807,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::Bind(Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>&& rhs)
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -9762,7 +9828,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
@@ -9770,6 +9837,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -10184,7 +10253,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::Bind(Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>&& rhs)
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -10205,7 +10274,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6>
@@ -10213,6 +10283,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -10627,7 +10699,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::Bind(Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>&& rhs)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -10648,7 +10720,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
@@ -10656,6 +10729,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -11071,7 +11146,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::Bind(Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>&& rhs)
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -11092,7 +11167,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
@@ -11100,6 +11176,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -11515,7 +11593,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::Bind(Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>&& rhs)
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -11536,7 +11614,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7>
@@ -11544,6 +11623,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -11959,7 +12040,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::Bind(Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>&& rhs)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -11980,7 +12061,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
@@ -11988,6 +12070,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -12403,7 +12487,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::Bind(Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>&& rhs)
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -12424,7 +12508,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
@@ -12432,6 +12517,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -12847,7 +12934,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::Bind(Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>&& rhs)
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -12868,7 +12955,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8>
@@ -12876,6 +12964,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -13291,7 +13381,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::Bind(Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>&& rhs)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -13312,7 +13402,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
@@ -13320,6 +13411,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -13736,7 +13829,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::Bind(Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>&& rhs)
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -13757,7 +13850,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
@@ -13765,6 +13859,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -14181,7 +14277,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::Bind(Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>&& rhs)
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -14202,7 +14298,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9>
@@ -14210,6 +14307,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -14626,7 +14725,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::Bind(Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>&& rhs)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -14647,7 +14746,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
@@ -14655,6 +14755,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -15071,7 +15173,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::Bind(Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>&& rhs)
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -15092,7 +15194,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
@@ -15100,6 +15203,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -15516,7 +15621,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::Bind(Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>&& rhs)
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -15537,7 +15642,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10>
@@ -15545,6 +15651,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -15961,7 +16069,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::Bind(Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>&& rhs)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -15982,7 +16090,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
@@ -15990,6 +16099,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -16407,7 +16518,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::Bind(Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>&& rhs)
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -16428,7 +16539,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
@@ -16436,6 +16548,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -16853,7 +16967,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::Bind(Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>&& rhs)
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -16874,7 +16988,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11>
@@ -16882,6 +16997,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -17299,7 +17416,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::Bind(Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>&& rhs)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -17320,7 +17437,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
@@ -17328,6 +17446,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -17745,7 +17865,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::Bind(Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>&& rhs)
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -17766,7 +17886,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
@@ -17774,6 +17895,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -18191,7 +18314,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::Bind(Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>&& rhs)
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -18212,7 +18335,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12>
@@ -18220,6 +18344,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -18637,7 +18763,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::Bind(Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>&& rhs)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -18658,7 +18784,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
@@ -18666,6 +18793,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -19084,7 +19213,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::Bind(Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>&& rhs)
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -19105,7 +19234,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
@@ -19113,6 +19243,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -19531,7 +19663,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::Bind(Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>&& rhs)
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -19552,7 +19684,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13>
@@ -19560,6 +19693,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -19978,7 +20113,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::Bind(Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>&& rhs)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -19999,7 +20134,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
@@ -20007,6 +20143,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -20425,7 +20563,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::Bind(Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>&& rhs)
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -20446,7 +20584,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
@@ -20454,6 +20593,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -20872,7 +21013,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::Bind(Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>&& rhs)
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -20893,7 +21034,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14>
@@ -20901,6 +21043,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -21319,7 +21463,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::Bind(Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>&& rhs)
+	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -21340,7 +21484,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
@@ -21348,6 +21493,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -21767,7 +21914,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::Bind(Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>&& rhs)
+	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -21788,7 +21935,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
@@ -21796,6 +21944,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
@@ -22215,7 +22365,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
-	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::Bind(Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>&& rhs)
+	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -22236,7 +22386,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<class ClassT, class R, class A0, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9, class A10, class A11, class A12, class A13, class A14, class A15>
@@ -22244,6 +22395,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
