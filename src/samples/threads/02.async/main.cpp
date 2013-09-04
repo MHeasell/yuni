@@ -3,7 +3,6 @@
 #include <yuni/thread/async.h>
 #include <yuni/core/system/suspend.h>
 #include <yuni/core/logs.h>
-#include <iostream>
 
 using namespace Yuni;
 
