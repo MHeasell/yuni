@@ -324,26 +324,32 @@ namespace Yuni
 		class Item
 		{
 		public:
-			Item()
-				:next(NULL)
+			Item() :
+				next(nullptr)
 			{}
-			Item(const Item& rhs)
-				:next(rhs.next), data(rhs.data)
+			Item(const Item& rhs) :
+				next(rhs.next), data(rhs.data)
 			{}
-			inline explicit Item(Item* n)
-				:next(n), data()
+			inline explicit Item(Item* n) :
+				next(n), data()
 			{}
-			inline explicit Item(reference_type value)
-				:next(NULL), data(value)
+			inline explicit Item(value_type& value) :
+				next(nullptr), data(value)
 			{}
-			template<class U> inline explicit Item(const U& value)
-				:next(NULL), data(value)
+			# ifdef YUNI_HAS_CPP_MOVE
+			inline explicit Item(value_type&& value) :
+				next(nullptr), data(std::move(value))
 			{}
-			inline Item(Item* n, reference_type value)
-				:next(n), data(value)
+			# endif
+
+			template<class U> inline explicit Item(const U& value) :
+				next(nullptr), data(value)
 			{}
-			template<class U> inline Item(Item* n, const U& value)
-				:next(n), data(value)
+			inline Item(Item* n, reference_type value) :
+				next(n), data(value)
+			{}
+			template<class U> inline Item(Item* n, const U& value) :
+				next(n), data(value)
 			{}
 
 
