@@ -64,6 +64,15 @@ namespace Yuni
 
 
 
+
+
+
+
+
+
+
+
+
 	template<uint ChunkSizeT, bool ExpandableT>
 	inline CString<ChunkSizeT,ExpandableT>::CString()
 	{}
@@ -104,6 +113,15 @@ namespace Yuni
 	CString<ChunkSizeT,ExpandableT>::CString(const CString<ChunkSizeT,ExpandableT>& rhs) :
 		AncestorType(rhs)
 	{}
+
+
+	# ifdef YUNI_HAS_CPP_MOVE
+	template<uint ChunkSizeT, bool ExpandableT>
+	inline
+	CString<ChunkSizeT,ExpandableT>::CString(CString<ChunkSizeT,ExpandableT>&& rhs) :
+		AncestorType(rhs)
+	{}
+	# endif
 
 
 	template<uint ChunkSizeT, bool ExpandableT>
@@ -3152,6 +3170,15 @@ namespace Yuni
 	CString<ChunkSizeT,ExpandableT>::operator = (const CString<ChunkSizeT,ExpandableT>& rhs)
 	{
 		assign(rhs);
+		return *this;
+	}
+
+
+	template<uint ChunkSizeT, bool ExpandableT>
+	inline CString<ChunkSizeT,ExpandableT>&
+	CString<ChunkSizeT,ExpandableT>::operator = (CString<ChunkSizeT,ExpandableT>&& rhs)
+	{
+		AncestorType::operator = (std::move(rhs));
 		return *this;
 	}
 

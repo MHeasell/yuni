@@ -267,6 +267,13 @@ namespace Yuni
 		template<uint SizeT, bool ExpT>
 		CString(const CString<SizeT,ExpT>& string);
 
+		# ifdef YUNI_HAS_CPP_MOVE
+		/*!
+		** \brief Move constructor
+		*/
+		CString(CString&& rhs);
+		# endif
+
 		/*!
 		** \brief Constructor from a copy of a substring of 's'
 		**
@@ -1963,6 +1970,12 @@ namespace Yuni
 		CString& operator = (const CString& rhs);
 		//! The operator `=` (assign)
 		template<class U> CString& operator = (const U& rhs);
+
+		# ifdef YUNI_HAS_CPP_MOVE
+		//! Move operator
+		CString& operator = (CString&& rhs);
+		# endif
+
 
 		//! The operator `<`
 		bool operator <  (const AnyString& rhs) const;
