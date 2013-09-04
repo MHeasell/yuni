@@ -39,15 +39,14 @@ namespace BindImpl
 	*/
 	template<class P> class IPointer;
 
-	# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 	/*!
 	** \brief Binding with a function
 	**
 	** \tparam P The prototype of the member
 	*/
 	template<class P> class BoundWithFunction;
-	# endif
 
+	# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 	/*!
 	** \brief Binding with a functor
 	**
@@ -55,6 +54,7 @@ namespace BindImpl
 	** \tparam P The prototype of the member
 	*/
 	template<class C, class P> class BoundWithFunctor;
+	# endif
 
 	/*!
 	** \brief Binding with a function

@@ -143,13 +143,14 @@ namespace Yuni
 		# endif
 		//! Constructor from a library symbol
 		Bind(const Yuni::DynamicLibrary::Symbol& symbol);
-		//! Constructor from a pointer-to-function
-		Bind(R (*pointer)(<%=generator.list(i)%>));
 		//! Constructor, from a pointer-to-method
 		template<class C> Bind(C* c, R (C::*member)(<%=generator.list(i)%>));
 		# ifdef YUNI_HAS_CPP_BIND_LAMBDA
 		//! Constructor from a functor, most likely a lambda
 		template<class C> Bind(C&& functor);
+		# else
+		//! Constructor from a pointer-to-function
+		Bind(R (*pointer)(<%=generator.list(i)%>));
 		# endif
 		//! Destructor
 		~Bind();

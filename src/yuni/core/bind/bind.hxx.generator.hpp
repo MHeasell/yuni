@@ -36,7 +36,7 @@ namespace Yuni
 	# ifdef YUNI_HAS_CPP_MOVE
 	// Move Constructor
 	template<<%=tmpl[0]%>>
-	inline Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::Bind(Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>&& rhs)
+	inline Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::Bind(Bind&& rhs)
 	{
 		pHolder.swap(rhs.pHolder);
 	}
@@ -57,7 +57,8 @@ namespace Yuni
 	{
 		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (<%=generator.list(i)%>)>(std::move(functor));
 	}
-	# endif
+
+	# else
 
 	// Constructor: Pointer-to-function
 	template<<%=tmpl[0]%>>
@@ -65,6 +66,8 @@ namespace Yuni
 	{
 		bind(pointer);
 	}
+
+	# endif
 
 
 	// Constructor: pointer-to-member
