@@ -20,7 +20,11 @@ namespace Yuni
 		virtual ~EveryTimer()
 		{
 			// mandatory, the user is unlikely to call it when using 'every'
-			stop();
+			if (started())
+			{
+				gracefulStop();
+				wait(); // wait indefinitively if needed
+			}
 		}
 
 	protected:

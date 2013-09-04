@@ -18,7 +18,11 @@ namespace Yuni
 		virtual ~AsyncThread()
 		{
 			// mandatory, the user is unlikely to call it when using 'async'
-			stop();
+			if (started())
+			{
+				gracefulStop();
+				wait(); // wait indefinitively if needed
+			}
 		}
 
 	protected:
