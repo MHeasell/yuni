@@ -23,13 +23,6 @@ namespace Yuni
 
 
 	template<typename P>
-	inline uint Event<P>::count() const
-	{
-		return AncestorType::pBindList.size();
-	}
-
-
-	template<typename P>
 	inline uint Event<P>::size() const
 	{
 		return AncestorType::pBindList.size();
