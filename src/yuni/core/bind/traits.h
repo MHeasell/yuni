@@ -2036,7 +2036,7 @@ namespace BindImpl
 		virtual ~BoundWithFunctor() {}
 
 		BoundWithFunctor(C&& functor) :
-			pFunctor(std::move(functor))
+			pFunctor(std::forward<C>(functor))
 		{}
 
 		virtual R invoke() const override
