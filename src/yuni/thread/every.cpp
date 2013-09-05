@@ -39,7 +39,7 @@ namespace Yuni
 
 
 
-	Thread::Timer::Ptr  every(uint ms, const Bind<bool ()>& callback, bool autostart)
+	Thread::Timer::Ptr  Every(uint ms, const Bind<bool ()>& callback, bool autostart)
 	{
 		Thread::Timer* timer;
 		# ifdef YUNI_HAS_CPP_MOVE
@@ -111,7 +111,7 @@ namespace Yuni
 
 
 
-	Thread::Timer::Ptr  every(uint ms, bool precise, const Bind<bool (uint64)>& callback, bool autostart)
+	Thread::Timer::Ptr  Every(uint ms, bool precise, const Bind<bool (uint64)>& callback, bool autostart)
 	{
 		Thread::Timer* timer;
 
