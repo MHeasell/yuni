@@ -11,7 +11,7 @@ using namespace Yuni;
 int main(void)
 {
 	uint counter = 0;
-	auto timer = every(1000, [&] () -> bool {
+	auto timer = Every(1000, [&] () -> bool {
 		std::cout << "counter: " << ++counter << std::endl;
 		return true; // continue looping
 	});
@@ -35,7 +35,7 @@ static bool TimerCallback()
 
 int main(void)
 {
-	Thead::Timer::Ptr timer = every(1000, & TimerCallback);
+	Thead::Timer::Ptr timer = Every(1000, & TimerCallback);
 
 	// wait for 10 seconds
 	Suspend(5);

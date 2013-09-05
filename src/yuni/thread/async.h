@@ -22,14 +22,14 @@ namespace Yuni
 	**
 	** int main()
 	** {
-	**	auto thread1 = async([&] () {
+	**	auto thread1 = Async([&] () {
 	**		std::cout << "thread1: some complex computations here..." << std::endl;
 	**		// suspend the execution of the thread for 3 seconds for the demo
 	**		thread1->suspend(3000);
 	**		std::cout << "thread1: done here !" << std::endl;
 	**	});
 	**
-	**	auto thread2 = async([&] () {
+	**	auto thread2 = Async([&] () {
 	**		std::cout << "thread2: some complex computations here..." << std::endl;
 	**		// suspend the execution of the thread for 3 seconds for the demo
 	**		thread2->suspend(2000);
@@ -44,12 +44,12 @@ namespace Yuni
 	** \param callback The callback to execute
 	** \param autostart True to automatically start the timer
 	*/
-	Thread::IThread::Ptr  async(const Bind<void ()>& callback, bool autostart = true);
+	Thread::IThread::Ptr  Async(const Bind<void ()>& callback, bool autostart = true);
 
 
 
 	//!
-	class Async; // forward declaration
+	class AsyncThread; // forward declaration
 
 
 

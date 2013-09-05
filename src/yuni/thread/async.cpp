@@ -17,11 +17,11 @@ namespace Yuni
 
 		virtual ~AsyncThread()
 		{
-			// mandatory, the user is unlikely to call it when using 'async'
+			// mandatory, the user is unlikely to call it when using 'Async'
 			if (started())
 			{
 				gracefulStop();
-				wait(); // wait indefinitively if needed
+				wait(); // wait indefinitely if needed
 			}
 		}
 
@@ -38,7 +38,7 @@ namespace Yuni
 
 
 
-	Thread::IThread::Ptr  async(const Bind<void ()>& callback, bool autostart)
+	Thread::IThread::Ptr  Async(const Bind<void ()>& callback, bool autostart)
 	{
 		Thread::IThread* thread;
 		# ifdef YUNI_HAS_CPP_MOVE

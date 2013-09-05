@@ -14,14 +14,14 @@ int main(void)
 	// A simple logger, which only display on std::cout/cerr
 	Logs::Logger<> logs;
 
-	auto thread1 = async([&] () {
+	auto thread1 = Async([&] () {
 		logs.info() << "thread1: some complex computations here...";
 		// suspend the execution of the thread for 3 seconds for the demo
 		Suspend(3);
 		logs.info() << "thread1: done here !";
 	});
 
-	auto thread2 = async([&] () {
+	auto thread2 = Async([&] () {
 		logs.info() << "thread2: some complex computations here...";
 		// suspend the execution of the thread for 2 seconds for the demo
 		Suspend(2);
@@ -63,8 +63,8 @@ static void Thread2Callback()
 
 int main(void)
 {
-	Thread::IThread::Ptr thread1 = async(& Thread1Callback);
-	Thread::IThread::Ptr thread2 = async(& Thread2Callback);
+	Thread::IThread::Ptr thread1 = Async(& Thread1Callback);
+	Thread::IThread::Ptr thread2 = Async(& Thread2Callback);
 
 	thread1->wait(); // wait for the first thread
 	thread2->wait(); // wait for the second thread
