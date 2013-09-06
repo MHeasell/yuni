@@ -2308,11 +2308,11 @@ namespace Yuni
 	CString<ChunkSizeT,ExpandableT>::utf8valid(Size& offset) const
 	{
 		offset = 0;
-		UTF8::Char c;
-		UTF8::Error e;
 		do
 		{
-			if (UTF8::errNone != (e = utf8next<false>(offset, c)))
+			UTF8::Char c;
+			UTF8::Error e;
+			if (UTF8::errNone != ((e = utf8next<false>(offset, c))))
 				return (e == UTF8::errOutOfBound) ? UTF8::errNone : e;
 		}
 		while (true);
@@ -2324,9 +2324,9 @@ namespace Yuni
 	CString<ChunkSizeT,ExpandableT>::utf8validFast() const
 	{
 		uint i = 0;
-		uint l;
 		while (i != AncestorType::size)
 		{
+			uint l;
 			if (0 == (l = UTF8::Char::Size(AncestorType::data + i)))
 				return false;
 			i += l;
@@ -2659,21 +2659,23 @@ namespace Yuni
 		if (whitespaces.empty() or empty())
 			return;
 
-		uint i;
-		while (AncestorType::size > 0)
+		do
 		{
-			i = 0;
-			for (; i != whitespaces.size(); ++i)
+			bool hasTrimmed = false;
+			for (uint i = 0; i != whitespaces.size(); ++i)
 			{
 				if (whitespaces[i] == AncestorType::data[AncestorType::size - 1])
 				{
 					--AncestorType::size;
+					hasTrimmed = true;
 					break;
 				}
 			}
-			if (whitespaces.size() == i) // nothing has been found. Aborting
+			if (not hasTrimmed) // nothing has been found. Aborting
 				break;
 		}
+		while (AncestorType::size > 0);
+
 		// Making sure that the string is zero-terminated if required
 		// The const_cast is only here to make it compile when the string
 		// is an adapter
@@ -2690,21 +2692,22 @@ namespace Yuni
 			return;
 
 		Size count = 0;
-		uint i;
 		while (count < AncestorType::size)
 		{
-			i = 0;
-			for (; i != whitespaces.size(); ++i)
+			bool hasTrimmed = false;
+			for (uint i = 0; i != whitespaces.size(); ++i)
 			{
 				if (whitespaces[i] == AncestorType::data[count])
 				{
 					++count;
+					hasTrimmed = true;
 					break;
 				}
 			}
-			if (whitespaces.size() == i) // nothing has been found. Aborting
+			if (not hasTrimmed) // nothing has been found. Aborting
 				break;
 		}
+
 		// Remove the first 'count' characters
 		consume(count);
 	}

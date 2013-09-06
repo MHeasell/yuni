@@ -2,27 +2,29 @@
 #include "renderwindow.h"
 #include "../core/foreach.h"
 
+
+
 namespace Yuni
 {
 namespace UI
 {
 
-
 	RenderWindow::RenderWindow(const AnyString& title, uint width, uint height, uint bitDepth, bool fullScreen):
 		pTitle(title),
-		pLeft(0),
-		pTop(0),
+		pLeft(),
+		pTop(),
 		pWidth(width),
 		pHeight(height),
 		pResWidth(width),
 		pResHeight(height),
 		pBitDepth(bitDepth),
 		pFB(width, height),
-		pPostEffects(0),
+		pPostEffects(),
 		pFullScreen(fullScreen),
 		pMultiSampling(MultiSampling::msNone),
 		pState(fullScreen ? wsMaximized : wsNormal),
-		pRefreshFunc(0)
+		pRefreshFunc(),
+		pMouse(nullptr)
 	{
 		pActiveView = new View(0, 0, width, height, 127, true);
 		pViewList.push_back(pActiveView);
@@ -257,6 +259,8 @@ namespace UI
 
 	void RenderWindow::doMouseMove(int x, int y)
 	{
+		assert(pMouse and "invalid mouse pointer");
+
 		EventPropagation propagate = epContinue;
 		YUNI_REVERSE_FOREACH(auto view, pViewList)
 		{
@@ -267,8 +271,11 @@ namespace UI
 		pMouse->doMove(x, y);
 	}
 
+
 	void RenderWindow::doMouseDown(Input::IMouse::Button btn)
 	{
+		assert(pMouse and "invalid mouse pointer");
+
 		EventPropagation propagate = epContinue;
 		YUNI_REVERSE_FOREACH(auto view, pViewList)
 		{
@@ -279,8 +286,11 @@ namespace UI
 		pMouse->doDown(btn);
 	}
 
+
 	void RenderWindow::doMouseUp(Input::IMouse::Button btn)
 	{
+		assert(pMouse and "invalid mouse pointer");
+
 		EventPropagation propagate = epContinue;
 		YUNI_REVERSE_FOREACH(auto view, pViewList)
 		{
@@ -293,6 +303,8 @@ namespace UI
 
 	void RenderWindow::doMouseDblClick(Input::IMouse::Button btn)
 	{
+		assert(pMouse and "invalid mouse pointer");
+
 		EventPropagation propagate = epContinue;
 		YUNI_REVERSE_FOREACH(auto view, pViewList)
 		{
@@ -303,8 +315,11 @@ namespace UI
 		pMouse->doDblClick(btn);
 	}
 
+
 	void RenderWindow::doMouseScroll(float delta)
 	{
+		assert(pMouse and "invalid mouse pointer");
+
 		EventPropagation propagate = epContinue;
 		YUNI_REVERSE_FOREACH(auto view, pViewList)
 		{
@@ -315,6 +330,7 @@ namespace UI
 		pMouse->doScroll(delta);
 	}
 
+
 	void RenderWindow::doMouseHover(int x, int y)
 	{
 		EventPropagation propagate = epContinue;
@@ -324,6 +340,8 @@ namespace UI
 			if (epFinishView <= propagate)
 				break;
 		}
+
+		assert(pMouse and "invalid mouse pointer");
 		pMouse->doHover(x, y);
 	}
 
@@ -355,7 +373,9 @@ namespace UI
 
 
 
+
+
+
 } // namespace UI
 } // namespace Yuni
-
 

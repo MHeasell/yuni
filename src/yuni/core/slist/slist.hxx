@@ -296,7 +296,7 @@ namespace Yuni
 
 	template<class T, class Alloc>
 	template<class U, class A>
-	void LinkedList<T,Alloc>::push_back(const std::list<U,A> rhs)
+	void LinkedList<T,Alloc>::push_back(const std::list<U,A>& rhs)
 	{
 		typedef std::list<U,A> L;
 		typename L::const_iterator end = rhs.end();
