@@ -149,7 +149,7 @@ namespace Yuni
 		/*!
 		** \brief Add a list of values at the end of the list
 		*/
-		template<class U, class A> void push_back(const std::list<U,A> rhs);
+		template<class U, class A> void push_back(const std::list<U,A>& rhs);
 		/*!
 		** \brief Add a list of values at the end of the list
 		*/
