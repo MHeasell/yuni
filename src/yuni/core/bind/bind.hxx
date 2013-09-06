@@ -95,7 +95,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (), void>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R ()>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R ()>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -425,7 +425,7 @@ namespace Yuni
 	inline Bind<R (), void>& Bind<R (), void>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R ()>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R ()>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -493,7 +493,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (*)(), void>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R ()>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R ()>(std::forward<C>(functor));
 	}
 
 	# else
@@ -538,7 +538,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (*)(), void>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R ()>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R ()>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -868,7 +868,7 @@ namespace Yuni
 	inline Bind<R (*)(), void>& Bind<R (*)(), void>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R ()>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R ()>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -936,7 +936,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (ClassT::*)(), ClassT>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R ()>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R ()>(std::forward<C>(functor));
 	}
 
 	# else
@@ -981,7 +981,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (ClassT::*)(), ClassT>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R ()>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R ()>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -1311,7 +1311,7 @@ namespace Yuni
 	inline Bind<R (ClassT::*)(), ClassT>& Bind<R (ClassT::*)(), ClassT>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R ()>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R ()>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -1379,7 +1379,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (A0), void>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -1424,7 +1424,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (A0), void>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -1754,7 +1754,7 @@ namespace Yuni
 	inline Bind<R (A0), void>& Bind<R (A0), void>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -1822,7 +1822,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (*)(A0), void>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -1867,7 +1867,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (*)(A0), void>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -2197,7 +2197,7 @@ namespace Yuni
 	inline Bind<R (*)(A0), void>& Bind<R (*)(A0), void>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -2265,7 +2265,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (ClassT::*)(A0), ClassT>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -2310,7 +2310,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (ClassT::*)(A0), ClassT>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -2640,7 +2640,7 @@ namespace Yuni
 	inline Bind<R (ClassT::*)(A0), ClassT>& Bind<R (ClassT::*)(A0), ClassT>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -2708,7 +2708,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (A0, A1), void>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -2753,7 +2753,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (A0, A1), void>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -3084,7 +3084,7 @@ namespace Yuni
 	inline Bind<R (A0, A1), void>& Bind<R (A0, A1), void>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -3152,7 +3152,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (*)(A0, A1), void>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -3197,7 +3197,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (*)(A0, A1), void>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -3528,7 +3528,7 @@ namespace Yuni
 	inline Bind<R (*)(A0, A1), void>& Bind<R (*)(A0, A1), void>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -3596,7 +3596,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (ClassT::*)(A0, A1), ClassT>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -3641,7 +3641,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (ClassT::*)(A0, A1), ClassT>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -3972,7 +3972,7 @@ namespace Yuni
 	inline Bind<R (ClassT::*)(A0, A1), ClassT>& Bind<R (ClassT::*)(A0, A1), ClassT>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -4040,7 +4040,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (A0, A1, A2), void>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -4085,7 +4085,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (A0, A1, A2), void>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -4416,7 +4416,7 @@ namespace Yuni
 	inline Bind<R (A0, A1, A2), void>& Bind<R (A0, A1, A2), void>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -4484,7 +4484,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (*)(A0, A1, A2), void>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -4529,7 +4529,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (*)(A0, A1, A2), void>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -4860,7 +4860,7 @@ namespace Yuni
 	inline Bind<R (*)(A0, A1, A2), void>& Bind<R (*)(A0, A1, A2), void>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -4928,7 +4928,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (ClassT::*)(A0, A1, A2), ClassT>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -4973,7 +4973,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (ClassT::*)(A0, A1, A2), ClassT>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -5304,7 +5304,7 @@ namespace Yuni
 	inline Bind<R (ClassT::*)(A0, A1, A2), ClassT>& Bind<R (ClassT::*)(A0, A1, A2), ClassT>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -5372,7 +5372,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (A0, A1, A2, A3), void>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -5417,7 +5417,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (A0, A1, A2, A3), void>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -5749,7 +5749,7 @@ namespace Yuni
 	inline Bind<R (A0, A1, A2, A3), void>& Bind<R (A0, A1, A2, A3), void>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -5817,7 +5817,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (*)(A0, A1, A2, A3), void>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -5862,7 +5862,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (*)(A0, A1, A2, A3), void>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -6194,7 +6194,7 @@ namespace Yuni
 	inline Bind<R (*)(A0, A1, A2, A3), void>& Bind<R (*)(A0, A1, A2, A3), void>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -6262,7 +6262,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -6307,7 +6307,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -6639,7 +6639,7 @@ namespace Yuni
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3), ClassT>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -6707,7 +6707,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (A0, A1, A2, A3, A4), void>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -6752,7 +6752,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (A0, A1, A2, A3, A4), void>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -7084,7 +7084,7 @@ namespace Yuni
 	inline Bind<R (A0, A1, A2, A3, A4), void>& Bind<R (A0, A1, A2, A3, A4), void>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -7152,7 +7152,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (*)(A0, A1, A2, A3, A4), void>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -7197,7 +7197,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (*)(A0, A1, A2, A3, A4), void>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -7529,7 +7529,7 @@ namespace Yuni
 	inline Bind<R (*)(A0, A1, A2, A3, A4), void>& Bind<R (*)(A0, A1, A2, A3, A4), void>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -7597,7 +7597,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -7642,7 +7642,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -7974,7 +7974,7 @@ namespace Yuni
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4), ClassT>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -8042,7 +8042,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (A0, A1, A2, A3, A4, A5), void>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -8087,7 +8087,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (A0, A1, A2, A3, A4, A5), void>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -8420,7 +8420,7 @@ namespace Yuni
 	inline Bind<R (A0, A1, A2, A3, A4, A5), void>& Bind<R (A0, A1, A2, A3, A4, A5), void>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -8488,7 +8488,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -8533,7 +8533,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -8866,7 +8866,7 @@ namespace Yuni
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5), void>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -8934,7 +8934,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -8979,7 +8979,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -9312,7 +9312,7 @@ namespace Yuni
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5), ClassT>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -9380,7 +9380,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -9425,7 +9425,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -9758,7 +9758,7 @@ namespace Yuni
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6), void>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -9826,7 +9826,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -9871,7 +9871,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -10204,7 +10204,7 @@ namespace Yuni
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6), void>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -10272,7 +10272,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -10317,7 +10317,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -10650,7 +10650,7 @@ namespace Yuni
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6), ClassT>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -10718,7 +10718,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -10763,7 +10763,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -11097,7 +11097,7 @@ namespace Yuni
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7), void>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -11165,7 +11165,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -11210,7 +11210,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -11544,7 +11544,7 @@ namespace Yuni
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7), void>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -11612,7 +11612,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -11657,7 +11657,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -11991,7 +11991,7 @@ namespace Yuni
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7), ClassT>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -12059,7 +12059,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -12104,7 +12104,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -12438,7 +12438,7 @@ namespace Yuni
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -12506,7 +12506,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -12551,7 +12551,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -12885,7 +12885,7 @@ namespace Yuni
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), void>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -12953,7 +12953,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -12998,7 +12998,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -13332,7 +13332,7 @@ namespace Yuni
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8), ClassT>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -13400,7 +13400,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -13445,7 +13445,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -13780,7 +13780,7 @@ namespace Yuni
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -13848,7 +13848,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -13893,7 +13893,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -14228,7 +14228,7 @@ namespace Yuni
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), void>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -14296,7 +14296,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -14341,7 +14341,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -14676,7 +14676,7 @@ namespace Yuni
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9), ClassT>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -14744,7 +14744,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -14789,7 +14789,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -15124,7 +15124,7 @@ namespace Yuni
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -15192,7 +15192,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -15237,7 +15237,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -15572,7 +15572,7 @@ namespace Yuni
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), void>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -15640,7 +15640,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -15685,7 +15685,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -16020,7 +16020,7 @@ namespace Yuni
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10), ClassT>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -16088,7 +16088,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -16133,7 +16133,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -16469,7 +16469,7 @@ namespace Yuni
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -16537,7 +16537,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -16582,7 +16582,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -16918,7 +16918,7 @@ namespace Yuni
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), void>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -16986,7 +16986,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -17031,7 +17031,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -17367,7 +17367,7 @@ namespace Yuni
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11), ClassT>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -17435,7 +17435,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -17480,7 +17480,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -17816,7 +17816,7 @@ namespace Yuni
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -17884,7 +17884,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -17929,7 +17929,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -18265,7 +18265,7 @@ namespace Yuni
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), void>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -18333,7 +18333,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -18378,7 +18378,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -18714,7 +18714,7 @@ namespace Yuni
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12), ClassT>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -18782,7 +18782,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -18827,7 +18827,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -19164,7 +19164,7 @@ namespace Yuni
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -19232,7 +19232,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -19277,7 +19277,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -19614,7 +19614,7 @@ namespace Yuni
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), void>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -19682,7 +19682,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -19727,7 +19727,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -20064,7 +20064,7 @@ namespace Yuni
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13), ClassT>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -20132,7 +20132,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -20177,7 +20177,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -20514,7 +20514,7 @@ namespace Yuni
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -20582,7 +20582,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -20627,7 +20627,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -20964,7 +20964,7 @@ namespace Yuni
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), void>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -21032,7 +21032,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -21077,7 +21077,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -21414,7 +21414,7 @@ namespace Yuni
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14), ClassT>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -21482,7 +21482,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -21527,7 +21527,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -21865,7 +21865,7 @@ namespace Yuni
 	inline Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>& Bind<R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -21933,7 +21933,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -21978,7 +21978,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -22316,7 +22316,7 @@ namespace Yuni
 	inline Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>& Bind<R (*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), void>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
@@ -22384,7 +22384,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -22429,7 +22429,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -22767,7 +22767,7 @@ namespace Yuni
 	inline Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>& Bind<R (ClassT::*)(A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15), ClassT>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
