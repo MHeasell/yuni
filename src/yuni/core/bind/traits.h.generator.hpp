@@ -310,7 +310,7 @@ namespace BindImpl
 		virtual ~BoundWithFunctor() {}
 
 		BoundWithFunctor(C&& functor) :
-			pFunctor(std::move(functor))
+			pFunctor(std::forward<C>(functor))
 		{}
 
 		virtual R invoke(<%=generator.variableList(i)%>) const override
@@ -320,12 +320,12 @@ namespace BindImpl
 
 		virtual const void* object() const override
 		{
-			return NULL;
+			return nullptr;
 		}
 
 		virtual const IEventObserverBase* observerBaseObject() const override
 		{
-			return NULL;
+			return nullptr;
 		}
 
 		virtual bool isDescendantOf(const IEventObserverBase*) const override

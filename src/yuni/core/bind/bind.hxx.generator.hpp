@@ -55,7 +55,7 @@ namespace Yuni
 	template<class C>
 	inline Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::Bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (<%=generator.list(i)%>)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (<%=generator.list(i)%>)>(std::forward<C>(functor));
 	}
 
 	# else
@@ -100,7 +100,7 @@ namespace Yuni
 	template<class C>
 	inline void Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::bind(C&& functor)
 	{
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (<%=generator.list(i)%>)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (<%=generator.list(i)%>)>(std::forward<C>(functor));
 	}
 	# endif
 
@@ -442,7 +442,7 @@ namespace Yuni
 	inline Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>& Bind<<%=tmpl[1]%>, <%=tmpl[2]%>>::operator = (C&& functor)
 	{
 		// Inc the reference count
-		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (<%=generator.list(i)%>)>(std::move(functor));
+		pHolder = new Private::BindImpl::BoundWithFunctor<C, R (<%=generator.list(i)%>)>(std::forward<C>(functor));
 		return *this;
 	}
 	# endif
