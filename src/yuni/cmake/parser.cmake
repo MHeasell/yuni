@@ -8,26 +8,18 @@ LIBYUNI_CONFIG_LIB("both" "parser"        "yuni-static-parser")
 include_directories("..")
 
 
-set (SRC_PRIVATE_PARSER
-	private/parser/info-charset.h
-	private/parser/info-charset.cpp
-)
-source_group("Parser\\Private" FILES ${SRC_PRIVATE_PARSER})
-
 
 set(SRC_PARSER
-	parser/generator/rule/list.h
-	parser/generator/rule/rule.h
-	parser/generator/rule/rule.hxx
-	parser/generator/variable.h
+	parser/peg/grammar.h
+	parser/peg/grammar.hxx
+	parser/peg/grammar.cpp
 )
-source_group("Parser" FILES ${SRC_PARSER})
+source_group("Parser\\Generator" FILES ${SRC_PARSER})
 
 
 
 add_Library(yuni-static-parser STATIC
 	${SRC_PARSER}
-	${SRC_PRIVATE_PARSER}
 )
 
 # Setting output path
