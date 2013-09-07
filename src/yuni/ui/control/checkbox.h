@@ -23,12 +23,14 @@ namespace Control
 	public:
 		CheckBox(int x, int y, uint width, uint height):
 			IControl(x, y, width, height),
-			pChecked(false)
+			pChecked(false),
+			pBeingClicked(false)
 		{}
 
 		CheckBox(const Point2D<int>& position, const Point2D<uint>& size):
 			IControl(position, size),
-			pChecked(false)
+			pChecked(false),
+			pBeingClicked(false)
 		{}
 
 		//! Virtual destructor
@@ -82,6 +84,8 @@ namespace Control
 		String pHoverText;
 
 	}; // class CheckBox
+
+
 
 
 
