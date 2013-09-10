@@ -15,16 +15,62 @@ namespace Parser
 namespace PEG
 {
 
-	enum RuleType
+	class Node final
 	{
-		rtRule,
-		rtGroup,
-		rtModifier,
-		rtString,
-		rtListOfChars,
-	};
+	public:
+		enum Type
+		{
+			asRule,
+			asString,
+			asSet,
+			asAND,
+			asOR,
+		};
 
-	template<class StreamT> void RuleTypeToString(StreamT& out, RuleType type);
+	public:
+		//! List of nodes
+		typedef std::vector<Node> Vector;
+		//! Map of nodes
+		typedef std::map<String, Node> Map;
+
+	public:
+		Node();
+
+		template<class StreamT> void print(StreamT& out, uint depth = 0) const;
+
+	public:
+		struct
+		{
+			//! negate the return value
+			bool negate;
+			//! Minimum number of occurences
+			uint min;
+			//! Maximum number of occurences
+			uint max;
+
+			void reset(uint a, uint b) {min = a; max = b;}
+		}
+		match;
+
+		struct
+		{
+			//! Type of node
+			Type type;
+			//! Text or set of chars to match
+			String text;
+		}
+		rule;
+
+		//! Sub nodes
+		Vector children;
+		//! Other possible match
+		Vector alternatives;
+		//! Has alternatives ? The keyword '|' has been found
+		bool hasAlternatives;
+
+	}; // class Node
+
+
 
 
 	class Grammar final : private NonCopyable<Grammar>
