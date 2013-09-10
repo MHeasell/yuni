@@ -16,16 +16,96 @@ namespace PEG
 	}
 
 
-	template<class StreamT> void RuleTypeToString(StreamT& out, RuleType type)
+	namespace // anonymous
 	{
-		switch (type)
+
+		template<class StreamT>
+		static inline void PrintText(StreamT& out, const String& text)
 		{
-			case rtRule:         out << "rule";break;
-			case rtGroup:        out << "group";break;
-			case rtModifier:     out << "modifier";break;
-			case rtString:       out << "string";break;
-			case rtListOfChars:  out << "set";break;
+			String::const_utf8iterator end = text.utf8end();
+			String::const_utf8iterator i   = text.utf8begin();
+
+			for (; i != end; ++i)
+			{
+				if (i->size() == 1)
+				{
+					switch ((char) *i)
+					{
+						case '\n': out << "\\n"; break;
+						case '\t': out << "\\t"; break;
+						case '\r': out << "\\r"; break;
+						case '\f': out << "\\f"; break;
+						case '\v': out << "\\v"; break;
+						case '"' : out << "\\\""; break;
+						default: out << *i;
+					}
+				}
+				else
+					out << *i;
+			}
 		}
+
+	} // anonymous namespace
+
+
+	template<class StreamT>
+	void Node::print(StreamT& out, uint depth) const
+	{
+		for (uint i = 0; i != depth; ++i)
+			out << "    ";
+		out << ((match.negate) ? "- " : "+ ");
+
+		switch (rule.type)
+		{
+			case asString:
+			{
+				out << "match string \"";
+				PrintText(out, rule.text);
+				out << '"';
+				break;
+			}
+			case asSet:
+			{
+				out << "match one of \"";
+				PrintText(out, rule.text);
+				out << '"';
+				break;
+			}
+			case asRule:
+			{
+				if (rule.text == '.')
+					out << "match any";
+				else
+					out << "match rule " << rule.text;
+				break;
+			}
+			case asAND:
+			{
+				out << "and";
+				break;
+			}
+			case asOR:
+			{
+				out << "or";
+				break;
+			}
+		}
+
+		if (not (match.min == 1 and match.max == 1))
+		{
+			out << " {" << match.min << ',';
+			if (match.max == (uint) -1)
+				out << 'n';
+			else
+				out << match.max;
+			out << '}';
+		}
+
+		out << '\n';
+
+		++depth;
+		for (uint i = 0; i != children.size(); ++i)
+			children[i].print(out, depth);
 	}
 
 

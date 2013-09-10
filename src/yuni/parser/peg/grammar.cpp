@@ -1,6 +1,7 @@
 
 #include "grammar.h"
 #include "../../io/file.h"
+#include <stack>
 
 
 namespace Yuni
@@ -12,6 +13,18 @@ namespace PEG
 namespace // anonymous
 {
 
+	enum RuleType
+	{
+		rtRule,
+		rtGroup,
+		rtModifier,
+		rtString,
+		rtListOfChars,
+	};
+
+
+
+
 	typedef std::vector<std::pair<uint, AnyString> > VectorPairYAndLine;
 
 	class SubRulePart final
@@ -20,11 +33,13 @@ namespace // anonymous
 		typedef std::vector<SubRulePart> Vector;
 	public:
 		SubRulePart() :
-			type(rtRule)
+			type(rtRule),
+			line((uint) -1)
 		{}
 
 		SubRulePart(const NullPtr&) :
-			type(rtRule)
+			type(rtRule),
+			line((uint) -1)
 		{}
 
 		bool empty() const
@@ -35,8 +50,11 @@ namespace // anonymous
 	public:
 		String text;
 		RuleType type;
+		uint line;
+		String source;
 
 	}; // class SubRulePart
+
 
 	class TempRuleInfo final
 	{
@@ -71,6 +89,8 @@ namespace // anonymous
 	private:
 		bool analyzeEachRule();
 		bool prepareRuleIdentifier(AnyString& line, uint lineIndex);
+		bool prepareNodeFromSubrules(const String& rulename, Node& node, SubRulePart::Vector& rules);
+
 		bool error(String& message);
 		void warns(String& message);
 
@@ -91,6 +111,19 @@ namespace // anonymous
 	}; // class RuleParser
 
 
+
+
+	template<class StreamT> static inline void RuleTypeToString(StreamT& out, RuleType type)
+	{
+		switch (type)
+		{
+			case rtRule:         out << "rule";break;
+			case rtGroup:        out << "group";break;
+			case rtModifier:     out << "modifier";break;
+			case rtString:       out << "string";break;
+			case rtListOfChars:  out << "set";break;
+		}
+	}
 
 
 
@@ -149,6 +182,179 @@ namespace // anonymous
 		return true;
 	}
 
+
+
+	static inline Node& PushNewNode(std::stack<Node*> stack)
+	{
+		Node& current = *stack.top();
+		if (current.alternatives.empty())
+		{
+			current.children.push_back(Node());
+			return current.children.back();
+		}
+		else
+		{
+			current.alternatives.push_back(Node());
+			return current.alternatives.back();
+		}
+	}
+
+
+	inline bool RuleParser::prepareNodeFromSubrules(const String& rulename, Node& node, SubRulePart::Vector& rules)
+	{
+		assert(not rules.empty() and "empty list - must be checked before calling this routine");
+		std::stack<Node*> stack;
+		stack.push(&node);
+		uint firstLine = rules[0].line;
+		// flag to determine whether some conditional expression has been encountered for post-process
+		bool hasConditional = false;
+
+		node.rule.type = Node::asAND;
+
+		for (uint i = 0; i != rules.size(); ++i)
+		{
+			// alias
+			RuleType type = rules[i].type;
+			const String& text = rules[i].text;
+			const String& source = rules[i].source;
+			uint line = rules[i].line;
+
+			/*std::cout << "  :: ";
+			RuleTypeToString(std::cout, type);
+			std::cout << " -> " << text << std::endl;*/
+
+			switch (type)
+			{
+				case rtString:
+				{
+					if (not text.empty())
+					{
+						Node& subnode = PushNewNode(stack);
+						subnode.rule.type = Node::asString;
+						subnode.rule.text = text;
+						break;
+					}
+					errmsg.clear() << source << ": l" << line << ": empty string, nothing to match";
+					return error(errmsg);
+				}
+
+				case rtListOfChars:
+				{
+					if (not text.empty())
+					{
+						Node& subnode = PushNewNode(stack);
+						subnode.rule.type  = Node::asSet;
+						subnode.match.negate = (text.first() == '^');
+						if (subnode.match.negate)
+						{
+							uint offset = (subnode.match.negate) ? 1 : 0;
+							subnode.rule.text.assign(text, text.size() - offset, offset);
+						}
+						else
+							subnode.rule.text = text;
+
+						if (not subnode.rule.text.empty())
+							break;
+					}
+					errmsg.clear() << source << ": l" << line << ": empty set of chars";
+					return error(errmsg);
+				}
+
+				case rtRule:
+				{
+					if (not text.empty())
+					{
+						Node& subnode = PushNewNode(stack);
+						subnode.rule.type = Node::asRule;
+						subnode.rule.text = text;
+						break;
+					}
+					errmsg.clear() << source << ": l" << line << ": " << rulename << ": empty rule name";
+					return error(errmsg);
+				}
+
+				case rtGroup:
+				{
+					if (text.first() == '(')
+					{
+						Node& subnode = PushNewNode(stack);
+						subnode.rule.type = Node::asAND;
+						stack.push(&subnode);
+					}
+					else if (text.first() == ')')
+					{
+						if (stack.size() > 1)
+						{
+							stack.pop();
+						}
+						else
+						{
+							errmsg.clear() << source << ": l" << firstLine << ": " << rulename
+								<< ": parenthesis mismatch, too many ')'";
+							return error(errmsg);
+						}
+					}
+					else if (text.first() == '|')
+					{
+						Node& current = *stack.top();
+						if (current.children.empty() and current.alternatives.empty())
+						{
+							// all is empty - useless declaration but not really an error
+							break;
+						}
+
+						// will be reduced later
+						/*Node& subnode = PushNewNode(stack);
+						subnode.rule.type = Node::asAND;
+						subnode.rule.text = '|';
+						stack.push(&subnode);*/
+						// require post-process
+						hasConditional = true;
+					}
+					else
+					{
+						errmsg.clear() << source << ": l" << firstLine << ": invalid group " << text;
+						return error(errmsg);
+					}
+					break;
+				}
+
+				case rtModifier:
+				{
+					Node& subnode = *stack.top();
+					if (subnode.children.empty())
+					{
+						errmsg.clear() << source << ": l" << firstLine << ": repeat pattern without content: " << text;
+						return error(errmsg);
+					}
+					Node& last = subnode.children.back();
+					if (text == '*')
+						last.match.reset(0, (uint) -1);
+					else if (text == '?')
+						last.match.reset(0, 1);
+					else if (text == '+')
+						last.match.reset(1, (uint) -1);
+					else
+					{
+						errmsg.clear() << source << ": l" << firstLine << ": invalid repeat pattern " << text;
+						return error(errmsg);
+					}
+					break;
+				}
+
+			} // switch rule type
+		} // each rule part
+
+		if (stack.size() != 1) // '(' ')' mismatch
+		{
+			errmsg.clear() << source << ": l" << firstLine << ": " << rulename
+				<< ": parenthesis mismatch, missing " << (stack.size() - 1) << " ')'";
+			return error(errmsg);
+		}
+
+		node.print(std::cout);
+		return true;
+	}
 
 
 
@@ -228,6 +434,8 @@ namespace // anonymous
 
 		SubRulePart::Vector newsubrules;
 		newsubrules.push_back(nullptr);
+		// flag to determine whether an error has been encountered
+		bool result = true;
 
 		for (; i != end; ++i)
 		{
@@ -240,6 +448,7 @@ namespace // anonymous
 			bool hasBackslash = false;
 			uint bracketDepth = 0;
 			char stringQuote = '\0';
+			bool localerror = false;
 
 			// for each line of the rule
 			VectorPairYAndLine::const_iterator send = i->second.subrules.end();
@@ -274,6 +483,8 @@ namespace // anonymous
 										newsubrules.push_back(nullptr);
 									stringQuote = c;
 									newsubrules.back().type = rtString;
+									newsubrules.back().line = lineIndex;
+									newsubrules.back().source = source;
 									break;
 								}
 								case '[':
@@ -285,16 +496,21 @@ namespace // anonymous
 									if (not newsubrules.back().empty())
 										newsubrules.push_back(nullptr);
 									newsubrules.back().type = rtListOfChars;
+									newsubrules.back().line = lineIndex;
+									newsubrules.back().source = source;
 									break;
 								}
 								case '^':
 								case '*':
 								case '+':
+								case '?':
 								{
 									if (not newsubrules.back().empty())
 										newsubrules.push_back(nullptr);
 									newsubrules.back().text = c;
 									newsubrules.back().type = rtModifier;
+									newsubrules.back().line = lineIndex;
+									newsubrules.back().source = source;
 									newsubrules.push_back(nullptr);
 									break;
 								}
@@ -306,6 +522,8 @@ namespace // anonymous
 										newsubrules.push_back(nullptr);
 									newsubrules.back().text = c;
 									newsubrules.back().type = rtGroup;
+									newsubrules.back().line = lineIndex;
+									newsubrules.back().source = source;
 									newsubrules.push_back(nullptr);
 									break;
 								}
@@ -321,6 +539,7 @@ namespace // anonymous
 								default:
 								{
 									newsubrules.back().text += *ci;
+									newsubrules.back().line = lineIndex;
 									break;
 								}
 							}
@@ -460,16 +679,15 @@ namespace // anonymous
 											case 'f': newsubrules.back().text += '\f';break;
 											default:
 											{
+												// continue on error
 												error(errmsg.clear() << source << ": l" << lineIndex << ": invalid escape sequence at " << offsetutf8);
-												return false;
+												result = false;
 											}
 										}
 										hasBackslash = false;
 									}
 									else
-									{
 										newsubrules.back().text.append(*ci);
-									}
 								}
 							}
 
@@ -480,37 +698,44 @@ namespace // anonymous
 
 				} // each utf8 char
 
-				switch (state)
+				if (state == stInString)
 				{
-					case stInString:
-					{
-						error(errmsg.clear() << source << ": l" << lineIndex << ": unfinished string at offset " << instringStartUtf8);
-						return false;
-					}
-					case stInCharList:
-					{
-						error(errmsg.clear() << source << ": l" << lineIndex << ": unfinished list of char at offset " << instringStartUtf8);
-						return false;
-					}
-					default: // ignored
-					{
-					}
+					error(errmsg.clear() << source << ": l" << lineIndex << ": unfinished string at offset " << instringStartUtf8);
+					localerror = true;
+					break;
 				}
+				if (state == stInCharList)
+				{
+					error(errmsg.clear() << source << ": l" << lineIndex << ": unfinished list of char at offset " << instringStartUtf8);
+					localerror = true;
+					break;
+				}
+
+				if (localerror)
+					break; // abort
+
 			} // each subrule
 
-			// remove the empty last item
-			if (newsubrules.back().empty())
-				newsubrules.pop_back();
-
-			for (uint i = 0; i != newsubrules.size(); ++i)
+			if (not localerror)
 			{
-				std::cout << "  :: ";
-				RuleTypeToString(std::cout, newsubrules[i].type);
-				std::cout << " -> " << newsubrules[i].text << std::endl;
+				// remove the empty last item
+				if (newsubrules.back().empty())
+					newsubrules.pop_back();
+
+				if (not newsubrules.empty())
+				{
+					Node node;
+					// continue on errors
+					result = prepareNodeFromSubrules(currentRuleName, node, newsubrules) and result;
+				}
+				else
+					warns(errmsg.clear() << source << ": ignoring the empty rule '" << currentRuleName << "'");
 			}
+			else
+				result = false;
 		}
 
-		return true;
+		return result;
 	}
 
 
@@ -551,6 +776,16 @@ namespace // anonymous
 		parser.content = content;
 		return parser.analyze();
 	}
+
+
+	Node::Node()
+	{
+		match.negate = false;
+		match.min = 1;
+		match.max = 1;
+		rule.type = asRule;
+	}
+
 
 
 
