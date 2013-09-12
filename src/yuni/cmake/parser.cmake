@@ -13,6 +13,9 @@ set(SRC_PARSER
 	parser/peg/grammar.h
 	parser/peg/grammar.hxx
 	parser/peg/grammar.cpp
+	parser/peg/node.h
+	parser/peg/node.hxx
+	parser/peg/node.cpp
 )
 source_group("Parser\\Generator" FILES ${SRC_PARSER})
 

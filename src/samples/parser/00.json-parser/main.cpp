@@ -69,6 +69,12 @@ int main(int argc, char** argv)
 		return EXIT_FAILURE;
 	}
 
+	//std::cout << grammar << std::endl;
+
+	Clob dot;
+	grammar.exportToDOT(dot);
+	std::cout << dot << std::endl;
+
 	return 0;
 }
 

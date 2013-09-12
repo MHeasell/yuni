@@ -75,7 +75,7 @@ namespace // anonymous
 	class RuleParser final
 	{
 	public:
-		RuleParser(Grammar& grammar);
+		RuleParser(Grammar& grammar, Node::Map& rules);
 
 		bool analyze();
 
@@ -90,15 +90,18 @@ namespace // anonymous
 		bool analyzeEachRule();
 		bool prepareRuleIdentifier(AnyString& line, uint lineIndex);
 		bool prepareNodeFromSubrules(const String& rulename, Node& node, SubRulePart::Vector& rules);
+		bool checkForRulesExistence() const;
 
-		bool error(String& message);
-		void warns(String& message);
+		bool error(String& message) const;
+		void warns(String& message) const;
 
 	private:
 		//! The original grammar
 		Grammar& grammar;
+		//! All rules of the grammar
+		Node::Map& grammarRules;
 		//! Error message
-		String errmsg;
+		mutable String errmsg;
 		//! The current line
 		AnyString line;
 		//! The current rule name
@@ -146,19 +149,20 @@ namespace // anonymous
 
 
 
-	inline RuleParser::RuleParser(Grammar& grammar) :
-		grammar(grammar)
+	inline RuleParser::RuleParser(Grammar& grammar, Node::Map& rules) :
+		grammar(grammar),
+		grammarRules(rules)
 	{}
 
 
-	inline bool RuleParser::error(String& message)
+	inline bool RuleParser::error(String& message) const
 	{
 		grammar.onError(message);
 		return false;
 	}
 
 
-	inline void RuleParser::warns(String& message)
+	inline void RuleParser::warns(String& message) const
 	{
 		grammar.onWarning(message);
 	}
@@ -187,16 +191,35 @@ namespace // anonymous
 	static inline Node& PushNewNode(std::stack<Node*> stack)
 	{
 		Node& current = *stack.top();
-		if (current.alternatives.empty())
+		current.children.push_back(Node());
+		return current.children.back();
+	}
+
+
+	static inline void PostProcessConditionalNode(Node& node)
+	{
+	}
+
+
+	inline bool RuleParser::checkForRulesExistence() const
+	{
+		Node::Map::const_iterator i = grammarRules.begin();
+		Node::Map::const_iterator end = grammarRules.end();
+		bool ok = true;
+		AnyString errRulename;
+
+		for (; i != end; ++i)
 		{
-			current.children.push_back(Node());
-			return current.children.back();
+			const Node& node = i->second;
+			if (not node.checkRules(errRulename, grammarRules))
+			{
+				errmsg.clear() << "rule '" << i->first<< "': unknown rule reference '" << errRulename << "'";
+				error(errmsg);
+				ok = false;
+			}
 		}
-		else
-		{
-			current.alternatives.push_back(Node());
-			return current.alternatives.back();
-		}
+
+		return ok;
 	}
 
 
@@ -218,10 +241,6 @@ namespace // anonymous
 			const String& text = rules[i].text;
 			const String& source = rules[i].source;
 			uint line = rules[i].line;
-
-			/*std::cout << "  :: ";
-			RuleTypeToString(std::cout, type);
-			std::cout << " -> " << text << std::endl;*/
 
 			switch (type)
 			{
@@ -264,6 +283,12 @@ namespace // anonymous
 				{
 					if (not text.empty())
 					{
+						if (text == '|') // internal virtual rule
+						{
+							errmsg.clear() << source << ": l" << line << ": invalid rulename";
+							return error(errmsg);
+						}
+
 						Node& subnode = PushNewNode(stack);
 						subnode.rule.type = Node::asRule;
 						subnode.rule.text = text;
@@ -297,17 +322,16 @@ namespace // anonymous
 					else if (text.first() == '|')
 					{
 						Node& current = *stack.top();
-						if (current.children.empty() and current.alternatives.empty())
+						if (current.children.empty())
 						{
 							// all is empty - useless declaration but not really an error
 							break;
 						}
 
-						// will be reduced later
-						/*Node& subnode = PushNewNode(stack);
-						subnode.rule.type = Node::asAND;
-						subnode.rule.text = '|';
-						stack.push(&subnode);*/
+						Node& subnode = PushNewNode(stack);
+						subnode.rule.type = Node::asRule;
+						subnode.rule.text = '|'; // virtual rule, which must be replaced later
+
 						// require post-process
 						hasConditional = true;
 					}
@@ -352,7 +376,9 @@ namespace // anonymous
 			return error(errmsg);
 		}
 
-		node.print(std::cout);
+		if (hasConditional)
+			PostProcessConditionalNode(node);
+
 		return true;
 	}
 
@@ -416,7 +442,10 @@ namespace // anonymous
 		}
 		while (offset < content.size());
 
-		return analyzeEachRule();
+		if (not analyzeEachRule())
+			return false;
+
+		return checkForRulesExistence();
 	}
 
 
@@ -440,7 +469,6 @@ namespace // anonymous
 		for (; i != end; ++i)
 		{
 			currentRuleName = i->first;
-			std::cout << std::endl << "@" << currentRuleName << std::endl;
 			newsubrules.clear();
 			newsubrules.push_back(nullptr);
 			State state = stDefault;
@@ -724,9 +752,11 @@ namespace // anonymous
 
 				if (not newsubrules.empty())
 				{
-					Node node;
-					// continue on errors
-					result = prepareNodeFromSubrules(currentRuleName, node, newsubrules) and result;
+					Node& node = grammarRules[currentRuleName];
+					node.clear();
+
+					if (not prepareNodeFromSubrules(currentRuleName, node, newsubrules))
+						result = false; // continue on errors
 				}
 				else
 					warns(errmsg.clear() << source << ": ignoring the empty rule '" << currentRuleName << "'");
@@ -769,24 +799,63 @@ namespace // anonymous
 	}
 
 
+	void Grammar::clear()
+	{
+		pRules.clear();
+	}
+
+
 	bool Grammar::loadFromData(const AnyString& content, const AnyString& source)
 	{
-		RuleParser parser(*this);
+		clear();
+
+		RuleParser parser(*this, pRules);
 		parser.source  = source;
 		parser.content = content;
 		return parser.analyze();
 	}
 
 
-	Node::Node()
+	void Grammar::print(std::ostream& out) const
 	{
-		match.negate = false;
-		match.min = 1;
-		match.max = 1;
-		rule.type = asRule;
+		Node::Map::const_iterator i = pRules.begin();
+		Node::Map::const_iterator end = pRules.end();
+
+		for (; i != end; ++i)
+		{
+			out << "RULE " << i->first << '\n';
+			i->second.print(out, 1);
+			out << '\n';
+		}
 	}
 
 
+	void Grammar::exportToDOT(Clob& out) const
+	{
+		out
+			<< '\n'
+			<< "digraph {\n";
+
+		Node::Map::const_iterator end = pRules.end();
+
+		// all nodes
+		out << "\t// nodes\n";
+		for (Node::Map::const_iterator i = pRules.begin(); i != end; ++i)
+			out << "\t\"" << i->first << "\";\n";
+		out << "\n";
+
+		// export edges
+		out << "\t// edges\n";
+		for (Node::Map::const_iterator i = pRules.begin(); i != end; ++i)
+		{
+			// the current rulename
+			const String& rulename = i->first;
+
+			i->second.exportDepsToDOT(out, rulename);
+		}
+
+		out << "}\n\n";
+	}
 
 
 
