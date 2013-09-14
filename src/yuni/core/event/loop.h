@@ -65,7 +65,7 @@ namespace EventLoop
 		:public Policy::ObjectLevelLockableNotRecursive<IEventLoop<ParentT,FlowT,StatsT,DetachedT> >
 		,public FlowT<IEventLoop<ParentT,FlowT,StatsT,DetachedT> >
 		,public StatsT<IEventLoop<ParentT,FlowT,StatsT,DetachedT> >
-		,private NonCopyable<IEventLoop<ParentType,FlowT,StatsT,DetachedT> >
+		,private NonCopyable<IEventLoop<ParentT,FlowT,StatsT,DetachedT> >
 	{
 	public:
 		//! Parent
