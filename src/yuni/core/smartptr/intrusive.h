@@ -28,7 +28,7 @@ namespace Yuni
 		**   according the current threading policy
 		*/
 		template<class T>
-		class SmartPtr
+		class SmartPtrType
 		{
 		public:
 			//! A thread-safe type
@@ -38,7 +38,7 @@ namespace Yuni
 			//! The most suitable smart pointer for T
 			typedef typename Yuni::Static::If<ThreadingPolicy::threadSafe, PtrThreadSafe, PtrSingleThreaded>::ResultType Ptr;
 
-		}; // class SmartPtr
+		}; // class SmartPtrType
 
 
 	public:
