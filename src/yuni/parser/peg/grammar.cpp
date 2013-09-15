@@ -79,6 +79,8 @@ namespace // anonymous
 
 		bool analyze();
 
+		void resetIndexes();
+
 
 	public:
 		//! Original content
@@ -198,6 +200,58 @@ namespace // anonymous
 
 	static inline void PostProcessConditionalNode(Node& node)
 	{
+		do
+		{
+			bool loopAgain = false;
+
+			for (uint i = 0; i != node.children.size(); ++i)
+			{
+				Node& subnode = node.children[i];
+				if (subnode.rule.type == Node::asRule and subnode.rule.text == '|')
+				{
+					loopAgain = true;
+
+					if (i == 0 or i == node.children.size() - 1)
+					{
+						// empty but not really invalid
+						node.children.erase(node.children.begin() + i);
+					}
+					else
+					{
+						subnode.children.push_back(node.children[i - 1]);
+						subnode.children.push_back(node.children[i + 1]);
+						subnode.rule.type = Node::asOR;
+						subnode.rule.text.clear();
+						subnode.rule.text.shrink();
+						node.children.erase(node.children.begin() + i + 1);
+						node.children.erase(node.children.begin() + i - 1);
+					}
+
+					break;
+				}
+			}
+
+			if (not loopAgain)
+				break;
+		}
+		while (true);
+
+		// recursive update
+		for (uint i = 0; i != node.children.size(); ++i)
+		{
+			if (not node.children[i].children.empty())
+				PostProcessConditionalNode(node.children[i]);
+		}
+	}
+
+
+	inline void RuleParser::resetIndexes()
+	{
+		Node::Map::iterator i = grammarRules.begin();
+		Node::Map::iterator end = grammarRules.end();
+		uint index = 0;
+		for (; i != end; ++i)
+			(i->second).resetIndex(index);
 	}
 
 
@@ -445,7 +499,10 @@ namespace // anonymous
 		if (not analyzeEachRule())
 			return false;
 
-		return checkForRulesExistence();
+		if (not checkForRulesExistence())
+			return false;
+
+		return true;
 	}
 
 
@@ -812,46 +869,52 @@ namespace // anonymous
 		RuleParser parser(*this, pRules);
 		parser.source  = source;
 		parser.content = content;
-		return parser.analyze();
-	}
-
-
-	void Grammar::print(std::ostream& out) const
-	{
-		Node::Map::const_iterator i = pRules.begin();
-		Node::Map::const_iterator end = pRules.end();
-
-		for (; i != end; ++i)
-		{
-			out << "RULE " << i->first << '\n';
-			i->second.print(out, 1);
-			out << '\n';
-		}
+		bool ok = parser.analyze();
+		parser.resetIndexes();
+		return ok;
 	}
 
 
 	void Grammar::exportToDOT(Clob& out) const
 	{
-		out
-			<< '\n'
-			<< "digraph {\n";
+		out << "\ndigraph {\n";
 
 		Node::Map::const_iterator end = pRules.end();
 
-		// all nodes
-		out << "\t// nodes\n";
-		for (Node::Map::const_iterator i = pRules.begin(); i != end; ++i)
-			out << "\t\"" << i->first << "\";\n";
+		out << "\t// options\n";
+		out << "\trankdir = LR;\n";
+		out << '\n';
+		out << "\tsubgraph \"cluster_:start\" {\n";
+		out << "\t\tstyle = filled;\n";
+		out << "\t\tlabel = \"start\";\n";
+		out << "\t\tcolor = lightgrey;\n";
+		out << "\t\tnode [style = filled, color = white];\n";
+		out << "\t\t\":start\" [shape = diamond];\n";
+		out << "\t}\n";
+		out << "\tsubgraph \"cluster_:end\" {\n";
+		out << "\t\tstyle = filled;\n";
+		out << "\t\tlabel = \"final\";\n";
+		out << "\t\tcolor = \"#bbbbff\";\n";
+		out << "\t\tnode [style = filled, color = white];\n";
+		out << "\t\t\"EOF\" [shape = diamond];\n";
+		out << "\t}\n";
 		out << "\n";
 
-		// export edges
-		out << "\t// edges\n";
+		// export rules
+		out << "\t// rules\n";
 		for (Node::Map::const_iterator i = pRules.begin(); i != end; ++i)
 		{
 			// the current rulename
 			const String& rulename = i->first;
 
-			i->second.exportDepsToDOT(out, rulename);
+			out << "\tsubgraph \"cluster-" << rulename << "\" {\n";
+			out << "\t\tstyle = filled;\n";
+			out << "\t\tlabel = \"rule:" << rulename << "\";\n";
+			out << "\t\tcolor = \"#e2e2e2\";\n";
+			out << "\t\tnode [style = filled, color = white];\n";
+			out << '\n';
+			i->second.exportDOTSubgraph(out, pRules, rulename);
+			out << "\t}\n\n";
 		}
 
 		out << "}\n\n";

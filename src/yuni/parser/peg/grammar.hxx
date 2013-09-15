@@ -22,13 +22,4 @@ namespace PEG
 } // namespace Parser
 } // namespace Yuni
 
-
-
-inline std::ostream& operator << (std::ostream& out, const Yuni::Parser::PEG::Grammar& grammar)
-{
-	grammar.print(out);
-	return out;
-}
-
-
 #endif // __YUNI_PARSER_GENERATOR_GRAMMAR_H__

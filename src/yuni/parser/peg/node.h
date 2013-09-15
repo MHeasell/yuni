@@ -36,9 +36,10 @@ namespace PEG
 		Node();
 
 		void clear();
-		void print(std::ostream& out, uint depth = 0) const;
 		bool checkRules(AnyString& error, const Node::Map& rules) const;
-		void exportDepsToDOT(Clob& out, const AnyString& sourcerulename) const;
+
+		void exportDOTSubgraph(Clob& out, const Map& rules, const String& rulename) const;
+		void resetIndex(uint& base);
 
 	public:
 		struct
@@ -65,6 +66,9 @@ namespace PEG
 
 		//! Sub nodes
 		Vector children;
+
+		//! Global index among all nodes and sub nodes
+		String id;
 
 	}; // class Node
 
