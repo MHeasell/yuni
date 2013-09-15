@@ -10,17 +10,6 @@ namespace Parser
 namespace PEG
 {
 
-	void Node::clear()
-	{
-		match.negate = false;
-		match.min = 1;
-		match.max = 1;
-		rule.type = asRule;
-		rule.text.clear();
-		children.clear();
-	}
-
-
 	template<class StreamT>
 	static inline void PrintText(StreamT& out, const String& text)
 	{
@@ -33,12 +22,12 @@ namespace PEG
 			{
 				switch ((char) *i)
 				{
-					case '\n': out << "\\n"; break;
-					case '\t': out << "\\t"; break;
-					case '\r': out << "\\r"; break;
-					case '\f': out << "\\f"; break;
-					case '\v': out << "\\v"; break;
-					case '"' : out << "\\\""; break;
+					case '\n': out << "\\\\n"; break;
+					case '\t': out << "\\\\t"; break;
+					case '\r': out << "\\\\r"; break;
+					case '\f': out << "\\\\f"; break;
+					case '\v': out << "\\\\v"; break;
+					case '"' : out << "\\\\\""; break;
 					default: out << *i;
 				}
 			}
@@ -49,65 +38,155 @@ namespace PEG
 
 
 
-	void Node::print(std::ostream& out, uint depth) const
+	static inline void PrintSubNodesIDs(Clob& out, const Node& node)
 	{
-		for (uint i = 0; i != depth; ++i)
-			out << "    . ";
+		out << "\t\t\"" << node.id << "\" [label = \"";
+		if (node.match.negate)
+			out << "! ";
 
-		if (match.negate)
-			out << "not / ";
-
-		switch (rule.type)
+		switch (node.rule.type)
 		{
-			case asString:
+			case Node::asAND:
 			{
-				out << "match string \"";
-				PrintText(out, rule.text);
-				out << '"';
+				out << "AND";
 				break;
 			}
-			case asSet:
+			case Node::asOR:
 			{
-				out << "match one of \"";
-				PrintText(out, rule.text);
-				out << '"';
+				out << "OR";
 				break;
 			}
-			case asRule:
+			case Node::asString:
 			{
-				if (rule.text == '.')
-					out << "match any";
-				else
-					out << "match rule " << rule.text;
+				out << "\\\"";
+				PrintText(out, node.rule.text);
+				out << "\\\"";
 				break;
 			}
-			case asAND:
+			case Node::asSet:
 			{
-				out << "and";
+				out << "one of \\\"";
+				PrintText(out, node.rule.text);
+				out << "\\\"";
 				break;
 			}
-			case asOR:
+			case Node::asRule:
 			{
-				out << "or";
+				PrintText(out, node.rule.text);
 				break;
 			}
+			default:
+				PrintText(out, node.rule.text);
 		}
 
-		if (not (match.min == 1 and match.max == 1))
+		out << "\"";
+
+		if (node.rule.type == Node::asAND or node.rule.type == Node::asOR)
+			out << " shape = diamond";
+
+		out << "];\n";
+		for (uint i = 0; i != node.children.size(); ++i)
+			PrintSubNodesIDs(out, node.children[i]);
+	}
+
+
+	static inline void PrintSubNodesLinks(Clob& out, const Node::Map& rules, const Node& node, const String& source, bool inverseColor)
+	{
+		if (node.rule.type == Node::asRule)
 		{
-			out << " {" << match.min << ',';
-			if (match.max == (uint) -1)
-				out << 'n';
+			Node::Map::const_iterator i = rules.find(node.rule.text);
+			if (i != rules.end())
+				out << "\t\t\"" << source << "\" -> \"" << i->second.id << "\"";
 			else
-				out << match.max;
-			out << '}';
+				out << "\t\t\"" << source << "\" -> \"" << node.id << "\"";
+		}
+		else
+			out << "\t\t\"" << source << "\" -> \"" << node.id << "\"";
+
+		out << ";\n";
+
+		// relation
+		if (not (node.match.min == 1 and node.match.max == 1))
+		{
+			out << "\t\t\"" << node.id << "\" -> \"" << node.id << "\" [label=<<font color=\"#FF5500\">";
+			if (node.match.min == 0 and node.match.max == (uint) -1)
+				out << '*';
+			else if (node.match.min == 0 and node.match.max == 1)
+				out << '?';
+			else if (node.match.min == 1 and node.match.max == (uint) -1)
+				out << '+';
+			else
+			{
+				out << '{' << node.match.min << ',';
+				if (node.match.max == (uint) -1)
+					out << 'n';
+				else
+					out << node.match.max;
+				out << '}';
+			}
+
+			out << "</font>>];\n";
 		}
 
-		out << '\n';
+		// display all subnodes
+		if (not node.children.empty())
+		{
+			out << "\t\tsubgraph \"cluster-" << node.id << "\" {\n";
+			if (inverseColor)
+			{
+				out << "\t\tstyle = filled;\n";
+				out << "\t\tcolor = lightgrey;\n";
+				out << "\t\tnode [style = filled, color = white];\n";
+			}
+			else
+			{
+				out << "\t\tstyle = filled;\n";
+				out << "\t\tcolor = \"#dfdfdf\";\n";
+				out << "\t\tnode [style = filled, color = lightgrey];\n";
+			}
 
-		++depth;
+			switch (node.rule.type)
+			{
+				case Node::asOR:
+				{
+					PrintSubNodesLinks(out, rules, node.children[0], node.id, not inverseColor);
+					for (uint i = 1; i != node.children.size(); ++i)
+						PrintSubNodesLinks(out, rules, node.children[i], node.id, not inverseColor);
+					break;
+				}
+				default:
+				{
+					PrintSubNodesLinks(out, rules, node.children[0], node.id, not inverseColor);
+					for (uint i = 1; i != node.children.size(); ++i)
+						PrintSubNodesLinks(out, rules, node.children[i], node.children[i - 1].id, not inverseColor);
+				}
+			}
+
+			out << "\t\t}\n";
+		}
+	}
+
+
+
+
+
+	void Node::clear()
+	{
+		match.negate = false;
+		match.min = 1;
+		match.max = 1;
+		rule.type = asRule;
+		rule.text.clear();
+		children.clear();
+	}
+
+
+	void Node::resetIndex(uint& base)
+	{
+		id.clear() << "n" << base;
+		++base;
 		for (uint i = 0; i != children.size(); ++i)
-			children[i].print(out, depth);
+			children[i].resetIndex(base);
 	}
 
 
@@ -134,6 +213,25 @@ namespace PEG
 	}
 
 
+
+	void Node::exportDOTSubgraph(Clob& out, const Node::Map& rules, const String& rulename) const
+	{
+		// display all subnodes
+		out << "\t\t\"" << id << "\" [label = \"" << rulename << "\"];\n";
+		for (uint i = 0; i != children.size(); ++i)
+			PrintSubNodesIDs(out, children[i]);
+
+		// display all subnodes
+		if (not children.empty())
+		{
+			PrintSubNodesLinks(out, rules, children[0], id, false);
+			for (uint i = 1; i != children.size(); ++i)
+				PrintSubNodesLinks(out, rules, children[i], children[i - 1].id, false);
+		}
+	}
+
+
+	/*
 	void Node::exportDepsToDOT(Clob& out, const AnyString& sourcerulename) const
 	{
 		if (rule.type == asRule)
@@ -144,7 +242,7 @@ namespace PEG
 
 				if (not (match.min == 1 and match.max == 1))
 				{
-					out << " [label=\"";
+					out << " [label=<<font color=\"#FF5500\">";
 					if (match.min == 0 and match.max == (uint) -1)
 						out << '*';
 					else if (match.min == 0 and match.max == 1)
@@ -161,7 +259,7 @@ namespace PEG
 						out << '}';
 					}
 
-					out << "\"]";
+					out << "</font>>]";
 				}
 
 				out << ";\n";
@@ -172,7 +270,7 @@ namespace PEG
 		for (uint i = 0; i != children.size(); ++i)
 			children[i].exportDepsToDOT(out, sourcerulename);
 	}
-
+	*/
 
 
 
