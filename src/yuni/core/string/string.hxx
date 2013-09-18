@@ -13,9 +13,6 @@
 namespace Yuni
 {
 
-	//! Returns a non-null terminated C-String
-	char* NullTerminatedCString();
-
 
 	template<uint ChunkSizeT, bool ExpandableT>
 	inline int CString<ChunkSizeT,ExpandableT>::ToLower(int c)
