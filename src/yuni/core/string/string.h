@@ -1893,8 +1893,8 @@ namespace Yuni
 		** \warning This method does not take care of string representation (with `'` or `"`)
 		** \see words()
 		*/
-		template<template<class,class> class ListT, class UType, class Alloc, typename StringT>
-		void split(ListT<UType,Alloc>& out, const StringT& sep,
+		template<template<class,class> class ListT, class UType, class Alloc>
+		void split(ListT<UType,Alloc>& out, const AnyString& sep,
 			bool keepEmptyElements = false, bool trimElements = true, bool emptyBefore = true) const;
 
 		/*!

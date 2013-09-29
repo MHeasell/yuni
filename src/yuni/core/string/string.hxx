@@ -2940,14 +2940,15 @@ namespace Yuni
 
 
 	template<uint ChunkSizeT, bool ExpandableT>
-	template<template<class,class> class ListT, class UType, class Alloc, class StringT>
+	template<template<class,class> class ListT, class UType, class Alloc>
 	void
-	CString<ChunkSizeT,ExpandableT>::split(ListT<UType,Alloc>& out, const StringT& sep,
+	CString<ChunkSizeT,ExpandableT>::split(ListT<UType,Alloc>& out, const AnyString& sep,
 		bool keepEmptyElements, bool trimElements, bool emptyBefore) const
 	{
 		// Empty the container
 		if (emptyBefore)
 			out.clear();
+
 		// String empty
 		if (AncestorType::size != 0)
 		{
