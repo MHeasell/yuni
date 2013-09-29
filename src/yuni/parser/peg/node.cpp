@@ -40,6 +40,9 @@ namespace PEG
 
 	static inline void PrintSubNodesIDs(Clob& out, const Node& node)
 	{
+		if (node.rule.type == Node::asRule and node.rule.text == "EOF")
+			return;
+
 		out << "\t\t\"" << node.id << "\" [label = \"";
 		if (node.match.negate)
 			out << "! ";
@@ -93,6 +96,9 @@ namespace PEG
 	static inline void PrintSubNodesLinks(Clob& out, const Node::Map& rules, const Node& node, const String& source, bool inverseColor)
 	{
 		if (node.rule.type == Node::asRule)
+			return;
+
+		if (node.rule.type == Node::asRule)
 		{
 			Node::Map::const_iterator i = rules.find(node.rule.text);
 			if (i != rules.end())
@@ -108,9 +114,13 @@ namespace PEG
 		// relation
 		if (not (node.match.min == 1 and node.match.max == 1))
 		{
-			out << "\t\t\"" << node.id << "\" -> \"" << node.id << "\" [label=<<font color=\"#FF5500\">";
+			out << "\t\t\"" << node.id << "\" -> \"" << node.id << "\" [";
+			if (node.rule.type == Node::asRule)
+				out << "lhead = \"cluster-" << node.rule.text << "\"; ";
+			out << "label=<<font color=\"#FF5500\">";
+
 			if (node.match.min == 0 and node.match.max == (uint) -1)
-				out << '*';
+				out << '*' << node.id;
 			else if (node.match.min == 0 and node.match.max == 1)
 				out << '?';
 			else if (node.match.min == 1 and node.match.max == (uint) -1)
@@ -190,6 +200,68 @@ namespace PEG
 	}
 
 
+	void Node::resetRuleIndexesFromMap(const Node::Map& rules)
+	{
+		if (rule.type == Node::asRule)
+		{
+			if (rule.text == "EOF")
+			{
+				id = "EOF";
+				enumID.clear();
+			}
+			else
+			{
+				Node::Map::const_iterator i = rules.find(rule.text);
+				if (i != rules.end())
+				{
+					id = (i->second).id;
+					enumID = (i->second).enumID;
+				}
+			}
+		}
+
+		for (uint i = 0; i != children.size(); ++i)
+			children[i].resetRuleIndexesFromMap(rules);
+	}
+
+
+	void Node::resetEnumID(const AnyString& rulename)
+	{
+		enumID.clear();
+		enumID << "rg";
+
+		bool maj = false;
+		AnyString::const_utf8iterator end = rulename.utf8end();
+		AnyString::const_utf8iterator i   = rulename.utf8begin();
+		for (; i != end; ++i)
+		{
+			char c = (char) *i;
+			if (c == '-' or c == '_' or c == ' ')
+			{
+				maj = true;
+			}
+			else
+			{
+				if (not maj)
+				{
+					enumID += *i;
+				}
+				else
+				{
+					maj = false;
+					if (i->size() > 1)
+						enumID += *i;
+					else
+						enumID += (char) String::ToUpper(c);
+				}
+			}
+		}
+
+		if (enumID.size() > 2)
+			enumID[2] = (char) String::ToUpper(enumID[2]);
+	}
+
+
 	bool Node::checkRules(AnyString& error, const Node::Map& rules) const
 	{
 		if (rule.type == asRule)
@@ -231,46 +303,95 @@ namespace PEG
 	}
 
 
-	/*
-	void Node::exportDepsToDOT(Clob& out, const AnyString& sourcerulename) const
+	static inline Clob& PrintTabs(Clob& out, uint depth)
 	{
-		if (rule.type == asRule)
+		for (uint i = 0; i != depth; ++i)
+			out += '\t';
+		return out;
+	}
+
+
+	static inline Clob& PrintString(Clob& out, const String& text)
+	{
+		String::const_utf8iterator end = text.utf8end();
+		String::const_utf8iterator i   = text.utf8begin();
+
+		for (; i != end; ++i)
 		{
-			if (rule.text != '|' and rule.text != '.' and rule.text != "EOF")
+			if (i->size() == 1)
 			{
-				out << "\t\"" << sourcerulename << "\" -> \"" << rule.text << "\"";
-
-				if (not (match.min == 1 and match.max == 1))
+				switch ((char) *i)
 				{
-					out << " [label=<<font color=\"#FF5500\">";
-					if (match.min == 0 and match.max == (uint) -1)
-						out << '*';
-					else if (match.min == 0 and match.max == 1)
-						out << '?';
-					else if (match.min == 1 and match.max == (uint) -1)
-						out << '+';
-					else
-					{
-						out << '{' << match.min << ',';
-						if (match.max == (uint) -1)
-							out << 'n';
-						else
-							out << match.max;
-						out << '}';
-					}
-
-					out << "</font>>]";
+					case '\n': out << "\\n"; break;
+					case '\t': out << "\\t"; break;
+					case '\r': out << "\\r"; break;
+					case '\f': out << "\\f"; break;
+					case '\v': out << "\\v"; break;
+					case '"' : out << "\\\""; break;
+					default: out << *i;
 				}
+			}
+			else
+				out << *i;
+		}
 
-				out << ";\n";
+		return out;
+	}
 
+
+	static inline void PrintAsciiChar(Clob& out, char c)
+	{
+		switch (c)
+		{
+			case '\'':  out << "\\\'";break;
+			case '\n':  out << "\\n";break;
+			case '\t':  out << "\\t";break;
+			case '\r':  out << "\\r";break;
+			case '\f':  out << "\\f";break;
+			case '\v':  out << "\\v";break;
+			default: out << c;
+		}
+	}
+
+
+	void Node::exportCPP(Clob& out, uint depth) const
+	{
+		uint d = depth;
+		switch (rule.type)
+		{
+			case Node::asRule:
+			{
+				PrintTabs(out, d) << "goto i_" << rule.text << ";\n";
+				break;
+			}
+			case Node::asString:
+			{
+				if (rule.text.size() == 1)
+				{
+					PrintTabs(out, d) << "if (not matchSingleAsciiChar('";
+					PrintAsciiChar(out, rule.text[0]);
+					out << "'))\n";
+					PrintTabs(out, d) << "\tgoto i_ERROR;\n";
+				}
+				else
+				{
+					PrintTabs(out, d) << "if (not matchString(AnyString(\"";
+					PrintString(out, rule.text) << "\", " << rule.text.size() << ")))" << '\n';
+					PrintTabs(out, d) << "\tgoto i_ERROR;\n";
+				}
+				break;
 			}
 		}
 
 		for (uint i = 0; i != children.size(); ++i)
-			children[i].exportDepsToDOT(out, sourcerulename);
+		{
+			PrintTabs(out, d) << "{\n";
+			children[i].exportCPP(out, d + 1);
+			PrintTabs(out, d) << "}\n";
+		}
 	}
-	*/
+
+
 
 
 

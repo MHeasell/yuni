@@ -75,6 +75,9 @@ int main(int argc, char** argv)
 	grammar.exportToDOT(dot);
 	std::cout << dot << std::endl;
 
+	Clob h, hxx, cpp;
+	grammar.exportToCPP("/tmp/inifile.", "Yuni::Piko::IniFile");
+
 	return 0;
 }
 

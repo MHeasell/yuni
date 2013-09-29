@@ -16,6 +16,8 @@ set(SRC_PARSER
 	parser/peg/node.h
 	parser/peg/node.hxx
 	parser/peg/node.cpp
+	parser/peg/export-cpp.cpp
+	parser/peg/export-dot.cpp
 )
 source_group("Parser\\Generator" FILES ${SRC_PARSER})
 

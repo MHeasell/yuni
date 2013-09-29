@@ -39,7 +39,10 @@ namespace PEG
 		bool checkRules(AnyString& error, const Node::Map& rules) const;
 
 		void exportDOTSubgraph(Clob& out, const Map& rules, const String& rulename) const;
+		void exportCPP(Clob& out, uint depth) const;
 		void resetIndex(uint& base);
+		void resetEnumID(const AnyString& rulename);
+		void resetRuleIndexesFromMap(const Node::Map& rules);
 
 	public:
 		struct
@@ -69,6 +72,8 @@ namespace PEG
 
 		//! Global index among all nodes and sub nodes
 		String id;
+		//! Enum ID for code generation
+		String enumID;
 
 	}; // class Node
 
