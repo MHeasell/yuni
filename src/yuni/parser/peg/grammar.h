@@ -39,6 +39,8 @@ namespace PEG
 
 		//! Export as DOT file
 		void exportToDOT(Clob& out) const;
+		//! Export to C++
+		bool exportToCPP(const AnyString& rootfilename, const AnyString& name) const;
 
 		//! print the whole grammar to cout
 		void print(std::ostream& out) const;
@@ -66,11 +68,6 @@ namespace PEG
 } // namespace PEG
 } // namespace Parser
 } // namespace Yuni
-
-
-//! operator << for grammar
-std::ostream& operator << (std::ostream& out, const Yuni::Parser::PEG::Grammar& grammar);
-
 
 # include "grammar.hxx"
 

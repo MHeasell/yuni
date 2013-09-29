@@ -90,7 +90,7 @@ namespace // anonymous
 
 	private:
 		bool analyzeEachRule();
-		bool prepareRuleIdentifier(AnyString& line, uint lineIndex);
+		bool prepareRuleIdentifierName(AnyString& line, uint lineIndex);
 		bool prepareNodeFromSubrules(const String& rulename, Node& node, SubRulePart::Vector& rules);
 		bool checkForRulesExistence() const;
 
@@ -170,7 +170,7 @@ namespace // anonymous
 	}
 
 
-	inline bool RuleParser::prepareRuleIdentifier(AnyString& line, uint lineIndex)
+	inline bool RuleParser::prepareRuleIdentifierName(AnyString& line, uint lineIndex)
 	{
 		if (line.last() != ':')
 		{
@@ -247,11 +247,18 @@ namespace // anonymous
 
 	inline void RuleParser::resetIndexes()
 	{
-		Node::Map::iterator i = grammarRules.begin();
 		Node::Map::iterator end = grammarRules.end();
 		uint index = 0;
-		for (; i != end; ++i)
+
+		for (Node::Map::iterator i = grammarRules.begin(); i != end; ++i)
+		{
 			(i->second).resetIndex(index);
+			(i->second).resetEnumID(i->first);
+		}
+
+		// post-fix ids for rules
+		for (Node::Map::iterator i = grammarRules.begin(); i != end; ++i)
+			(i->second).resetRuleIndexesFromMap(grammarRules);
 	}
 
 
@@ -466,7 +473,7 @@ namespace // anonymous
 				// new rule
 				line.trimRight();
 
-				if (not prepareRuleIdentifier(line, lineIndex))
+				if (not prepareRuleIdentifierName(line, lineIndex))
 					return false;
 
 				currentRuleName = line;
@@ -874,51 +881,6 @@ namespace // anonymous
 		return ok;
 	}
 
-
-	void Grammar::exportToDOT(Clob& out) const
-	{
-		out << "\ndigraph {\n";
-
-		Node::Map::const_iterator end = pRules.end();
-
-		out << "\t// options\n";
-		out << "\trankdir = LR;\n";
-		out << '\n';
-		out << "\tsubgraph \"cluster_:start\" {\n";
-		out << "\t\tstyle = filled;\n";
-		out << "\t\tlabel = \"start\";\n";
-		out << "\t\tcolor = lightgrey;\n";
-		out << "\t\tnode [style = filled, color = white];\n";
-		out << "\t\t\":start\" [shape = diamond];\n";
-		out << "\t}\n";
-		out << "\tsubgraph \"cluster_:end\" {\n";
-		out << "\t\tstyle = filled;\n";
-		out << "\t\tlabel = \"final\";\n";
-		out << "\t\tcolor = \"#bbbbff\";\n";
-		out << "\t\tnode [style = filled, color = white];\n";
-		out << "\t\t\"EOF\" [shape = diamond];\n";
-		out << "\t}\n";
-		out << "\n";
-
-		// export rules
-		out << "\t// rules\n";
-		for (Node::Map::const_iterator i = pRules.begin(); i != end; ++i)
-		{
-			// the current rulename
-			const String& rulename = i->first;
-
-			out << "\tsubgraph \"cluster-" << rulename << "\" {\n";
-			out << "\t\tstyle = filled;\n";
-			out << "\t\tlabel = \"rule:" << rulename << "\";\n";
-			out << "\t\tcolor = \"#e2e2e2\";\n";
-			out << "\t\tnode [style = filled, color = white];\n";
-			out << '\n';
-			i->second.exportDOTSubgraph(out, pRules, rulename);
-			out << "\t}\n\n";
-		}
-
-		out << "}\n\n";
-	}
 
 
 
