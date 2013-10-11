@@ -5,46 +5,50 @@
 namespace Yuni
 {
 
-	template<typename P>
+	template<class P>
 	inline Event<P>::Event()
 	{}
 
 
-	template<typename P>
+	template<class P>
 	inline Event<P>::Event(const Event<P>& /*rhs*/)
 	{}
 
 
-	template<typename P>
+	template<class P>
 	inline Event<P>::~Event()
 	{
 		clearWL();
 	}
 
 
-	template<typename P>
+	template<class P>
 	inline uint Event<P>::size() const
 	{
 		return AncestorType::pBindList.size();
 	}
 
 
-	template<typename P>
+	template<class P>
 	void Event<P>::clearWL()
 	{
 		if (not AncestorType::pBindList.empty())
 		{
 			// We will inform all bound objects that we are no longer linked.
-			IEvent* baseThis = dynamic_cast<IEvent*>(this);
-			typename AncestorType::BindList::iterator end = AncestorType::pBindList.end();
-			for (typename AncestorType::BindList::iterator i = AncestorType::pBindList.begin(); i != end; ++i)
 			{
-				if ((*i).isDescendantOfIEventObserverBase())
+				IEvent* baseThis = dynamic_cast<IEvent*>(this);
+
+				const typename AncestorType::BindList::iterator end = AncestorType::pBindList.end();
+				typename AncestorType::BindList::iterator i = AncestorType::pBindList.begin();
+				for (; i != end; ++i)
 				{
-					// Getting the object pointer, if any, then decrementing the ref counter
-					const IEventObserverBase* base = ((*i).observerBaseObject());
-					if (base)
-						base->boundEventRemoveFromTable(baseThis);
+					if ((*i).isDescendantOfIEventObserverBase())
+					{
+						// Getting the object pointer, if any, then decrementing the ref counter
+						const IEventObserverBase* base = ((*i).observerBaseObject());
+						if (base)
+							base->boundEventRemoveFromTable(baseThis);
+					}
 				}
 			}
 			// Clear our own list
@@ -53,7 +57,7 @@ namespace Yuni
 	}
 
 
-	template<typename P>
+	template<class P>
 	inline void Event<P>::clear()
 	{
 		if (not AncestorType::pEmpty)
@@ -68,7 +72,7 @@ namespace Yuni
 	}
 
 
-	template<typename P>
+	template<class P>
 	inline void Event<P>::connect(typename BindType::FunctionType pointer)
 	{
 		Bind<P> b;
@@ -84,7 +88,7 @@ namespace Yuni
 	}
 
 
-	template<typename P>
+	template<class P>
 	template<typename U>
 	void Event<P>::connect(typename BindType::template WithUserData<U>::FunctionType pointer,
 		typename BindType::template WithUserData<U>::ParameterType userdata)
@@ -105,7 +109,7 @@ namespace Yuni
 	}
 
 
-	template<typename P>
+	template<class P>
 	template<class C>
 	void Event<P>::connect(C* o, typename Event<P>::template PointerToMember<C>::Type method)
 	{
@@ -131,7 +135,7 @@ namespace Yuni
 	}
 
 
-	template<typename P>
+	template<class P>
 	template<class C>
 	void Event<P>::connect(const C* o, typename Event<P>::template PointerToMember<C>::ConstType method)
 	{
@@ -157,7 +161,7 @@ namespace Yuni
 	}
 
 
-	template<typename P>
+	template<class P>
 	template<class U>
 	void Event<P>::remove(const U* object)
 	{
@@ -167,7 +171,7 @@ namespace Yuni
 			if (base)
 			{
 				typename ThreadingPolicy::MutexLocker locker(*this);
-				if (!AncestorType::pBindList.empty())
+				if (not AncestorType::pBindList.empty())
 				{
 					typedef Yuni::Private::EventImpl::template
 						PredicateRemoveObserverBase<typename AncestorType::BindType> RemoveType;
@@ -179,7 +183,7 @@ namespace Yuni
 			else
 			{
 				typename ThreadingPolicy::MutexLocker locker(*this);
-				if (!AncestorType::pBindList.empty())
+				if (not AncestorType::pBindList.empty())
 				{
 					typedef Yuni::Private::EventImpl::template
 						PredicateRemoveObject<typename AncestorType::BindType> RemoveType;
@@ -192,12 +196,12 @@ namespace Yuni
 	}
 
 
-	template<typename P>
+	template<class P>
 	void Event<P>::unregisterObserver(const IEventObserverBase* pointer)
 	{
 		typename ThreadingPolicy::MutexLocker locker(*this);
 		// When unregistering an observer, we have to remove it without any more checks
-		if (!AncestorType::pBindList.empty())
+		if (not AncestorType::pBindList.empty())
 		{
 			typedef Yuni::Private::EventImpl::template
 				PredicateRemoveWithoutChecks<typename AncestorType::BindType> RemoveType;
@@ -207,7 +211,7 @@ namespace Yuni
 	}
 
 
-	template<typename P>
+	template<class P>
 	inline Event<P>& Event<P>::operator = (const NullPtr&)
 	{
 		clear();
@@ -215,7 +219,7 @@ namespace Yuni
 	}
 
 
-	template<typename P>
+	template<class P>
 	inline Event<P>& Event<P>::operator = (const Event<P>& rhs)
 	{
 		AncestorType::assign(rhs);
@@ -223,14 +227,14 @@ namespace Yuni
 	}
 
 
-	template<typename P>
+	template<class P>
 	inline bool Event<P>::operator ! () const
 	{
 		return (AncestorType::pEmpty);
 	}
 
 
-	template<typename P>
+	template<class P>
 	inline bool Event<P>::empty() const
 	{
 		return (AncestorType::pEmpty);
