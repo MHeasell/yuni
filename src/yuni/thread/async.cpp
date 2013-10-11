@@ -38,19 +38,19 @@ namespace Yuni
 
 
 
+
 	Thread::IThread::Ptr  Async(const Bind<void ()>& callback, bool autostart)
 	{
-		Thread::IThread* thread;
 		# ifdef YUNI_HAS_CPP_MOVE
-		thread = new AsyncThread(std::move(callback));
+		Thread::IThread* thread = new AsyncThread(std::move(callback));
 		# else
-		thread = new AsyncThread(callback);
+		Thread::IThread* thread = new AsyncThread(callback);
 		# endif
+
 		if (autostart)
 			thread->start();
 		return thread;
 	}
-
 
 
 

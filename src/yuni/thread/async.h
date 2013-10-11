@@ -48,9 +48,6 @@ namespace Yuni
 
 
 
-	//!
-	class AsyncThread; // forward declaration
-
 
 
 } // namespace Yuni
