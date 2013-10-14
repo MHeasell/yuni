@@ -6,6 +6,7 @@
 # include "../../core/noncopyable.h"
 # include "../../core/event/event.h"
 # include "node.h"
+# include <iosfwd>
 
 
 namespace Yuni
@@ -68,6 +69,8 @@ namespace PEG
 } // namespace PEG
 } // namespace Parser
 } // namespace Yuni
+
+std::ostream& operator << (std::ostream& out, const Yuni::Parser::PEG::Grammar& grammar);
 
 # include "grammar.hxx"
 
