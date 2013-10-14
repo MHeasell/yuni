@@ -19,6 +19,14 @@ namespace PEG
 	}
 
 
+	inline uint Node::treeCount() const
+	{
+		uint count = (uint) children.size();
+		for (uint i = 0; i != children.size(); ++i)
+			count += children[i].treeCount();
+		return count;
+	}
+
 
 
 

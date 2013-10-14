@@ -44,7 +44,7 @@ namespace // anonymous
 
 		bool empty() const
 		{
-			return type == rtRule && text.empty();
+			return (type == rtRule && text.empty());
 		}
 
 	public:
@@ -882,9 +882,31 @@ namespace // anonymous
 	}
 
 
+	void Grammar::print(std::ostream& out) const
+	{
+		Node::Map::const_iterator end = pRules.end();
+		for (Node::Map::const_iterator i = pRules.begin(); i != end; ++i)
+		{
+			out << i->first << ":\n";
+			i->second.exportStd(out);
+			out << "\n\n";
+		}
+	}
+
+
 
 
 
 } // namespace PEG
 } // namespace Parser
 } // namespace Yuni
+
+
+
+std::ostream& operator << (std::ostream& out, const Yuni::Parser::PEG::Grammar& grammar)
+{
+	grammar.print(out);
+	return out;
+}
+
+

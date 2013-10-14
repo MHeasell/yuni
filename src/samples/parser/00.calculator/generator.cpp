@@ -69,14 +69,14 @@ int main(int argc, char** argv)
 		return EXIT_FAILURE;
 	}
 
-	//std::cout << grammar << std::endl;
+	std::cout << grammar << std::endl;
 
-	Clob dot;
-	grammar.exportToDOT(dot);
-	std::cout << dot << std::endl;
+	//Clob dot;
+	//grammar.exportToDOT(dot);
+	//std::cout << dot << std::endl;
 
 	Clob h, hxx, cpp;
-	grammar.exportToCPP("/tmp/inifile.", "Yuni::Piko::IniFile");
+	grammar.exportToCPP("./calculator-grammar.", "Demo::Calculator");
 
 	return 0;
 }

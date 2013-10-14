@@ -38,11 +38,13 @@ namespace PEG
 		void clear();
 		bool checkRules(AnyString& error, const Node::Map& rules) const;
 
+		void exportStd(std::ostream& out, uint depth = 1) const;
 		void exportDOTSubgraph(Clob& out, const Map& rules, const String& rulename) const;
-		void exportCPP(Clob& out, uint depth) const;
+		void exportCPP(Clob& out, const Map& rules, Clob::Vector& helpers, uint depth, bool canreturn, uint& sp) const;
 		void resetIndex(uint& base);
 		void resetEnumID(const AnyString& rulename);
 		void resetRuleIndexesFromMap(const Node::Map& rules);
+		uint treeCount() const;
 
 	public:
 		struct
