@@ -1,0 +1,15 @@
+/*.user
+/*.vcproj
+/.*.swo
+/.*.swp
+/CMakeCache.txt
+/CMakeFiles
+/CMakeScripts
+/Debug
+/Makefile
+/Release
+/Yuni-Framework.build
+/build
+/cmake_install.cmake
+/color_01_rgba
+/color_01_rgba.dir

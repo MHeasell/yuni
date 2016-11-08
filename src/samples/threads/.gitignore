@@ -1,0 +1,10 @@
+/Makefile
+/cmake_install.cmake
+/CMakeFiles
+/CMakeCache.txt
+/.*.swo
+/.*.swp
+/CMakeScripts
+/build
+/Debug
+/Yuni-Framework.build

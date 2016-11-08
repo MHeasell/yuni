@@ -1,0 +1,7 @@
+/.*.sw*
+/CMakeFiles
+/Makefile
+/cmake_install.cmake
+/Debug
+/Release
+/CMakeCache.txt

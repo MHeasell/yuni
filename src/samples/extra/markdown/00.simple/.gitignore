@@ -1,0 +1,6 @@
+/*.dir
+/.*
+/Makefile
+/CMakeFiles
+/cmake_install.cmake
+/markdown_00_helloworld*

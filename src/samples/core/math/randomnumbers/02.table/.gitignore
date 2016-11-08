@@ -1,0 +1,11 @@
+/*
+/*.user
+/*.vcproj
+/.*.swn
+/.*.swo
+/.*.swp
+/CMakeFiles
+/Debug
+/Makefile
+/cmake_install.cmake
+/math_rn_02_table

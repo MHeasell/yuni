@@ -1,0 +1,11 @@
+/*
+/*.user
+/*.vcproj
+/.*.sw*
+/CMakeFiles
+/Debug
+/Makefile
+/Release
+/cmake_install.cmake
+/libyuni-config
+/libyuni-config.exe

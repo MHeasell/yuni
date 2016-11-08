@@ -1,0 +1,7 @@
+/.*.sw*
+/CMakeFiles
+/Debug
+/Makefile
+/Release
+/cmake_install.cmake
+/io_00_iterator*

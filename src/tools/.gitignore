@@ -1,0 +1,7 @@
+/*.filters
+/*.vcxproj
+/CMakeCache.txt
+/CMakeFiles
+/Makefile
+/cmake_install.cmake
+/yuni-config-bootstrap

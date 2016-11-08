@@ -1,0 +1,15 @@
+/*.user
+/.*.swo
+/.*.swp
+/CMakeCache.txt
+/CMakeFiles
+/CMakeScripts
+/Debug
+/Makefile
+/Release
+/Yuni-Framework.build
+/build
+/cmake_install.cmake
+/threads_00_basics
+/threads_00_basics.dir
+/threads_00_basics.vcproj

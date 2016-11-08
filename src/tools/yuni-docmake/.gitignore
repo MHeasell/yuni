@@ -1,0 +1,15 @@
+/cmake_install.cmake
+/.*
+/*.dir
+/Makefile
+/CMakeFiles
+/yuni-docmake*
+/*.vcxproj
+/*.user
+/*.filters
+/Debug
+/Release
+/index-db.hxx
+/webpage.hxx
+/edln-make*
+/edln-dox2article*
