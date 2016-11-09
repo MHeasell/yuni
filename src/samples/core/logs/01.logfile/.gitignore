@@ -1,0 +1,10 @@
+/sample.log
+/.*.sw*
+/Makefile
+/CMakeFiles
+/CMakeScripts
+/Debug
+/Release
+/logs_01_file
+/logs_01_file.exe
+/cmake_install.cmake

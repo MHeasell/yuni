@@ -1,0 +1,15 @@
+/*.user
+/.*.swo
+/.*.swp
+/CMakeCache.txt
+/CMakeFiles
+/CMakeScripts
+/Debug
+/Makefile
+/Release
+/Yuni-Framework.build
+/build
+/cmake_install.cmake
+/hash_00_md5
+/hash_00_md5.dir
+/hash_00_md5.vcproj

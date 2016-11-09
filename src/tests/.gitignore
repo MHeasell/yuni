@@ -1,0 +1,14 @@
+/Makefile
+/cmake_install.cmake
+/CMakeFiles
+/CMakeCache.txt
+/.*.swo
+/.*.swp
+/CMakeScripts
+/build
+/Debug
+/Yuni-Framework.build
+/YUNI-TESTS.xcodeproj
+/ALL_BUILD.vcproj
+/YUNI-TESTS.sln
+/ZERO_CHECK.vcproj

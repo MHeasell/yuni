@@ -1,0 +1,6 @@
+/cmake_install.cmake
+/.*
+/*.dir
+/Makefile
+/CMakeFiles
+/yunidoc-make*

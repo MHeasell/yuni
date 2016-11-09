@@ -1,0 +1,8 @@
+/*.xml
+/.*.sw*
+/CMakeCache.txt
+/CMakeFiles
+/Makefile
+/cmake_install.cmake
+/test_libyuni_core_audio_01_movingsource
+/test_libyuni_core_audio_00_loadandplay

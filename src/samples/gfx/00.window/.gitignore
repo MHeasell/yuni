@@ -1,0 +1,8 @@
+/CMakeFiles
+/.*
+/*.dir
+/Makefile
+/cmake_install.cmake
+/Debug
+/Release
+/gfx_00_window*

@@ -1,0 +1,11 @@
+/*
+/*.build
+/.*.swn
+/.*.swo
+/.*.swp
+/CMakeFiles
+/CMakeScripts
+/Debug
+/Makefile
+/cmake_install.cmake
+/script_00_helloworld

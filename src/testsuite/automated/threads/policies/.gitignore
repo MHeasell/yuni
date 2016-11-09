@@ -1,0 +1,11 @@
+/cmake_install.cmake
+/*.xml
+/CMakeFiles
+/test_libyuni_threads_policies_singlethreaded
+/test_libyuni_threads_policies_singlethreaded.exe
+/test_libyuni_threads_policies_classlevellockable
+/test_libyuni_threads_policies_classlevellockable.exe
+/test_libyuni_threads_policies_objectlevellockable
+/test_libyuni_threads_policies_objectlevellockable.exe
+/Makefile
+/.*.sw*

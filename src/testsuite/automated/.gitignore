@@ -1,0 +1,4 @@
+/Makefile
+/CMakeFiles
+/.*.sw*
+/cmake_install.cmake

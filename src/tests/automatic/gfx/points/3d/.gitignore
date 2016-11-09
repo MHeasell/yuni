@@ -1,0 +1,14 @@
+/Makefile
+/cmake_install.cmake
+/CMakeFiles
+/CMakeCache.txt
+/.*.swo
+/.*.swp
+/CMakeScripts
+/build
+/Debug
+/Yuni-Framework.build
+/test-gfx-points-3d
+/*.vcproj
+/*.user
+/*

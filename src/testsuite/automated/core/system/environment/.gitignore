@@ -1,0 +1,6 @@
+/cmake_install.cmake
+/Makefile
+/CMakeFiles
+/test_libyuni_core_system_environment_read
+/.*.sw*
+/*.xml

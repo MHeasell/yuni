@@ -1,0 +1,9 @@
+/CMakeFiles
+/Makefile
+/.*.sw*
+/test_libyuni_core_string_constructor_char
+/test_libyuni_core_string_constructor_char.exe
+/test_libyuni_core_string_constructor_wchar
+/test_libyuni_core_string_constructor_wchar.exe
+/*.xml
+/cmake_install.cmake

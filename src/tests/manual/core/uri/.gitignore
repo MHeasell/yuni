@@ -1,0 +1,11 @@
+/*
+/*.user
+/*.vcproj
+/.*.swn
+/.*.swo
+/.*.swp
+/CMakeFiles
+/Debug
+/Makefile
+/cmake_install.cmake
+/test_toolbox_uri00

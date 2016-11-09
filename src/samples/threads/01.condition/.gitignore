@@ -1,0 +1,6 @@
+/.*.sw*
+/CMakeScripts
+/threads_01_condition
+/Makefile
+/CMakeFiles
+/cmake_install.cmake
